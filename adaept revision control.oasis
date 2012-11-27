@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<OASIS>
+  <ProjectSettings>
+    <LocalPath value="C:\ae\aegit\src\"/>
+    <ValidObjects value="-1"/>
+    <MethodExportName value=""/>
+    <MethodExportAsk value="False"/>
+    <MethodImportName value=""/>
+    <MethodImportAsk value="False"/>
+    <MethodImportOnDialog value="False"/>
+    <MethodImportOnBuild value="False"/>
+    <MethodMDEName value=""/>
+    <NamingPreference value="0"/>
+    <SelectObjects value="1"/>
+    <AdditionalFolders/>
+    <DataTables>
+      <Table0 TableName="*"/>
+    </DataTables>
+  </ProjectSettings>
+</OASIS>
