@@ -54,20 +54,16 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
     
-    ' provide a default property value
+    ' provide a default value for the SourceFolder property
     aegitSourceFolder = "default"
-'    If IsMissing(varDebug) Then
-'        blnDebug = False
-'    Else
-'        blnDebug = True
-'    End If
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
-'    If blnDebug Then
-        Debug.Print "Class_Initialize"
-        Debug.Print , "aegitType.SourceFolder=" & aegitType.SourceFolder
-        Debug.Print , "aegitType.TestFolder=" & aegitType.TestFolder
-'    End If
+    
+    Debug.Print "Class_Initialize"
+    Debug.Print , "Default for aegitSourceFolder=" & aegitSourceFolder
+    Debug.Print , "Default for aegitType.SourceFolder=" & aegitType.SourceFolder
+    Debug.Print , "Default for aegitType.TestFolder=" & aegitType.TestFolder
+
 End Sub
 
 Property Get SourceFolder() As String
@@ -84,11 +80,17 @@ Property Get TestFolder() As String
     TestFolder = aegitType.TestFolder
 End Property
 
-Property Get DocumentTheDatabase(Optional blnDebug As Variant) As Boolean
-    If IsMissing(blnDebug) Then
-        DocumentTheDatabase = aeDocumentTheDatabase
+Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get DocumentTheDatabase"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        aeDocumentTheDatabase
     Else
-        DocumentTheDatabase = aeDocumentTheDatabase(blnDebug)
+        Debug.Print "Get DocumentTheDatabase"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
+        aeDocumentTheDatabase (DebugTheCode)
     End If
 End Property
 
@@ -145,10 +147,15 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     On Error GoTo aeDocumentTheDatabase_Error
 
+    Debug.Print "aeDocumentTheDatabase"
     If IsMissing(varDebug) Then
         blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTheDatabase is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
         blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTheDatabase is set to True"
+        Debug.Print , "NOW DEBUGGING..."
     End If
     
     If aegitSourceFolder = "default" Then
@@ -411,12 +418,17 @@ Public Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     
     On Error GoTo aeReadDocDatabase_Error
     
+    Debug.Print "aeReadDocDatabase"
     If IsMissing(varDebug) Then
         blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeReadDocDatabase is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
         blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeReadDocDatabase is set to True"
+        Debug.Print , "NOW DEBUGGING..."
     End If
-
+    
     Const acQuery = 1
 
     Dim myFile As Object

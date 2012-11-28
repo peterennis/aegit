@@ -41,23 +41,46 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     Dim bln1 As Boolean
     Dim bln2 As Boolean
     Dim bln3 As Boolean
-    Dim blnDebug As Boolean
 
     'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
 
     'MsgBox IsMissing(Debugit)
+    
+    '=============
+    ' TEST 1
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "1. aegitClassTest => DocumentTheDatabase"
     If IsMissing(Debugit) Then
-        blnDebug = False
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln1 = oDbObjects.DocumentTheDatabase()
     Else
-        blnDebug = True
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln1 = oDbObjects.DocumentTheDatabase("WithDebugging")
     End If
-    
-    bln1 = oDbObjects.DocumentTheDatabase(blnDebug)
-    
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+   
+    '=============
+    ' TEST 2
+    '=============
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "2. aegitClassTest => Exists"
     bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
     
+    '=============
+    ' TEST 3
+    '=============
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "3. aegitClassTest => ReadDocDatabase"
     bln3 = oDbObjects.ReadDocDatabase(True)
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
 
     Debug.Print bln1, bln2, bln3
 
