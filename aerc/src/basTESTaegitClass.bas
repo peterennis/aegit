@@ -35,18 +35,19 @@ End Sub
 
 Public Function aegitClassTest()
 
-    Dim objDbObjects As aegitClass
-    Set objDbObjects = New aegitClass
+    Dim oDbObjects As aegitClass
+    Set oDbObjects = New aegitClass
     
     Dim bln1 As Boolean
     Dim bln2 As Boolean
     Dim bln3 As Boolean
 
-    Debug.Print "objDbObjects.SourceFolder=" & objDbObjects.SourceFolder
-    Debug.Print "objDbObjects.TestFolder=" & objDbObjects.TestFolder
-    bln1 = objDbObjects.DocumentTheDatabase(True)
-    bln2 = objDbObjects.Exists("Modules", "basRevisionControl")
-    bln3 = objDbObjects.ReadDocDatabase(True)
+    oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
+    Debug.Print "oDbObjects.SourceFolder=" & oDbObjects.SourceFolder
+    Debug.Print "oDbObjects.TestFolder=" & oDbObjects.TestFolder
+    bln1 = oDbObjects.DocumentTheDatabase(True)
+    bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
+    bln3 = oDbObjects.ReadDocDatabase(True)
 
     Debug.Print bln1, bln2, bln3
 

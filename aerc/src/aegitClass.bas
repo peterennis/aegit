@@ -1,7 +1,7 @@
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = True
+Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
@@ -42,6 +42,7 @@ Private Type mySetupType
 End Type
 
 Private aegitType As mySetupType
+Private aegitSourceFolder As String
 '
 
 Private Sub Class_Initialize()
@@ -49,6 +50,8 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
     
+    ' provide a default property value
+    aegitSourceFolder = "default"
 '    If IsMissing(varDebug) Then
 '        blnDebug = False
 '    Else
@@ -64,7 +67,13 @@ Private Sub Class_Initialize()
 End Sub
 
 Property Get SourceFolder() As String
-    SourceFolder = aegitType.SourceFolder
+    SourceFolder = aegitSourceFolder
+End Property
+
+Property Let SourceFolder(ByVal strSourceFolder As String)
+    ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
+    ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
+    aegitSourceFolder = strSourceFolder
 End Property
 
 Property Get TestFolder() As String
