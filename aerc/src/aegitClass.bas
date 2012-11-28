@@ -354,29 +354,29 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
 
     If IsMissing(blnDebug) Then blnDebug = False
 
-    If blnDebug Then Debug.Print ">==> BuildTestDirectory >==>"
+    If blnDebug Then Debug.Print , ">==> BuildTheDirectory >==>"
 
     ' Bail out if (a) the drive does not exist, or if (b) the directory already exists.
 
-    If blnDebug Then Debug.Print "THE_DRIVE = " & THE_DRIVE
-    If blnDebug Then Debug.Print "FSO.DriveExists(THE_DRIVE) = " & FSO.DriveExists(THE_DRIVE)
+    If blnDebug Then Debug.Print , , "THE_DRIVE = " & THE_DRIVE
+    If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & FSO.DriveExists(THE_DRIVE)
     If Not FSO.DriveExists(THE_DRIVE) Then
-        Debug.Print "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
+        Debug.Print , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
         BuildTheDirectory = False
         Exit Function
     End If
-    If blnDebug Then Debug.Print "The drive EXISTS !!!"
+    If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
 
-    If blnDebug Then Debug.Print "The test folder is: " & aegitType.TestFolder
+    If blnDebug Then Debug.Print , , "The test folder is: " & aegitType.TestFolder
     If FSO.FolderExists(aegitType.TestFolder) Then
-        If blnDebug Then Debug.Print "FSO.FolderExists(aegitType.TestFolder) = TRUE - The directory EXISTS !!!"
+        If blnDebug Then Debug.Print , , "FSO.FolderExists(aegitType.TestFolder) = TRUE - The directory EXISTS !!!"
         BuildTheDirectory = False
         Exit Function
     End If
-    If blnDebug Then Debug.Print "The test directory does NOT EXIST !!!"
+    If blnDebug Then Debug.Print , , "The test directory does NOT EXIST !!!"
 
     Set objTestFolder = FSO.CreateFolder(aegitType.TestFolder)
-    If blnDebug Then Debug.Print aegitType.TestFolder & " has been CREATED !!!"
+    If blnDebug Then Debug.Print , , aegitType.TestFolder & " has been CREATED !!!"
 
     Set objTestFolder = Nothing
 
@@ -406,11 +406,13 @@ Public Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 ' Date:     February 8, 2011
 ' Comment:  Add explicit references for objects, wscript, fso
 ' Requires: Reference to Microsoft Scripting Runtime
-' 20110224: Make this a function
-' 20110302: Change to aeReadDocDatabase for use in aegitClass
-'           Add Skipping: to MsgBox for existing objects
+' Updated:
+' 20121128: Fix debugging output
 ' 20110303: Add Debug.Print output for Skipping: message
 '           Output VERSION and VERSION_DATE for debug
+' 20110302: Change to aeReadDocDatabase for use in aegitClass
+'           Add Skipping: to MsgBox for existing objects
+' 20110224: Make this a function
 '====================================================================
 '
 
@@ -437,26 +439,30 @@ Public Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     
     Dim bln As Boolean
 
-    If blnDebug Then Debug.Print ">==> ReadDocDatabase >==>"
-    If blnDebug Then Debug.Print "aegit VERSION: " & VERSION
-    If blnDebug Then Debug.Print "aegit VERSION_DATE: " & VERSION_DATE
-    If blnDebug Then Debug.Print "aegitType.SourceFolder=" & aegitType.SourceFolder
-    If blnDebug Then Debug.Print "aegitType.TestFolder=" & aegitType.TestFolder
+    If blnDebug Then
+        Debug.Print ">==> ReadDocDatabase >==>"
+        Debug.Print , "aegit VERSION: " & VERSION
+        Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
+        Debug.Print , "aegitType.SourceFolder=" & aegitType.SourceFolder
+        Debug.Print , "aegitType.TestFolder=" & aegitType.TestFolder
+    End If
 
     '''''''''' Create needed objects
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
-        If blnDebug Then Debug.Print "wsh.CurrentDirectory=" & wsh.CurrentDirectory
+        If blnDebug Then Debug.Print , "wsh.CurrentDirectory=" & wsh.CurrentDirectory
         ' CurDir Function
-        If blnDebug Then Debug.Print "CurDir=" & CurDir
+        If blnDebug Then Debug.Print , "CurDir=" & CurDir
+    
     Dim FSO As Scripting.FileSystemObject
     Set FSO = CreateObject("Scripting.FileSystemObject")
 
     If blnDebug Then
         bln = BuildTheDirectory(FSO, blnDebug)
-        Debug.Print "BuildTestDirectory(FSO," & blnDebug & ") = " & bln
+        Debug.Print , "<==<"
     Else
         bln = BuildTheDirectory(FSO)
+        Debug.Print , "<==<"
     End If
 
     Dim objFolder As Object
@@ -507,7 +513,8 @@ Public Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         End If
     Next
 
-    Debug.Print "DONE !!!"
+    Debug.Print "<==<"
+    'Debug.Print "DONE !!!"
 
     On Error GoTo 0
     aeReadDocDatabase = True
@@ -530,6 +537,8 @@ Private Function aeExists(strAccObjType As String, _
 '             strAccObjType: "Tables", "Queries", "Forms",
 '                            "Reports", "Macros", "Modules"
 '             strAccObjName: The name of the object
+' Updated:
+' 20121128:   Fix debugging output
 ' 20110302:   Make aeExists private in aegitClass
 '====================================================================
 
