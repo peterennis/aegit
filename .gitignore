@@ -4,6 +4,7 @@
 
 *.accdb
 *.laccdb
+~TMP*
 
 #################
 ## Eclipse
