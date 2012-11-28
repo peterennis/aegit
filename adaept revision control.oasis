@@ -2,7 +2,7 @@
 <OASIS>
   <ProjectSettings>
     <LocalPath value="C:\ae\aegit\src\"/>
-    <ValidObjects value="-1"/>
+    <ValidObjects value="-8193"/>
     <MethodExportName value=""/>
     <MethodExportAsk value="False"/>
     <MethodImportName value=""/>
@@ -15,7 +15,7 @@
     <VersioningSystem value="SVN"/>
     <AdditionalFolders/>
     <DataTables>
-      <Table0 TableName="*"/>
+      <Table1 TableName="*"/>
     </DataTables>
   </ProjectSettings>
 </OASIS>
