@@ -18,6 +18,7 @@ Private Const THE_DRIVE As String = "C"
 '
 '20121127 v015  Update version, export using OASIS and commit to github
 '               Reverse order of version comments so newest is at the top
+'               Skip ~TMP* names for scripts (macros)
 '20110303 v014  Make class PublicNotCreatable, project name aegitClassProvider
 '               http://support.microsoft.com/kb/555159
 '20110303 v013  Initialize class using Private Type
@@ -101,18 +102,22 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Comment:  Uses the undocumented [Application.SaveAsText] syntax
 '           To reload use the syntax [Application.LoadFromText]
 '           Add explicit references for DAO
-' 20110218: Forms->frm, Reports->rpt, Scripts->mac
-'           Modules->bas, Queries->qry
-'           Error handler
-' 20110224: Make this a function. Add optional debug flag
+' Updated:
+'
+' 20121127: Reverse comment order, newest at top
+'           Skip export of ~TMP macros
+' 20110303: Add Optional blnDebug parameter
+'           Skip export of all zzz objects (using doc.Name)
+' 20110302: Skip export of ~TMP queries
+'           debug message output singular and plural
+' 20110302: Change to aeDocumentTheDatabase for use in aegitClass
 ' 20110226: Skip export of MSys (hiddem system queries) and
 '           ~sq_ (hidden ODBC queries) objects
 '           Add count of objects in debug output
-' 20110302: Change to aeDocumentTheDatabase for use in aegitClass
-' 20110302: Skip export of ~TMP queries
-'           debug message output singular and plural
-' 20110303: Add Optional blnDebug parameter
-'           Skip export of all zzz objects (using doc.Name)
+' 20110224: Make this a function. Add optional debug flag
+' 20110218: Forms->frm, Reports->rpt, Scripts->mac
+'           Modules->bas, Queries->qry
+'           Error handler
 '====================================================================
 '
 
@@ -134,64 +139,123 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
+    '=============
+    ' FORMS
+    '=============
+    i = 0
     Set cnt = dbs.Containers("Forms")
+    Debug.Print "FORMS"
     For Each doc In cnt.Documents
         If Not (Left(doc.Name, 3) = "zzz") Then
+            i = i + 1
             Application.SaveAsText acForm, doc.Name, aegitType.SourceFolder & doc.Name & ".frm"
         End If
     Next doc
     If blnDebug Then
-        If cnt.Documents.Count = 1 Then
-            Debug.Print cnt.Documents.Count & " Form EXPORTED!"
+        If i = 1 Then
+            Debug.Print , "1 Form EXPORTED!"
         Else
-            Debug.Print cnt.Documents.Count & " Forms EXPORTED!"
+            Debug.Print , i & " Forms EXPORTED!"
+        End If
+    End If
+    If blnDebug Then
+        If cnt.Documents.Count = 1 Then
+            Debug.Print , "1 Form EXISTING!"
+        Else
+            Debug.Print , cnt.Documents.Count & " Forms EXISTING!"
         End If
     End If
     
+    '=============
+    ' REPORTS
+    '=============
+    i = 0
     Set cnt = dbs.Containers("Reports")
+    Debug.Print "REPORTS"
     For Each doc In cnt.Documents
         If Not (Left(doc.Name, 3) = "zzz") Then
+            i = i + 1
             Application.SaveAsText acReport, doc.Name, aegitType.SourceFolder & doc.Name & ".rpt"
         End If
     Next doc
     If blnDebug Then
-        If cnt.Documents.Count = 1 Then
-            Debug.Print cnt.Documents.Count & " Report EXPORTED!"
+        If i = 1 Then
+            Debug.Print , "1 Report EXPORTED!"
         Else
-            Debug.Print cnt.Documents.Count & " Reports EXPORTED!"
+            Debug.Print , i & " Reports EXPORTED!"
+        End If
+    End If
+    If blnDebug Then
+        If cnt.Documents.Count = 1 Then
+            Debug.Print , "1 Report EXISTING!"
+        Else
+            Debug.Print , cnt.Documents.Count & " Reports EXISTING!"
         End If
     End If
 
+    '=============
+    ' MACROS
+    '=============
+    i = 0
     Set cnt = dbs.Containers("Scripts")
+    Debug.Print "MACROS"
     For Each doc In cnt.Documents
-        If Not (Left(doc.Name, 3) = "zzz") Then
+        Debug.Print , doc.Name
+        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+            i = i + 1
             Application.SaveAsText acMacro, doc.Name, aegitType.SourceFolder & doc.Name & ".mac"
         End If
     Next doc
     If blnDebug Then
-        If cnt.Documents.Count = 1 Then
-            Debug.Print cnt.Documents.Count & " Macro EXPORTED!"
+        If i = 1 Then
+            Debug.Print , "1 Macro EXPORTED!"
         Else
-            Debug.Print cnt.Documents.Count & " Macros EXPORTED!"
+            Debug.Print , i & " Macros EXPORTED!"
+        End If
+    End If
+    If blnDebug Then
+        If cnt.Documents.Count = 1 Then
+            Debug.Print , "1 Macro EXISTING!"
+        Else
+            Debug.Print , cnt.Documents.Count & " Macros EXISTING!"
         End If
     End If
 
+    '=============
+    ' MODULES
+    '=============
+    i = 0
+    Debug.Print "MODULES"
     Set cnt = dbs.Containers("Modules")
     For Each doc In cnt.Documents
+        Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
+            i = i + 1
             Application.SaveAsText acModule, doc.Name, aegitType.SourceFolder & doc.Name & ".bas"
         End If
     Next doc
     If blnDebug Then
-        If cnt.Documents.Count = 1 Then
-            Debug.Print cnt.Documents.Count & " Module EXPORTED!"
+        If i = 1 Then
+            Debug.Print , "1 Module EXPORTED!"
         Else
-            Debug.Print cnt.Documents.Count & " Modules EXPORTED!"
+            Debug.Print , i & " Modules EXPORTED!"
+        End If
+    End If
+    If blnDebug Then
+        If cnt.Documents.Count = 1 Then
+            Debug.Print , "1 Module EXISTING!"
+        Else
+            Debug.Print , cnt.Documents.Count & " Modules EXISTING!"
         End If
     End If
 
+    '=============
+    ' QUERIES
+    '=============
     i = 0
+    Debug.Print "QUERIES"
     For Each qdf In CurrentDb.QueryDefs
+        Debug.Print , qdf.Name
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
@@ -201,14 +265,14 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Next qdf
     If blnDebug Then
         If i = 1 Then
-            Debug.Print i & " Query EXPORTED!"
+            Debug.Print , "1 Query EXPORTED!"
         Else
-            Debug.Print i & " Queries EXPORTED!"
+            Debug.Print , i & " Queries EXPORTED!"
         End If
     End If
     If blnDebug Then
         If CurrentDb.QueryDefs.Count = 1 Then
-            Debug.Print , CurrentDb.QueryDefs.Count & " Query EXISTING!"
+            Debug.Print , "1 Query EXISTING!"
         Else
             Debug.Print , CurrentDb.QueryDefs.Count & " Queries EXISTING!"
         End If
