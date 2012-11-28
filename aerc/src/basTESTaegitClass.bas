@@ -33,7 +33,7 @@ Public Sub aegitClass_LateBinding()
 '    MsgBox anEmployee.Name
 End Sub
 
-Public Function aegitClassTest()
+Public Function aegitClassTest(Optional Debugit As Variant)
 
     Dim oDbObjects As aegitClass
     Set oDbObjects = New aegitClass
@@ -41,12 +41,22 @@ Public Function aegitClassTest()
     Dim bln1 As Boolean
     Dim bln2 As Boolean
     Dim bln3 As Boolean
+    Dim blnDebug As Boolean
 
-    oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
-    Debug.Print "oDbObjects.SourceFolder=" & oDbObjects.SourceFolder
-    Debug.Print "oDbObjects.TestFolder=" & oDbObjects.TestFolder
-    bln1 = oDbObjects.DocumentTheDatabase(True)
+    'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
+    'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
+
+    'MsgBox IsMissing(Debugit)
+    If IsMissing(Debugit) Then
+        blnDebug = False
+    Else
+        blnDebug = True
+    End If
+    
+    bln1 = oDbObjects.DocumentTheDatabase(blnDebug)
+    
     bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
+    
     bln3 = oDbObjects.ReadDocDatabase(True)
 
     Debug.Print bln1, bln2, bln3

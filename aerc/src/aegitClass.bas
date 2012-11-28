@@ -12,10 +12,12 @@ Option Explicit
 ' Comment:  Create class for revision control
 '====================================================================
 
-Private Const VERSION As String = "0.1.5"
-Private Const VERSION_DATE As String = "Nov 27, 2012"
+Private Const VERSION As String = "0.1.6"
+Private Const VERSION_DATE As String = "Nov 28, 2012"
 Private Const THE_DRIVE As String = "C"
 '
+'20121128 v016  Use strSourceLocation to allow custom path and test for error,
+'               Cleanup debug messages code
 '20121127 v015  Update version, export using OASIS and commit to github
 '               Reverse order of version comments so newest is at the top
 '               Skip ~TMP* names for scripts (macros)
@@ -43,6 +45,8 @@ End Type
 
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
+Private aegitblnCustomSourceFolder As Boolean
+Private strSourceLocation As String
 '
 
 Private Sub Class_Initialize()
@@ -112,7 +116,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 '           To reload use the syntax [Application.LoadFromText]
 '           Add explicit references for DAO
 ' Updated:
-'
+' 20121128: Use strSourceLocation to allow custom path and test for error,
+'           Cleanup debug messages code
 ' 20121127: Reverse comment order, newest at top
 '           Skip export of ~TMP macros
 ' 20110303: Add Optional blnDebug parameter
@@ -146,6 +151,18 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         blnDebug = True
     End If
     
+    If aegitSourceFolder = "default" Then
+        strSourceLocation = aegitType.SourceFolder
+    Else
+        strSourceLocation = aegitSourceFolder
+    End If
+    
+    If blnDebug Then
+        Debug.Print "aeDocumentTheDatabase"
+        Debug.Print , "SourceFolder=" & strSourceLocation
+        Debug.Print , "TestFolder=" & strSourceLocation
+    End If
+
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
     '=============
@@ -153,21 +170,23 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     '=============
     i = 0
     Set cnt = dbs.Containers("Forms")
-    Debug.Print "FORMS"
+    If blnDebug Then Debug.Print "FORMS"
+    
     For Each doc In cnt.Documents
+        If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acForm, doc.Name, aegitType.SourceFolder & doc.Name & ".frm"
+            Application.SaveAsText acForm, doc.Name, strSourceLocation & doc.Name & ".frm"
         End If
     Next doc
+    
     If blnDebug Then
         If i = 1 Then
             Debug.Print , "1 Form EXPORTED!"
         Else
             Debug.Print , i & " Forms EXPORTED!"
         End If
-    End If
-    If blnDebug Then
+        
         If cnt.Documents.Count = 1 Then
             Debug.Print , "1 Form EXISTING!"
         Else
@@ -180,21 +199,23 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     '=============
     i = 0
     Set cnt = dbs.Containers("Reports")
-    Debug.Print "REPORTS"
+    If blnDebug Then Debug.Print "REPORTS"
+    
     For Each doc In cnt.Documents
+        If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acReport, doc.Name, aegitType.SourceFolder & doc.Name & ".rpt"
+            Application.SaveAsText acReport, doc.Name, strSourceLocation & doc.Name & ".rpt"
         End If
     Next doc
+    
     If blnDebug Then
         If i = 1 Then
             Debug.Print , "1 Report EXPORTED!"
         Else
             Debug.Print , i & " Reports EXPORTED!"
         End If
-    End If
-    If blnDebug Then
+        
         If cnt.Documents.Count = 1 Then
             Debug.Print , "1 Report EXISTING!"
         Else
@@ -207,22 +228,23 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     '=============
     i = 0
     Set cnt = dbs.Containers("Scripts")
-    Debug.Print "MACROS"
+    If blnDebug Then Debug.Print "MACROS"
+    
     For Each doc In cnt.Documents
-        Debug.Print , doc.Name
+        If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
-            Application.SaveAsText acMacro, doc.Name, aegitType.SourceFolder & doc.Name & ".mac"
+            Application.SaveAsText acMacro, doc.Name, strSourceLocation & doc.Name & ".mac"
         End If
     Next doc
+    
     If blnDebug Then
         If i = 1 Then
             Debug.Print , "1 Macro EXPORTED!"
         Else
             Debug.Print , i & " Macros EXPORTED!"
         End If
-    End If
-    If blnDebug Then
+        
         If cnt.Documents.Count = 1 Then
             Debug.Print , "1 Macro EXISTING!"
         Else
@@ -234,23 +256,24 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' MODULES
     '=============
     i = 0
-    Debug.Print "MODULES"
     Set cnt = dbs.Containers("Modules")
+    If blnDebug Then Debug.Print "MODULES"
+    
     For Each doc In cnt.Documents
-        Debug.Print , doc.Name
+        If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acModule, doc.Name, aegitType.SourceFolder & doc.Name & ".bas"
+            Application.SaveAsText acModule, doc.Name, strSourceLocation & doc.Name & ".bas"
         End If
     Next doc
+    
     If blnDebug Then
         If i = 1 Then
             Debug.Print , "1 Module EXPORTED!"
         Else
             Debug.Print , i & " Modules EXPORTED!"
         End If
-    End If
-    If blnDebug Then
+        
         If cnt.Documents.Count = 1 Then
             Debug.Print , "1 Module EXISTING!"
         Else
@@ -262,24 +285,25 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' QUERIES
     '=============
     i = 0
-    Debug.Print "QUERIES"
+    If blnDebug Then Debug.Print "QUERIES"
+    
     For Each qdf In CurrentDb.QueryDefs
-        Debug.Print , qdf.Name
+        If blnDebug Then Debug.Print , qdf.Name
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acQuery, qdf.Name, aegitType.SourceFolder & qdf.Name & ".qry"
+            Application.SaveAsText acQuery, qdf.Name, strSourceLocation & qdf.Name & ".qry"
         End If
     Next qdf
+    
     If blnDebug Then
         If i = 1 Then
             Debug.Print , "1 Query EXPORTED!"
         Else
             Debug.Print , i & " Queries EXPORTED!"
         End If
-    End If
-    If blnDebug Then
+        
         If CurrentDb.QueryDefs.Count = 1 Then
             Debug.Print , "1 Query EXISTING!"
         Else
@@ -298,8 +322,12 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
 aeDocumentTheDatabase_Error:
 
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-
+    If Err = 2950 Then
+        MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    End If
+    
 End Function
 
 Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
