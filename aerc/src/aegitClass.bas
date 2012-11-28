@@ -361,7 +361,7 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     If blnDebug Then Debug.Print , , "THE_DRIVE = " & THE_DRIVE
     If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & FSO.DriveExists(THE_DRIVE)
     If Not FSO.DriveExists(THE_DRIVE) Then
-        Debug.Print , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
+        Debug.Print , , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
         BuildTheDirectory = False
         Exit Function
     End If
