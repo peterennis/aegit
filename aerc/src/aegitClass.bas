@@ -167,27 +167,14 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
 
-
-    Debug.Print "<@_@>"
-1    Dim refCurr As Reference
-2    For Each refCurr In Application.References
-3        Debug.Print refCurr.Name & ": " & refCurr.FullPath
-4    Next
-
-5    Dim ref As Reference
-6    Dim prp As Property
-    ' Enumerate References collection.
-7    For Each ref In References
-        ' Print name of reference.
-8        Debug.Print ref.Name
-        ' Enumerate Properties collection of each Reference.
-9        For Each prp In ref.Collection
-            ' Print name of each property.
-10            Debug.Print prp.Name; " = "; prp.Value
-11        Next prp
-12    Next ref
-    Debug.Print "<*_*>"
-
+'1    Debug.Print "<@_@>"
+'2    i = 0
+'3    Dim refCurr As Reference
+'4    For Each refCurr In Application.References
+'5        i = i + 1
+'6        Debug.Print , "ref " & i, refCurr.Name, refCurr.FullPath
+'7    Next
+'8    Debug.Print "<*_*>"
 
     If blnDebug Then
         Debug.Print ">==> aegitGetReferences >==>"
@@ -199,6 +186,7 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.VERSION
         Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
         Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
+        Debug.Print , "<@_@>"
         Debug.Print , "References:"
     End If
 
@@ -213,6 +201,7 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
         RefDesc = vbaProj.References(i).Description
 
         If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
@@ -220,6 +209,7 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
               If blnDebug Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
+    If blnDebug Then Debug.Print , "<*_*>"
     If blnDebug Then Debug.Print "<==<"
 
     On Error GoTo 0
@@ -463,7 +453,7 @@ aeDocumentTheDatabase_Error:
 End Function
 
 Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
-                                        Optional blnDebug As Variant) As Boolean
+                                        Optional varDebug As Variant) As Boolean
 ' Ref: http://msdn.microsoft.com/en-us/library/ebkhfaaz(v=vs.85).aspx
 '====================================================================
 ' Author:   Peter F. Ennis
@@ -474,10 +464,19 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
 '====================================================================
 
     Dim objTestFolder As Object
+    Dim blnDebug As Boolean
     
     On Error GoTo BuildTheDirectory_Error
 
-    If IsMissing(blnDebug) Then blnDebug = False
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of BuildTheDirectory is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of BuildTheDirectory is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
     If blnDebug Then Debug.Print , ">==> BuildTheDirectory >==>"
 
@@ -486,7 +485,7 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     If blnDebug Then Debug.Print , , "THE_DRIVE = " & THE_DRIVE
     If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & FSO.DriveExists(THE_DRIVE)
     If Not FSO.DriveExists(THE_DRIVE) Then
-        Debug.Print , , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
+        If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
         BuildTheDirectory = False
         Exit Function
     End If
@@ -561,7 +560,6 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     Dim myFile As Object
     Dim strFileType As String
     Dim strFileBaseName As String
-    
     Dim bln As Boolean
 
     If blnDebug Then
@@ -583,11 +581,10 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     Set FSO = CreateObject("Scripting.FileSystemObject")
 
     If blnDebug Then
-        bln = BuildTheDirectory(FSO, blnDebug)
+        bln = BuildTheDirectory(FSO, "WithDebugging")
         Debug.Print , "<==<"
     Else
         bln = BuildTheDirectory(FSO)
-        Debug.Print , "<==<"
     End If
 
     Dim objFolder As Object
@@ -638,7 +635,7 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         End If
     Next
 
-    Debug.Print "<==<"
+    If blnDebug Then Debug.Print "<==<"
     'Debug.Print "DONE !!!"
 
     On Error GoTo 0

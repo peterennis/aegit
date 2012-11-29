@@ -48,6 +48,7 @@ Public Function aegitClassTest(Optional Debugit As Variant)
 
     'MsgBox IsMissing(Debugit)
     
+Test1:
     '=============
     ' TEST 1
     '=============
@@ -65,6 +66,7 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
    
+Test2:
     '=============
     ' TEST 2
     '=============
@@ -73,16 +75,25 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
-    
+
+Test3:
     '=============
     ' TEST 3
     '=============
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "3. aegitClassTest => ReadDocDatabase"
-    bln3 = oDbObjects.ReadDocDatabase(True)
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln3 = oDbObjects.ReadDocDatabase()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln3 = oDbObjects.ReadDocDatabase("WithDebugging")
+    End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
+Test4:
     '=============
     ' TEST 4
     '=============
