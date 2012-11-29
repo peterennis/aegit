@@ -41,6 +41,7 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     Dim bln1 As Boolean
     Dim bln2 As Boolean
     Dim bln3 As Boolean
+    Dim bln4 As Boolean
 
     'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
@@ -82,7 +83,24 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-    Debug.Print bln1, bln2, bln3
+    '=============
+    ' TEST 4
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "4. aegitClassTest => GetReferences"
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln4 = oDbObjects.GetReferences()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln4 = oDbObjects.GetReferences("WithDebugging")
+    End If
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+    
+    Debug.Print bln1, bln2, bln3, bln4
 
     'Stop
 End Function

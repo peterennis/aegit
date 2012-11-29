@@ -100,54 +100,107 @@ Property Get Exists(strAccObjType As String, _
     Exists = aeExists(strAccObjType, strAccObjName)
 End Property
 
-Property Get ReadDocDatabase(Optional blnDebug As Variant) As Boolean
-    If IsMissing(blnDebug) Then
+Property Get ReadDocDatabase(Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get ReadDocDatabase"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeReadDocDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
         ReadDocDatabase = aeReadDocDatabase
     Else
-        ReadDocDatabase = aeReadDocDatabase(blnDebug)
+        Debug.Print "Get ReadDocDatabase"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeReadDocDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
+        ReadDocDatabase = aeReadDocDatabase(DebugTheCode)
     End If
 End Property
 
-Public Function GetReferences() As Boolean
+Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get GetReferences"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aegitGetReferences"
+        Debug.Print , "DEBUGGING IS OFF"
+        GetReferences = aegitGetReferences
+    Else
+        Debug.Print "Get GetReferences"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aegitGetReferences"
+        Debug.Print , "DEBUGGING TURNED ON"
+        GetReferences = aegitGetReferences(DebugTheCode)
+    End If
+End Property
+
+Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
 ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
 ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
-    
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     November 28, 2012
+' Comment:  Added and adapted from aeladdin (tm) code
+' Updated:
+'====================================================================
+
     Dim i As Integer
     Dim RefName As String
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
-    Dim vbaProj As Object
+    Dim blnDebug As Boolean
 
+    Dim vbaProj As Object
     Set vbaProj = Application.VBE.ActiveVBProject
-    Debug.Print vbaProj.Name
-    Debug.Print "vbaProj.Type='" & vbaProj.Type & "'"
-    ' Display the versions of Access, ADO and DAO
-    Debug.Print "Access version = " & Application.VERSION
-    Debug.Print "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.VERSION
-    Debug.Print "DAO (DbEngine)  version = " & Application.DBEngine.VERSION
-    Debug.Print "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
-    Debug.Print "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
-    Debug.Print "References:"
-    
+
+    On Error GoTo aegitGetReferences_Error
+
+    Debug.Print "aegitGetReferences"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aegitGetReferences is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aegitGetReferences is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
+
+    If blnDebug Then
+        Debug.Print ">==> aegitGetReferences >==>"
+        Debug.Print , "vbaProj.Name = " & vbaProj.Name
+        Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
+        ' Display the versions of Access, ADO and DAO
+        Debug.Print , "Access version = " & Application.VERSION
+        Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.VERSION
+        Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.VERSION
+        Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
+        Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
+        Debug.Print , "References:"
+    End If
+
     For i = 1 To vbaProj.References.Count
-        
+
         blnRefBroken = False
-        
+
         ' Get the Name of the Reference
         RefName = vbaProj.References(i).Name
-        
+
         ' Get the Description of Reference
         RefDesc = vbaProj.References(i).Description
-        
-        Debug.Print vbaProj.References(i).Name, vbaProj.References(i).Description
+
+        If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
               blnRefBroken = True
-              Debug.Print vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              If blnDebug Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
-    
+    If blnDebug Then Debug.Print "<==<"
+
+    On Error GoTo 0
+    aegitGetReferences = True
+    Exit Function
+
+aegitGetReferences_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitGetReferences of Class aegitClass"
+
 End Function
 
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
@@ -433,7 +486,7 @@ BuildTheDirectory_Error:
 
 End Function
 
-Public Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
+Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 ' VBScript makes use of ADOX (Microsoft's Active Data Objects Extensions for Data Definition Language and Security)
 ' to create a query on a Microsoft Access database
 ' Ref: http://stackoverflow.com/questions/859530/alternative-to-application-loadfromtext-for-ms-access-queries
@@ -483,7 +536,7 @@ Public Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     Dim bln As Boolean
 
     If blnDebug Then
-        Debug.Print ">==> ReadDocDatabase >==>"
+        Debug.Print ">==> aeReadDocDatabase >==>"
         Debug.Print , "aegit VERSION: " & VERSION
         Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
         Debug.Print , "aegitType.SourceFolder=" & aegitType.SourceFolder
