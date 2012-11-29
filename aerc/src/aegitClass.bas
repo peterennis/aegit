@@ -6,6 +6,8 @@ Option Compare Database
 Option Explicit
 
 ' Ref: http://www.di-mgt.com.au/cl_Simple.html
+' Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION
+'
 '====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 24, 2011
@@ -131,6 +133,11 @@ End Property
 Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
 ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
 ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
+' Ref: http://www.cpearson.com/excel/missingreferences.aspx
+' Ref: http://allenbrowne.com/ser-38.html
+' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
+' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
+'
 '====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     November 28, 2012
@@ -159,6 +166,28 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "varDebug IS NOT missing so blnDebug of aegitGetReferences is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
+
+
+    Debug.Print "<@_@>"
+    Dim refCurr As Reference
+    For Each refCurr In Application.References
+        Debug.Print refCurr.Name & ": " & refCurr.FullPath
+    Next
+
+    Dim ref As Reference
+    Dim prp As Property
+    ' Enumerate References collection.
+    For Each ref In References
+        ' Print name of reference.
+        Debug.Print ref.Name
+        ' Enumerate Properties collection of each Reference.
+        For Each prp In ref.Collection
+            ' Print name of each property.
+            Debug.Print prp.Name; " = "; prp.Value
+        Next prp
+    Next ref
+    Debug.Print "<*_*>"
+
 
     If blnDebug Then
         Debug.Print ">==> aegitGetReferences >==>"
