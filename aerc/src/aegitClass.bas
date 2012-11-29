@@ -169,23 +169,23 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
 
 
     Debug.Print "<@_@>"
-    Dim refCurr As Reference
-    For Each refCurr In Application.References
-        Debug.Print refCurr.Name & ": " & refCurr.FullPath
-    Next
+1    Dim refCurr As Reference
+2    For Each refCurr In Application.References
+3        Debug.Print refCurr.Name & ": " & refCurr.FullPath
+4    Next
 
-    Dim ref As Reference
-    Dim prp As Property
+5    Dim ref As Reference
+6    Dim prp As Property
     ' Enumerate References collection.
-    For Each ref In References
+7    For Each ref In References
         ' Print name of reference.
-        Debug.Print ref.Name
+8        Debug.Print ref.Name
         ' Enumerate Properties collection of each Reference.
-        For Each prp In ref.Collection
+9        For Each prp In ref.Collection
             ' Print name of each property.
-            Debug.Print prp.Name; " = "; prp.Value
-        Next prp
-    Next ref
+10            Debug.Print prp.Name; " = "; prp.Value
+11        Next prp
+12    Next ref
     Debug.Print "<*_*>"
 
 
