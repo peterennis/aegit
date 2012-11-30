@@ -33,11 +33,22 @@ Public Sub aegitClass_LateBinding()
 '    MsgBox anEmployee.Name
 End Sub
 
+Private Function PassFail(bln As Boolean) As String
+    If bln Then
+        PassFail = "Pass"
+    Else
+        PassFail = "Fail"
+    End If
+End Function
+
 Public Function aegitClassTest(Optional Debugit As Variant)
+' Usage:
+' Run in immediate window:                  aegitClassTest
+' Show debug output in immediate window:    aegitClassTest("debug")
 
     Dim oDbObjects As aegitClass
     Set oDbObjects = New aegitClass
-    
+
     Dim bln1 As Boolean
     Dim bln2 As Boolean
     Dim bln3 As Boolean
@@ -47,7 +58,7 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
 
     'MsgBox IsMissing(Debugit)
-    
+
 Test1:
     '=============
     ' TEST 1
@@ -55,6 +66,7 @@ Test1:
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"
+    Debug.Print "aegitClassTest"
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
@@ -72,7 +84,15 @@ Test2:
     '=============
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "2. aegitClassTest => Exists"
-    bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
+    Debug.Print "aegitClassTest"
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to Exists"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln2 = oDbObjects.Exists("Modules", "basRevisionControl", "WithDebugging")
+    End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
@@ -82,8 +102,9 @@ Test3:
     '=============
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "3. aegitClassTest => ReadDocDatabase"
+    Debug.Print "aegitClassTest"
     If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
         bln3 = oDbObjects.ReadDocDatabase()
     Else
@@ -100,8 +121,9 @@ Test4:
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "4. aegitClassTest => GetReferences"
+    Debug.Print "aegitClassTest"
     If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "Debugit IS missing so no parameter is passed to GetReferences"
         Debug.Print , "DEBUGGING IS OFF"
         bln4 = oDbObjects.GetReferences()
     Else
@@ -111,7 +133,7 @@ Test4:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
-    Debug.Print bln1, bln2, bln3, bln4
+    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4)
 
     'Stop
 End Function

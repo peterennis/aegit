@@ -8,9 +8,10 @@ Option Explicit
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
+' Pass Fail of the tests should be associated to True False of the function, any error should return False
 '
 
-
+' 20121129 - v017 - Pass Fail test results and debug output cleanup
 ' 20121128 - v016 - SourceFolder property updated to allow passing the path into the class
     ' Cleanup debug messages code, include GetReferences from aeladdin (tm)
     ' Public Function aeReadDocDatabase - does it need a Get property call to make the function Private? - fixed, set to Private

@@ -6,18 +6,20 @@ Option Compare Database
 Option Explicit
 
 ' Ref: http://www.di-mgt.com.au/cl_Simple.html
-' Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION
 '
-'====================================================================
+'=======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 24, 2011
 ' Comment:  Create class for revision control
-'====================================================================
+' History:  See comment details, basChangeLog, commit messages on githib
+'=======================================================================
 
-Private Const VERSION As String = "0.1.6"
-Private Const VERSION_DATE As String = "Nov 28, 2012"
+Private Const VERSION As String = "0.1.7"
+Private Const VERSION_DATE As String = "Nov 29, 2012"
 Private Const THE_DRIVE As String = "C"
 '
+'20121129 v017  Output error messages to the immediate window when debug is turned on
+'               Pass Fail test results and debug output cleanup
 '20121128 v016  Use strSourceLocation to allow custom path and test for error,
 '               Cleanup debug messages code
 '               Include GetReferences from aeladdin (tm) and fix it
@@ -98,8 +100,19 @@ Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
 End Property
 
 Property Get Exists(strAccObjType As String, _
-                        strAccObjName As String) As Boolean
-    Exists = aeExists(strAccObjType, strAccObjName)
+                        strAccObjName As String, _
+                        Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get Exists"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING IS OFF"
+        Exists = aeExists(strAccObjType, strAccObjName)
+    Else
+        Debug.Print "Get Exists"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING TURNED ON"
+        Exists = aeExists(strAccObjType, strAccObjName, DebugTheCode)
+    End If
 End Property
 
 Property Get ReadDocDatabase(Optional DebugTheCode As Variant) As Boolean
@@ -119,18 +132,18 @@ End Property
 Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
         Debug.Print "Get GetReferences"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aegitGetReferences"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING IS OFF"
-        GetReferences = aegitGetReferences
+        GetReferences = aeGetReferences
     Else
         Debug.Print "Get GetReferences"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aegitGetReferences"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING TURNED ON"
-        GetReferences = aegitGetReferences(DebugTheCode)
+        GetReferences = aeGetReferences(DebugTheCode)
     End If
 End Property
 
-Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
+Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
 ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
 ' Ref: http://www.cpearson.com/excel/missingreferences.aspx
@@ -154,16 +167,16 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
     Dim vbaProj As Object
     Set vbaProj = Application.VBE.ActiveVBProject
 
-    On Error GoTo aegitGetReferences_Error
+    On Error GoTo aeGetReferences_Error
 
     Debug.Print "aegitGetReferences"
     If IsMissing(varDebug) Then
         blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aegitGetReferences is set to False"
+        Debug.Print , "varDebug IS missing so blnDebug of aeGetReferences is set to False"
         Debug.Print , "DEBUGGING IS OFF"
     Else
         blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aegitGetReferences is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeGetReferences is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
 
@@ -177,7 +190,7 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
 '8    Debug.Print "<*_*>"
 
     If blnDebug Then
-        Debug.Print ">==> aegitGetReferences >==>"
+        Debug.Print ">==> aeGetReferences >==>"
         Debug.Print , "vbaProj.Name = " & vbaProj.Name
         Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
         ' Display the versions of Access, ADO and DAO
@@ -213,12 +226,13 @@ Private Function aegitGetReferences(Optional varDebug As Variant) As Boolean
     If blnDebug Then Debug.Print "<==<"
 
     On Error GoTo 0
-    aegitGetReferences = True
+    aeGetReferences = True
     Exit Function
 
-aegitGetReferences_Error:
+aeGetReferences_Error:
 
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitGetReferences of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
 
 End Function
 
@@ -280,7 +294,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
     
     If blnDebug Then
-        Debug.Print "aeDocumentTheDatabase"
+        Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "SourceFolder=" & strSourceLocation
         Debug.Print , "TestFolder=" & strSourceLocation
     End If
@@ -446,8 +460,10 @@ aeDocumentTheDatabase_Error:
 
     If Err = 2950 Then
         MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+        If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+        If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
     End If
     
 End Function
@@ -468,6 +484,7 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     
     On Error GoTo BuildTheDirectory_Error
 
+    Debug.Print "BuildTheDirectory"
     If IsMissing(varDebug) Then
         blnDebug = False
         Debug.Print , "varDebug IS missing so blnDebug of BuildTheDirectory is set to False"
@@ -511,6 +528,7 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
 BuildTheDirectory_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class Module aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class Module aegitClass"
 
 End Function
 
@@ -645,11 +663,12 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 aeReadDocDatabase_Error:
 
     MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
 
 End Function
 
 Private Function aeExists(strAccObjType As String, _
-                        strAccObjName As String) As Boolean
+                        strAccObjName As String, Optional varDebug As Variant) As Boolean
 '
 '====================================================================
 ' Author:     Peter F. Ennis
@@ -666,8 +685,20 @@ Private Function aeExists(strAccObjType As String, _
 
     Dim objType As Object
     Dim obj As Variant
+    Dim blnDebug As Boolean
     
     On Error GoTo aeExists_Error
+
+    Debug.Print "aeExists"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeExists is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeExists is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
     aeExists = False
 
@@ -702,5 +733,6 @@ Private Function aeExists(strAccObjType As String, _
 aeExists_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
 
 End Function
