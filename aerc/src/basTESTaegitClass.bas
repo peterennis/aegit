@@ -91,7 +91,7 @@ Test2:
         bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-        bln2 = oDbObjects.Exists("Modules", "basRevisionControl", "WithDebugging")
+        bln2 = oDbObjects.Exists("Modules", "aegitClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -133,6 +133,11 @@ Test4:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
+    Debug.Print "Test 1: DocumentTheDatabase"
+    Debug.Print "Test 2: Exists"
+    Debug.Print "Test 3: ReadDocDatabase"
+    Debug.Print "Test 4: GetReferences"
+    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4"
     Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4)
 
     'Stop

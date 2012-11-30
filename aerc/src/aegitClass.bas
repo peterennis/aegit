@@ -15,7 +15,7 @@ Option Explicit
 '=======================================================================
 
 Private Const VERSION As String = "0.1.7"
-Private Const VERSION_DATE As String = "Nov 29, 2012"
+Private Const VERSION_DATE As String = "November 29, 2012"
 Private Const THE_DRIVE As String = "C"
 '
 '20121129 v017  Output error messages to the immediate window when debug is turned on
@@ -169,7 +169,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
     On Error GoTo aeGetReferences_Error
 
-    Debug.Print "aegitGetReferences"
+    Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
         blnDebug = False
         Debug.Print , "varDebug IS missing so blnDebug of aeGetReferences is set to False"
@@ -669,6 +669,7 @@ End Function
 
 Private Function aeExists(strAccObjType As String, _
                         strAccObjName As String, Optional varDebug As Variant) As Boolean
+' Ref: http://vbabuff.blogspot.com/2010/03/does-access-object-exists.html
 '
 '====================================================================
 ' Author:     Peter F. Ennis
@@ -687,6 +688,8 @@ Private Function aeExists(strAccObjType As String, _
     Dim obj As Variant
     Dim blnDebug As Boolean
     
+    aeExists = True
+
     On Error GoTo aeExists_Error
 
     Debug.Print "aeExists"
@@ -700,7 +703,7 @@ Private Function aeExists(strAccObjType As String, _
         Debug.Print , "NOW DEBUGGING..."
     End If
 
-    aeExists = False
+    If blnDebug Then Debug.Print ">==> aeExists >==>"
 
     Select Case strAccObjType
         Case "Tables"
@@ -717,14 +720,37 @@ Private Function aeExists(strAccObjType As String, _
             Set objType = CurrentProject.AllModules
         Case Else
             MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegitClass"
+            If blnDebug Then
+                Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
+                Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
+                Debug.Print "<==<"
+            End If
+            aeExists = False
+            Set obj = Nothing
+            Exit Function
     End Select
 
+    If blnDebug Then Debug.Print , "strAccObjType = " & strAccObjType
+    If blnDebug Then Debug.Print , "strAccObjName = " & strAccObjName
+
     For Each obj In objType
+        If blnDebug Then Debug.Print , obj.Name, strAccObjName
         If obj.Name = strAccObjName Then
+            If blnDebug Then
+                Debug.Print , strAccObjName & " EXISTS!"
+                Debug.Print "<==<"
+            End If
             aeExists = True
-            Exit For ' Found it!
+            Set obj = Nothing
+            Exit Function ' Found it!
+        Else
+            aeExists = False
         End If
     Next
+    If blnDebug Then
+        Debug.Print , strAccObjName & " DOES NOT EXIST!"
+        Debug.Print "<==<"
+    End If
 
     On Error GoTo 0
     Set obj = Nothing
@@ -734,5 +760,6 @@ aeExists_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    aeExists = False
 
 End Function
