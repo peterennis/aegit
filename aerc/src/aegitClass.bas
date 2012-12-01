@@ -275,9 +275,11 @@ Private Function LongestTableName() As Integer
     Dim tblDef As DAO.TableDef
     Dim intTNLen As Integer
 
+    On Error GoTo LongestTableName_Error
+
     intTNLen = 0
     Set dbs = CurrentDb()
-    'Set tdf = db.TableDefs(strTableName)
+    Debug.Print "dbs.Name=" & dbs.Name
     For Each tblDef In CurrentDb.TableDefs
         Debug.Print tblDef.Name, Len(tblDef.Name)
         If Not (Left(tblDef.Name, 4) = "MSys" _
@@ -290,7 +292,15 @@ Private Function LongestTableName() As Integer
             End If
         End If
     Next tblDef
+
+    On Error GoTo 0
     LongestTableName = intTNLen
+    Exit Function
+
+LongestTableName_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
 
 End Function
 
