@@ -143,6 +143,34 @@ Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
     End If
 End Property
 
+Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get DocumentRelations"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING IS OFF"
+        DocumentRelations = aeDocumentRelations
+    Else
+        Debug.Print "Get DocumentRelations"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING TURNED ON"
+        DocumentRelations = aeDocumentRelations(DebugTheCode)
+    End If
+End Property
+
+Property Get DocumentTables(Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get DocumentTables"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING IS OFF"
+        DocumentTables = aeDocumentTables
+    Else
+        Debug.Print "Get DocumentTables"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING TURNED ON"
+        DocumentTables = aeDocumentTables(DebugTheCode)
+    End If
+End Property
+
 Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
 ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
@@ -236,8 +264,57 @@ aeGetReferences_Error:
 
 End Function
 
-'!!!!!!!!!!!!!
-' Ref: http://allenbrowne.com/func-06.html
+Private Function LongestTableName() As Integer
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     November 30, 2012
+' Comment:  Return the length of the longest table name
+'====================================================================
+
+    Dim dbs As DAO.Database
+    Dim tblDef As DAO.TableDef
+    Dim intTNLen As Integer
+
+    intTNLen = 0
+    Set dbs = CurrentDb()
+    'Set tdf = db.TableDefs(strTableName)
+    For Each tblDef In CurrentDb.TableDefs
+        Debug.Print tblDef.Name, Len(tblDef.Name)
+        If Not (Left(tblDef.Name, 4) = "MSys" _
+                Or Left(tblDef.Name, 4) = "~TMP" _
+                Or Left(tblDef.Name, 3) = "zzz") Then
+            'Debug.Print "here", "intTNLen=" & intTNLen
+            If Len(tblDef.Name) > intTNLen Then
+                intTNLen = Len(tblDef.Name)
+                'Debug.Print "intTNLen=" & intTNLen
+            End If
+        End If
+    Next tblDef
+    LongestTableName = intTNLen
+
+End Function
+
+Public Function zLongestFieldName() As Integer
+    Dim dbs As DAO.Database
+    Dim tblDef As DAO.TableDef
+    Dim intFieldLen As Integer
+
+    Set dbs = CurrentDb()
+    'Set tdf = db.TableDefs(strTableName)
+    For Each tblDef In CurrentDb.TableDefs
+        If Not (Left(tblDef.Name, 4) = "MSys" _
+          Or Left(tblDef.Name, 4) = "~TMP" _
+          Or Left(tblDef.Name, 3) = "zzz") Then
+            If intFieldLen > Len(TableInfo(tblDef.Name)) Then
+            intFieldLen = Len(TableInfo(tblDef.Name))
+            Debug.Print "intFieldLen=" & intFieldLen
+            End If
+        End If
+    Next tblDef
+    zLongestFieldName = intFieldLen
+End Function
+
+'Ref: http://allenbrowne.com/func-06.html
 'Provided by Allen Browne.  Last updated: April 2010.
 '
 'TableInfo() function
@@ -246,153 +323,163 @@ End Function
 'For Access 2000 or 2002, make sure you have a DAO reference.
 'The Description property does not exist for fields that have no description, so a separate function handles that error.
 '
-'Function TableInfo(strTableName As String)
-'On Error GoTo TableInfoErr
-'   ' Purpose:   Display the field names, types, sizes and descriptions for a table.
-'   ' Argument:  Name of a table in the current database.
-'   Dim db As DAO.Database
-'   Dim tdf As DAO.TableDef
-'   Dim fld As DAO.Field
-'
-'   Set db = CurrentDb()
-'   Set tdf = db.TableDefs(strTableName)
-'   Debug.Print "FIELD NAME", "FIELD TYPE", "SIZE", "DESCRIPTION"
-'   Debug.Print "==========", "==========", "====", "==========="
-'
-'   For Each fld In tdf.Fields
-'      Debug.Print fld.Name,
-'      Debug.Print FieldTypeName(fld),
-'      Debug.Print fld.Size,
-'      Debug.Print GetDescrip(fld)
-'   Next
-'   Debug.Print "==========", "==========", "====", "==========="
-'
-'TableInfoExit:
-'   Set db = Nothing
-'   Exit Function
-'
-'TableInfoErr:
-'   Select Case Err
-'   Case 3265&  'Table name invalid
-'      MsgBox strTableName & " table doesn't exist"
-'   Case Else
-'      Debug.Print "TableInfo() Error " & Err & ": " & Error
-'   End Select
-'   Resume TableInfoExit
-'End Function
-'
-'Function GetDescrip(obj As Object) As String
-'    On Error Resume Next
-'    GetDescrip = obj.Properties("Description")
-'End Function
-'
-'Function FieldTypeName(fld As DAO.Field) As String
-'    'Purpose: Converts the numeric results of DAO Field.Type to text.
-'    Dim strReturn As String    'Name to return
-'
-'    Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
-'        Case dbBoolean: strReturn = "Yes/No"            ' 1
-'        Case dbByte: strReturn = "Byte"                 ' 2
-'        Case dbInteger: strReturn = "Integer"           ' 3
-'        Case dbLong                                     ' 4
-'            If (fld.Attributes And dbAutoIncrField) = 0& Then
-'                strReturn = "Long Integer"
-'           Else
-'                strReturn = "AutoNumber"
-'            End If
-'        Case dbCurrency: strReturn = "Currency"         ' 5
-'        Case dbSingle: strReturn = "Single"             ' 6
-'        Case dbDouble: strReturn = "Double"             ' 7
-'        Case dbDate: strReturn = "Date/Time"            ' 8
-'        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
-'        Case dbText                                     '10
-'            If (fld.Attributes And dbFixedField) = 0& Then
-'                strReturn = "Text"
-'            Else
-'                strReturn = "Text (fixed width)"        '(no interface)
-'            End If
-'        Case dbLongBinary: strReturn = "OLE Object"     '11
-'        Case dbMemo                                     '12
-'            If (fld.Attributes And dbHyperlinkField) = 0& Then
-'                strReturn = "Memo"
-'            Else
-'                strReturn = "Hyperlink"
-'            End If
-'        Case dbGUID: strReturn = "GUID"                 '15
-'
-'        'Attached tables only: cannot create these in JET.
-'        Case dbBigInt: strReturn = "Big Integer"        '16
-'        Case dbVarBinary: strReturn = "VarBinary"       '17
-'        Case dbChar: strReturn = "Char"                 '18
-'        Case dbNumeric: strReturn = "Numeric"           '19
-'        Case dbDecimal: strReturn = "Decimal"           '20
-'        Case dbFloat: strReturn = "Float"               '21
-'        Case dbTime: strReturn = "Time"                 '22
-'        Case dbTimeStamp: strReturn = "Time Stamp"      '23
-'
-'        'Constants for complex types don't work prior to Access 2007 and later.
-'        Case 101&: strReturn = "Attachment"         'dbAttachment
-'        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
-'        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
-'        Case 104&: strReturn = "Complex Long"       'dbComplexLong
-'        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
-'        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
-'        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
-'        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
-'        Case 109&: strReturn = "Complex Text"       'dbComplexText
-'        Case Else: strReturn = "Field type " & fld.Type & " unknown"
-'    End Select
-'
-'    FieldTypeName = strReturn
-'End Function
-'!!!!!!!!!!!!!
+Private Function TableInfo(strTableName As String)
+On Error GoTo TableInfoErr
+   ' Purpose:   Display the field names, types, sizes and descriptions for a table.
+   ' Argument:  Name of a table in the current database.
+   Dim db As DAO.Database
+   Dim tdf As DAO.TableDef
+   Dim fld As DAO.Field
 
-Private Function aeDocumentTablesRelations() As String
+   Set db = CurrentDb()
+   Set tdf = db.TableDefs(strTableName)
+   Debug.Print "FIELD NAME         ", , "FIELD TYPE", "SIZE", "DESCRIPTION"
+   Debug.Print "===================", , "==========", "====", "==========="
+
+   For Each fld In tdf.Fields
+      Debug.Print fld.Name, ,
+      Debug.Print FieldTypeName(fld),
+      Debug.Print fld.Size,
+      Debug.Print GetDescrip(fld)
+   Next
+   Debug.Print "===================", , "==========", "====", "==========="
+
+TableInfoExit:
+   Set db = Nothing
+   Exit Function
+
+TableInfoErr:
+   Select Case Err
+   Case 3265&  'Table name invalid
+      MsgBox strTableName & " table doesn't exist"
+   Case Else
+      Debug.Print "TableInfo() Error " & Err & ": " & Error
+   End Select
+   Resume TableInfoExit
+End Function
+
+Function GetDescrip(obj As Object) As String
+    On Error Resume Next
+    GetDescrip = obj.Properties("Description")
+End Function
+
+Private Function FieldTypeName(fld As DAO.Field) As String
+    'Purpose: Converts the numeric results of DAO Field.Type to text.
+    Dim strReturn As String    'Name to return
+
+    Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
+        Case dbBoolean: strReturn = "Yes/No"            ' 1
+        Case dbByte: strReturn = "Byte"                 ' 2
+        Case dbInteger: strReturn = "Integer"           ' 3
+        Case dbLong                                     ' 4
+            If (fld.Attributes And dbAutoIncrField) = 0& Then
+                strReturn = "Long Integer"
+           Else
+                strReturn = "AutoNumber"
+            End If
+        Case dbCurrency: strReturn = "Currency"         ' 5
+        Case dbSingle: strReturn = "Single"             ' 6
+        Case dbDouble: strReturn = "Double"             ' 7
+        Case dbDate: strReturn = "Date/Time"            ' 8
+        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
+        Case dbText                                     '10
+            If (fld.Attributes And dbFixedField) = 0& Then
+                strReturn = "Text"
+            Else
+                strReturn = "Text (fixed width)"        '(no interface)
+            End If
+        Case dbLongBinary: strReturn = "OLE Object"     '11
+        Case dbMemo                                     '12
+            If (fld.Attributes And dbHyperlinkField) = 0& Then
+                strReturn = "Memo"
+            Else
+                strReturn = "Hyperlink"
+            End If
+        Case dbGUID: strReturn = "GUID"                 '15
+
+        'Attached tables only: cannot create these in JET.
+        Case dbBigInt: strReturn = "Big Integer"        '16
+        Case dbVarBinary: strReturn = "VarBinary"       '17
+        Case dbChar: strReturn = "Char"                 '18
+        Case dbNumeric: strReturn = "Numeric"           '19
+        Case dbDecimal: strReturn = "Decimal"           '20
+        Case dbFloat: strReturn = "Float"               '21
+        Case dbTime: strReturn = "Time"                 '22
+        Case dbTimeStamp: strReturn = "Time Stamp"      '23
+
+        'Constants for complex types don't work prior to Access 2007 and later.
+        Case 101&: strReturn = "Attachment"         'dbAttachment
+        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
+        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
+        Case 104&: strReturn = "Complex Long"       'dbComplexLong
+        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
+        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
+        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
+        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
+        Case 109&: strReturn = "Complex Text"       'dbComplexText
+        Case Else: strReturn = "Field type " & fld.Type & " unknown"
+    End Select
+
+    FieldTypeName = strReturn
+End Function
+
+Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 ' Ref: Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
 ' Document the tables, fields, and relationships
 '   Tables, field type, primary keys, foreign keys, indexes
 '   Relationships in the database with table, foreign table, primary keys, foreign keys
 ' Ref: http://allenbrowne.com/func-06.html
 
-    Dim strDocument As String
-    Dim tblDef As DAO.TableDef
-    Dim fld As DAO.Field
-    Dim idx As DAO.Index
+          Dim strDocument As String
+          Dim tblDef As DAO.TableDef
+          Dim fld As DAO.Field
+          Dim idx As DAO.Index
 
-    For Each tblDef In CurrentDb.TableDefs
-        'If Not Left(tblDef.Name, 4) = "MSys" Then
-        If Not (Left(tblDef.Name, 4) = "MSys" _
+          Dim blnDebug As Boolean
+
+10        On Error GoTo aeDocumentTables_Error
+
+20    Debug.Print "aeDocumentTablesRelations"
+30    If IsMissing(varDebug) Then
+40        blnDebug = False
+50        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
+60        Debug.Print , "DEBUGGING IS OFF"
+70    Else
+80        blnDebug = True
+90        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
+100       Debug.Print , "NOW DEBUGGING..."
+110   End If
+
+120   For Each tblDef In CurrentDb.TableDefs
+130      If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
-            strDocument = strDocument & vbCrLf & tblDef.Name & vbCrLf
-            For Each fld In tblDef.Fields
-                strDocument = strDocument & "   " & fld.Name & "   " & FieldTypeToString(fld.Type)
-                If isPK(tblDef, fld.Name) Then
-                    strDocument = strDocument & "  PrimaryKey"
-                End If
-                If isFK(tblDef, fld.Name) Then
-                    strDocument = strDocument & "  ForeignKey"
-                End If
-                If isIndex(tblDef, fld.Name) Then
-                    strDocument = strDocument & "  Indexed"
-                End If
-                If fld.Required Then
-                    strDocument = strDocument & "  Required"
-                End If
-                strDocument = strDocument & vbCrLf
-            Next fld
+140          TableInfo (tblDef.Name)
         End If
-    Next tblDef
-    aeDocumentTablesRelations = strDocument
+320   Next tblDef
+          
+340   aeDocumentTables = True
 
-aeDocumentTablesRelations_Error:
+aeDocumentTables_Error:
 
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesRelations of Class aegitClass"
-    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesRelations of Class aegitClass"
+350       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+360       If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+370       aeDocumentTables = False
 
 End Function
 
-Private Function FieldTypeToString(intFieldType As Integer) As String
+Private Function FieldTypeToString(intFieldType As Integer, Optional varDebug As Variant) As String
+
+    Dim blnDebug As Boolean
+
+    On Error GoTo FieldTypeToString_Error
+
+    If IsMissing(varDebug) Then
+        blnDebug = False
+    Else
+        blnDebug = True
+    End If
+
     Select Case intFieldType
         Case 1
             FieldTypeToString = "dbBoolean"
@@ -441,6 +528,15 @@ Private Function FieldTypeToString(intFieldType As Integer) As String
         Case 23
             FieldTypeToString = "dbTimeStamp"
     End Select
+
+    On Error GoTo 0
+    Exit Function
+
+FieldTypeToString_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldTypeToString of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldTypeToString of Class aegitClass"
+
 End Function
 
 Private Function isPK(tblDef As DAO.TableDef, strField As String) As Boolean
@@ -486,13 +582,28 @@ Private Function isFK(tblDef As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function fncDocumentRelations() As String
+Private Function aeDocumentRelations(Optional varDebug As Variant) As String
   
     Dim strDocument As String
     Dim rel As DAO.Relation
     Dim fld As DAO.Field
     Dim idx As DAO.Index
     Dim prop As DAO.Property
+    
+    Dim blnDebug As Boolean
+
+    On Error GoTo aeDocumentRelations_Error
+
+    Debug.Print "aeDocumentRelations"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentRelations is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentRelations is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
     For Each rel In CurrentDb.Relations
         strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
@@ -503,7 +614,12 @@ Private Function fncDocumentRelations() As String
             strDocument = strDocument & vbCrLf
         Next fld
     Next rel
-    fncDocumentRelations = strDocument
+    aeDocumentRelations = strDocument
+
+aeDocumentRelations_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
 
 End Function
 

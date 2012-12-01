@@ -12,6 +12,7 @@ Option Explicit
 '
 
 ' 20121129 - v017 - Pass Fail test results and debug output cleanup
+    ' Working on documenting the tables and relations
 ' 20121128 - v016 - SourceFolder property updated to allow passing the path into the class
     ' Cleanup debug messages code, include GetReferences from aeladdin (tm)
     ' Public Function aeReadDocDatabase - does it need a Get property call to make the function Private? - fixed, set to Private

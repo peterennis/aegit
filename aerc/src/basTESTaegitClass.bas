@@ -53,11 +53,14 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     Dim bln2 As Boolean
     Dim bln3 As Boolean
     Dim bln4 As Boolean
+    Dim bln5 As Boolean
 
     'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
 
     'MsgBox IsMissing(Debugit)
+
+    'GoTo Test5
 
 Test1:
     '=============
@@ -133,12 +136,32 @@ Test4:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
+Test5:
+    '=============
+    ' TEST 5
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "5. aegitClassTest => DocumentTables"
+    Debug.Print "aegitClassTest"
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTables"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln5 = oDbObjects.DocumentTables()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln4 = oDbObjects.DocumentTables("WithDebugging")
+    End If
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+    
     Debug.Print "Test 1: DocumentTheDatabase"
     Debug.Print "Test 2: Exists"
     Debug.Print "Test 3: ReadDocDatabase"
     Debug.Print "Test 4: GetReferences"
-    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4"
-    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4)
+    Debug.Print "Test 5: DocumentTables"
+    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5"
+    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5)
 
     'Stop
 End Function
