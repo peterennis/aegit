@@ -18,7 +18,8 @@ Private Const VERSION As String = "0.1.8"
 Private Const VERSION_DATE As String = "December 1, 2012"
 Private Const THE_DRIVE As String = "C"
 '
-'20121201 v018  Fix
+'20121201 v018  Fix err=0 and error=0
+'               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
 '20121129 v017  Output error messages to the immediate window when debug is turned on
 '               Pass Fail test results and debug output cleanup
 '20121128 v016  Use strSourceLocation to allow custom path and test for error,
@@ -44,6 +45,15 @@ Private Const THE_DRIVE As String = "C"
 '               Use ?aegitClassTest of basTestRevisionControl in the immediate window to check basic operation
 '
 
+' Ref: http://www.cpearson.com/excel/sizestring.htm
+''''''''''''''''''''''''''''''''''''''
+' This enum is used by SizeString to indicate whether the supplied text
+' appears on the left or right side of result string.
+Private Enum SizeStringSide
+    TextLeft = 1
+    TextRight = 2
+End Enum
+
 Private Type mySetupType
     SourceFolder As String
     TestFolder As String
@@ -52,7 +62,8 @@ End Type
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitblnCustomSourceFolder As Boolean
-Private strSourceLocation As String
+Private aestrSourceLocation As String
+Private aeintLTN
 '
 
 Private Sub Class_Initialize()
@@ -64,7 +75,8 @@ Private Sub Class_Initialize()
     aegitSourceFolder = "default"
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
-    
+    aeintLTN = LongestTableName
+
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder=" & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder=" & aegitType.SourceFolder
@@ -325,48 +337,105 @@ Public Function zLongestFieldName() As Integer
     zLongestFieldName = intFieldLen
 End Function
 
-'Ref: http://allenbrowne.com/func-06.html
+Private Function SizeString(Text As String, Length As Long, _
+    Optional ByVal TextSide As SizeStringSide = TextLeft, _
+    Optional PadChar As String = " ") As String
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' SizeString
+' This procedure creates a string of a specified length. Text is the original string
+' to include, and Length is the length of the result string. TextSide indicates whether
+' Text should appear on the left (in which case the result is padded on the right with
+' PadChar) or on the right (in which case the string is padded on the left). When padding on
+' either the left or right, padding is done using the PadChar. character. If PadChar is omitted,
+' a space is used. If PadChar is longer than one character, the left-most character of PadChar
+' is used. If PadChar is an empty string, a space is used. If TextSide is neither
+' TextLeft or TextRight, the procedure uses TextLeft.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Dim sPadChar As String
+
+If Len(Text) >= Length Then
+    ' if the source string is longer than the specified length, return the
+    ' Length left characters
+    SizeString = Left(Text, Length)
+    Exit Function
+End If
+
+If Len(PadChar) = 0 Then
+    ' PadChar is an empty string. use a space.
+    sPadChar = " "
+Else
+    ' use only the first character of PadChar
+    sPadChar = Left(PadChar, 1)
+End If
+
+If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
+    ' if TextSide was neither TextLeft nor TextRight, use TextLeft.
+    TextSide = TextLeft
+End If
+
+If TextSide = TextLeft Then
+    ' if the text goes on the left, fill out the right with spaces
+    SizeString = Text & String(Length - Len(Text), sPadChar)
+Else
+    ' otherwise fill on the left and put the Text on the right
+    SizeString = String(Length - Len(Text), sPadChar) & Text
+End If
+
+End Function
+
+' Ref: http://allenbrowne.com/func-06.html
 'Provided by Allen Browne.  Last updated: April 2010.
 '
 'TableInfo() function
 '
-'This function displays in the Immediate Window (Ctrl+G) the structure of any table in the current database.
-'For Access 2000 or 2002, make sure you have a DAO reference.
-'The Description property does not exist for fields that have no description, so a separate function handles that error.
+'This function displays in the Immediate Window (Ctrl+G) the structure of any table in the current database
+'For Access 2000 or 2002, make sure you have a DAO reference
+'The Description property does not exist for fields that have no description, so a separate function handles that error
 '
 Private Function TableInfo(strTableName As String)
-On Error GoTo TableInfoErr
-   ' Purpose:   Display the field names, types, sizes and descriptions for a table.
-   ' Argument:  Name of a table in the current database.
-   Dim db As DAO.Database
-   Dim tdf As DAO.TableDef
-   Dim fld As DAO.Field
+' Purpose:  Display the field names, types, sizes and descriptions for a table
+' Argument: Name of a table in the current database
+' Update:   Peter Ennis
+' 20121201  SizeString(), LongestTableName()
+'
+    On Error GoTo TableInfoErr
 
-   Set db = CurrentDb()
-   Set tdf = db.TableDefs(strTableName)
-   Debug.Print "FIELD NAME         ", , "FIELD TYPE", "SIZE", "DESCRIPTION"
-   Debug.Print "===================", , "==========", "====", "==========="
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim sLen As Long
 
-   For Each fld In tdf.Fields
-      Debug.Print fld.Name, ,
-      Debug.Print FieldTypeName(fld),
-      Debug.Print fld.Size,
-      Debug.Print GetDescrip(fld)
-   Next
-   Debug.Print "===================", , "==========", "====", "==========="
+    Set db = CurrentDb()
+    Set tdf = db.TableDefs(strTableName)
+    sLen = Len("TABLE: ") + aeintLTN
+    'Debug.Print sLen
+    Debug.Print SizeString("-", sLen, TextLeft, "-")
+    Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+    Debug.Print SizeString("-", sLen, TextLeft, "-")
+    Debug.Print "FIELD NAME         ", , "FIELD TYPE", "SIZE", "DESCRIPTION"
+    Debug.Print "===================", , "==========", "====", "==========="
+
+    For Each fld In tdf.Fields
+        Debug.Print fld.Name, ,
+        Debug.Print FieldTypeName(fld),
+        Debug.Print fld.Size,
+        Debug.Print GetDescrip(fld)
+    Next
+    Debug.Print "===================", , "==========", "====", "==========="
 
 TableInfoExit:
-   Set db = Nothing
-   Exit Function
+    Set db = Nothing
+    Exit Function
 
 TableInfoErr:
-   Select Case Err
-   Case 3265&  'Table name invalid
-      MsgBox strTableName & " table doesn't exist"
-   Case Else
-      Debug.Print "TableInfo() Error " & Err & ": " & Error
-   End Select
-   Resume TableInfoExit
+    Select Case Err
+        Case 3265&  'Table name invalid
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+            MsgBox strTableName & " table doesn't exist"
+        Case Else
+            Debug.Print "TableInfo() Error " & Err & ": " & Error
+    End Select
+    Resume TableInfoExit
 End Function
 
 Function GetDescrip(obj As Object) As String
@@ -450,7 +519,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 
     On Error GoTo aeDocumentTables_Error
 
-    Debug.Print "aeDocumentTablesRelations"
+    Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
         blnDebug = False
         Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
@@ -468,7 +537,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
             TableInfo (tblDef.Name)
         End If
     Next tblDef
-    
+
     On Error GoTo 0
     aeDocumentTables = True
     Exit Function
@@ -696,15 +765,15 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
     
     If aegitSourceFolder = "default" Then
-        strSourceLocation = aegitType.SourceFolder
+        aestrSourceLocation = aegitType.SourceFolder
     Else
-        strSourceLocation = aegitSourceFolder
+        aestrSourceLocation = aegitSourceFolder
     End If
     
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
-        Debug.Print , "SourceFolder=" & strSourceLocation
-        Debug.Print , "TestFolder=" & strSourceLocation
+        Debug.Print , "SourceFolder=" & aestrSourceLocation
+        Debug.Print , "TestFolder=" & aestrSourceLocation
     End If
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -720,7 +789,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acForm, doc.Name, strSourceLocation & doc.Name & ".frm"
+            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
         End If
     Next doc
     
@@ -749,7 +818,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acReport, doc.Name, strSourceLocation & doc.Name & ".rpt"
+            Application.SaveAsText acReport, doc.Name, aestrSourceLocation & doc.Name & ".rpt"
         End If
     Next doc
     
@@ -778,7 +847,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
-            Application.SaveAsText acMacro, doc.Name, strSourceLocation & doc.Name & ".mac"
+            Application.SaveAsText acMacro, doc.Name, aestrSourceLocation & doc.Name & ".mac"
         End If
     Next doc
     
@@ -807,7 +876,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acModule, doc.Name, strSourceLocation & doc.Name & ".bas"
+            Application.SaveAsText acModule, doc.Name, aestrSourceLocation & doc.Name & ".bas"
         End If
     Next doc
     
@@ -837,7 +906,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acQuery, qdf.Name, strSourceLocation & qdf.Name & ".qry"
+            Application.SaveAsText acQuery, qdf.Name, aestrSourceLocation & qdf.Name & ".qry"
         End If
     Next qdf
     
@@ -867,8 +936,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 aeDocumentTheDatabase_Error:
 
     If Err = 2950 Then
-        MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
-        If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+        If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
