@@ -385,7 +385,7 @@ Private Function FieldTypeName(fld As DAO.Field) As String
         Case dbLong                                     ' 4
             If (fld.Attributes And dbAutoIncrField) = 0& Then
                 strReturn = "Long Integer"
-           Else
+            Else
                 strReturn = "AutoNumber"
             End If
         Case dbCurrency: strReturn = "Currency"         ' 5
@@ -441,41 +441,43 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 '   Relationships in the database with table, foreign table, primary keys, foreign keys
 ' Ref: http://allenbrowne.com/func-06.html
 
-          Dim strDocument As String
-          Dim tblDef As DAO.TableDef
-          Dim fld As DAO.Field
-          Dim idx As DAO.Index
+    Dim strDocument As String
+    Dim tblDef As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim idx As DAO.Index
 
-          Dim blnDebug As Boolean
+    Dim blnDebug As Boolean
 
-10        On Error GoTo aeDocumentTables_Error
+    On Error GoTo aeDocumentTables_Error
 
-20    Debug.Print "aeDocumentTablesRelations"
-30    If IsMissing(varDebug) Then
-40        blnDebug = False
-50        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
-60        Debug.Print , "DEBUGGING IS OFF"
-70    Else
-80        blnDebug = True
-90        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
-100       Debug.Print , "NOW DEBUGGING..."
-110   End If
+    Debug.Print "aeDocumentTablesRelations"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
-120   For Each tblDef In CurrentDb.TableDefs
-130      If Not (Left(tblDef.Name, 4) = "MSys" _
+    For Each tblDef In CurrentDb.TableDefs
+        If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
-140          TableInfo (tblDef.Name)
+            TableInfo (tblDef.Name)
         End If
-320   Next tblDef
-          
-340   aeDocumentTables = True
+    Next tblDef
+    
+    On Error GoTo 0
+    aeDocumentTables = True
+    Exit Function
 
 aeDocumentTables_Error:
 
-350       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-360       If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-370       aeDocumentTables = False
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    aeDocumentTables = False
 
 End Function
 
