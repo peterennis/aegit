@@ -2,6 +2,19 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'Copyright (c) 2011 Peter F. Ennis
+'This library is free software; you can redistribute it and/or
+'modify it under the terms of the GNU Lesser General Public
+'License as published by the Free Software Foundation;
+'version 3.0.
+'This library is distributed in the hope that it will be useful,
+'but WITHOUT ANY WARRANTY; without even the implied warranty of
+'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+'Lesser General Public License for more details.
+'You should have received a copy of the GNU Lesser General Public
+'License along with this library; if not, visit
+'http://www.gnu.org/licenses/lgpl-3.0.txt
+
 Option Compare Database
 Option Explicit
 
@@ -11,7 +24,7 @@ Option Explicit
 ' Author:   Peter F. Ennis
 ' Date:     February 24, 2011
 ' Comment:  Create class for revision control
-' History:  See comment details, basChangeLog, commit messages on githib
+' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
 Private Const VERSION As String = "0.1.8"
@@ -20,6 +33,9 @@ Private Const THE_DRIVE As String = "C"
 '
 '20121201 v018  Fix err=0 and error=0
 '               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
+'               Include LGPL license
+'               Ref: http://www.gnu.org/licenses/gpl-howto.html
+'               Ref: http://blogs.sourceallies.com/2011/07/creating-an-open-source-project/
 '20121129 v017  Output error messages to the immediate window when debug is turned on
 '               Pass Fail test results and debug output cleanup
 '20121128 v016  Use strSourceLocation to allow custom path and test for error,
