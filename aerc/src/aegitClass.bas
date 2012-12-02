@@ -79,7 +79,7 @@ Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
-Private aeintLTN
+Private aeintLTN As Integer
 '
 
 Private Sub Class_Initialize()
