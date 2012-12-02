@@ -14,10 +14,11 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on githib
 '=======================================================================
 
-Private Const VERSION As String = "0.1.7"
-Private Const VERSION_DATE As String = "November 29, 2012"
+Private Const VERSION As String = "0.1.8"
+Private Const VERSION_DATE As String = "December 1, 2012"
 Private Const THE_DRIVE As String = "C"
 '
+'20121201 v018  Fix
 '20121129 v017  Output error messages to the immediate window when debug is turned on
 '               Pass Fail test results and debug output cleanup
 '20121128 v016  Use strSourceLocation to allow custom path and test for error,

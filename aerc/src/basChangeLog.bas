@@ -11,6 +11,7 @@ Option Explicit
 ' Pass Fail of the tests should be associated to True False of the function, any error should return False
 '
 
+' 20121201 - v018 -
 ' 20121129 - v017 - Pass Fail test results and debug output cleanup
     ' Working on documenting the tables and relations
 ' 20121128 - v016 - SourceFolder property updated to allow passing the path into the class
