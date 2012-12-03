@@ -12,6 +12,7 @@ Option Explicit
 '
 
 
+'20121203 - v019 - LongestFieldPropsName()
 '20121201 - v018 -
 'Move old research comments from basTESTaegitClass
 '' RESEARCH:

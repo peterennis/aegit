@@ -27,10 +27,11 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.1.8"
-Private Const VERSION_DATE As String = "December 1, 2012"
+Private Const VERSION As String = "0.1.9"
+Private Const VERSION_DATE As String = "December 3, 2012"
 Private Const THE_DRIVE As String = "C"
 '
+'20121203 v019  LongestFieldPropsName()
 '20121201 v018  Fix err=0 and error=0
 '               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
 '               Include LGPL license
@@ -80,6 +81,9 @@ Private aegitSourceFolder As String
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
 Private aeintLTN As Integer
+Private aeintFNLen As Integer
+Private aeintFTLen As Integer
+Private aeintFDLen As Integer
 '
 
 Private Sub Class_Initialize()
@@ -333,24 +337,51 @@ LongestTableName_Error:
 
 End Function
 
-Public Function zLongestFieldName() As Integer
+Private Function LongestFieldPropsName() As Boolean
     Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
-    Dim intFieldLen As Integer
+    Dim fld As DAO.Field
+
+    Dim strLFN As String
+    Dim strLFT As String
+    Dim strLFD As String
+
+    aeintFNLen = 0
+    aeintFTLen = 0
+    aeintFDLen = 0
 
     Set dbs = CurrentDb()
     'Set tdf = db.TableDefs(strTableName)
     For Each tblDef In CurrentDb.TableDefs
         If Not (Left(tblDef.Name, 4) = "MSys" _
-          Or Left(tblDef.Name, 4) = "~TMP" _
-          Or Left(tblDef.Name, 3) = "zzz") Then
-            If intFieldLen > Len(TableInfo(tblDef.Name)) Then
-            intFieldLen = Len(TableInfo(tblDef.Name))
-            Debug.Print "intFieldLen=" & intFieldLen
-            End If
+                Or Left(tblDef.Name, 4) = "~TMP" _
+                Or Left(tblDef.Name, 3) = "zzz") Then
+            For Each fld In tblDef.Fields
+                If Len(fld.Name) > aeintFNLen Then
+                    strLFN = fld.Name
+                    aeintFNLen = Len(fld.Name)
+                End If
+                If Len(FieldTypeName(fld)) > aeintFTLen Then
+                    strLFT = FieldTypeName(fld)
+                    aeintFTLen = Len(FieldTypeName(fld))
+                End If
+                If Len(GetDescrip(fld)) > aeintFDLen Then
+                    strLFD = GetDescrip(fld)
+                    aeintFDLen = Len(GetDescrip(fld))
+                End If
+                Debug.Print fld.Name,
+                Debug.Print FieldTypeName(fld),
+                Debug.Print fld.Size,
+                Debug.Print GetDescrip(fld)
+            Next
+            Debug.Print strLFN, "aeintFNLen=" & aeintFNLen
+            Debug.Print strLFT, "aeintFTLen=" & aeintFTLen
+            Debug.Print strLFD, "aeintFDLen=" & aeintFDLen
+
         End If
     Next tblDef
-    zLongestFieldName = intFieldLen
+    LongestFieldPropsName = True
+    
 End Function
 
 Private Function SizeString(Text As String, Length As Long, _
@@ -454,13 +485,13 @@ TableInfoErr:
     Resume TableInfoExit
 End Function
 
-Function GetDescrip(obj As Object) As String
+Private Function GetDescrip(obj As Object) As String
     On Error Resume Next
     GetDescrip = obj.Properties("Description")
 End Function
 
 Private Function FieldTypeName(fld As DAO.Field) As String
-    'Purpose: Converts the numeric results of DAO Field.Type to text.
+' Purpose: Converts the numeric results of DAO Field.Type to text
     Dim strReturn As String    'Name to return
 
     Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
@@ -720,14 +751,6 @@ aeDocumentRelations_Error:
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
 
 End Function
-
-'Private Function DocumentTables() As Boolean
-'  Debug.Print fncDocumentTables
-'End Function
-'
-'Private Function DocumentRelations() As Boolean
-'  Debug.Print fncDocumentRelations
-'End Function
 
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
