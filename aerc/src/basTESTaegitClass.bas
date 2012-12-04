@@ -59,7 +59,7 @@ Test2:
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to Exists"
         Debug.Print , "DEBUGGING IS OFF"
-        bln2 = oDbObjects.Exists("Modules", "basRevisionControl")
+        bln2 = oDbObjects.Exists("Modules", "aegitClass")
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
         bln2 = oDbObjects.Exists("Modules", "aegitClass", "WithDebugging")
