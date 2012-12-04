@@ -85,6 +85,7 @@ Private aeintFNLen As Long
 Private aeintFTLen As Long
 Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
+Private Const aestr4 As String = "    "
 '
 
 Private Sub Class_Initialize()
@@ -485,21 +486,21 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
-                        , SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
-                        , SizeString("SIZE", aeintFSize, TextLeft, " ") _
-                        , SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
+                        & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
+                        & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
+                        & aestr4 & SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
         Debug.Print SizeString("=", aeintFNLen, TextLeft, "=") _
-                        , SizeString("=", aeintFTLen, TextLeft, "=") _
-                        , SizeString("=", aeintFSize, TextLeft, "=") _
-                        , SizeString("=", aeintFDLen, TextLeft, "=")
+                        & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
+                        & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
+                        & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
     End If
 
     For Each fld In tdf.Fields
         If blnDebug Then
-            Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " "),
-            Debug.Print SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " "),
-            Debug.Print SizeString(fld.Size, aeintFSize, TextLeft, " "),
-            Debug.Print SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
+            Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
+                & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
+                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
         End If
     Next
     If blnDebug Then Debug.Print

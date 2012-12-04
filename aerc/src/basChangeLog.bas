@@ -12,6 +12,8 @@ Option Explicit
 '
 
 
+'20121203 - v020 - Output positioning of TableInfo, use debug flag
+'20121203 - v019 - LongestFieldPropsName()
 '20121201 - v018 -
 'Move old research comments from basTESTaegitClass
 '' RESEARCH:
