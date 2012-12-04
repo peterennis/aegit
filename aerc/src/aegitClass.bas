@@ -31,6 +31,7 @@ Private Const VERSION As String = "0.2.0"
 Private Const VERSION_DATE As String = "December 3, 2012"
 Private Const THE_DRIVE As String = "C"
 '
+'20121204 v020  intFailCount for TableInfo
 '20121203 v019  LongestFieldPropsName()
 '20121201 v018  Fix err=0 and error=0
 '               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
@@ -504,6 +505,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
         End If
     Next
     If blnDebug Then Debug.Print
+    
+    TableInfo = True
 
 TableInfoExit:
     Set db = Nothing
@@ -521,7 +524,9 @@ TableInfoErr:
         Case Else
             Debug.Print "TableInfo() Error " & Err & ": " & Error
     End Select
+    TableInfo = False
     Resume TableInfoExit
+
 End Function
 
 Private Function GetDescrip(obj As Object) As String
@@ -602,9 +607,12 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     Dim idx As DAO.Index
 
     Dim blnDebug As Boolean
+    Dim blnResult As Boolean
+    Dim intFailCount As Integer
 
     On Error GoTo aeDocumentTables_Error
 
+    intFailCount = 0
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
         blnDebug = False
@@ -621,17 +629,27 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
             If blnDebug Then
-                TableInfo tblDef.Name, "WithDebugging"
+                blnResult = TableInfo(tblDef.Name, "WithDebugging")
+                If Not blnResult Then intFailCount = intFailCount + 1
+                'Debug.Print "tblDef.Name=" & tblDef.Name
             Else
-                TableInfo (tblDef.Name)
+                blnResult = TableInfo(tblDef.Name)
+                If Not blnResult Then intFailCount = intFailCount + 1
             End If
         End If
     Next tblDef
 
-    aeDocumentTables = True
+    If intFailCount > 0 Then
+        aeDocumentTables = False
+    Else
+        aeDocumentTables = True
+    End If
+    If blnDebug Then
+        Debug.Print "intFailCount=" & intFailCount
+        Debug.Print "aeDocumentTables=" & aeDocumentTables
+    End If
 
 aeDocumentTables_Exit:
-    LongestFieldPropsName
     Exit Function
 
 aeDocumentTables_Error:
@@ -1226,6 +1244,7 @@ aeReadDocDatabase_Error:
 
     MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    aeReadDocDatabase = False
 
 End Function
 

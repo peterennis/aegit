@@ -118,7 +118,7 @@ Test5:
         bln5 = oDbObjects.DocumentTables()
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-        bln4 = oDbObjects.DocumentTables("WithDebugging")
+        bln5 = oDbObjects.DocumentTables("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
