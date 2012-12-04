@@ -2,6 +2,19 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'Copyright (c) 2011 Peter F. Ennis
+'This library is free software; you can redistribute it and/or
+'modify it under the terms of the GNU Lesser General Public
+'License as published by the Free Software Foundation;
+'version 3.0.
+'This library is distributed in the hope that it will be useful,
+'but WITHOUT ANY WARRANTY; without even the implied warranty of
+'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+'Lesser General Public License for more details.
+'You should have received a copy of the GNU Lesser General Public
+'License along with this library; if not, visit
+'http://www.gnu.org/licenses/lgpl-3.0.txt
+
 Option Compare Database
 Option Explicit
 
@@ -11,13 +24,19 @@ Option Explicit
 ' Author:   Peter F. Ennis
 ' Date:     February 24, 2011
 ' Comment:  Create class for revision control
-' History:  See comment details, basChangeLog, commit messages on githib
+' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.1.7"
-Private Const VERSION_DATE As String = "November 29, 2012"
+Private Const VERSION As String = "0.2.0"
+Private Const VERSION_DATE As String = "December 3, 2012"
 Private Const THE_DRIVE As String = "C"
 '
+'20121203 v019  LongestFieldPropsName()
+'20121201 v018  Fix err=0 and error=0
+'               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
+'               Include LGPL license
+'               Ref: http://www.gnu.org/licenses/gpl-howto.html
+'               Ref: http://blogs.sourceallies.com/2011/07/creating-an-open-source-project/
 '20121129 v017  Output error messages to the immediate window when debug is turned on
 '               Pass Fail test results and debug output cleanup
 '20121128 v016  Use strSourceLocation to allow custom path and test for error,
@@ -43,6 +62,15 @@ Private Const THE_DRIVE As String = "C"
 '               Use ?aegitClassTest of basTestRevisionControl in the immediate window to check basic operation
 '
 
+' Ref: http://www.cpearson.com/excel/sizestring.htm
+''''''''''''''''''''''''''''''''''''''
+' This enum is used by SizeString to indicate whether the supplied text
+' appears on the left or right side of result string.
+Private Enum SizeStringSide
+    TextLeft = 1
+    TextRight = 2
+End Enum
+
 Private Type mySetupType
     SourceFolder As String
     TestFolder As String
@@ -51,7 +79,12 @@ End Type
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitblnCustomSourceFolder As Boolean
-Private strSourceLocation As String
+Private aestrSourceLocation As String
+Private aeintLTN As Integer
+Private aeintFNLen As Integer
+Private aeintFTLen As Integer
+Private Const aeintFSize As Integer = 4
+Private aeintFDLen As Integer
 '
 
 Private Sub Class_Initialize()
@@ -63,11 +96,18 @@ Private Sub Class_Initialize()
     aegitSourceFolder = "default"
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
-    
+    aeintLTN = LongestTableName
+    LongestFieldPropsName
+
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder=" & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder=" & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.TestFolder=" & aegitType.TestFolder
+    Debug.Print , "aeintLTN =" & aeintLTN
+    Debug.Print , "aeintFNLen=" & aeintFNLen
+    Debug.Print , "aeintFTLen=" & aeintFTLen
+    Debug.Print , "aeintFSize=" & aeintFSize
+    Debug.Print , "aeintFDLen=" & aeintFDLen
 
 End Sub
 
@@ -275,11 +315,13 @@ Private Function LongestTableName() As Integer
     Dim tblDef As DAO.TableDef
     Dim intTNLen As Integer
 
+    On Error GoTo LongestTableName_Error
+
     intTNLen = 0
     Set dbs = CurrentDb()
-    'Set tdf = db.TableDefs(strTableName)
+    'Debug.Print "dbs.Name=" & dbs.Name
     For Each tblDef In CurrentDb.TableDefs
-        Debug.Print tblDef.Name, Len(tblDef.Name)
+        'Debug.Print tblDef.Name, Len(tblDef.Name)
         If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
@@ -290,81 +332,174 @@ Private Function LongestTableName() As Integer
             End If
         End If
     Next tblDef
+
+    On Error GoTo 0
     LongestTableName = intTNLen
+    Exit Function
+
+LongestTableName_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
 
 End Function
 
-Public Function zLongestFieldName() As Integer
+Private Function LongestFieldPropsName() As Boolean
     Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
-    Dim intFieldLen As Integer
+    Dim fld As DAO.Field
+
+    Dim strLFN As String
+    Dim strLFT As String
+    Dim strLFD As String
+
+    aeintFNLen = 0
+    aeintFTLen = 0
+    aeintFDLen = 0
 
     Set dbs = CurrentDb()
     'Set tdf = db.TableDefs(strTableName)
     For Each tblDef In CurrentDb.TableDefs
         If Not (Left(tblDef.Name, 4) = "MSys" _
-          Or Left(tblDef.Name, 4) = "~TMP" _
-          Or Left(tblDef.Name, 3) = "zzz") Then
-            If intFieldLen > Len(TableInfo(tblDef.Name)) Then
-            intFieldLen = Len(TableInfo(tblDef.Name))
-            Debug.Print "intFieldLen=" & intFieldLen
-            End If
+                Or Left(tblDef.Name, 4) = "~TMP" _
+                Or Left(tblDef.Name, 3) = "zzz") Then
+            For Each fld In tblDef.Fields
+                If Len(fld.Name) > aeintFNLen Then
+                    strLFN = fld.Name
+                    aeintFNLen = Len(fld.Name)
+                End If
+                If Len(FieldTypeName(fld)) > aeintFTLen Then
+                    strLFT = FieldTypeName(fld)
+                    aeintFTLen = Len(FieldTypeName(fld))
+                End If
+                If Len(GetDescrip(fld)) > aeintFDLen Then
+                    strLFD = GetDescrip(fld)
+                    aeintFDLen = Len(GetDescrip(fld))
+                End If
+                'Debug.Print fld.Name,
+                'Debug.Print FieldTypeName(fld),
+                'Debug.Print fld.Size,
+                'Debug.Print GetDescrip(fld)
+            Next
+            'Debug.Print strLFN, "aeintFNLen=" & aeintFNLen
+            'Debug.Print strLFT, "aeintFTLen=" & aeintFTLen
+            'Debug.Print , "aeintFSize=" & aeintFSize
+            'Debug.Print strLFD, "aeintFDLen=" & aeintFDLen
+
         End If
     Next tblDef
-    zLongestFieldName = intFieldLen
+    LongestFieldPropsName = True
+    
 End Function
 
-'Ref: http://allenbrowne.com/func-06.html
+Private Function SizeString(Text As String, Length As Long, _
+    Optional ByVal TextSide As SizeStringSide = TextLeft, _
+    Optional PadChar As String = " ") As String
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' SizeString
+' This procedure creates a string of a specified length. Text is the original string
+' to include, and Length is the length of the result string. TextSide indicates whether
+' Text should appear on the left (in which case the result is padded on the right with
+' PadChar) or on the right (in which case the string is padded on the left). When padding on
+' either the left or right, padding is done using the PadChar. character. If PadChar is omitted,
+' a space is used. If PadChar is longer than one character, the left-most character of PadChar
+' is used. If PadChar is an empty string, a space is used. If TextSide is neither
+' TextLeft or TextRight, the procedure uses TextLeft.
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Dim sPadChar As String
+
+If Len(Text) >= Length Then
+    ' if the source string is longer than the specified length, return the
+    ' Length left characters
+    SizeString = Left(Text, Length)
+    Exit Function
+End If
+
+If Len(PadChar) = 0 Then
+    ' PadChar is an empty string. use a space.
+    sPadChar = " "
+Else
+    ' use only the first character of PadChar
+    sPadChar = Left(PadChar, 1)
+End If
+
+If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
+    ' if TextSide was neither TextLeft nor TextRight, use TextLeft.
+    TextSide = TextLeft
+End If
+
+If TextSide = TextLeft Then
+    ' if the text goes on the left, fill out the right with spaces
+    SizeString = Text & String(Length - Len(Text), sPadChar)
+Else
+    ' otherwise fill on the left and put the Text on the right
+    SizeString = String(Length - Len(Text), sPadChar) & Text
+End If
+
+End Function
+
+' Ref: http://allenbrowne.com/func-06.html
 'Provided by Allen Browne.  Last updated: April 2010.
 '
 'TableInfo() function
 '
-'This function displays in the Immediate Window (Ctrl+G) the structure of any table in the current database.
-'For Access 2000 or 2002, make sure you have a DAO reference.
-'The Description property does not exist for fields that have no description, so a separate function handles that error.
+'This function displays in the Immediate Window (Ctrl+G) the structure of any table in the current database
+'For Access 2000 or 2002, make sure you have a DAO reference
+'The Description property does not exist for fields that have no description, so a separate function handles that error
 '
 Private Function TableInfo(strTableName As String)
-On Error GoTo TableInfoErr
-   ' Purpose:   Display the field names, types, sizes and descriptions for a table.
-   ' Argument:  Name of a table in the current database.
-   Dim db As DAO.Database
-   Dim tdf As DAO.TableDef
-   Dim fld As DAO.Field
+' Purpose:  Display the field names, types, sizes and descriptions for a table
+' Argument: Name of a table in the current database
+' Update:   Peter Ennis
+' 20121201  SizeString(), LongestTableName()
+'
+    On Error GoTo TableInfoErr
 
-   Set db = CurrentDb()
-   Set tdf = db.TableDefs(strTableName)
-   Debug.Print "FIELD NAME         ", , "FIELD TYPE", "SIZE", "DESCRIPTION"
-   Debug.Print "===================", , "==========", "====", "==========="
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim sLen As Long
 
-   For Each fld In tdf.Fields
-      Debug.Print fld.Name, ,
-      Debug.Print FieldTypeName(fld),
-      Debug.Print fld.Size,
-      Debug.Print GetDescrip(fld)
-   Next
-   Debug.Print "===================", , "==========", "====", "==========="
+    Set db = CurrentDb()
+    Set tdf = db.TableDefs(strTableName)
+    sLen = Len("TABLE: ") + aeintLTN
+    'Debug.Print sLen
+    Debug.Print SizeString("-", sLen, TextLeft, "-")
+    Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+    Debug.Print SizeString("-", sLen, TextLeft, "-")
+    Debug.Print "FIELD NAME         ", , "FIELD TYPE", "SIZE", "DESCRIPTION"
+    Debug.Print "===================", , "==========", "====", "==========="
+
+    For Each fld In tdf.Fields
+        Debug.Print fld.Name, ,
+        Debug.Print FieldTypeName(fld),
+        Debug.Print fld.Size,
+        Debug.Print GetDescrip(fld)
+    Next
+    Debug.Print "===================", , "==========", "====", "==========="
 
 TableInfoExit:
-   Set db = Nothing
-   Exit Function
+    Set db = Nothing
+    Exit Function
 
 TableInfoErr:
-   Select Case Err
-   Case 3265&  'Table name invalid
-      MsgBox strTableName & " table doesn't exist"
-   Case Else
-      Debug.Print "TableInfo() Error " & Err & ": " & Error
-   End Select
-   Resume TableInfoExit
+    Select Case Err
+        Case 3265&  'Table name invalid
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+            MsgBox strTableName & " table doesn't exist"
+        Case Else
+            Debug.Print "TableInfo() Error " & Err & ": " & Error
+    End Select
+    Resume TableInfoExit
 End Function
 
-Function GetDescrip(obj As Object) As String
+Private Function GetDescrip(obj As Object) As String
     On Error Resume Next
     GetDescrip = obj.Properties("Description")
 End Function
 
 Private Function FieldTypeName(fld As DAO.Field) As String
-    'Purpose: Converts the numeric results of DAO Field.Type to text.
+' Purpose: Converts the numeric results of DAO Field.Type to text
     Dim strReturn As String    'Name to return
 
     Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
@@ -374,7 +509,7 @@ Private Function FieldTypeName(fld As DAO.Field) As String
         Case dbLong                                     ' 4
             If (fld.Attributes And dbAutoIncrField) = 0& Then
                 strReturn = "Long Integer"
-           Else
+            Else
                 strReturn = "AutoNumber"
             End If
         Case dbCurrency: strReturn = "Currency"         ' 5
@@ -430,41 +565,45 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 '   Relationships in the database with table, foreign table, primary keys, foreign keys
 ' Ref: http://allenbrowne.com/func-06.html
 
-          Dim strDocument As String
-          Dim tblDef As DAO.TableDef
-          Dim fld As DAO.Field
-          Dim idx As DAO.Index
+    Dim strDocument As String
+    Dim tblDef As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim idx As DAO.Index
 
-          Dim blnDebug As Boolean
+    Dim blnDebug As Boolean
 
-10        On Error GoTo aeDocumentTables_Error
+    On Error GoTo aeDocumentTables_Error
 
-20    Debug.Print "aeDocumentTablesRelations"
-30    If IsMissing(varDebug) Then
-40        blnDebug = False
-50        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
-60        Debug.Print , "DEBUGGING IS OFF"
-70    Else
-80        blnDebug = True
-90        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
-100       Debug.Print , "NOW DEBUGGING..."
-110   End If
+    Debug.Print "aeDocumentTables"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
-120   For Each tblDef In CurrentDb.TableDefs
-130      If Not (Left(tblDef.Name, 4) = "MSys" _
+    For Each tblDef In CurrentDb.TableDefs
+        If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
-140          TableInfo (tblDef.Name)
+            TableInfo (tblDef.Name)
         End If
-320   Next tblDef
-          
-340   aeDocumentTables = True
+    Next tblDef
+
+    LongestFieldPropsName
+    
+    On Error GoTo 0
+    aeDocumentTables = True
+    Exit Function
 
 aeDocumentTables_Error:
 
-350       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-360       If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-370       aeDocumentTables = False
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    aeDocumentTables = False
 
 End Function
 
@@ -623,14 +762,6 @@ aeDocumentRelations_Error:
 
 End Function
 
-'Private Function DocumentTables() As Boolean
-'  Debug.Print fncDocumentTables
-'End Function
-'
-'Private Function DocumentRelations() As Boolean
-'  Debug.Print fncDocumentRelations
-'End Function
-
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -683,15 +814,15 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
     
     If aegitSourceFolder = "default" Then
-        strSourceLocation = aegitType.SourceFolder
+        aestrSourceLocation = aegitType.SourceFolder
     Else
-        strSourceLocation = aegitSourceFolder
+        aestrSourceLocation = aegitSourceFolder
     End If
     
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
-        Debug.Print , "SourceFolder=" & strSourceLocation
-        Debug.Print , "TestFolder=" & strSourceLocation
+        Debug.Print , "SourceFolder=" & aestrSourceLocation
+        Debug.Print , "TestFolder=" & aestrSourceLocation
     End If
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -707,7 +838,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acForm, doc.Name, strSourceLocation & doc.Name & ".frm"
+            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
         End If
     Next doc
     
@@ -736,7 +867,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acReport, doc.Name, strSourceLocation & doc.Name & ".rpt"
+            Application.SaveAsText acReport, doc.Name, aestrSourceLocation & doc.Name & ".rpt"
         End If
     Next doc
     
@@ -765,7 +896,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
-            Application.SaveAsText acMacro, doc.Name, strSourceLocation & doc.Name & ".mac"
+            Application.SaveAsText acMacro, doc.Name, aestrSourceLocation & doc.Name & ".mac"
         End If
     Next doc
     
@@ -794,7 +925,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acModule, doc.Name, strSourceLocation & doc.Name & ".bas"
+            Application.SaveAsText acModule, doc.Name, aestrSourceLocation & doc.Name & ".bas"
         End If
     Next doc
     
@@ -824,7 +955,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acQuery, qdf.Name, strSourceLocation & qdf.Name & ".qry"
+            Application.SaveAsText acQuery, qdf.Name, aestrSourceLocation & qdf.Name & ".qry"
         End If
     Next qdf
     
@@ -854,8 +985,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 aeDocumentTheDatabase_Error:
 
     If Err = 2950 Then
-        MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
-        If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & strSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+        If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
