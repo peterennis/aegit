@@ -105,7 +105,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitSourceFolder=" & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder=" & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.TestFolder=" & aegitType.TestFolder
-    Debug.Print , "aeintLTN =" & aeintLTN
+    Debug.Print , "aeintLTN=" & aeintLTN
     Debug.Print , "aeintFNLen=" & aeintFNLen
     Debug.Print , "aeintFTLen=" & aeintFTLen
     Debug.Print , "aeintFSize=" & aeintFSize
