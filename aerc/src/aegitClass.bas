@@ -80,11 +80,11 @@ Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
-Private aeintLTN As Integer
-Private aeintFNLen As Integer
-Private aeintFTLen As Integer
-Private Const aeintFSize As Integer = 4
-Private aeintFDLen As Integer
+Private aeintLTN As Long
+Private aeintFNLen As Long
+Private aeintFTLen As Long
+Private Const aeintFSize As Long = 4
+Private aeintFDLen As Long
 '
 
 Private Sub Class_Initialize()
@@ -406,35 +406,35 @@ Private Function SizeString(Text As String, Length As Long, _
 ' is used. If PadChar is an empty string, a space is used. If TextSide is neither
 ' TextLeft or TextRight, the procedure uses TextLeft.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim sPadChar As String
+    Dim sPadChar As String
 
-If Len(Text) >= Length Then
-    ' if the source string is longer than the specified length, return the
-    ' Length left characters
-    SizeString = Left(Text, Length)
-    Exit Function
-End If
+    If Len(Text) >= Length Then
+        ' if the source string is longer than the specified length, return the
+        ' Length left characters
+        SizeString = Left(Text, Length)
+        Exit Function
+    End If
 
-If Len(PadChar) = 0 Then
-    ' PadChar is an empty string. use a space.
-    sPadChar = " "
-Else
-    ' use only the first character of PadChar
-    sPadChar = Left(PadChar, 1)
-End If
+    If Len(PadChar) = 0 Then
+        ' PadChar is an empty string. use a space.
+        sPadChar = " "
+    Else
+        ' use only the first character of PadChar
+        sPadChar = Left(PadChar, 1)
+    End If
 
-If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
-    ' if TextSide was neither TextLeft nor TextRight, use TextLeft.
-    TextSide = TextLeft
-End If
+    If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
+        ' if TextSide was neither TextLeft nor TextRight, use TextLeft.
+        TextSide = TextLeft
+    End If
 
-If TextSide = TextLeft Then
-    ' if the text goes on the left, fill out the right with spaces
-    SizeString = Text & String(Length - Len(Text), sPadChar)
-Else
-    ' otherwise fill on the left and put the Text on the right
-    SizeString = String(Length - Len(Text), sPadChar) & Text
-End If
+    If TextSide = TextLeft Then
+        ' if the text goes on the left, fill out the right with spaces
+        SizeString = Text & String(Length - Len(Text), sPadChar)
+    Else
+        ' otherwise fill on the left and put the Text on the right
+        SizeString = String(Length - Len(Text), sPadChar) & Text
+    End If
 
 End Function
 
@@ -447,7 +447,7 @@ End Function
 'For Access 2000 or 2002, make sure you have a DAO reference
 'The Description property does not exist for fields that have no description, so a separate function handles that error
 '
-Private Function TableInfo(strTableName As String)
+Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
 ' Purpose:  Display the field names, types, sizes and descriptions for a table
 ' Argument: Name of a table in the current database
 ' Update:   Peter Ennis
@@ -460,23 +460,49 @@ Private Function TableInfo(strTableName As String)
     Dim fld As DAO.Field
     Dim sLen As Long
 
+    Dim blnDebug As Boolean
+
+    On Error GoTo TableInfoErr
+
+    'Debug.Print "TableInfo"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        'Debug.Print , "varDebug IS missing so blnDebug of TableInfo is set to False"
+        'Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        'Debug.Print , "varDebug IS NOT missing so blnDebug of TableInfo is set to True"
+        'Debug.Print , "NOW DEBUGGING..."
+    End If
+
     Set db = CurrentDb()
     Set tdf = db.TableDefs(strTableName)
     sLen = Len("TABLE: ") + aeintLTN
-    'Debug.Print sLen
-    Debug.Print SizeString("-", sLen, TextLeft, "-")
-    Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
-    Debug.Print SizeString("-", sLen, TextLeft, "-")
-    Debug.Print "FIELD NAME         ", , "FIELD TYPE", "SIZE", "DESCRIPTION"
-    Debug.Print "===================", , "==========", "====", "==========="
+    
+    If blnDebug Then
+        'Debug.Print sLen
+        Debug.Print SizeString("-", sLen, TextLeft, "-")
+        Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+        Debug.Print SizeString("-", sLen, TextLeft, "-")
+        Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
+                        , SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
+                        , SizeString("SIZE", aeintFSize, TextLeft, " ") _
+                        , SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
+        Debug.Print SizeString("=", aeintFNLen, TextLeft, "=") _
+                        , SizeString("=", aeintFTLen, TextLeft, "=") _
+                        , SizeString("=", aeintFSize, TextLeft, "=") _
+                        , SizeString("=", aeintFDLen, TextLeft, "=")
+    End If
 
     For Each fld In tdf.Fields
-        Debug.Print fld.Name, ,
-        Debug.Print FieldTypeName(fld),
-        Debug.Print fld.Size,
-        Debug.Print GetDescrip(fld)
+        If blnDebug Then
+            Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " "),
+            Debug.Print SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " "),
+            Debug.Print SizeString(fld.Size, aeintFSize, TextLeft, " "),
+            Debug.Print SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
+        End If
     Next
-    Debug.Print "===================", , "==========", "====", "==========="
+    If blnDebug Then Debug.Print
 
 TableInfoExit:
     Set db = Nothing
@@ -487,6 +513,10 @@ TableInfoErr:
         Case 3265&  'Table name invalid
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
             MsgBox strTableName & " table doesn't exist"
+            If blnDebug Then
+                Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+                Debug.Print strTableName & " table doesn't exist"
+            End If
         Case Else
             Debug.Print "TableInfo() Error " & Err & ": " & Error
     End Select
@@ -589,14 +619,18 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
         If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
-            TableInfo (tblDef.Name)
+            If blnDebug Then
+                TableInfo tblDef.Name, "WithDebugging"
+            Else
+                TableInfo (tblDef.Name)
+            End If
         End If
     Next tblDef
 
-    LongestFieldPropsName
-    
-    On Error GoTo 0
     aeDocumentTables = True
+
+aeDocumentTables_Exit:
+    LongestFieldPropsName
     Exit Function
 
 aeDocumentTables_Error:
@@ -604,6 +638,7 @@ aeDocumentTables_Error:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     aeDocumentTables = False
+    Resume aeDocumentTables_Exit
 
 End Function
 
