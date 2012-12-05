@@ -28,10 +28,11 @@ Option Explicit
 '=======================================================================
 
 Private Const VERSION As String = "0.2.0"
-Private Const VERSION_DATE As String = "December 3, 2012"
+Private Const VERSION_DATE As String = "December 4, 2012"
 Private Const THE_DRIVE As String = "C"
 '
 '20121204 v020  intFailCount for TableInfo, output sql text for queries
+'               output table setup
 '20121203 v019  LongestFieldPropsName()
 '20121201 v018  Fix err=0 and error=0
 '               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
@@ -88,6 +89,7 @@ Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile = "SqlCodeForQueries.txt"
+Private Const aeTblTxtFile = "TblSetupForTables.txt"
 '
 
 Private Sub Class_Initialize()
@@ -458,14 +460,19 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 '
     On Error GoTo TableInfoErr
 
-    Dim db As DAO.Database
+    Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim sLen As Long
-
+    Dim strFile As String
+    
     Dim blnDebug As Boolean
 
     On Error GoTo TableInfoErr
+
+    strFile = aestrSourceLocation & aeTblTxtFile
+    'MsgBox "strFile=" & strFile
+    Open strFile For Output As #1
 
     'Debug.Print "TableInfo"
     If IsMissing(varDebug) Then
@@ -478,8 +485,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
         'Debug.Print , "NOW DEBUGGING..."
     End If
 
-    Set db = CurrentDb()
-    Set tdf = db.TableDefs(strTableName)
+    Set dbs = CurrentDb()
+    Set tdf = dbs.TableDefs(strTableName)
     sLen = Len("TABLE: ") + aeintLTN
     
     If blnDebug Then
@@ -497,6 +504,18 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
     End If
 
+    Print #1, SizeString("-", sLen, TextLeft, "-")
+    Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+    Print #1, SizeString("-", sLen, TextLeft, "-")
+    Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
+                        & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
+                        & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
+                        & aestr4 & SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
+    Print #1, SizeString("=", aeintFNLen, TextLeft, "=") _
+                        & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
+                        & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
+                        & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
+
     For Each fld In tdf.Fields
         If blnDebug Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
@@ -504,13 +523,19 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
                 & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
         End If
+        Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
+            & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
+            & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+            & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
     If blnDebug Then Debug.Print
-    
+    Print #1, vbCrLf
+    Close #1
+
     TableInfo = True
 
 TableInfoExit:
-    Set db = Nothing
+    Set dbs = Nothing
     Exit Function
 
 TableInfoErr:
@@ -579,16 +604,17 @@ Private Function FieldTypeName(fld As DAO.Field) As String
         Case dbTime: strReturn = "Time"                 '22
         Case dbTimeStamp: strReturn = "Time Stamp"      '23
 
-        'Constants for complex types don't work prior to Access 2007 and later.
-        Case 101&: strReturn = "Attachment"         'dbAttachment
-        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
-        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
-        Case 104&: strReturn = "Complex Long"       'dbComplexLong
-        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
-        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
-        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
-        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
-        Case 109&: strReturn = "Complex Text"       'dbComplexText
+        'Constants for complex types don't work
+        'prior to Access 2007 and later.
+        Case 101&: strReturn = "Attachment"             'dbAttachment
+        Case 102&: strReturn = "Complex Byte"           'dbComplexByte
+        Case 103&: strReturn = "Complex Integer"        'dbComplexInteger
+        Case 104&: strReturn = "Complex Long"           'dbComplexLong
+        Case 105&: strReturn = "Complex Single"         'dbComplexSingle
+        Case 106&: strReturn = "Complex Double"         'dbComplexDouble
+        Case 107&: strReturn = "Complex GUID"           'dbComplexGUID
+        Case 108&: strReturn = "Complex Decimal"        'dbComplexDecimal
+        Case 109&: strReturn = "Complex Text"           'dbComplexText
         Case Else: strReturn = "Field type " & fld.Type & " unknown"
     End Select
 

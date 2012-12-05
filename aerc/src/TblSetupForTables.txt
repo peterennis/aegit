@@ -1,0 +1,10 @@
+--------------------------------------------------------------
+TABLE: tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+--------------------------------------------------------------
+FIELD NAME     FIELD TYPE    SIZE    DESCRIPTION                       
+===========    ==========    ====    ==================================
+id             AutoNumber    4                                         
+Desc           Text          255                                       
+Description    Text          255     This is a description of the field
+
+
