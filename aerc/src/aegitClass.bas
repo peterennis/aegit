@@ -19,50 +19,17 @@ Option Compare Database
 Option Explicit
 
 ' Ref: http://www.di-mgt.com.au/cl_Simple.html
-'
 '=======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 24, 2011
 ' Comment:  Create class for revision control
+' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.2.0"
-Private Const VERSION_DATE As String = "December 4, 2012"
+Private Const VERSION As String = "0.2.1"
+Private Const VERSION_DATE As String = "December 5, 2012"
 Private Const THE_DRIVE As String = "C"
-'
-'20121204 v020  intFailCount for TableInfo, output sql text for queries
-'               output table setup
-'20121203 v019  LongestFieldPropsName()
-'20121201 v018  Fix err=0 and error=0
-'               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
-'               Include LGPL license
-'               Ref: http://www.gnu.org/licenses/gpl-howto.html
-'               Ref: http://blogs.sourceallies.com/2011/07/creating-an-open-source-project/
-'20121129 v017  Output error messages to the immediate window when debug is turned on
-'               Pass Fail test results and debug output cleanup
-'20121128 v016  Use strSourceLocation to allow custom path and test for error,
-'               Cleanup debug messages code
-'               Include GetReferences from aeladdin (tm) and fix it
-'20121127 v015  Update version, export using OASIS and commit to github
-'               Reverse order of version comments so newest is at the top
-'               Skip ~TMP* names for scripts (macros)
-'20110303 v014  Make class PublicNotCreatable, project name aegitClassProvider
-'               http://support.microsoft.com/kb/555159
-'20110303 v013  Initialize class using Private Type
-'20110303 v012  Fix bug in skip export of all zzz objects, must use doc.Name
-'20110303 v011  Skip export of all zzz objects, create module basTESTaegitClass
-'20110303 v010  Add Option blnDebug to ReadDocDatabase property
-'20110302 v010  Delete basRevisionControl
-'20110302 v009  Skip export of ~TMP queries, debug message output singular and plural
-'20110302 v008  Move other finctions from basRevisionControl to asgitClass
-'20110302 v007  Add private function aeDocumentTheDatabase from DocumentTheDatabase
-'               Test with updated aegitClassTest
-'20110226 v006  TEST_FOLDER=>THE_FOLDER, TEST_DRIVE=>THE_DRIVE, BuildTestDirectory=>BuildTheDirectory
-'               Objects have obj prefix, use For Each qdf, output "Macros EXPORTED" (not Scripts)
-'20110222 v004  Create aegitClass shell and basTestRevisionControl
-'               Use ?aegitClassTest of basTestRevisionControl in the immediate window to check basic operation
-'
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
 ''''''''''''''''''''''''''''''''''''''
@@ -223,12 +190,12 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/ser-38.html
 ' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
 ' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
-'
 '====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     November 28, 2012
 ' Comment:  Added and adapted from aeladdin (tm) code
-' Updated:
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
     Dim i As Integer
@@ -252,15 +219,6 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeGetReferences is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
-
-'1    Debug.Print "<@_@>"
-'2    i = 0
-'3    Dim refCurr As Reference
-'4    For Each refCurr In Application.References
-'5        i = i + 1
-'6        Debug.Print , "ref " & i, refCurr.Name, refCurr.FullPath
-'7    Next
-'8    Debug.Print "<*_*>"
 
     If blnDebug Then
         Debug.Print ">==> aeGetReferences >==>"
@@ -314,6 +272,8 @@ Private Function LongestTableName() As Integer
 ' Author:   Peter F. Ennis
 ' Date:     November 30, 2012
 ' Comment:  Return the length of the longest table name
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
     Dim dbs As DAO.Database
@@ -324,16 +284,12 @@ Private Function LongestTableName() As Integer
 
     intTNLen = 0
     Set dbs = CurrentDb()
-    'Debug.Print "dbs.Name = " & dbs.Name
     For Each tblDef In CurrentDb.TableDefs
-        'Debug.Print tblDef.Name, Len(tblDef.Name)
         If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
-            'Debug.Print "here", "intTNLen = " & intTNLen
             If Len(tblDef.Name) > intTNLen Then
                 intTNLen = Len(tblDef.Name)
-                'Debug.Print "intTNLen = " & intTNLen
             End If
         End If
     Next tblDef
@@ -345,11 +301,18 @@ Private Function LongestTableName() As Integer
 LongestTableName_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
-    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
 
 End Function
 
 Private Function LongestFieldPropsName() As Boolean
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     December 5, 2012
+' Comment:  Return length of field properties for text output alignment
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
+'====================================================================
+
     Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
@@ -363,7 +326,7 @@ Private Function LongestFieldPropsName() As Boolean
     aeintFDLen = 0
 
     Set dbs = CurrentDb()
-    'Set tdf = db.TableDefs(strTableName)
+
     For Each tblDef In CurrentDb.TableDefs
         If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
@@ -381,16 +344,7 @@ Private Function LongestFieldPropsName() As Boolean
                     strLFD = GetDescrip(fld)
                     aeintFDLen = Len(GetDescrip(fld))
                 End If
-                'Debug.Print fld.Name,
-                'Debug.Print FieldTypeName(fld),
-                'Debug.Print fld.Size,
-                'Debug.Print GetDescrip(fld)
             Next
-            'Debug.Print strLFN, "aeintFNLen=" & aeintFNLen
-            'Debug.Print strLFT, "aeintFTLen=" & aeintFTLen
-            'Debug.Print , "aeintFSize=" & aeintFSize
-            'Debug.Print strLFD, "aeintFDLen=" & aeintFDLen
-
         End If
     Next tblDef
     LongestFieldPropsName = True
@@ -400,6 +354,7 @@ End Function
 Private Function SizeString(Text As String, Length As Long, _
     Optional ByVal TextSide As SizeStringSide = TextLeft, _
     Optional PadChar As String = " ") As String
+' Ref: http://www.cpearson.com/excel/sizestring.htm
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ' SizeString
 ' This procedure creates a string of a specified length. Text is the original string
@@ -411,6 +366,7 @@ Private Function SizeString(Text As String, Length As Long, _
 ' is used. If PadChar is an empty string, a space is used. If TextSide is neither
 ' TextLeft or TextRight, the procedure uses TextLeft.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     Dim sPadChar As String
 
     If Len(Text) >= Length Then
@@ -443,21 +399,16 @@ Private Function SizeString(Text As String, Length As Long, _
 
 End Function
 
-' Ref: http://allenbrowne.com/func-06.html
-'Provided by Allen Browne.  Last updated: April 2010.
-'
-'TableInfo() function
-'
-'This function displays in the Immediate Window (Ctrl+G) the structure of any table in the current database
-'For Access 2000 or 2002, make sure you have a DAO reference
-'The Description property does not exist for fields that have no description, so a separate function handles that error
-'
 Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
+' Ref: http://allenbrowne.com/func-06.html
+'====================================================================
 ' Purpose:  Display the field names, types, sizes and descriptions for a table
 ' Argument: Name of a table in the current database
-' Update:   Peter Ennis
-' 20121201  SizeString(), LongestTableName()
-'
+' Updates:  Peter F. Ennis
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
+'====================================================================
+
     On Error GoTo TableInfoErr
 
     Dim dbs As DAO.Database
@@ -471,10 +422,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     On Error GoTo TableInfoErr
 
     strFile = aestrSourceLocation & aeTblTxtFile
-    'MsgBox "strFile=" & strFile
     Open strFile For Output As #1
 
-    'Debug.Print "TableInfo"
     If IsMissing(varDebug) Then
         blnDebug = False
         'Debug.Print , "varDebug IS missing so blnDebug of TableInfo is set to False"
@@ -490,7 +439,6 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     sLen = Len("TABLE: ") + aeintLTN
     
     If blnDebug Then
-        'Debug.Print sLen
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
@@ -561,6 +509,7 @@ Private Function GetDescrip(obj As Object) As String
 End Function
 
 Private Function FieldTypeName(fld As DAO.Field) As String
+' Ref: http://allenbrowne.com/func-06.html
 ' Purpose: Converts the numeric results of DAO Field.Type to text
     Dim strReturn As String    'Name to return
 
@@ -622,10 +571,10 @@ Private Function FieldTypeName(fld As DAO.Field) As String
 End Function
 
 Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
-' Ref: Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
+' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
 ' Document the tables, fields, and relationships
-'   Tables, field type, primary keys, foreign keys, indexes
-'   Relationships in the database with table, foreign table, primary keys, foreign keys
+' Tables, field type, primary keys, foreign keys, indexes
+' Relationships in the database with table, foreign table, primary keys, foreign keys
 ' Ref: http://allenbrowne.com/func-06.html
 
     Dim strDocument As String
@@ -658,7 +607,6 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
             If blnDebug Then
                 blnResult = TableInfo(tblDef.Name, "WithDebugging")
                 If Not blnResult Then intFailCount = intFailCount + 1
-                'Debug.Print "tblDef.Name=" & tblDef.Name
             Else
                 blnResult = TableInfo(tblDef.Name)
                 If Not blnResult Then intFailCount = intFailCount + 1
@@ -774,13 +722,19 @@ End Function
 
 Private Function OutputQueriesSqlText() As Boolean
 ' Ref: http://www.pcreview.co.uk/forums/export-sql-saved-query-into-text-file-t2775525.html
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     December 3, 2012
+' Comment:  Output the sql code of all queries to a text file
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
+'====================================================================
 
     Dim dbs As DAO.Database
     Dim qdf As DAO.QueryDef
     Dim strFile As String
     
     strFile = aestrSourceLocation & aeSqlTxtFile
-    'MsgBox "strFile=" & strFile
 
     Open strFile For Output As #1
 
@@ -796,7 +750,6 @@ Private Function OutputQueriesSqlText() As Boolean
 
     Set qdf = Nothing
     Set dbs = Nothing
-    'Debug.Print strFile
     OutputQueriesSqlText = True
 
 End Function
@@ -811,25 +764,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Comment:  Uses the undocumented [Application.SaveAsText] syntax
 '           To reload use the syntax [Application.LoadFromText]
 '           Add explicit references for DAO
-' Updated:
-' 20121128: Use strSourceLocation to allow custom path and test for error,
-'           Cleanup debug messages code
-' 20121127: Reverse comment order, newest at top
-'           Skip export of ~TMP macros
-' 20110303: Add Optional blnDebug parameter
-'           Skip export of all zzz objects (using doc.Name)
-' 20110302: Skip export of ~TMP queries
-'           debug message output singular and plural
-' 20110302: Change to aeDocumentTheDatabase for use in aegitClass
-' 20110226: Skip export of MSys (hiddem system queries) and
-'           ~sq_ (hidden ODBC queries) objects
-'           Add count of objects in debug output
-' 20110224: Make this a function. Add optional debug flag
-' 20110218: Forms->frm, Reports->rpt, Scripts->mac
-'           Modules->bas, Queries->qry
-'           Error handler
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
-'
 
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
@@ -1043,7 +980,8 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
 ' Date:     February 8, 2011
 ' Comment:  Add optional debug parameter
 ' Requires: Reference to Microsoft Scripting Runtime
-' 20110302: Add error handler and include in aegitClass
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
     Dim objTestFolder As Object
@@ -1115,15 +1053,9 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 ' Date:     February 8, 2011
 ' Comment:  Add explicit references for objects, wscript, fso
 ' Requires: Reference to Microsoft Scripting Runtime
-' Updated:
-' 20121128: Fix debugging output
-' 20110303: Add Debug.Print output for Skipping: message
-'           Output VERSION and VERSION_DATE for debug
-' 20110302: Change to aeReadDocDatabase for use in aegitClass
-'           Add Skipping: to MsgBox for existing objects
-' 20110224: Make this a function
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
-'
 
     Dim blnDebug As Boolean
     
@@ -1155,7 +1087,7 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print , "aegitType.TestFolder = " & aegitType.TestFolder
     End If
 
-    '''''''''' Create needed objects
+    ' Create needed objects
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
         If blnDebug Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
@@ -1221,7 +1153,6 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     Next
 
     If blnDebug Then Debug.Print "<==<"
-    'Debug.Print "DONE !!!"
 
     On Error GoTo 0
     aeReadDocDatabase = True
@@ -1247,9 +1178,8 @@ Private Function aeExists(strAccObjType As String, _
 '             strAccObjType: "Tables", "Queries", "Forms",
 '                            "Reports", "Macros", "Modules"
 '             strAccObjName: The name of the object
-' Updated:
-' 20121128:   Fix debugging output
-' 20110302:   Make aeExists private in aegitClass
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
     Dim objType As Object

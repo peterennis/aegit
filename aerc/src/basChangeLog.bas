@@ -13,7 +13,95 @@ Option Explicit
 '
 
 
-
+'
+'20121205 - v021 - Centralize code comments in basChangeLog
+    ' Move historical comments in the code into the log here:
+                '20121204 v020  intFailCount for TableInfo, output sql text for queries
+                '               output table setup
+                '20121203 v019  LongestFieldPropsName()
+                '20121201 v018  Fix err=0 and error=0
+                '               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
+                '               Include LGPL license
+                '               Ref: http://www.gnu.org/licenses/gpl-howto.html
+                '               Ref: http://blogs.sourceallies.com/2011/07/creating-an-open-source-project/
+                '20121129 v017  Output error messages to the immediate window when debug is turned on
+                '               Pass Fail test results and debug output cleanup
+                '20121128 v016  Use strSourceLocation to allow custom path and test for error,
+                '               Cleanup debug messages code
+                '               Include GetReferences from aeladdin (tm) and fix it
+                '20121127 v015  Update version, export using OASIS and commit to github
+                '               Reverse order of version comments so newest is at the top
+                '               Skip ~TMP* names for scripts (macros)
+                '20110303 v014  Make class PublicNotCreatable, project name aegitClassProvider
+                '               http://support.microsoft.com/kb/555159
+                '20110303 v013  Initialize class using Private Type
+                '20110303 v012  Fix bug in skip export of all zzz objects, must use doc.Name
+                '20110303 v011  Skip export of all zzz objects, create module basTESTaegitClass
+                '20110303 v010  Add Option blnDebug to ReadDocDatabase property
+                '20110302 v010  Delete basRevisionControl
+                '20110302 v009  Skip export of ~TMP queries, debug message output singular and plural
+                '20110302 v008  Move other finctions from basRevisionControl to asgitClass
+                '20110302 v007  Add private function aeDocumentTheDatabase from DocumentTheDatabase
+                '               Test with updated aegitClassTest
+                '20110226 v006  TEST_FOLDER=>THE_FOLDER, TEST_DRIVE=>THE_DRIVE, BuildTestDirectory=>BuildTheDirectory
+                '               Objects have obj prefix, use For Each qdf, output "Macros EXPORTED" (not Scripts)
+                '20110222 v004  Create aegitClass shell and basTestRevisionControl
+                '               Use ?aegitClassTest of basTestRevisionControl in the immediate window to check basic operation
+                '
+                '====================================================================
+                'Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
+                ' 20121128: Use strSourceLocation to allow custom path and test for error,
+                '           Cleanup debug messages code
+                ' 20121127: Reverse comment order, newest at top
+                '           Skip export of ~TMP macros
+                ' 20110303: Add Optional blnDebug parameter
+                '           Skip export of all zzz objects (using doc.Name)
+                ' 20110302: Skip export of ~TMP queries
+                '           debug message output singular and plural
+                ' 20110302: Change to aeDocumentTheDatabase for use in aegitClass
+                ' 20110226: Skip export of MSys (hiddem system queries) and
+                '           ~sq_ (hidden ODBC queries) objects
+                '           Add count of objects in debug output
+                ' 20110224: Make this a function. Add optional debug flag
+                ' 20110218: Forms->frm, Reports->rpt, Scripts->mac
+                '           Modules->bas, Queries->qry
+                '           Error handler
+                '====================================================================
+                '
+                '====================================================================
+                'Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
+                '                                        Optional varDebug As Variant) As Boolean
+                ' 20110302: Add error handler and include in aegitClass
+                '====================================================================
+                '
+                '====================================================================
+                'Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
+                ' 20121128: Fix debugging output
+                ' 20110303: Add Debug.Print output for Skipping: message
+                '           Output VERSION and VERSION_DATE for debug
+                ' 20110302: Change to aeReadDocDatabase for use in aegitClass
+                '           Add Skipping: to MsgBox for existing objects
+                ' 20110224: Make this a function
+                '====================================================================
+                '
+                '====================================================================
+                'Private Function aeExists(strAccObjType As String, _
+                '                        strAccObjName As String, Optional varDebug As Variant) As Boolean
+                ' 20121128:   Fix debugging output
+                ' 20110302:   Make aeExists private in aegitClass
+                '====================================================================
+                '
+                '====================================================================
+                'Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
+                'Original Code Provided by Allen Browne. Last updated: April 2010.
+                'TableInfo() function
+                'This function displays in the Immediate Window (Ctrl+G) the structure of any table in the current database
+                'For Access 2000 or 2002, make sure you have a DAO reference
+                'The Description property does not exist for fields that have no description, so a separate function handles that error
+                'Update:   Peter Ennis
+                '20121201  SizeString(), LongestTableName()
+                '====================================================================
+                '
 '20121203 - v020 - Output positioning of TableInfo, use debug flag
     ' Output query sql to a text file
     ' Output table configuration to a text file
