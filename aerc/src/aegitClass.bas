@@ -31,7 +31,7 @@ Private Const VERSION As String = "0.2.0"
 Private Const VERSION_DATE As String = "December 3, 2012"
 Private Const THE_DRIVE As String = "C"
 '
-'20121204 v020  intFailCount for TableInfo
+'20121204 v020  intFailCount for TableInfo, output sql text for queries
 '20121203 v019  LongestFieldPropsName()
 '20121201 v018  Fix err=0 and error=0
 '               Add SizeString from Chip Pearson for help formatting TableInfo from Allen Browne
@@ -87,6 +87,7 @@ Private aeintFTLen As Long
 Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private Const aestr4 As String = "    "
+Private Const aeSqlTxtFile = "SqlCodeForQueries.txt"
 '
 
 Private Sub Class_Initialize()
@@ -102,14 +103,14 @@ Private Sub Class_Initialize()
     LongestFieldPropsName
 
     Debug.Print "Class_Initialize"
-    Debug.Print , "Default for aegitSourceFolder=" & aegitSourceFolder
-    Debug.Print , "Default for aegitType.SourceFolder=" & aegitType.SourceFolder
-    Debug.Print , "Default for aegitType.TestFolder=" & aegitType.TestFolder
-    Debug.Print , "aeintLTN=" & aeintLTN
-    Debug.Print , "aeintFNLen=" & aeintFNLen
-    Debug.Print , "aeintFTLen=" & aeintFTLen
-    Debug.Print , "aeintFSize=" & aeintFSize
-    Debug.Print , "aeintFDLen=" & aeintFDLen
+    Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
+    Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
+    Debug.Print , "Default for aegitType.TestFolder = " & aegitType.TestFolder
+    Debug.Print , "aeintLTN = " & aeintLTN
+    Debug.Print , "aeintFNLen = " & aeintFNLen
+    Debug.Print , "aeintFTLen = " & aeintFTLen
+    Debug.Print , "aeintFSize = " & aeintFSize
+    Debug.Print , "aeintFDLen = " & aeintFDLen
 
 End Sub
 
@@ -321,16 +322,16 @@ Private Function LongestTableName() As Integer
 
     intTNLen = 0
     Set dbs = CurrentDb()
-    'Debug.Print "dbs.Name=" & dbs.Name
+    'Debug.Print "dbs.Name = " & dbs.Name
     For Each tblDef In CurrentDb.TableDefs
         'Debug.Print tblDef.Name, Len(tblDef.Name)
         If Not (Left(tblDef.Name, 4) = "MSys" _
                 Or Left(tblDef.Name, 4) = "~TMP" _
                 Or Left(tblDef.Name, 3) = "zzz") Then
-            'Debug.Print "here", "intTNLen=" & intTNLen
+            'Debug.Print "here", "intTNLen = " & intTNLen
             If Len(tblDef.Name) > intTNLen Then
                 intTNLen = Len(tblDef.Name)
-                'Debug.Print "intTNLen=" & intTNLen
+                'Debug.Print "intTNLen = " & intTNLen
             End If
         End If
     Next tblDef
@@ -645,8 +646,8 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
         aeDocumentTables = True
     End If
     If blnDebug Then
-        Debug.Print "intFailCount=" & intFailCount
-        Debug.Print "aeDocumentTables=" & aeDocumentTables
+        Debug.Print "intFailCount = " & intFailCount
+        Debug.Print "aeDocumentTables = " & aeDocumentTables
     End If
 
 aeDocumentTables_Exit:
@@ -658,77 +659,6 @@ aeDocumentTables_Error:
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     aeDocumentTables = False
     Resume aeDocumentTables_Exit
-
-End Function
-
-Private Function FieldTypeToString(intFieldType As Integer, Optional varDebug As Variant) As String
-
-    Dim blnDebug As Boolean
-
-    On Error GoTo FieldTypeToString_Error
-
-    If IsMissing(varDebug) Then
-        blnDebug = False
-    Else
-        blnDebug = True
-    End If
-
-    Select Case intFieldType
-        Case 1
-            FieldTypeToString = "dbBoolean"
-        Case 2
-            FieldTypeToString = "dbByte"
-        Case 3
-            FieldTypeToString = "dbInteger"
-        Case 4
-            FieldTypeToString = "dbLong"
-        Case 5
-            FieldTypeToString = "dbCurrency"
-        Case 6
-            FieldTypeToString = "dbSingle"
-        Case 7
-            FieldTypeToString = "dbDouble"
-        Case 8
-            FieldTypeToString = "dbDate"
-        Case 9
-            FieldTypeToString = "dbBinary"
-        Case 10
-            FieldTypeToString = "dbText"
-        Case 11
-            FieldTypeToString = "dbLongBinary"
-        Case 12
-            FieldTypeToString = "dbMemo"
-        Case 13
-            FieldTypeToString = "Text"
-        Case 14
-            FieldTypeToString = "Text"
-        Case 15
-            FieldTypeToString = "dbGUID"
-        Case 16
-            FieldTypeToString = "dbBigInt"
-        Case 17
-            FieldTypeToString = "dbVarBinary"
-        Case 18
-            FieldTypeToString = "dbChar"
-        Case 19
-            FieldTypeToString = "dbNumeric"
-        Case 20
-            FieldTypeToString = "dbDecimal"
-        Case 21
-            FieldTypeToString = "dbFloat"
-        Case 22
-            FieldTypeToString = "dbTime"
-        Case 23
-            FieldTypeToString = "dbTimeStamp"
-    End Select
-
-    On Error GoTo 0
-    Exit Function
-
-FieldTypeToString_Error:
-
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldTypeToString of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldTypeToString of Class aegitClass"
 
 End Function
 
@@ -816,6 +746,35 @@ aeDocumentRelations_Error:
 
 End Function
 
+Private Function OutputQueriesSqlText() As Boolean
+' Ref: http://www.pcreview.co.uk/forums/export-sql-saved-query-into-text-file-t2775525.html
+
+    Dim dbs As DAO.Database
+    Dim qdf As DAO.QueryDef
+    Dim strFile As String
+    
+    strFile = aestrSourceLocation & aeSqlTxtFile
+    'MsgBox "strFile=" & strFile
+
+    Open strFile For Output As #1
+
+    Set dbs = CurrentDb
+    For Each qdf In dbs.QueryDefs
+        If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
+                        Or Left(qdf.Name, 4) = "~TMP" _
+                        Or Left(qdf.Name, 3) = "zzz") Then
+            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
+        End If
+    Next
+    Close #1
+
+    Set qdf = Nothing
+    Set dbs = Nothing
+    'Debug.Print strFile
+    OutputQueriesSqlText = True
+
+End Function
+
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -875,8 +834,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
-        Debug.Print , "SourceFolder=" & aestrSourceLocation
-        Debug.Print , "TestFolder=" & aestrSourceLocation
+        Debug.Print , "SourceFolder = " & aestrSourceLocation
+        Debug.Print , "TestFolder = " & aestrSourceLocation
     End If
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -1027,6 +986,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         End If
     End If
 
+    OutputQueriesSqlText
+    
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
@@ -1164,16 +1125,16 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print ">==> aeReadDocDatabase >==>"
         Debug.Print , "aegit VERSION: " & VERSION
         Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
-        Debug.Print , "aegitType.SourceFolder=" & aegitType.SourceFolder
-        Debug.Print , "aegitType.TestFolder=" & aegitType.TestFolder
+        Debug.Print , "aegitType.SourceFolder = " & aegitType.SourceFolder
+        Debug.Print , "aegitType.TestFolder = " & aegitType.TestFolder
     End If
 
     '''''''''' Create needed objects
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
-        If blnDebug Then Debug.Print , "wsh.CurrentDirectory=" & wsh.CurrentDirectory
+        If blnDebug Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
         ' CurDir Function
-        If blnDebug Then Debug.Print , "CurDir=" & CurDir
+        If blnDebug Then Debug.Print , "CurDir = " & CurDir
     
     Dim FSO As Scripting.FileSystemObject
     Set FSO = CreateObject("Scripting.FileSystemObject")
