@@ -9,10 +9,12 @@ Option Explicit
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Pass Fail of the tests should be associated to True False of the function, any error should return False
+' Fix error when tst folder not set, it is intended for import testing to recreate a database
 '
 
 
-'20121203 - v020 - Output positioning of TableInfo, use debug flag'
+
+'20121203 - v020 - Output positioning of TableInfo, use debug flag
     ' Output query sql to a text file
     ' Output table configuration to a text file
 '20121203 - v019 - LongestFieldPropsName()
