@@ -399,6 +399,23 @@ Private Function SizeString(Text As String, Length As Long, _
 
 End Function
 
+Private Function FileLocked(strFileName As String) As Boolean
+' Ref: http://support.microsoft.com/kb/209189
+    On Error Resume Next
+    ' If the file is already opened by another process,
+    ' and the specified type of access is not allowed,
+    ' the Open operation fails and an error occurs.
+    Open strFileName For Binary Access Read Write Lock Read Write As #1
+    Close #1
+    ' If an error occurs, the document is currently open.
+    If Err.Number <> 0 Then
+        ' Display the error number and description.
+        MsgBox "Error #" & Str(Err.Number) & " - " & Err.Description
+        FileLocked = True
+        Err.Clear
+    End If
+End Function
+
 Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/func-06.html
 '====================================================================
@@ -415,14 +432,10 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim sLen As Long
-    Dim strFile As String
     
     Dim blnDebug As Boolean
 
     On Error GoTo TableInfoErr
-
-    strFile = aestrSourceLocation & aeTblTxtFile
-    Open strFile For Output As #1
 
     If IsMissing(varDebug) Then
         blnDebug = False
@@ -478,7 +491,6 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Next
     If blnDebug Then Debug.Print
     Print #1, vbCrLf
-    Close #1
 
     TableInfo = True
 
@@ -585,9 +597,10 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     Dim blnDebug As Boolean
     Dim blnResult As Boolean
     Dim intFailCount As Integer
+    Dim strFile As String
 
     On Error GoTo aeDocumentTables_Error
-
+    
     intFailCount = 0
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
@@ -598,6 +611,16 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
         blnDebug = True
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
         Debug.Print , "NOW DEBUGGING..."
+    End If
+
+    strFile = aestrSourceLocation & aeTblTxtFile
+    
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then Kill (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
     End If
 
     For Each tblDef In CurrentDb.TableDefs
@@ -613,6 +636,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
             End If
         End If
     Next tblDef
+    Close 1
 
     If intFailCount > 0 Then
         aeDocumentTables = False
@@ -795,6 +819,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrSourceLocation = aegitSourceFolder
     End If
     
+    'MsgBox aestrSourceLocation & "*.*"
+    Kill (aestrSourceLocation & "*.*")
+    
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "SourceFolder = " & aestrSourceLocation
@@ -807,16 +834,16 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' FORMS
     '=============
     i = 0
-    Set cnt = dbs.Containers("Forms")
-    If blnDebug Then Debug.Print "FORMS"
+1    Set cnt = dbs.Containers("Forms")
+2    If blnDebug Then Debug.Print "FORMS"
     
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz") Then
-            i = i + 1
-            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
-        End If
-    Next doc
+3    For Each doc In cnt.Documents
+4        If blnDebug Then Debug.Print , doc.Name
+5        If Not (Left(doc.Name, 3) = "zzz") Then
+6            i = i + 1
+7            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
+8        End If
+9    Next doc
     
     If blnDebug Then
         If i = 1 Then
@@ -950,14 +977,13 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
 
     OutputQueriesSqlText
+    aeDocumentTheDatabase = True
     
+aeDocumentTheDatabase_Exit:
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
     Set qdf = Nothing
-
-    On Error GoTo 0
-    aeDocumentTheDatabase = True
     Exit Function
 
 aeDocumentTheDatabase_Error:
@@ -965,9 +991,13 @@ aeDocumentTheDatabase_Error:
     If Err = 2950 Then
         MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
+        aeDocumentTheDatabase = False
+        Resume aeDocumentTheDatabase_Exit
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+        aeDocumentTheDatabase = False
+        Resume aeDocumentTheDatabase_Exit
     End If
     
 End Function

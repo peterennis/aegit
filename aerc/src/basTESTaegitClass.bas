@@ -26,9 +26,6 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
 
-    'MsgBox IsMissing(Debugit)
-
-    'GoTo Test5
 
 Test1:
     '=============
@@ -131,5 +128,4 @@ Test5:
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5"
     Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5)
 
-    'Stop
 End Function
