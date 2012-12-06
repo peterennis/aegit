@@ -399,6 +399,32 @@ Private Function SizeString(Text As String, Length As Long, _
 
 End Function
 
+Private Function GetCurrentPath(MyLinkedTable As String) As String
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
+'  To test in the Immediate window:       ? getcurrentpath("Const")
+'====================================================================
+' Procedure : GetCurrentPath
+' DateTime  : 08/23/2010
+' Author    : Rx
+' Purpose   : Returns Current Path of a Linked Table in Access
+'====================================================================
+    On Error GoTo PROC_ERROR
+    GetCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
+        ' non-linked table returns blank - the Instr removes the "Database="
+PROC_EXIT:
+    On Error Resume Next
+    Exit Function
+PROC_ERROR:
+    Select Case Err.Number
+        'Case ###         ' Add your own error management or log error to logging table
+        Case Else
+            'a custom log usage function commented out
+            'function LogUsage(ByVal strFormName As String, strCallingProc As String, Optional ControlName) As Boolean
+            'call LogUsage Err.Number, "basRelinkTables", "GetCurrentPath" ()
+    End Select
+    Resume PROC_EXIT
+End Function
+
 Private Function FileLocked(strFileName As String) As Boolean
 ' Ref: http://support.microsoft.com/kb/209189
     On Error Resume Next
@@ -432,10 +458,13 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim sLen As Long
+    Dim strLinkedTablePath As String
     
     Dim blnDebug As Boolean
 
     On Error GoTo TableInfoErr
+
+    strLinkedTablePath = ""
 
     If IsMissing(varDebug) Then
         blnDebug = False
@@ -454,6 +483,10 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     If blnDebug Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+        strLinkedTablePath = GetCurrentPath(strTableName)
+        If strLinkedTablePath <> "" Then
+            Debug.Print strLinkedTablePath
+        End If
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
                         & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
@@ -466,6 +499,9 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     End If
 
     Print #1, SizeString("-", sLen, TextLeft, "-")
+    If strLinkedTablePath <> "" Then
+        Print #1, strLinkedTablePath
+    End If
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -476,6 +512,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
                         & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
+    strLinkedTablePath = ""
 
     For Each fld In tdf.Fields
         If blnDebug Then
