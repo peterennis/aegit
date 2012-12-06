@@ -399,17 +399,20 @@ Private Function SizeString(Text As String, Length As Long, _
 
 End Function
 
-Private Function GetCurrentPath(MyLinkedTable As String) As String
+Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
-'  To test in the Immediate window:       ? getcurrentpath("Const")
+' To test in the Immediate window:       ? getcurrentpath("Const")
 '====================================================================
-' Procedure : GetCurrentPath
+' Procedure : GetLinkedTableCurrentPath
 ' DateTime  : 08/23/2010
 ' Author    : Rx
 ' Purpose   : Returns Current Path of a Linked Table in Access
+' Updates   : Peter F. Ennis
+' Updated   : All notes moved to change log
+' History   : See comment details, basChangeLog, commit messages on github
 '====================================================================
     On Error GoTo PROC_ERROR
-    GetCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
+    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
         ' non-linked table returns blank - the Instr removes the "Database="
 PROC_EXIT:
     On Error Resume Next
@@ -480,10 +483,11 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Set tdf = dbs.TableDefs(strTableName)
     sLen = Len("TABLE: ") + aeintLTN
     
+    strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
+    
     If blnDebug Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
-        strLinkedTablePath = GetCurrentPath(strTableName)
         If strLinkedTablePath <> "" Then
             Debug.Print strLinkedTablePath
         End If

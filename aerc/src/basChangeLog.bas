@@ -14,7 +14,7 @@ Option Explicit
 
 
 '
-'20121205 - v022 - Print linked table path in output
+'20121205 - v022 - Print linked table path in output, GetLinkedTableCurrentPath
 '20121205 - v021 - Centralize code comments in basChangeLog
     ' output for append on tables setup, kill files before export
     ' Move historical comments in the code into the log here:
