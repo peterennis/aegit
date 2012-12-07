@@ -287,17 +287,16 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
     Print #1, , "<*_*>"
     Print #1, "<==<"
-    Close 1
     aeGetReferences = True
     
 aeGetReferences_Exit:
+    Close 1
     Exit Function
 
 aeGetReferences_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
-    Close 1
     aeGetReferences = False
     Resume aeGetReferences_Exit
 
@@ -485,7 +484,7 @@ Private Function FileLocked(strFileName As String) As Boolean
     ' and the specified type of access is not allowed,
     ' the Open operation fails and an error occurs.
     Open strFileName For Binary Access Read Write Lock Read Write As #1
-    Close #1
+    Close 1
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
@@ -730,7 +729,6 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
             End If
         End If
     Next tblDef
-    Close 1
 
     If intFailCount > 0 Then
         aeDocumentTables = False
@@ -745,13 +743,13 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 aeDocumentTables_Exit:
     Set tblDef = Nothing
     Set fld = Nothing
+    Close 1
     Exit Function
 
 aeDocumentTables_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    Close 1
     aeDocumentTables = False
     Resume aeDocumentTables_Exit
 
@@ -846,7 +844,6 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     Next rel
     If blnDebug Then Debug.Print strDocument
     Print #1, strDocument
-    Close 1
     aeDocumentRelations = True
 
 aeDocumentRelations_Exit:
@@ -854,6 +851,7 @@ aeDocumentRelations_Exit:
     Set fld = Nothing
     Set idx = Nothing
     Set prop = Nothing
+    Close 1
     Exit Function
 
 aeDocumentRelations_Error:
@@ -861,7 +859,6 @@ aeDocumentRelations_Error:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     aeDocumentRelations = False
-    Close 1
     Resume aeDocumentRelations_Exit
 
 End Function
@@ -883,8 +880,14 @@ Private Function OutputQueriesSqlText() As Boolean
     On Error GoTo OutputQueriesSqlText_Error
 
     strFile = aestrSourceLocation & aeSqlTxtFile
-
-    Open strFile For Output As #1
+    
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then Kill (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
+    End If
 
     Set dbs = CurrentDb
     For Each qdf In dbs.QueryDefs
@@ -908,7 +911,6 @@ OutputQueriesSqlText_Error:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
     'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
     OutputQueriesSqlText = False
-    Close 1
     Resume OutputQueriesSqlText_Exit
 
 End Function
