@@ -26,6 +26,7 @@ Public Function aegitClassTest(Optional Debugit As Variant)
 
     'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
+    'oDbObjects.SourceFolder = "C:\ae\bibles\src\"
 
 Test1:
     '=============

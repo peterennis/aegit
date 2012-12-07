@@ -518,9 +518,11 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Set dbs = CurrentDb()
     Set tdf = dbs.TableDefs(strTableName)
     sLen = Len("TABLE: ") + Len(strTableName)
-    
+
     strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
-    
+
+    If aeintFDLen < Len("DESCRIPTION") Then aeintFDLen = Len("DESCRIPTION")
+
     If blnDebug Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
