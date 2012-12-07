@@ -3,18 +3,21 @@ Option Explicit
 
 ' Problems:
 ' ReadDocDatabase debug output when custom test folder given
-' Exists function debug output
 ' Test for expected references when class first created
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Pass Fail of the tests should be associated to True False of the function, any error should return False
 ' Fix error when tst folder not set, it is intended for import testing to recreate a database
+' http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated
+'   This has useful information about using tdf.attributes
 '
 
 
 '
 '20121206 - v023 - Fix for aeintFDLen < Len("DESCRIPTION")
+    ' FIXED - Exists function debug output
+    ' Error trap for LongestFieldPropsName
 '20121205 - v022 - Print linked table path in output, GetLinkedTableCurrentPath
     ' Table name header output fix for length and linked table path
 '20121205 - v021 - Centralize code comments in basChangeLog

@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.2.1"
-Private Const VERSION_DATE As String = "December 5, 2012"
+Private Const VERSION As String = "0.2.3"
+Private Const VERSION_DATE As String = "December 7, 2012"
 Private Const THE_DRIVE As String = "C"
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
@@ -65,7 +65,7 @@ Private Sub Class_Initialize()
 ' Ref: http://www.cadalyst.com/cad/autocad/programming-with-class-part-1-5050
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
-    
+
     ' provide a default value for the SourceFolder property
     aegitSourceFolder = "default"
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
@@ -357,6 +357,8 @@ Private Function LongestFieldPropsName() As Boolean
     Dim strLFT As String
     Dim strLFD As String
 
+    On Error GoTo LongestFieldPropsName_Error
+    
     aeintFNLen = 0
     aeintFTLen = 0
     aeintFDLen = 0
@@ -384,6 +386,18 @@ Private Function LongestFieldPropsName() As Boolean
         End If
     Next tblDef
     LongestFieldPropsName = True
+
+LongestFieldPropsName_Exit:
+    Set dbs = Nothing
+    Set tblDef = Nothing
+    Set fld = Nothing
+    Exit Function
+
+LongestFieldPropsName_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
+    LongestFieldPropsName = False
+    Resume LongestFieldPropsName_Exit
     
 End Function
 
@@ -475,7 +489,7 @@ Private Function FileLocked(strFileName As String) As Boolean
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "Error #" & Str(Err.Number) & " - " & Err.Description
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegitClass"
         FileLocked = True
         Err.Clear
     End If
@@ -575,6 +589,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
 TableInfoExit:
     Set dbs = Nothing
+    Set tdf = Nothing
+    Set fld = Nothing
     Exit Function
 
 TableInfoErr:
@@ -587,7 +603,7 @@ TableInfoErr:
                 Debug.Print strTableName & " table doesn't exist"
             End If
         Case Else
-            Debug.Print "TableInfo() Error " & Err & ": " & Error
+            Debug.Print "TableInfo() Else Error " & Err & ": " & Error
     End Select
     TableInfo = False
     Resume TableInfoExit
@@ -735,6 +751,7 @@ aeDocumentTables_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    Close 1
     aeDocumentTables = False
     Resume aeDocumentTables_Exit
 
@@ -862,7 +879,9 @@ Private Function OutputQueriesSqlText() As Boolean
     Dim dbs As DAO.Database
     Dim qdf As DAO.QueryDef
     Dim strFile As String
-    
+
+    On Error GoTo OutputQueriesSqlText_Error
+
     strFile = aestrSourceLocation & aeSqlTxtFile
 
     Open strFile For Output As #1
@@ -875,11 +894,22 @@ Private Function OutputQueriesSqlText() As Boolean
             Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
         End If
     Next
-    Close #1
 
+    OutputQueriesSqlText = True
+
+OutputQueriesSqlText_Exit:
     Set qdf = Nothing
     Set dbs = Nothing
-    OutputQueriesSqlText = True
+    Close 1
+    Exit Function
+
+OutputQueriesSqlText_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
+    OutputQueriesSqlText = False
+    Close 1
+    Resume OutputQueriesSqlText_Exit
 
 End Function
 
