@@ -85,6 +85,13 @@ Private Sub Class_Initialize()
 
 End Sub
 
+Private Sub Class_Terminate()
+    Debug.Print
+    Debug.Print "Class_Terminate"
+    Debug.Print , "aegit VERSION: " & VERSION
+    Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
+End Sub
+
 Property Get SourceFolder() As String
     SourceFolder = aegitSourceFolder
 End Property
