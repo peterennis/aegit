@@ -834,13 +834,17 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     End If
 
     For Each rel In CurrentDb.Relations
-        strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
-        strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
-        strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
-        For Each fld In rel.Fields
-            strDocument = strDocument & "  PK: " & fld.Name & "   FK:" & fld.ForeignName
-            strDocument = strDocument & vbCrLf
-        Next fld
+        If Not (Left(rel.Name, 4) = "MSys" _
+                        Or Left(rel.Name, 4) = "~TMP" _
+                        Or Left(rel.Name, 3) = "zzz") Then
+            strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
+            strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
+            strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
+            For Each fld In rel.Fields
+                strDocument = strDocument & "  PK: " & fld.Name & "   FK:" & fld.ForeignName
+                strDocument = strDocument & vbCrLf
+            Next fld
+        End If
     Next rel
     If blnDebug Then Debug.Print strDocument
     Print #1, strDocument

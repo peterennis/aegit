@@ -1,6 +1,1 @@
 
-Name: MSysNavPaneGroupCategoriesMSysNavPaneGroups
-  Table: MSysNavPaneGroupCategories
-  Foreign Table: MSysNavPaneGroups
-  PK: Id   FK:GroupCategoryID
-
