@@ -1,0 +1,22 @@
+>==> The Project References >==>
+              vbaProj.Name = aegit
+              vbaProj.Type = '100'
+              Access version = 14.0
+              ADO (ActiveX Data Object) version = 6.2
+              DAO (DbEngine)  version = 14.0
+              DAO (CodeDb)    version = 12.0
+              DAO (CurrentDb) version = 12.0
+              <@_@>
+                   References:
+                            VBA           Visual Basic For Applications
+                                          C:\PROGRA~2\COMMON~1\MICROS~1\VBA\VBA7\VBE7.DLL
+                            Access        Microsoft Access 14.0 Object Library
+                                          C:\Program Files (x86)\Microsoft Office\Office14\MSACC.OLB
+                            stdole        OLE Automation
+                                          C:\Windows\SysWOW64\stdole2.tlb
+                            DAO           Microsoft Office 14.0 Access database engine Object Library
+                                          C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE14\ACEDAO.DLL
+                            Scripting     Microsoft Scripting Runtime
+                                          C:\Windows\SysWOW64\scrrun.dll
+              <*_*>
+<==<

@@ -57,6 +57,8 @@ Private aeintFDLen As Long
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile = "SqlCodeForQueries.txt"
 Private Const aeTblTxtFile = "TblSetupForTables.txt"
+Private Const aeRefTxtFile = "ReferencesSetup.txt"
+Private Const aeRelTxtFile = "RelationsSetup.txt"
 '
 
 Private Sub Class_Initialize()
@@ -203,6 +205,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
     Dim blnDebug As Boolean
+    Dim strFile As String
 
     Dim vbaProj As Object
     Set vbaProj = Application.VBE.ActiveVBProject
@@ -220,6 +223,16 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
 
+    strFile = aestrSourceLocation & aeRefTxtFile
+    
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then Kill (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
+    End If
+
     If blnDebug Then
         Debug.Print ">==> aeGetReferences >==>"
         Debug.Print , "vbaProj.Name = " & vbaProj.Name
@@ -231,8 +244,20 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
         Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
         Debug.Print , "<@_@>"
-        Debug.Print , "References:"
+        Debug.Print , "     " & "References:"
     End If
+
+        Print #1, ">==> The Project References >==>"
+        Print #1, , "vbaProj.Name = " & vbaProj.Name
+        Print #1, , "vbaProj.Type = '" & vbaProj.Type & "'"
+        ' Display the versions of Access, ADO and DAO
+        Print #1, , "Access version = " & Application.VERSION
+        Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.VERSION
+        Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.VERSION
+        Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
+        Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
+        Print #1, , "<@_@>"
+        Print #1, , "     " & "References:"
 
     For i = 1 To vbaProj.References.Count
 
@@ -247,23 +272,34 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
         If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
 
+        Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        Print #1, , , , vbaProj.References(i).FullPath
+
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
               blnRefBroken = True
               If blnDebug Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
     If blnDebug Then Debug.Print , "<*_*>"
     If blnDebug Then Debug.Print "<==<"
 
-    On Error GoTo 0
+    Print #1, , "<*_*>"
+    Print #1, "<==<"
+    Close 1
     aeGetReferences = True
+    
+aeGetReferences_Exit:
     Exit Function
 
 aeGetReferences_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    Close 1
+    aeGetReferences = False
+    Resume aeGetReferences_Exit
 
 End Function
 
@@ -481,17 +517,17 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
     Set dbs = CurrentDb()
     Set tdf = dbs.TableDefs(strTableName)
-    sLen = Len("TABLE: ") + aeintLTN
+    sLen = Len("TABLE: ") + Len(strTableName)
     
     strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
     
     If blnDebug Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+        Debug.Print SizeString("-", sLen, TextLeft, "-")
         If strLinkedTablePath <> "" Then
             Debug.Print strLinkedTablePath
         End If
-        Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
                         & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
                         & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
@@ -503,11 +539,11 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     End If
 
     Print #1, SizeString("-", sLen, TextLeft, "-")
+    Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+    Print #1, SizeString("-", sLen, TextLeft, "-")
     If strLinkedTablePath <> "" Then
         Print #1, strLinkedTablePath
     End If
-    Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
-    Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
                         & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
                         & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
@@ -633,7 +669,6 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     Dim strDocument As String
     Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
-    Dim idx As DAO.Index
 
     Dim blnDebug As Boolean
     Dim blnResult As Boolean
@@ -690,6 +725,8 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     End If
 
 aeDocumentTables_Exit:
+    Set tblDef = Nothing
+    Set fld = Nothing
     Exit Function
 
 aeDocumentTables_Error:
@@ -744,13 +781,15 @@ Private Function isFK(tblDef As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function aeDocumentRelations(Optional varDebug As Variant) As String
+Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
+' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
   
     Dim strDocument As String
     Dim rel As DAO.Relation
     Dim fld As DAO.Field
     Dim idx As DAO.Index
     Dim prop As DAO.Property
+    Dim strFile As String
     
     Dim blnDebug As Boolean
 
@@ -767,6 +806,16 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As String
         Debug.Print , "NOW DEBUGGING..."
     End If
 
+    strFile = aestrSourceLocation & aeRelTxtFile
+    
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then Kill (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
+    End If
+
     For Each rel In CurrentDb.Relations
         strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
         strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
@@ -776,12 +825,25 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As String
             strDocument = strDocument & vbCrLf
         Next fld
     Next rel
-    aeDocumentRelations = strDocument
+    If blnDebug Then Debug.Print strDocument
+    Print #1, strDocument
+    Close 1
+    aeDocumentRelations = True
+
+aeDocumentRelations_Exit:
+    Set rel = Nothing
+    Set fld = Nothing
+    Set idx = Nothing
+    Set prop = Nothing
+    Exit Function
 
 aeDocumentRelations_Error:
 
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    aeDocumentRelations = False
+    Close 1
+    Resume aeDocumentRelations_Exit
 
 End Function
 

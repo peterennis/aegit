@@ -22,6 +22,7 @@ Public Function aegitClassTest(Optional Debugit As Variant)
     Dim bln3 As Boolean
     Dim bln4 As Boolean
     Dim bln5 As Boolean
+    Dim bln6 As Boolean
 
     'oDbObjects.SourceFolder = "C:\Users\Peter\Documents\GitHub\aegit\aerc\src\"
     'oDbObjects.SourceFolder = "C:\TEMP\aegit\"
@@ -119,12 +120,32 @@ Test5:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
+Test6:
+    '=============
+    ' TEST 6
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "6. aegitClassTest => DocumentRelations"
+    Debug.Print "aegitClassTest"
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentRelations"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln6 = oDbObjects.DocumentRelations()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln6 = oDbObjects.DocumentRelations("WithDebugging")
+    End If
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+    
     Debug.Print "Test 1: DocumentTheDatabase"
     Debug.Print "Test 2: Exists"
     Debug.Print "Test 3: ReadDocDatabase"
     Debug.Print "Test 4: GetReferences"
     Debug.Print "Test 5: DocumentTables"
-    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5"
-    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5)
+    Debug.Print "Test 6: DocumentRelations"
+    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6"
+    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6)
 
 End Function
