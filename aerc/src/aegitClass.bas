@@ -111,12 +111,12 @@ Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
         Debug.Print "Get DocumentTheDatabase"
         Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        aeDocumentTheDatabase
+        DocumentTheDatabase = aeDocumentTheDatabase
     Else
         Debug.Print "Get DocumentTheDatabase"
         Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        aeDocumentTheDatabase (DebugTheCode)
+        DocumentTheDatabase = aeDocumentTheDatabase(DebugTheCode)
     End If
 End Property
 

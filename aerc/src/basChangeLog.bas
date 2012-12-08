@@ -18,6 +18,7 @@ Option Explicit
 '20121206 - v023 - Fix for aeintFDLen < Len("DESCRIPTION")
     ' FIXED - Exists function debug output
     ' Error trap for LongestFieldPropsName
+    ' Return boolean for DocumentTheDatabase to fix Test 1 result
 '20121205 - v022 - Print linked table path in output, GetLinkedTableCurrentPath
     ' Table name header output fix for length and linked table path
 '20121205 - v021 - Centralize code comments in basChangeLog
