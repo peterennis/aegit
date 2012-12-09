@@ -234,7 +234,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
     
     If Dir(strFile) <> "" Then
         ' The file exists
-        If Not FileLocked(strFile) Then Kill (strFile)
+        If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
     Else
         If Not FileLocked(strFile) Then Open strFile For Append As #1
@@ -717,7 +717,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     
     If Dir(strFile) <> "" Then
         ' The file exists
-        If Not FileLocked(strFile) Then Kill (strFile)
+        If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
     Else
         If Not FileLocked(strFile) Then Open strFile For Append As #1
@@ -834,7 +834,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     
     If Dir(strFile) <> "" Then
         ' The file exists
-        If Not FileLocked(strFile) Then Kill (strFile)
+        If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
     Else
         If Not FileLocked(strFile) Then Open strFile For Append As #1
@@ -894,7 +894,7 @@ Private Function OutputQueriesSqlText() As Boolean
     
     If Dir(strFile) <> "" Then
         ' The file exists
-        If Not FileLocked(strFile) Then Kill (strFile)
+        If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
     Else
         If Not FileLocked(strFile) Then Open strFile For Append As #1
@@ -926,6 +926,14 @@ OutputQueriesSqlText_Error:
 
 End Function
 
+Public Sub KillProperly(Killfile As String)
+' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
+    If Len(Dir(Killfile)) > 0 Then
+        SetAttr Killfile, vbNormal
+        Kill Killfile
+    End If
+End Sub
+ 
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -944,6 +952,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
+    Dim strFile As String
     Dim i As Integer
 
     Dim blnDebug As Boolean
@@ -966,9 +975,15 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Else
         aestrSourceLocation = aegitSourceFolder
     End If
-    
-    'MsgBox aestrSourceLocation & "*.*"
-    Kill (aestrSourceLocation & "*.*")
+ 
+    ' Delete all the files in a given directory:
+    ' Loop through all the files in the directory by using Dir$ function
+    strFile = Dir(aestrSourceLocation & "*.*")
+    Do While strFile <> ""
+        KillProperly aestrSourceLocation & strFile
+        'need to specify full path again because a file was deleted 1
+        strFile = Dir(aestrSourceLocation & "*.*")
+    Loop
     
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
@@ -1252,7 +1267,7 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     
     Const acQuery = 1
 
-    Dim myFile As Object
+    Dim MyFile As Object
     Dim strFileType As String
     Dim strFileBaseName As String
     Dim bln As Boolean
@@ -1285,11 +1300,11 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     Dim objFolder As Object
     Set objFolder = FSO.GetFolder(aegitType.TestFolder)
 
-    For Each myFile In objFolder.Files
-        If blnDebug Then Debug.Print "myFile = " & myFile
-        If blnDebug Then Debug.Print "myFile.Name = " & myFile.Name
-        strFileBaseName = FSO.GetBaseName(myFile.Name)
-        strFileType = FSO.GetExtensionName(myFile.Name)
+    For Each MyFile In objFolder.Files
+        If blnDebug Then Debug.Print "myFile = " & MyFile
+        If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
+        strFileBaseName = FSO.GetBaseName(MyFile.Name)
+        strFileType = FSO.GetExtensionName(MyFile.Name)
         If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
 
         If (strFileType = "frm") Then
@@ -1297,35 +1312,35 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
                 MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If blnDebug Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acForm, strFileBaseName, myFile.Path
+                Application.LoadFromText acForm, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "rpt") Then
             If Exists("REPORTS", strFileBaseName) Then
                 MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If blnDebug Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acReport, strFileBaseName, myFile.Path
+                Application.LoadFromText acReport, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "bas") Then
             If Exists("MODULES", strFileBaseName) Then
                 MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If blnDebug Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acModule, strFileBaseName, myFile.Path
+                Application.LoadFromText acModule, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "mac") Then
             If Exists("MACROS", strFileBaseName) Then
                 MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If blnDebug Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acMacro, strFileBaseName, myFile.Path
+                Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "qry") Then
             If Exists("QUERIES", strFileBaseName) Then
                 MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If blnDebug Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acQuery, strFileBaseName, myFile.Path
+                Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
             End If
         End If
     Next
