@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.2.4"
-Private Const VERSION_DATE As String = "December 7, 2012"
+Private Const VERSION As String = "0.2.5"
+Private Const VERSION_DATE As String = "December 8, 2012"
 Private Const THE_DRIVE As String = "C"
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm

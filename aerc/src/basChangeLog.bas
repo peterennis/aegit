@@ -16,6 +16,7 @@ Option Explicit
 
 '
 '20121207 - v024 - bump version, compact and repair, create zip, add tag
+    ' KillProperly
 '20121206 - v023 - Fix for aeintFDLen < Len("DESCRIPTION")
     ' FIXED - Exists function debug output
     ' Error trap for LongestFieldPropsName
