@@ -14,7 +14,8 @@ Option Explicit
 '
 
 
-'
+'20121209 - v025 - Output built in properties to text file
+    ' Fix errorf 3251 in OutputBuiltInPropertiesText
 '20121207 - v024 - bump version, compact and repair, create zip, add tag
     ' KillProperly
 '20121206 - v023 - Fix for aeintFDLen < Len("DESCRIPTION")

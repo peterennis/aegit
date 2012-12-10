@@ -1,0 +1,192 @@
+Name: Name
+Type: dbMemo
+Value: C:\ae\aegit\adaept revision control.accdb
+---
+Name: Connect
+Type: dbMemo
+Value: 
+---
+Name: Transactions
+Type: dbBoolean
+Value: True
+---
+Name: Updatable
+Type: dbBoolean
+Value: True
+---
+Name: CollatingOrder
+Type: dbInteger
+Value: 1033
+---
+Name: QueryTimeout
+Type: dbInteger
+Value: 60
+---
+Name: Version
+Type: dbMemo
+Value: 12.0
+---
+Name: RecordsAffected
+Type: dbLong
+Value: 0
+---
+Name: ReplicaID
+Type: dbGUID
+Value: 
+---
+Name: DesignMasterID
+Type: dbGUID
+Value: 
+---
+Name: Connection
+Type: 
+Value: 
+---
+Name: ANSI Query Mode
+Type: dbLong
+Value: 0
+---
+Name: Themed Form Controls
+Type: dbLong
+Value: 1
+---
+Name: Use Microsoft Access 2007 compatible cache
+Type: dbLong
+Value: 0
+---
+Name: Clear Cache on Close
+Type: dbLong
+Value: 0
+---
+Name: Never Cache
+Type: dbLong
+Value: 0
+---
+Name: AccessVersion
+Type: dbText
+Value: 09.50
+---
+Name: NavPane Category
+Type: dbLong
+Value: 0
+---
+Name: Show Navigation Pane Search Bar
+Type: dbLong
+Value: 1
+---
+Name: Build
+Type: dbLong
+Value: 24
+---
+Name: ProjVer
+Type: dbInteger
+Value: 119
+---
+Name: HasOfflineLists
+Type: dbInteger
+Value: 70
+---
+Name: UseMDIMode
+Type: dbByte
+Value: 0
+---
+Name: ShowDocumentTabs
+Type: dbBoolean
+Value: True
+---
+Name: Picture Property Storage Format
+Type: dbLong
+Value: 0
+---
+Name: WebDesignMode
+Type: dbByte
+Value: 0
+---
+Name: CheckTruncatedNumFields
+Type: dbLong
+Value: 1
+---
+Name: Theme Resource Name
+Type: dbText
+Value: Office Theme
+---
+Name: StartUpShowDBWindow
+Type: dbBoolean
+Value: True
+---
+Name: StartUpShowStatusBar
+Type: dbBoolean
+Value: True
+---
+Name: AllowShortcutMenus
+Type: dbBoolean
+Value: True
+---
+Name: AllowFullMenus
+Type: dbBoolean
+Value: True
+---
+Name: AllowBuiltInToolbars
+Type: dbBoolean
+Value: True
+---
+Name: AllowToolbarChanges
+Type: dbBoolean
+Value: True
+---
+Name: AllowSpecialKeys
+Type: dbBoolean
+Value: True
+---
+Name: UseAppIconForFrmRpt
+Type: dbBoolean
+Value: False
+---
+Name: AllowDatasheetSchema
+Type: dbBoolean
+Value: True
+---
+Name: DesignWithData
+Type: dbBoolean
+Value: True
+---
+Name: Show Values Limit
+Type: dbLong
+Value: 1000
+---
+Name: Show Values in Indexed
+Type: dbLong
+Value: 1
+---
+Name: Show Values in Non-Indexed
+Type: dbLong
+Value: 1
+---
+Name: Show Values in Remote
+Type: dbLong
+Value: 0
+---
+Name: Auto Compact
+Type: dbLong
+Value: 0
+---
+Name: NavPane Closed
+Type: dbLong
+Value: 0
+---
+Name: NavPane Width
+Type: dbLong
+Value: 215
+---
+Name: NavPane View By
+Type: dbLong
+Value: 0
+---
+Name: NavPane Sort By
+Type: dbLong
+Value: 1
+---
+Name: Track Name AutoCorrect Info
+Type: dbText
+Value: -1
+---

@@ -28,7 +28,7 @@ Option Explicit
 '=======================================================================
 
 Private Const VERSION As String = "0.2.5"
-Private Const VERSION_DATE As String = "December 8, 2012"
+Private Const VERSION_DATE As String = "December 9, 2012"
 Private Const THE_DRIVE As String = "C"
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
@@ -59,6 +59,7 @@ Private Const aeSqlTxtFile = "SqlCodeForQueries.txt"
 Private Const aeTblTxtFile = "TblSetupForTables.txt"
 Private Const aeRefTxtFile = "ReferencesSetup.txt"
 Private Const aeRelTxtFile = "RelationsSetup.txt"
+Private Const aePrpTxtFile = "PropertiesBuiltIn.txt"
 '
 
 Private Sub Class_Initialize()
@@ -926,13 +927,142 @@ OutputQueriesSqlText_Error:
 
 End Function
 
-Public Sub KillProperly(Killfile As String)
+Private Sub KillProperly(Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
     If Len(Dir(Killfile)) > 0 Then
         SetAttr Killfile, vbNormal
         Kill Killfile
     End If
 End Sub
+
+Private Function GetPropEnum(typeNum As Long) As String
+' from http://msdn.microsoft.com/en-us/library/bb242635.aspx
+ 
+    Select Case typeNum
+        Case 1
+            GetPropEnum = "dbBoolean"
+        Case 2
+            GetPropEnum = "dbByte"
+        Case 3
+            GetPropEnum = "dbInteger"
+        Case 4
+            GetPropEnum = "dbLong"
+        Case 5
+            GetPropEnum = "dbCurrency"
+        Case 6
+            GetPropEnum = "dbSingle"
+        Case 7
+            GetPropEnum = "dbDouble"
+        Case 8
+            GetPropEnum = "dbDate"
+        Case 9
+            GetPropEnum = "dbBinary"
+        Case 10
+            GetPropEnum = "dbText"
+        Case 11
+            GetPropEnum = "dbLongBinary"
+        Case 12
+            GetPropEnum = "dbMemo"
+        Case 15
+            GetPropEnum = "dbGUID"
+        Case 16
+            GetPropEnum = "dbBigInt"
+        Case 17
+            GetPropEnum = "dbVarBinary"
+        Case 18
+            GetPropEnum = "dbChar"
+        Case 19
+            GetPropEnum = "dbNumeric"
+        Case 20
+            GetPropEnum = "dbDecimal"
+        Case 21
+            GetPropEnum = "dbFloat"
+        Case 22
+            GetPropEnum = "dbTime"
+        Case 23
+            GetPropEnum = "dbTimeStamp"
+        Case 101
+            GetPropEnum = "dbAttachment"
+        Case 102
+            GetPropEnum = "dbComplexByte"
+        Case 103
+            GetPropEnum = "dbComplexInteger"
+        Case 104
+            GetPropEnum = "dbComplexLong"
+        Case 105
+            GetPropEnum = "dbComplexSingle"
+        Case 106
+            GetPropEnum = "dbComplexDouble"
+        Case 107
+            GetPropEnum = "dbComplexGUID"
+        Case 108
+            GetPropEnum = "dbComplexDecimal"
+        Case 109
+            GetPropEnum = "dbComplexText"
+    End Select
+
+End Function
+
+Private Function GetPrpValue(obj As Object) As String
+    On Error Resume Next
+    GetPrpValue = obj.Properties("Value")
+End Function
+ 
+Private Function OutputBuiltInPropertiesText() As Boolean
+' Ref: http://www.jpsoftwaretech.com/listing-built-in-access-database-properties/
+
+    Dim dbs As DAO.Database
+    Dim prps As DAO.Properties
+    Dim prp As DAO.Property
+    Dim strFile As String
+
+    On Error GoTo OutputBuiltInPropertiesText_Error
+
+    strFile = aestrSourceLocation & aePrpTxtFile
+
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then KillProperly (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
+    End If
+ 
+    Set dbs = CurrentDb
+    Set prps = dbs.Properties
+
+    Debug.Print "OutputBuiltInPropertiesText"
+
+    For Each prp In prps
+'            Debug.Print "Name: " & prp.Name
+'            Debug.Print "Type: " & GetPropEnum(prp.Type)
+'            Debug.Print "Value: " & GetPrpValue(prp)
+'            Debug.Print "---"
+
+        Print #1, "Name: " & prp.Name
+        Print #1, "Type: " & GetPropEnum(prp.Type)
+        ' Fix for error 3251
+        Print #1, "Value: " & GetPrpValue(prp)
+        Print #1, "---"
+    Next prp
+
+    OutputBuiltInPropertiesText = True
+
+OutputBuiltInPropertiesText_Exit:
+    Set prp = Nothing
+    Set prps = Nothing
+    Set dbs = Nothing
+    Close 1
+    Exit Function
+
+OutputBuiltInPropertiesText_Error:
+
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+    OutputBuiltInPropertiesText = False
+    Resume OutputBuiltInPropertiesText_Exit
+
+End Function
  
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
@@ -997,16 +1127,16 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' FORMS
     '=============
     i = 0
-1    Set cnt = dbs.Containers("Forms")
-2    If blnDebug Then Debug.Print "FORMS"
+    Set cnt = dbs.Containers("Forms")
+    If blnDebug Then Debug.Print "FORMS"
     
-3    For Each doc In cnt.Documents
-4        If blnDebug Then Debug.Print , doc.Name
-5        If Not (Left(doc.Name, 3) = "zzz") Then
-6            i = i + 1
-7            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
-8        End If
-9    Next doc
+    For Each doc In cnt.Documents
+        If blnDebug Then Debug.Print , doc.Name
+        If Not (Left(doc.Name, 3) = "zzz") Then
+            i = i + 1
+            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
+        End If
+    Next doc
     
     If blnDebug Then
         If i = 1 Then
@@ -1140,6 +1270,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
 
     OutputQueriesSqlText
+    OutputBuiltInPropertiesText
     aeDocumentTheDatabase = True
     
 aeDocumentTheDatabase_Exit:
