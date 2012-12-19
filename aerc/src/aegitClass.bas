@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.2.5"
-Private Const VERSION_DATE As String = "December 9, 2012"
+Private Const VERSION As String = "0.2.6"
+Private Const VERSION_DATE As String = "December 18, 2012"
 Private Const THE_DRIVE As String = "C"
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
@@ -47,8 +47,10 @@ End Type
 
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
+Private aegitTestFolder As String
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
+Private aestrTestLocation As String
 Private aeintLTN As Long
 Private aeintFNLen As Long
 Private aeintFTLen As Long
@@ -69,6 +71,7 @@ Private Sub Class_Initialize()
 
     ' provide a default value for the SourceFolder property
     aegitSourceFolder = "default"
+    aegitTestFolder = "default"
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
     aeintLTN = LongestTableName
@@ -76,6 +79,7 @@ Private Sub Class_Initialize()
 
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
+    Debug.Print , "Default for aegitTestFolder = " & aegitTestFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.TestFolder = " & aegitType.TestFolder
     Debug.Print , "aeintLTN = " & aeintLTN
@@ -104,7 +108,11 @@ Property Let SourceFolder(ByVal strSourceFolder As String)
 End Property
 
 Property Get TestFolder() As String
-    TestFolder = aegitType.TestFolder
+    TestFolder = aegitTestFolder
+End Property
+
+Property Let TestFolder(ByVal strTestFolder As String)
+    aegitTestFolder = strTestFolder
 End Property
 
 Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
@@ -1106,6 +1114,12 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrSourceLocation = aegitSourceFolder
     End If
  
+    If aegitTestFolder = "default" Then
+        aestrTestLocation = aegitType.TestFolder
+    Else
+        aestrTestLocation = aegitTestFolder
+    End If
+ 
     ' Delete all the files in a given directory:
     ' Loop through all the files in the directory by using Dir$ function
     strFile = Dir(aestrSourceLocation & "*.*")
@@ -1114,13 +1128,14 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         'need to specify full path again because a file was deleted 1
         strFile = Dir(aestrSourceLocation & "*.*")
     Loop
-    
+
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "SourceFolder = " & aestrSourceLocation
-        Debug.Print , "TestFolder = " & aestrSourceLocation
+        Debug.Print , "TestFolder = " & aestrTestLocation
     End If
-
+    'Stop
+    
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
     '=============
@@ -1151,6 +1166,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
             Debug.Print , cnt.Documents.Count & " Forms EXISTING!"
         End If
     End If
+    Set cnt = Nothing
     
     '=============
     ' REPORTS
@@ -1180,6 +1196,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
             Debug.Print , cnt.Documents.Count & " Reports EXISTING!"
         End If
     End If
+    Set cnt = Nothing
 
     '=============
     ' MACROS
@@ -1209,6 +1226,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
             Debug.Print , cnt.Documents.Count & " Macros EXISTING!"
         End If
     End If
+    Set cnt = Nothing
 
     '=============
     ' MODULES
@@ -1238,6 +1256,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
             Debug.Print , cnt.Documents.Count & " Modules EXISTING!"
         End If
     End If
+    Set cnt = Nothing
 
     '=============
     ' QUERIES
@@ -1337,16 +1356,24 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     End If
     If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
 
-    If blnDebug Then Debug.Print , , "The test folder is: " & aegitType.TestFolder
-    If FSO.FolderExists(aegitType.TestFolder) Then
-        If blnDebug Then Debug.Print , , "FSO.FolderExists(aegitType.TestFolder) = TRUE - The directory EXISTS !!!"
+    If aegitTestFolder = "default" Then
+        aestrTestLocation = aegitType.TestFolder
+    Else
+        aestrTestLocation = aegitTestFolder
+    End If
+
+    If blnDebug Then Debug.Print , , "The test folder is: " & aestrTestLocation
+    'MsgBox "The test folder is: " & aestrTestLocation
+    
+    If FSO.FolderExists(aestrTestLocation) Then
+        If blnDebug Then Debug.Print , , "FSO.FolderExists(aestrTestLocation) = TRUE - The directory EXISTS !!!"
         BuildTheDirectory = False
         Exit Function
     End If
     If blnDebug Then Debug.Print , , "The test directory does NOT EXIST !!!"
 
-    Set objTestFolder = FSO.CreateFolder(aegitType.TestFolder)
-    If blnDebug Then Debug.Print , , aegitType.TestFolder & " has been CREATED !!!"
+    Set objTestFolder = FSO.CreateFolder(aestrTestLocation)
+    If blnDebug Then Debug.Print , , aestrTestLocation & " has been CREATED !!!"
 
     Set objTestFolder = Nothing
 
@@ -1407,8 +1434,9 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print ">==> aeReadDocDatabase >==>"
         Debug.Print , "aegit VERSION: " & VERSION
         Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
-        Debug.Print , "aegitType.SourceFolder = " & aegitType.SourceFolder
-        Debug.Print , "aegitType.TestFolder = " & aegitType.TestFolder
+        Debug.Print , "SourceFolder = " & aestrSourceLocation
+        Debug.Print , "TestFolder = " & aestrTestLocation
+        'Stop
     End If
 
     ' Create needed objects

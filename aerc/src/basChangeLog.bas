@@ -14,6 +14,7 @@ Option Explicit
 '
 
 
+'20121218 - v026 - Fix for test folder
 '20121209 - v025 - Output built in properties to text file
     ' Fix errorf 3251 in OutputBuiltInPropertiesText
 '20121207 - v024 - bump version, compact and repair, create zip, add tag

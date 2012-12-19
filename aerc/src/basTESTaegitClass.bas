@@ -9,7 +9,7 @@ Private Function PassFail(bln As Boolean) As String
     End If
 End Function
 
-Public Function aegitClassTest(Optional Debugit As Variant)
+Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
 ' Usage:
 ' Run in immediate window:                  aegitClassTest
 ' Show debug output in immediate window:    aegitClassTest("debug")
@@ -46,7 +46,7 @@ Test1:
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
-   
+
 Test2:
     '=============
     ' TEST 2
@@ -57,10 +57,10 @@ Test2:
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to Exists"
         Debug.Print , "DEBUGGING IS OFF"
-        bln2 = oDbObjects.Exists("Modules", "aegitClass")
+        bln2 = oDbObjects.Exists("Modules", "zzzaegitClass")
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-        bln2 = oDbObjects.Exists("Modules", "aegitClass", "WithDebugging")
+        bln2 = oDbObjects.Exists("Modules", "zzzaegitClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
