@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.2.6"
-Private Const VERSION_DATE As String = "December 18, 2012"
+Private Const VERSION As String = "0.2.8"
+Private Const VERSION_DATE As String = "December 26, 2012"
 Private Const THE_DRIVE As String = "C"
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
@@ -1072,6 +1072,61 @@ OutputBuiltInPropertiesText_Error:
 
 End Function
  
+Private Function DocumentTheContainer(strContainerType As String, strExt As String, Optional varDebug As Variant) As Boolean
+' strContainers: Forms, Reports, Scripts (Macros), Modules
+
+    Dim dbs As DAO.Database
+    Dim cnt As DAO.Container
+    Dim doc As DAO.Document
+    Dim i As Integer
+    Dim intAcObjType As Integer
+    Dim blnDebug As Boolean
+
+    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
+
+    i = 0
+    Set cnt = dbs.Containers(strContainerType)
+
+    Select Case strContainerType
+        Case "Forms": intAcObjType = 2 'acForm
+        Case "Reports": intAcObjType = 3 'acReport
+        Case "Scripts": intAcObjType = 4 'acMacro
+        Case "Modules": intAcObjType = 5 'acModule
+        Case Else
+            MsgBox "Wrong Case Select in DocumentTheContainer"
+    End Select
+
+    If blnDebug Then Debug.Print UCase(strContainerType)
+   
+    For Each doc In cnt.Documents
+        If blnDebug Then Debug.Print , doc.Name
+        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+            i = i + 1
+            Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
+        End If
+    Next doc
+    
+    If blnDebug Then
+        Debug.Print , i & " EXPORTED!"
+        Debug.Print , cnt.Documents.Count & " EXISTING!"
+    End If
+
+    Set doc = Nothing
+    Set cnt = Nothing
+    Set dbs = Nothing
+
+End Function
+ 
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -1092,7 +1147,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Dim qdf As DAO.QueryDef
     Dim strFile As String
     Dim i As Integer
-
     Dim blnDebug As Boolean
 
     On Error GoTo aeDocumentTheDatabase_Error
@@ -1125,7 +1179,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     strFile = Dir(aestrSourceLocation & "*.*")
     Do While strFile <> ""
         KillProperly aestrSourceLocation & strFile
-        'need to specify full path again because a file was deleted 1
+        ' Need to specify full path again because a file was deleted
         strFile = Dir(aestrSourceLocation & "*.*")
     Loop
 
@@ -1134,136 +1188,156 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print , "SourceFolder = " & aestrSourceLocation
         Debug.Print , "TestFolder = " & aestrTestLocation
     End If
-    'Stop
     
+    If blnDebug Then
+        DocumentTheContainer "Forms", "frm", "WithDebugging"
+        DocumentTheContainer "Reports", "rpt", "WithDebugging"
+        DocumentTheContainer "Scripts", "mac", "WithDebugging"
+        DocumentTheContainer "Modules", "bas", "WithDebugging"
+    Else
+        DocumentTheContainer "Forms", "frm"
+        DocumentTheContainer "Reports", "rpt"
+        DocumentTheContainer "Scripts", "mac"
+        DocumentTheContainer "Modules", "bas"
+    End If
+    'Stop
+
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
-    '=============
-    ' FORMS
-    '=============
-    i = 0
-    Set cnt = dbs.Containers("Forms")
-    If blnDebug Then Debug.Print "FORMS"
-    
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz") Then
-            i = i + 1
-            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
-        End If
-    Next doc
-    
-    If blnDebug Then
-        If i = 1 Then
-            Debug.Print , "1 Form EXPORTED!"
-        Else
-            Debug.Print , i & " Forms EXPORTED!"
-        End If
-        
-        If cnt.Documents.Count = 1 Then
-            Debug.Print , "1 Form EXISTING!"
-        Else
-            Debug.Print , cnt.Documents.Count & " Forms EXISTING!"
-        End If
-    End If
-    Set cnt = Nothing
-    
-    '=============
-    ' REPORTS
-    '=============
-    i = 0
-    Set cnt = dbs.Containers("Reports")
-    If blnDebug Then Debug.Print "REPORTS"
-    
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz") Then
-            i = i + 1
-            Application.SaveAsText acReport, doc.Name, aestrSourceLocation & doc.Name & ".rpt"
-        End If
-    Next doc
-    
-    If blnDebug Then
-        If i = 1 Then
-            Debug.Print , "1 Report EXPORTED!"
-        Else
-            Debug.Print , i & " Reports EXPORTED!"
-        End If
-        
-        If cnt.Documents.Count = 1 Then
-            Debug.Print , "1 Report EXISTING!"
-        Else
-            Debug.Print , cnt.Documents.Count & " Reports EXISTING!"
-        End If
-    End If
-    Set cnt = Nothing
-
-    '=============
-    ' MACROS
-    '=============
-    i = 0
-    Set cnt = dbs.Containers("Scripts")
-    If blnDebug Then Debug.Print "MACROS"
-    
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
-            i = i + 1
-            Application.SaveAsText acMacro, doc.Name, aestrSourceLocation & doc.Name & ".mac"
-        End If
-    Next doc
-    
-    If blnDebug Then
-        If i = 1 Then
-            Debug.Print , "1 Macro EXPORTED!"
-        Else
-            Debug.Print , i & " Macros EXPORTED!"
-        End If
-        
-        If cnt.Documents.Count = 1 Then
-            Debug.Print , "1 Macro EXISTING!"
-        Else
-            Debug.Print , cnt.Documents.Count & " Macros EXISTING!"
-        End If
-    End If
-    Set cnt = Nothing
-
-    '=============
-    ' MODULES
-    '=============
-    i = 0
-    Set cnt = dbs.Containers("Modules")
-    If blnDebug Then Debug.Print "MODULES"
-    
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz") Then
-            i = i + 1
-            Application.SaveAsText acModule, doc.Name, aestrSourceLocation & doc.Name & ".bas"
-        End If
-    Next doc
-    
-    If blnDebug Then
-        If i = 1 Then
-            Debug.Print , "1 Module EXPORTED!"
-        Else
-            Debug.Print , i & " Modules EXPORTED!"
-        End If
-        
-        If cnt.Documents.Count = 1 Then
-            Debug.Print , "1 Module EXISTING!"
-        Else
-            Debug.Print , cnt.Documents.Count & " Modules EXISTING!"
-        End If
-    End If
-    Set cnt = Nothing
+'    '=============
+'    ' FORMS
+'    '=============
+'    i = 0
+'    Set cnt = dbs.Containers("Forms")
+'    If blnDebug Then Debug.Print "FORMS"
+'
+'    For Each doc In cnt.Documents
+'        If blnDebug Then Debug.Print , doc.Name
+'        If Not (Left(doc.Name, 3) = "zzz") Then
+'            i = i + 1
+'            Application.SaveAsText acForm, doc.Name, aestrSourceLocation & doc.Name & ".frm"
+'        End If
+'    Next doc
+'
+'    If blnDebug Then
+'        If i = 1 Then
+'            Debug.Print , "1 Form EXPORTED!"
+'        Else
+'            Debug.Print , i & " Forms EXPORTED!"
+'        End If
+'
+'        If cnt.Documents.Count = 1 Then
+'            Debug.Print , "1 Form EXISTING!"
+'        Else
+'            Debug.Print , cnt.Documents.Count & " Forms EXISTING!"
+'        End If
+'    End If
+'    Set cnt = Nothing
+'
+'    '=============
+'    ' REPORTS
+'    '=============
+'    i = 0
+'    Set cnt = dbs.Containers("Reports")
+'    If blnDebug Then Debug.Print "REPORTS"
+'
+'    For Each doc In cnt.Documents
+'        If blnDebug Then Debug.Print , doc.Name
+'        If Not (Left(doc.Name, 3) = "zzz") Then
+'            i = i + 1
+'            Application.SaveAsText acReport, doc.Name, aestrSourceLocation & doc.Name & ".rpt"
+'        End If
+'    Next doc
+'
+'    If blnDebug Then
+'        If i = 1 Then
+'            Debug.Print , "1 Report EXPORTED!"
+'        Else
+'            Debug.Print , i & " Reports EXPORTED!"
+'        End If
+'
+'        If cnt.Documents.Count = 1 Then
+'            Debug.Print , "1 Report EXISTING!"
+'        Else
+'            Debug.Print , cnt.Documents.Count & " Reports EXISTING!"
+'        End If
+'    End If
+'    Set cnt = Nothing
+'
+'    '=============
+'    ' MACROS
+'    '=============
+'    i = 0
+'    Set cnt = dbs.Containers("Scripts")
+'    If blnDebug Then Debug.Print "MACROS"
+'
+'    For Each doc In cnt.Documents
+'        If blnDebug Then Debug.Print , doc.Name
+'        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+'            i = i + 1
+'            Application.SaveAsText acMacro, doc.Name, aestrSourceLocation & doc.Name & ".mac"
+'        End If
+'    Next doc
+'
+'    If blnDebug Then
+'        If i = 1 Then
+'            Debug.Print , "1 Macro EXPORTED!"
+'        Else
+'            Debug.Print , i & " Macros EXPORTED!"
+'        End If
+'
+'        If cnt.Documents.Count = 1 Then
+'            Debug.Print , "1 Macro EXISTING!"
+'        Else
+'            Debug.Print , cnt.Documents.Count & " Macros EXISTING!"
+'        End If
+'    End If
+'    Set cnt = Nothing
+'
+'    '=============
+'    ' MODULES
+'    '=============
+'    i = 0
+'    Set cnt = dbs.Containers("Modules")
+'    If blnDebug Then Debug.Print "MODULES"
+'
+'    For Each doc In cnt.Documents
+'        If blnDebug Then Debug.Print , doc.Name
+'        If Not (Left(doc.Name, 3) = "zzz") Then
+'            i = i + 1
+'            Application.SaveAsText acModule, doc.Name, aestrSourceLocation & doc.Name & ".bas"
+'        End If
+'    Next doc
+'
+'    If blnDebug Then
+'        If i = 1 Then
+'            Debug.Print , "1 Module EXPORTED!"
+'        Else
+'            Debug.Print , i & " Modules EXPORTED!"
+'        End If
+'
+'        If cnt.Documents.Count = 1 Then
+'            Debug.Print , "1 Module EXISTING!"
+'        Else
+'            Debug.Print , cnt.Documents.Count & " Modules EXISTING!"
+'        End If
+'    End If
+'    Set cnt = Nothing
 
     '=============
     ' QUERIES
     '=============
     i = 0
     If blnDebug Then Debug.Print "QUERIES"
-    
+
+    ' Delete all TEMP queries ...
+    For Each qdf In CurrentDb.QueryDefs
+        If Left(qdf.Name, 1) = "~" Then
+            CurrentDb.QueryDefs.Delete qdf.Name
+            CurrentDb.QueryDefs.Refresh
+        End If
+    Next qdf
+
     For Each qdf In CurrentDb.QueryDefs
         If blnDebug Then Debug.Print , qdf.Name
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
@@ -1310,6 +1384,7 @@ aeDocumentTheDatabase_Error:
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         aeDocumentTheDatabase = False
+        Stop
         Resume aeDocumentTheDatabase_Exit
     End If
     

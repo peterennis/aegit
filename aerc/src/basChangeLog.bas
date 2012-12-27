@@ -2,21 +2,29 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' aeDocumentTheDatabase breakout cnt container operations into a function
 ' ReadDocDatabase debug output when custom test folder given
 ' Test for expected references when class first created
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
-' Pass Fail of the tests should be associated to True False of the function, any error should return False
-' Fix error when tst folder not set, it is intended for import testing to recreate a database
 ' http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated
 '   This has useful information about using tdf.attributes
-'
+' Say you want to display a list of reports available in your database to a user in one of your forms.  Simply add a combo-box to your form, then set the Row Source property as follows:
+'   SELECT [Name] FROM [MSysObjects] WHERE [Type] = -32764 AND Left([Name],1) <> "~" ORDER BY [Name]
+'   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+
+'20121226 - v028 - Use DocumentTheContainer for Forms, Reports, Scripts (Macros), Modules - removes duplicate code
+    ' Delete all TEMP queries,  Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=160994
+    ' Enumeration for SaveAsText, http://bytes.com/topic/access/answers/190534-saveastext-syntax
+'20121219 - v027 - List or close all open queries added to test module
 '20121218 - v026 - Fix for test folder
+    ' FIXED - Fix error when tst folder not set, it is intended for import testing to recreate a database
+    ' FIXED - Pass Fail of the tests should be associated to True False of the function, any error should return False
 '20121209 - v025 - Output built in properties to text file
-    ' Fix errorf 3251 in OutputBuiltInPropertiesText
+    ' Fix error 3251 in OutputBuiltInPropertiesText
 '20121207 - v024 - bump version, compact and repair, create zip, add tag
     ' KillProperly
 '20121206 - v023 - Fix for aeintFDLen < Len("DESCRIPTION")
