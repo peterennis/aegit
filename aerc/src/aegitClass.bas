@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const Version As String = "0.2.9"
-Private Const VERSION_DATE As String = "January 17, 2013"
+Private Const aegitVERSION As String = "0.2.9"
+Private Const aegitVERSION_DATE As String = "January 17, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -103,8 +103,8 @@ End Sub
 Private Sub Class_Terminate()
     Debug.Print
     Debug.Print "Class_Terminate"
-    Debug.Print , "aegit VERSION: " & Version
-    Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
+    Debug.Print , "aegit VERSION: " & aegitVERSION
+    Debug.Print , "aegit VERSION_DATE: " & aegitVERSION_DATE
 End Sub
 
 Property Get SourceFolder() As String
@@ -1412,8 +1412,8 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 
     If blnDebug Then
         Debug.Print ">==> aeReadDocDatabase >==>"
-        Debug.Print , "aegit VERSION: " & Version
-        Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
+        Debug.Print , "aegit VERSION: " & aegitVERSION
+        Debug.Print , "aegit VERSION_DATE: " & aegitVERSION_DATE
         Debug.Print , "SourceFolder = " & aestrSourceLocation
         Debug.Print , "TestFolder = " & aestrTestLocation
         'Stop
