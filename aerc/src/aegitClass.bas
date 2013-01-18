@@ -27,7 +27,7 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.2.9"
+Private Const aegitVERSION As String = "0.3.0"
 Private Const aegitVERSION_DATE As String = "January 17, 2013"
 Private Const THE_DRIVE As String = "C"
 
