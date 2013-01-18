@@ -27,9 +27,11 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const VERSION As String = "0.2.8"
-Private Const VERSION_DATE As String = "December 26, 2012"
+Private Const Version As String = "0.2.9"
+Private Const VERSION_DATE As String = "January 17, 2013"
 Private Const THE_DRIVE As String = "C"
+
+Private Const gcfHandleErrors As Boolean = True
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
 ''''''''''''''''''''''''''''''''''''''
@@ -44,6 +46,14 @@ Private Type mySetupType
     SourceFolder As String
     TestFolder As String
 End Type
+
+' Current pointer to the array element of the call stack
+Private mintStackPointer As Integer
+' Array of procedure names in the call stack
+Private mastrCallStack() As String
+' The number of elements to increase the array
+Private Const mcintIncrementStackSize As Integer = 10
+Private mfInErrorHandler As Boolean
 
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
@@ -93,7 +103,7 @@ End Sub
 Private Sub Class_Terminate()
     Debug.Print
     Debug.Print "Class_Terminate"
-    Debug.Print , "aegit VERSION: " & VERSION
+    Debug.Print , "aegit VERSION: " & Version
     Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
 End Sub
 
@@ -254,11 +264,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "vbaProj.Name = " & vbaProj.Name
         Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
         ' Display the versions of Access, ADO and DAO
-        Debug.Print , "Access version = " & Application.VERSION
-        Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.VERSION
-        Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.VERSION
-        Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
-        Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
+        Debug.Print , "Access version = " & Application.Version
+        Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+        Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+        Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+        Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
         Debug.Print , "<@_@>"
         Debug.Print , "     " & "References:"
     End If
@@ -267,11 +277,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Print #1, , "vbaProj.Name = " & vbaProj.Name
         Print #1, , "vbaProj.Type = '" & vbaProj.Type & "'"
         ' Display the versions of Access, ADO and DAO
-        Print #1, , "Access version = " & Application.VERSION
-        Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.VERSION
-        Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.VERSION
-        Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.VERSION
-        Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.VERSION
+        Print #1, , "Access version = " & Application.Version
+        Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+        Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+        Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+        Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
         Print #1, , "<@_@>"
         Print #1, , "     " & "References:"
 
@@ -1073,57 +1083,69 @@ OutputBuiltInPropertiesText_Error:
 End Function
  
 Private Function DocumentTheContainer(strContainerType As String, strExt As String, Optional varDebug As Variant) As Boolean
-' strContainerType: Forms, Reports, Scripts (Macros), Modules
+      ' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
-    Dim dbs As DAO.Database
-    Dim cnt As DAO.Container
-    Dim doc As DAO.Document
-    Dim i As Integer
-    Dim intAcObjType As Integer
-    Dim blnDebug As Boolean
+          ' Use a call stack and global error handler
+10        If gcfHandleErrors Then On Error GoTo PROC_ERR
+20        PushCallStack "AdvancedErrorStructure"
 
-    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+          Dim dbs As DAO.Database
+          Dim cnt As DAO.Container
+          Dim doc As DAO.Document
+          Dim i As Integer
+          Dim intAcObjType As Integer
+          Dim blnDebug As Boolean
 
-    If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
-    Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
-        Debug.Print , "NOW DEBUGGING..."
-    End If
+30        Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
-    i = 0
-    Set cnt = dbs.Containers(strContainerType)
+40        If IsMissing(varDebug) Then
+50            blnDebug = False
+60            Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
+70            Debug.Print , "DEBUGGING IS OFF"
+80        Else
+90            blnDebug = True
+100           Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
+110           Debug.Print , "NOW DEBUGGING..."
+120       End If
 
-    Select Case strContainerType
-        Case "Forms": intAcObjType = 2 'acForm
-        Case "Reports": intAcObjType = 3 'acReport
-        Case "Scripts": intAcObjType = 4 'acMacro
-        Case "Modules": intAcObjType = 5 'acModule
-        Case Else
-            MsgBox "Wrong Case Select in DocumentTheContainer"
-    End Select
+130       i = 0
+140       Set cnt = dbs.Containers(strContainerType)
 
-    If blnDebug Then Debug.Print UCase(strContainerType)
-   
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
-            i = i + 1
-            Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
-        End If
-    Next doc
-    
-    If blnDebug Then
-        Debug.Print , i & " EXPORTED!"
-        Debug.Print , cnt.Documents.Count & " EXISTING!"
-    End If
+150       Select Case strContainerType
+              Case "Forms": intAcObjType = 2 'acForm
+160           Case "Reports": intAcObjType = 3 'acReport
+170           Case "Scripts": intAcObjType = 4 'acMacro
+180           Case "Modules": intAcObjType = 5 'acModule
+190           Case Else
+200               MsgBox "Wrong Case Select in DocumentTheContainer"
+210       End Select
 
-    Set doc = Nothing
-    Set cnt = Nothing
-    Set dbs = Nothing
+220       If blnDebug Then Debug.Print UCase(strContainerType)
+
+230       For Each doc In cnt.Documents
+240           If blnDebug Then Debug.Print , doc.Name
+250           If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+260               i = i + 1
+270               Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
+280           End If
+290       Next doc
+
+300       If blnDebug Then
+310           Debug.Print , i & " EXPORTED!"
+320           Debug.Print , cnt.Documents.Count & " EXISTING!"
+330       End If
+
+340       Set doc = Nothing
+350       Set cnt = Nothing
+360       Set dbs = Nothing
+
+PROC_EXIT:
+370       PopCallStack
+380       Exit Function
+
+PROC_ERR:
+390       GlobalErrHandler
+400       Resume PROC_EXIT
 
 End Function
  
@@ -1264,10 +1286,13 @@ aeDocumentTheDatabase_Error:
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         aeDocumentTheDatabase = False
+        
+        'x ResetWorkspace
         Stop
+        
         Resume aeDocumentTheDatabase_Exit
     End If
-    
+
 End Function
 
 Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
@@ -1387,7 +1412,7 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 
     If blnDebug Then
         Debug.Print ">==> aeReadDocDatabase >==>"
-        Debug.Print , "aegit VERSION: " & VERSION
+        Debug.Print , "aegit VERSION: " & Version
         Debug.Print , "aegit VERSION_DATE: " & VERSION_DATE
         Debug.Print , "SourceFolder = " & aestrSourceLocation
         Debug.Print , "TestFolder = " & aestrTestLocation
@@ -1568,3 +1593,111 @@ aeExists_Error:
     aeExists = False
 
 End Function
+
+'==================================================
+' Global Error Handler Routines
+' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
+'==================================================
+
+Private Sub ResetWorkspace()
+    Dim intCounter As Integer
+
+    On Error Resume Next
+
+    Application.MenuBar = ""
+    DoCmd.SetWarnings False
+    DoCmd.Hourglass False
+    DoCmd.Echo True
+
+    ' Clean up workspace by closing open forms and reports
+    For intCounter = 0 To Forms.Count - 1
+        DoCmd.Close acForm, Forms(intCounter).Name
+    Next intCounter
+
+    For intCounter = 0 To Reports.Count - 1
+        DoCmd.Close acReport, Reports(intCounter).Name
+    Next intCounter
+End Sub
+
+Private Sub GlobalErrHandler()
+  ' Comments: Main procedure to handle errors that occur.
+
+    Dim strError As String
+    Dim lngError As Long
+    Dim intErl As Integer
+    Dim strMsg As String
+
+    ' Variables to preserve error information
+    strError = Err.Description
+    lngError = Err.Number
+    intErl = Erl
+
+    ' Reset workspace, close open objects
+    ResetWorkspace
+
+    ' Prompt the user with information on the error:
+    strMsg = "Procedure: " & CurrentProcName() & vbCrLf & _
+            "Line : " & intErl & vbCrLf & _
+            "Error : (" & lngError & ")" & strError
+    MsgBox strMsg, vbCritical
+
+    'x Write error to file:
+    'x WriteErrorToFile lngError, strError, intErl
+
+    MsgBox "lngError = " & lngError & vbCrLf & _
+            "strError = " & strError & vbCrLf & _
+            "intErl =" & intErl & vbCrLf & _
+            "Application Quit is turned OFF !!!", vbExclamation, "GlobalErrHandler"
+
+    ' Exit Access without saving any changes
+    ' (you might want to change this to save all changes)
+    
+    'Application.Quit acExit
+End Sub
+
+Private Function CurrentProcName() As String
+    CurrentProcName = mastrCallStack(mintStackPointer - 1)
+End Function
+
+Private Sub PushCallStack(strProcName As String)
+    ' Comments: Add the current procedure name to the Call Stack.
+    '           Should be called whenever a procedure is called
+
+    On Error Resume Next
+
+    ' Verify the stack array can handle the current array element
+    If mintStackPointer > UBound(mastrCallStack) Then
+    ' If array has not been defined, initialize the error handler
+        If Err.Number = 9 Then
+            ErrorHandlerInit
+        Else
+            ' Increase the size of the array to not go out of bounds
+            ReDim Preserve mastrCallStack(UBound(mastrCallStack) + _
+            mcintIncrementStackSize)
+        End If
+    End If
+
+    On Error GoTo 0
+
+    mastrCallStack(mintStackPointer) = strProcName
+
+    ' Increment pointer to next element
+    mintStackPointer = mintStackPointer + 1
+End Sub
+
+Private Sub ErrorHandlerInit()
+    mfInErrorHandler = False
+    mintStackPointer = 1
+    ReDim mastrCallStack(1 To mcintIncrementStackSize)
+End Sub
+
+Private Sub PopCallStack()
+    ' Comments: Remove a procedure name from the call stack
+
+    If mintStackPointer <= UBound(mastrCallStack) Then
+        mastrCallStack(mintStackPointer) = ""
+    End If
+
+    ' Reset pointer to previous element
+    mintStackPointer = mintStackPointer - 1
+End Sub
