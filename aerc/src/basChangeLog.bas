@@ -2,7 +2,6 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
-' aeDocumentTheDatabase breakout cnt container operations into a function
 ' ReadDocDatabase debug output when custom test folder given
 ' Test for expected references when class first created
 ' Import of class source code into a new database creates a module
@@ -15,10 +14,13 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
-'20130118 - v030 -
+'20130118 - v030 - Create the WriteErrorToFile procedure
+    ' Add global error handler to aeReadDocDatabase and test
+    ' Output to aegitErrorLog.txt in My Documents
 '20130117 - v029 - Add global error handler sample
     ' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
 '20121226 - v028 - Use DocumentTheContainer for Forms, Reports, Scripts (Macros), Modules - removes duplicate code
+    ' FIXED - aeDocumentTheDatabase breakout cnt container operations into a function
     ' Delete all TEMP queries,  Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=160994
     ' Enumeration for SaveAsText, http://bytes.com/topic/access/answers/190534-saveastext-syntax
 '20121219 - v027 - List or close all open queries added to test module

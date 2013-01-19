@@ -1087,7 +1087,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "AdvancedErrorStructure"
+    PushCallStack "DocumentTheContainer"
 
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
@@ -1135,11 +1135,10 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
         Debug.Print , cnt.Documents.Count & " EXISTING!"
     End If
 
+PROC_EXIT:
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
-
-PROC_EXIT:
     PopCallStack
     Exit Function
 
@@ -1388,9 +1387,11 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 '====================================================================
 
     Dim blnDebug As Boolean
-    
-    On Error GoTo aeReadDocDatabase_Error
-    
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "aeReadDocDatabase"
+
     Debug.Print "aeReadDocDatabase"
     If IsMissing(varDebug) Then
         blnDebug = False
@@ -1401,7 +1402,7 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeReadDocDatabase is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
-    
+
     Const acQuery = 1
 
     Dim MyFile As Object
@@ -1485,15 +1486,18 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 
     If blnDebug Then Debug.Print "<==<"
 
-    On Error GoTo 0
+
+PROC_EXIT:
     aeReadDocDatabase = True
+    PopCallStack
     Exit Function
 
-aeReadDocDatabase_Error:
-
+PROC_ERR:
     MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
     aeReadDocDatabase = False
+    GlobalErrHandler
+    Resume PROC_EXIT
 
 End Function
 
@@ -1641,6 +1645,9 @@ Private Sub GlobalErrHandler()
              "Application Quit is turned OFF !!!"
     MsgBox strMsg, vbCritical, "GlobalErrHandler"
 
+    ' Write error to file:
+    WriteErrorToFile intErl, lngError, CurrentProcName(), strError
+
     ' Exit Access without saving any changes
     ' (you might want to change this to save all changes)
 
@@ -1692,4 +1699,22 @@ Private Sub PopCallStack()
 
     ' Reset pointer to previous element
     mintStackPointer = mintStackPointer - 1
+End Sub
+
+Private Sub WriteErrorToFile(intTheErl As Integer, lngTheErrorNum As Long, _
+                strCurrentProcName As String, strErrorDescription As String)
+    
+    Dim strFilePath As String
+    Dim lngFileNum As Long
+    
+    On Error Resume Next
+
+    ' Write to a text file called aegitErrorLog in the MyDocuments folder
+    strFilePath = CreateObject("WScript.Shell").SpecialFolders("MYDOCUMENTS") & "\aegitErrorLog.txt"
+
+    lngFileNum = FreeFile
+    Open strFilePath For Append Access Write Lock Write As lngFileNum
+        Print #lngFileNum, Now(), intTheErl, lngTheErrorNum, strCurrentProcName, strErrorDescription
+    Close lngFileNum
+
 End Sub
