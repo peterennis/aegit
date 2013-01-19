@@ -28,7 +28,7 @@ Option Explicit
 '=======================================================================
 
 Private Const aegitVERSION As String = "0.3.0"
-Private Const aegitVERSION_DATE As String = "January 17, 2013"
+Private Const aegitVERSION_DATE As String = "January 18, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1083,69 +1083,69 @@ OutputBuiltInPropertiesText_Error:
 End Function
  
 Private Function DocumentTheContainer(strContainerType As String, strExt As String, Optional varDebug As Variant) As Boolean
-      ' strContainerType: Forms, Reports, Scripts (Macros), Modules
+' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
-          ' Use a call stack and global error handler
-10        If gcfHandleErrors Then On Error GoTo PROC_ERR
-20        PushCallStack "AdvancedErrorStructure"
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "AdvancedErrorStructure"
 
-          Dim dbs As DAO.Database
-          Dim cnt As DAO.Container
-          Dim doc As DAO.Document
-          Dim i As Integer
-          Dim intAcObjType As Integer
-          Dim blnDebug As Boolean
+    Dim dbs As DAO.Database
+    Dim cnt As DAO.Container
+    Dim doc As DAO.Document
+    Dim i As Integer
+    Dim intAcObjType As Integer
+    Dim blnDebug As Boolean
 
-30        Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
-40        If IsMissing(varDebug) Then
-50            blnDebug = False
-60            Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
-70            Debug.Print , "DEBUGGING IS OFF"
-80        Else
-90            blnDebug = True
-100           Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
-110           Debug.Print , "NOW DEBUGGING..."
-120       End If
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
-130       i = 0
-140       Set cnt = dbs.Containers(strContainerType)
+    i = 0
+    Set cnt = dbs.Containers(strContainerType)
 
-150       Select Case strContainerType
-              Case "Forms": intAcObjType = 2 'acForm
-160           Case "Reports": intAcObjType = 3 'acReport
-170           Case "Scripts": intAcObjType = 4 'acMacro
-180           Case "Modules": intAcObjType = 5 'acModule
-190           Case Else
-200               MsgBox "Wrong Case Select in DocumentTheContainer"
-210       End Select
+    Select Case strContainerType
+        Case "Forms": intAcObjType = 2 'acForm
+        Case "Reports": intAcObjType = 3 'acReport
+        Case "Scripts": intAcObjType = 4 'acMacro
+        Case "Modules": intAcObjType = 5 'acModule
+        Case Else
+            MsgBox "Wrong Case Select in DocumentTheContainer"
+    End Select
 
-220       If blnDebug Then Debug.Print UCase(strContainerType)
+    If blnDebug Then Debug.Print UCase(strContainerType)
 
-230       For Each doc In cnt.Documents
-240           If blnDebug Then Debug.Print , doc.Name
-250           If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
-260               i = i + 1
-270               Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
-280           End If
-290       Next doc
+    For Each doc In cnt.Documents
+        If blnDebug Then Debug.Print , doc.Name
+        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+            i = i + 1
+            Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
+        End If
+    Next doc
 
-300       If blnDebug Then
-310           Debug.Print , i & " EXPORTED!"
-320           Debug.Print , cnt.Documents.Count & " EXISTING!"
-330       End If
+    If blnDebug Then
+        Debug.Print , i & " EXPORTED!"
+        Debug.Print , cnt.Documents.Count & " EXISTING!"
+    End If
 
-340       Set doc = Nothing
-350       Set cnt = Nothing
-360       Set dbs = Nothing
+    Set doc = Nothing
+    Set cnt = Nothing
+    Set dbs = Nothing
 
 PROC_EXIT:
-370       PopCallStack
-380       Exit Function
+    PopCallStack
+    Exit Function
 
 PROC_ERR:
-390       GlobalErrHandler
-400       Resume PROC_EXIT
+    GlobalErrHandler
+    Resume PROC_EXIT
 
 End Function
  
@@ -1286,10 +1286,9 @@ aeDocumentTheDatabase_Error:
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
         aeDocumentTheDatabase = False
-        
-        'x ResetWorkspace
+
         Stop
-        
+
         Resume aeDocumentTheDatabase_Exit
     End If
 
@@ -1620,7 +1619,7 @@ Private Sub ResetWorkspace()
 End Sub
 
 Private Sub GlobalErrHandler()
-  ' Comments: Main procedure to handle errors that occur.
+' Main procedure to handle errors that occur.
 
     Dim strError As String
     Dim lngError As Long
@@ -1637,21 +1636,14 @@ Private Sub GlobalErrHandler()
 
     ' Prompt the user with information on the error:
     strMsg = "Procedure: " & CurrentProcName() & vbCrLf & _
-            "Line : " & intErl & vbCrLf & _
-            "Error : (" & lngError & ")" & strError
-    MsgBox strMsg, vbCritical
-
-    'x Write error to file:
-    'x WriteErrorToFile lngError, strError, intErl
-
-    MsgBox "lngError = " & lngError & vbCrLf & _
-            "strError = " & strError & vbCrLf & _
-            "intErl =" & intErl & vbCrLf & _
-            "Application Quit is turned OFF !!!", vbExclamation, "GlobalErrHandler"
+             "Line: " & intErl & vbCrLf & _
+             "Error: (" & lngError & ")" & strError & vbCrLf & _
+             "Application Quit is turned OFF !!!"
+    MsgBox strMsg, vbCritical, "GlobalErrHandler"
 
     ' Exit Access without saving any changes
     ' (you might want to change this to save all changes)
-    
+
     'Application.Quit acExit
 End Sub
 
@@ -1660,8 +1652,8 @@ Private Function CurrentProcName() As String
 End Function
 
 Private Sub PushCallStack(strProcName As String)
-    ' Comments: Add the current procedure name to the Call Stack.
-    '           Should be called whenever a procedure is called
+' Add the current procedure name to the Call Stack.
+' Should be called whenever a procedure is called
 
     On Error Resume Next
 
@@ -1692,7 +1684,7 @@ Private Sub ErrorHandlerInit()
 End Sub
 
 Private Sub PopCallStack()
-    ' Comments: Remove a procedure name from the call stack
+' Remove a procedure name from the call stack
 
     If mintStackPointer <= UBound(mastrCallStack) Then
         mastrCallStack(mintStackPointer) = ""
