@@ -14,6 +14,8 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130212 - v031 - Add geh to aexists, BuildTheDirectory, aeDocumentTheDatabase, OutputBuiltInPropertiesText, OutputQueriesSqlText,
+    ' aeDocumentRelations, aeDocumentTables, TableInfo, LongestFieldPropsName, LongestTableName, aeGetReferences
 '20130118 - v030 - Create the WriteErrorToFile procedure
     ' Add global error handler to aeReadDocDatabase and test
     ' Output to aegitErrorLog.txt in My Documents

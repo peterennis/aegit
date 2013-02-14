@@ -1,6 +1,24 @@
 Option Compare Database
 Option Explicit
 
+' Default Usage:
+' The following folders are used if no custom configuration is provided:
+' aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
+' aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
+' Run in immediate window:                  aegitClassTest
+' Show debug output in immediate window:    aegitClassTest("debug")
+'
+' Custom Usage:
+' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
+' For custom configuration of the output source folder in aegitClassTest use:
+' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
+' Run in immediate window: MYPROJECT_TEST
+'
+'Public Function MYPROJECT_TEST()
+'    'aegitClassTest
+'    aegitClassTest ("debug")
+'End Function
+
 Public Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx
 
@@ -50,6 +68,8 @@ Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
     Dim bln4 As Boolean
     Dim bln5 As Boolean
     Dim bln6 As Boolean
+
+    'oDbObjects.SourceFolder = THE_SOURCE_FOLDER
 
 Test1:
     '=============
