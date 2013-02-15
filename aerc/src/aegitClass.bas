@@ -1263,6 +1263,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         DocumentTheContainer "Scripts", "mac"
         DocumentTheContainer "Modules", "bas"
     End If
+    
+    ListContainers ("ListOfContainers.txt")
     'Stop
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -1780,3 +1782,64 @@ Private Sub WriteErrorToFile(intTheErl As Integer, lngTheErrorNum As Long, _
     Close lngFileNum
 
 End Sub
+
+Private Sub WriteStringToFile(lngFileNum As Long, strTheString As String, strTheAbsoluteFileName As String)
+  
+    On Error Resume Next
+
+    Open strTheAbsoluteFileName For Append Access Write Lock Write As lngFileNum
+        Print #lngFileNum, strTheString
+    Close lngFileNum
+
+End Sub
+
+Public Function ListContainers(strTheFileName As String) As Boolean
+' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
+
+    Dim conItem As Container
+    Dim strName As String
+    Dim strOwner As String
+    Dim strText As String
+    Dim strFile As String
+    Dim lngFileNum As Long
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "ListContainers"
+
+    lngFileNum = FreeFile
+
+    'Dim aestrSourceLocation As String
+    'aestrSourceLocation = "C:\ae\aegit\aerc\src\"
+    strFile = aestrSourceLocation & strTheFileName
+
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then KillProperly (strFile)
+        Open strFile For Append As lngFileNum
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As lngFileNum
+    End If
+
+    For Each conItem In DBEngine.Workspaces(0).Databases(0).Containers
+        strName = conItem.Name
+        strOwner = conItem.Owner
+        strText = "Container Name: " & strName & ", Owner: " & strOwner
+        Debug.Print strText
+        WriteStringToFile lngFileNum, strText, strFile
+    Next conItem
+
+    ListContainers = True
+
+PROC_EXIT:
+    Set conItem = Nothing
+    Close lngFileNum
+    PopCallStack
+    Exit Function
+
+PROC_ERR:
+    ListContainers = False
+    GlobalErrHandler
+    Resume PROC_EXIT
+
+End Function

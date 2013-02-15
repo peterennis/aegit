@@ -222,18 +222,3 @@ Public Sub ContainerObjectX()
    End With
 
 End Sub
-
-Public Function ListContainers()
-' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
-    Dim conItem As Container
-    Dim strName As String
-    Dim strOwner As String
-    Dim strText As String
-    For Each conItem In DBEngine.Workspaces(0).Databases(0).Containers
-        strName = conItem.Name
-        strOwner = conItem.Owner
-        strText = "Container name: " & strName & ", Owner: " & strOwner
-        Debug.Print strText
-    Next conItem
-    ListContainers = True
-End Function
