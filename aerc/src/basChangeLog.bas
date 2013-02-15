@@ -16,6 +16,7 @@ Option Explicit
 
 '20130212 - v031 - Add geh to aexists, BuildTheDirectory, aeDocumentTheDatabase, OutputBuiltInPropertiesText, OutputQueriesSqlText,
     ' aeDocumentRelations, aeDocumentTables, TableInfo, LongestFieldPropsName, LongestTableName, aeGetReferences
+    ' Output ListOfContainers.txt
 '20130118 - v030 - Create the WriteErrorToFile procedure
     ' Add global error handler to aeReadDocDatabase and test
     ' Output to aegitErrorLog.txt in My Documents

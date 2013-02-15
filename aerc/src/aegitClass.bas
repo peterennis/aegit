@@ -627,21 +627,6 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
     TableInfo = True
 
-'TableInfoErr:
-'    Select Case Err
-'        Case 3265&  'Table name invalid
-'            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-'            MsgBox strTableName & " table doesn't exist"
-'            If blnDebug Then
-'                Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-'                Debug.Print strTableName & " table doesn't exist"
-'            End If
-'        Case Else
-'            Debug.Print "TableInfo() Else Error " & Err & ": " & Error
-'    End Select
-'    TableInfo = False
-'    Resume TableInfoExit
-
 PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
@@ -1149,7 +1134,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
     Set cnt = dbs.Containers(strContainerType)
 
     Select Case strContainerType
-        Case "Forms": intAcObjType = 2 'acForm
+        Case "Forms": intAcObjType = 2   'acForm
         Case "Reports": intAcObjType = 3 'acReport
         Case "Scripts": intAcObjType = 4 'acMacro
         Case "Modules": intAcObjType = 5 'acModule
@@ -1312,20 +1297,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     
     aeDocumentTheDatabase = True
     
-'aeDocumentTheDatabase_Error:
-'    If Err = 2950 Then
-'        MsgBox "Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
-'        If blnDebug Then Debug.Print ">>>Trap>>>Erl=" & Erl & " Err=2950 " & " cannot find path " & aestrSourceLocation & " in procedure aeDocumentTheDatabase of Class aegitClass"
-'        aeDocumentTheDatabase = False
-'        Resume aeDocumentTheDatabase_Exit
-'    Else
-'        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-'        If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-'        aeDocumentTheDatabase = False
-'        Stop
-'        Resume aeDocumentTheDatabase_Exit
-'    End If
-
 PROC_EXIT:
     Set qdf = Nothing
     Set doc = Nothing
@@ -1406,8 +1377,6 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     If blnDebug Then Debug.Print , , aestrTestLocation & " has been CREATED !!!"
 
     BuildTheDirectory = True
-
-'???    On Error GoTo 0
 
 PROC_EXIT:
     Set objTestFolder = Nothing
@@ -1644,8 +1613,6 @@ Private Function aeExists(strAccObjType As String, _
     End If
 
     aeExists = True
-
-'''    On Error GoTo 0      ???
 
 PROC_EXIT:
     Set obj = Nothing
