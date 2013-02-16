@@ -1780,8 +1780,6 @@ Public Function ListContainers(strTheFileName As String) As Boolean
     Set dbs = CurrentDb
     lngFileNum = FreeFile
 
-    'Dim aestrSourceLocation As String
-    'aestrSourceLocation = "C:\ae\aegit\aerc\src\"
     strFile = aestrSourceLocation & strTheFileName
 
     If Dir(strFile) <> "" Then
@@ -1807,17 +1805,9 @@ Public Function ListContainers(strTheFileName As String) As Boolean
                 WriteStringToFile lngFileNum, "  " & prpLoop.Name _
                     & " = " & prpLoop, strFile
             Next prpLoop
-      Next conItem
-      .Close
-   End With
-    
-'    For Each conItem In DBEngine.Workspaces(0).Databases(0).Containers
-'        strName = conItem.Name
-'        strOwner = conItem.Owner
-'        strText = "Container Name: " & strName & ", Owner: " & strOwner
-'        Debug.Print strText
-'        WriteStringToFile lngFileNum, strText, strFile
-'    Next conItem
+        Next conItem
+        .Close
+    End With
 
     ListContainers = True
 
