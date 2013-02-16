@@ -193,32 +193,3 @@ Test6:
     Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6)
 
 End Function
-
-Public Sub ContainerObjectX()
-' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
-
-   Dim dbs As Database
-   Dim ctrLoop As Container
-   Dim prpLoop As Property
-
-   Set dbs = CurrentDb
-
-   With dbs
-
-      ' Enumerate Containers collection.
-      For Each ctrLoop In .Containers
-         Debug.Print "Properties of " & ctrLoop.Name _
-            & " container"
-
-         ' Enumerate Properties collection of each Container object.
-         For Each prpLoop In ctrLoop.Properties
-            Debug.Print "  " & prpLoop.Name _
-               & " = "; prpLoop
-         Next prpLoop
-
-      Next ctrLoop
-
-      .Close
-   End With
-
-End Sub

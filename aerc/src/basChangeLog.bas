@@ -14,6 +14,7 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130215 - v032 - Merge ContainerObjectX proc into ListOfContainers
 '20130212 - v031 - Add geh to aexists, BuildTheDirectory, aeDocumentTheDatabase, OutputBuiltInPropertiesText, OutputQueriesSqlText,
     ' aeDocumentRelations, aeDocumentTables, TableInfo, LongestFieldPropsName, LongestTableName, aeGetReferences
     ' Output ListOfContainers.txt

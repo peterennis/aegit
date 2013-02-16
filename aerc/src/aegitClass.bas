@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.1"
-Private Const aegitVERSION_DATE As String = "February 12, 2013"
+Private Const aegitVERSION As String = "0.3.2"
+Private Const aegitVERSION_DATE As String = "February 15, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1762,8 +1762,11 @@ End Sub
 
 Public Function ListContainers(strTheFileName As String) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
+' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
 
-    Dim conItem As Container
+    Dim dbs As DAO.Database
+    Dim conItem As DAO.Container
+    Dim prpLoop As DAO.Property
     Dim strName As String
     Dim strOwner As String
     Dim strText As String
@@ -1774,6 +1777,7 @@ Public Function ListContainers(strTheFileName As String) As Boolean
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "ListContainers"
 
+    Set dbs = CurrentDb
     lngFileNum = FreeFile
 
     'Dim aestrSourceLocation As String
@@ -1788,18 +1792,39 @@ Public Function ListContainers(strTheFileName As String) As Boolean
         If Not FileLocked(strFile) Then Open strFile For Append As lngFileNum
     End If
 
-    For Each conItem In DBEngine.Workspaces(0).Databases(0).Containers
-        strName = conItem.Name
-        strOwner = conItem.Owner
-        strText = "Container Name: " & strName & ", Owner: " & strOwner
-        Debug.Print strText
-        WriteStringToFile lngFileNum, strText, strFile
-    Next conItem
+    With dbs
+        ' Enumerate Containers collection.
+        For Each conItem In .Containers
+            Debug.Print "Properties of " & conItem.Name _
+                & " container"
+            WriteStringToFile lngFileNum, "Properties of " & conItem.Name _
+                & " container", strFile
+            
+            ' Enumerate Properties collection of each Container object.
+            For Each prpLoop In conItem.Properties
+                Debug.Print "  " & prpLoop.Name _
+                    & " = "; prpLoop
+                WriteStringToFile lngFileNum, "  " & prpLoop.Name _
+                    & " = " & prpLoop, strFile
+            Next prpLoop
+      Next conItem
+      .Close
+   End With
+    
+'    For Each conItem In DBEngine.Workspaces(0).Databases(0).Containers
+'        strName = conItem.Name
+'        strOwner = conItem.Owner
+'        strText = "Container Name: " & strName & ", Owner: " & strOwner
+'        Debug.Print strText
+'        WriteStringToFile lngFileNum, strText, strFile
+'    Next conItem
 
     ListContainers = True
 
 PROC_EXIT:
+    Set prpLoop = Nothing
     Set conItem = Nothing
+    Set dbs = Nothing
     Close lngFileNum
     PopCallStack
     Exit Function
