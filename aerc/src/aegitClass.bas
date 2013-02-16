@@ -317,6 +317,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
     aeGetReferences = True
 
 PROC_EXIT:
+    Set vbaProj = Nothing
     Close 1
     PopCallStack
     Exit Function
@@ -1328,7 +1329,7 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
 
     Dim objTestFolder As Object
     Dim blnDebug As Boolean
-    
+
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "BuildTheDirectory"
@@ -1412,6 +1413,10 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 ' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
+    Dim MyFile As Object
+    Dim strFileType As String
+    Dim strFileBaseName As String
+    Dim bln As Boolean
     Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
@@ -1430,11 +1435,6 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     End If
 
     Const acQuery = 1
-
-    Dim MyFile As Object
-    Dim strFileType As String
-    Dim strFileBaseName As String
-    Dim bln As Boolean
 
     If blnDebug Then
         Debug.Print ">==> aeReadDocDatabase >==>"
@@ -1515,6 +1515,10 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     aeReadDocDatabase = True
 
 PROC_EXIT:
+    Set MyFile = Nothing
+    'Set ojbFolder = Nothing
+    Set FSO = Nothing
+    Set wsh = Nothing
     aeReadDocDatabase = True
     PopCallStack
     Exit Function
