@@ -14,6 +14,10 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130225 - v034 - Add UseTestFolder with associated Let property to explicitly turn on the routines for import testing
+'20130222 - v033 - Use MYPROJECT_TEST to run zzzaegitClassTest with a value for THE_SOURCE_FOLDER
+    ' Ref: http://stackoverflow.com/questions/7907255/hide-access-options
+    ' Add fix for properties output, Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 '20130215 - v032 - Merge ContainerObjectX proc into ListOfContainers
 '20130212 - v031 - Add geh to aexists, BuildTheDirectory, aeDocumentTheDatabase, OutputBuiltInPropertiesText, OutputQueriesSqlText,
     ' aeDocumentRelations, aeDocumentTables, TableInfo, LongestFieldPropsName, LongestTableName, aeGetReferences

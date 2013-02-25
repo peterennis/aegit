@@ -14,10 +14,10 @@ Option Explicit
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
 ' Run in immediate window: MYPROJECT_TEST
 '
-'Public Function MYPROJECT_TEST()
-'    'aegitClassTest
-'    aegitClassTest ("debug")
-'End Function
+Public Function MYPROJECT_TEST()
+    'zzzaegitClassTest
+    aegitClassTest ("debug")
+End Function
 
 Public Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx

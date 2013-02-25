@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.2"
-Private Const aegitVERSION_DATE As String = "February 15, 2013"
+Private Const aegitVERSION As String = "0.3.4"
+Private Const aegitVERSION_DATE As String = "February 25, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -44,6 +44,7 @@ End Enum
 Private Type mySetupType
     SourceFolder As String
     TestFolder As String
+    UseTestFolder As Boolean
 End Type
 
 ' Current pointer to the array element of the call stack
@@ -57,6 +58,7 @@ Private mfInErrorHandler As Boolean
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitTestFolder As String
+Private aegitUseTestFolder As Boolean
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
 Private aestrTestLocation As String
@@ -78,11 +80,13 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
-    ' provide a default value for the SourceFolder property
+    ' provide a default value for the SourceFolder and TestFolder properties
     aegitSourceFolder = "default"
     aegitTestFolder = "default"
+    aegitUseTestFolder = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
+    aegitType.UseTestFolder = False
     aeintLTN = LongestTableName
     LongestFieldPropsName
 
@@ -91,6 +95,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitTestFolder = " & aegitTestFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.TestFolder = " & aegitType.TestFolder
+    Debug.Print , "Default for aegitType.UseTestFolder = " & aegitType.UseTestFolder
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -121,6 +126,10 @@ End Property
 
 Property Let TestFolder(ByVal strTestFolder As String)
     aegitTestFolder = strTestFolder
+End Property
+
+Property Let UseTestFolder(ByVal blnUseTestFolder As Boolean)
+    aegitUseTestFolder = blnUseTestFolder
 End Property
 
 Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
@@ -1042,7 +1051,7 @@ Private Function GetPropEnum(typeNum As Long) As String
 End Function
 
 Private Function GetPrpValue(obj As Object) As String
-    On Error Resume Next
+    'On Error Resume Next
     GetPrpValue = obj.Properties("Value")
 End Function
  
@@ -1052,7 +1061,9 @@ Private Function OutputBuiltInPropertiesText() As Boolean
     Dim dbs As DAO.Database
     Dim prps As DAO.Properties
     Dim prp As DAO.Property
+    Dim varPropValue As Variant
     Dim strFile As String
+    Dim strError As String
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -1074,15 +1085,13 @@ Private Function OutputBuiltInPropertiesText() As Boolean
     Debug.Print "OutputBuiltInPropertiesText"
 
     For Each prp In prps
-'            Debug.Print "Name: " & prp.Name
-'            Debug.Print "Type: " & GetPropEnum(prp.Type)
-'            Debug.Print "Value: " & GetPrpValue(prp)
-'            Debug.Print "---"
-
         Print #1, "Name: " & prp.Name
         Print #1, "Type: " & GetPropEnum(prp.Type)
-        ' Fix for error 3251
-        Print #1, "Value: " & GetPrpValue(prp)
+        ' Fixed for error 3251
+        varPropValue = GetPrpValue(prp)
+        Print #1, "Value: " & varPropValue
+        Print #1, "Inherited: " & prp.Inherited & ";" & strError
+        strError = ""
         Print #1, "---"
     Next prp
 
@@ -1097,11 +1106,18 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    'MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-    'If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-    OutputBuiltInPropertiesText = False
-    GlobalErrHandler
-    Resume PROC_EXIT
+     Select Case Err.Number
+        Case 3251
+            strError = Err.Number & "," & Err.Description
+            varPropValue = Null
+            Resume Next
+        Case Else
+            'MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            OutputBuiltInPropertiesText = False
+            GlobalErrHandler
+            Resume PROC_EXIT
+    End Select
 
 End Function
  
@@ -1216,11 +1232,13 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Else
         aestrSourceLocation = aegitSourceFolder
     End If
- 
-    If aegitTestFolder = "default" Then
-        aestrTestLocation = aegitType.TestFolder
-    Else
-        aestrTestLocation = aegitTestFolder
+
+    If aegitUseTestFolder Then
+        If aegitTestFolder = "default" Then
+            aestrTestLocation = aegitType.TestFolder
+        Else
+            aestrTestLocation = aegitTestFolder
+        End If
     End If
  
     ' Delete all the files in a given directory:
@@ -1358,10 +1376,12 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     End If
     If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
 
-    If aegitTestFolder = "default" Then
-        aestrTestLocation = aegitType.TestFolder
-    Else
-        aestrTestLocation = aegitTestFolder
+    If aegitUseTestFolder Then
+        If aegitTestFolder = "default" Then
+            aestrTestLocation = aegitType.TestFolder
+        Else
+            aestrTestLocation = aegitTestFolder
+        End If
     End If
 
     If blnDebug Then Debug.Print , , "The test folder is: " & aestrTestLocation
@@ -1374,8 +1394,10 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     End If
     If blnDebug Then Debug.Print , , "The test directory does NOT EXIST !!!"
 
-    Set objTestFolder = FSO.CreateFolder(aestrTestLocation)
-    If blnDebug Then Debug.Print , , aestrTestLocation & " has been CREATED !!!"
+    If aegitUseTestFolder Then
+        Set objTestFolder = FSO.CreateFolder(aestrTestLocation)
+        If blnDebug Then Debug.Print , , aestrTestLocation & " has been CREATED !!!"
+    End If
 
     BuildTheDirectory = True
 
@@ -1385,7 +1407,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
     BuildTheDirectory = False
     GlobalErrHandler
@@ -1462,53 +1484,55 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         bln = BuildTheDirectory(FSO)
     End If
 
-    Dim objFolder As Object
-    Set objFolder = FSO.GetFolder(aegitType.TestFolder)
+    If aegitUseTestFolder Then
+        Dim objFolder As Object
+        Set objFolder = FSO.GetFolder(aegitType.TestFolder)
 
-    For Each MyFile In objFolder.Files
-        If blnDebug Then Debug.Print "myFile = " & MyFile
-        If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
-        strFileBaseName = FSO.GetBaseName(MyFile.Name)
-        strFileType = FSO.GetExtensionName(MyFile.Name)
-        If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
+        For Each MyFile In objFolder.Files
+            If blnDebug Then Debug.Print "myFile = " & MyFile
+            If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
+            strFileBaseName = FSO.GetBaseName(MyFile.Name)
+            strFileType = FSO.GetExtensionName(MyFile.Name)
+            If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
 
-        If (strFileType = "frm") Then
-            If Exists("FORMS", strFileBaseName) Then
-                MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-            Else
-                Application.LoadFromText acForm, strFileBaseName, MyFile.Path
+            If (strFileType = "frm") Then
+                If Exists("FORMS", strFileBaseName) Then
+                    MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                    If blnDebug Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                Else
+                    Application.LoadFromText acForm, strFileBaseName, MyFile.Path
+                End If
+            ElseIf (strFileType = "rpt") Then
+                If Exists("REPORTS", strFileBaseName) Then
+                    MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                    If blnDebug Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                Else
+                    Application.LoadFromText acReport, strFileBaseName, MyFile.Path
+                End If
+            ElseIf (strFileType = "bas") Then
+                If Exists("MODULES", strFileBaseName) Then
+                    MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                    If blnDebug Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                Else
+                    Application.LoadFromText acModule, strFileBaseName, MyFile.Path
+                End If
+            ElseIf (strFileType = "mac") Then
+                If Exists("MACROS", strFileBaseName) Then
+                    MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                    If blnDebug Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                Else
+                    Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
+                End If
+            ElseIf (strFileType = "qry") Then
+                If Exists("QUERIES", strFileBaseName) Then
+                    MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                    If blnDebug Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                Else
+                    Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
+                End If
             End If
-        ElseIf (strFileType = "rpt") Then
-            If Exists("REPORTS", strFileBaseName) Then
-                MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-            Else
-                Application.LoadFromText acReport, strFileBaseName, MyFile.Path
-            End If
-        ElseIf (strFileType = "bas") Then
-            If Exists("MODULES", strFileBaseName) Then
-                MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-            Else
-                Application.LoadFromText acModule, strFileBaseName, MyFile.Path
-            End If
-        ElseIf (strFileType = "mac") Then
-            If Exists("MACROS", strFileBaseName) Then
-                MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-            Else
-                Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
-            End If
-        ElseIf (strFileType = "qry") Then
-            If Exists("QUERIES", strFileBaseName) Then
-                MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-            Else
-                Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
-            End If
-        End If
-    Next
+        Next
+    End If
 
     If blnDebug Then Debug.Print "<==<"
     

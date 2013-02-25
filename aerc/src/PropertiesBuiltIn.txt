@@ -1,192 +1,240 @@
 Name: Name
 Type: dbMemo
 Value: C:\ae\aegit\adaept revision control.accdb
+Inherited: False;
 ---
 Name: Connect
 Type: dbMemo
 Value: 
+Inherited: False;
 ---
 Name: Transactions
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: Updatable
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: CollatingOrder
 Type: dbInteger
 Value: 1033
+Inherited: False;
 ---
 Name: QueryTimeout
 Type: dbInteger
 Value: 60
+Inherited: False;
 ---
 Name: Version
 Type: dbMemo
 Value: 12.0
+Inherited: False;
 ---
 Name: RecordsAffected
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: ReplicaID
 Type: dbGUID
 Value: 
+Inherited: False;
 ---
 Name: DesignMasterID
 Type: dbGUID
 Value: 
+Inherited: False;
 ---
 Name: Connection
 Type: 
 Value: 
+Inherited: False;3251,Operation is not supported for this type of object.
 ---
 Name: ANSI Query Mode
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: Themed Form Controls
 Type: dbLong
 Value: 1
+Inherited: False;
 ---
 Name: Use Microsoft Access 2007 compatible cache
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: Clear Cache on Close
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: Never Cache
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: AccessVersion
 Type: dbText
 Value: 09.50
+Inherited: False;
 ---
 Name: NavPane Category
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: Show Navigation Pane Search Bar
 Type: dbLong
 Value: 1
+Inherited: False;
 ---
 Name: Build
 Type: dbLong
 Value: 24
+Inherited: False;
 ---
 Name: ProjVer
 Type: dbInteger
 Value: 119
+Inherited: False;
 ---
 Name: HasOfflineLists
 Type: dbInteger
 Value: 70
+Inherited: False;
 ---
 Name: UseMDIMode
 Type: dbByte
 Value: 0
+Inherited: False;
 ---
 Name: ShowDocumentTabs
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: Picture Property Storage Format
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: WebDesignMode
 Type: dbByte
 Value: 0
+Inherited: False;
 ---
 Name: CheckTruncatedNumFields
 Type: dbLong
 Value: 1
+Inherited: False;
 ---
 Name: Theme Resource Name
 Type: dbText
 Value: Office Theme
+Inherited: False;
 ---
 Name: StartUpShowDBWindow
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: StartUpShowStatusBar
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: AllowShortcutMenus
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: AllowFullMenus
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: AllowBuiltInToolbars
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: AllowToolbarChanges
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: AllowSpecialKeys
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: UseAppIconForFrmRpt
 Type: dbBoolean
 Value: False
+Inherited: False;
 ---
 Name: AllowDatasheetSchema
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: DesignWithData
 Type: dbBoolean
 Value: True
+Inherited: False;
 ---
 Name: Show Values Limit
 Type: dbLong
 Value: 1000
+Inherited: False;
 ---
 Name: Show Values in Indexed
 Type: dbLong
 Value: 1
+Inherited: False;
 ---
 Name: Show Values in Non-Indexed
 Type: dbLong
 Value: 1
+Inherited: False;
 ---
 Name: Show Values in Remote
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: Auto Compact
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: NavPane Closed
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: NavPane Width
 Type: dbLong
 Value: 215
+Inherited: False;
 ---
 Name: NavPane View By
 Type: dbLong
 Value: 0
+Inherited: False;
 ---
 Name: NavPane Sort By
 Type: dbLong
 Value: 1
+Inherited: False;
 ---
 Name: Track Name AutoCorrect Info
 Type: dbText
 Value: -1
+Inherited: False;
 ---
