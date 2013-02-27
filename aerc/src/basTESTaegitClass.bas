@@ -193,3 +193,36 @@ Test6:
     Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6)
 
 End Function
+
+Public Function aegitClassImportTest(Optional Debugit As Variant) As Boolean
+' Usage:
+' Run in immediate window:                  aegitClassImportTest
+
+    Dim oDbObjects As aegitClass
+    Set oDbObjects = New aegitClass
+
+    Dim bln1 As Boolean
+
+ImportTest1:
+    '==============
+    ' IMPORT TEST 1
+    '==============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "1. aegitClassImportTest => ReadDocDatabase"
+    Debug.Print "aegitClassImportTest"
+
+    oDbObjects.UseImportFolder = True
+
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln1 = oDbObjects.ReadDocDatabase()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln1 = oDbObjects.ReadDocDatabase("WithDebugging")
+    End If
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+
+End Function
