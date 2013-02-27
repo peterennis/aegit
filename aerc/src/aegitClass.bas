@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.4"
-Private Const aegitVERSION_DATE As String = "February 25, 2013"
+Private Const aegitVERSION As String = "0.3.5"
+Private Const aegitVERSION_DATE As String = "February 26, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -43,8 +43,8 @@ End Enum
 
 Private Type mySetupType
     SourceFolder As String
-    TestFolder As String
-    UseTestFolder As Boolean
+    ImportFolder As String
+    UseImportFolder As Boolean
 End Type
 
 ' Current pointer to the array element of the call stack
@@ -57,11 +57,11 @@ Private mfInErrorHandler As Boolean
 
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
-Private aegitTestFolder As String
-Private aegitUseTestFolder As Boolean
+Private aegitImportFolder As String
+Private aegitUseImportFolder As Boolean
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
-Private aestrTestLocation As String
+Private aestrImportLocation As String
 Private aeintLTN As Long
 Private aeintFNLen As Long
 Private aeintFTLen As Long
@@ -80,22 +80,22 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
-    ' provide a default value for the SourceFolder and TestFolder properties
+    ' provide a default value for the SourceFolder and ImportFolder properties
     aegitSourceFolder = "default"
-    aegitTestFolder = "default"
-    aegitUseTestFolder = False
+    aegitImportFolder = "default"
+    aegitUseImportFolder = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-    aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
-    aegitType.UseTestFolder = False
+    aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
+    aegitType.UseImportFolder = False
     aeintLTN = LongestTableName
     LongestFieldPropsName
 
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
-    Debug.Print , "Default for aegitTestFolder = " & aegitTestFolder
+    Debug.Print , "Default for aegitImportFolder = " & aegitImportFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    Debug.Print , "Default for aegitType.TestFolder = " & aegitType.TestFolder
-    Debug.Print , "Default for aegitType.UseTestFolder = " & aegitType.UseTestFolder
+    Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
+    Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -120,16 +120,16 @@ Property Let SourceFolder(ByVal strSourceFolder As String)
     aegitSourceFolder = strSourceFolder
 End Property
 
-Property Get TestFolder() As String
-    TestFolder = aegitTestFolder
+Property Get ImportFolder() As String
+    ImportFolder = aegitImportFolder
 End Property
 
-Property Let TestFolder(ByVal strTestFolder As String)
-    aegitTestFolder = strTestFolder
+Property Let ImportFolder(ByVal strImportFolder As String)
+    aegitImportFolder = strImportFolder
 End Property
 
-Property Let UseTestFolder(ByVal blnUseTestFolder As Boolean)
-    aegitUseTestFolder = blnUseTestFolder
+Property Let UseImportFolder(ByVal blnUseImportFolder As Boolean)
+    aegitUseImportFolder = blnUseImportFolder
 End Property
 
 Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
@@ -1233,11 +1233,11 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrSourceLocation = aegitSourceFolder
     End If
 
-    If aegitUseTestFolder Then
-        If aegitTestFolder = "default" Then
-            aestrTestLocation = aegitType.TestFolder
+    If aegitUseImportFolder Then
+        If aegitImportFolder = "default" Then
+            aestrImportLocation = aegitType.ImportFolder
         Else
-            aestrTestLocation = aegitTestFolder
+            aestrImportLocation = aegitImportFolder
         End If
     End If
  
@@ -1253,7 +1253,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "SourceFolder = " & aestrSourceLocation
-        Debug.Print , "TestFolder = " & aestrTestLocation
+        Debug.Print , "ImportFolder = " & aestrImportLocation
     End If
     
     If blnDebug Then
@@ -1345,7 +1345,7 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
 ' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
-    Dim objTestFolder As Object
+    Dim objImportFolder As Object
     Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
@@ -1375,34 +1375,34 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
         Exit Function
     End If
     If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
-
-    If aegitUseTestFolder Then
-        If aegitTestFolder = "default" Then
-            aestrTestLocation = aegitType.TestFolder
-        Else
-            aestrTestLocation = aegitTestFolder
-        End If
-    End If
-
-    If blnDebug Then Debug.Print , , "The test folder is: " & aestrTestLocation
-    'MsgBox "The test folder is: " & aestrTestLocation
+    If blnDebug Then Debug.Print , , "aegitUseImportFolder = " & aegitUseImportFolder
     
-    If FSO.FolderExists(aestrTestLocation) Then
-        If blnDebug Then Debug.Print , , "FSO.FolderExists(aestrTestLocation) = TRUE - The directory EXISTS !!!"
+    If aegitUseImportFolder Then
+        If aegitImportFolder = "default" Then
+            aestrImportLocation = aegitType.ImportFolder
+        Else
+            aestrImportLocation = aegitImportFolder
+        End If
+        
+        If blnDebug Then Debug.Print , , "The import directory is: " & aestrImportLocation
+    End If
+   
+    If FSO.FolderExists(aestrImportLocation) Then
+        If blnDebug Then Debug.Print , , "FSO.FolderExists(aestrImportLocation) = TRUE - The directory EXISTS !!!"
         BuildTheDirectory = False
         Exit Function
     End If
-    If blnDebug Then Debug.Print , , "The test directory does NOT EXIST !!!"
+    If blnDebug Then Debug.Print , , "The import directory does NOT EXIST !!!"
 
-    If aegitUseTestFolder Then
-        Set objTestFolder = FSO.CreateFolder(aestrTestLocation)
-        If blnDebug Then Debug.Print , , aestrTestLocation & " has been CREATED !!!"
+    If aegitUseImportFolder Then
+        Set objImportFolder = FSO.CreateFolder(aestrImportLocation)
+        If blnDebug Then Debug.Print , , aestrImportLocation & " has been CREATED !!!"
     End If
 
     BuildTheDirectory = True
 
 PROC_EXIT:
-    Set objTestFolder = Nothing
+    Set objImportFolder = Nothing
     PopCallStack
     Exit Function
 
@@ -1463,7 +1463,7 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print , "aegit VERSION: " & aegitVERSION
         Debug.Print , "aegit VERSION_DATE: " & aegitVERSION_DATE
         Debug.Print , "SourceFolder = " & aestrSourceLocation
-        Debug.Print , "TestFolder = " & aestrTestLocation
+        Debug.Print , "ImportFolder = " & aestrImportLocation
         'Stop
     End If
 
@@ -1484,9 +1484,9 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         bln = BuildTheDirectory(FSO)
     End If
 
-    If aegitUseTestFolder Then
+    If aegitUseImportFolder Then
         Dim objFolder As Object
-        Set objFolder = FSO.GetFolder(aegitType.TestFolder)
+        Set objFolder = FSO.GetFolder(aegitType.ImportFolder)
 
         For Each MyFile In objFolder.Files
             If blnDebug Then Debug.Print "myFile = " & MyFile

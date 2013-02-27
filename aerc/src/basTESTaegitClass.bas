@@ -4,7 +4,7 @@ Option Explicit
 ' Default Usage:
 ' The following folders are used if no custom configuration is provided:
 ' aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-' aegitType.TestFolder = "C:\ae\aegit\aerc\tst\"
+' aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
 ' Run in immediate window:                  aegitClassTest
 ' Show debug output in immediate window:    aegitClassTest("debug")
 '

@@ -14,6 +14,7 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130226 - v035 - Change Test folder references and variables to Import folder
 '20130225 - v034 - Add UseTestFolder with associated Let property to explicitly turn on the routines for import testing
 '20130222 - v033 - Use MYPROJECT_TEST to run zzzaegitClassTest with a value for THE_SOURCE_FOLDER
     ' Ref: http://stackoverflow.com/questions/7907255/hide-access-options
