@@ -15,6 +15,9 @@ Option Explicit
 
 
 '20130226 - v035 - Change Test folder references and variables to Import folder
+    ' wsh.CurrentDirectory = aestrImportLocation
+    ' Fix places where Erl missing
+    ' Get values for aestrSourceLocation, aestrImportLocation in aeReadDocdatabase
 '20130225 - v034 - Add UseTestFolder with associated Let property to explicitly turn on the routines for import testing
 '20130222 - v033 - Use MYPROJECT_TEST to run zzzaegitClassTest with a value for THE_SOURCE_FOLDER
     ' Ref: http://stackoverflow.com/questions/7907255/hide-access-options

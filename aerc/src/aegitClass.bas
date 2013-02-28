@@ -332,7 +332,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     aeGetReferences = False
     GlobalErrHandler
@@ -378,7 +378,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
     LongestTableName = 0
     GlobalErrHandler
     Resume PROC_EXIT
@@ -442,7 +442,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
     LongestFieldPropsName = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -645,7 +645,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
     TableInfo = False
     GlobalErrHandler
@@ -796,7 +796,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     aeDocumentTables = False
     GlobalErrHandler
@@ -912,7 +912,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     aeDocumentRelations = False
     GlobalErrHandler
@@ -967,7 +967,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
     OutputQueriesSqlText = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1112,8 +1112,8 @@ PROC_ERR:
             varPropValue = Null
             Resume Next
         Case Else
-            'MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-            'If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
             OutputBuiltInPropertiesText = False
             GlobalErrHandler
             Resume PROC_EXIT
@@ -1233,12 +1233,11 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrSourceLocation = aegitSourceFolder
     End If
 
-    If aegitUseImportFolder Then
-        If aegitImportFolder = "default" Then
+    If aegitImportFolder = "default" Then
             aestrImportLocation = aegitType.ImportFolder
-        Else
-            aestrImportLocation = aegitImportFolder
-        End If
+    End If
+    If aegitUseImportFolder Then
+        aestrImportLocation = aegitImportFolder
     End If
  
     ' Delete all the files in a given directory:
@@ -1325,8 +1324,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
     aeDocumentTheDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1377,15 +1376,14 @@ Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
     If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
     If blnDebug Then Debug.Print , , "aegitUseImportFolder = " & aegitUseImportFolder
     
-    If aegitUseImportFolder Then
-        If aegitImportFolder = "default" Then
-            aestrImportLocation = aegitType.ImportFolder
-        Else
-            aestrImportLocation = aegitImportFolder
-        End If
-        
-        If blnDebug Then Debug.Print , , "The import directory is: " & aestrImportLocation
+    If aegitImportFolder = "default" Then
+        aestrImportLocation = aegitType.ImportFolder
     End If
+    If aegitUseImportFolder And aegitImportFolder <> "default" Then
+        aestrImportLocation = aegitImportFolder
+    End If
+        
+    If blnDebug Then Debug.Print , , "The import directory is: " & aestrImportLocation
    
     If FSO.FolderExists(aestrImportLocation) Then
         If blnDebug Then Debug.Print , , "FSO.FolderExists(aestrImportLocation) = TRUE - The directory EXISTS !!!"
@@ -1408,7 +1406,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
     BuildTheDirectory = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1458,11 +1456,25 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
 
     Const acQuery = 1
 
+    If aegitSourceFolder = "default" Then
+        aestrSourceLocation = aegitType.SourceFolder
+    Else
+        aestrSourceLocation = aegitSourceFolder
+    End If
+
+    If aegitImportFolder = "default" Then
+        aestrImportLocation = aegitType.ImportFolder
+    End If
+    If aegitUseImportFolder And aegitImportFolder <> "default" Then
+        aestrImportLocation = aegitImportFolder
+    End If
+
     If blnDebug Then
         Debug.Print ">==> aeReadDocDatabase >==>"
         Debug.Print , "aegit VERSION: " & aegitVERSION
         Debug.Print , "aegit VERSION_DATE: " & aegitVERSION_DATE
         Debug.Print , "SourceFolder = " & aestrSourceLocation
+        Debug.Print , "UseImportFolder = " & aegitUseImportFolder
         Debug.Print , "ImportFolder = " & aestrImportLocation
         'Stop
     End If
@@ -1470,9 +1482,11 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
     ' Create needed objects
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
-        If blnDebug Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
-        ' CurDir Function
-        If blnDebug Then Debug.Print , "CurDir = " & CurDir
+
+    wsh.CurrentDirectory = aestrImportLocation
+    If blnDebug Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
+    ' CurDir Function
+    If blnDebug Then Debug.Print , "CurDir = " & CurDir
     
     Dim FSO As Scripting.FileSystemObject
     Set FSO = CreateObject("Scripting.FileSystemObject")
@@ -1548,8 +1562,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
     aeReadDocDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1648,8 +1662,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
     aeExists = False
     GlobalErrHandler
     Resume PROC_EXIT
