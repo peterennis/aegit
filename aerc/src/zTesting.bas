@@ -1,23 +1,47 @@
 Option Compare Database
 Option Explicit
 
-Public Sub CreateDbScript()
+Public Sub TestCnR()
+' TableDefs not refreshed after create
+' Ref: http://support.microsoft.com/kb/104339
+' So force a compact and repair
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa202943(v=office.10).aspx
+' Not a "good practice" but for this use it is simple and works
+' From the Access window
+' Access 2003: SendKeys "%(TDC)", False
+' Access 2007: SendKeys "%(FMC)", False
+' Access 2010: SendKeys "%(YC)", False
+' From the Immediate window
+    SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
+End Sub
+
+Public Sub TestCreateDbScript()
+    CreateDbScript "C:\Temp\Schema.txt"
+End Sub
+
+Public Sub CreateDbScript(strScriptFile As String)
 ' From Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
-Dim db As Database
-Dim tdf As TableDef
-Dim fld As DAO.Field
-Dim ndx As DAO.Index
-Dim strSQL As String
-Dim strFlds As String
-Dim strCn As String
-
-Dim fs, f
+    Dim db As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim ndx As DAO.Index
+    Dim strSQL As String
+    Dim strFlds As String
+    Dim strCn As String
+    Dim fs, f
 
     Set db = CurrentDb
 
     Set fs = CreateObject("Scripting.FileSystemObject")
-    Set f = fs.CreateTextFile("C:\Temp\Schema.txt")
+    Set f = fs.CreateTextFile(strScriptFile)
+
+    strSQL = "Public Sub CreateTheDb()" & vbCrLf
+    f.WriteLine strSQL
+    strSQL = "Dim strSQL As String"
+    f.WriteLine strSQL
+    strSQL = "On Error GoTo ErrorTrap"
+    f.WriteLine strSQL
 
     For Each tdf In db.TableDefs
         If Left(tdf.Name, 4) <> "Msys" Then
@@ -30,61 +54,46 @@ Dim fs, f
                 strFlds = strFlds & ",[" & fld.Name & "] "
 
                 Select Case fld.Type
-
                     Case dbText
                         'No look-up fields
                         strFlds = strFlds & "Text (" & fld.Size & ")"
-
                     Case dbLong
                         If (fld.Attributes And dbAutoIncrField) = 0& Then
                             strFlds = strFlds & "Long"
                         Else
                             strFlds = strFlds & "Counter"
                         End If
-
                     Case dbBoolean
                         strFlds = strFlds & "YesNo"
-
                     Case dbByte
                         strFlds = strFlds & "Byte"
-
                     Case dbInteger
                         strFlds = strFlds & "Integer"
-
                     Case dbCurrency
                         strFlds = strFlds & "Currency"
-
                     Case dbSingle
                         strFlds = strFlds & "Single"
-
                     Case dbDouble
                         strFlds = strFlds & "Double"
-
                     Case dbDate
                         strFlds = strFlds & "DateTime"
-
                     Case dbBinary
                         strFlds = strFlds & "Binary"
-
                     Case dbLongBinary
                         strFlds = strFlds & "OLE Object"
-
                     Case dbMemo
                         If (fld.Attributes And dbHyperlinkField) = 0& Then
                             strFlds = strFlds & "Memo"
                         Else
                             strFlds = strFlds & "Hyperlink"
                         End If
-
                     Case dbGUID
                         strFlds = strFlds & "GUID"
-
                 End Select
 
             Next
 
             strSQL = strSQL & Mid(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
-
             f.WriteLine vbCrLf & strSQL
 
             'Indexes
@@ -129,7 +138,25 @@ Dim fs, f
         End If
     Next
 
+    'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
+    'f.WriteLine strSQL
+    f.WriteLine
+    strSQL = "SendKeys " & """" & "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}" & """" & ", False"
+    f.WriteLine strSQL
+    strSQL = "Exit Sub"
+    f.WriteLine strSQL
+    strSQL = "ErrorTrap:"
+    f.WriteLine strSQL
+    'MsgBox "Erl=" & Erl & vbCrLf & "Err.Number=" & Err.Number & vbCrLf & "Err.Description=" & Err.Description
+    strSQL = "MsgBox " & """" & "Erl=" & """" & " & vbCrLf & " & _
+                """" & "Err.Number=" & """" & " & Err.Number & vbCrLf & " & _
+                """" & "Err.Description=" & """" & " & Err.Description"
+    f.WriteLine strSQL & vbCrLf
+    strSQL = "End Sub"
+    f.WriteLine strSQL
+
     f.Close
+    Debug.Print "Done"
 
 End Sub
 
