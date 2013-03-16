@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.5"
-Private Const aegitVERSION_DATE As String = "February 26, 2013"
+Private Const aegitVERSION As String = "0.3.6"
+Private Const aegitVERSION_DATE As String = "March 15, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -608,7 +608,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
     If strLinkedTablePath <> "" Then
-        Print #1, strLinkedTablePath
+        Print #1, "Linked=>" & strLinkedTablePath
     End If
     Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
                         & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _

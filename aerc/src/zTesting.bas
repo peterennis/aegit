@@ -1,6 +1,9 @@
 Option Compare Database
 Option Explicit
 
+' Remove this after integration with aegitClass
+Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
+
 Public Sub TestCnR()
 ' TableDefs not refreshed after create
 ' Ref: http://support.microsoft.com/kb/104339
@@ -16,7 +19,9 @@ Public Sub TestCnR()
 End Sub
 
 Public Sub TestCreateDbScript()
-    CreateDbScript "C:\Temp\Schema.txt"
+    'CreateDbScript "C:\Temp\Schema.txt"
+    Debug.Print "THE_SOURCE_FOLDER=" & THE_SOURCE_FOLDER
+    CreateDbScript THE_SOURCE_FOLDER & "Schema.txt"
 End Sub
 
 Public Sub CreateDbScript(strScriptFile As String)
@@ -29,7 +34,9 @@ Public Sub CreateDbScript(strScriptFile As String)
     Dim strSQL As String
     Dim strFlds As String
     Dim strCn As String
-    Dim fs, f
+    Dim strLinkedTablePath As String
+    Dim fs As Object
+    Dim f As Object
 
     Set db = CurrentDb
 
@@ -44,7 +51,17 @@ Public Sub CreateDbScript(strScriptFile As String)
     f.WriteLine strSQL
 
     For Each tdf In db.TableDefs
-        If Left(tdf.Name, 4) <> "Msys" Then
+        If Not (Left(tdf.Name, 4) = "Msys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
+
+            strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
+            If strLinkedTablePath <> "" Then
+                f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
+            Else
+                f.WriteLine vbCrLf & "'Local Table"
+            End If
+
             strSQL = "strSQL=""CREATE TABLE [" & tdf.Name & "] ("
 
             strFlds = ""
@@ -159,6 +176,37 @@ Public Sub CreateDbScript(strScriptFile As String)
     Debug.Print "Done"
 
 End Sub
+
+Public Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
+' To test in the Immediate window:       ? getcurrentpath("Const")
+'====================================================================
+' Procedure : GetLinkedTableCurrentPath
+' DateTime  : 08/23/2010
+' Author    : Rx
+' Purpose   : Returns Current Path of a Linked Table in Access
+' Updates   : Peter F. Ennis
+' Updated   : All notes moved to change log
+' History   : See comment details, basChangeLog, commit messages on github
+'====================================================================
+    On Error GoTo PROC_ERR
+    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
+        ' non-linked table returns blank - the Instr removes the "Database="
+
+PROC_EXIT:
+    On Error Resume Next
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        'Case ###         ' Add your own error management or log error to logging table
+        Case Else
+            'a custom log usage function commented out
+            'function LogUsage(ByVal strFormName As String, strCallingProc As String, Optional ControlName) As Boolean
+            'call LogUsage Err.Number, "basRelinkTables", "GetCurrentPath" ()
+    End Select
+    Resume PROC_EXIT
+End Function
 
 ' Ref: http://www.utteraccess.com/forum/lofiversion/index.php/t1995627.html
 '-------------------------------------------------------------------------------------------------
