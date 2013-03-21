@@ -68,8 +68,9 @@ Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
     Dim bln4 As Boolean
     Dim bln5 As Boolean
     Dim bln6 As Boolean
+    Dim bln7 As Boolean
 
-    'oDbObjects.SourceFolder = THE_SOURCE_FOLDER
+    oDbObjects.SourceFolder = THE_SOURCE_FOLDER
 
 Test1:
     '=============
@@ -183,14 +184,36 @@ Test6:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
+    ' CompactAndRepair
+    ' When run this will close the database so obviously no results will be seen.
+    ' Comment out GoTo RESULTS to run it.
+    bln7 = False
+    GoTo RESULTS
+
+Test7:
+    '=============
+    ' TEST 7
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "7. aegitClassTest => CompactAndRepair"
+    Debug.Print "aegitClassTest"
+
+        bln7 = oDbObjects.CompactAndRepair
+
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+
+RESULTS:
     Debug.Print "Test 1: DocumentTheDatabase"
     Debug.Print "Test 2: Exists"
     Debug.Print "Test 3: ReadDocDatabase"
     Debug.Print "Test 4: GetReferences"
     Debug.Print "Test 5: DocumentTables"
     Debug.Print "Test 6: DocumentRelations"
-    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6"
-    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6)
+    Debug.Print "Test 7: CompactAndRepair"
+    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7"
+    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7)
 
 End Function
 

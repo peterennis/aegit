@@ -14,6 +14,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
+'Access 2010 - Compact And Repair
 SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
 Exit Sub
 ErrorTrap:

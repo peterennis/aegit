@@ -4,20 +4,6 @@ Option Explicit
 ' Remove this after integration with aegitClass
 Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
 
-Public Sub TestCnR()
-' TableDefs not refreshed after create
-' Ref: http://support.microsoft.com/kb/104339
-' So force a compact and repair
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa202943(v=office.10).aspx
-' Not a "good practice" but for this use it is simple and works
-' From the Access window
-' Access 2003: SendKeys "%(TDC)", False
-' Access 2007: SendKeys "%(FMC)", False
-' Access 2010: SendKeys "%(YC)", False
-' From the Immediate window
-    SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
-End Sub
-
 Public Sub TestCreateDbScript()
     'CreateDbScript "C:\Temp\Schema.txt"
     Debug.Print "THE_SOURCE_FOLDER=" & THE_SOURCE_FOLDER
@@ -25,7 +11,7 @@ Public Sub TestCreateDbScript()
 End Sub
 
 Public Sub CreateDbScript(strScriptFile As String)
-' From Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
+' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
     Dim db As DAO.Database
     Dim tdf As DAO.TableDef
@@ -39,7 +25,6 @@ Public Sub CreateDbScript(strScriptFile As String)
     Dim f As Object
 
     Set db = CurrentDb
-
     Set fs = CreateObject("Scripting.FileSystemObject")
     Set f = fs.CreateTextFile(strScriptFile)
 
@@ -51,7 +36,7 @@ Public Sub CreateDbScript(strScriptFile As String)
     f.WriteLine strSQL
 
     For Each tdf In db.TableDefs
-        If Not (Left(tdf.Name, 4) = "Msys" _
+        If Not (Left(tdf.Name, 4) = "MSys" _
                 Or Left(tdf.Name, 4) = "~TMP" _
                 Or Left(tdf.Name, 3) = "zzz") Then
 
@@ -63,7 +48,6 @@ Public Sub CreateDbScript(strScriptFile As String)
             End If
 
             strSQL = "strSQL=""CREATE TABLE [" & tdf.Name & "] ("
-
             strFlds = ""
 
             For Each fld In tdf.Fields
@@ -123,7 +107,6 @@ Public Sub CreateDbScript(strScriptFile As String)
                 End If
 
                 strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
-
                 strFlds = ""
 
                 For Each fld In tdf.Fields
@@ -131,7 +114,6 @@ Public Sub CreateDbScript(strScriptFile As String)
                 Next
 
                 strSQL = strSQL & Mid(strFlds, 2) & ") "
-
                 strCn = ""
 
                 If ndx.Primary Then
@@ -158,6 +140,7 @@ Public Sub CreateDbScript(strScriptFile As String)
     'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
     'f.WriteLine strSQL
     f.WriteLine
+    f.WriteLine "'Access 2010 - Compact And Repair"
     strSQL = "SendKeys " & """" & "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}" & """" & ", False"
     f.WriteLine strSQL
     strSQL = "Exit Sub"

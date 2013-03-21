@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.6"
-Private Const aegitVERSION_DATE As String = "March 15, 2013"
+Private Const aegitVERSION As String = "0.3.7"
+Private Const aegitVERSION_DATE As String = "March 20, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -216,6 +216,23 @@ Property Get DocumentTables(Optional DebugTheCode As Variant) As Boolean
         Debug.Print , "DEBUGGING TURNED ON"
         DocumentTables = aeDocumentTables(DebugTheCode)
     End If
+End Property
+
+Property Get CompactAndRepair() As Boolean
+' Automation for Compact and Repair
+'
+' TableDefs not refreshed after create
+' Ref: http://support.microsoft.com/kb/104339
+' So force a compact and repair
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa202943(v=office.10).aspx
+' Not a "good practice" but for this use it is simple and works
+' From the Access window
+' Access 2003: SendKeys "%(TDC)", False
+' Access 2007: SendKeys "%(FMC)", False
+' Access 2010: SendKeys "%(YC)", False
+' From the Immediate window
+    SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
+    CompactAndRepair = True
 End Property
 
 Private Function aeGetReferences(Optional varDebug As Variant) As Boolean

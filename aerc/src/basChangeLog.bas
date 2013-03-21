@@ -14,6 +14,7 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130320 - v037 - Add CompactAndRepair (tested for Access 2012) to aegitClass using SendKeys
 '20130315 - v036 - Add Linked=> indicator to linked tables description in output file TblSetupForTables.txt
     ' Do not define zzz tables for Schema.txt export
 '20130226 - v035 - Change Test folder references and variables to Import folder
