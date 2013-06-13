@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.7"
-Private Const aegitVERSION_DATE As String = "March 20, 2013"
+Private Const aegitVERSION As String = "0.3.8"
+Private Const aegitVERSION_DATE As String = "June 13, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -218,9 +218,22 @@ Property Get DocumentTables(Optional DebugTheCode As Variant) As Boolean
     End If
 End Property
 
-Property Get CompactAndRepair() As Boolean
+Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
-'
+
+    Dim blnRun As Boolean
+
+    Debug.Print "CompactAndRepair"
+    If Not IsMissing(varTrueFalse) Then
+        blnRun = False
+        Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
+        Debug.Print , "RUN IS OFF"
+    Else
+        blnRun = True
+        Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
+        Debug.Print , "RUN IS ON... This will not be seen as CompactAndRepair will run."
+    End If
+
 ' TableDefs not refreshed after create
 ' Ref: http://support.microsoft.com/kb/104339
 ' So force a compact and repair
@@ -231,8 +244,17 @@ Property Get CompactAndRepair() As Boolean
 ' Access 2007: SendKeys "%(FMC)", False
 ' Access 2010: SendKeys "%(YC)", False
 ' From the Immediate window
-    SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
-    CompactAndRepair = True
+    
+    If blnRun Then
+        ' Close VBA
+        SendKeys "%F{END}{ENTER}", False
+        ' Run Compact and Repair
+        SendKeys "%F{TAB}{TAB}{ENTER}", False
+        CompactAndRepair = True
+    Else
+        CompactAndRepair = False
+    End If
+    
 End Property
 
 Private Function aeGetReferences(Optional varDebug As Variant) As Boolean

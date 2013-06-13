@@ -15,8 +15,8 @@ Option Explicit
 ' Run in immediate window: MYPROJECT_TEST
 '
 Public Function MYPROJECT_TEST()
-    'zzzaegitClassTest
-    aegitClassTest ("debug")
+    aegitClassTest
+    'aegitClassTest ("debug")
 End Function
 
 Public Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
@@ -186,9 +186,7 @@ Test6:
     
     ' CompactAndRepair
     ' When run this will close the database so obviously no results will be seen.
-    ' Comment out GoTo RESULTS to run it.
-    bln7 = False
-    GoTo RESULTS
+    ' Use True/False parameter to run it or not.
 
 Test7:
     '=============
@@ -199,7 +197,7 @@ Test7:
     Debug.Print "7. aegitClassTest => CompactAndRepair"
     Debug.Print "aegitClassTest"
 
-        bln7 = oDbObjects.CompactAndRepair
+        bln7 = oDbObjects.CompactAndRepair("Do Not Run")
 
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
