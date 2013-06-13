@@ -227,11 +227,11 @@ Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
     If Not IsMissing(varTrueFalse) Then
         blnRun = False
         Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
-        Debug.Print , "RUN IS OFF"
+        Debug.Print , "RUN CompactAndRepair IS OFF"
     Else
         blnRun = True
         Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
-        Debug.Print , "RUN IS ON... This will not be seen as CompactAndRepair will run."
+        Debug.Print , "RUN CompactAndRepair IS ON..."
     End If
 
 ' TableDefs not refreshed after create
