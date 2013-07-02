@@ -119,10 +119,10 @@ Test3:
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        bln3 = oDbObjects.ReadDocDatabase()
+        bln3 = oDbObjects.ReadDocDatabase(False)
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-        bln3 = oDbObjects.ReadDocDatabase("WithDebugging")
+        bln3 = oDbObjects.ReadDocDatabase(False, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -238,10 +238,10 @@ ImportTest1:
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        bln1 = oDbObjects.ReadDocDatabase()
+        bln1 = oDbObjects.ReadDocDatabase(True)
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-        bln1 = oDbObjects.ReadDocDatabase("WithDebugging")
+        bln1 = oDbObjects.ReadDocDatabase(True, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print

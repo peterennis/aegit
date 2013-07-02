@@ -27,7 +27,9 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.9"
+Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
+
+Private Const aegitVERSION As String = "0.4.0"
 Private Const aegitVERSION_DATE As String = "Jul7 2, 2013"
 Private Const THE_DRIVE As String = "C"
 
@@ -162,17 +164,17 @@ Property Get Exists(strAccObjType As String, _
     End If
 End Property
 
-Property Get ReadDocDatabase(Optional DebugTheCode As Variant) As Boolean
+Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
         Debug.Print "Get ReadDocDatabase"
         Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        ReadDocDatabase = aeReadDocDatabase
+        ReadDocDatabase = aeReadDocDatabase(blnImport)
     Else
         Debug.Print "Get ReadDocDatabase"
         Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeReadDocDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        ReadDocDatabase = aeReadDocDatabase(DebugTheCode)
+        ReadDocDatabase = aeReadDocDatabase(blnImport, DebugTheCode)
     End If
 End Property
 
@@ -256,6 +258,55 @@ Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
     End If
     
 End Property
+
+Private Function Pause(NumberOfSeconds As Variant)
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?p=952355
+
+    On Error GoTo PROC_ERR
+
+    Dim PauseTime As Variant, start As Variant
+
+    PauseTime = NumberOfSeconds
+    start = Timer
+    Do While Timer < start + PauseTime
+        Sleep 100
+        DoEvents
+    Loop
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegitClass"
+    Resume PROC_EXIT
+
+End Function
+
+Private Sub WaitSeconds(intSeconds As Integer)
+' Comments: Waits for a specified number of seconds
+' Params  : intSeconds      Number of seconds to wait
+' Source  : Total Visual SourceBook
+' Ref     : http://www.fmsinc.com/MicrosoftAccess/modules/examples/AvoidDoEvents.asp
+
+    On Error GoTo PROC_ERR
+
+    Dim datTime As Date
+
+    datTime = DateAdd("s", intSeconds, Now)
+
+    Do
+        ' Yield to other programs (better than using DoEvents which eats up all the CPU cycles)
+        Sleep 100
+        DoEvents
+    Loop Until Now >= datTime
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegitClass"
+    Resume PROC_EXIT
+End Sub
 
 Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
@@ -1204,10 +1255,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
-            ' NOTE: Err 2220 is intermittent. Seems to happen more after compact and repair.
-            ' If some code is added it goes away so this break is included for detection to
-            ' hopefully find some solution...
-            If Err.Number = 2220 Then Stop
+            If intAcObjType = 2 Then Pause (0.25)
             Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
         End If
     Next doc
@@ -1456,7 +1504,7 @@ PROC_ERR:
 
 End Function
 
-Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
+Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Variant) As Boolean
 ' VBScript makes use of ADOX (Microsoft's Active Data Objects Extensions for Data Definition Language and Security)
 ' to create a query on a Microsoft Access database
 ' Ref: http://stackoverflow.com/questions/859530/alternative-to-application-loadfromtext-for-ms-access-queries
@@ -1497,6 +1545,12 @@ Private Function aeReadDocDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
 
+    If Not blnImport Then
+        Debug.Print , "blnImport IS FALSE so exit aeReadDocDatabase"
+        aeReadDocDatabase = False
+        Exit Function
+    End If
+    
     Const acQuery = 1
 
     If aegitSourceFolder = "default" Then
