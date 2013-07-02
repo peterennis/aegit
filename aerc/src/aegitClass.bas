@@ -27,8 +27,8 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Const aegitVERSION As String = "0.3.8"
-Private Const aegitVERSION_DATE As String = "June 13, 2013"
+Private Const aegitVERSION As String = "0.3.9"
+Private Const aegitVERSION_DATE As String = "Jul7 2, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1204,6 +1204,10 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
+            ' NOTE: Err 2220 is intermittent. Seems to happen more after compact and repair.
+            ' If some code is added it goes away so this break is included for detection to
+            ' hopefully find some solution...
+            If Err.Number = 2220 Then Stop
             Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
         End If
     Next doc

@@ -14,6 +14,7 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130702 - v039 - Add Stop for Err 2220 in Function DocumentTheContainer. See code comment.
 '20130613 - v038 - Allow True/False option for CompactAndRepair
 '20130320 - v037 - Add CompactAndRepair (tested for Access 2010) to aegitClass using SendKeys
 '20130315 - v036 - Add Linked=> indicator to linked tables description in output file TblSetupForTables.txt

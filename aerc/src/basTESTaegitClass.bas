@@ -197,7 +197,7 @@ Test7:
     Debug.Print "7. aegitClassTest => CompactAndRepair"
     Debug.Print "aegitClassTest"
 
-        bln7 = oDbObjects.CompactAndRepair()
+        bln7 = oDbObjects.CompactAndRepair("Do Not Run")
 
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
