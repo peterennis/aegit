@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.4.0"
-Private Const aegitVERSION_DATE As String = "Jul7 2, 2013"
+Private Const aegitVERSION As String = "0.4.0.1"
+Private Const aegitVERSION_DATE As String = "Jul7 8, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1255,7 +1255,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
-            If intAcObjType = 2 Then Pause (0.25)
+            If intAcObjType = 2 Then Pause (0.5)
             Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
         End If
     Next doc
