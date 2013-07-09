@@ -55,9 +55,6 @@ Private Function PassFail(bln As Boolean) As String
 End Function
 
 Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
-' Usage:
-' Run in immediate window:                  aegitClassTest
-' Show debug output in immediate window:    aegitClassTest("debug")
 
     Dim oDbObjects As aegitClass
     Set oDbObjects = New aegitClass
