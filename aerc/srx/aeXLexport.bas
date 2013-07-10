@@ -6,6 +6,9 @@ Option Explicit
 ' scroll down and tick the entry for Microsoft Visual Basic for Applications Extensibility 5.3
 ' Scripting.FileSystemObject requires reference to Microsoft Scripting Runtime
 
+Private Const FOLDER_WITH_VBA_PROJECT_FILES As String = "C:\ae\aegit\aerc\srx"
+'
+
 Public Sub ExportModules()
     Dim bExport As Boolean
     Dim wkbSource As Excel.Workbook
@@ -22,7 +25,10 @@ Public Sub ExportModules()
         MsgBox "Export Folder not exist"
         Exit Sub
     End If
-    
+
+    'Debug.Print FolderWithVBAProjectFiles & "\*.*"
+    'Stop
+
     On Error Resume Next
         Kill FolderWithVBAProjectFiles & "\*.*"
     On Error GoTo 0
@@ -30,17 +36,17 @@ Public Sub ExportModules()
     ''' NOTE: This workbook must be open in Excel.
     strSourceWorkbook = ActiveWorkbook.Name
     Set wkbSource = Application.Workbooks(strSourceWorkbook)
-    
+
     If wkbSource.VBProject.Protection = 1 Then
     MsgBox "The VBA in this workbook is protected," & _
         "not possible to export the code"
     Exit Sub
     End If
-    
+
     strExportPath = FolderWithVBAProjectFiles & "\"
-    
+
     For Each cmpComponent In wkbSource.VBProject.VBComponents
-        
+
         bExport = True
         strFileName = cmpComponent.Name
 
@@ -57,16 +63,16 @@ Public Sub ExportModules()
                 ''' Don't try to export.
                 bExport = False
         End Select
-        
+
         If bExport Then
             ''' Export the component to a text file.
             cmpComponent.Export strExportPath & strFileName
-            
+
         ''' remove it from the project if you want
         '''wkbSource.VBProject.VBComponents.Remove cmpComponent
-        
+
         End If
-   
+
     Next cmpComponent
 
     MsgBox "Export is ready"
@@ -96,7 +102,7 @@ Public Sub ImportModules()
     ''' NOTE: This workbook must be open in Excel.
     strTargetWorkbook = ActiveWorkbook.Name
     Set wkbTarget = Application.Workbooks(strTargetWorkbook)
-    
+
     If wkbTarget.VBProject.Protection = 1 Then
     MsgBox "The VBA in this workbook is protected," & _
         "not possible to Import the code"
@@ -105,7 +111,7 @@ Public Sub ImportModules()
 
     ''' NOTE: Path where the code modules are located.
     strImportPath = FolderWithVBAProjectFiles & "\"
-        
+
     Set objFSO = New Scripting.FileSystemObject
     If objFSO.GetFolder(strImportPath).Files.Count = 0 Then
        MsgBox "There are no files to import"
@@ -116,19 +122,19 @@ Public Sub ImportModules()
     Call DeleteVBAModulesAndUserForms
 
     Set cmpComponents = wkbTarget.VBProject.VBComponents
-    
+
     ''' Import all the code modules in the specified path
     ''' to the ActiveWorkbook.
     For Each objFile In objFSO.GetFolder(strImportPath).Files
-    
+
         If (objFSO.GetExtensionName(objFile.Name) = "cls") Or _
             (objFSO.GetExtensionName(objFile.Name) = "frm") Or _
             (objFSO.GetExtensionName(objFile.Name) = "bas") Then
             cmpComponents.Import objFile.Path
         End If
-        
-    Next objFile
     
+    Next objFile
+
     MsgBox "Import is ready"
 End Sub
 
@@ -142,37 +148,45 @@ Function FolderWithVBAProjectFiles() As String
 
     SpecialPath = WshShell.SpecialFolders("MyDocuments")
 
-    If Right(SpecialPath, 1) <> "\" Then
-        SpecialPath = SpecialPath & "\"
-    End If
-    
-    If FSO.FolderExists(SpecialPath & "VBAProjectFiles") = False Then
-        On Error Resume Next
-        MkDir SpecialPath & "VBAProjectFiles"
-        On Error GoTo 0
-    End If
-    
-    If FSO.FolderExists(SpecialPath & "VBAProjectFiles") = True Then
-        FolderWithVBAProjectFiles = SpecialPath & "VBAProjectFiles"
+    If IsNull(FOLDER_WITH_VBA_PROJECT_FILES) Then
+
+        If Right(SpecialPath, 1) <> "\" Then
+            SpecialPath = SpecialPath & "\"
+        End If
+
+        If FSO.FolderExists(SpecialPath & "VBAProjectFiles") = False Then
+            On Error Resume Next
+            MkDir SpecialPath & "VBAProjectFiles"
+            On Error GoTo 0
+        End If
+
+        If FSO.FolderExists(SpecialPath & "VBAProjectFiles") = True Then
+            FolderWithVBAProjectFiles = SpecialPath & "VBAProjectFiles"
+        Else
+            FolderWithVBAProjectFiles = "Error"
+        End If
+
     Else
-        FolderWithVBAProjectFiles = "Error"
+
+        FolderWithVBAProjectFiles = FOLDER_WITH_VBA_PROJECT_FILES
+
     End If
-    
+
 End Function
 
 Function DeleteVBAModulesAndUserForms()
-        Dim VBProj As VBIDE.VBProject
-        Dim VBComp As VBIDE.VBComponent
-        
-        Set VBProj = ActiveWorkbook.VBProject
-        
-        For Each VBComp In VBProj.VBComponents
-            If VBComp.Type = vbext_ct_Document Then
-                'Thisworkbook or worksheet module
-                'We do nothing
-            Else
-                VBProj.VBComponents.Remove VBComp
-            End If
-        Next VBComp
+    Dim VBProj As VBIDE.VBProject
+    Dim VBComp As VBIDE.VBComponent
+
+    Set VBProj = ActiveWorkbook.VBProject
+
+    For Each VBComp In VBProj.VBComponents
+        If VBComp.Type = vbext_ct_Document Then
+            'Thisworkbook or worksheet module
+            'We do nothing
+        Else
+            VBProj.VBComponents.Remove VBComp
+        End If
+    Next VBComp
 End Function
 
