@@ -17,10 +17,12 @@ Public Sub ExportModules()
     Dim strFileName As String
     Dim cmpComponent As VBIDE.VBComponent
 
-    ''' The code modules will be exported in a folder named.
+    ''' The code modules will be exported in a folder named
     ''' VBAProjectFiles in the Documents folder.
-    ''' The code below create this folder if it not exist
-    ''' or delete all files in the folder if it exist.
+    ''' The code below creates this folder if it does not exist
+    ''' or deletes all files in the folder if it exists.
+    ''' The Const FOLDER_WITH_VBA_PROJECT_FILES hardcodes an
+    ''' alternative location.
     If FolderWithVBAProjectFiles = "Error" Then
         MsgBox "Export Folder not exist"
         Exit Sub
@@ -68,8 +70,8 @@ Public Sub ExportModules()
             ''' Export the component to a text file.
             cmpComponent.Export strExportPath & strFileName
 
-        ''' remove it from the project if you want
-        '''wkbSource.VBProject.VBComponents.Remove cmpComponent
+            ''' remove it from the project if you want
+            '''wkbSource.VBProject.VBComponents.Remove cmpComponent
 
         End If
 
