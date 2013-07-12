@@ -1,6 +1,7 @@
 Attribute VB_Name = "basChangeLog"
 Option Explicit
 
+'20130711 - v003 - Code moved to aexlgitClass
 '20130711 - v002 - Reorganizing, add old xla comment history
     ' 03312007 - v002 - Start of creating aeXL Library
     '                   Remove worksheets. Keep Sheet1 as it is required. Use zzz to put items to sleep.
