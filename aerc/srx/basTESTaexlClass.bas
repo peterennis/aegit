@@ -14,6 +14,7 @@ Option Explicit
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
 ' Run in immediate window: MYPROJECT_TEST
 '
+
 Public Function MYPROJECT_TEST()
     aexlClassTest
     'aexlClassTest ("debug")

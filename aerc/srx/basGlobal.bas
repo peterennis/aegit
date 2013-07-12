@@ -1,20 +1,6 @@
 Attribute VB_Name = "basGlobal"
 Option Explicit
 
-' 03312007 - v002 - Start of creating aeXL Library
-'                   Remove worksheets. Keep Sheet1 as it is required. Use zzz to put items to sleep.
-' 04012007 - v005 - Need IsLoaded and module basFindWindow in main application.
-' 04072007 - v007 - adaept Process Management Menu.
-' 04192007 - v008 - gblnWorkbookClosing and gblnWorkbookOpening go to application
-'                 - Comment out Workbook_Open and Workbook_Close code so the lib compiles.
-' 00000000 - v009 - adaept Process Management development
-' 00000000 - v010 - adaept Process Management development
-' 00000000 - v011 - adaept Process Management development
-' 04142009 - v012 - Renamed to aeXLW Library v012.xla
-'                   Remove all functions not used in adaept Process Management.
-'
-
-
 ' Configuration for flexible sheet names
 Public Const gstrSetupInformation = "Project Information"
 Public Const gstrMenuTitle = "adaept Process Management Menu"
@@ -28,26 +14,21 @@ Public Const gblnDisplayTheProjectMenu = False
 ' protection on the sheets and workbook.
 Public gblnUnsecured As Boolean
 
-'
-'
-' Keep track of display of CFCS information
 Public gblnInformationIsVisible As Boolean
-'
+
 ' Determine if workbook is being closed
 ''Public gblnWorkbookClosing As Boolean
-'
+
 ' Determine if workbook is being opened
 ''Public gblnWorkbookOpening As Boolean
-'
+
 ' Determine if workbook password was entered
 Public gblnWorkbookPasswordEntered As Boolean
-'
 ' Determine if Import Completed
 Public gblnImportCompleted As Boolean
-'
 ' Determine if Import is in operation
 Public gblnImporting As Boolean
-'
+
 
 
 Public Type ApplicationSettingsType
@@ -74,14 +55,12 @@ Public gtypAppSettings As ApplicationSettingsType
 
 Public Function FileExists(strFullPath As String) As Boolean
 ' Ref:      http://www.contextures.com/xlfaqMac.html#FileExist
-
     FileExists = Len(Dir$(strFullPath))
-
 End Function
 
 Public Sub RememberApplicationSettings(Optional blnDebug As Boolean)
 
-On Error GoTo Err_RememberApplicationSettings
+    On Error GoTo Err_RememberApplicationSettings
 
     With ActiveWindow
         gtypAppSettings.blnDisplayFormulas = .DisplayFormulas
