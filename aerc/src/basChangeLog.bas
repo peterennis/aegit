@@ -14,8 +14,12 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
-'20130708 - v04002- Decrease pause to 0.25 secs. Err 2220 possibly related to bad parameter in OpenForm command.
-'20130708 - v04001- Add and use Pause function. Err 2220 appeared again. Increase pause to 0.5 secs.
+'20130711 - v041 - Err 2220 again. Happens after new file copy and rename then Security Warning! with "Enable Content" button appears in VBA when opened
+    ' and run code export. Related to the initial protection status?
+    ' The error occurred a lot. Deleted contents of src folder and export again with no error! Test this again if future iterations and if it fixes the
+    ' issue then code related to file deletion could be the problem. Consider a test and warning if the folder has content after deletion?
+'20130708 -v0402 - Decrease pause to 0.25 secs. Err 2220 possibly related to bad parameter in OpenForm command.
+'20130708 -v0401 - Add and use Pause function. Err 2220 appeared again. Increase pause to 0.5 secs.
 '20130702 - v040 - Remove Stop for Err 2220. Does not work with geh. Add WaitSeconds procedure.
 '20130702 - v039 - Add Stop for Err 2220 in Function DocumentTheContainer. See code comment.
 '20130613 - v038 - Allow True/False option for CompactAndRepair
