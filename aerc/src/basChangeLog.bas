@@ -14,9 +14,9 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 
 
+'20130906 - v044 - Start dev for creating a file with a list of hidden queries
 '20130820 - v043 - Hidden attributes e.g. queries, not exported - needs fix
     ' *** Ref: http://stackoverflow.com/questions/10882317/get-list-of-queries-in-project-ms-access
-    '
 '20130816 - v042 - Err 2220 again. Query with "<" in the name always causes the error.
     ' Test creating a file with ">" in the name gives the OS error message:
     ' A filename can't contain any of the following characters:     \/:*?"<>|

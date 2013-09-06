@@ -245,3 +245,52 @@ ImportTest1:
     Debug.Print
 
 End Function
+
+Public Sub TestHideQueryDef()
+' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/25d9dafd-b446-40ba-8dbd-a0efa983f2ff/how-to-programatically-hide-a-querydef
+
+    ' Query1 returns the list of all queries
+    ' Ref: http://stackoverflow.com/questions/10882317/get-list-of-queries-in-project-ms-access
+    Const strQueryName As String = "Query1"
+
+    Dim fIsHidden As Boolean
+
+    ' To determine if the query is hidden:
+    fIsHidden = GetHiddenAttribute(acQuery, strQueryName)
+    Debug.Print strQueryName, fIsHidden
+
+    ' To show the query:
+    SetHiddenAttribute acQuery, strQueryName, False
+
+    ' To hide the query:
+    SetHiddenAttribute acQuery, strQueryName, True
+
+End Sub
+
+Public Sub ListOfAllQueries()
+' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
+
+    Const strSQL As String = "SELECT m.Name " & vbCrLf & _
+                                "FROM MSysObjects AS m " & vbCrLf & _
+                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
+                                "ORDER BY m.Name;"
+    ' NOTE: Use zzz* for the query name so that it will be ignored by aegit code export
+    Const strTempQuery As String = "zzz___MyTempQuery___"
+
+    Debug.Print strSQL
+
+    Dim qdfCurr As DAO.QueryDef
+
+    ' Create the temp query that will have the query names
+    On Error Resume Next
+    Set qdfCurr = CurrentDb.QueryDefs(strTempQuery)
+    If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
+        Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
+    End If
+    qdfCurr.SQL = strSQL
+    'Debug.Print """" & strTempQuery & """"
+    DoCmd.OpenQuery strTempQuery
+    'DoCmd.Close acQuery, strTempQuery
+    Debug.Print "The number of queries in the database is: " & DCount("Name", strTempQuery)
+
+End Sub
