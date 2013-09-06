@@ -207,6 +207,7 @@ RESULTS:
     Debug.Print "Test 5: DocumentTables"
     Debug.Print "Test 6: DocumentRelations"
     Debug.Print "Test 7: CompactAndRepair"
+    Debug.Print
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7"
     Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7)
 

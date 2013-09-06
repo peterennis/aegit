@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.4.1"
-Private Const aegitVERSION_DATE As String = "July 11, 2013"
+Private Const aegitVERSION As String = "0.4.3"
+Private Const aegitVERSION_DATE As String = "August 20, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1331,6 +1331,13 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrImportLocation = aegitImportFolder
     End If
  
+    If blnDebug Then
+        Debug.Print , ">==> aeDocumentTheDatabase >==>"
+        Debug.Print , "SourceFolder = " & aestrSourceLocation
+        Debug.Print , "ImportFolder = " & aestrImportLocation
+    End If
+    'Stop
+
     ' Delete all the files in a given directory:
     ' Loop through all the files in the directory by using Dir$ function
     strFile = Dir(aestrSourceLocation & "*.*")
@@ -1340,12 +1347,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         strFile = Dir(aestrSourceLocation & "*.*")
     Loop
 
-    If blnDebug Then
-        Debug.Print , ">==> aeDocumentTheDatabase >==>"
-        Debug.Print , "SourceFolder = " & aestrSourceLocation
-        Debug.Print , "ImportFolder = " & aestrImportLocation
-    End If
-    
     If blnDebug Then
         DocumentTheContainer "Forms", "frm", "WithDebugging"
         DocumentTheContainer "Reports", "rpt", "WithDebugging"
