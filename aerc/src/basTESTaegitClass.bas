@@ -267,6 +267,10 @@ Public Sub TestHideQueryDef()
 
 End Sub
 
+Public Function IsQryHidden(strQueryName As String) As Boolean
+    IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
+End Function
+
 Public Sub ListOfAllQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
@@ -292,5 +296,44 @@ Public Sub ListOfAllQueries()
     DoCmd.OpenQuery strTempQuery
     'DoCmd.Close acQuery, strTempQuery
     Debug.Print "The number of queries in the database is: " & DCount("Name", strTempQuery)
+
+End Sub
+
+Public Sub MakeTableWithListOfAllQueries()
+
+    Const strTempTable As String = "zzzTmpTblQueries"
+    ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export
+    Const strSQL As String = "SELECT m.Name, 0 AS Hidden INTO " & strTempTable & " " & vbCrLf & _
+                                "FROM MSysObjects AS m " & vbCrLf & _
+                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
+                                "ORDER BY m.Name;"
+
+    ' RunSQL works for Action queries
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL strSQL
+    DoCmd.SetWarnings True
+    Debug.Print "The number of queries in the database is: " & DCount("Name", strTempTable)
+
+End Sub
+
+Public Sub MakeTableWithListOfAllHiddenQueries()
+
+    Const strTempTable As String = "zzzTmpTblQueries"
+    ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export
+    Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
+                                "FROM MSysObjects AS m " & vbCrLf & _
+                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
+                                "ORDER BY m.Name;"
+    
+'    "SELECT m.Name, IIf(IsQryHidden([Name]),1,0) AS Hidden INTO " & strTempTable & " " & vbCrLf & _
+'                                "FROM MSysObjects AS m " & vbCrLf & _
+'                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
+'                                "ORDER BY m.Name;"
+
+    ' RunSQL works for Action queries
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL strSQL
+    DoCmd.SetWarnings True
+    Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
 
 End Sub
