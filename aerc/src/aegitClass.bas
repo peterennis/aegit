@@ -259,14 +259,6 @@ Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
     
 End Property
 
-Private Function ExportTheTableData(strTbl As String, strSpec As String, _
-                    strPathFileName As String, blnHasHeaders As Boolean)
-' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
-
-    DoCmd.TransferText acExportDelim, strSpec, strTbl, strPathFileName, blnHasHeaders
-
-End Function
-
 Private Sub ListAllHiddenQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
@@ -286,7 +278,7 @@ Private Sub ListAllHiddenQueries()
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
     Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    ExportTheTableData strTempTable, "", aestrSourceLocation & "ListOfHiddenQueries.txt", False
+    DoCmd.OutputTo acOutputTable, strTempTable, acFormatTXT, aestrSourceLocation & "ListOfHiddenQueries.txt"
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
