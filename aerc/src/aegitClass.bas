@@ -278,7 +278,7 @@ Private Sub ListAllHiddenQueries()
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
     Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    DoCmd.OutputTo acOutputTable, strTempTable, acFormatTXT, aestrSourceLocation & "ListOfHiddenQueries.txt"
+    DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "ListOfHiddenQueries.txt", False
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 

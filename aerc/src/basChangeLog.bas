@@ -16,6 +16,7 @@ Option Explicit
 
 '20130916 - v045 - Include sub ListAllHiddenQueries and ExportTheTableData
     ' Use OutputTo command as export.ini created with the export method
+    ' Revert to TransferText - no header or text formatting
 '20130906 - v044 - Start dev for creating a file with a list of hidden queries
 '20130820 - v043 - Hidden attributes e.g. queries, not exported - needs fix
     ' *** Ref: http://stackoverflow.com/questions/10882317/get-list-of-queries-in-project-ms-access
