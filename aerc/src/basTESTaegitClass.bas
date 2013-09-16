@@ -316,6 +316,14 @@ Public Sub MakeTableWithListOfAllQueries()
 
 End Sub
 
+Public Function ExportTheTableData(strTbl As String, strSpec As String, _
+                    strPathFileName As String, blnHasHeaders As Boolean)
+' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
+
+    DoCmd.TransferText acExportDelim, strSpec, strTbl, strPathFileName, blnHasHeaders
+
+End Function
+
 Public Sub MakeTableWithListOfAllHiddenQueries()
 
     Const strTempTable As String = "zzzTmpTblQueries"
@@ -335,5 +343,6 @@ Public Sub MakeTableWithListOfAllHiddenQueries()
     DoCmd.RunSQL strSQL
     DoCmd.SetWarnings True
     Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+    ExportTheTableData strTempTable, "", "C:\Temp\ListOfHiddenQueries.txt", False
 
 End Sub

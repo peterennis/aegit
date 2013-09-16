@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.4.4"
-Private Const aegitVERSION_DATE As String = "September 6, 2013"
+Private Const aegitVERSION As String = "0.4.5"
+Private Const aegitVERSION_DATE As String = "September 16, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -258,6 +258,39 @@ Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
     End If
     
 End Property
+
+Private Function ExportTheTableData(strTbl As String, strSpec As String, _
+                    strPathFileName As String, blnHasHeaders As Boolean)
+' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
+
+    DoCmd.TransferText acExportDelim, strSpec, strTbl, strPathFileName, blnHasHeaders
+
+End Function
+
+Private Sub ListAllHiddenQueries()
+' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
+
+    Const strTempTable As String = "zzzTmpTblQueries"
+    ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
+    Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
+                                "FROM MSysObjects AS m " & vbCrLf & _
+                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
+                                "ORDER BY m.Name;"
+    
+'    "SELECT m.Name, IIf(IsQryHidden([Name]),1,0) AS Hidden INTO " & strTempTable & " " & vbCrLf & _
+'                                "FROM MSysObjects AS m " & vbCrLf & _
+'                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
+'                                "ORDER BY m.Name;"
+
+    ' RunSQL works for Action queries
+    DoCmd.SetWarnings False
+    DoCmd.RunSQL strSQL
+    Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+    ExportTheTableData strTempTable, "", aestrSourceLocation & "ListOfHiddenQueries.txt", False
+    CurrentDb.Execute "DROP TABLE " & strTempTable
+    DoCmd.SetWarnings True
+
+End Sub
 
 Private Function Pause(NumberOfSeconds As Variant)
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?p=952355
@@ -1360,6 +1393,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
     
     ListContainers ("ListOfContainers.txt")
+    ListAllHiddenQueries
     'Stop
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
