@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.4.5"
-Private Const aegitVERSION_DATE As String = "September 16, 2013"
+Private Const aegitVERSION As String = "0.4.6"
+Private Const aegitVERSION_DATE As String = "September 17, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -106,6 +106,12 @@ Private Sub Class_Initialize()
 End Sub
 
 Private Sub Class_Terminate()
+    Dim strFile As String
+    strFile = aegitSourceFolder & "export.ini"
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then KillProperly (strFile)
+    End If
     Debug.Print
     Debug.Print "Class_Terminate"
     Debug.Print , "aegit VERSION: " & aegitVERSION
