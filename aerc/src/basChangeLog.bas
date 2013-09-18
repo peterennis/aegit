@@ -15,6 +15,7 @@ Option Explicit
 
 
 '20130917 - v046 - If it exists then kill export.ini in class terminate
+    ' Add qpt_Dummy as test
 '20130916 - v045 - Include sub ListAllHiddenQueries and ExportTheTableData
     ' Use OutputTo command as export.ini created with the export method
     ' Revert to TransferText - no header or text formatting
