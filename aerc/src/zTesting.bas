@@ -393,12 +393,11 @@ End Function
 Public Sub GetPropertyDescription()
 ' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
 
+    Dim dbs As DAO.Database
     Dim obj As Object
     Dim prp As Property
-    Dim dbs As DAO.Database
 
     Set dbs = Application.CurrentDb
-
     Set obj = dbs.Containers("modules").Documents("aegitClass")
 
     On Error Resume Next

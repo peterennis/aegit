@@ -1,2 +1,6 @@
 <<<qpt_Dummy>>>
 -- Select * from Nothing
+<<<qry_HiddenDummy>>>
+SELECT *
+FROM tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;
+
