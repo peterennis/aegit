@@ -314,3 +314,99 @@ Public Function ExecSQL(strSQL As String, Optional strColumDelim As String = "|"
     Set rs = Nothing
 
 End Function
+
+Public Function SpFolder(SpName)
+
+    Dim objShell As Object
+    Dim objFolder As Object
+    Dim objFolderItem As Object
+
+    Set objShell = CreateObject("Shell.Application")
+    Set objFolder = objShell.Namespace(SpName)
+
+    Set objFolderItem = objFolder.Self
+
+    SpFolder = objFolderItem.Path
+
+End Function
+   
+Public Sub AllCodeToDesktop()
+' Ref: http://wiki.lessthandot.com/index.php/Code_and_Code_Windows
+' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
+' The reference for the FileSystemObject Object is Windows Script Host Object Model
+' but it not necessary to add the reference for this procedure.
+
+    Const Desktop = &H10&
+    Const MyDocuments = &H5&
+
+    Dim fs As Object
+    Dim f As Object
+    Dim strMod As String
+    Dim mdl As Object
+    Dim i As Integer
+    Dim strTxtFile As String
+
+    Set fs = CreateObject("Scripting.FileSystemObject")
+
+    'Set up the file
+    Debug.Print "CurrentProject.Name = " & CurrentProject.Name
+    strTxtFile = SpFolder(Desktop) & "\" & Replace(CurrentProject.Name, ".", " ") & ".txt"
+    Debug.Print "strTxtFile = " & strTxtFile
+    Set f = fs.CreateTextFile(SpFolder(Desktop) & "\" _
+        & Replace(CurrentProject.Name, ".", " ") & ".txt")
+
+    'For each component in the project ...
+    For Each mdl In VBE.ActiveVBProject.VBComponents
+        'using the count of lines ...
+        i = VBE.ActiveVBProject.VBComponents(mdl.Name).codemodule.CountOfLines
+        'put the code in a string ...
+        If i > 0 Then
+            strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).codemodule.Lines(1, i)
+        End If
+        'and then write it to a file, first marking the start with
+        'some equal signs and the component name.
+        f.WriteLine String(15, "=") & vbCrLf & mdl.Name _
+            & vbCrLf & String(15, "=") & vbCrLf & strMod
+    Next
+       
+    'Close eveything
+    f.Close
+    Set fs = Nothing
+
+End Sub
+
+Public Function PropertyExists(obj As Object, strPropertyName As String) As Boolean
+' Ref: http://www.utteraccess.com/forum/Description-property-Mic-t552348.html
+' e.g. ? PropertyExists(CurrentDB. ("The Name Of Your Table"), "Description")
+    Dim var As Variant
+
+    On Error Resume Next
+    Set var = obj.Properties(strPropertyName)
+    If Err.Number > 0 Then
+        PropertyExists = False
+    Else
+        PropertyExists = True
+    End If
+
+End Function
+
+Public Sub GetPropertyDescription()
+' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
+
+    Dim obj As Object
+    Dim prp As Property
+    Dim dbs As DAO.Database
+
+    Set dbs = Application.CurrentDb
+
+    Set obj = dbs.Containers("modules").Documents("aegitClass")
+
+    On Error Resume Next
+    For Each prp In obj.Properties
+        Debug.Print prp.Name, prp.Value
+    Next prp
+
+    Set obj = Nothing
+    Set dbs = Nothing
+
+End Sub

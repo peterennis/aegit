@@ -220,7 +220,7 @@ Inherited: False;
 ---
 Name: NavPane Width
 Type: dbLong
-Value: 215
+Value: 297
 Inherited: False;
 ---
 Name: NavPane View By
