@@ -273,7 +273,6 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
     Dim fnr2 As Integer
     Dim tstring As String * 1
     Dim i As Integer
-    Dim ByteCount As Integer
 
     aeReadWriteStream = False
 
@@ -300,18 +299,14 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
     While Not EOF(fnr)
 
-        'ByteCount = ByteCount + 1
         Get #fnr, , tstring
-
-        'If ByteCount < 10 Then
-        '   MsgBox Asc(tstring)
-        'End If
 
         If Asc(tstring) = 254 Or Asc(tstring) = 255 Or _
                 Asc(tstring) = 0 Then
         Else
             Put #fnr2, , tstring
         End If
+
     Wend
 
     Close #fnr

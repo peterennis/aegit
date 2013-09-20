@@ -3,6 +3,10 @@ Option Explicit
 
 ' Problems:
 ' Need proper fix for internationalization SaveAsText UTF-16 for Access 2013 and proper set of github to deal with it
+'   Ref: http://www.git-scm.com/docs/gitattributes.html and look at:
+'   If you want to interoperate with a source code management system that enforces end-of-line normalization,
+'   or you simply want all text files in your repository to be normalized, you should instead set the text attribute
+'   to "auto" for all files.
 ' ReadDocDatabase debug output when custom test folder given
 ' Test for expected references when class first created
 ' Import of class source code into a new database creates a module
@@ -18,6 +22,9 @@ Option Explicit
 '20130920 - v047 - Add aeReadWriteStream to aegitClass to fix SaveAsText from UTF-16 to txt
     ' Keeps compatibility with older versions of Access
     ' Will need proper fix for internationalization
+    ' Access 2013 is saving text as UTF-16 (FFFE at the start of file)
+    ' This is a test sample for fixing it
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=241996
 '20130917 - v046 - If it exists then kill export.ini in class terminate
     ' Add qpt_Dummy as test, UTF2TXT_TestFunction added to deal with Access 2013 saving text as UTF-16 and resulting github diff challenges
 '20130916 - v045 - Include sub ListAllHiddenQueries and ExportTheTableData
