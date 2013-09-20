@@ -31,8 +31,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aexlgitVERSION As String = "0.0.3"
-Private Const aexlgitVERSION_DATE As String = "July 11, 2013"
+Private Const aexlgitVERSION As String = "0.0.4"
+Private Const aexlgitVERSION_DATE As String = "September 20, 2013"
 Private Const THE_DRIVE As String = "C"
 Private Const gcfHandleErrors As Boolean = True
 
@@ -184,25 +184,23 @@ Private Function aeDocumentTheExcelCode(Optional varDebug As Variant) As Boolean
             Case vbext_ct_StdModule
                 strFileName = strFileName & ".bas"
             Case vbext_ct_Document
-                ''' This is a worksheet or workbook object.
-                ''' Don't try to export.
-                bExport = False
+                strFileName = strFileName & ".sht"
+            Case Else
+                MsgBox "Type not known: " & cmpComponent.Type
         End Select
 
         If bExport Then
-            ''' Export the component to a text file.
+            ' Export the component to a text file.
             cmpComponent.Export strExportPath & strFileName
 
-            ''' remove it from the project if you want
-            '''wkbSource.VBProject.VBComponents.Remove cmpComponent
+            ' remove it from the project if you want
+            'wkbSource.VBProject.VBComponents.Remove cmpComponent
 
         End If
 
     Next cmpComponent
 
     aeDocumentTheExcelCode = True
-
-    MsgBox "Export is ready"
 
 End Function
 
