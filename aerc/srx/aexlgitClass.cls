@@ -140,12 +140,12 @@ Private Function aeDocumentTheExcelCode(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
 
-    ''' The code modules will be exported in a folder named
-    ''' VBAProjectFiles in the Documents folder.
-    ''' The code below creates this folder if it does not exist
-    ''' or deletes all files in the folder if it exists.
-    ''' The Const FOLDER_WITH_VBA_PROJECT_FILES hardcodes an
-    ''' alternative location.
+    ' The code modules will be exported in a folder named
+    ' VBAProjectFiles in the Documents folder.
+    ' The code below creates this folder if it does not exist
+    ' or deletes all files in the folder if it exists.
+    ' The Const FOLDER_WITH_VBA_PROJECT_FILES hardcodes an
+    ' alternative location.
     If FolderWithVBAProjectFiles = "Error" Then
         MsgBox "Export Folder does not exist"
         Exit Function
@@ -158,7 +158,7 @@ Private Function aeDocumentTheExcelCode(Optional varDebug As Variant) As Boolean
         Kill FolderWithVBAProjectFiles & "\*.*"
     On Error GoTo 0
 
-    ''' NOTE: This workbook must be open in Excel.
+    ' NOTE: This workbook must be open in Excel.
     strSourceWorkbook = ActiveWorkbook.Name
     Set wkbSource = Application.Workbooks(strSourceWorkbook)
 
@@ -175,7 +175,7 @@ Private Function aeDocumentTheExcelCode(Optional varDebug As Variant) As Boolean
         bExport = True
         strFileName = cmpComponent.Name
 
-        ''' Concatenate the correct filename for export.
+        ' Concatenate the correct filename for export.
         Select Case cmpComponent.Type
             Case vbext_ct_ClassModule
                 strFileName = strFileName & ".cls"
@@ -219,13 +219,13 @@ Private Sub ImportModules()
         Exit Sub
     End If
 
-    'Get the path to the folder with modules
+    ' Get the path to the folder with modules
     If FolderWithVBAProjectFiles = "Error" Then
         MsgBox "Import Folder not exist"
         Exit Sub
     End If
 
-    ''' NOTE: This workbook must be open in Excel.
+    ' NOTE: This workbook must be open in Excel.
     strTargetWorkbook = ActiveWorkbook.Name
     Set wkbTarget = Application.Workbooks(strTargetWorkbook)
 
@@ -235,7 +235,7 @@ Private Sub ImportModules()
     Exit Sub
     End If
 
-    ''' NOTE: Path where the code modules are located.
+    ' NOTE: Path where the code modules are located.
     strImportPath = FolderWithVBAProjectFiles & "\"
 
     Set objFSO = New Scripting.FileSystemObject
@@ -244,13 +244,13 @@ Private Sub ImportModules()
        Exit Sub
     End If
 
-    'Delete all modules/Userforms from the ActiveWorkbook
+    ' Delete all modules/Userforms from the ActiveWorkbook
     Call DeleteVBAModulesAndUserForms
 
     Set cmpComponents = wkbTarget.VBProject.VBComponents
 
-    ''' Import all the code modules in the specified path
-    ''' to the ActiveWorkbook.
+    ' Import all the code modules in the specified path
+    ' to the ActiveWorkbook.
     For Each objFile In objFSO.GetFolder(strImportPath).Files
 
         If (objFSO.GetExtensionName(objFile.Name) = "cls") Or _
@@ -305,7 +305,7 @@ Private Function FolderWithVBAProjectFiles() As String
 
 End Function
 
-Function DeleteVBAModulesAndUserForms()
+Private Function DeleteVBAModulesAndUserForms()
     Dim VBProj As VBIDE.VBProject
     Dim VBComp As VBIDE.VBComponent
 
@@ -313,8 +313,7 @@ Function DeleteVBAModulesAndUserForms()
 
     For Each VBComp In VBProj.VBComponents
         If VBComp.Type = vbext_ct_Document Then
-            'Thisworkbook or worksheet module
-            'We do nothing
+            ' ThisWorkbook or Worksheet module we do nothing
         Else
             VBProj.VBComponents.Remove VBComp
         End If
