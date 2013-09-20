@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.4.6"
-Private Const aegitVERSION_DATE As String = "September 17, 2013"
+Private Const aegitVERSION As String = "0.4.7"
+Private Const aegitVERSION_DATE As String = "September 20, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -264,6 +264,61 @@ Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
     End If
     
 End Property
+
+Private Function aeReadWriteStream(strPathFileName As String) As Boolean
+
+    Dim fname As String
+    Dim fname2 As String
+    Dim fnr As Integer
+    Dim fnr2 As Integer
+    Dim tstring As String * 1
+    Dim i As Integer
+    Dim ByteCount As Integer
+
+    aeReadWriteStream = False
+
+    ' If the file has no Byte Order Mark (BOM)
+    ' Ref: http://msdn.microsoft.com/en-us/library/windows/desktop/dd374101%28v=vs.85%29.aspx
+    ' then do nothing
+    fname = strPathFileName
+    fname2 = strPathFileName & ".clean.txt"
+
+    fnr = FreeFile()
+    Open fname For Binary Access Read As #fnr
+    Get #fnr, , tstring
+    ' #FFFE, #FFFF, #0000
+    ' If no BOM then it is a txt file and header stripping is not needed
+    If Asc(tstring) <> 254 And Asc(tstring) <> 255 And _
+                Asc(tstring) <> 0 Then
+        Close #fnr
+        aeReadWriteStream = False
+        Exit Function
+    End If
+
+    fnr2 = FreeFile()
+    Open fname2 For Binary Lock Read Write As #fnr2
+
+    While Not EOF(fnr)
+
+        'ByteCount = ByteCount + 1
+        Get #fnr, , tstring
+
+        'If ByteCount < 10 Then
+        '   MsgBox Asc(tstring)
+        'End If
+
+        If Asc(tstring) = 254 Or Asc(tstring) = 255 Or _
+                Asc(tstring) = 0 Then
+        Else
+            Put #fnr2, , tstring
+        End If
+    Wend
+
+    Close #fnr
+    Close #fnr2
+    aeReadWriteStream = True
+
+End Function
 
 Private Sub ListAllHiddenQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
@@ -1288,6 +1343,11 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
             i = i + 1
             If intAcObjType = 2 Then Pause (0.25)
             Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
+            ' Convert UTF-16 to txt - fix for Access 2013
+            If aeReadWriteStream(aestrSourceLocation & doc.Name & "." & strExt) = True Then
+                KillProperly (aestrSourceLocation & doc.Name & "." & strExt)
+                Name aestrSourceLocation & doc.Name & "." & strExt & ".clean.txt" As aestrSourceLocation & doc.Name & "." & strExt
+            End If
         End If
     Next doc
 
@@ -1373,7 +1433,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' Loop through all the files in the directory by using Dir$ function
     strFile = Dir(aestrSourceLocation & "*.*")
     Do While strFile <> ""
-        KillProperly aestrSourceLocation & strFile
+        KillProperly (aestrSourceLocation & strFile)
         ' Need to specify full path again because a file was deleted
         strFile = Dir(aestrSourceLocation & "*.*")
     Loop
@@ -1417,9 +1477,14 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
                         Or Left(qdf.Name, 3) = "zzz") Then
             i = i + 1
             Application.SaveAsText acQuery, qdf.Name, aestrSourceLocation & qdf.Name & ".qry"
+            ' Convert UTF-16 to txt - fix for Access 2013
+            If aeReadWriteStream(aestrSourceLocation & qdf.Name & ".qry") = True Then
+                KillProperly (aestrSourceLocation & qdf.Name & ".qry")
+                Name aestrSourceLocation & qdf.Name & ".qry" & ".clean.txt" As aestrSourceLocation & qdf.Name & ".qry"
+            End If
         End If
     Next qdf
-    
+
     If blnDebug Then
         If i = 1 Then
             Debug.Print , "1 Query EXPORTED!"
@@ -1436,9 +1501,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     OutputQueriesSqlText
     OutputBuiltInPropertiesText
-    
+
     aeDocumentTheDatabase = True
-    
+
 PROC_EXIT:
     Set qdf = Nothing
     Set doc = Nothing

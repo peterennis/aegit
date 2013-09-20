@@ -415,7 +415,7 @@ Public Sub UTF2TXT_TestFunction()
 ' This is a test for fixing it
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=241996
   
-  If aeReadWriteStream("C:\ae\aegit\aerc\src\qpt_Dummy.qry") = True Then
+  If aeReadWriteStream("C:\ae\aegit\aerc\src\qry_HiddenDummy.qry") = True Then
       MsgBox "aeReadWriteStream succeeded"
     Else
       MsgBox "aeReadWriteStream failed"
