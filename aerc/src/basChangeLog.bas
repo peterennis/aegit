@@ -25,7 +25,7 @@ Option Explicit
     ' Access 2013 is saving text as UTF-16 (FFFE at the start of file)
     ' This is a test sample for fixing it
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=241996
-    ' Add frm_Dummy
+    ' Add frm_Dummy, rpt_Dummy
 '20130917 - v046 - If it exists then kill export.ini in class terminate
     ' Add qpt_Dummy as test, UTF2TXT_TestFunction added to deal with Access 2013 saving text as UTF-16 and resulting github diff challenges
 '20130916 - v045 - Include sub ListAllHiddenQueries and ExportTheTableData
