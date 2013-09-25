@@ -409,3 +409,33 @@ Public Sub GetPropertyDescription()
     Set dbs = Nothing
 
 End Sub
+
+Public Sub ListAllProperties()
+' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
+
+    Dim dbs As DAO.Database
+    Dim obj As Object
+    Dim prp As Property
+    Dim doc As Document
+
+    Set dbs = Application.CurrentDb
+    Set obj = dbs.Containers("modules")
+
+    'Debug.Print "Modules", obj.Documents.Count
+    'Debug.Print "Modules", obj.Documents(1).Name
+    'Debug.Print "Modules", obj.Documents(2).Name
+
+    ' Ref: http://stackoverflow.com/questions/16642362/how-to-get-the-following-code-to-continue-on-error
+    For Each doc In obj.Documents
+        Debug.Print ">>>" & doc.Name
+        For Each prp In doc.Properties
+            On Error Resume Next
+            Debug.Print prp.Name, prp.Value
+            On Error GoTo 0
+        Next
+    Next
+
+    Set obj = Nothing
+    Set dbs = Nothing
+
+End Sub
