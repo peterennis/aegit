@@ -4,3 +4,8 @@
 SELECT *
 FROM tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;
 
+<<<qryLastUpdated>>>
+SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate, MSysObjects.Name, MSysObjects.Type
+FROM MSysObjects
+ORDER BY MSysObjects.DateUpdate DESC;
+

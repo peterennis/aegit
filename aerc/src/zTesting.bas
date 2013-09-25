@@ -439,3 +439,36 @@ Public Sub ListAllProperties()
     Set dbs = Nothing
 
 End Sub
+
+Public Sub TestPropertiesOutput()
+' Ref: http://www.everythingaccess.com/tutorials.asp?ID=Accessing-detailed-file-information-provided-by-the-Operating-System
+' Ref: http://www.techrepublic.com/article/a-simple-solution-for-tracking-changes-to-access-data/
+' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/480c17b3-e3d1-4f98-b1d6-fa16b23c6a0d/please-help-to-edit-the-table-query-form-and-modules-modified-date
+'
+' Ref: http://perfectparadigm.com/tip001.html
+'SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate,
+'MSysObjects.Name , MSysObjects.Type
+'FROM MSysObjects;
+
+    Debug.Print ">>>frm_Dummy"
+    Debug.Print "DateCreated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("DateCreated").Value
+    Debug.Print "LastUpdated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("LastUpdated").Value
+
+' *** Ref: http://support.microsoft.com/default.aspx?scid=kb%3Ben-us%3B299554 ***
+'When the user initially creates a new Microsoft Access specific-object, such as a form), the database engine still
+'enters the current date and time into the DateCreate and DateUpdate columns in the MSysObjects table. However, when
+'the user modifies and saves the object, Microsoft Access does not notify the database engine; therefore, the
+'DateUpdate column always stays the same.
+
+' Ref: http://questiontrack.com/how-can-i-display-a-last-modified-time-on-ms-access-form-995507.html
+
+    Dim obj As AccessObject
+    Dim dbs As Object
+
+    Set dbs = Application.CurrentData
+    Set obj = dbs.AllTables("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
+    Debug.Print ">>>" & obj.Name
+    Debug.Print "DateModified: " & obj.DateModified
+    Debug.Print "DateCreated: " & obj.DateCreated
+
+End Sub

@@ -1,0 +1,86 @@
+Operation =1
+Option =0
+Begin InputTables
+    Name ="MSysObjects"
+End
+Begin OutputColumns
+    Expression ="MSysObjects.DateCreate"
+    Expression ="MSysObjects.DateUpdate"
+    Expression ="MSysObjects.Name"
+    Expression ="MSysObjects.Type"
+End
+Begin OrderBy
+    Expression ="MSysObjects.DateUpdate"
+    Flag =1
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBinary "GUID" = Begin
+    0x10cb38ec2c8e274483bf74d696d4e178
+End
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbLongBinary "DOL" = Begin
+    0x0acc0e55000000005159fecd89dda146a0721068d8b1af1e000000007950638d ,
+    0xb948e44000000000000000004d005300790073004f0062006a00650063007400 ,
+    0x7300000000000000e51d6318e8a44641a140761c24820865070000005159fecd ,
+    0x89dda146a0721068d8b1af1e4400610074006500430072006500610074006500 ,
+    0x000000000000c5551a0e88161942b19e0f69a0fa0633070000005159fecd89dd ,
+    0xa146a0721068d8b1af1e44006100740065005500700064006100740065000000 ,
+    0x000000002ae609e39796c746a663d1972a2a574b070000005159fecd89dda146 ,
+    0xa0721068d8b1af1e4e0061006d006500000000000000b80005b4a4827c479230 ,
+    0xca472f34dcd0070000005159fecd89dda146a0721068d8b1af1e540079007000 ,
+    0x6500000000000000000000000000000000000000000000000c00000005000000 ,
+    0x0000000000000000000000000000
+End
+dbByte "PublishToWeb" ="1"
+dbByte "RecordsetType" ="0"
+dbBoolean "TotalsRow" ="0"
+Begin
+    Begin
+        dbText "Name" ="MSysObjects.DateCreate"
+        dbInteger "ColumnWidth" ="2145"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="MSysObjects.DateUpdate"
+        dbInteger "ColumnWidth" ="2250"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="MSysObjects.Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="MSysObjects.Type"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =0
+    Right =991
+    Bottom =851
+    Left =-1
+    Top =-1
+    Right =975
+    Bottom =589
+    Left =0
+    Top =0
+    ColumnsShown =539
+    Begin
+        Left =48
+        Top =12
+        Right =507
+        Bottom =302
+        Top =0
+        Name ="MSysObjects"
+        Name =""
+    End
+End
