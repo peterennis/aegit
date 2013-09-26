@@ -430,6 +430,23 @@ Public Sub ListGUID()
 
 End Sub
 
+Public Function fListGUID(strTableName As String) As String
+' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
+' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
+
+    Dim i As Integer
+    Dim arrGUID8() As Byte
+    Dim strGUID As String
+
+    arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
+    For i = 1 To 8
+        strGUID = strGUID & Hex(arrGUID8(i)) & "-"
+    Next
+    'Debug.Print Left(strGUID, 23)
+    fListGUID = Left(strGUID, 23)
+
+End Function
+
 Public Sub ListAllProperties(strContainer As String)
 ' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
     
