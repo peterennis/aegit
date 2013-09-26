@@ -410,16 +410,36 @@ Public Sub GetPropertyDescription()
 
 End Sub
 
-Public Sub ListAllProperties()
-' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
+Public Sub TestListAllProperties()
+    'ListAllProperties ("modules")
+    ListAllProperties ("tables")
+End Sub
 
+Public Sub ListGUID()
+' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
+
+    Dim i As Integer
+    Dim arrGUID8() As Byte
+    Dim strGUID As String
+
+    arrGUID8 = CurrentDb.TableDefs("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger").Properties("GUID").Value
+    For i = 1 To 8
+        strGUID = strGUID & Hex(arrGUID8(i)) & "-"
+    Next
+    Debug.Print Left(strGUID, 23)
+
+End Sub
+
+Public Sub ListAllProperties(strContainer As String)
+' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
+    
     Dim dbs As DAO.Database
     Dim obj As Object
     Dim prp As Property
     Dim doc As Document
 
     Set dbs = Application.CurrentDb
-    Set obj = dbs.Containers("modules")
+    Set obj = dbs.Containers(strContainer)
 
     'Debug.Print "Modules", obj.Documents.Count
     'Debug.Print "Modules", obj.Documents(1).Name
@@ -427,12 +447,14 @@ Public Sub ListAllProperties()
 
     ' Ref: http://stackoverflow.com/questions/16642362/how-to-get-the-following-code-to-continue-on-error
     For Each doc In obj.Documents
-        Debug.Print ">>>" & doc.Name
-        For Each prp In doc.Properties
-            On Error Resume Next
-            Debug.Print prp.Name, prp.Value
-            On Error GoTo 0
-        Next
+        If Left(doc.Name, 4) <> "MSys" And Left(doc.Name, 3) <> "zzz" Then
+            Debug.Print ">>>" & doc.Name
+            For Each prp In doc.Properties
+                On Error Resume Next
+                Debug.Print prp.Name, prp.Value
+                On Error GoTo 0
+            Next
+        End If
     Next
 
     Set obj = Nothing
@@ -468,7 +490,7 @@ Public Sub TestPropertiesOutput()
     Set dbs = Application.CurrentData
     Set obj = dbs.AllTables("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
     Debug.Print ">>>" & obj.Name
-    Debug.Print "DateModified: " & obj.DateModified
     Debug.Print "DateCreated: " & obj.DateCreated
+    Debug.Print "DateModified: " & obj.DateModified
 
 End Sub
