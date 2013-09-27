@@ -7,11 +7,11 @@ dbByte "Orientation" ="0"
 dbBinary "GUID" = Begin
     0x6d957e58f6ae6748b58acaaca527ec19
 End
+dbByte "PublishToWeb" ="1"
+dbText "Description" ="Don't be a dummy!"
 dbLongBinary "DOL" = Begin
     0x0acc0e5500000000000000000000000000000000000000000c00000005000000 ,
     0x0000000000000000000000000000
 End
-dbByte "PublishToWeb" ="1"
-dbText "Description" ="Don't be a dummy!"
 Begin
 End

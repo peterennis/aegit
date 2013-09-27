@@ -449,6 +449,8 @@ End Function
 
 Public Sub ListAllProperties(strContainer As String)
 ' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
+' Ref: http://ms-access.veryhelper.com/q_ms-access-database_153855.html
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
     
     Dim dbs As DAO.Database
     Dim obj As Object
@@ -470,6 +472,10 @@ Public Sub ListAllProperties(strContainer As String)
                 On Error Resume Next
                     If prp.Name = "GUID" And strContainer = "tables" Then
                         Debug.Print prp.Name, fListGUID(doc.Name)
+                    ElseIf prp.Name = "DOL" Then
+                        Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
+                    ElseIf prp.Name = "NameMap" Then
+                        Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
                     Else
                         Debug.Print prp.Name, prp.Value
                     End If

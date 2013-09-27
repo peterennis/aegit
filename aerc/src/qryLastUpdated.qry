@@ -23,6 +23,9 @@ dbBinary "GUID" = Begin
 End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
+dbByte "PublishToWeb" ="1"
+dbByte "RecordsetType" ="0"
+dbBoolean "TotalsRow" ="0"
 dbLongBinary "DOL" = Begin
     0x0acc0e55000000005159fecd89dda146a0721068d8b1af1e000000007950638d ,
     0xb948e44000000000000000004d005300790073004f0062006a00650063007400 ,
@@ -36,9 +39,6 @@ dbLongBinary "DOL" = Begin
     0x6500000000000000000000000000000000000000000000000c00000005000000 ,
     0x0000000000000000000000000000
 End
-dbByte "PublishToWeb" ="1"
-dbByte "RecordsetType" ="0"
-dbBoolean "TotalsRow" ="0"
 Begin
     Begin
         dbText "Name" ="MSysObjects.DateCreate"
@@ -65,12 +65,12 @@ Begin
     State =0
     Left =0
     Top =0
-    Right =991
+    Right =1475
     Bottom =851
     Left =-1
     Top =-1
-    Right =975
-    Bottom =589
+    Right =1459
+    Bottom =572
     Left =0
     Top =0
     ColumnsShown =539
