@@ -235,7 +235,7 @@ Inherited: False;
 ---
 Name: Track Name AutoCorrect Info
 Type: dbLong
-Value: 1
+Value: 0
 Inherited: False;
 ---
 Name: Perform Name AutoCorrect

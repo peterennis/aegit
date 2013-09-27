@@ -521,3 +521,63 @@ Public Sub TestPropertiesOutput()
     Debug.Print "DateModified: " & obj.DateModified
 
 End Sub
+
+Public Sub ListAccessApplicationOptions()
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa140020(v=office.10).aspx (2000)
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa189769(v=office.10).aspx (XP)
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa172326(v=office.11).aspx (2003)
+' Ref: http://msdn.microsoft.com/en-us/library/office/bb256546(v=office.12).aspx (2007)
+' Ref: http://msdn.microsoft.com/en-us/library/office/ff823177(v=office.14).aspx (2010)
+' *** Ref: http://msdn.microsoft.com/en-us/library/office/ff823177.aspx (2013)
+' Ref: http://office.microsoft.com/en-us/access-help/HV080750165.aspx (2013?)
+' Set Options from Visual Basic
+
+    Debug.Print ">>>Creating databases section"
+    Debug.Print , "Default File Format", Application.GetOption("Default File Format")
+    Debug.Print , "Default Database Directory", Application.GetOption("Default Database Directory")
+    Debug.Print , "New Database Sort Order", Application.GetOption("New Database Sort Order")
+    Debug.Print ">>>Application Options section"
+    Debug.Print , "Auto Compact", Application.GetOption("Auto Compact")
+    Debug.Print , "Remove Personal Information", Application.GetOption("Remove Personal Information")
+    Debug.Print , "Themed Form Controls", Application.GetOption("Themed Form Controls")
+    Debug.Print , "DesignWithData", Application.GetOption("DesignWithData")
+    Debug.Print , "CheckTruncatedNumFields", Application.GetOption("CheckTruncatedNumFields")
+    Debug.Print , "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")
+    Debug.Print ">>>Name AutoCorrect Options section"
+    Debug.Print , "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")
+    Debug.Print , "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")
+    Debug.Print , "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")
+    Debug.Print ">>>Filter Lookup options for <Database Name> Database section"
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+    Debug.Print "", Application.GetOption("")
+
+End Sub
