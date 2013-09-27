@@ -557,47 +557,44 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "2000", "AllowBreakIntoCode", dbs.Properties!AllowBreakIntoCode           'True/False  Determines if the CTRL+BREAK key combination can be used to stop code from running.
     Debug.Print , "2000", "HijriCalendar", dbs.Properties!HijriCalendar                     'True/False  Applies only to Arabic countries; determines if the application uses Hijri or Gregorian dates.
     Debug.Print ">>>View Tab"
-    Debug.Print , "XP", "Show Status Bar", Application.GetOption("Show Status Bar")                         'Show, Status bar
-    Debug.Print , "XP", "Show Startup Dialog Box", Application.GetOption("Show Startup Dialog Box")         'Show, Startup Task Pane
-    Debug.Print , "XP", "Show New Object Shortcuts", Application.GetOption("Show New Object Shortcuts")     'Show, New object shortcuts
-    Debug.Print , "XP", "Show Hidden Objects", Application.GetOption("Show Hidden Objects")                 'Show, Hidden objects
-'Show, System objects    Show System Objects
-'Show, Windows in Taskbar    ShowWindowsInTaskbar
-'Show in Macro Design, Names column  Show Macro Names Column
-'Show in Macro Design, Conditions column Show Conditions Column
-'Click options in database window    Database Explorer Click Behavior
-'General Tab
-'Option text String argument
-'Print margins, Left; Margin; Left; Margin
-'Print margins, Right; Margin; Right; Margin
-'Print margins, Top; Margin; Top; Margin
-'Print margins, Bottom; Margin; Bottom; Margin
-'Use four-year digit year formatting, This database  Four-Digit Year Formatting
-'Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
-'Name AutoCorrect, Track name AutoCorrect info   Track Name AutoCorrect Info
-'Name AutoCorrect, Perform name AutoCorrect  Perform Name AutoCorrect
-'Name AutoCorrect, Log name AutoCorrect changes  Log Name AutoCorrect Changes
-'Recently used file list Enable MRU File List
-'Recently used file list, (number of files)  Size of MRU File List
-'Provide feedback with sound Provide Feedback with Sound
-'Compact on Close    Auto Compact
-'New database sort order New Database Sort Order
-'Remove personal information from this file  Remove Personal Information
-'Default database folder Default Database Directory
-'Edit/Find Tab
-'Option text String argument
-'Default find/replace behavior   Default Find/Replace Behavior
-'Confirm, Record changes Confirm Record Changes
-'Confirm, Document deletions Confirm Document Deletions
-'Confirm, Action queries Confirm Action Queries
-'Show list of values in, Local indexed fields    Show Values in Indexed
-'Show list of values in, Local nonindexed fields Show Values in Non-Indexed
-'Show list of values in, ODBC fields Show Values in Remote
-'Show list of values in, Records in local snapshot   Show Values in Snapshot
-'Show list of values in, Records at server   Show Values in Server
-'Don't display lists where more than this number of records read Show Values Limit
-'Datasheet Tab
-'Option text String argument
+    Debug.Print , "XP", "Show Status Bar", Application.GetOption("Show Status Bar")                             'Show, Status bar
+    Debug.Print , "XP", "Show Startup Dialog Box", Application.GetOption("Show Startup Dialog Box")             'Show, Startup Task Pane
+    Debug.Print , "XP", "Show New Object Shortcuts", Application.GetOption("Show New Object Shortcuts")         'Show, New object shortcuts
+    Debug.Print , "XP", "Show Hidden Objects", Application.GetOption("Show Hidden Objects")                     'Show, Hidden objects
+    Debug.Print , "XP", "Show System Objects", Application.GetOption("Show System Objects")                     'Show, System objects
+    Debug.Print , "XP", "ShowWindowsInTaskbar", Application.GetOption("ShowWindowsInTaskbar")                   'Show, Windows in Taskbar
+    Debug.Print , "XP", "Show Macro Names Column", Application.GetOption("Show Macro Names Column")             'Show in Macro Design, Names column
+    Debug.Print , "XP", "Show Conditions Column", Application.GetOption("Show Conditions Column")               'Show in Macro Design, Conditions column
+    Debug.Print , "XP", "Database Explorer Click Behavior", Application.GetOption("Database Explorer Click Behavior")      'Click options in database window
+    Debug.Print ">>>General Tab"
+    Debug.Print , "XP", "Left Margin", Application.GetOption("Left Margin")                                     'Print margins, Left margin
+    Debug.Print , "XP", "Right Margin", Application.GetOption("Right Margin")                                   'Print margins, Right margin
+    Debug.Print , "XP", "Top Margin", Application.GetOption("Top Margin")                                       'Print margins, Top margin
+    Debug.Print , "XP", "Bottom Margin", Application.GetOption("Bottom Margin")                                 'Print margins, Bottom margin
+    Debug.Print , "XP", "Four-Digit Year Formatting", Application.GetOption("Four-Digit Year Formatting")       'Use four-year digit year formatting, This database
+    Debug.Print , "XP", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")    'Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
+    Debug.Print , "XP", "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")     'Name AutoCorrect, Track name AutoCorrect info
+    Debug.Print , "XP", "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")           'Name AutoCorrect, Perform name AutoCorrect
+    Debug.Print , "XP", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")   'Name AutoCorrect, Log name AutoCorrect changes
+    Debug.Print , "XP", "Enable MRU File List", Application.GetOption("Enable MRU File List")                   'Recently used file list
+    Debug.Print , "XP", "Size of MRU File List", Application.GetOption("Size of MRU File List")                 'Recently used file list, (number of files)
+    Debug.Print , "XP", "Provide Feedback with Sound", Application.GetOption("Provide Feedback with Sound")     'Provide feedback with sound
+    Debug.Print , "XP", "Auto Compact", Application.GetOption("Auto Compact")                                   'Compact on Close
+    Debug.Print , "XP", "New Database Sort Order", Application.GetOption("New Database Sort Order")             'New database sort order
+    Debug.Print , "XP", "Remove Personal Information", Application.GetOption("Remove Personal Information")     'Remove personal information from this file
+    Debug.Print , "XP", "Default Database Directory", Application.GetOption("Default Database Directory")       'Default database folder
+    Debug.Print ">>>Edit/Find Tab"
+    Debug.Print , "XP", "Default Find/Replace Behavior", Application.GetOption("Default Find/Replace Behavior") 'Default find/replace behavior
+    Debug.Print , "XP", "Confirm Record Changes", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
+    Debug.Print , "XP", "Confirm Document Deletions", Application.GetOption("Confirm Document Deletions")       'Confirm, Document deletions
+    Debug.Print , "XP", "Confirm Action Queries", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
+    Debug.Print , "XP", "Show Values in Indexed", Application.GetOption("Show Values in Indexed")               'Show list of values in, Local indexed fields
+    Debug.Print , "XP", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")       'Show list of values in, Local nonindexed fields
+    Debug.Print , "XP", "Show Values in Remote", Application.GetOption("Show Values in Remote")                 'Show list of values in, ODBC fields
+    Debug.Print , "XP", "Show Values in Snapshot", Application.GetOption("Show Values in Snapshot")             'Show list of values in, Records in local snapshot
+    Debug.Print , "XP", "Show Values in Server", Application.GetOption("Show Values in Server")                 'Show list of values in, Records at server
+    Debug.Print , "XP", "Show Values Limit", Application.GetOption("Show Values Limit")                         'Don't display lists where more than this number of records read
+    Debug.Print ">>>Datasheet Tab"
 'Default colors, Font    Default Font Color
 'Default colors, Background  Default Background Color
 'Default colors, Gridlines   Default Gridlines Color
