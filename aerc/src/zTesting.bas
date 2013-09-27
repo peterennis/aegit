@@ -468,7 +468,11 @@ Public Sub ListAllProperties(strContainer As String)
             Debug.Print ">>>" & doc.Name
             For Each prp In doc.Properties
                 On Error Resume Next
-                Debug.Print prp.Name, prp.Value
+                    If prp.Name = "GUID" And strContainer = "tables" Then
+                        Debug.Print prp.Name, fListGUID(doc.Name)
+                    Else
+                        Debug.Print prp.Name, prp.Value
+                    End If
                 On Error GoTo 0
             Next
         End If
