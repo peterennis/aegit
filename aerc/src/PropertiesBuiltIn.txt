@@ -243,3 +243,13 @@ Type: dbLong
 Value: 0
 Inherited: False;
 ---
+Name: AppTitle
+Type: dbText
+Value: aegit
+Inherited: False;
+---
+Name: AppIcon
+Type: dbText
+Value: .\adaept64.ico
+Inherited: False;
+---

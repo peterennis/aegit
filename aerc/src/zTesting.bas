@@ -532,6 +532,151 @@ Public Sub ListAccessApplicationOptions()
 ' Ref: http://office.microsoft.com/en-us/access-help/HV080750165.aspx (2013?)
 ' Set Options from Visual Basic
 
+    Dim dbs As Database
+    Set dbs = CurrentDb
+
+    On Error Resume Next
+    Debug.Print ">>>Standard Options"
+    '2000 The following options are equivalent to the standard startup options found in the Startup Options dialog box.
+    Debug.Print , "2000", "AppTitle", dbs.Properties!AppTitle                               'String  The title of an application, as displayed in the title bar.
+    Debug.Print , "2000", "AppIcon", dbs.Properties!AppIcon                                 'String  The file name and path of an application's icon.
+    Debug.Print , "2000", "StartupMenuBar", dbs.Properties!StartUpMenuBar                   'String  Sets the default menu bar for the application.
+    Debug.Print , "2000", "AllowFullMenus", dbs.Properties!AllowFullMenus                   'True/False  Determines if the built-in Access menu bars are displayed.
+    Debug.Print , "2000", "AllowShortcutMenus", dbs.Properties!AllowShortcutMenus           'True/False  Determines if the built-in Access shortcut menus are displayed.
+    Debug.Print , "2000", "StartupForm", dbs.Properties!StartUpForm                         'String  Sets the form or data page to show when the application is first opened.
+    Debug.Print , "2000", "StartupShowDBWindow", dbs.Properties!StartUpShowDBWindow         'True/False  Determines if the database window is displayed when the application is first opened.
+    Debug.Print , "2000", "StartupShowStatusBar", dbs.Properties!StartUpShowStatusBar       'True/False  Determines if the status bar is displayed.
+    Debug.Print , "2000", "StartupShortcutMenuBar", dbs.Properties!StartUpShortcutMenuBar   'String  Sets the shortcut menu bar to be used in all forms and reports.
+    Debug.Print , "2000", "AllowBuiltInToolbars", dbs.Properties!AllowBuiltInToolbars       'True/False  Determines if the built-in Access toolbars are displayed.
+    Debug.Print , "2000", "AllowToolbarChanges", dbs.Properties!AllowToolbarChanges         'True/False  Determined if toolbar changes can be made.
+    Debug.Print ">>>Advanced Option"
+    Debug.Print , "2000", "AllowSpecialKeys", dbs.Properties!AllowSpecialKeys               'option (True/False value) determines if the use of special keys is permitted. It is equivalent to the advanced startup option found in the Startup Options dialog box.
+    Debug.Print ">>>Extra Options"
+    'The following options are not available from the Startup Options dialog box or any other Access user interface component, they are only available in programming code.
+    Debug.Print , "2000", "AllowBypassKey", dbs.Properties!AllowBypassKey                   'True/False  Determines if the SHIFT key can be used to bypass the application load process.
+    Debug.Print , "2000", "AllowBreakIntoCode", dbs.Properties!AllowBreakIntoCode           'True/False  Determines if the CTRL+BREAK key combination can be used to stop code from running.
+    Debug.Print , "2000", "HijriCalendar", dbs.Properties!HijriCalendar                     'True/False  Applies only to Arabic countries; determines if the application uses Hijri or Gregorian dates.
+    Debug.Print ">>>View Tab"
+    Debug.Print , "XP", "Show Status Bar", Application.GetOption("Show Status Bar")                         'Show, Status bar
+    Debug.Print , "XP", "Show Startup Dialog Box", Application.GetOption("Show Startup Dialog Box")         'Show, Startup Task Pane
+    Debug.Print , "XP", "Show New Object Shortcuts", Application.GetOption("Show New Object Shortcuts")     'Show, New object shortcuts
+    Debug.Print , "XP", "Show Hidden Objects", Application.GetOption("Show Hidden Objects")                 'Show, Hidden objects
+'Show, System objects    Show System Objects
+'Show, Windows in Taskbar    ShowWindowsInTaskbar
+'Show in Macro Design, Names column  Show Macro Names Column
+'Show in Macro Design, Conditions column Show Conditions Column
+'Click options in database window    Database Explorer Click Behavior
+'General Tab
+'Option text String argument
+'Print margins, Left; Margin; Left; Margin
+'Print margins, Right; Margin; Right; Margin
+'Print margins, Top; Margin; Top; Margin
+'Print margins, Bottom; Margin; Bottom; Margin
+'Use four-year digit year formatting, This database  Four-Digit Year Formatting
+'Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
+'Name AutoCorrect, Track name AutoCorrect info   Track Name AutoCorrect Info
+'Name AutoCorrect, Perform name AutoCorrect  Perform Name AutoCorrect
+'Name AutoCorrect, Log name AutoCorrect changes  Log Name AutoCorrect Changes
+'Recently used file list Enable MRU File List
+'Recently used file list, (number of files)  Size of MRU File List
+'Provide feedback with sound Provide Feedback with Sound
+'Compact on Close    Auto Compact
+'New database sort order New Database Sort Order
+'Remove personal information from this file  Remove Personal Information
+'Default database folder Default Database Directory
+'Edit/Find Tab
+'Option text String argument
+'Default find/replace behavior   Default Find/Replace Behavior
+'Confirm, Record changes Confirm Record Changes
+'Confirm, Document deletions Confirm Document Deletions
+'Confirm, Action queries Confirm Action Queries
+'Show list of values in, Local indexed fields    Show Values in Indexed
+'Show list of values in, Local nonindexed fields Show Values in Non-Indexed
+'Show list of values in, ODBC fields Show Values in Remote
+'Show list of values in, Records in local snapshot   Show Values in Snapshot
+'Show list of values in, Records at server   Show Values in Server
+'Don't display lists where more than this number of records read Show Values Limit
+'Datasheet Tab
+'Option text String argument
+'Default colors, Font    Default Font Color
+'Default colors, Background  Default Background Color
+'Default colors, Gridlines   Default Gridlines Color
+'Default gridlines showing, Horizontal   Default Gridlines Horizontal
+'Default gridlines showing, Vertical Default Gridlines Vertical
+'Default column width    Default Column Width
+'Default font, Font  Default Font Name
+'Default font, Weight    Default Font Weight
+'Default font, Size  Default Font Size
+'Default font, Underline Default Font Underline
+'Default font, Italic    Default Font Italic
+'Default cell effect Default Cell Effect
+'Show animations Show Animations
+'Keyboard Tab
+'Option text String argument
+'Move after enter    Move After Enter
+'Behavior entering field Behavior Entering Field
+'Arrow key behavior  Arrow Key Behavior
+'Cursor stops at first/last field    Cursor Stops at First/Last Field
+'Auto commit Ime Autocommit
+'Datasheet IME control   Datasheet Ime Control
+'Tables/Queries Tab
+'Option text String argument
+'Table design, Default field sizes - Text    Default Text Field Size
+'Table design, Default field sizes - Number  Default Number Field Size
+'Table design, Default field type    Default Field Type
+'Table design, AutoIndex on Import/Create    AutoIndex on Import/Create
+'Query design, Show table names  Show Table Names
+'Query design, Output all fields Output All Fields
+'Query design, Enable AutoJoin   Enable AutoJoin
+'Query design, Run permissions   Run Permissions
+'Query design, SQL Server Compatible Syntax (ANSI 92) - This database    ANSI Query Mode
+'Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases    ANSI Query Mode Default
+'Forms/Reports Tab
+'Option text String argument
+'Selection behavior  Selection Behavior
+'Form template   Form Template
+'Report template Report Template
+'Always use event procedures Always Use Event Procedures
+'Advanced Tab
+'Option text String argument
+'DDE operations, Ignore DDE requests Ignore DDE Requests
+'DDE operations, Enable DDE refresh  Enable DDE Refresh
+'Default File Format Default File Format
+'Client-server settings, Default max records Row Limit
+'Default open mode   Default Open Mode for Databases
+'Command-line arguments  Command-Line Arguments
+'OLE/DDE timeout OLE/DDE Timeout (sec)
+'Default record locking  Default Record Locking
+'Refresh interval    Refresh Interval (sec)
+'Number of update retries    Number of Update Retries
+'ODBC fresh interval ODBC Refresh Interval (sec)
+'Update retry interval   Update Retry Interval (msec)
+'Open databases using record-level locking   Use Row Level Locking
+'Save login and password Save Login and Password
+'Pages Tab
+'Option text String argument
+'Default Designer Properties, Section Indent Section Indent
+'Default Designer Properties, Alternative Row Color  Alternate Row Color
+'Default Designer Properties, Caption Section Style  Caption Section Style
+'Default Designer Properties, Footer Section Style   Footer Section Style
+'Default Database/Project Properties, Use Default Page Folder    Use Default Page Folder
+'Default Database/Project Properties, Default Page Folder    Default Page Folder
+'Default Database/Project Properties, Use Default Connection File    Use Default Connection File
+'Default Database/Project Properties, Default Connection File    Default Connection File
+'Spelling Tab
+'Option text String argument
+'Dictionary Language Spelling dictionary language
+'Add words to    Spelling add words to
+'Suggest from main dictionary only   Spelling suggest from main dictionary only
+'Ignore words in UPPERCASE   Spelling ignore words in UPPERCASE
+'Ignore words with numbers   Spelling ignore words with number
+'Ignore Internet and file addresses  Spelling ignore Internet and file addresses
+'Language-specific, German: Use post-reform rules    Spelling use German post-reform rules
+'Language-specific, Korean: Combine aux verb/adj.    Spelling combine aux verb/adj
+'Language-specific, Korean: Use auto-change list Spelling use auto-change list
+'Language-specific, Korean: Process compound nouns   Spelling process compound nouns
+'Language-specific, Hebrew modes Spelling Hebrew modes
+'Language-specific, Arabic modes Spelling Arabic modes
     Debug.Print ">>>Creating databases section"
     Debug.Print , "Default File Format", Application.GetOption("Default File Format")
     Debug.Print , "Default Database Directory", Application.GetOption("Default Database Directory")
@@ -579,5 +724,7 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print "", Application.GetOption("")
     Debug.Print "", Application.GetOption("")
     Debug.Print "", Application.GetOption("")
+
+    Set dbs = Nothing
 
 End Sub
