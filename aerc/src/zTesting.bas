@@ -525,6 +525,8 @@ End Sub
 Public Sub ListAccessApplicationOptions()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa140020(v=office.10).aspx (2000)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa189769(v=office.10).aspx (XP)
+'   IME is Microsoft Global Input Method Editors (IMEs)
+'   Ref: http://www.dbforums.com/microsoft-access/993286-what-ime.html
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa172326(v=office.11).aspx (2003)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb256546(v=office.12).aspx (2007)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff823177(v=office.14).aspx (2010)
@@ -595,73 +597,67 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "XP", "Show Values in Server", Application.GetOption("Show Values in Server")                 'Show list of values in, Records at server
     Debug.Print , "XP", "Show Values Limit", Application.GetOption("Show Values Limit")                         'Don't display lists where more than this number of records read
     Debug.Print ">>>Datasheet Tab"
-'Default colors, Font    Default Font Color
-'Default colors, Background  Default Background Color
-'Default colors, Gridlines   Default Gridlines Color
-'Default gridlines showing, Horizontal   Default Gridlines Horizontal
-'Default gridlines showing, Vertical Default Gridlines Vertical
-'Default column width    Default Column Width
-'Default font, Font  Default Font Name
-'Default font, Weight    Default Font Weight
-'Default font, Size  Default Font Size
-'Default font, Underline Default Font Underline
-'Default font, Italic    Default Font Italic
-'Default cell effect Default Cell Effect
-'Show animations Show Animations
-'Keyboard Tab
-'Option text String argument
-'Move after enter    Move After Enter
-'Behavior entering field Behavior Entering Field
-'Arrow key behavior  Arrow Key Behavior
-'Cursor stops at first/last field    Cursor Stops at First/Last Field
-'Auto commit Ime Autocommit
-'Datasheet IME control   Datasheet Ime Control
-'Tables/Queries Tab
-'Option text String argument
-'Table design, Default field sizes - Text    Default Text Field Size
-'Table design, Default field sizes - Number  Default Number Field Size
-'Table design, Default field type    Default Field Type
-'Table design, AutoIndex on Import/Create    AutoIndex on Import/Create
-'Query design, Show table names  Show Table Names
-'Query design, Output all fields Output All Fields
-'Query design, Enable AutoJoin   Enable AutoJoin
-'Query design, Run permissions   Run Permissions
-'Query design, SQL Server Compatible Syntax (ANSI 92) - This database    ANSI Query Mode
-'Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases    ANSI Query Mode Default
-'Forms/Reports Tab
-'Option text String argument
-'Selection behavior  Selection Behavior
-'Form template   Form Template
-'Report template Report Template
-'Always use event procedures Always Use Event Procedures
-'Advanced Tab
-'Option text String argument
-'DDE operations, Ignore DDE requests Ignore DDE Requests
-'DDE operations, Enable DDE refresh  Enable DDE Refresh
-'Default File Format Default File Format
-'Client-server settings, Default max records Row Limit
-'Default open mode   Default Open Mode for Databases
-'Command-line arguments  Command-Line Arguments
-'OLE/DDE timeout OLE/DDE Timeout (sec)
-'Default record locking  Default Record Locking
-'Refresh interval    Refresh Interval (sec)
-'Number of update retries    Number of Update Retries
-'ODBC fresh interval ODBC Refresh Interval (sec)
-'Update retry interval   Update Retry Interval (msec)
-'Open databases using record-level locking   Use Row Level Locking
-'Save login and password Save Login and Password
-'Pages Tab
-'Option text String argument
-'Default Designer Properties, Section Indent Section Indent
-'Default Designer Properties, Alternative Row Color  Alternate Row Color
-'Default Designer Properties, Caption Section Style  Caption Section Style
-'Default Designer Properties, Footer Section Style   Footer Section Style
-'Default Database/Project Properties, Use Default Page Folder    Use Default Page Folder
-'Default Database/Project Properties, Default Page Folder    Default Page Folder
-'Default Database/Project Properties, Use Default Connection File    Use Default Connection File
-'Default Database/Project Properties, Default Connection File    Default Connection File
-'Spelling Tab
-'Option text String argument
+    Debug.Print , "XP", "Default Font Color", Application.GetOption("Default Font Color")                       'Default colors, Font
+    Debug.Print , "XP", "Default Background Color", Application.GetOption("Default Background Color")           'Default colors, Background
+    Debug.Print , "XP", "Default Gridlines Color", Application.GetOption("Default Gridlines Color")             'Default colors, Gridlines
+    Debug.Print , "XP", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal")   'Default gridlines showing, Horizontal
+    Debug.Print , "XP", "Default Gridlines Vertical", Application.GetOption("Default Gridlines Vertical")       'Default gridlines showing, Vertical
+    Debug.Print , "XP", "Default Column Width", Application.GetOption("Default Column Width")                   'Default column width
+    Debug.Print , "XP", "Default Font Name", Application.GetOption("Default Font Name")                         'Default font, Font
+    Debug.Print , "XP", "Default Font Weight", Application.GetOption("Default Font Weight")                     'Default font, Weight
+    Debug.Print , "XP", "Default Font Size", Application.GetOption("Default Font Size")                         'Default font, Size
+    Debug.Print , "XP", "Default Font Underline", Application.GetOption("Default Font Underline")               'Default font, Underline
+    Debug.Print , "XP", "Default Font Italic", Application.GetOption("Default Font Italic")                     'Default font, Italic
+    Debug.Print , "XP", "Default Cell Effect", Application.GetOption("Default Cell Effect")                     'Default cell effect
+    Debug.Print , "XP", "Show Animations", Application.GetOption("Show Animations")                             'Show animations
+    Debug.Print ">>>Keyboard Tab"
+    Debug.Print , "XP", "Move After Enter", Application.GetOption("Move After Enter")                                   'Move after enter
+    Debug.Print , "XP", "Behavior Entering Field", Application.GetOption("Behavior Entering Field")                     'Behavior entering field
+    Debug.Print , "XP", "Arrow Key Behavior", Application.GetOption("Arrow Key Behavior")                               'Arrow key behavior
+    Debug.Print , "XP", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")   'Cursor stops at first/last field
+    Debug.Print , "XP", "Ime Autocommit", Application.GetOption("Ime Autocommit")                                       'Auto commit
+    Debug.Print , "XP", "Datasheet Ime Control", Application.GetOption("Datasheet Ime Control")                         'Datasheet IME control
+    Debug.Print ">>>Tables/Queries Tab"
+    Debug.Print , "XP", "Default Text Field Size", Application.GetOption("Default Text Field Size")             'Table design, Default field sizes - Text
+    Debug.Print , "XP", "Default Number Field Size", Application.GetOption("Default Number Field Size")         'Table design, Default field sizes - Number
+    Debug.Print , "XP", "Default Field Type", Application.GetOption("Default Field Type")                       'Table design, Default field type
+    Debug.Print , "XP", "AutoIndex on Import/Create", Application.GetOption("AutoIndex on Import/Create")       'Table design, AutoIndex on Import/Create
+    Debug.Print , "XP", "Show Table Names", Application.GetOption("Show Table Names")                           'Query design, Show table names
+    Debug.Print , "XP", "Output All Fields", Application.GetOption("Output All Fields")                         'Query design, Output all fields
+    Debug.Print , "XP", "Enable AutoJoin", Application.GetOption("Enable AutoJoin")                             'Query design, Enable AutoJoin
+    Debug.Print , "XP", "Run Permissions", Application.GetOption("Run Permissions")                             'Query design, Run permissions
+    Debug.Print , "XP", "ANSI Query Mode", Application.GetOption("ANSI Query Mode")                             'Query design, SQL Server Compatible Syntax (ANSI 92) - This database
+    Debug.Print , "XP", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")             'Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases
+    Debug.Print ">>>Forms/Reports Tab"
+    Debug.Print , "XP", "Selection Behavior", Application.GetOption("Selection Behavior")                       'Selection behavior
+    Debug.Print , "XP", "Form Template", Application.GetOption("Form Template")                                 'Form template
+    Debug.Print , "XP", "Report Template", Application.GetOption("Report Template")                             'Report template
+    Debug.Print , "XP", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")     'Always use event procedures
+    Debug.Print ">>>Advanced Tab"
+    Debug.Print , "XP", "Ignore DDE Requests", Application.GetOption("Ignore DDE Requests")                         'DDE operations, Ignore DDE requests
+    Debug.Print , "XP", "Enable DDE Refresh", Application.GetOption("Enable DDE Refresh")                           'DDE operations, Enable DDE refresh
+    Debug.Print , "XP", "Default File Format", Application.GetOption("Default File Format")                         'Default File Format
+    Debug.Print , "XP", "Row Limit", Application.GetOption("Row Limit")                                             'Client-server settings, Default max records
+    Debug.Print , "XP", "Default Open Mode for Databases", Application.GetOption("Default Open Mode for Databases") 'Default open mode
+    Debug.Print , "XP", "Command-Line Arguments", Application.GetOption("Command-Line Arguments")                   'Command-line arguments
+    Debug.Print , "XP", "OLE/DDE Timeout (sec)", Application.GetOption("OLE/DDE Timeout (sec)")                     'OLE/DDE timeout
+    Debug.Print , "XP", "Default Record Locking", Application.GetOption("Default Record Locking")                   'Default record locking
+    Debug.Print , "XP", "Refresh Interval (sec)", Application.GetOption("Refresh Interval (sec)")                   'Refresh interval
+    Debug.Print , "XP", "Number of Update Retries", Application.GetOption("Number of Update Retries")               'Number of update retries
+    Debug.Print , "XP", "ODBC Refresh Interval (sec)", Application.GetOption("ODBC Refresh Interval (sec)")         'ODBC fresh interval
+    Debug.Print , "XP", "Update Retry Interval (msec)", Application.GetOption("Update Retry Interval (msec)")       'Update retry interval
+    Debug.Print , "XP", "Use Row Level Locking", Application.GetOption("Use Row Level Locking")                     'Open databases using record-level locking
+    Debug.Print , "XP", "Save Login and Password", Application.GetOption("Save Login and Password")                 'Save login and password
+    Debug.Print ">>>Pages Tab"
+    Debug.Print , "XP", "Section Indent", Application.GetOption("Section Indent")                                   'Default Designer Properties, Section Indent
+    Debug.Print , "XP", "Alternate Row Color", Application.GetOption("Alternate Row Color")                         'Default Designer Properties, Alternative Row Color
+    Debug.Print , "XP", "Caption Section Style", Application.GetOption("Caption Section Style")                     'Default Designer Properties, Caption Section Style
+    Debug.Print , "XP", "Footer Section Style", Application.GetOption("Footer Section Style")                       'Default Designer Properties, Footer Section Style
+    Debug.Print , "XP", "Use Default Page Folder", Application.GetOption("Use Default Page Folder")                 'Default Database/Project Properties, Use Default Page Folder
+    Debug.Print , "XP", "Default Page Folder", Application.GetOption("Default Page Folder")                         'Default Database/Project Properties, Default Page Folder
+    Debug.Print , "XP", "Use Default Connection File", Application.GetOption("Use Default Connection File")         'Default Database/Project Properties, Use Default Connection File
+    Debug.Print , "XP", "Default Connection File", Application.GetOption("Default Connection File")                 'Default Database/Project Properties, Default Connection File
+    Debug.Print ">>>Spelling Tab"
 'Dictionary Language Spelling dictionary language
 'Add words to    Spelling add words to
 'Suggest from main dictionary only   Spelling suggest from main dictionary only
