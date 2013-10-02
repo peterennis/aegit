@@ -523,6 +523,9 @@ Public Sub TestPropertiesOutput()
 End Sub
 
 Public Sub ListAccessApplicationOptions()
+' Note: If you are developing a database application, add-in, library database, or referenced database, make sure that the
+' Error Trapping option is set to 2 (Break On Unhandled Errors) when you have finished debugging your code.
+'
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa140020(v=office.10).aspx (2000)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa189769(v=office.10).aspx (XP)
 '   IME is Microsoft Global Input Method Editors (IMEs)
@@ -559,117 +562,136 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "2000", "AllowBreakIntoCode", dbs.Properties!AllowBreakIntoCode           'True/False  Determines if the CTRL+BREAK key combination can be used to stop code from running.
     Debug.Print , "2000", "HijriCalendar", dbs.Properties!HijriCalendar                     'True/False  Applies only to Arabic countries; determines if the application uses Hijri or Gregorian dates.
     Debug.Print ">>>View Tab"
-    Debug.Print , "XP", "Show Status Bar", Application.GetOption("Show Status Bar")                             'Show, Status bar
-    Debug.Print , "XP", "Show Startup Dialog Box", Application.GetOption("Show Startup Dialog Box")             'Show, Startup Task Pane
-    Debug.Print , "XP", "Show New Object Shortcuts", Application.GetOption("Show New Object Shortcuts")         'Show, New object shortcuts
-    Debug.Print , "XP", "Show Hidden Objects", Application.GetOption("Show Hidden Objects")                     'Show, Hidden objects
-    Debug.Print , "XP", "Show System Objects", Application.GetOption("Show System Objects")                     'Show, System objects
-    Debug.Print , "XP", "ShowWindowsInTaskbar", Application.GetOption("ShowWindowsInTaskbar")                   'Show, Windows in Taskbar
-    Debug.Print , "XP", "Show Macro Names Column", Application.GetOption("Show Macro Names Column")             'Show in Macro Design, Names column
-    Debug.Print , "XP", "Show Conditions Column", Application.GetOption("Show Conditions Column")               'Show in Macro Design, Conditions column
-    Debug.Print , "XP", "Database Explorer Click Behavior", Application.GetOption("Database Explorer Click Behavior")      'Click options in database window
+    Debug.Print , "XP, 2003", "Show Status Bar", Application.GetOption("Show Status Bar")                                     'Show, Status bar
+    Debug.Print , "XP, 2003", "Show Startup Dialog Box", Application.GetOption("Show Startup Dialog Box")                     'Show, Startup Task Pane
+    Debug.Print , "XP, 2003", "Show New Object Shortcuts", Application.GetOption("Show New Object Shortcuts")                 'Show, New object shortcuts
+    Debug.Print , "XP, 2003", "Show Hidden Objects", Application.GetOption("Show Hidden Objects")                             'Show, Hidden objects
+    Debug.Print , "XP, 2003", "Show System Objects", Application.GetOption("Show System Objects")                             'Show, System objects
+    Debug.Print , "XP, 2003", "ShowWindowsInTaskbar", Application.GetOption("ShowWindowsInTaskbar")                           'Show, Windows in Taskbar
+    Debug.Print , "XP, 2003", "Show Macro Names Column", Application.GetOption("Show Macro Names Column")                     'Show in Macro Design, Names column
+    Debug.Print , "XP, 2003", "Show Conditions Column", Application.GetOption("Show Conditions Column")                       'Show in Macro Design, Conditions column
+    Debug.Print , "XP, 2003", "Database Explorer Click Behavior", Application.GetOption("Database Explorer Click Behavior")   'Click options in database window
     Debug.Print ">>>General Tab"
-    Debug.Print , "XP", "Left Margin", Application.GetOption("Left Margin")                                     'Print margins, Left margin
-    Debug.Print , "XP", "Right Margin", Application.GetOption("Right Margin")                                   'Print margins, Right margin
-    Debug.Print , "XP", "Top Margin", Application.GetOption("Top Margin")                                       'Print margins, Top margin
-    Debug.Print , "XP", "Bottom Margin", Application.GetOption("Bottom Margin")                                 'Print margins, Bottom margin
-    Debug.Print , "XP", "Four-Digit Year Formatting", Application.GetOption("Four-Digit Year Formatting")       'Use four-year digit year formatting, This database
-    Debug.Print , "XP", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")    'Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
-    Debug.Print , "XP", "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")     'Name AutoCorrect, Track name AutoCorrect info
-    Debug.Print , "XP", "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")           'Name AutoCorrect, Perform name AutoCorrect
-    Debug.Print , "XP", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")   'Name AutoCorrect, Log name AutoCorrect changes
-    Debug.Print , "XP", "Enable MRU File List", Application.GetOption("Enable MRU File List")                   'Recently used file list
-    Debug.Print , "XP", "Size of MRU File List", Application.GetOption("Size of MRU File List")                 'Recently used file list, (number of files)
-    Debug.Print , "XP", "Provide Feedback with Sound", Application.GetOption("Provide Feedback with Sound")     'Provide feedback with sound
-    Debug.Print , "XP", "Auto Compact", Application.GetOption("Auto Compact")                                   'Compact on Close
-    Debug.Print , "XP", "New Database Sort Order", Application.GetOption("New Database Sort Order")             'New database sort order
-    Debug.Print , "XP", "Remove Personal Information", Application.GetOption("Remove Personal Information")     'Remove personal information from this file
-    Debug.Print , "XP", "Default Database Directory", Application.GetOption("Default Database Directory")       'Default database folder
+    Debug.Print , "XP, 2003", "Left Margin", Application.GetOption("Left Margin")                                                             'Print margins, Left margin
+    Debug.Print , "XP, 2003", "Right Margin", Application.GetOption("Right Margin")                                                           'Print margins, Right margin
+    Debug.Print , "XP, 2003", "Top Margin", Application.GetOption("Top Margin")                                                               'Print margins, Top margin
+    Debug.Print , "XP, 2003", "Bottom Margin", Application.GetOption("Bottom Margin")                                                         'Print margins, Bottom margin
+    Debug.Print , "XP, 2003", "Four-Digit Year Formatting", Application.GetOption("Four-Digit Year Formatting")                               'Use four-year digit year formatting, This database
+    Debug.Print , "XP, 2003", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")   'Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
+    Debug.Print , "XP, 2003", "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")                             'Name AutoCorrect, Track name AutoCorrect info
+    Debug.Print , "XP, 2003", "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")                                   'Name AutoCorrect, Perform name AutoCorrect
+    Debug.Print , "XP, 2003", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")                           'Name AutoCorrect, Log name AutoCorrect changes
+    Debug.Print , "XP, 2003", "Enable MRU File List", Application.GetOption("Enable MRU File List")                                           'Recently used file list
+    Debug.Print , "XP, 2003", "Size of MRU File List", Application.GetOption("Size of MRU File List")                                         'Recently used file list, (number of files)
+    Debug.Print , "XP, 2003", "Provide Feedback with Sound", Application.GetOption("Provide Feedback with Sound")                             'Provide feedback with sound
+    Debug.Print , "XP, 2003", "Auto Compact", Application.GetOption("Auto Compact")                                                           'Compact on Close
+    Debug.Print , "XP, 2003", "New Database Sort Order", Application.GetOption("New Database Sort Order")                                     'New database sort order
+    Debug.Print , "XP, 2003", "Remove Personal Information", Application.GetOption("Remove Personal Information")                             'Remove personal information from this file
+    Debug.Print , "XP, 2003", "Default Database Directory", Application.GetOption("Default Database Directory")                               'Default database folder
     Debug.Print ">>>Edit/Find Tab"
-    Debug.Print , "XP", "Default Find/Replace Behavior", Application.GetOption("Default Find/Replace Behavior") 'Default find/replace behavior
-    Debug.Print , "XP", "Confirm Record Changes", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
-    Debug.Print , "XP", "Confirm Document Deletions", Application.GetOption("Confirm Document Deletions")       'Confirm, Document deletions
-    Debug.Print , "XP", "Confirm Action Queries", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
-    Debug.Print , "XP", "Show Values in Indexed", Application.GetOption("Show Values in Indexed")               'Show list of values in, Local indexed fields
-    Debug.Print , "XP", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")       'Show list of values in, Local nonindexed fields
-    Debug.Print , "XP", "Show Values in Remote", Application.GetOption("Show Values in Remote")                 'Show list of values in, ODBC fields
-    Debug.Print , "XP", "Show Values in Snapshot", Application.GetOption("Show Values in Snapshot")             'Show list of values in, Records in local snapshot
-    Debug.Print , "XP", "Show Values in Server", Application.GetOption("Show Values in Server")                 'Show list of values in, Records at server
-    Debug.Print , "XP", "Show Values Limit", Application.GetOption("Show Values Limit")                         'Don't display lists where more than this number of records read
+    Debug.Print , "XP, 2003", "Default Find/Replace Behavior", Application.GetOption("Default Find/Replace Behavior") 'Default find/replace behavior
+    Debug.Print , "XP, 2003", "Confirm Record Changes", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
+    Debug.Print , "XP, 2003", "Confirm Document Deletions", Application.GetOption("Confirm Document Deletions")       'Confirm, Document deletions
+    Debug.Print , "XP, 2003", "Confirm Action Queries", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
+    Debug.Print , "XP, 2003", "Show Values in Indexed", Application.GetOption("Show Values in Indexed")               'Show list of values in, Local indexed fields
+    Debug.Print , "XP, 2003", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")       'Show list of values in, Local nonindexed fields
+    Debug.Print , "XP, 2003", "Show Values in Remote", Application.GetOption("Show Values in Remote")                 'Show list of values in, ODBC fields
+    Debug.Print , "XP, 2003", "Show Values in Snapshot", Application.GetOption("Show Values in Snapshot")             'Show list of values in, Records in local snapshot
+    Debug.Print , "XP, 2003", "Show Values in Server", Application.GetOption("Show Values in Server")                 'Show list of values in, Records at server
+    Debug.Print , "XP, 2003", "Show Values Limit", Application.GetOption("Show Values Limit")                         'Don't display lists where more than this number of records read
     Debug.Print ">>>Datasheet Tab"
-    Debug.Print , "XP", "Default Font Color", Application.GetOption("Default Font Color")                       'Default colors, Font
-    Debug.Print , "XP", "Default Background Color", Application.GetOption("Default Background Color")           'Default colors, Background
-    Debug.Print , "XP", "Default Gridlines Color", Application.GetOption("Default Gridlines Color")             'Default colors, Gridlines
-    Debug.Print , "XP", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal")   'Default gridlines showing, Horizontal
-    Debug.Print , "XP", "Default Gridlines Vertical", Application.GetOption("Default Gridlines Vertical")       'Default gridlines showing, Vertical
-    Debug.Print , "XP", "Default Column Width", Application.GetOption("Default Column Width")                   'Default column width
-    Debug.Print , "XP", "Default Font Name", Application.GetOption("Default Font Name")                         'Default font, Font
-    Debug.Print , "XP", "Default Font Weight", Application.GetOption("Default Font Weight")                     'Default font, Weight
-    Debug.Print , "XP", "Default Font Size", Application.GetOption("Default Font Size")                         'Default font, Size
-    Debug.Print , "XP", "Default Font Underline", Application.GetOption("Default Font Underline")               'Default font, Underline
-    Debug.Print , "XP", "Default Font Italic", Application.GetOption("Default Font Italic")                     'Default font, Italic
-    Debug.Print , "XP", "Default Cell Effect", Application.GetOption("Default Cell Effect")                     'Default cell effect
-    Debug.Print , "XP", "Show Animations", Application.GetOption("Show Animations")                             'Show animations
+    Debug.Print , "XP, 2003", "Default Font Color", Application.GetOption("Default Font Color")                       'Default colors, Font
+    Debug.Print , "XP, 2003", "Default Background Color", Application.GetOption("Default Background Color")           'Default colors, Background
+    Debug.Print , "XP, 2003", "Default Gridlines Color", Application.GetOption("Default Gridlines Color")             'Default colors, Gridlines
+    Debug.Print , "XP, 2003", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal")   'Default gridlines showing, Horizontal
+    Debug.Print , "XP, 2003", "Default Gridlines Vertical", Application.GetOption("Default Gridlines Vertical")       'Default gridlines showing, Vertical
+    Debug.Print , "XP, 2003", "Default Column Width", Application.GetOption("Default Column Width")                   'Default column width
+    Debug.Print , "XP, 2003", "Default Font Name", Application.GetOption("Default Font Name")                         'Default font, Font
+    Debug.Print , "XP, 2003", "Default Font Weight", Application.GetOption("Default Font Weight")                     'Default font, Weight
+    Debug.Print , "XP, 2003", "Default Font Size", Application.GetOption("Default Font Size")                         'Default font, Size
+    Debug.Print , "XP, 2003", "Default Font Underline", Application.GetOption("Default Font Underline")               'Default font, Underline
+    Debug.Print , "XP, 2003", "Default Font Italic", Application.GetOption("Default Font Italic")                     'Default font, Italic
+    Debug.Print , "XP, 2003", "Default Cell Effect", Application.GetOption("Default Cell Effect")                     'Default cell effect
+    Debug.Print , "XP, 2003", "Show Animations", Application.GetOption("Show Animations")                             'Show animations
+    Debug.Print , "2003", "Show Smart Tags on Datasheets", Application.GetOption("Show Smart Tags on Datasheets")     'Show Smart Tags on Datasheets
     Debug.Print ">>>Keyboard Tab"
-    Debug.Print , "XP", "Move After Enter", Application.GetOption("Move After Enter")                                   'Move after enter
-    Debug.Print , "XP", "Behavior Entering Field", Application.GetOption("Behavior Entering Field")                     'Behavior entering field
-    Debug.Print , "XP", "Arrow Key Behavior", Application.GetOption("Arrow Key Behavior")                               'Arrow key behavior
-    Debug.Print , "XP", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")   'Cursor stops at first/last field
-    Debug.Print , "XP", "Ime Autocommit", Application.GetOption("Ime Autocommit")                                       'Auto commit
-    Debug.Print , "XP", "Datasheet Ime Control", Application.GetOption("Datasheet Ime Control")                         'Datasheet IME control
+    Debug.Print , "XP, 2003", "Move After Enter", Application.GetOption("Move After Enter")                                   'Move after enter
+    Debug.Print , "XP, 2003", "Behavior Entering Field", Application.GetOption("Behavior Entering Field")                     'Behavior entering field
+    Debug.Print , "XP, 2003", "Arrow Key Behavior", Application.GetOption("Arrow Key Behavior")                               'Arrow key behavior
+    Debug.Print , "XP, 2003", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")   'Cursor stops at first/last field
+    Debug.Print , "XP, 2003", "Ime Autocommit", Application.GetOption("Ime Autocommit")                                       'Auto commit
+    Debug.Print , "XP, 2003", "Datasheet Ime Control", Application.GetOption("Datasheet Ime Control")                         'Datasheet IME control
     Debug.Print ">>>Tables/Queries Tab"
-    Debug.Print , "XP", "Default Text Field Size", Application.GetOption("Default Text Field Size")             'Table design, Default field sizes - Text
-    Debug.Print , "XP", "Default Number Field Size", Application.GetOption("Default Number Field Size")         'Table design, Default field sizes - Number
-    Debug.Print , "XP", "Default Field Type", Application.GetOption("Default Field Type")                       'Table design, Default field type
-    Debug.Print , "XP", "AutoIndex on Import/Create", Application.GetOption("AutoIndex on Import/Create")       'Table design, AutoIndex on Import/Create
-    Debug.Print , "XP", "Show Table Names", Application.GetOption("Show Table Names")                           'Query design, Show table names
-    Debug.Print , "XP", "Output All Fields", Application.GetOption("Output All Fields")                         'Query design, Output all fields
-    Debug.Print , "XP", "Enable AutoJoin", Application.GetOption("Enable AutoJoin")                             'Query design, Enable AutoJoin
-    Debug.Print , "XP", "Run Permissions", Application.GetOption("Run Permissions")                             'Query design, Run permissions
-    Debug.Print , "XP", "ANSI Query Mode", Application.GetOption("ANSI Query Mode")                             'Query design, SQL Server Compatible Syntax (ANSI 92) - This database
-    Debug.Print , "XP", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")             'Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases
+    Debug.Print , "XP, 2003", "Default Text Field Size", Application.GetOption("Default Text Field Size")                           'Table design, Default field sizes - Text
+    Debug.Print , "XP, 2003", "Default Number Field Size", Application.GetOption("Default Number Field Size")                       'Table design, Default field sizes - Number
+    Debug.Print , "XP, 2003", "Default Field Type", Application.GetOption("Default Field Type")                                     'Table design, Default field type
+    Debug.Print , "XP, 2003", "AutoIndex on Import/Create", Application.GetOption("AutoIndex on Import/Create")                     'Table design, AutoIndex on Import/Create
+    Debug.Print , "XP, 2003", "Show Table Names", Application.GetOption("Show Table Names")                                         'Query design, Show table names
+    Debug.Print , "XP, 2003", "Output All Fields", Application.GetOption("Output All Fields")                                       'Query design, Output all fields
+    Debug.Print , "XP, 2003", "Enable AutoJoin", Application.GetOption("Enable AutoJoin")                                           'Query design, Enable AutoJoin
+    Debug.Print , "XP, 2003", "Run Permissions", Application.GetOption("Run Permissions")                                           'Query design, Run permissions
+    Debug.Print , "XP, 2003", "ANSI Query Mode", Application.GetOption("ANSI Query Mode")                                           'Query design, SQL Server Compatible Syntax (ANSI 92) - This database
+    Debug.Print , "XP, 2003", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")                           'Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases
+    Debug.Print , "2003", "Query Design Font Name", Application.GetOption("Query Design Font Name")                                 'Query design, Query design font, Font
+    Debug.Print , "2003", "Query Design Font Size", Application.GetOption("Query Design Font Size")                                 'Query design, Query design font, Size
+    Debug.Print , "2003", "Show Property Update Options buttons", Application.GetOption("Show Property Update Options buttons")     'Show Property Update Options buttons
     Debug.Print ">>>Forms/Reports Tab"
-    Debug.Print , "XP", "Selection Behavior", Application.GetOption("Selection Behavior")                       'Selection behavior
-    Debug.Print , "XP", "Form Template", Application.GetOption("Form Template")                                 'Form template
-    Debug.Print , "XP", "Report Template", Application.GetOption("Report Template")                             'Report template
-    Debug.Print , "XP", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")     'Always use event procedures
+    Debug.Print , "XP, 2003", "Selection Behavior", Application.GetOption("Selection Behavior")                       'Selection behavior
+    Debug.Print , "XP, 2003", "Form Template", Application.GetOption("Form Template")                                 'Form template
+    Debug.Print , "XP, 2003", "Report Template", Application.GetOption("Report Template")                             'Report template
+    Debug.Print , "XP, 2003", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")     'Always use event procedures
+    Debug.Print , "2003", "Show Smart Tags on Forms", Application.GetOption("Show Smart Tags on Forms")               'Show Smart Tags on Forms
+    Debug.Print , "2003", "Themed Form Controls", Application.GetOption("Themed Form Controls")                       'Show Windows Themed Controls on Forms
     Debug.Print ">>>Advanced Tab"
-    Debug.Print , "XP", "Ignore DDE Requests", Application.GetOption("Ignore DDE Requests")                         'DDE operations, Ignore DDE requests
-    Debug.Print , "XP", "Enable DDE Refresh", Application.GetOption("Enable DDE Refresh")                           'DDE operations, Enable DDE refresh
-    Debug.Print , "XP", "Default File Format", Application.GetOption("Default File Format")                         'Default File Format
+    Debug.Print , "XP, 2003", "Ignore DDE Requests", Application.GetOption("Ignore DDE Requests")                         'DDE operations, Ignore DDE requests
+    Debug.Print , "XP, 2003", "Enable DDE Refresh", Application.GetOption("Enable DDE Refresh")                           'DDE operations, Enable DDE refresh
+    Debug.Print , "XP, 2003", "Default File Format", Application.GetOption("Default File Format")                         'Default File Format
     Debug.Print , "XP", "Row Limit", Application.GetOption("Row Limit")                                             'Client-server settings, Default max records
-    Debug.Print , "XP", "Default Open Mode for Databases", Application.GetOption("Default Open Mode for Databases") 'Default open mode
-    Debug.Print , "XP", "Command-Line Arguments", Application.GetOption("Command-Line Arguments")                   'Command-line arguments
-    Debug.Print , "XP", "OLE/DDE Timeout (sec)", Application.GetOption("OLE/DDE Timeout (sec)")                     'OLE/DDE timeout
-    Debug.Print , "XP", "Default Record Locking", Application.GetOption("Default Record Locking")                   'Default record locking
-    Debug.Print , "XP", "Refresh Interval (sec)", Application.GetOption("Refresh Interval (sec)")                   'Refresh interval
-    Debug.Print , "XP", "Number of Update Retries", Application.GetOption("Number of Update Retries")               'Number of update retries
-    Debug.Print , "XP", "ODBC Refresh Interval (sec)", Application.GetOption("ODBC Refresh Interval (sec)")         'ODBC fresh interval
-    Debug.Print , "XP", "Update Retry Interval (msec)", Application.GetOption("Update Retry Interval (msec)")       'Update retry interval
-    Debug.Print , "XP", "Use Row Level Locking", Application.GetOption("Use Row Level Locking")                     'Open databases using record-level locking
+    Debug.Print , "XP, 2003", "Default Open Mode for Databases", Application.GetOption("Default Open Mode for Databases") 'Default open mode
+    Debug.Print , "XP, 2003", "Command-Line Arguments", Application.GetOption("Command-Line Arguments")                   'Command-line arguments
+    Debug.Print , "XP, 2003", "OLE/DDE Timeout (sec)", Application.GetOption("OLE/DDE Timeout (sec)")                     'OLE/DDE timeout
+    Debug.Print , "XP, 2003", "Default Record Locking", Application.GetOption("Default Record Locking")                   'Default record locking
+    Debug.Print , "XP, 2003", "Refresh Interval (sec)", Application.GetOption("Refresh Interval (sec)")                   'Refresh interval
+    Debug.Print , "XP, 2003", "Number of Update Retries", Application.GetOption("Number of Update Retries")               'Number of update retries
+    Debug.Print , "XP, 2003", "ODBC Refresh Interval (sec)", Application.GetOption("ODBC Refresh Interval (sec)")         'ODBC fresh interval
+    Debug.Print , "XP, 2003", "Update Retry Interval (msec)", Application.GetOption("Update Retry Interval (msec)")       'Update retry interval
+    Debug.Print , "XP, 2003", "Use Row Level Locking", Application.GetOption("Use Row Level Locking")                     'Open databases using record-level locking
     Debug.Print , "XP", "Save Login and Password", Application.GetOption("Save Login and Password")                 'Save login and password
     Debug.Print ">>>Pages Tab"
-    Debug.Print , "XP", "Section Indent", Application.GetOption("Section Indent")                                   'Default Designer Properties, Section Indent
-    Debug.Print , "XP", "Alternate Row Color", Application.GetOption("Alternate Row Color")                         'Default Designer Properties, Alternative Row Color
-    Debug.Print , "XP", "Caption Section Style", Application.GetOption("Caption Section Style")                     'Default Designer Properties, Caption Section Style
-    Debug.Print , "XP", "Footer Section Style", Application.GetOption("Footer Section Style")                       'Default Designer Properties, Footer Section Style
-    Debug.Print , "XP", "Use Default Page Folder", Application.GetOption("Use Default Page Folder")                 'Default Database/Project Properties, Use Default Page Folder
-    Debug.Print , "XP", "Default Page Folder", Application.GetOption("Default Page Folder")                         'Default Database/Project Properties, Default Page Folder
-    Debug.Print , "XP", "Use Default Connection File", Application.GetOption("Use Default Connection File")         'Default Database/Project Properties, Use Default Connection File
-    Debug.Print , "XP", "Default Connection File", Application.GetOption("Default Connection File")                 'Default Database/Project Properties, Default Connection File
+    Debug.Print , "XP, 2003", "Section Indent", Application.GetOption("Section Indent")                                   'Default Designer Properties, Section Indent
+    Debug.Print , "XP, 2003", "Alternate Row Color", Application.GetOption("Alternate Row Color")                         'Default Designer Properties, Alternative Row Color
+    Debug.Print , "XP, 2003", "Caption Section Style", Application.GetOption("Caption Section Style")                     'Default Designer Properties, Caption Section Style
+    Debug.Print , "XP, 2003", "Footer Section Style", Application.GetOption("Footer Section Style")                       'Default Designer Properties, Footer Section Style
+    Debug.Print , "XP, 2003", "Use Default Page Folder", Application.GetOption("Use Default Page Folder")                 'Default Database/Project Properties, Use Default Page Folder
+    Debug.Print , "XP, 2003", "Default Page Folder", Application.GetOption("Default Page Folder")                         'Default Database/Project Properties, Default Page Folder
+    Debug.Print , "XP, 2003", "Use Default Connection File", Application.GetOption("Use Default Connection File")         'Default Database/Project Properties, Use Default Connection File
+    Debug.Print , "XP, 2003", "Default Connection File", Application.GetOption("Default Connection File")                 'Default Database/Project Properties, Default Connection File
     Debug.Print ">>>Spelling Tab"
-'Dictionary Language Spelling dictionary language
-'Add words to    Spelling add words to
-'Suggest from main dictionary only   Spelling suggest from main dictionary only
-'Ignore words in UPPERCASE   Spelling ignore words in UPPERCASE
-'Ignore words with numbers   Spelling ignore words with number
-'Ignore Internet and file addresses  Spelling ignore Internet and file addresses
-'Language-specific, German: Use post-reform rules    Spelling use German post-reform rules
-'Language-specific, Korean: Combine aux verb/adj.    Spelling combine aux verb/adj
-'Language-specific, Korean: Use auto-change list Spelling use auto-change list
-'Language-specific, Korean: Process compound nouns   Spelling process compound nouns
-'Language-specific, Hebrew modes Spelling Hebrew modes
-'Language-specific, Arabic modes Spelling Arabic modes
+    Debug.Print , "XP, 2003", "Spelling dictionary language", Application.GetOption("Spelling dictionary language")                               'Dictionary Language
+    Debug.Print , "XP, 2003", "Spelling add words to", Application.GetOption("Spelling add words to")                                             'Add words to
+    Debug.Print , "XP, 2003", "Spelling suggest from main dictionary only", Application.GetOption("Spelling suggest from main dictionary only")   'Suggest from main dictionary only
+    Debug.Print , "XP, 2003", "Spelling ignore words in UPPERCASE", Application.GetOption("Spelling ignore words in UPPERCASE")                   'Ignore words in UPPERCASE
+    Debug.Print , "XP, 2003", "Spelling ignore words with number", Application.GetOption("Spelling ignore words with number")                     'Ignore words with numbers
+    Debug.Print , "XP, 2003", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses") 'Ignore Internet and file addresses
+    Debug.Print , "XP, 2003", "Spelling use German post-reform rules", Application.GetOption("Spelling use German post-reform rules")             'Language-specific, German: Use post-reform rules
+    Debug.Print , "XP, 2003", "Spelling combine aux verb/adj", Application.GetOption("Spelling combine aux verb/adj")                             'Language-specific, Korean: Combine aux verb/adj.
+    Debug.Print , "XP, 2003", "Spelling use auto-change list", Application.GetOption("Spelling use auto-change list")                             'Language-specific, Korean: Use auto-change list
+    Debug.Print , "XP, 2003", "Spelling process compound nouns", Application.GetOption("Spelling process compound nouns")                         'Language-specific, Korean: Process compound nouns
+    Debug.Print , "XP, 2003", "Spelling Hebrew modes", Application.GetOption("Spelling Hebrew modes")                                             'Language-specific, Hebrew modes
+    Debug.Print , "XP, 2003", "Spelling Arabic modes", Application.GetOption("Spelling Arabic modes")                                             'Language-specific, Arabic modes
+    Debug.Print ">>>International Tab"
+    Debug.Print , "2003", "Default direction", Application.GetOption("Default direction")       'Right-to-Left, Default direction
+    Debug.Print , "2003", "General alignment", Application.GetOption("General alignment")       'Right-to-Left, General alignment
+    Debug.Print , "2003", "Cursor movement", Application.GetOption("Cursor movement")           'Right-to-Left, Cursor movement
+    Debug.Print , "2003", "Use Hijri Calendar", Application.GetOption("Use Hijri Calendar")     'Use Hijri Calendar
+    Debug.Print ">>>Error Checking Tab"
+    Debug.Print , "2003", "Enable Error Checking", Application.GetOption("Enable Error Checking")                                                   'Settings, Enable error checking
+    Debug.Print , "2003", "Error Checking Indicator Color", Application.GetOption("Error Checking Indicator Color")                                 'Settings, Error indicator color
+    Debug.Print , "2003", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")   'Form/Report Design Rules, Unassociated label and control
+    Debug.Print , "2003", "Keyboard Shortcut Errors Error Checking", Application.GetOption("Keyboard Shortcut Errors Error Checking")               'Form/Report Design Rules, Keyboard shortcut errors
+    Debug.Print , "2003", "Invalid Control Properties Error Checking", Application.GetOption("Invalid Control Properties Error Checking")           'Form/Report Design Rules, Invalid control properties
+    Debug.Print , "2003", "Common Report Errors Error Checking", Application.GetOption("Common Report Errors Error Checking")                       'Form/Report Design Rules, Common report errors
+    
     Debug.Print ">>>Creating databases section"
     Debug.Print , "Default File Format", Application.GetOption("Default File Format")
     Debug.Print , "Default Database Directory", Application.GetOption("Default Database Directory")
