@@ -762,56 +762,56 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "2007", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")             'Check for common report errors
     Debug.Print ">>>Proofing Tab"
     Debug.Print "   >>>When correcting spelling in Microsoft Office programs section"
-Debug.Print , "2007",       'Ignore words in UPPERCASE Spelling ignore words in UPPERCASE
-Debug.Print , "2007",       'Ignore words that contain numbers Spelling ignore words with number
-Debug.Print , "2007",       'Ignore Internet and file addresses Spelling ignore Internet and file addresses
-Debug.Print , "2007",       'Suggest from main dictionary only Spelling suggest from main dictionary only
-Debug.Print , "2007",       'Dictionary Language Spelling dictionary language
+    Debug.Print , "2007", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")            'Ignore words in UPPERCASE
+    Debug.Print , "2007", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")             'Ignore words that contain numbers
+    Debug.Print , "2007", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")   'Ignore Internet and file addresses
+    Debug.Print , "2007", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")    'Suggest from main dictionary only
+    Debug.Print , "2007", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                  'Dictionary Language
     Debug.Print ">>>Advanced Tab"
     Debug.Print "   >>>Editing section"
-Debug.Print , "2007",       'Move after enter Move After Enter
-Debug.Print , "2007",       'Behavior entering field Behavior Entering Field
-Debug.Print , "2007",       'Arrow key behavior Arrow Key Behavior
-Debug.Print , "2007",       'Cursor stops at first/last field Cursor Stops at First/Last Field
-Debug.Print , "2007",       'Default find/replace behavior Default Find/Replace Behavior
-Debug.Print , "2007",       'Confirm, Record changes Confirm Record Changes
-Debug.Print , "2007",       'Confirm, Document deletions Confirm Document Deletions
-Debug.Print , "2007",       'Confirm, Action queries Confirm Action Queries
-Debug.Print , "2007",       'Default direction Default Direction
-Debug.Print , "2007",       'General alignment General Alignment
-Debug.Print , "2007",       'Cursor movement Cursor Movement
-Debug.Print , "2007",       'Datasheet IME control Datasheet Ime Control
-Debug.Print , "2007",       'Use Hijri Calendar Use Hijri Calendar
+    Debug.Print , "2007", "Move After Enter                ", Application.GetOption("Move After Enter")                     'Move after enter
+    Debug.Print , "2007", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")              'Behavior entering field
+    Debug.Print , "2007", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                   'Arrow key behavior
+    Debug.Print , "2007", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")     'Cursor stops at first/last field
+    Debug.Print , "2007", "Default Find/Replace Behavior   ", Application.GetOption("Default Find/Replace Behavior")        'Default find/replace behavior
+    Debug.Print , "2007", "Confirm Record Changes          ", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
+    Debug.Print , "2007", "Confirm Document Deletions      ", Application.GetOption("Confirm Document Deletions")           'Confirm, Document deletions
+    Debug.Print , "2007", "Confirm Action Queries          ", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
+    Debug.Print , "2007", "Default Direction               ", Application.GetOption("Default Direction")                    'Default direction
+    Debug.Print , "2007", "General Alignment               ", Application.GetOption("General Alignment")                    'General alignment
+    Debug.Print , "2007", "Cursor Movement                 ", Application.GetOption("Cursor Movement")                      'Cursor movement
+    Debug.Print , "2007", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")                'Datasheet IME control
+    Debug.Print , "2007", "Use Hijri Calendar              ", Application.GetOption("Use Hijri Calendar")                   'Use Hijri Calendar
     Debug.Print "   >>>Display section"
-Debug.Print , "2007",       'Show this number of Recent Documents Size of MRU File List
-Debug.Print , "2007",       'Status bar Show Status Bar
-Debug.Print , "2007",       'Show animations Show Animations
-Debug.Print , "2007",       'Show Smart Tags on Datasheets Show Smart Tags on Datasheets
-Debug.Print , "2007",       'Show Smart Tags on Forms and Reports Show Smart Tags on Forms and Reports
-Debug.Print , "2007",       'Show in Macro Design, Names column Show Macro Names Column
-Debug.Print , "2007",       'Show in Macro Design, Conditions column Show Conditions Column
+    Debug.Print , "2007", "Size of MRU File List               ", Application.GetOption("Size of MRU File List")                'Show this number of Recent Documents
+    Debug.Print , "2007", "Show Status Bar                     ", Application.GetOption("Show Status Bar")                      'Status bar
+    Debug.Print , "2007", "Show Animations                     ", Application.GetOption("Show Animations")                      'Show animations
+    Debug.Print , "2007", "Show Smart Tags on Datasheets       ", Application.GetOption("Show Smart Tags on Datasheets")        'Show Smart Tags on Datasheets
+    Debug.Print , "2007", "Show Smart Tags on Forms and Reports", Application.GetOption("Show Smart Tags on Forms and Reports") 'Show Smart Tags on Forms and Reports
+    Debug.Print , "2007", "Show Macro Names Column             ", Application.GetOption("Show Macro Names Column")              'Show in Macro Design, Names column
+    Debug.Print , "2007", "Show Conditions Column              ", Application.GetOption("Show Conditions Column")               'Show in Macro Design, Conditions column
     Debug.Print "   >>>Printing section"
-Debug.Print , "2007",       'Left margin Left Margin
-Debug.Print , "2007",       'Right margin Right Margin
-Debug.Print , "2007",       'Top margin Top Margin
-Debug.Print , "2007",       'Bottom margin Bottom Margin
+    Debug.Print , "2007", "Left Margin  ", Application.GetOption("Left Margin")         'Left margin
+    Debug.Print , "2007", "Right Margin ", Application.GetOption("Right Margin")        'Right margin
+    Debug.Print , "2007", "Top Margin   ", Application.GetOption("Top Margin")          'Top margin
+    Debug.Print , "2007", "Bottom Margin", Application.GetOption("Bottom Margin")       'Bottom margin
     Debug.Print "   >>>General section"
-Debug.Print , "2007",       'Provide feedback with sound  Provide Feedback with Sound
-Debug.Print , "2007",       'Use four-year digit year formatting, This database Four-Digit Year Formatting
-Debug.Print , "2007",       'Use four-year digit year formatting, All databases Four-Digit Year Formatting All Databases
+    Debug.Print , "2007", "Provide Feedback with Sound             ", Application.GetOption("Provide Feedback with Sound")                  'Provide feedback with sound
+    Debug.Print , "2007", "Four-Digit Year Formatting              ", Application.GetOption("Four-Digit Year Formatting")                   'Use four-year digit year formatting, This database
+    Debug.Print , "2007", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")     'Use four-year digit year formatting, All databases
     Debug.Print "   >>>Advanced section"
-Debug.Print , "2007",       'Open last used database when Access starts Open Last Used Database When Access Starts
-Debug.Print , "2007",       'Default open mode Default Open Mode for Databases
-Debug.Print , "2007",       'Default record locking Default Record Locking
-Debug.Print , "2007",       'Open databases by using record-level locking Use Row Level Locking
-Debug.Print , "2007",       'OLE/DDE timeout (sec) OLE/DDE Timeout (sec)
-Debug.Print , "2007",       'Refresh interval (sec) Refresh Interval (sec)
-Debug.Print , "2007",       'Number of update retries Number of Update Retries
-Debug.Print , "2007",       'ODBC refresh interval (sec) ODBC Refresh Interval (sec)
-Debug.Print , "2007",       'Update retry interval (msec) Update Retry Interval (msec)
-Debug.Print , "2007",       'DDE operations, Ignore DDE requests Ignore DDE Requests
-Debug.Print , "2007",       'DDE operations, Enable DDE refresh Enable DDE Refresh
-Debug.Print , "2007",       'Command-line arguments Command-Line Arguments
+    Debug.Print , "2007", "Open Last Used Database When Access Starts", Application.GetOption("Open Last Used Database When Access Starts")     'Open last used database when Access starts
+    Debug.Print , "2007", "Default Open Mode for Databases           ", Application.GetOption("Default Open Mode for Databases")                'Default open mode
+    Debug.Print , "2007", "Default Record Locking                    ", Application.GetOption("Default Record Locking")                         'Default record locking
+    Debug.Print , "2007", "Use Row Level Locking                     ", Application.GetOption("Use Row Level Locking")                          'Open databases by using record-level locking
+    Debug.Print , "2007", "OLE/DDE Timeout (sec)                     ", Application.GetOption("OLE/DDE Timeout (sec)")                          'OLE/DDE timeout (sec)
+    Debug.Print , "2007", "Refresh Interval (sec)                    ", Application.GetOption("Refresh Interval (sec)")                         'Refresh interval (sec)
+    Debug.Print , "2007", "Number of Update Retries                  ", Application.GetOption("Number of Update Retries")                       'Number of update retries
+    Debug.Print , "2007", "ODBC Refresh Interval (sec)               ", Application.GetOption("ODBC Refresh Interval (sec)")                    'ODBC refresh interval (sec)
+    Debug.Print , "2007", "Update Retry Interval (msec)              ", Application.GetOption("Update Retry Interval (msec)")                   'Update retry interval (msec)
+    Debug.Print , "2007", "Ignore DDE Requests                       ", Application.GetOption("Ignore DDE Requests")                            'DDE operations, Ignore DDE requests
+    Debug.Print , "2007", "Enable DDE Refresh                        ", Application.GetOption("Enable DDE Refresh")                             'DDE operations, Enable DDE refresh
+    Debug.Print , "2007", "Command-Line Arguments                    ", Application.GetOption("Command-Line Arguments")                         'Command-line arguments
 
     Set dbs = Nothing
 
