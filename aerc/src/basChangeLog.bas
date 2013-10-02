@@ -19,7 +19,7 @@ Option Explicit
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 '
 ' Guides:
-' Office VBA—Basic Debugging Techniques
+' Office VBA Basic Debugging Techniques
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 

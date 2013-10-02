@@ -423,20 +423,20 @@ Private Sub ListAccessApplicationOptions()
     Print #fle, , "XP, 2003", "Show Values in Server        ", Application.GetOption("Show Values in Server")               'Show list of values in, Records at server
     Print #fle, , "XP, 2003", "Show Values Limit            ", Application.GetOption("Show Values Limit")                   'Don't display lists where more than this number of records read
     Print #fle, ">>>Datasheet Tab"
-    Print #fle, , "XP, 2003", "Default Font Color          ", Application.GetOption("Default Font Color")                   'Default colors, Font
-    Print #fle, , "XP, 2003", "Default Background Color    ", Application.GetOption("Default Background Color")             'Default colors, Background
-    Print #fle, , "XP, 2003", "Default Gridlines Color     ", Application.GetOption("Default Gridlines Color")              'Default colors, Gridlines
-    Print #fle, , "XP, 2003", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal")         'Default gridlines showing, Horizontal
-    Print #fle, , "XP, 2003", "Default Gridlines Vertical  ", Application.GetOption("Default Gridlines Vertical")           'Default gridlines showing, Vertical
-    Print #fle, , "XP, 2003", "Default Column Width        ", Application.GetOption("Default Column Width")                 'Default column width
-    Print #fle, , "XP, 2003", "Default Font Name           ", Application.GetOption("Default Font Name")                    'Default font, Font
-    Print #fle, , "XP, 2003", "Default Font Weight         ", Application.GetOption("Default Font Weight")                  'Default font, Weight
-    Print #fle, , "XP, 2003", "Default Font Size           ", Application.GetOption("Default Font Size")                    'Default font, Size
-    Print #fle, , "XP, 2003", "Default Font Underline      ", Application.GetOption("Default Font Underline")               'Default font, Underline
-    Print #fle, , "XP, 2003", "Default Font Italic         ", Application.GetOption("Default Font Italic")                  'Default font, Italic
-    Print #fle, , "XP, 2003", "Default Cell Effect         ", Application.GetOption("Default Cell Effect")                  'Default cell effect
-    Print #fle, , "XP, 2003", "Show Animations             ", Application.GetOption("Show Animations")                      'Show animations
-    Print #fle, , "2003", "Show Smart Tags on Datasheets", Application.GetOption("Show Smart Tags on Datasheets")     'Show Smart Tags on Datasheets
+    Print #fle, , "XP, 2003", "Default Font Color           ", Application.GetOption("Default Font Color")                  'Default colors, Font
+    Print #fle, , "XP, 2003", "Default Background Color     ", Application.GetOption("Default Background Color")            'Default colors, Background
+    Print #fle, , "XP, 2003", "Default Gridlines Color      ", Application.GetOption("Default Gridlines Color")             'Default colors, Gridlines
+    Print #fle, , "XP, 2003", "Default Gridlines Horizontal ", Application.GetOption("Default Gridlines Horizontal")        'Default gridlines showing, Horizontal
+    Print #fle, , "XP, 2003", "Default Gridlines Vertical   ", Application.GetOption("Default Gridlines Vertical")          'Default gridlines showing, Vertical
+    Print #fle, , "XP, 2003", "Default Column Width         ", Application.GetOption("Default Column Width")                'Default column width
+    Print #fle, , "XP, 2003", "Default Font Name            ", Application.GetOption("Default Font Name")                   'Default font, Font
+    Print #fle, , "XP, 2003", "Default Font Weight          ", Application.GetOption("Default Font Weight")                 'Default font, Weight
+    Print #fle, , "XP, 2003", "Default Font Size            ", Application.GetOption("Default Font Size")                   'Default font, Size
+    Print #fle, , "XP, 2003", "Default Font Underline       ", Application.GetOption("Default Font Underline")              'Default font, Underline
+    Print #fle, , "XP, 2003", "Default Font Italic          ", Application.GetOption("Default Font Italic")                 'Default font, Italic
+    Print #fle, , "XP, 2003", "Default Cell Effect          ", Application.GetOption("Default Cell Effect")                 'Default cell effect
+    Print #fle, , "XP, 2003", "Show Animations              ", Application.GetOption("Show Animations")                     'Show animations
+    Print #fle, , "    2003", "Show Smart Tags on Datasheets", Application.GetOption("Show Smart Tags on Datasheets")       'Show Smart Tags on Datasheets
     Print #fle, ">>>Keyboard Tab"
     Print #fle, , "XP, 2003", "Move After Enter                ", Application.GetOption("Move After Enter")                   'Move after enter
     Print #fle, , "XP, 2003", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")            'Behavior entering field
@@ -463,13 +463,13 @@ Private Sub ListAccessApplicationOptions()
     Print #fle, , "XP, 2003", "Form Template              ", Application.GetOption("Form Template")                   'Form template
     Print #fle, , "XP, 2003", "Report Template            ", Application.GetOption("Report Template")                 'Report template
     Print #fle, , "XP, 2003", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")     'Always use event procedures
-    Print #fle, , "2003", "Show Smart Tags on Forms", Application.GetOption("Show Smart Tags on Forms")               'Show Smart Tags on Forms
-    Print #fle, , "2003", "Themed Form Controls", Application.GetOption("Themed Form Controls")                       'Show Windows Themed Controls on Forms
+    Print #fle, , "    2003", "Show Smart Tags on Forms   ", Application.GetOption("Show Smart Tags on Forms")        'Show Smart Tags on Forms
+    Print #fle, , "    2003", "Themed Form Controls       ", Application.GetOption("Themed Form Controls")            'Show Windows Themed Controls on Forms
     Print #fle, ">>>Advanced Tab"
-    Print #fle, , "XP, 2003", "Ignore DDE Requests", Application.GetOption("Ignore DDE Requests")                         'DDE operations, Ignore DDE requests
-    Print #fle, , "XP, 2003", "Enable DDE Refresh", Application.GetOption("Enable DDE Refresh")                           'DDE operations, Enable DDE refresh
-    Print #fle, , "XP, 2003", "Default File Format", Application.GetOption("Default File Format")                         'Default File Format
-    Print #fle, , "XP", "Row Limit", Application.GetOption("Row Limit")                                                   'Client-server settings, Default max records
+    Print #fle, , "XP, 2003", "Ignore DDE Requests            ", Application.GetOption("Ignore DDE Requests")             'DDE operations, Ignore DDE requests
+    Print #fle, , "XP, 2003", "Enable DDE Refresh             ", Application.GetOption("Enable DDE Refresh")              'DDE operations, Enable DDE refresh
+    Print #fle, , "XP, 2003", "Default File Format            ", Application.GetOption("Default File Format")             'Default File Format
+    Print #fle, , "XP      ", "Row Limit                      ", Application.GetOption("Row Limit")                       'Client-server settings, Default max records
     Print #fle, , "XP, 2003", "Default Open Mode for Databases", Application.GetOption("Default Open Mode for Databases") 'Default open mode
     Print #fle, , "XP, 2003", "Command-Line Arguments         ", Application.GetOption("Command-Line Arguments")          'Command-line arguments
     Print #fle, , "XP, 2003", "OLE/DDE Timeout (sec)          ", Application.GetOption("OLE/DDE Timeout (sec)")           'OLE/DDE timeout
@@ -478,8 +478,8 @@ Private Sub ListAccessApplicationOptions()
     Print #fle, , "XP, 2003", "Number of Update Retries       ", Application.GetOption("Number of Update Retries")        'Number of update retries
     Print #fle, , "XP, 2003", "ODBC Refresh Interval (sec)    ", Application.GetOption("ODBC Refresh Interval (sec)")     'ODBC fresh interval
     Print #fle, , "XP, 2003", "Update Retry Interval (msec)   ", Application.GetOption("Update Retry Interval (msec)")    'Update retry interval
-    Print #fle, , "XP, 2003", "Use Row Level Locking", Application.GetOption("Use Row Level Locking")                     'Open databases using record-level locking
-    Print #fle, , "XP", "Save Login and Password", Application.GetOption("Save Login and Password")                       'Save login and password
+    Print #fle, , "XP, 2003", "Use Row Level Locking          ", Application.GetOption("Use Row Level Locking")           'Open databases using record-level locking
+    Print #fle, , "XP      ", "Save Login and Password        ", Application.GetOption("Save Login and Password")         'Save login and password
     Print #fle, ">>>Pages Tab"
     Print #fle, , "XP, 2003", "Section Indent             ", Application.GetOption("Section Indent")                      'Default Designer Properties, Section Indent
     Print #fle, , "XP, 2003", "Alternate Row Color        ", Application.GetOption("Alternate Row Color")                 'Default Designer Properties, Alternative Row Color
@@ -503,17 +503,17 @@ Private Sub ListAccessApplicationOptions()
     Print #fle, , "XP, 2003", "Spelling Hebrew modes                      ", Application.GetOption("Spelling Hebrew modes")                        'Language-specific, Hebrew modes
     Print #fle, , "XP, 2003", "Spelling Arabic modes                      ", Application.GetOption("Spelling Arabic modes")                        'Language-specific, Arabic modes
     Print #fle, ">>>International Tab"
-    Print #fle, , "2003", "Default direction ", Application.GetOption("Default direction")       'Right-to-Left, Default direction
-    Print #fle, , "2003", "General alignment ", Application.GetOption("General alignment")       'Right-to-Left, General alignment
-    Print #fle, , "2003", "Cursor movement   ", Application.GetOption("Cursor movement")         'Right-to-Left, Cursor movement
-    Print #fle, , "2003", "Use Hijri Calendar", Application.GetOption("Use Hijri Calendar")      'Use Hijri Calendar
+    Print #fle, , "    2003", "Default direction ", Application.GetOption("Default direction")       'Right-to-Left, Default direction
+    Print #fle, , "    2003", "General alignment ", Application.GetOption("General alignment")       'Right-to-Left, General alignment
+    Print #fle, , "    2003", "Cursor movement   ", Application.GetOption("Cursor movement")         'Right-to-Left, Cursor movement
+    Print #fle, , "    2003", "Use Hijri Calendar", Application.GetOption("Use Hijri Calendar")      'Use Hijri Calendar
     Print #fle, ">>>Error Checking Tab"
-    Print #fle, , "2003", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                          'Settings, Enable error checking
-    Print #fle, , "2003", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                 'Settings, Error indicator color
-    Print #fle, , "2003", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")  'Form/Report Design Rules, Unassociated label and control
-    Print #fle, , "2003", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")        'Form/Report Design Rules, Keyboard shortcut errors
-    Print #fle, , "2003", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")      'Form/Report Design Rules, Invalid control properties
-    Print #fle, , "2003", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")            'Form/Report Design Rules, Common report errors
+    Print #fle, , "    2003", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                          'Settings, Enable error checking
+    Print #fle, , "    2003", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                 'Settings, Error indicator color
+    Print #fle, , "    2003", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")  'Form/Report Design Rules, Unassociated label and control
+    Print #fle, , "    2003", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")        'Form/Report Design Rules, Keyboard shortcut errors
+    Print #fle, , "    2003", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")      'Form/Report Design Rules, Invalid control properties
+    Print #fle, , "    2003", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")            'Form/Report Design Rules, Common report errors
     Print #fle, ">>>Popular Tab"
     Print #fle, "   >>>Creating databases section"
     Print #fle, , "2007, 2010, 2013", "Default File Format       ", Application.GetOption("Default File Format")            'Default file format

@@ -62,7 +62,7 @@
               XP, 2003      Default Font Italic                        0 
               XP, 2003      Default Cell Effect                        0 
               XP, 2003      Show Animations                           -1 
-              2003          Show Smart Tags on Datasheets             -1 
+                  2003      Show Smart Tags on Datasheets             -1 
 >>>Keyboard Tab
               XP, 2003      Move After Enter                           1 
               XP, 2003      Behavior Entering Field                    0 
@@ -89,12 +89,12 @@
               XP, 2003      Form Template               Normal
               XP, 2003      Report Template             Normal
               XP, 2003      Always Use Event Procedures  0 
-              2003          Themed Form Controls        -1 
+                  2003      Themed Form Controls        -1 
 >>>Advanced Tab
-              XP, 2003      Ignore DDE Requests          0 
-              XP, 2003      Enable DDE Refresh          -1 
-              XP, 2003      Default File Format          12 
-              XP            Row Limit      10000 
+              XP, 2003      Ignore DDE Requests                        0 
+              XP, 2003      Enable DDE Refresh                        -1 
+              XP, 2003      Default File Format                        12 
+              XP            Row Limit                                  10000 
               XP, 2003      Default Open Mode for Databases            0 
               XP, 2003      Command-Line Arguments                    
               XP, 2003      OLE/DDE Timeout (sec)                      30 
@@ -103,8 +103,8 @@
               XP, 2003      Number of Update Retries                   2 
               XP, 2003      ODBC Refresh Interval (sec)                1500 
               XP, 2003      Update Retry Interval (msec)               250 
-              XP, 2003      Use Row Level Locking       -1 
-              XP            Save Login and Password      0 
+              XP, 2003      Use Row Level Locking                     -1 
+              XP            Save Login and Password                    0 
 >>>Pages Tab
 >>>Spelling Tab
               XP, 2003      Spelling dictionary language                             0 
@@ -120,17 +120,17 @@
               XP, 2003      Spelling Hebrew modes                                    0 
               XP, 2003      Spelling Arabic modes                                    2 
 >>>International Tab
-              2003          Default direction            0 
-              2003          General alignment            0 
-              2003          Cursor movement              0 
-              2003          Use Hijri Calendar           0 
+                  2003      Default direction            0 
+                  2003      General alignment            0 
+                  2003      Cursor movement              0 
+                  2003      Use Hijri Calendar           0 
 >>>Error Checking Tab
-              2003          Enable Error Checking                                   -1 
-              2003          Error Checking Indicator Color                          -256 
-              2003          Unassociated Label and Control Error Checking           -1 
-              2003          Keyboard Shortcut Errors Error Checking                 -1 
-              2003          Invalid Control Properties Error Checking               -1 
-              2003          Common Report Errors Error Checking                     -1 
+                  2003      Enable Error Checking                                   -1 
+                  2003      Error Checking Indicator Color                          -256 
+                  2003      Unassociated Label and Control Error Checking           -1 
+                  2003      Keyboard Shortcut Errors Error Checking                 -1 
+                  2003      Invalid Control Properties Error Checking               -1 
+                  2003      Common Report Errors Error Checking                     -1 
 >>>Popular Tab
    >>>Creating databases section
               2007, 2010, 2013            Default File Format          12 
