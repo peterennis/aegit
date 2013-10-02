@@ -691,54 +691,127 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "2003", "Keyboard Shortcut Errors Error Checking", Application.GetOption("Keyboard Shortcut Errors Error Checking")               'Form/Report Design Rules, Keyboard shortcut errors
     Debug.Print , "2003", "Invalid Control Properties Error Checking", Application.GetOption("Invalid Control Properties Error Checking")           'Form/Report Design Rules, Invalid control properties
     Debug.Print , "2003", "Common Report Errors Error Checking", Application.GetOption("Common Report Errors Error Checking")                       'Form/Report Design Rules, Common report errors
-    
-    Debug.Print ">>>Creating databases section"
-    Debug.Print , "Default File Format", Application.GetOption("Default File Format")
-    Debug.Print , "Default Database Directory", Application.GetOption("Default Database Directory")
-    Debug.Print , "New Database Sort Order", Application.GetOption("New Database Sort Order")
-    Debug.Print ">>>Application Options section"
-    Debug.Print , "Auto Compact", Application.GetOption("Auto Compact")
-    Debug.Print , "Remove Personal Information", Application.GetOption("Remove Personal Information")
-    Debug.Print , "Themed Form Controls", Application.GetOption("Themed Form Controls")
-    Debug.Print , "DesignWithData", Application.GetOption("DesignWithData")
-    Debug.Print , "CheckTruncatedNumFields", Application.GetOption("CheckTruncatedNumFields")
-    Debug.Print , "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")
-    Debug.Print ">>>Name AutoCorrect Options section"
-    Debug.Print , "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")
-    Debug.Print , "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")
-    Debug.Print , "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")
-    Debug.Print ">>>Filter Lookup options for <Database Name> Database section"
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
-    Debug.Print "", Application.GetOption("")
+    Debug.Print ">>>Popular Tab"
+    Debug.Print "   >>>Creating databases section"
+    Debug.Print , "2007", "Default File Format", Application.GetOption("Default File Format")
+    Debug.Print , "2007", "Default Database Directory", Application.GetOption("Default Database Directory")
+    Debug.Print , "2007", "New Database Sort Order", Application.GetOption("New Database Sort Order")
+    Debug.Print ">>>Current Database Tab"
+    Debug.Print "   >>>Application Options section"
+    Debug.Print , "2007", "Auto Compact", Application.GetOption("Auto Compact")
+    Debug.Print , "2007", "Remove Personal Information", Application.GetOption("Remove Personal Information")
+    Debug.Print , "2007", "Themed Form Controls", Application.GetOption("Themed Form Controls")
+    Debug.Print , "2007", "DesignWithData", Application.GetOption("DesignWithData")
+    Debug.Print , "2007", "CheckTruncatedNumFields", Application.GetOption("CheckTruncatedNumFields")
+    Debug.Print , "2007", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")
+    Debug.Print "   >>>Name AutoCorrect Options section"
+    Debug.Print , "2007", "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")
+    Debug.Print , "2007", "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")
+    Debug.Print , "2007", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")
+    Debug.Print "   >>>Filter Lookup options for <Database Name> Database section"
+Debug.Print , "2007",       'Show list of values in, Local indexed fields Show Values in Indexed
+Debug.Print , "2007",       'Show list of values in, Local nonindexed fields Show Values in Non-Indexed
+Debug.Print , "2007",       'Show list of values in, ODBC fields Show Values in Remote
+Debug.Print , "2007",       'Show list of values in, Records in local snapshot Show Values in Snapshot
+Debug.Print , "2007",       'Show list of values in, Records at server Show Values in Server
+Debug.Print , "2007",       'Don't display lists where more than this number of records read Show Values Limit
+    Debug.Print ">>>Datasheet Tab"
+    Debug.Print "   >>>Default colors section"
+Debug.Print , "2007",       'Font color Default Font Color
+Debug.Print , "2007",       'Background color Default Background Color
+Debug.Print , "2007",       'Alternate background color _64
+Debug.Print , "2007",       'Gridlines color Default Gridlines Color
+    Debug.Print "   >>>Gridlines and cell effects section"
+Debug.Print , "2007",       'Default gridlines showing, Horizontal Default Gridlines Horizontal
+Debug.Print , "2007",       'Default gridlines showing, Vertical Default Gridlines Vertical
+Debug.Print , "2007",       'Default cell effect Default Cell Effect
+Debug.Print , "2007",       'Default column width Default Column Width
+    Debug.Print "   >>>Default font section"
+Debug.Print , "2007",       'Font Default Font Name
+Debug.Print , "2007",       'Size Default Font Size
+Debug.Print , "2007",       'Weight Default Font Weight
+Debug.Print , "2007",       'Underline Default Font Underline
+Debug.Print , "2007",       'Italic Default Font Italic
+    Debug.Print ">>>Object Designers Tab"
+    Debug.Print "   >>>Table design section"
+Debug.Print , "2007",       'Default text field size Default Text Field Size
+Debug.Print , "2007",       'Default number field size Default Number Field Size
+Debug.Print , "2007",       'Default field type Default Field Type
+Debug.Print , "2007",       'AutoIndex on Import/Create AutoIndex on Import/Create
+Debug.Print , "2007",       'Show Property Update Option Buttons Show Property Update Options Buttons
+    Debug.Print "   >>>Query design section"
+Debug.Print , "2007",       'Show table names Show Table Names
+Debug.Print , "2007",       'Output all fields Output All Fields
+Debug.Print , "2007",       'Enable AutoJoin Enable AutoJoin
+Debug.Print , "2007",       'SQL Server Compatible Syntax (ANSI 92), This database ANSI Query Mode
+Debug.Print , "2007",       'SQL Server Compatible Syntax (ANSI 92), Default for new databases ANSI Query Mode Default
+Debug.Print , "2007",       'Query design font, Font Query Design Font Name
+Debug.Print , "2007",       'Query design font, Size Query Design Font Size
+    Debug.Print "   >>>Forms/Reports section"
+Debug.Print , "2007",       'Selection behavior Selection Behavior
+Debug.Print , "2007",       'Form template Form Template
+Debug.Print , "2007",       'Report template Report Template
+Debug.Print , "2007",       'Always use event procedures Always Use Event Procedures
+    Debug.Print "   >>>Error checking section"
+Debug.Print , "2007",       'Enable error checking Enable Error Checking
+Debug.Print , "2007",       'Error indicator color Error Checking Indicator Color
+Debug.Print , "2007",       'Check for unassociated label and control Unassociated Label and Control Error Checking
+Debug.Print , "2007",       'Check for new unassociated labels New Unassociated Labels Error Checking
+Debug.Print , "2007",       'Check for keyboard shortcut errors Keyboard Shortcut Errors Error Checking
+Debug.Print , "2007",       'Check for invalid control properties Invalid Control Properties Error Checking
+Debug.Print , "2007",       'Check for common report errors Common Report Errors Error Checking
+    Debug.Print ">>>Proofing Tab"
+    Debug.Print "   >>>When correcting spelling in Microsoft Office programs section"
+Debug.Print , "2007",       'Ignore words in UPPERCASE Spelling ignore words in UPPERCASE
+Debug.Print , "2007",       'Ignore words that contain numbers Spelling ignore words with number
+Debug.Print , "2007",       'Ignore Internet and file addresses Spelling ignore Internet and file addresses
+Debug.Print , "2007",       'Suggest from main dictionary only Spelling suggest from main dictionary only
+Debug.Print , "2007",       'Dictionary Language Spelling dictionary language
+    Debug.Print ">>>Advanced Tab"
+    Debug.Print "   >>>Editing section"
+Debug.Print , "2007",       'Move after enter Move After Enter
+Debug.Print , "2007",       'Behavior entering field Behavior Entering Field
+Debug.Print , "2007",       'Arrow key behavior Arrow Key Behavior
+Debug.Print , "2007",       'Cursor stops at first/last field Cursor Stops at First/Last Field
+Debug.Print , "2007",       'Default find/replace behavior Default Find/Replace Behavior
+Debug.Print , "2007",       'Confirm, Record changes Confirm Record Changes
+Debug.Print , "2007",       'Confirm, Document deletions Confirm Document Deletions
+Debug.Print , "2007",       'Confirm, Action queries Confirm Action Queries
+Debug.Print , "2007",       'Default direction Default Direction
+Debug.Print , "2007",       'General alignment General Alignment
+Debug.Print , "2007",       'Cursor movement Cursor Movement
+Debug.Print , "2007",       'Datasheet IME control Datasheet Ime Control
+Debug.Print , "2007",       'Use Hijri Calendar Use Hijri Calendar
+    Debug.Print "   >>>Display section"
+Debug.Print , "2007",       'Show this number of Recent Documents Size of MRU File List
+Debug.Print , "2007",       'Status bar Show Status Bar
+Debug.Print , "2007",       'Show animations Show Animations
+Debug.Print , "2007",       'Show Smart Tags on Datasheets Show Smart Tags on Datasheets
+Debug.Print , "2007",       'Show Smart Tags on Forms and Reports Show Smart Tags on Forms and Reports
+Debug.Print , "2007",       'Show in Macro Design, Names column Show Macro Names Column
+Debug.Print , "2007",       'Show in Macro Design, Conditions column Show Conditions Column
+    Debug.Print "   >>>Printing section"
+Debug.Print , "2007",       'Left margin Left Margin
+Debug.Print , "2007",       'Right margin Right Margin
+Debug.Print , "2007",       'Top margin Top Margin
+Debug.Print , "2007",       'Bottom margin Bottom Margin
+    Debug.Print "   >>>General section"
+Debug.Print , "2007",       'Provide feedback with sound  Provide Feedback with Sound
+Debug.Print , "2007",       'Use four-year digit year formatting, This database Four-Digit Year Formatting
+Debug.Print , "2007",       'Use four-year digit year formatting, All databases Four-Digit Year Formatting All Databases
+    Debug.Print "   >>>Advanced section"
+Debug.Print , "2007",       'Open last used database when Access starts Open Last Used Database When Access Starts
+Debug.Print , "2007",       'Default open mode Default Open Mode for Databases
+Debug.Print , "2007",       'Default record locking Default Record Locking
+Debug.Print , "2007",       'Open databases by using record-level locking Use Row Level Locking
+Debug.Print , "2007",       'OLE/DDE timeout (sec) OLE/DDE Timeout (sec)
+Debug.Print , "2007",       'Refresh interval (sec) Refresh Interval (sec)
+Debug.Print , "2007",       'Number of update retries Number of Update Retries
+Debug.Print , "2007",       'ODBC refresh interval (sec) ODBC Refresh Interval (sec)
+Debug.Print , "2007",       'Update retry interval (msec) Update Retry Interval (msec)
+Debug.Print , "2007",       'DDE operations, Ignore DDE requests Ignore DDE Requests
+Debug.Print , "2007",       'DDE operations, Enable DDE refresh Enable DDE Refresh
+Debug.Print , "2007",       'Command-line arguments Command-Line Arguments
 
     Set dbs = Nothing
 
