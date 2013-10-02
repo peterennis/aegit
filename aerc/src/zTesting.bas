@@ -693,125 +693,125 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "2003", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")            'Form/Report Design Rules, Common report errors
     Debug.Print ">>>Popular Tab"
     Debug.Print "   >>>Creating databases section"
-    Debug.Print , "2007, 2010", "Default File Format       ", Application.GetOption("Default File Format")            'Default file format
-    Debug.Print , "2007, 2010", "Default Database Directory", Application.GetOption("Default Database Directory")     'Default database folder
-    Debug.Print , "2007, 2010", "New Database Sort Order   ", Application.GetOption("New Database Sort Order")        'New database sort order
+    Debug.Print , "2007, 2010, 2013", "Default File Format       ", Application.GetOption("Default File Format")            'Default file format
+    Debug.Print , "2007, 2010, 2013", "Default Database Directory", Application.GetOption("Default Database Directory")     'Default database folder
+    Debug.Print , "2007, 2010, 2013", "New Database Sort Order   ", Application.GetOption("New Database Sort Order")        'New database sort order
     Debug.Print ">>>Current Database Tab"
     Debug.Print "   >>>Application Options section"
-    Debug.Print , "2007, 2010", "Auto Compact                   ", Application.GetOption("Auto Compact")                      'Compact on Close
-    Debug.Print , "2007, 2010", "Remove Personal Information    ", Application.GetOption("Remove Personal Information")       'Remove personal information from file properties on save
-    Debug.Print , "2007, 2010", "Themed Form Controls           ", Application.GetOption("Themed Form Controls")              'Use Windows-themed Controls on Forms
-    Debug.Print , "2007, 2010", "DesignWithData                 ", Application.GetOption("DesignWithData")                    'Enable Layout View for this database
-    Debug.Print , "2007, 2010", "CheckTruncatedNumFields        ", Application.GetOption("CheckTruncatedNumFields")           'Check for truncated number fields
-    Debug.Print , "2007, 2010", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")   'Picture Property Storage Format
+    Debug.Print , "2007, 2010, 2013", "Auto Compact                   ", Application.GetOption("Auto Compact")                      'Compact on Close
+    Debug.Print , "2007, 2010, 2013", "Remove Personal Information    ", Application.GetOption("Remove Personal Information")       'Remove personal information from file properties on save
+    Debug.Print , "2007, 2010, 2013", "Themed Form Controls           ", Application.GetOption("Themed Form Controls")              'Use Windows-themed Controls on Forms
+    Debug.Print , "2007, 2010, 2013", "DesignWithData                 ", Application.GetOption("DesignWithData")                    'Enable Layout View for this database
+    Debug.Print , "2007, 2010, 2013", "CheckTruncatedNumFields        ", Application.GetOption("CheckTruncatedNumFields")           'Check for truncated number fields
+    Debug.Print , "2007, 2010, 2013", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")   'Picture Property Storage Format
     Debug.Print "   >>>Name AutoCorrect Options section"
-    Debug.Print , "2007, 2010", "Track Name AutoCorrect Info ", Application.GetOption("Track Name AutoCorrect Info")   'Track name AutoCorrect info
-    Debug.Print , "2007, 2010", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")      'Perform name AutoCorrect
-    Debug.Print , "2007, 2010", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")  'Log name AutoCorrect changes
+    Debug.Print , "2007, 2010, 2013", "Track Name AutoCorrect Info ", Application.GetOption("Track Name AutoCorrect Info")   'Track name AutoCorrect info
+    Debug.Print , "2007, 2010, 2013", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")      'Perform name AutoCorrect
+    Debug.Print , "2007, 2010, 2013", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")  'Log name AutoCorrect changes
     Debug.Print "   >>>Filter Lookup options for <Database Name> Database section"
-    Debug.Print , "2007, 2010", "Show Values in Indexed    ", Application.GetOption("Show Values in Indexed")         'Show list of values in, Local indexed fields
-    Debug.Print , "2007, 2010", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")     'Show list of values in, Local nonindexed fields
-    Debug.Print , "2007, 2010", "Show Values in Remote     ", Application.GetOption("Show Values in Remote")          'Show list of values in, ODBC fields
-    Debug.Print , "2007, 2010", "Show Values in Snapshot   ", Application.GetOption("Show Values in Snapshot")        'Show list of values in, Records in local snapshot
-    Debug.Print , "2007, 2010", "Show Values in Server     ", Application.GetOption("Show Values in Server")          'Show list of values in, Records at server
-    Debug.Print , "2007, 2010", "Show Values Limit         ", Application.GetOption("Show Values Limit")              'Don't display lists where more than this number of records read
+    Debug.Print , "2007, 2010, 2013", "Show Values in Indexed    ", Application.GetOption("Show Values in Indexed")         'Show list of values in, Local indexed fields
+    Debug.Print , "2007, 2010, 2013", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")     'Show list of values in, Local nonindexed fields
+    Debug.Print , "2007, 2010, 2013", "Show Values in Remote     ", Application.GetOption("Show Values in Remote")          'Show list of values in, ODBC fields
+    Debug.Print , "2007, 2010, 2013", "Show Values in Snapshot   ", Application.GetOption("Show Values in Snapshot")        'Show list of values in, Records in local snapshot
+    Debug.Print , "2007, 2010, 2013", "Show Values in Server     ", Application.GetOption("Show Values in Server")          'Show list of values in, Records at server
+    Debug.Print , "2007, 2010, 2013", "Show Values Limit         ", Application.GetOption("Show Values Limit")              'Don't display lists where more than this number of records read
     Debug.Print ">>>Datasheet Tab"
     Debug.Print "   >>>Default colors section"
-    Debug.Print , "2007, 2010", "Default Font Color      ", Application.GetOption("Default Font Color")               'Font color
-    Debug.Print , "2007, 2010", "Default Background Color", Application.GetOption("Default Background Color")         'Background color
-    Debug.Print , "2007, 2010", "_64                     ", Application.GetOption("_64")                              'Alternate background color
-    Debug.Print , "2007, 2010", "Default Gridlines Color ", Application.GetOption("Default Gridlines Color")          'Gridlines color
+    Debug.Print , "2007, 2010, 2013", "Default Font Color      ", Application.GetOption("Default Font Color")               'Font color
+    Debug.Print , "2007, 2010, 2013", "Default Background Color", Application.GetOption("Default Background Color")         'Background color
+    Debug.Print , "2007, 2010, 2013", "_64                     ", Application.GetOption("_64")                              'Alternate background color
+    Debug.Print , "2007, 2010, 2013", "Default Gridlines Color ", Application.GetOption("Default Gridlines Color")          'Gridlines color
     Debug.Print "   >>>Gridlines and cell effects section"
-    Debug.Print , "2007, 2010", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal") 'Default gridlines showing, Horizontal
-    Debug.Print , "2007, 2010", "Default Gridlines Vertical  ", Application.GetOption("Default Gridlines Vertical")   'Default gridlines showing, Vertical
-    Debug.Print , "2007, 2010", "Default Cell Effect         ", Application.GetOption("Default Cell Effect")          'Default cell effect
-    Debug.Print , "2007, 2010", "Default Column Width        ", Application.GetOption("Default Column Width")         'Default column width
+    Debug.Print , "2007, 2010, 2013", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal") 'Default gridlines showing, Horizontal
+    Debug.Print , "2007, 2010, 2013", "Default Gridlines Vertical  ", Application.GetOption("Default Gridlines Vertical")   'Default gridlines showing, Vertical
+    Debug.Print , "2007, 2010, 2013", "Default Cell Effect         ", Application.GetOption("Default Cell Effect")          'Default cell effect
+    Debug.Print , "2007, 2010, 2013", "Default Column Width        ", Application.GetOption("Default Column Width")         'Default column width
     Debug.Print "   >>>Default font section"
-    Debug.Print , "2007, 2010", "Default Font Name     ", Application.GetOption("Default Font Name")                  'Font
-    Debug.Print , "2007, 2010", "Default Font Size     ", Application.GetOption("Default Font Size")                  'Size
-    Debug.Print , "2007, 2010", "Default Font Weight   ", Application.GetOption("Default Font Weight")                'Weight
-    Debug.Print , "2007, 2010", "Default Font Underline", Application.GetOption("Default Font Underline")             'Underline
-    Debug.Print , "2007, 2010", "Default Font Italic   ", Application.GetOption("Default Font Italic")                'Italic
+    Debug.Print , "2007, 2010, 2013", "Default Font Name     ", Application.GetOption("Default Font Name")                  'Font
+    Debug.Print , "2007, 2010, 2013", "Default Font Size     ", Application.GetOption("Default Font Size")                  'Size
+    Debug.Print , "2007, 2010, 2013", "Default Font Weight   ", Application.GetOption("Default Font Weight")                'Weight
+    Debug.Print , "2007, 2010, 2013", "Default Font Underline", Application.GetOption("Default Font Underline")             'Underline
+    Debug.Print , "2007, 2010, 2013", "Default Font Italic   ", Application.GetOption("Default Font Italic")                'Italic
     Debug.Print ">>>Object Designers Tab"
     Debug.Print "   >>>Table design section"
-    Debug.Print , "2007, 2010", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              'Default text field size
-    Debug.Print , "2007, 2010", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            'Default number field size
-    Debug.Print , "2007, 2010", "Default Field Type                  ", Application.GetOption("Default Field Type")                   'Default field type
-    Debug.Print , "2007, 2010", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           'AutoIndex on Import/Create
-    Debug.Print , "2007, 2010", "Show Property Update Options Buttons", Application.GetOption("Show Property Update Options Buttons") 'Show Property Update Option Buttons
+    Debug.Print , "2007, 2010, 2013", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              'Default text field size
+    Debug.Print , "2007, 2010, 2013", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            'Default number field size
+    Debug.Print , "2007, 2010, 2013", "Default Field Type                  ", Application.GetOption("Default Field Type")                   'Default field type
+    Debug.Print , "2007, 2010, 2013", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           'AutoIndex on Import/Create
+    Debug.Print , "2007, 2010, 2013", "Show Property Update Options Buttons", Application.GetOption("Show Property Update Options Buttons") 'Show Property Update Option Buttons
     Debug.Print "   >>>Query design section"
-    Debug.Print , "2007, 2010", "Show Table Names       ", Application.GetOption("Show Table Names")                  'Show table names
-    Debug.Print , "2007, 2010", "Output All Fields      ", Application.GetOption("Output All Fields")                 'Output all fields
-    Debug.Print , "2007, 2010", "Enable AutoJoin        ", Application.GetOption("Enable AutoJoin")                   'Enable AutoJoin
-    Debug.Print , "2007, 2010", "ANSI Query Mode        ", Application.GetOption("ANSI Query Mode")                   'SQL Server Compatible Syntax (ANSI 92), This database
-    Debug.Print , "2007, 2010", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")           'SQL Server Compatible Syntax (ANSI 92), Default for new databases
-    Debug.Print , "2007, 2010", "Query Design Font Name ", Application.GetOption("Query Design Font Name")            'Query design font, Font
-    Debug.Print , "2007, 2010", "Query Design Font Size ", Application.GetOption("Query Design Font Size")            'Query design font, Size
+    Debug.Print , "2007, 2010, 2013", "Show Table Names       ", Application.GetOption("Show Table Names")                  'Show table names
+    Debug.Print , "2007, 2010, 2013", "Output All Fields      ", Application.GetOption("Output All Fields")                 'Output all fields
+    Debug.Print , "2007, 2010, 2013", "Enable AutoJoin        ", Application.GetOption("Enable AutoJoin")                   'Enable AutoJoin
+    Debug.Print , "2007, 2010, 2013", "ANSI Query Mode        ", Application.GetOption("ANSI Query Mode")                   'SQL Server Compatible Syntax (ANSI 92), This database
+    Debug.Print , "2007, 2010, 2013", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")           'SQL Server Compatible Syntax (ANSI 92), Default for new databases
+    Debug.Print , "2007, 2010, 2013", "Query Design Font Name ", Application.GetOption("Query Design Font Name")            'Query design font, Font
+    Debug.Print , "2007, 2010, 2013", "Query Design Font Size ", Application.GetOption("Query Design Font Size")            'Query design font, Size
     Debug.Print "   >>>Forms/Reports section"
-    Debug.Print , "2007, 2010", "Selection Behavior         ", Application.GetOption("Selection Behavior")            'Selection behavior
-    Debug.Print , "2007, 2010", "Form Template              ", Application.GetOption("Form Template")                 'Form template
-    Debug.Print , "2007, 2010", "Report Template            ", Application.GetOption("Report Template")               'Report template
-    Debug.Print , "2007, 2010", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")   'Always use event procedures
+    Debug.Print , "2007, 2010, 2013", "Selection Behavior         ", Application.GetOption("Selection Behavior")            'Selection behavior
+    Debug.Print , "2007, 2010, 2013", "Form Template              ", Application.GetOption("Form Template")                 'Form template
+    Debug.Print , "2007, 2010, 2013", "Report Template            ", Application.GetOption("Report Template")               'Report template
+    Debug.Print , "2007, 2010, 2013", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")   'Always use event procedures
     Debug.Print "   >>>Error checking section"
-    Debug.Print , "2007, 2010", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                           'Enable error checking
-    Debug.Print , "2007, 2010", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                  'Error indicator color
-    Debug.Print , "2007, 2010", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")   'Check for unassociated label and control
-    Debug.Print , "2007, 2010", "New Unassociated Labels Error Checking       ", Application.GetOption("New Unassociated Labels Error Checking")          'Check for new unassociated labels
-    Debug.Print , "2007, 2010", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")         'Check for keyboard shortcut errors
-    Debug.Print , "2007, 2010", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")       'Check for invalid control properties
-    Debug.Print , "2007, 2010", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")             'Check for common report errors
+    Debug.Print , "2007, 2010, 2013", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                           'Enable error checking
+    Debug.Print , "2007, 2010, 2013", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                  'Error indicator color
+    Debug.Print , "2007, 2010, 2013", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")   'Check for unassociated label and control
+    Debug.Print , "2007, 2010, 2013", "New Unassociated Labels Error Checking       ", Application.GetOption("New Unassociated Labels Error Checking")          'Check for new unassociated labels
+    Debug.Print , "2007, 2010, 2013", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")         'Check for keyboard shortcut errors
+    Debug.Print , "2007, 2010, 2013", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")       'Check for invalid control properties
+    Debug.Print , "2007, 2010, 2013", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")             'Check for common report errors
     Debug.Print ">>>Proofing Tab"
     Debug.Print "   >>>When correcting spelling in Microsoft Office programs section"
-    Debug.Print , "2007, 2010", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")            'Ignore words in UPPERCASE
-    Debug.Print , "2007, 2010", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")             'Ignore words that contain numbers
-    Debug.Print , "2007, 2010", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")   'Ignore Internet and file addresses
-    Debug.Print , "2007, 2010", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")    'Suggest from main dictionary only
-    Debug.Print , "2007, 2010", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                  'Dictionary Language
+    Debug.Print , "2007, 2010, 2013", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")            'Ignore words in UPPERCASE
+    Debug.Print , "2007, 2010, 2013", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")             'Ignore words that contain numbers
+    Debug.Print , "2007, 2010, 2013", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")   'Ignore Internet and file addresses
+    Debug.Print , "2007, 2010, 2013", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")    'Suggest from main dictionary only
+    Debug.Print , "2007, 2010, 2013", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                  'Dictionary Language
     Debug.Print ">>>Advanced Tab"
     Debug.Print "   >>>Editing section"
-    Debug.Print , "2007, 2010", "Move After Enter                ", Application.GetOption("Move After Enter")                     'Move after enter
-    Debug.Print , "2007, 2010", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")              'Behavior entering field
-    Debug.Print , "2007, 2010", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                   'Arrow key behavior
-    Debug.Print , "2007, 2010", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")     'Cursor stops at first/last field
-    Debug.Print , "2007, 2010", "Default Find/Replace Behavior   ", Application.GetOption("Default Find/Replace Behavior")        'Default find/replace behavior
-    Debug.Print , "2007, 2010", "Confirm Record Changes          ", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
-    Debug.Print , "2007, 2010", "Confirm Document Deletions      ", Application.GetOption("Confirm Document Deletions")           'Confirm, Document deletions
-    Debug.Print , "2007, 2010", "Confirm Action Queries          ", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
-    Debug.Print , "2007, 2010", "Default Direction               ", Application.GetOption("Default Direction")                    'Default direction
-    Debug.Print , "2007, 2010", "General Alignment               ", Application.GetOption("General Alignment")                    'General alignment
-    Debug.Print , "2007, 2010", "Cursor Movement                 ", Application.GetOption("Cursor Movement")                      'Cursor movement
-    Debug.Print , "2007, 2010", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")                'Datasheet IME control
-    Debug.Print , "2007, 2010", "Use Hijri Calendar              ", Application.GetOption("Use Hijri Calendar")                   'Use Hijri Calendar
+    Debug.Print , "2007, 2010, 2013", "Move After Enter                ", Application.GetOption("Move After Enter")                     'Move after enter
+    Debug.Print , "2007, 2010, 2013", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")              'Behavior entering field
+    Debug.Print , "2007, 2010, 2013", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                   'Arrow key behavior
+    Debug.Print , "2007, 2010, 2013", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")     'Cursor stops at first/last field
+    Debug.Print , "2007, 2010, 2013", "Default Find/Replace Behavior   ", Application.GetOption("Default Find/Replace Behavior")        'Default find/replace behavior
+    Debug.Print , "2007, 2010, 2013", "Confirm Record Changes          ", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
+    Debug.Print , "2007, 2010, 2013", "Confirm Document Deletions      ", Application.GetOption("Confirm Document Deletions")           'Confirm, Document deletions
+    Debug.Print , "2007, 2010, 2013", "Confirm Action Queries          ", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
+    Debug.Print , "2007, 2010, 2013", "Default Direction               ", Application.GetOption("Default Direction")                    'Default direction
+    Debug.Print , "2007, 2010, 2013", "General Alignment               ", Application.GetOption("General Alignment")                    'General alignment
+    Debug.Print , "2007, 2010, 2013", "Cursor Movement                 ", Application.GetOption("Cursor Movement")                      'Cursor movement
+    Debug.Print , "2007, 2010, 2013", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")                'Datasheet IME control
+    Debug.Print , "2007, 2010, 2013", "Use Hijri Calendar              ", Application.GetOption("Use Hijri Calendar")                   'Use Hijri Calendar
     Debug.Print "   >>>Display section"
-    Debug.Print , "2007, 2010", "Size of MRU File List               ", Application.GetOption("Size of MRU File List")                'Show this number of Recent Documents
-    Debug.Print , "2007, 2010", "Show Status Bar                     ", Application.GetOption("Show Status Bar")                      'Status bar
-    Debug.Print , "2007, 2010", "Show Animations                     ", Application.GetOption("Show Animations")                      'Show animations
-    Debug.Print , "2007, 2010", "Show Smart Tags on Datasheets       ", Application.GetOption("Show Smart Tags on Datasheets")        'Show Smart Tags on Datasheets
-    Debug.Print , "2007, 2010", "Show Smart Tags on Forms and Reports", Application.GetOption("Show Smart Tags on Forms and Reports") 'Show Smart Tags on Forms and Reports
-    Debug.Print , "2007, 2010", "Show Macro Names Column             ", Application.GetOption("Show Macro Names Column")              'Show in Macro Design, Names column
-    Debug.Print , "2007, 2010", "Show Conditions Column              ", Application.GetOption("Show Conditions Column")               'Show in Macro Design, Conditions column
+    Debug.Print , "2007, 2010, 2013", "Size of MRU File List               ", Application.GetOption("Size of MRU File List")                'Show this number of Recent Documents
+    Debug.Print , "2007, 2010, 2013", "Show Status Bar                     ", Application.GetOption("Show Status Bar")                      'Status bar
+    Debug.Print , "2007, 2010, 2013", "Show Animations                     ", Application.GetOption("Show Animations")                      'Show animations
+    Debug.Print , "2007, 2010, 2013", "Show Smart Tags on Datasheets       ", Application.GetOption("Show Smart Tags on Datasheets")        'Show Smart Tags on Datasheets
+    Debug.Print , "2007, 2010, 2013", "Show Smart Tags on Forms and Reports", Application.GetOption("Show Smart Tags on Forms and Reports") 'Show Smart Tags on Forms and Reports
+    Debug.Print , "2007, 2010, 2013", "Show Macro Names Column             ", Application.GetOption("Show Macro Names Column")              'Show in Macro Design, Names column
+    Debug.Print , "2007, 2010, 2013", "Show Conditions Column              ", Application.GetOption("Show Conditions Column")               'Show in Macro Design, Conditions column
     Debug.Print "   >>>Printing section"
-    Debug.Print , "2007, 2010", "Left Margin  ", Application.GetOption("Left Margin")         'Left margin
-    Debug.Print , "2007, 2010", "Right Margin ", Application.GetOption("Right Margin")        'Right margin
-    Debug.Print , "2007, 2010", "Top Margin   ", Application.GetOption("Top Margin")          'Top margin
-    Debug.Print , "2007, 2010", "Bottom Margin", Application.GetOption("Bottom Margin")       'Bottom margin
+    Debug.Print , "2007, 2010, 2013", "Left Margin  ", Application.GetOption("Left Margin")         'Left margin
+    Debug.Print , "2007, 2010, 2013", "Right Margin ", Application.GetOption("Right Margin")        'Right margin
+    Debug.Print , "2007, 2010, 2013", "Top Margin   ", Application.GetOption("Top Margin")          'Top margin
+    Debug.Print , "2007, 2010, 2013", "Bottom Margin", Application.GetOption("Bottom Margin")       'Bottom margin
     Debug.Print "   >>>General section"
-    Debug.Print , "2007, 2010", "Provide Feedback with Sound             ", Application.GetOption("Provide Feedback with Sound")                  'Provide feedback with sound
-    Debug.Print , "2007, 2010", "Four-Digit Year Formatting              ", Application.GetOption("Four-Digit Year Formatting")                   'Use four-year digit year formatting, This database
-    Debug.Print , "2007, 2010", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")     'Use four-year digit year formatting, All databases
+    Debug.Print , "2007, 2010, 2013", "Provide Feedback with Sound             ", Application.GetOption("Provide Feedback with Sound")                  'Provide feedback with sound
+    Debug.Print , "2007, 2010, 2013", "Four-Digit Year Formatting              ", Application.GetOption("Four-Digit Year Formatting")                   'Use four-year digit year formatting, This database
+    Debug.Print , "2007, 2010, 2013", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")     'Use four-year digit year formatting, All databases
     Debug.Print "   >>>Advanced section"
-    Debug.Print , "2007, 2010", "Open Last Used Database When Access Starts", Application.GetOption("Open Last Used Database When Access Starts")     'Open last used database when Access starts
-    Debug.Print , "2007, 2010", "Default Open Mode for Databases           ", Application.GetOption("Default Open Mode for Databases")                'Default open mode
-    Debug.Print , "2007, 2010", "Default Record Locking                    ", Application.GetOption("Default Record Locking")                         'Default record locking
-    Debug.Print , "2007, 2010", "Use Row Level Locking                     ", Application.GetOption("Use Row Level Locking")                          'Open databases by using record-level locking
-    Debug.Print , "2007, 2010", "OLE/DDE Timeout (sec)                     ", Application.GetOption("OLE/DDE Timeout (sec)")                          'OLE/DDE timeout (sec)
-    Debug.Print , "2007, 2010", "Refresh Interval (sec)                    ", Application.GetOption("Refresh Interval (sec)")                         'Refresh interval (sec)
-    Debug.Print , "2007, 2010", "Number of Update Retries                  ", Application.GetOption("Number of Update Retries")                       'Number of update retries
-    Debug.Print , "2007, 2010", "ODBC Refresh Interval (sec)               ", Application.GetOption("ODBC Refresh Interval (sec)")                    'ODBC refresh interval (sec)
-    Debug.Print , "2007, 2010", "Update Retry Interval (msec)              ", Application.GetOption("Update Retry Interval (msec)")                   'Update retry interval (msec)
-    Debug.Print , "2007, 2010", "Ignore DDE Requests                       ", Application.GetOption("Ignore DDE Requests")                            'DDE operations, Ignore DDE requests
-    Debug.Print , "2007, 2010", "Enable DDE Refresh                        ", Application.GetOption("Enable DDE Refresh")                             'DDE operations, Enable DDE refresh
-    Debug.Print , "2007, 2010", "Command-Line Arguments                    ", Application.GetOption("Command-Line Arguments")                         'Command-line arguments
+    Debug.Print , "2007, 2010, 2013", "Open Last Used Database When Access Starts", Application.GetOption("Open Last Used Database When Access Starts")     'Open last used database when Access starts
+    Debug.Print , "2007, 2010, 2013", "Default Open Mode for Databases           ", Application.GetOption("Default Open Mode for Databases")                'Default open mode
+    Debug.Print , "2007, 2010, 2013", "Default Record Locking                    ", Application.GetOption("Default Record Locking")                         'Default record locking
+    Debug.Print , "2007, 2010, 2013", "Use Row Level Locking                     ", Application.GetOption("Use Row Level Locking")                          'Open databases by using record-level locking
+    Debug.Print , "2007, 2010, 2013", "OLE/DDE Timeout (sec)                     ", Application.GetOption("OLE/DDE Timeout (sec)")                          'OLE/DDE timeout (sec)
+    Debug.Print , "2007, 2010, 2013", "Refresh Interval (sec)                    ", Application.GetOption("Refresh Interval (sec)")                         'Refresh interval (sec)
+    Debug.Print , "2007, 2010, 2013", "Number of Update Retries                  ", Application.GetOption("Number of Update Retries")                       'Number of update retries
+    Debug.Print , "2007, 2010, 2013", "ODBC Refresh Interval (sec)               ", Application.GetOption("ODBC Refresh Interval (sec)")                    'ODBC refresh interval (sec)
+    Debug.Print , "2007, 2010, 2013", "Update Retry Interval (msec)              ", Application.GetOption("Update Retry Interval (msec)")                   'Update retry interval (msec)
+    Debug.Print , "2007, 2010, 2013", "Ignore DDE Requests                       ", Application.GetOption("Ignore DDE Requests")                            'DDE operations, Ignore DDE requests
+    Debug.Print , "2007, 2010, 2013", "Enable DDE Refresh                        ", Application.GetOption("Enable DDE Refresh")                             'DDE operations, Enable DDE refresh
+    Debug.Print , "2007, 2010, 2013", "Command-Line Arguments                    ", Application.GetOption("Command-Line Arguments")                         'Command-line arguments
 
     Set dbs = Nothing
 
