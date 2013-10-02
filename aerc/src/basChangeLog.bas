@@ -24,6 +24,7 @@ Option Explicit
 '
 
 
+'20131002 - v048 - Add ListAccessApplicationOptions to aegitClass for options txt output
 '20130920 - v047 - Add aeReadWriteStream to aegitClass to fix SaveAsText from UTF-16 to txt
     ' Keeps compatibility with older versions of Access
     ' Will need proper fix for internationalization
