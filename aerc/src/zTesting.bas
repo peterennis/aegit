@@ -693,73 +693,73 @@ Public Sub ListAccessApplicationOptions()
     Debug.Print , "2003", "Common Report Errors Error Checking", Application.GetOption("Common Report Errors Error Checking")                       'Form/Report Design Rules, Common report errors
     Debug.Print ">>>Popular Tab"
     Debug.Print "   >>>Creating databases section"
-    Debug.Print , "2007", "Default File Format", Application.GetOption("Default File Format")
-    Debug.Print , "2007", "Default Database Directory", Application.GetOption("Default Database Directory")
-    Debug.Print , "2007", "New Database Sort Order", Application.GetOption("New Database Sort Order")
+    Debug.Print , "2007", "Default File Format", Application.GetOption("Default File Format")                   'Default file format
+    Debug.Print , "2007", "Default Database Directory", Application.GetOption("Default Database Directory")     'Default database folder
+    Debug.Print , "2007", "New Database Sort Order", Application.GetOption("New Database Sort Order")           'New database sort order
     Debug.Print ">>>Current Database Tab"
     Debug.Print "   >>>Application Options section"
-    Debug.Print , "2007", "Auto Compact", Application.GetOption("Auto Compact")
-    Debug.Print , "2007", "Remove Personal Information", Application.GetOption("Remove Personal Information")
-    Debug.Print , "2007", "Themed Form Controls", Application.GetOption("Themed Form Controls")
-    Debug.Print , "2007", "DesignWithData", Application.GetOption("DesignWithData")
-    Debug.Print , "2007", "CheckTruncatedNumFields", Application.GetOption("CheckTruncatedNumFields")
-    Debug.Print , "2007", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")
+    Debug.Print , "2007", "Auto Compact", Application.GetOption("Auto Compact")                                         'Compact on Close
+    Debug.Print , "2007", "Remove Personal Information", Application.GetOption("Remove Personal Information")           'Remove personal information from file properties on save
+    Debug.Print , "2007", "Themed Form Controls", Application.GetOption("Themed Form Controls")                         'Use Windows-themed Controls on Forms
+    Debug.Print , "2007", "DesignWithData", Application.GetOption("DesignWithData")                                     'Enable Layout View for this database
+    Debug.Print , "2007", "CheckTruncatedNumFields", Application.GetOption("CheckTruncatedNumFields")                   'Check for truncated number fields
+    Debug.Print , "2007", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")   'Picture Property Storage Format
     Debug.Print "   >>>Name AutoCorrect Options section"
-    Debug.Print , "2007", "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")
-    Debug.Print , "2007", "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")
-    Debug.Print , "2007", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")
+    Debug.Print , "2007", "Track Name AutoCorrect Info", Application.GetOption("Track Name AutoCorrect Info")   'Track name AutoCorrect info
+    Debug.Print , "2007", "Perform Name AutoCorrect", Application.GetOption("Perform Name AutoCorrect")         'Perform name AutoCorrect
+    Debug.Print , "2007", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes") 'Log name AutoCorrect changes
     Debug.Print "   >>>Filter Lookup options for <Database Name> Database section"
-Debug.Print , "2007",       'Show list of values in, Local indexed fields Show Values in Indexed
-Debug.Print , "2007",       'Show list of values in, Local nonindexed fields Show Values in Non-Indexed
-Debug.Print , "2007",       'Show list of values in, ODBC fields Show Values in Remote
-Debug.Print , "2007",       'Show list of values in, Records in local snapshot Show Values in Snapshot
-Debug.Print , "2007",       'Show list of values in, Records at server Show Values in Server
-Debug.Print , "2007",       'Don't display lists where more than this number of records read Show Values Limit
+    Debug.Print , "2007", "Show Values in Indexed    ", Application.GetOption("Show Values in Indexed")         'Show list of values in, Local indexed fields
+    Debug.Print , "2007", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")     'Show list of values in, Local nonindexed fields
+    Debug.Print , "2007", "Show Values in Remote     ", Application.GetOption("Show Values in Remote")          'Show list of values in, ODBC fields
+    Debug.Print , "2007", "Show Values in Snapshot   ", Application.GetOption("Show Values in Snapshot")        'Show list of values in, Records in local snapshot
+    Debug.Print , "2007", "Show Values in Server     ", Application.GetOption("Show Values in Server")          'Show list of values in, Records at server
+    Debug.Print , "2007", "Show Values Limit         ", Application.GetOption("Show Values Limit")              'Don't display lists where more than this number of records read
     Debug.Print ">>>Datasheet Tab"
     Debug.Print "   >>>Default colors section"
-Debug.Print , "2007",       'Font color Default Font Color
-Debug.Print , "2007",       'Background color Default Background Color
-Debug.Print , "2007",       'Alternate background color _64
-Debug.Print , "2007",       'Gridlines color Default Gridlines Color
+    Debug.Print , "2007", "Default Font Color      ", Application.GetOption("Default Font Color")               'Font color
+    Debug.Print , "2007", "Default Background Color", Application.GetOption("Default Background Color")         'Background color
+    Debug.Print , "2007", "_64                     ", Application.GetOption("_64")                              'Alternate background color
+    Debug.Print , "2007", "Default Gridlines Color ", Application.GetOption("Default Gridlines Color")          'Gridlines color
     Debug.Print "   >>>Gridlines and cell effects section"
-Debug.Print , "2007",       'Default gridlines showing, Horizontal Default Gridlines Horizontal
-Debug.Print , "2007",       'Default gridlines showing, Vertical Default Gridlines Vertical
-Debug.Print , "2007",       'Default cell effect Default Cell Effect
-Debug.Print , "2007",       'Default column width Default Column Width
+    Debug.Print , "2007", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal") 'Default gridlines showing, Horizontal
+    Debug.Print , "2007", "Default Gridlines Vertical  ", Application.GetOption("Default Gridlines Vertical")   'Default gridlines showing, Vertical
+    Debug.Print , "2007", "Default Cell Effect         ", Application.GetOption("Default Cell Effect")          'Default cell effect
+    Debug.Print , "2007", "Default Column Width        ", Application.GetOption("Default Column Width")         'Default column width
     Debug.Print "   >>>Default font section"
-Debug.Print , "2007",       'Font Default Font Name
-Debug.Print , "2007",       'Size Default Font Size
-Debug.Print , "2007",       'Weight Default Font Weight
-Debug.Print , "2007",       'Underline Default Font Underline
-Debug.Print , "2007",       'Italic Default Font Italic
+    Debug.Print , "2007", "Default Font Name     ", Application.GetOption("Default Font Name")                  'Font
+    Debug.Print , "2007", "Default Font Size     ", Application.GetOption("Default Font Size")                  'Size
+    Debug.Print , "2007", "Default Font Weight   ", Application.GetOption("Default Font Weight")                'Weight
+    Debug.Print , "2007", "Default Font Underline", Application.GetOption("Default Font Underline")             'Underline
+    Debug.Print , "2007", "Default Font Italic   ", Application.GetOption("Default Font Italic")                'Italic
     Debug.Print ">>>Object Designers Tab"
     Debug.Print "   >>>Table design section"
-Debug.Print , "2007",       'Default text field size Default Text Field Size
-Debug.Print , "2007",       'Default number field size Default Number Field Size
-Debug.Print , "2007",       'Default field type Default Field Type
-Debug.Print , "2007",       'AutoIndex on Import/Create AutoIndex on Import/Create
-Debug.Print , "2007",       'Show Property Update Option Buttons Show Property Update Options Buttons
+    Debug.Print , "2007", "Default Text Field Size", Application.GetOption("Default Text Field Size")                           'Default text field size
+    Debug.Print , "2007", "Default Number Field Size", Application.GetOption("Default Number Field Size")                       'Default number field size
+    Debug.Print , "2007", "Default Field Type", Application.GetOption("Default Field Type")                                     'Default field type
+    Debug.Print , "2007", "AutoIndex on Import/Create", Application.GetOption("AutoIndex on Import/Create")                     'AutoIndex on Import/Create
+    Debug.Print , "2007", "Show Property Update Options Buttons", Application.GetOption("Show Property Update Options Buttons") 'Show Property Update Option Buttons
     Debug.Print "   >>>Query design section"
-Debug.Print , "2007",       'Show table names Show Table Names
-Debug.Print , "2007",       'Output all fields Output All Fields
-Debug.Print , "2007",       'Enable AutoJoin Enable AutoJoin
-Debug.Print , "2007",       'SQL Server Compatible Syntax (ANSI 92), This database ANSI Query Mode
-Debug.Print , "2007",       'SQL Server Compatible Syntax (ANSI 92), Default for new databases ANSI Query Mode Default
-Debug.Print , "2007",       'Query design font, Font Query Design Font Name
-Debug.Print , "2007",       'Query design font, Size Query Design Font Size
+    Debug.Print , "2007", "Show Table Names       ", Application.GetOption("Show Table Names")                  'Show table names
+    Debug.Print , "2007", "Output All Fields      ", Application.GetOption("Output All Fields")                 'Output all fields
+    Debug.Print , "2007", "Enable AutoJoin        ", Application.GetOption("Enable AutoJoin")                   'Enable AutoJoin
+    Debug.Print , "2007", "ANSI Query Mode        ", Application.GetOption("ANSI Query Mode")                   'SQL Server Compatible Syntax (ANSI 92), This database
+    Debug.Print , "2007", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")           'SQL Server Compatible Syntax (ANSI 92), Default for new databases
+    Debug.Print , "2007", "Query Design Font Name ", Application.GetOption("Query Design Font Name")            'Query design font, Font
+    Debug.Print , "2007", "Query Design Font Size ", Application.GetOption("Query Design Font Size")            'Query design font, Size
     Debug.Print "   >>>Forms/Reports section"
-Debug.Print , "2007",       'Selection behavior Selection Behavior
-Debug.Print , "2007",       'Form template Form Template
-Debug.Print , "2007",       'Report template Report Template
-Debug.Print , "2007",       'Always use event procedures Always Use Event Procedures
+    Debug.Print , "2007", "Selection Behavior         ", Application.GetOption("Selection Behavior")            'Selection behavior
+    Debug.Print , "2007", "Form Template              ", Application.GetOption("Form Template")                 'Form template
+    Debug.Print , "2007", "Report Template            ", Application.GetOption("Report Template")               'Report template
+    Debug.Print , "2007", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")   'Always use event procedures
     Debug.Print "   >>>Error checking section"
-Debug.Print , "2007",       'Enable error checking Enable Error Checking
-Debug.Print , "2007",       'Error indicator color Error Checking Indicator Color
-Debug.Print , "2007",       'Check for unassociated label and control Unassociated Label and Control Error Checking
-Debug.Print , "2007",       'Check for new unassociated labels New Unassociated Labels Error Checking
-Debug.Print , "2007",       'Check for keyboard shortcut errors Keyboard Shortcut Errors Error Checking
-Debug.Print , "2007",       'Check for invalid control properties Invalid Control Properties Error Checking
-Debug.Print , "2007",       'Check for common report errors Common Report Errors Error Checking
+    Debug.Print , "2007", "Enable Error Checking", Application.GetOption("Enable Error Checking")                                                   'Enable error checking
+    Debug.Print , "2007", "Error Checking Indicator Color", Application.GetOption("Error Checking Indicator Color")                                 'Error indicator color
+    Debug.Print , "2007", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")   'Check for unassociated label and control
+    Debug.Print , "2007", "New Unassociated Labels Error Checking", Application.GetOption("New Unassociated Labels Error Checking")                 'Check for new unassociated labels
+    Debug.Print , "2007", "Keyboard Shortcut Errors Error Checking", Application.GetOption("Keyboard Shortcut Errors Error Checking")               'Check for keyboard shortcut errors
+    Debug.Print , "2007", "Invalid Control Properties Error Checking", Application.GetOption("Invalid Control Properties Error Checking")           'Check for invalid control properties
+    Debug.Print , "2007", "Common Report Errors Error Checking", Application.GetOption("Common Report Errors Error Checking")                       'Check for common report errors
     Debug.Print ">>>Proofing Tab"
     Debug.Print "   >>>When correcting spelling in Microsoft Office programs section"
 Debug.Print , "2007",       'Ignore words in UPPERCASE Spelling ignore words in UPPERCASE
