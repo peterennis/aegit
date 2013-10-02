@@ -17,6 +17,11 @@ Option Explicit
 ' Say you want to display a list of reports available in your database to a user in one of your forms.  Simply add a combo-box to your form, then set the Row Source property as follows:
 '   SELECT [Name] FROM [MSysObjects] WHERE [Type] = -32764 AND Left([Name],1) <> "~" ORDER BY [Name]
 '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
+'
+' Guides:
+' Office VBA—Basic Debugging Techniques
+' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
+'
 
 
 '20130920 - v047 - Add aeReadWriteStream to aegitClass to fix SaveAsText from UTF-16 to txt
