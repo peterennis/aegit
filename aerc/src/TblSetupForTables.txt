@@ -1,10 +1,20 @@
+------------
+TABLE: Items
+------------
+FIELD NAME     FIELD TYPE      SIZE    DESCRIPTION                       
+===========    ============    ====    ==================================
+Item           Text            255                                       
+Quantity       Long Integer    4                                         
+Status         Text            255                                       
+
+
 --------------------------------------------------------------
 TABLE: tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 --------------------------------------------------------------
-FIELD NAME     FIELD TYPE    SIZE    DESCRIPTION                       
-===========    ==========    ====    ==================================
-id             AutoNumber    4                                         
-Desc           Text          255                                       
-Description    Text          255     This is a description of the field
+FIELD NAME     FIELD TYPE      SIZE    DESCRIPTION                       
+===========    ============    ====    ==================================
+id             AutoNumber      4                                         
+Desc           Text            255                                       
+Description    Text            255     This is a description of the field
 
 

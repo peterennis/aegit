@@ -4,8 +4,8 @@
               Access version = 15.0
               ADO (ActiveX Data Object) version = 6.2
               DAO (DbEngine)  version = 15.0
-              DAO (CodeDb)    version = 12.0
-              DAO (CurrentDb) version = 12.0
+              DAO (CodeDb)    version = 14.0
+              DAO (CurrentDb) version = 14.0
               <@_@>
                    References:
                             VBA           Visual Basic For Applications

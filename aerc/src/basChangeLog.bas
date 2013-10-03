@@ -23,7 +23,10 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
-
+'20131003 - v049 - Ref: http://msdn.microsoft.com/en-us/library/gg435977(v=office.14).aspx
+    ' Add table macro for output test
+    ' Discontinued features and modified functionality in Access 2013
+    ' Ref: http://office.microsoft.com/en-us/access-help/discontinued-features-and-modified-functionality-in-access-2013-HA102749226.aspx
 '20131002 - v048 - Add ListAccessApplicationOptions to aegitClass for options txt output
 '20130920 - v047 - Add aeReadWriteStream to aegitClass to fix SaveAsText from UTF-16 to txt
     ' Keeps compatibility with older versions of Access
