@@ -27,6 +27,7 @@ Option Explicit
     ' Add table macro for output test
     ' Discontinued features and modified functionality in Access 2013
     ' Ref: http://office.microsoft.com/en-us/access-help/discontinued-features-and-modified-functionality-in-access-2013-HA102749226.aspx
+    ' Ref: http://stackoverflow.com/questions/9206153/how-to-export-access-2010-data-macros
 '20131002 - v048 - Add ListAccessApplicationOptions to aegitClass for options txt output
 '20130920 - v047 - Add aeReadWriteStream to aegitClass to fix SaveAsText from UTF-16 to txt
     ' Keeps compatibility with older versions of Access
