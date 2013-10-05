@@ -358,10 +358,10 @@ Public Sub AllCodeToDesktop()
     'For each component in the project ...
     For Each mdl In VBE.ActiveVBProject.VBComponents
         'using the count of lines ...
-        i = VBE.ActiveVBProject.VBComponents(mdl.Name).codemodule.CountOfLines
+        i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
         'put the code in a string ...
         If i > 0 Then
-            strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).codemodule.Lines(1, i)
+            strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, i)
         End If
         'and then write it to a file, first marking the start with
         'some equal signs and the component name.
@@ -574,7 +574,10 @@ Public Sub SaveTableMacros()
         .resolveExternals = False
     End With
 
-    objXMLDOMDoc.LoadXML ("<root><items><item><foo>a</foo><bar>1</bar></item></items></root>")
+    ' Ref: http://msdn.microsoft.com/en-us/library/ms762722(v=vs.85).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/ms754585(v=vs.85).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/aa468547.aspx
+    objXMLDOMDoc.Load ("C:\Temp\Items.xml")
 
     Dim strXMLResDoc
     Set strXMLResDoc = CreateObject("Msxml2.DOMDocument.6.0")
@@ -589,3 +592,60 @@ Public Sub SaveTableMacros()
     Set objXMLStyleSheet = Nothing
 
 End Sub
+
+Sub ApplicationInformation()
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa223101(v=office.11).aspx
+
+    Debug.Print Application.CurrentProject.FullName
+    Debug.Print Application.CurrentProject.ProjectType
+
+End Sub
+
+Public Sub SetRefToLibrary()
+' http://www.exceltoolset.com/setting-a-reference-to-the-vba-extensibility-library-by-code/
+' Adjusted for Microsoft Access
+' Create a reference to the VBA Extensibility library
+    On Error Resume Next        ' in case the reference already exits
+    Access.Application.VBE.ActiveVBProject.References _
+                  .AddFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 0
+End Sub
+
+Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
+'Public Function TotalLinesInProject(Optional VBProj As VBIDE.VBProject = Nothing) As Long
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Reference to Microsoft Visual Basic For Applications Extensibility 5.3
+' was required in old code.
+' Ref: http://www.cpearson.com/excel/vbe.aspx
+' Adjusted for Microsoft Access and Late Binding. No reference needed.
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' This returns the total number of lines in all components of the VBProject
+' referenced by VBProj. If VBProj is missing, the VBProject of the
+' Access.Application is used. Returns -1 if the VBProject is locked.
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    Dim VBP As Object               'VBIDE.VBProject
+    Dim VBComp As Object            'VBIDE.VBComponent
+    Dim LineCount As Long
+    
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=245480
+    Const vbext_pp_locked = 1
+
+    If VBProj Is Nothing Then
+        Set VBP = Access.Application.VBE.ActiveVBProject
+    Else
+        Set VBP = VBProj
+    End If
+
+    If VBP.Protection = vbext_pp_locked Then
+        TotalLinesInProject = -1
+        Exit Function
+    End If
+
+    For Each VBComp In VBP.VBComponents
+        LineCount = LineCount + VBComp.CodeModule.CountOfLines
+    Next VBComp
+    
+    TotalLinesInProject = LineCount
+
+End Function
+    

@@ -354,6 +354,16 @@ Private Sub ListAccessApplicationOptions()
 ' *** Ref: http://msdn.microsoft.com/en-us/library/office/ff823177.aspx (2013)
 ' Ref: http://office.microsoft.com/en-us/access-help/HV080750165.aspx (2013?)
 ' Set Options from Visual Basic
+'
+' Ref: http://www.fmsinc.com/tpapers/vbacode/debug.asp
+' Break on Unhandled Errors” works in most cases but is problematic while debugging class modules.
+' During development, if Error Trapping is set to “Break on Unhandled Errors” and an error occurs in a class module,
+' the debugger stops on the line calling the class rather than the offending line in the class.
+' This makes finding and fixing the problem a real pain.
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "ListAccessApplicationOptions"
 
     Dim dbs As Database
     Set dbs = CurrentDb
@@ -363,7 +373,7 @@ Private Sub ListAccessApplicationOptions()
     fle = FreeFile()
     Open aegitSourceFolder & "\ListAccessApplicationOptions.txt" For Output As #fle
 
-    On Error Resume Next
+    'On Error Resume Next
     Print #fle, ">>>Standard Options"
     '2000 The following options are equivalent to the standard startup options found in the Startup Options dialog box.
     Print #fle, , "2000", "AppTitle              ", dbs.Properties!AppTitle                     'String  The title of an application, as displayed in the title bar.
@@ -636,8 +646,24 @@ Private Sub ListAccessApplicationOptions()
     Print #fle, , "2007, 2010, 2013", "Enable DDE Refresh                        ", Application.GetOption("Enable DDE Refresh")                             'DDE operations, Enable DDE refresh
     Print #fle, , "2007, 2010, 2013", "Command-Line Arguments                    ", Application.GetOption("Command-Line Arguments")                         'Command-line arguments
 
+PROC_EXIT:
     Set dbs = Nothing
-    Close #fle
+    Close fle
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    If Err = 2091 Then          ''...' is an invalid name.
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAccessApplicationOptions of Class aegitClass"
+        Print #fle, "!" & Err.Description
+        Err.Clear
+    ElseIf Err = 3270 Then      'Property not found.
+        Err.Clear
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAccessApplicationOptions of Class aegitClass"
+        GlobalErrHandler
+    End If
+    Resume Next
 
 End Sub
 
