@@ -356,8 +356,8 @@ Private Sub ListAccessApplicationOptions()
 ' Set Options from Visual Basic
 '
 ' Ref: http://www.fmsinc.com/tpapers/vbacode/debug.asp
-' Break on Unhandled Errors” works in most cases but is problematic while debugging class modules.
-' During development, if Error Trapping is set to “Break on Unhandled Errors” and an error occurs in a class module,
+' Break on Unhandled Errors: works in most cases but is problematic while debugging class modules.
+' During development, if Error Trapping is set to 'Break on Unhandled Errors' and an error occurs in a class module,
 ' the debugger stops on the line calling the class rather than the offending line in the class.
 ' This makes finding and fixing the problem a real pain.
 
