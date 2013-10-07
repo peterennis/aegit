@@ -29,7 +29,7 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.0"
+Private Const aegitVERSION As String = "0.5.1"
 Private Const aegitVERSION_DATE As String = "October 7, 2013"
 Private Const THE_DRIVE As String = "C"
 
@@ -315,7 +315,7 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
 End Function
 
-Private Sub ListAllHiddenQueries()
+Private Sub ListOfAllHiddenQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
     Const strTempTable As String = "zzzTmpTblQueries"
@@ -334,13 +334,13 @@ Private Sub ListAllHiddenQueries()
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
     Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "ListOfHiddenQueries.txt", False
+    DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "ListOfAllHiddenQueries.txt", False
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
 End Sub
 
-Private Sub ListAccessApplicationOptions()
+Private Sub ListOfAccessApplicationOptions()
 ' Note: If you are developing a database application, add-in, library database, or referenced database, make sure that the
 ' Error Trapping option is set to 2 (Break On Unhandled Errors) when you have finished debugging your code.
 '
@@ -363,7 +363,7 @@ Private Sub ListAccessApplicationOptions()
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListAccessApplicationOptions"
+    PushCallStack "ListOfAccessApplicationOptions"
 
     Dim dbs As Database
     Set dbs = CurrentDb
@@ -371,7 +371,7 @@ Private Sub ListAccessApplicationOptions()
     Dim fle As Integer
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\ListAccessApplicationOptions.txt" For Output As #fle
+    Open aegitSourceFolder & "\ListOfAccessApplicationOptions.txt" For Output As #fle
 
     'On Error Resume Next
     Print #fle, ">>>Standard Options"
@@ -654,13 +654,68 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2091 Then          ''...' is an invalid name.
-        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAccessApplicationOptions of Class aegitClass"
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
         Print #fle, "!" & Err.Description
         Err.Clear
     ElseIf Err = 3270 Then      'Property not found.
         Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAccessApplicationOptions of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        GlobalErrHandler
+    End If
+    Resume Next
+
+End Sub
+
+Private Sub ListOfApplicationProperties()
+' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "ListOfApplicationProperties"
+
+    Dim dbs As Database
+    Set dbs = CurrentDb
+    Dim fle As Integer
+
+    fle = FreeFile()
+    Open aegitSourceFolder & "\ListOfApplicationProperties.txt" For Output As #fle
+
+    Dim prp As Property
+    Dim i As Integer
+    Dim strPropName As String
+    Dim varPropValue As Variant
+    Dim varPropType As Variant
+    Dim varPropInherited As Variant
+    Dim intPropPropCount As Integer
+    Dim strError As String
+
+    With dbs
+        For i = 0 To (.Properties.Count - 1)
+            strPropName = .Properties(i).Name
+            varPropValue = Null
+            varPropValue = .Properties(i).Value
+            varPropType = .Properties(i).Type
+            varPropInherited = .Properties(i).Inherited
+            Print #fle, strPropName & ": " & varPropValue & ", " & _
+                varPropType & ", " & varPropInherited
+        Next i
+    End With
+
+PROC_EXIT:
+    Set dbs = Nothing
+    Close fle
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3251 Then
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        Debug.Print strPropName
+        Print #fle, "!" & Err.Description, strPropName
+        Err.Clear
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -1772,9 +1827,10 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         DocumentTheContainer "Modules", "bas"
     End If
     
-    ListContainers ("ListOfContainers.txt")
-    ListAllHiddenQueries
-    ListAccessApplicationOptions
+    ListOfContainers ("ListOfContainers.txt")
+    ListOfAllHiddenQueries
+    ListOfAccessApplicationOptions
+    ListOfApplicationProperties
     'Stop
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -2320,7 +2376,7 @@ Private Sub WriteStringToFile(lngFileNum As Long, strTheString As String, strThe
 
 End Sub
 
-Public Function ListContainers(strTheFileName As String) As Boolean
+Public Function ListOfContainers(strTheFileName As String) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
 
@@ -2335,7 +2391,7 @@ Public Function ListContainers(strTheFileName As String) As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListContainers"
+    PushCallStack "ListOfContainers"
 
     Set dbs = CurrentDb
     lngFileNum = FreeFile
@@ -2369,7 +2425,7 @@ Public Function ListContainers(strTheFileName As String) As Boolean
         .Close
     End With
 
-    ListContainers = True
+    ListOfContainers = True
 
 PROC_EXIT:
     Set prpLoop = Nothing
@@ -2380,7 +2436,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    ListContainers = False
+    ListOfContainers = False
     GlobalErrHandler
     Resume PROC_EXIT
 
