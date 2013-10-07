@@ -22,7 +22,7 @@ Option Explicit
 ' Office VBA Basic Debugging Techniques
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
-
+'20131003 - v050 - Bump
 '20131003 - v049 - Ref: http://msdn.microsoft.com/en-us/library/gg435977(v=office.14).aspx
     ' Add table macro for output test
     ' Discontinued features and modified functionality in Access 2013
