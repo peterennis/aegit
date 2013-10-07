@@ -70,11 +70,11 @@ Private aeintFTLen As Long
 Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private Const aestr4 As String = "    "
-Private Const aeSqlTxtFile = "SqlCodeForQueries.txt"
-Private Const aeTblTxtFile = "TblSetupForTables.txt"
-Private Const aeRefTxtFile = "ReferencesSetup.txt"
-Private Const aeRelTxtFile = "RelationsSetup.txt"
-Private Const aePrpTxtFile = "PropertiesBuiltIn.txt"
+Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
+Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
+Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
+Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
+Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
 '
 
 Private Sub Class_Initialize()
