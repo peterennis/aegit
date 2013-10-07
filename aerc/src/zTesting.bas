@@ -649,38 +649,60 @@ Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
 
 End Function
 
-Public Sub ListApplicationProperties()
+Public Sub ListOfApplicationProperties()
 ' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 
- On Error GoTo tagError
- Dim prp As Property, i As Integer
- Dim strPropName As String, varPropValue As Variant, varPropType As Variant
- Dim varPropInherited As Variant, intPropPropCount As Integer
- Dim strError As String
+'    ' Use a call stack and global error handler
+'    If gcfHandleErrors Then On Error GoTo PROC_ERR
+'    PushCallStack "ListAccessApplicationOptions"
 
- With CurrentDb
+    On Error GoTo PROC_ERR
 
-     For i = 0 To (.Properties.Count - 1)
-         strPropName = .Properties(i).Name
-         varPropValue = Null
-         varPropValue = .Properties(i).Value
-         varPropType = .Properties(i).Type
-         varPropInherited = .Properties(i).Inherited
-         Debug.Print strPropName & ": " & varPropValue & ", " & _
-             varPropType & ", " & varPropInherited & ";" & strError
-         strError = ""
-     Next i
+    Dim dbs As Database
+    Set dbs = CurrentDb
+    Dim fle As Integer
 
- End With
- Exit Sub
+    fle = FreeFile()
+    Open "C:\Temp\ListOfApplicationProperties.txt" For Output As #fle
+'    Open aegitSourceFolder & "\ListOfApplicationProperties.txt" For Output As #fle
 
-tagError:
-     Select Case Err.Number
-     Case 3251
-         strError = Err.Number & "," & Err.Description
-         Resume Next
-     Case Else
-         MsgBox Err.Description
-     Exit Sub
-     End Select
- End Sub
+    Dim prp As Property
+    Dim i As Integer
+    Dim strPropName As String
+    Dim varPropValue As Variant
+    Dim varPropType As Variant
+    Dim varPropInherited As Variant
+    Dim intPropPropCount As Integer
+    Dim strError As String
+
+    With dbs
+        For i = 0 To (.Properties.Count - 1)
+            strPropName = .Properties(i).Name
+            varPropValue = Null
+            varPropValue = .Properties(i).Value
+            varPropType = .Properties(i).Type
+            varPropInherited = .Properties(i).Inherited
+            Print #fle, strPropName & ": " & varPropValue & ", " & _
+                varPropType & ", " & varPropInherited
+        Next i
+    End With
+
+PROC_EXIT:
+    Set dbs = Nothing
+    Close fle
+'    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3251 Then
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        Debug.Print strPropName
+        Print #fle, "!" & Err.Description, strPropName
+        Err.Clear
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+'        GlobalErrHandler
+    End If
+    Resume Next
+
+End Sub
