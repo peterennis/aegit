@@ -648,4 +648,39 @@ Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
     TotalLinesInProject = LineCount
 
 End Function
-    
+
+Public Sub ListApplicationProperties()
+' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
+
+ On Error GoTo tagError
+ Dim prp As Property, i As Integer
+ Dim strPropName As String, varPropValue As Variant, varPropType As Variant
+ Dim varPropInherited As Variant, intPropPropCount As Integer
+ Dim strError As String
+
+ With CurrentDb
+
+     For i = 0 To (.Properties.Count - 1)
+         strPropName = .Properties(i).Name
+         varPropValue = Null
+         varPropValue = .Properties(i).Value
+         varPropType = .Properties(i).Type
+         varPropInherited = .Properties(i).Inherited
+         Debug.Print strPropName & ": " & varPropValue & ", " & _
+             varPropType & ", " & varPropInherited & ";" & strError
+         strError = ""
+     Next i
+
+ End With
+ Exit Sub
+
+tagError:
+     Select Case Err.Number
+     Case 3251
+         strError = Err.Number & "," & Err.Description
+         Resume Next
+     Case Else
+         MsgBox Err.Description
+     Exit Sub
+     End Select
+ End Sub
