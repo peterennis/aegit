@@ -2,13 +2,8 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
-' Need proper fix for internationalization SaveAsText UTF-16 for Access 2013 and proper set of github to deal with it
-'   Ref: http://www.git-scm.com/docs/gitattributes.html and look at:
-'   If you want to interoperate with a source code management system that enforces end-of-line normalization,
-'   or you simply want all text files in your repository to be normalized, you should instead set the text attribute
-'   to "auto" for all files.
 ' ReadDocDatabase debug output when custom test folder given
-' Test for expected references when class first created
+' Test for expected references when class first created OR fix to use late binding
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
@@ -23,6 +18,16 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20131022 - v052 - Create KillAllFiles outside of aeDocumentTheDatabase with varDebug pass through parameter
+    ' Err 2220 can't open the file... still occurring with forms
+    ' Use strTheCurrentPathAndFile in DocumentTheContainer
+    ' Include test for err 70 permission denied in KillAllFiles and STOP with critical message
+    ' DONE:
+    ' Need proper fix for internationalization SaveAsText UTF-16 for Access 2013 and proper set of github to deal with it
+    '   Ref: http://www.git-scm.com/docs/gitattributes.html and look at:
+    '   If you want to interoperate with a source code management system that enforces end-of-line normalization,
+    '   or you simply want all text files in your repository to be normalized, you should instead set the text attribute
+    '   to "auto" for all files.
 '20131003 - v051 - Add ListOfApplicationProperties to aegitClass
     ' Prepend Output... to some filenames
 '20131003 - v050 - Bump

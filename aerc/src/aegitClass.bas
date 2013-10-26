@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.1"
-Private Const aegitVERSION_DATE As String = "October 7, 2013"
+Private Const aegitVERSION As String = "0.5.2"
+Private Const aegitVERSION_DATE As String = "October 22, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -267,7 +267,7 @@ End Property
 
 Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
-    Dim fname As String
+    Dim FName As String
     Dim fname2 As String
     Dim fnr As Integer
     Dim fnr2 As Integer
@@ -279,11 +279,11 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
     ' If the file has no Byte Order Mark (BOM)
     ' Ref: http://msdn.microsoft.com/en-us/library/windows/desktop/dd374101%28v=vs.85%29.aspx
     ' then do nothing
-    fname = strPathFileName
+    FName = strPathFileName
     fname2 = strPathFileName & ".clean.txt"
 
     fnr = FreeFile()
-    Open fname For Binary Access Read As #fnr
+    Open FName For Binary Access Read As #fnr
     Get #fnr, , tstring
     ' #FFFE, #FFFF, #0000
     ' If no BOM then it is a txt file and header stripping is not needed
@@ -1674,6 +1674,38 @@ PROC_ERR:
 
 End Function
  
+Private Function IsFileLocked(PathName As String) As Boolean
+' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
+    
+    On Error GoTo ErrHandler
+    Dim i As Integer
+
+    If Len(Dir$(PathName)) Then
+        i = FreeFile()
+        Open PathName For Random Access Read Write Lock Read Write As #i
+        Lock i 'Redundant but let's be 100% sure
+        Unlock i
+        Close i
+    Else
+        'Err.Raise 53
+    End If
+
+ExitProc:
+    On Error GoTo 0
+    Exit Function
+
+ErrHandler:
+    Select Case Err.Number
+        Case 70 'Unable to acquire exclusive lock
+            IsFileLocked = True
+        Case Else
+            MsgBox "Error " & Err.Number & " (" & Err.Description & ")"
+    End Select
+    Resume ExitProc
+    Resume
+
+End Function
+
 Private Function DocumentTheContainer(strContainerType As String, strExt As String, Optional varDebug As Variant) As Boolean
 ' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
@@ -1687,6 +1719,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
     Dim i As Integer
     Dim intAcObjType As Integer
     Dim blnDebug As Boolean
+    Dim strTheCurrentPathAndFile As String
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
@@ -1718,12 +1751,17 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
         If blnDebug Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
-            If intAcObjType = 2 Then Pause (0.25)
-            Application.SaveAsText intAcObjType, doc.Name, aestrSourceLocation & doc.Name & "." & strExt
+            strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
+            If IsFileLocked(strTheCurrentPathAndFile) Then
+                MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP"
+                Stop
+            End If
+            'If intAcObjType = 2 Then Pause (0.5)
+            Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             ' Convert UTF-16 to txt - fix for Access 2013
-            If aeReadWriteStream(aestrSourceLocation & doc.Name & "." & strExt) = True Then
-                KillProperly (aestrSourceLocation & doc.Name & "." & strExt)
-                Name aestrSourceLocation & doc.Name & "." & strExt & ".clean.txt" As aestrSourceLocation & doc.Name & "." & strExt
+            If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
+                KillProperly (strTheCurrentPathAndFile)
+                Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
             End If
         End If
     Next doc
@@ -1748,7 +1786,54 @@ PROC_ERR:
     Resume PROC_EXIT
 
 End Function
- 
+
+Private Sub KillAllFiles(Optional varDebug As Variant)
+
+    Dim strFile As String
+    Dim blnDebug As Boolean
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "KillAllFiles"
+
+    Debug.Print "aeDocumentTheDatabase"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of KillAllFiles is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of KillAllFiles is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
+
+    ' Delete all the files in a given directory:
+    ' Loop through all the files in the directory by using Dir$ function
+    strFile = Dir(aestrSourceLocation & "*.*")
+    Do While strFile <> ""
+        KillProperly (aestrSourceLocation & strFile)
+        ' Need to specify full path again because a file was deleted
+        strFile = Dir(aestrSourceLocation & "*.*")
+    Loop
+
+PROC_EXIT:
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    If Err = 70 Then    ' Permission denied
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass" _
+            & vbCrLf & _
+            "Manually delete the files from git and try again!", vbCritical, "STOP"
+        Stop
+    End If
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    GlobalErrHandler
+    Resume PROC_EXIT
+
+End Sub
+
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -1767,7 +1852,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
-    Dim strFile As String
     Dim i As Integer
     Dim blnDebug As Boolean
 
@@ -1806,14 +1890,11 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
     'Stop
 
-    ' Delete all the files in a given directory:
-    ' Loop through all the files in the directory by using Dir$ function
-    strFile = Dir(aestrSourceLocation & "*.*")
-    Do While strFile <> ""
-        KillProperly (aestrSourceLocation & strFile)
-        ' Need to specify full path again because a file was deleted
-        strFile = Dir(aestrSourceLocation & "*.*")
-    Loop
+    If IsMissing(varDebug) Then
+        KillAllFiles
+    Else
+        KillAllFiles varDebug
+    End If
 
     If blnDebug Then
         DocumentTheContainer "Forms", "frm", "WithDebugging"
