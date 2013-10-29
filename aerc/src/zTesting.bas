@@ -420,13 +420,13 @@ Public Sub ListGUID()
 
     Dim i As Integer
     Dim arrGUID8() As Byte
-    Dim strGUID As String
+    Dim strGuid As String
 
     arrGUID8 = CurrentDb.TableDefs("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger").Properties("GUID").Value
     For i = 1 To 8
-        strGUID = strGUID & Hex(arrGUID8(i)) & "-"
+        strGuid = strGuid & Hex(arrGUID8(i)) & "-"
     Next
-    Debug.Print Left(strGUID, 23)
+    Debug.Print Left(strGuid, 23)
 
 End Sub
 
@@ -436,14 +436,14 @@ Public Function fListGUID(strTableName As String) As String
 
     Dim i As Integer
     Dim arrGUID8() As Byte
-    Dim strGUID As String
+    Dim strGuid As String
 
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
     For i = 1 To 8
-        strGUID = strGUID & Hex(arrGUID8(i)) & "-"
+        strGuid = strGuid & Hex(arrGUID8(i)) & "-"
     Next
     'Debug.Print Left(strGUID, 23)
-    fListGUID = Left(strGUID, 23)
+    fListGUID = Left(strGuid, 23)
 
 End Function
 
