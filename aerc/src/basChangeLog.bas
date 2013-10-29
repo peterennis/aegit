@@ -28,6 +28,7 @@ Option Explicit
     '   If you want to interoperate with a source code management system that enforces end-of-line normalization,
     '   or you simply want all text files in your repository to be normalized, you should instead set the text attribute
     '   to "auto" for all files.
+    ' Add and test ListFilesRecursively
 '20131003 - v051 - Add ListOfApplicationProperties to aegitClass
     ' Prepend Output... to some filenames
 '20131003 - v050 - Bump
