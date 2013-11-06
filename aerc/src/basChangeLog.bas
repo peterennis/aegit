@@ -18,8 +18,9 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20131025 - v053 - Improve message for err 70 KillAllFiles
 '20131022 - v052 - Create KillAllFiles outside of aeDocumentTheDatabase with varDebug pass through parameter
-    ' Err 2220 can't open the file... still occurring with forms
+    ' err 2220 can't open the file... still occurring with forms
     ' Use strTheCurrentPathAndFile in DocumentTheContainer
     ' Include test for err 70 permission denied in KillAllFiles and STOP with critical message
     ' DONE:
@@ -28,7 +29,6 @@ Option Explicit
     '   If you want to interoperate with a source code management system that enforces end-of-line normalization,
     '   or you simply want all text files in your repository to be normalized, you should instead set the text attribute
     '   to "auto" for all files.
-    ' Add and test ListFilesRecursively
 '20131003 - v051 - Add ListOfApplicationProperties to aegitClass
     ' Prepend Output... to some filenames
 '20131003 - v050 - Bump
@@ -55,7 +55,7 @@ Option Explicit
 '20130906 - v044 - Start dev for creating a file with a list of hidden queries
 '20130820 - v043 - Hidden attributes e.g. queries, not exported - needs fix
     ' *** Ref: http://stackoverflow.com/questions/10882317/get-list-of-queries-in-project-ms-access
-'20130816 - v042 - Err 2220 again. Query with "<" in the name always causes the error.
+'20130816 - v042 - err 2220 again. Query with "<" in the name always causes the error.
     ' Test creating a file with ">" in the name gives the OS error message:
     ' A filename can't contain any of the following characters:     \/:*?"<>|
     ' Ref: http://support.microsoft.com/kb/177506
@@ -63,23 +63,23 @@ Option Explicit
     ' Let the user do this in the db and fix it if needed. Source code export to file will follow the OS naming conventions.
 '20130715 - v042 - Change location of source folder debug output in aeDocumentTheDatabase so that Stop will show details before active code runs
     ' Get diff and add this to v043
-'20130711 - v041 - Err 2220 again. Happens after new file copy and rename then Security Warning! with "Enable Content" button appears in VBA when opened
+'20130711 - v041 - err 2220 again. Happens after new file copy and rename then Security Warning! with "Enable Content" button appears in VBA when opened
     ' and run code export. Related to the initial protection status?
     ' The error occurred a lot. Deleted contents of src folder and export again with no error! Test this again if future iterations and if it fixes the
     ' issue then code related to file deletion could be the problem. Consider a test and warning if the folder has content after deletion?
     ' Also seems related to file rename/compact and repair.
     ' Best current process: Rename file, open, enable content, update log/version, compact and repair, close then open the new version and export.
-'20130708 -v0402 - Decrease pause to 0.25 secs. Err 2220 possibly related to bad parameter in OpenForm command.
-'20130708 -v0401 - Add and use Pause function. Err 2220 appeared again. Increase pause to 0.5 secs.
-'20130702 - v040 - Remove Stop for Err 2220. Does not work with geh. Add WaitSeconds procedure.
-'20130702 - v039 - Add Stop for Err 2220 in Function DocumentTheContainer. See code comment.
+'20130708 -v0402 - Decrease pause to 0.25 secs. err 2220 possibly related to bad parameter in OpenForm command.
+'20130708 -v0401 - Add and use Pause function. err 2220 appeared again. Increase pause to 0.5 secs.
+'20130702 - v040 - Remove Stop for err 2220. Does not work with geh. Add WaitSeconds procedure.
+'20130702 - v039 - Add Stop for err 2220 in Function DocumentTheContainer. See code comment.
 '20130613 - v038 - Allow True/False option for CompactAndRepair
 '20130320 - v037 - Add CompactAndRepair (tested for Access 2010) to aegitClass using SendKeys
 '20130315 - v036 - Add Linked=> indicator to linked tables description in output file TblSetupForTables.txt
     ' Do not define zzz tables for Schema.txt export
 '20130226 - v035 - Change Test folder references and variables to Import folder
     ' wsh.CurrentDirectory = aestrImportLocation
-    ' Fix places where Erl missing
+    ' Fix places where erl missing
     ' Get values for aestrSourceLocation, aestrImportLocation in aeReadDocdatabase
 '20130225 - v034 - Add UseTestFolder with associated Let property to explicitly turn on the routines for import testing
 '20130222 - v033 - Use MYPROJECT_TEST to run zzzaegitClassTest with a value for THE_SOURCE_FOLDER

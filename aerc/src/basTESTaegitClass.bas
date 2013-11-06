@@ -16,7 +16,7 @@ Option Explicit
 '
 Public Function MYPROJECT_TEST()
     'aegitClassTest
-    aegitClassTest ("debug")
+    'aegitClassTest ("debug")
 End Function
 
 Public Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
@@ -288,7 +288,7 @@ Public Sub ListOfAllQueries()
     ' Create the temp query that will have the query names
     On Error Resume Next
     Set qdfCurr = CurrentDb.QueryDefs(strTempQuery)
-    If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
+    If err.Number = 3265 Then ' 3265 is "Item not found in this collection."
         Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
     End If
     qdfCurr.SQL = strSQL
@@ -752,7 +752,7 @@ Function GetFiles(strPath As String, _
     On Error Resume Next
     ' Get folder.
     Set oFolder = fsoSysObj.GetFolder(strPath)
-    If Err <> 0 Then
+    If err <> 0 Then
         ' Incorrect path.
         GetFiles = False
         GoTo GetFiles_End

@@ -60,8 +60,8 @@ Public Function GetEdition( _
 
 ErrorHandler:
     GetEdition = strERR_MSG & vbNewLine & _
-                    "Error Number: " & CStr(Err.Number) & _
-                    vbNewLine & "Error Desc: " & Err.Description
+                    "Error Number: " & CStr(err.Number) & _
+                    vbNewLine & "Error Desc: " & err.Description
  
 End Function
  
@@ -352,7 +352,7 @@ Exit_IsAppOpen:
     Exit Sub
 
 Err_IsAppOpen:
-    If Err.Number = ERR_APP_NOTRUNNING Then
+    If err.Number = ERR_APP_NOTRUNNING Then
         Debug.Print strAppName & " is not running!"
     End If
     Set objApp = Nothing
