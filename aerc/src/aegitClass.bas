@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.3"
-Private Const aegitVERSION_DATE As String = "October 25, 2013"
+Private Const aegitVERSION As String = "0.5.4"
+Private Const aegitVERSION_DATE As String = "December 19, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -365,7 +365,7 @@ Private Sub ListOfAccessApplicationOptions()
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "ListOfAccessApplicationOptions"
 
-    Dim dbs As Database
+    Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim str As String
     Dim fle As Integer
@@ -674,7 +674,7 @@ Private Sub ListOfApplicationProperties()
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "ListOfApplicationProperties"
 
-    Dim dbs As Database
+    Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim fle As Integer
 
@@ -1849,6 +1849,12 @@ PROC_ERR:
 
 End Sub
 
+Private Function FolderExists(strPath As String) As Boolean
+' Ref: http://allenbrowne.com/func-11.html
+    On Error Resume Next
+    FolderExists = ((GetAttr(strPath) And vbDirectory) = vbDirectory)
+End Function
+
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -1911,16 +1917,22 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         KillAllFiles varDebug
     End If
 
-    If blnDebug Then
-        DocumentTheContainer "Forms", "frm", "WithDebugging"
-        DocumentTheContainer "Reports", "rpt", "WithDebugging"
-        DocumentTheContainer "Scripts", "mac", "WithDebugging"
-        DocumentTheContainer "Modules", "bas", "WithDebugging"
+    ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
+    If FolderExists(aestrSourceLocation) Then
+        If blnDebug Then
+            DocumentTheContainer "Forms", "frm", "WithDebugging"
+            DocumentTheContainer "Reports", "rpt", "WithDebugging"
+            DocumentTheContainer "Scripts", "mac", "WithDebugging"
+            DocumentTheContainer "Modules", "bas", "WithDebugging"
+        Else
+            DocumentTheContainer "Forms", "frm"
+            DocumentTheContainer "Reports", "rpt"
+            DocumentTheContainer "Scripts", "mac"
+            DocumentTheContainer "Modules", "bas"
+        End If
     Else
-        DocumentTheContainer "Forms", "frm"
-        DocumentTheContainer "Reports", "rpt"
-        DocumentTheContainer "Scripts", "mac"
-        DocumentTheContainer "Modules", "bas"
+        MsgBox aestrSourceLocation & " Does not exist!", vbCritical, "aegit"
+        Stop
     End If
     
     ListOfContainers ("ListOfContainers.txt")
@@ -1998,6 +2010,8 @@ End Function
 
 Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
                                         Optional varDebug As Variant) As Boolean
+'*** Requires reference to "Microsoft Scripting Runtime"
+'
 ' Ref: http://msdn.microsoft.com/en-us/library/ebkhfaaz(v=vs.85).aspx
 '====================================================================
 ' Author:   Peter F. Ennis

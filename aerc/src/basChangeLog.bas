@@ -18,6 +18,9 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20131219 - v054 - Note about need for reference to Microsoft Scripting Runtime
+    ' Explicity define Dim dbs As Database
+    ' Erl(0) Error 2950 if the ouput location does not exist so test for it first in aeDocumentTheDatabase
 '20131025 - v053 - Improve message for err 70 KillAllFiles
 '20131022 - v052 - Create KillAllFiles outside of aeDocumentTheDatabase with varDebug pass through parameter
     ' err 2220 can't open the file... still occurring with forms
