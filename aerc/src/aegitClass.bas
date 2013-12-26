@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.4"
-Private Const aegitVERSION_DATE As String = "December 19, 2013"
+Private Const aegitVERSION As String = "0.5.5"
+Private Const aegitVERSION_DATE As String = "December 26, 2013"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -859,9 +859,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
         If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
         If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
+        If blnDebug Then Debug.Print , , , vbaProj.References(i).Guid
 
         Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
         Print #1, , , , vbaProj.References(i).FullPath
+        Print #1, , , , vbaProj.References(i).Guid
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then

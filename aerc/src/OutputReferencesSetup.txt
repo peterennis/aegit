@@ -10,13 +10,18 @@
                    References:
                             VBA           Visual Basic For Applications
                                           C:\PROGRA~1\COMMON~1\MICROS~1\VBA\VBA7.1\VBE7.DLL
+                                          {000204EF-0000-0000-C000-000000000046}
                             Access        Microsoft Access 15.0 Object Library
                                           C:\Program Files\Microsoft Office\Office15\MSACC.OLB
+                                          {4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}
                             stdole        OLE Automation
                                           C:\Windows\System32\stdole2.tlb
+                                          {00020430-0000-0000-C000-000000000046}
                             DAO           Microsoft Office 15.0 Access database engine Object Library
                                           C:\Program Files\Common Files\Microsoft Shared\OFFICE15\ACEDAO.DLL
+                                          {4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}
                             Scripting     Microsoft Scripting Runtime
                                           C:\Windows\System32\scrrun.dll
+                                          {420B2830-E718-11CF-893D-00A0C9054228}
               <*_*>
 <==<

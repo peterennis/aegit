@@ -31,7 +31,7 @@
               XP, 2003      Perform Name AutoCorrect                   0 
               XP, 2003      Log Name AutoCorrect Changes               0 
               XP, 2003      Enable MRU File List                      -1 
-              XP, 2003      Size of MRU File List                      1 
+              XP, 2003      Size of MRU File List                      2 
               XP, 2003      Provide Feedback with Sound                0 
               XP, 2003      Auto Compact                               0 
               XP, 2003      New Database Sort Order                    1033 
@@ -232,7 +232,7 @@
               2007, 2010, 2013            Datasheet Ime Control                      0 
               2007, 2010, 2013            Use Hijri Calendar                         0 
    >>>Display section
-              2007, 2010, 2013            Size of MRU File List                      1 
+              2007, 2010, 2013            Size of MRU File List                      2 
               2007, 2010, 2013            Show Status Bar                           -1 
               2007, 2010, 2013            Show Animations                           -1 
               2007, 2010, 2013            Show Smart Tags on Datasheets             -1 

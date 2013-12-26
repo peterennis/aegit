@@ -18,6 +18,7 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20131219 - v055 - Output GUID for project references
 '20131219 - v054 - Note about need for reference to Microsoft Scripting Runtime
     ' Explicity define Dim dbs As Database
     ' Erl(0) Error 2950 if the ouput location does not exist so test for it first in aeDocumentTheDatabase
