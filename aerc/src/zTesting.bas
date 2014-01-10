@@ -183,7 +183,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    Select Case err.Number
+    Select Case Err.Number
         'Case ###         ' Add your own error management or log error to logging table
         Case Else
             'a custom log usage function commented out
@@ -384,7 +384,7 @@ Public Function PropertyExists(obj As Object, strPropertyName As String) As Bool
 
     On Error Resume Next
     Set var = obj.Properties(strPropertyName)
-    If err.Number > 0 Then
+    If Err.Number > 0 Then
         PropertyExists = False
     Else
         PropertyExists = True

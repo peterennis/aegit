@@ -3,7 +3,6 @@ Option Explicit
 
 ' Problems:
 ' ReadDocDatabase debug output when custom test folder given
-' Test for expected references when class first created OR fix to use late binding
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
@@ -18,6 +17,9 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140110 - v056 - Use latebinding everywhere
+    ' Ref: http://www.granite.ab.ca/access/latebinding.htm
+    ' DONE: Test for expected references when class first created OR fix to use late binding
 '20131219 - v055 - Output GUID for project references
 '20131219 - v054 - Note about need for reference to Microsoft Scripting Runtime
     ' Explicity define Dim dbs As Database

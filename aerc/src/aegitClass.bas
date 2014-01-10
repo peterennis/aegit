@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.5"
-Private Const aegitVERSION_DATE As String = "December 26, 2013"
+Private Const aegitVERSION As String = "0.5.6"
+Private Const aegitVERSION_DATE As String = "January 10, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -653,14 +653,14 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    If err = 2091 Then          ''...' is an invalid name.
-        Debug.Print "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
-        Print #fle, "!" & err.Description
-        err.Clear
-    ElseIf err = 3270 Then      'Property not found.
-        err.Clear
+    If Err = 2091 Then          ''...' is an invalid name.
+        Debug.Print "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        Print #fle, "!" & Err.Description
+        Err.Clear
+    ElseIf Err = 3270 Then      'Property not found.
+        Err.Clear
     Else
-        MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -709,13 +709,13 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    If err = 3251 Then
-        Debug.Print "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+    If Err = 3251 Then
+        Debug.Print "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
         Debug.Print strPropName
-        Print #fle, "!" & err.Description, strPropName
-        err.Clear
+        Print #fle, "!" & Err.Description, strPropName
+        Err.Clear
     Else
-        MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -740,7 +740,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure Pause of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegitClass"
     Resume PROC_EXIT
 
 End Function
@@ -767,7 +767,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure WaitSeconds of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegitClass"
     Resume PROC_EXIT
 End Sub
 
@@ -887,8 +887,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeGetReferences of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     aeGetReferences = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -933,7 +933,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure LongestTableName of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
     LongestTableName = 0
     GlobalErrHandler
     Resume PROC_EXIT
@@ -997,7 +997,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
     LongestFieldPropsName = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1073,7 +1073,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    Select Case err.Number
+    Select Case Err.Number
         'Case ###         ' Add your own error management or log error to logging table
         Case Else
             'a custom log usage function commented out
@@ -1092,11 +1092,11 @@ Private Function FileLocked(strFileName As String) As Boolean
     Open strFileName For Binary Access Read Write Lock Read Write As #1
     Close 1
     ' If an error occurs, the document is currently open.
-    If err.Number <> 0 Then
+    If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure FileLocked of Class aegitClass"
+        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegitClass"
         FileLocked = True
-        err.Clear
+        Err.Clear
     End If
 End Function
 
@@ -1200,8 +1200,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure TableInfo of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure TableInfo of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
     TableInfo = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1351,8 +1351,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     aeDocumentTables = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1467,8 +1467,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     aeDocumentRelations = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1522,7 +1522,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
     OutputQueriesSqlText = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1546,7 +1546,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure KillProperly of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -1676,9 +1676,9 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-     Select Case err.Number
+     Select Case Err.Number
         Case 3251
-            strError = err.Number & "," & err.Description
+            strError = Err.Number & "," & Err.Description
             varPropValue = Null
             Resume Next
         Case Else
@@ -1712,11 +1712,11 @@ ExitProc:
     Exit Function
 
 ErrHandler:
-    Select Case err.Number
+    Select Case Err.Number
         Case 70 'Unable to acquire exclusive lock
             IsFileLocked = True
         Case Else
-            MsgBox "Error " & err.Number & " (" & err.Description & ")"
+            MsgBox "Error " & Err.Number & " (" & Err.Description & ")"
     End Select
     Resume ExitProc
     Resume
@@ -1838,14 +1838,14 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    If err = 70 Then    ' Permission denied
-        MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure KillAllFiles of Class aegitClass" _
+    If Err = 70 Then    ' Permission denied
+        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass" _
             & vbCrLf & vbCrLf & _
             "Manually delete the files from git, compact and repair database, then try again!", vbCritical, "STOP"
         Stop
     End If
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure KillAllFiles of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2002,15 +2002,17 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
     aeDocumentTheDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
-Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
+Private Function BuildTheDirectory(FSO As Object, _
+                                        Optional varDebug As Variant) As Boolean
+'Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
                                         Optional varDebug As Variant) As Boolean
 '*** Requires reference to "Microsoft Scripting Runtime"
 '
@@ -2085,8 +2087,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
     BuildTheDirectory = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2173,8 +2175,10 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     If blnDebug Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
     ' CurDir Function
     If blnDebug Then Debug.Print , "CurDir = " & CurDir
-    
-    Dim FSO As Scripting.FileSystemObject
+
+    ' Create needed objects
+    Dim FSO As Object
+'    Dim FSO As Scripting.FileSystemObject
     Set FSO = CreateObject("Scripting.FileSystemObject")
 
     If blnDebug Then
@@ -2248,8 +2252,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
     aeReadDocDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2348,8 +2352,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeExists of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & err.Number & " (" & err.Description & ") in procedure aeExists of Class aegitClass"
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
     aeExists = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2390,8 +2394,8 @@ Private Sub GlobalErrHandler()
     Dim strMsg As String
 
     ' Variables to preserve error information
-    strError = err.Description
-    lngError = err.Number
+    strError = Err.Description
+    lngError = Err.Number
     intErl = Erl
 
     ' Reset workspace, close open objects
@@ -2426,7 +2430,7 @@ Private Sub PushCallStack(strProcName As String)
     ' Verify the stack array can handle the current array element
     If mintStackPointer > UBound(mastrCallStack) Then
     ' If array has not been defined, initialize the error handler
-        If err.Number = 9 Then
+        If Err.Number = 9 Then
             ErrorHandlerInit
         Else
             ' Increase the size of the array to not go out of bounds

@@ -1,6 +1,12 @@
 Option Compare Database
 Option Explicit
 
+Dim ref As Reference
+
+' 0 if Late Binding
+' 1 if Reference to FSO set.
+#Const FSORef = 0
+
 ' Default Usage:
 ' The following folders are used if no custom configuration is provided:
 ' aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
@@ -288,7 +294,7 @@ Public Sub ListOfAllQueries()
     ' Create the temp query that will have the query names
     On Error Resume Next
     Set qdfCurr = CurrentDb.QueryDefs(strTempQuery)
-    If err.Number = 3265 Then ' 3265 is "Item not found in this collection."
+    If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
         Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
     End If
     qdfCurr.SQL = strSQL
@@ -735,24 +741,50 @@ End Sub
 '
 
 Function GetFiles(strPath As String, _
+                dctDict As Object, _
+                Optional blnRecursive As Boolean) As Boolean
+'Function GetFiles(strPath As String, _
                 dctDict As Dictionary, _
                 Optional blnRecursive As Boolean) As Boolean
 ' This procedure returns all the files in a directory into
 ' a Dictionary object. If called recursively, it also returns
 ' all files in subfolders.
 
-    Dim fsoSysObj    As FileSystemObject
-    Dim oFolder      As Folder
-    Dim oSubFolder   As Folder
-    Dim oFile        As File
+    #If FSORef = 0 Then  ' Late binding
+        ' Ref: http://msdn.microsoft.com/en-us/library/office/gg278516.aspx
+        Dim fsoSysObj    As Object
+        Dim oFolder      As Object
+        Dim oSubFolder   As Object
+        Dim oFile        As Object
+        Set fsoSysObj = CreateObject("Scripting.FileSystemObject")
+        ' <=======
+        ' Remove the Object reference if it is present
+        On Error Resume Next
+        Set ref = References!Scripting
+        If Err.Number = 0 Then
+            References.Remove ref
+        ElseIf Err.Number <> 9 Then 'Subscript out of range meaning not reference not found
+            MsgBox Err.Description
+            Exit Function
+        End If
+        ' Use your own error handling label here
+        On Error GoTo MyErrorHandler
+        '<=======
+    #Else
+        ' A reference to the Object Library must be specified
+        Dim fsoSysObj    As FileSystemObject
+        Dim oFolder      As Folder
+        Dim oSubFolder   As Folder
+        Dim oFile        As File
+        ' Return new FileSystemObject.
+        Set fsoSysObj = New FileSystemObject
+    #End If
 
-    ' Return new FileSystemObject.
-    Set fsoSysObj = New FileSystemObject
 
     On Error Resume Next
     ' Get folder.
     Set oFolder = fsoSysObj.GetFolder(strPath)
-    If err <> 0 Then
+    If Err <> 0 Then
         ' Incorrect path.
         GetFiles = False
         GoTo GetFiles_End
@@ -776,18 +808,30 @@ Function GetFiles(strPath As String, _
 
 GetFiles_End:
     Exit Function
+
+MyErrorHandler:
+    MsgBox "Erl=" & Erl & " Err=" & Err & " " & Err.Description, vbCritical, "Error here ... fix it!"
+    Exit Function
+
 End Function
 
 Public Sub TestGetFiles()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164475(v=office.10).aspx
-    
-    Dim dctDict As Dictionary
+
+    #If FSORef = 0 Then  ' Late binding
+        Dim dctDict As Object
+        ' Create new dictionary
+        Set dctDict = CreateObject("Scripting.Dictionary")
+    #Else
+        ' A reference to the Object Library must be specified
+        Dim dctDict As Dictionary
+        Set dctDict = New Dictionary
+    #End If
+        
     Dim varItem As Variant
     Dim GetTempDir As String
 
     GetTempDir = "C:\TEMP"
-    ' Create new dictionary.
-    Set dctDict = New Dictionary
     ' Call recursively, return files into Dictionary object.
     If GetFiles(GetTempDir, dctDict, True) Then
         ' Print items in dictionary.
