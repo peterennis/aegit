@@ -6,6 +6,7 @@ FIELD NAME     FIELD TYPE      SIZE    DESCRIPTION
 Item           Text            255                                       
 Quantity       Long Integer    4                                         
 Status         Text            255                                       
+YNO            Text            255                                       
 
 
 --------------------------------------------------------------

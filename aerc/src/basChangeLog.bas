@@ -16,6 +16,16 @@ Option Explicit
 '
 
 '20140112 - v057 - adaept sample tab displayed, but no output indication
+    ' Research for documenting field lookup value list
+    ' http://www.access-programmers.co.uk/forums/showthread.php?t=160994
+    ' http://www.devhut.net/tag/ms-access-vba-programming/
+    ' GetVBEDeatils
+    ' http://www.devhut.net/tag/ms-access-vba-programming/page/2/
+    ' http://www.functionx.com/vbaccess/Lesson25.HTML
+    ' *** http://www.accessmvp.com/twickerath/articles/multiuser.htm ***
+    ' http://www.codeproject.com/Articles/380870/Microsoft-Access-Application-Development-Guideline
+    ' http://www.eraserve.com/tutorials/MS_ACCESS_VBA_Get_Indexed_Fields.asp
+    '
 '20140110 - v056 - Use latebinding everywhere
     ' Ref: http://www.granite.ab.ca/access/latebinding.htm
     ' DONE: Test for expected references when class first created OR fix to use late binding
