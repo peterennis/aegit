@@ -6,6 +6,14 @@ Private Const FOR_READING = 1
 ' Remove this after integration with aegitClass
 Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
 
+' Ref: http://www.cpearson.com/excel/Enums.aspx
+Private Enum DisplayControlType
+    CheckBox = 106
+    TextBox = 109
+    ListBox = 110
+    ComboBox = 111
+End Enum
+
 Public Sub TestCreateDbScript()
     'CreateDbScript "C:\Temp\Schema.txt"
     Debug.Print "THE_SOURCE_FOLDER=" & THE_SOURCE_FOLDER
@@ -42,7 +50,9 @@ Public Sub CreateDbScript(strScriptFile As String)
                 Or Left(tdf.Name, 4) = "~TMP" _
                 Or Left(tdf.Name, 3) = "zzz") Then
 
-            strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
+MsgBox "FIXME"
+Stop
+'strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
             If strLinkedTablePath <> "" Then
                 f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
             Else
@@ -162,36 +172,104 @@ Public Sub CreateDbScript(strScriptFile As String)
 
 End Sub
 
-Public Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
-' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
-' To test in the Immediate window:       ? getcurrentpath("Const")
-'====================================================================
-' Procedure : GetLinkedTableCurrentPath
-' DateTime  : 08/23/2010
-' Author    : Rx
-' Purpose   : Returns Current Path of a Linked Table in Access
-' Updates   : Peter F. Ennis
-' Updated   : All notes moved to change log
-' History   : See comment details, basChangeLog, commit messages on github
-'====================================================================
-    On Error GoTo PROC_ERR
-    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
-        ' non-linked table returns blank - the Instr removes the "Database="
+Public Sub ObjectCounts()
+ 
+    Dim qry As DAO.QueryDef
+    Dim cnt As DAO.Container
+ 
+    'Delete all TEMP queries ...
+    For Each qry In CurrentDb.QueryDefs
+        If Left(qry.Name, 1) = "~" Then
+            CurrentDb.QueryDefs.Delete qry.Name
+            CurrentDb.QueryDefs.Refresh
+        End If
+    Next qry
+ 
+    'Print the values to the immediate window
+    With CurrentDb
+ 
+        Debug.Print "--- From the DAO.Database ---"
+        Debug.Print "-----------------------------"
+        Debug.Print "Tables (Inc. System tbls): " & .TableDefs.Count
+        Debug.Print "Querys: " & .QueryDefs.Count & vbCrLf
+ 
+        For Each cnt In .Containers
+            Debug.Print cnt.Name & ":" & cnt.Documents.Count
+        Next cnt
+ 
+    End With
+ 
+    'Use the "Project" collections to get the counts of objects
+    With CurrentProject
+        Debug.Print vbCrLf & "--- From the Access 'Project' ---"
+        Debug.Print "---------------------------------"
+        Debug.Print "Forms: " & .AllForms.Count
+        Debug.Print "Reports: " & .AllReports.Count
+        Debug.Print "DataAccessPages: " & .AllDataAccessPages.Count
+        Debug.Print "Modules: " & .AllModules.Count
+        Debug.Print "Macros (aka Scripts): " & .AllMacros.Count
+    End With
+ 
+End Sub
 
-PROC_EXIT:
+Private Function GetType(Value As DisplayControlType) As String
+' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
+
+    Select Case Value
+        Case 106
+            GetType = "Check box"
+        Case 109
+            GetType = "Text box"
+        Case 110
+            GetType = "List box"
+        Case 111
+            GetType = "Combo box"
+        'etc.
+        Case Else
+    End Select
+
+End Function
+
+Public Function FieldLookupControlTypeList() As String
+' Ref: http://support.microsoft.com/kb/304274
+' 106 - Check box, 109 - Text Box, 110 - List Box, 111 - Combo Box
+
+    On Error GoTo Error_Handler
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDefs
+    Dim tbl As DAO.TableDef
+    Dim fld As Field
+    Dim ctr As DisplayControlType
+    Dim lng As Long
+
+    Set dbs = CurrentDb()
+    Set tdf = dbs.TableDefs
+ 
     On Error Resume Next
+    For Each tbl In tdf
+        If Left(tbl.Name, 4) <> "MSys" Then
+            Debug.Print tbl.Name
+            For Each fld In tbl.Fields
+                lng = fld.Properties("DisplayControl").Value
+                Debug.Print , fld.Name, lng, GetType(lng)
+            Next fld
+        End If
+    Next tbl
+
+Error_Handler_Exit:
+    On Error Resume Next
+    Set tdf = Nothing
+    Set dbs = Nothing
     Exit Function
 
-PROC_ERR:
-    Select Case Err.Number
-        'Case ###         ' Add your own error management or log error to logging table
-        Case Else
-            'a custom log usage function commented out
-            'function LogUsage(ByVal strFormName As String, strCallingProc As String, Optional ControlName) As Boolean
-            'call LogUsage Err.Number, "basRelinkTables", "GetCurrentPath" ()
-    End Select
-    Resume PROC_EXIT
+Error_Handler:
+    MsgBox "Err=" & Err.Number & vbCrLf & _
+            " " & Err.Description, vbCritical, "Error"
+    Resume Error_Handler_Exit
+
 End Function
+ 
 
 ' Ref: http://www.utteraccess.com/forum/lofiversion/index.php/t1995627.html
 '-------------------------------------------------------------------------------------------------

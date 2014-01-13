@@ -17,15 +17,19 @@ Option Explicit
 
 '20140112 - v057 - adaept sample tab displayed, but no output indication
     ' Research for documenting field lookup value list
-    ' http://www.access-programmers.co.uk/forums/showthread.php?t=160994
-    ' http://www.devhut.net/tag/ms-access-vba-programming/
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=160994
+    ' Ref: http://www.devhut.net/tag/ms-access-vba-programming/
     ' GetVBEDeatils
-    ' http://www.devhut.net/tag/ms-access-vba-programming/page/2/
-    ' http://www.functionx.com/vbaccess/Lesson25.HTML
-    ' *** http://www.accessmvp.com/twickerath/articles/multiuser.htm ***
-    ' http://www.codeproject.com/Articles/380870/Microsoft-Access-Application-Development-Guideline
-    ' http://www.eraserve.com/tutorials/MS_ACCESS_VBA_Get_Indexed_Fields.asp
-    '
+    ' Ref: http://www.devhut.net/tag/ms-access-vba-programming/page/2/
+    ' Ref: http://www.functionx.com/vbaccess/Lesson25.htm
+    ' *** Ref: http://www.accessmvp.com/twickerath/articles/multiuser.htm ***
+    ' Ref: http://www.codeproject.com/Articles/380870/Microsoft-Access-Application-Development-Guideline
+    ' Ref: http://www.eraserve.com/tutorials/MS_ACCESS_VBA_Get_Indexed_Fields.asp
+    ' !!! Ref: http://allenbrowne.com/ser-27.html !!!
+    ' "There is no safe, reliable way for users to add items to the Value List in the form without messing up the integrity of the data."
+    ' The  Evils of Lookup Fields in Tables - Ref: http://access.mvps.org/access/lookupfields.htm
+    ' Ref: http://www.utteraccess.com/forum/Lookup-fields-table-pro-t269783.html
+    ' Ref: http://improvingsoftware.com/2009/10/02/blog-response-lookup-fields-in-access-are-evil/
 '20140110 - v056 - Use latebinding everywhere
     ' Ref: http://www.granite.ab.ca/access/latebinding.htm
     ' DONE: Test for expected references when class first created OR fix to use late binding
