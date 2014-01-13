@@ -100,7 +100,7 @@ Inherited: False;
 ---
 Name: ProjVer
 Type: dbInteger
-Value: 139
+Value: 119
 Inherited: False;
 ---
 Name: HasOfflineLists
