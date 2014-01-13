@@ -2,24 +2,26 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' Document custom tabs
 ' ReadDocDatabase debug output when custom test folder given
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated
 '   This has useful information about using tdf.attributes
-' Say you want to display a list of reports available in your database to a user in one of your forms.  Simply add a combo-box to your form, then set the Row Source property as follows:
-'   SELECT [Name] FROM [MSysObjects] WHERE [Type] = -32764 AND Left([Name],1) <> "~" ORDER BY [Name]
-'   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 '
 ' Guides:
 ' Office VBA Basic Debugging Techniques
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140112 - v057 - adaept sample tab displayed, but no output indication
 '20140110 - v056 - Use latebinding everywhere
     ' Ref: http://www.granite.ab.ca/access/latebinding.htm
     ' DONE: Test for expected references when class first created OR fix to use late binding
+    ' INFO: Say you want to display a list of reports available in your database to a user in one of your forms.  Simply add a combo-box to your form, then set the Row Source property as follows:
+    '   SELECT [Name] FROM [MSysObjects] WHERE [Type] = -32764 AND Left([Name],1) <> "~" ORDER BY [Name]
+    '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 '20131219 - v055 - Output GUID for project references
 '20131219 - v054 - Note about need for reference to Microsoft Scripting Runtime
     ' Explicity define Dim dbs As Database
