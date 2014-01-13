@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
-' Document custom tabs
+' Document custom tabs - adaept sample tab displayed, but no output indication
 ' ReadDocDatabase debug output when custom test folder given
 ' Import of class source code into a new database creates a module
 ' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
@@ -15,6 +15,9 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140113 - v058 - FieldLookupControlTypeList outputs table, field, control type and count for lookup tab
+    ' Office 2007 AcControlType Enumeration
+    ' http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
 '20140112 - v057 - adaept sample tab displayed, but no output indication
     ' Research for documenting field lookup value list
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=160994

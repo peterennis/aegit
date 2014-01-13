@@ -217,20 +217,19 @@ Private Function GetType(Value As DisplayControlType) As String
 
     Select Case Value
         Case 106
-            GetType = "Check box"
+            GetType = "CheckBox"
         Case 109
-            GetType = "Text box"
+            GetType = "TextBox"
         Case 110
-            GetType = "List box"
+            GetType = "ListBox"
         Case 111
-            GetType = "Combo box"
-        'etc.
+            GetType = "ComboBox"
         Case Else
     End Select
 
 End Function
 
-Public Function FieldLookupControlTypeList() As String
+Public Function FieldLookupControlTypeList() As Boolean
 ' Ref: http://support.microsoft.com/kb/304274
 ' 106 - Check box, 109 - Text Box, 110 - List Box, 111 - Combo Box
 
@@ -240,12 +239,24 @@ Public Function FieldLookupControlTypeList() As String
     Dim tdf As DAO.TableDefs
     Dim tbl As DAO.TableDef
     Dim fld As Field
-    Dim ctr As DisplayControlType
     Dim lng As Long
+    Dim strChkTbl As String
+    Dim strChkFld As String
+
+    ' Counters for DisplayControl types
+    Static intChk As Integer
+    Static intTxt As Integer
+    Static intLst As Integer
+    Static intCbo As Integer
 
     Set dbs = CurrentDb()
     Set tdf = dbs.TableDefs
- 
+
+    intChk = 0
+    intTxt = 0
+    intLst = 0
+    intCbo = 0
+
     On Error Resume Next
     For Each tbl In tdf
         If Left(tbl.Name, 4) <> "MSys" Then
@@ -253,9 +264,34 @@ Public Function FieldLookupControlTypeList() As String
             For Each fld In tbl.Fields
                 lng = fld.Properties("DisplayControl").Value
                 Debug.Print , fld.Name, lng, GetType(lng)
+                Select Case GetType(lng)
+                    Case "CheckBox"
+                        intChk = intChk + 1
+                        'Debug.Print intChk, ">Here"
+                        strChkTbl = tbl.Name
+                        strChkFld = fld.Name
+                    Case "TextBox"
+                        intTxt = intTxt + 1
+                        'Debug.Print intTxt, ">Here"
+                    Case "ListBox"
+                        intLst = intLst + 1
+                        'Debug.Print intLst, ">Here"
+                    Case "ComboBox"
+                        intCbo = intCbo + 1
+                        'Debug.Print intCbo, ">Here"
+                    Case Else
+                End Select
             Next fld
         End If
     Next tbl
+    Debug.Print "Count of Check box = " & intChk
+    Debug.Print "Count of Text box  = " & intTxt
+    Debug.Print "Count of List box  = " & intLst
+    Debug.Print "Count of Combo box = " & intCbo
+    'Debug.Print "Table with check box is " & strChkTbl
+    'Debug.Print "Field with check box is " & strChkFld
+
+    FieldLookupControlTypeList = True
 
 Error_Handler_Exit:
     On Error Resume Next
