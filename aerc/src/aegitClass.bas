@@ -2010,7 +2010,7 @@ PROC_ERR:
 
 End Function
 
-Private Function BuildTheDirectory(FSO As Object, _
+Private Function BuildTheDirectory(fso As Object, _
                                         Optional varDebug As Variant) As Boolean
 'Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
                                         Optional varDebug As Variant) As Boolean
@@ -2049,8 +2049,8 @@ Private Function BuildTheDirectory(FSO As Object, _
     ' Bail out if (a) the drive does not exist, or if (b) the directory already exists.
 
     If blnDebug Then Debug.Print , , "THE_DRIVE = " & THE_DRIVE
-    If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & FSO.DriveExists(THE_DRIVE)
-    If Not FSO.DriveExists(THE_DRIVE) Then
+    If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & fso.DriveExists(THE_DRIVE)
+    If Not fso.DriveExists(THE_DRIVE) Then
         If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
         BuildTheDirectory = False
         Exit Function
@@ -2067,7 +2067,7 @@ Private Function BuildTheDirectory(FSO As Object, _
         
     If blnDebug Then Debug.Print , , "The import directory is: " & aestrImportLocation
    
-    If FSO.FolderExists(aestrImportLocation) Then
+    If fso.FolderExists(aestrImportLocation) Then
         If blnDebug Then Debug.Print , , "FSO.FolderExists(aestrImportLocation) = TRUE - The directory EXISTS !!!"
         BuildTheDirectory = False
         Exit Function
@@ -2075,7 +2075,7 @@ Private Function BuildTheDirectory(FSO As Object, _
     If blnDebug Then Debug.Print , , "The import directory does NOT EXIST !!!"
 
     If aegitUseImportFolder Then
-        Set objImportFolder = FSO.CreateFolder(aestrImportLocation)
+        Set objImportFolder = fso.CreateFolder(aestrImportLocation)
         If blnDebug Then Debug.Print , , aestrImportLocation & " has been CREATED !!!"
     End If
 
@@ -2177,26 +2177,26 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     If blnDebug Then Debug.Print , "CurDir = " & CurDir
 
     ' Create needed objects
-    Dim FSO As Object
+    Dim fso As Object
 '    Dim FSO As Scripting.FileSystemObject
-    Set FSO = CreateObject("Scripting.FileSystemObject")
+    Set fso = CreateObject("Scripting.FileSystemObject")
 
     If blnDebug Then
-        bln = BuildTheDirectory(FSO, "WithDebugging")
+        bln = BuildTheDirectory(fso, "WithDebugging")
         Debug.Print , "<==<"
     Else
-        bln = BuildTheDirectory(FSO)
+        bln = BuildTheDirectory(fso)
     End If
 
     If aegitUseImportFolder Then
         Dim objFolder As Object
-        Set objFolder = FSO.GetFolder(aegitType.ImportFolder)
+        Set objFolder = fso.GetFolder(aegitType.ImportFolder)
 
         For Each MyFile In objFolder.Files
             If blnDebug Then Debug.Print "myFile = " & MyFile
             If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
-            strFileBaseName = FSO.GetBaseName(MyFile.Name)
-            strFileType = FSO.GetExtensionName(MyFile.Name)
+            strFileBaseName = fso.GetBaseName(MyFile.Name)
+            strFileType = fso.GetExtensionName(MyFile.Name)
             If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
 
             If (strFileType = "frm") Then
@@ -2245,7 +2245,7 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
 PROC_EXIT:
     Set MyFile = Nothing
     'Set ojbFolder = Nothing
-    Set FSO = Nothing
+    Set fso = Nothing
     Set wsh = Nothing
     aeReadDocDatabase = True
     PopCallStack

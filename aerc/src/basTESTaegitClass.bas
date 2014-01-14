@@ -187,14 +187,13 @@ Test6:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
-    ' CompactAndRepair
-    ' When run this will close the database so obviously no results will be seen.
-    ' Use True/False parameter to run it or not.
-
 Test7:
     '=============
     ' TEST 7
     '=============
+    ' CompactAndRepair
+    ' When run this will close the database so obviously no results will be seen.
+    ' Use True/False parameter to run it or not.
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "7. aegitClassTest => CompactAndRepair"

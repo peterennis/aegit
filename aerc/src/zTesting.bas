@@ -6,13 +6,12 @@ Private Const FOR_READING = 1
 ' Remove this after integration with aegitClass
 Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
 
-' Ref: http://www.cpearson.com/excel/Enums.aspx
-Private Enum DisplayControlType
-    CheckBox = 106
-    TextBox = 109
-    ListBox = 110
-    ComboBox = 111
-End Enum
+'Private Enum DisplayControlType
+'    CheckBox = 106
+'    TextBox = 109
+'    ListBox = 110
+'    ComboBox = 111
+'End Enum
 
 Public Sub TestCreateDbScript()
     'CreateDbScript "C:\Temp\Schema.txt"
@@ -212,17 +211,17 @@ Public Sub ObjectCounts()
  
 End Sub
 
-Private Function GetType(Value As DisplayControlType) As String
+Private Function GetType(Value As Long) As String
 ' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
 
     Select Case Value
-        Case 106
+        Case acCheckBox
             GetType = "CheckBox"
-        Case 109
+        Case acTextBox
             GetType = "TextBox"
-        Case 110
+        Case acListBox
             GetType = "ListBox"
-        Case 111
+        Case acComboBox
             GetType = "ComboBox"
         Case Else
     End Select
@@ -231,7 +230,8 @@ End Function
 
 Public Function FieldLookupControlTypeList() As Boolean
 ' Ref: http://support.microsoft.com/kb/304274
-' 106 - Check box, 109 - Text Box, 110 - List Box, 111 - Combo Box
+' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
+' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
 
     On Error GoTo Error_Handler
 
@@ -248,6 +248,8 @@ Public Function FieldLookupControlTypeList() As Boolean
     Static intTxt As Integer
     Static intLst As Integer
     Static intCbo As Integer
+    Static intAllFieldsCount As Integer
+    Static intOther As Integer
 
     Set dbs = CurrentDb()
     Set tdf = dbs.TableDefs
@@ -256,30 +258,35 @@ Public Function FieldLookupControlTypeList() As Boolean
     intTxt = 0
     intLst = 0
     intCbo = 0
+    intAllFieldsCount = 0
+    intOther = 0
 
     On Error Resume Next
     For Each tbl In tdf
         If Left(tbl.Name, 4) <> "MSys" Then
             Debug.Print tbl.Name
             For Each fld In tbl.Fields
+                intAllFieldsCount = intAllFieldsCount + 1
                 lng = fld.Properties("DisplayControl").Value
                 Debug.Print , fld.Name, lng, GetType(lng)
-                Select Case GetType(lng)
-                    Case "CheckBox"
+                Select Case lng
+                    Case acCheckBox
                         intChk = intChk + 1
                         'Debug.Print intChk, ">Here"
                         strChkTbl = tbl.Name
                         strChkFld = fld.Name
-                    Case "TextBox"
+                    Case acTextBox
                         intTxt = intTxt + 1
                         'Debug.Print intTxt, ">Here"
-                    Case "ListBox"
+                    Case acListBox
                         intLst = intLst + 1
                         'Debug.Print intLst, ">Here"
-                    Case "ComboBox"
+                    Case acComboBox
                         intCbo = intCbo + 1
                         'Debug.Print intCbo, ">Here"
                     Case Else
+                        intOther = intOther + 1
+                        'MsgBox "lng=" & lng
                 End Select
             Next fld
         End If
@@ -288,10 +295,17 @@ Public Function FieldLookupControlTypeList() As Boolean
     Debug.Print "Count of Text box  = " & intTxt
     Debug.Print "Count of List box  = " & intLst
     Debug.Print "Count of Combo box = " & intCbo
-    'Debug.Print "Table with check box is " & strChkTbl
-    'Debug.Print "Field with check box is " & strChkFld
+    Debug.Print "Count of Other     = " & intOther
+    Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
+    Debug.Print "Count of All Fields = " & intAllFieldsCount - intOther
+    Debug.Print "Table with check box is " & strChkTbl
+    Debug.Print "Field with check box is " & strChkFld
 
-    FieldLookupControlTypeList = True
+    If intAllFieldsCount - intOther = intChk + intTxt + intLst + intCbo Then
+        FieldLookupControlTypeList = True
+    Else
+        FieldLookupControlTypeList = False
+    End If
 
 Error_Handler_Exit:
     On Error Resume Next
@@ -446,7 +460,7 @@ Public Function SpFolder(SpName)
 
 End Function
    
-Public Sub AllCodeToDesktop()
+Public Sub ExportAllModulesToFile()
 ' Ref: http://wiki.lessthandot.com/index.php/Code_and_Code_Windows
 ' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
 ' The reference for the FileSystemObject Object is Windows Script Host Object Model
@@ -455,39 +469,42 @@ Public Sub AllCodeToDesktop()
     Const Desktop = &H10&
     Const MyDocuments = &H5&
 
-    Dim fs As Object
-    Dim f As Object
+    Dim fso As Object
+    Dim fil As Object
     Dim strMod As String
     Dim mdl As Object
     Dim i As Integer
     Dim strTxtFile As String
 
-    Set fs = CreateObject("Scripting.FileSystemObject")
+    Set fso = CreateObject("Scripting.FileSystemObject")
 
-    'Set up the file
+    ' Set up the file
     Debug.Print "CurrentProject.Name = " & CurrentProject.Name
-    strTxtFile = SpFolder(Desktop) & "\" & Replace(CurrentProject.Name, ".", " ") & ".txt"
+    strTxtFile = SpFolder(Desktop) & "\" & Replace(CurrentProject.Name, ".", "_") & ".txt"
     Debug.Print "strTxtFile = " & strTxtFile
-    Set f = fs.CreateTextFile(SpFolder(Desktop) & "\" _
-        & Replace(CurrentProject.Name, ".", " ") & ".txt")
+    Set fil = fso.CreateTextFile(SpFolder(Desktop) & "\" _
+            & Replace(CurrentProject.Name, ".", " ") & ".txt")
 
-    'For each component in the project ...
+    ' For each component in the project ...
     For Each mdl In VBE.ActiveVBProject.VBComponents
-        'using the count of lines ...
-        i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
-        'put the code in a string ...
-        If i > 0 Then
-            strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, i)
+        ' using the count of lines ...
+        If Left(mdl.Name, 3) <> "zzz" Then
+            Debug.Print mdl.Name
+            i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
+            ' put the code in a string ...
+            If i > 0 Then
+                strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, i)
+            End If
+            ' and then write it to a file, first marking the start with
+            ' some equal signs and the component name.
+            fil.WriteLine String(15, "=") & vbCrLf & mdl.Name _
+                & vbCrLf & String(15, "=") & vbCrLf & strMod
         End If
-        'and then write it to a file, first marking the start with
-        'some equal signs and the component name.
-        f.WriteLine String(15, "=") & vbCrLf & mdl.Name _
-            & vbCrLf & String(15, "=") & vbCrLf & strMod
     Next
        
     'Close eveything
-    f.Close
-    Set fs = Nothing
+    fil.Close
+    Set fso = Nothing
 
 End Sub
 
