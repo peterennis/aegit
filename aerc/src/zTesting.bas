@@ -233,7 +233,11 @@ Public Function FieldLookupControlTypeList() As Boolean
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
 ' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
 
-    On Error GoTo Error_Handler
+    ' Use a call stack and global error handler
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "FieldLookupControlTypeList"
+
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDefs
@@ -307,20 +311,20 @@ Public Function FieldLookupControlTypeList() As Boolean
         FieldLookupControlTypeList = False
     End If
 
-Error_Handler_Exit:
+PROC_EXIT:
     On Error Resume Next
     Set tdf = Nothing
     Set dbs = Nothing
+    'PopCallStack
     Exit Function
 
-Error_Handler:
-    MsgBox "Err=" & Err.Number & vbCrLf & _
-            " " & Err.Description, vbCritical, "Error"
-    Resume Error_Handler_Exit
+PROC_ERR:
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegitClass", vbCritical, "Error"
+    'GlobalErrHandler
+    Resume PROC_EXIT
 
 End Function
  
-
 ' Ref: http://www.utteraccess.com/forum/lofiversion/index.php/t1995627.html
 '-------------------------------------------------------------------------------------------------
 ' Procedure : ExecSQL

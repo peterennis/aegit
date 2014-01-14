@@ -298,15 +298,12 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
     Open fname2 For Binary Lock Read Write As #fnr2
 
     While Not EOF(fnr)
-
         Get #fnr, , tstring
-
         If Asc(tstring) = 254 Or Asc(tstring) = 255 Or _
                 Asc(tstring) = 0 Then
         Else
             Put #fnr2, , tstring
         End If
-
     Wend
 
     Close #fnr

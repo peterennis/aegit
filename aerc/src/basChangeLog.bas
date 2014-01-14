@@ -20,6 +20,7 @@ Option Explicit
     ' http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
     ' ExportAllModulesToFile
     ' Ref: http://www.cpearson.com/excel/Enums.aspx - removed, use AcControlType instead
+    ' Prep FieldLookupControlTypeList for inclusion in aegitClass
 '20140112 - v057 - adaept sample tab displayed, but no output indication
     ' Research for documenting field lookup value list
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=160994
