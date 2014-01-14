@@ -2,6 +2,7 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' Fix table description output description to max of each table
 ' Document custom tabs - adaept sample tab displayed, but no output indication
 ' ReadDocDatabase debug output when custom test folder given
 ' Import of class source code into a new database creates a module
