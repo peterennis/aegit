@@ -4,7 +4,7 @@ Option Explicit
 Private Const TEST_FILE_PATH As String = "C:\TEMP"
 Private Const FOR_READING = 1
 ' Remove this after integration with aegitClass
-Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
+'Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
 
 'Private Enum DisplayControlType
 '    CheckBox = 106
@@ -253,26 +253,34 @@ Public Function FieldLookupControlTypeList() As Boolean
     Static intLst As Integer
     Static intCbo As Integer
     Static intAllFieldsCount As Integer
-    Static intOther As Integer
+    Static intElse As Integer
 
     Set dbs = CurrentDb()
     Set tdf = dbs.TableDefs
+
+    Dim fle As Integer
+
+    fle = FreeFile()
+    'Open aegitSourceFolder & "\OutputFieldLookupControlTypeList.txt" For Output As #fle
+    Open "C:\TEMP\OutputFieldLookupControlTypeList.txt" For Output As #fle
 
     intChk = 0
     intTxt = 0
     intLst = 0
     intCbo = 0
     intAllFieldsCount = 0
-    intOther = 0
+    intElse = 0
 
     On Error Resume Next
     For Each tbl In tdf
         If Left(tbl.Name, 4) <> "MSys" Then
             Debug.Print tbl.Name
+            Print #fle, tbl.Name
             For Each fld In tbl.Fields
                 intAllFieldsCount = intAllFieldsCount + 1
                 lng = fld.Properties("DisplayControl").Value
                 Debug.Print , fld.Name, lng, GetType(lng)
+                Print #fle, , fld.Name, lng, GetType(lng)
                 Select Case lng
                     Case acCheckBox
                         intChk = intChk + 1
@@ -289,7 +297,7 @@ Public Function FieldLookupControlTypeList() As Boolean
                         intCbo = intCbo + 1
                         'Debug.Print intCbo, ">Here"
                     Case Else
-                        intOther = intOther + 1
+                        intElse = intElse + 1
                         'MsgBox "lng=" & lng
                 End Select
             Next fld
@@ -299,13 +307,23 @@ Public Function FieldLookupControlTypeList() As Boolean
     Debug.Print "Count of Text box  = " & intTxt
     Debug.Print "Count of List box  = " & intLst
     Debug.Print "Count of Combo box = " & intCbo
-    Debug.Print "Count of Other     = " & intOther
+    Debug.Print "Count of Else      = " & intElse
     Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
-    Debug.Print "Count of All Fields = " & intAllFieldsCount - intOther
-    Debug.Print "Table with check box is " & strChkTbl
-    Debug.Print "Field with check box is " & strChkFld
+    Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
+    'Debug.Print "Table with check box is " & strChkTbl
+    'Debug.Print "Field with check box is " & strChkFld
 
-    If intAllFieldsCount - intOther = intChk + intTxt + intLst + intCbo Then
+    Print #fle, "Count of Check box = " & intChk
+    Print #fle, "Count of Text box  = " & intTxt
+    Print #fle, "Count of List box  = " & intLst
+    Print #fle, "Count of Combo box = " & intCbo
+    Print #fle, "Count of Else      = " & intElse
+    Print #fle, "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
+    Print #fle, "Count of All Fields = " & intAllFieldsCount - intElse
+    'Print #fle, "Table with check box is " & strChkTbl
+    'Print #fle, "Field with check box is " & strChkFld
+
+    If intAllFieldsCount - intElse = intChk + intTxt + intLst + intCbo Then
         FieldLookupControlTypeList = True
     Else
         FieldLookupControlTypeList = False
@@ -313,6 +331,7 @@ Public Function FieldLookupControlTypeList() As Boolean
 
 PROC_EXIT:
     On Error Resume Next
+    Close fle
     Set tdf = Nothing
     Set dbs = Nothing
     'PopCallStack
