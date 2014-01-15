@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.8"
-Private Const aegitVERSION_DATE As String = "January 13, 2014"
+Private Const aegitVERSION As String = "0.5.9"
+Private Const aegitVERSION_DATE As String = "January 14, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1987,6 +1987,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     OutputQueriesSqlText
     OutputBuiltInPropertiesText
+    OutputFieldLookupControlTypeList
 
     aeDocumentTheDatabase = True
 
@@ -2352,6 +2353,142 @@ PROC_ERR:
     MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
     If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
     aeExists = False
+    GlobalErrHandler
+    Resume PROC_EXIT
+
+End Function
+
+Private Function GetType(Value As Long) As String
+' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
+
+    Select Case Value
+        Case acCheckBox
+            GetType = "CheckBox"
+        Case acTextBox
+            GetType = "TextBox"
+        Case acListBox
+            GetType = "ListBox"
+        Case acComboBox
+            GetType = "ComboBox"
+        Case Else
+    End Select
+
+End Function
+
+Private Sub OutputFieldLookupControlTypeList()
+    Dim bln As Boolean
+    bln = FieldLookupControlTypeList
+End Sub
+
+Private Function FieldLookupControlTypeList() As Boolean
+' Ref: http://support.microsoft.com/kb/304274
+' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
+' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "FieldLookupControlTypeList"
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDefs
+    Dim tbl As DAO.TableDef
+    Dim fld As Field
+    Dim lng As Long
+    Dim strChkTbl As String
+    Dim strChkFld As String
+
+    ' Counters for DisplayControl types
+    Static intChk As Integer
+    Static intTxt As Integer
+    Static intLst As Integer
+    Static intCbo As Integer
+    Static intAllFieldsCount As Integer
+    Static intElse As Integer
+
+    Set dbs = CurrentDb()
+    Set tdf = dbs.TableDefs
+
+    Dim fle As Integer
+
+    fle = FreeFile()
+    Open aegitSourceFolder & "\OutputFieldLookupControlTypeList.txt" For Output As #fle
+    'Open "C:\TEMP\OutputFieldLookupControlTypeList.txt" For Output As #fle
+
+    intChk = 0
+    intTxt = 0
+    intLst = 0
+    intCbo = 0
+    intAllFieldsCount = 0
+    intElse = 0
+
+    On Error Resume Next
+    For Each tbl In tdf
+        If Left(tbl.Name, 4) <> "MSys" Then
+            Debug.Print tbl.Name
+            Print #fle, tbl.Name
+            For Each fld In tbl.Fields
+                intAllFieldsCount = intAllFieldsCount + 1
+                lng = fld.Properties("DisplayControl").Value
+                Debug.Print , fld.Name, lng, GetType(lng)
+                Print #fle, , fld.Name, lng, GetType(lng)
+                Select Case lng
+                    Case acCheckBox
+                        intChk = intChk + 1
+                        'Debug.Print intChk, ">Here"
+                        strChkTbl = tbl.Name
+                        strChkFld = fld.Name
+                    Case acTextBox
+                        intTxt = intTxt + 1
+                        'Debug.Print intTxt, ">Here"
+                    Case acListBox
+                        intLst = intLst + 1
+                        'Debug.Print intLst, ">Here"
+                    Case acComboBox
+                        intCbo = intCbo + 1
+                        'Debug.Print intCbo, ">Here"
+                    Case Else
+                        intElse = intElse + 1
+                        'MsgBox "lng=" & lng
+                End Select
+            Next fld
+        End If
+    Next tbl
+    Debug.Print "Count of Check box = " & intChk
+    Debug.Print "Count of Text box  = " & intTxt
+    Debug.Print "Count of List box  = " & intLst
+    Debug.Print "Count of Combo box = " & intCbo
+    Debug.Print "Count of Else      = " & intElse
+    Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
+    Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
+    'Debug.Print "Table with check box is " & strChkTbl
+    'Debug.Print "Field with check box is " & strChkFld
+
+    Print #fle, "Count of Check box = " & intChk
+    Print #fle, "Count of Text box  = " & intTxt
+    Print #fle, "Count of List box  = " & intLst
+    Print #fle, "Count of Combo box = " & intCbo
+    Print #fle, "Count of Else      = " & intElse
+    Print #fle, "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
+    Print #fle, "Count of All Fields = " & intAllFieldsCount - intElse
+    'Print #fle, "Table with check box is " & strChkTbl
+    'Print #fle, "Field with check box is " & strChkFld
+
+    If intAllFieldsCount - intElse = intChk + intTxt + intLst + intCbo Then
+        FieldLookupControlTypeList = True
+    Else
+        FieldLookupControlTypeList = False
+    End If
+
+PROC_EXIT:
+    On Error Resume Next
+    Close fle
+    Set tdf = Nothing
+    Set dbs = Nothing
+    PopCallStack
+    Exit Function
+
+PROC_ERR:
+    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegitClass", vbCritical, "Error"
     GlobalErrHandler
     Resume PROC_EXIT
 

@@ -2,7 +2,8 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
-' Fix table description output description to max of each table
+' Modify ObjectCounts to provide more details and export results for development tracking, charting
+' Fix table output field description to max of each table
 ' Document custom tabs - adaept sample tab displayed, but no output indication
 ' ReadDocDatabase debug output when custom test folder given
 ' Import of class source code into a new database creates a module
@@ -16,6 +17,7 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140114 - v059 - OutputFieldLookupControlTypeList added to aegitClass
 '20140113 - v058 - FieldLookupControlTypeList outputs table, field, control type and count for lookup tab
     ' Office 2007 AcControlType Enumeration
     ' http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx

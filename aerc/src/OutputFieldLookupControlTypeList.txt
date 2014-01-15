@@ -1,0 +1,18 @@
+Items
+              Item           109          TextBox
+              Quantity       109          TextBox
+              Status         109          TextBox
+              YNO            110          ListBox
+              CHK            106          CheckBox
+              CBO            111          ComboBox
+tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+              id             111          ComboBox
+              Desc           109          TextBox
+              Description    109          TextBox
+Count of Check box = 1
+Count of Text box  = 5
+Count of List box  = 1
+Count of Combo box = 2
+Count of Else      = 0
+Count of Display Controls = 9
+Count of All Fields = 9

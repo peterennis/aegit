@@ -4,14 +4,7 @@ Option Explicit
 Private Const TEST_FILE_PATH As String = "C:\TEMP"
 Private Const FOR_READING = 1
 ' Remove this after integration with aegitClass
-'Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
-
-'Private Enum DisplayControlType
-'    CheckBox = 106
-'    TextBox = 109
-'    ListBox = 110
-'    ComboBox = 111
-'End Enum
+Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
 
 Public Sub TestCreateDbScript()
     'CreateDbScript "C:\Temp\Schema.txt"
@@ -211,139 +204,6 @@ Public Sub ObjectCounts()
  
 End Sub
 
-Private Function GetType(Value As Long) As String
-' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
-
-    Select Case Value
-        Case acCheckBox
-            GetType = "CheckBox"
-        Case acTextBox
-            GetType = "TextBox"
-        Case acListBox
-            GetType = "ListBox"
-        Case acComboBox
-            GetType = "ComboBox"
-        Case Else
-    End Select
-
-End Function
-
-Public Function FieldLookupControlTypeList() As Boolean
-' Ref: http://support.microsoft.com/kb/304274
-' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
-' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
-
-    ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "FieldLookupControlTypeList"
-
-    On Error GoTo PROC_ERR
-
-    Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDefs
-    Dim tbl As DAO.TableDef
-    Dim fld As Field
-    Dim lng As Long
-    Dim strChkTbl As String
-    Dim strChkFld As String
-
-    ' Counters for DisplayControl types
-    Static intChk As Integer
-    Static intTxt As Integer
-    Static intLst As Integer
-    Static intCbo As Integer
-    Static intAllFieldsCount As Integer
-    Static intElse As Integer
-
-    Set dbs = CurrentDb()
-    Set tdf = dbs.TableDefs
-
-    Dim fle As Integer
-
-    fle = FreeFile()
-    'Open aegitSourceFolder & "\OutputFieldLookupControlTypeList.txt" For Output As #fle
-    Open "C:\TEMP\OutputFieldLookupControlTypeList.txt" For Output As #fle
-
-    intChk = 0
-    intTxt = 0
-    intLst = 0
-    intCbo = 0
-    intAllFieldsCount = 0
-    intElse = 0
-
-    On Error Resume Next
-    For Each tbl In tdf
-        If Left(tbl.Name, 4) <> "MSys" Then
-            Debug.Print tbl.Name
-            Print #fle, tbl.Name
-            For Each fld In tbl.Fields
-                intAllFieldsCount = intAllFieldsCount + 1
-                lng = fld.Properties("DisplayControl").Value
-                Debug.Print , fld.Name, lng, GetType(lng)
-                Print #fle, , fld.Name, lng, GetType(lng)
-                Select Case lng
-                    Case acCheckBox
-                        intChk = intChk + 1
-                        'Debug.Print intChk, ">Here"
-                        strChkTbl = tbl.Name
-                        strChkFld = fld.Name
-                    Case acTextBox
-                        intTxt = intTxt + 1
-                        'Debug.Print intTxt, ">Here"
-                    Case acListBox
-                        intLst = intLst + 1
-                        'Debug.Print intLst, ">Here"
-                    Case acComboBox
-                        intCbo = intCbo + 1
-                        'Debug.Print intCbo, ">Here"
-                    Case Else
-                        intElse = intElse + 1
-                        'MsgBox "lng=" & lng
-                End Select
-            Next fld
-        End If
-    Next tbl
-    Debug.Print "Count of Check box = " & intChk
-    Debug.Print "Count of Text box  = " & intTxt
-    Debug.Print "Count of List box  = " & intLst
-    Debug.Print "Count of Combo box = " & intCbo
-    Debug.Print "Count of Else      = " & intElse
-    Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
-    Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
-    'Debug.Print "Table with check box is " & strChkTbl
-    'Debug.Print "Field with check box is " & strChkFld
-
-    Print #fle, "Count of Check box = " & intChk
-    Print #fle, "Count of Text box  = " & intTxt
-    Print #fle, "Count of List box  = " & intLst
-    Print #fle, "Count of Combo box = " & intCbo
-    Print #fle, "Count of Else      = " & intElse
-    Print #fle, "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
-    Print #fle, "Count of All Fields = " & intAllFieldsCount - intElse
-    'Print #fle, "Table with check box is " & strChkTbl
-    'Print #fle, "Field with check box is " & strChkFld
-
-    If intAllFieldsCount - intElse = intChk + intTxt + intLst + intCbo Then
-        FieldLookupControlTypeList = True
-    Else
-        FieldLookupControlTypeList = False
-    End If
-
-PROC_EXIT:
-    On Error Resume Next
-    Close fle
-    Set tdf = Nothing
-    Set dbs = Nothing
-    'PopCallStack
-    Exit Function
-
-PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegitClass", vbCritical, "Error"
-    'GlobalErrHandler
-    Resume PROC_EXIT
-
-End Function
- 
 ' Ref: http://www.utteraccess.com/forum/lofiversion/index.php/t1995627.html
 '-------------------------------------------------------------------------------------------------
 ' Procedure : ExecSQL
@@ -749,14 +609,6 @@ Public Sub SaveTableMacros()
 
 End Sub
 
-Sub ApplicationInformation()
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa223101(v=office.11).aspx
-
-    Debug.Print Application.CurrentProject.FullName
-    Debug.Print Application.CurrentProject.ProjectType
-
-End Sub
-
 Public Sub SetRefToLibrary()
 ' http://www.exceltoolset.com/setting-a-reference-to-the-vba-extensibility-library-by-code/
 ' Adjusted for Microsoft Access
@@ -766,7 +618,36 @@ Public Sub SetRefToLibrary()
                   .AddFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 0
 End Sub
 
-Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
+Public Sub ApplicationInformation()
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa223101(v=office.11).aspx
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa173218(v=office.11).aspx
+' Ref: http://msdn.microsoft.com/en-us/library/office/ff845735(v=office.15).aspx
+
+    Dim intProjType As Integer
+    Dim strProjType As String
+    Dim lng As Long
+
+    intProjType = Application.CurrentProject.ProjectType
+ 
+    Select Case intProjType
+        Case 0 ' acNull
+            strProjType = "acNull"
+        Case 1 ' acADP
+            strProjType = "acADP"
+        Case 2 ' acMDB
+            strProjType = "acMDB"
+        Case Else
+            MsgBox "Can't determine ProjectType"
+    End Select
+
+    Debug.Print Application.CurrentProject.FullName
+    Debug.Print "Project Type", intProjType, strProjType
+    lng = CodeLinesInProjectCount
+
+End Sub
+
+Public Function CodeLinesInProjectCount() As Long
+'Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
 'Public Function TotalLinesInProject(Optional VBProj As VBIDE.VBProject = Nothing) As Long
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ' Reference to Microsoft Visual Basic For Applications Extensibility 5.3
@@ -782,26 +663,31 @@ Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
     Dim VBP As Object               'VBIDE.VBProject
     Dim VBComp As Object            'VBIDE.VBComponent
     Dim LineCount As Long
-    
+
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=245480
     Const vbext_pp_locked = 1
 
-    If VBProj Is Nothing Then
+    'If VBProj Is Nothing Then
         Set VBP = Access.Application.VBE.ActiveVBProject
-    Else
-        Set VBP = VBProj
-    End If
+    'Else
+    '    Set VBP = VBProj
+    'End If
 
     If VBP.Protection = vbext_pp_locked Then
-        TotalLinesInProject = -1
+        CodeLinesInProjectCount = -1
         Exit Function
     End If
 
     For Each VBComp In VBP.VBComponents
+        If Left(VBComp.Name, 3) <> "zzz" Then
+            Debug.Print VBComp.Name, VBComp.CodeModule.CountOfLines
+        End If
         LineCount = LineCount + VBComp.CodeModule.CountOfLines
     Next VBComp
-    
-    TotalLinesInProject = LineCount
+
+    CodeLinesInProjectCount = LineCount
+
+    Set VBP = Nothing
 
 End Function
 
