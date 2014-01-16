@@ -18,6 +18,7 @@ Option Explicit
 '
 
 '20140114 - v059 - OutputFieldLookupControlTypeList added to aegitClass
+    ' Remove ExecSql from zTesting
 '20140113 - v058 - FieldLookupControlTypeList outputs table, field, control type and count for lookup tab
     ' Office 2007 AcControlType Enumeration
     ' http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx

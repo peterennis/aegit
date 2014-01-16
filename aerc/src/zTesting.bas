@@ -204,130 +204,6 @@ Public Sub ObjectCounts()
  
 End Sub
 
-' Ref: http://www.utteraccess.com/forum/lofiversion/index.php/t1995627.html
-'-------------------------------------------------------------------------------------------------
-' Procedure : ExecSQL
-' DateTime  : 30/03/2009 10:19
-' Author    : Dial222
-' Purpose   : Execute SQL Select statements in the Immediate window
-' Context   : Module basSQL2IMM
-' Notes     : No error trapping whatsover - this is a 1.0 technology!
-'             Max out at 194 data rows since immediate only displays 100!
-'
-' Usage     : in the immediate pane: ?execsql("select * from zstblprofile","|")
-'
-' Revision History
-' Version   Date        Who             What
-' 01        30/03/2009  Dial222         Function 'ExecSQL' Created
-' 02        30/03/2009  Dial222         Added code for left/right align of text/numeric data
-'                                       Added MaxRowLen and vbCrLF parsing functionality
-'                                       Uprated cMaxRows to 194
-'-------------------------------------------------------------------------------------------------
-'
-
-Public Function ExecSQL(strSQL As String, Optional strColumDelim As String = "|") As Boolean
-
-    Dim rs              As DAO.Recordset
-    Dim aintLen()       As Integer
-    Dim i               As Integer
-    Dim str             As String
-    Dim lngRowCOunt     As Long
-
-    Const cMaxRows      As Integer = 194
-    Const cMaxRowLen    As Integer = 1023  ' Max width of immediate pane in characters, truncate after this.
-
-    Set rs = CurrentDb.OpenRecordset(strSQL, dbOpenDynaset, dbSeeChanges)
-
-    With rs
-        .MoveLast
-        .MoveFirst
-
-        lngRowCOunt = .RecordCount
-        If lngRowCOunt > 0 Then
-            If lngRowCOunt > cMaxRows Then
-                Debug.Print "Too many rows to return, will only print first " & cMaxRows & " rows."
-            End If
-
-            ReDim Preserve aintLen(.Fields.Count)
-
-            For i = 0 To .Fields.Count - 1
-                ' Initialise field len to field name len
-                aintLen(i) = Len(.Fields(i).Name) + 3
-            Next i
-
-            ' On this pass just get length of field data for formatting
-            Do Until .EOF
-                If .AbsolutePosition = cMaxRows Then
-                    ' Stop at the magic number
-                    Exit Do
-                Else
-                    For i = 0 To rs.Fields.Count - 1
-                        ' Test and update field len
-                        If Len(CStr(Nz(.Fields(i).Value, ""))) > aintLen(i) Then
-                            aintLen(i) = Len(CStr(.Fields(i).Value)) + 3
-                        End If
-                    Next i
-                End If
-                .MoveNext
-            Loop
-
-            ' Print Column Headers
-            str = "Row " & strColumDelim & " "
-            For i = 0 To rs.Fields.Count - 1
-                ' Initialise field len to field name len
-                str = str & Left(.Fields(i).Name & Space(aintLen(i)), aintLen(i)) & " " & strColumDelim & " "
-            Next i
-
-            ' Print the header row
-            Debug.Print Left(str, cMaxRowLen)
-            str = Space(Len(str))
-            str = Replace(str, " ", "-")
-
-            ' print underscores
-            Debug.Print Left(str, cMaxRowLen)
-            str = ""
-
-            ' Start over for the data
-            .MoveFirst
-
-            Do Until .EOF
-                If .AbsolutePosition = cMaxRows Then
-                    Exit Do
-                Else
-                    str = Left(.AbsolutePosition + 1 & Space(3), 3) & " " & strColumDelim & " "
-                    For i = 0 To .Fields.Count - 1
-                        Select Case .Fields(i).Type
-                            Case Is = 3, 4, 5, 6, 7, 8, 16, 19, 20, 21, 22, 23 ' The numeric DataTypeEnums
-                                str = str & Right(Space(aintLen(i)) & .Fields(i).Value, aintLen(i)) & " " & strColumDelim & " "
-                            Case Else
-                                ' Is it number stored as text
-                                If IsNumeric(.Fields(i).Value) Then
-                                    ' Right align
-                                    str = str & Right(Space(aintLen(i)) & .Fields(i).Value, aintLen(i)) & " " & strColumDelim & " "
-                                Else
-                                    ' Left align
-                                    str = str & Left(.Fields(i).Value & Space(aintLen(i)), aintLen(i)) & " " & strColumDelim & " "
-                                End If
-                        End Select
-                    Next i
-                End If
-
-                ' Parse out vbCrLf and dump data row to immediate
-                Debug.Print Left(Replace(Replace(str, Chr(13), " "), Chr(10), " "), cMaxRowLen)
-                .MoveNext
-                str = ""
-            Loop
-
-            ExecSQL = True
-        Else
-            Debug.Print "No rows returned"
-        End If
-    End With
-
-    Set rs = Nothing
-
-End Function
-
 Public Function SpFolder(SpName)
 
     Dim objShell As Object
@@ -628,7 +504,7 @@ Public Sub ApplicationInformation()
     Dim lng As Long
 
     intProjType = Application.CurrentProject.ProjectType
- 
+
     Select Case intProjType
         Case 0 ' acNull
             strProjType = "acNull"
@@ -647,18 +523,9 @@ Public Sub ApplicationInformation()
 End Sub
 
 Public Function CodeLinesInProjectCount() As Long
-'Public Function TotalLinesInProject(Optional VBProj As Object = Nothing) As Long
-'Public Function TotalLinesInProject(Optional VBProj As VBIDE.VBProject = Nothing) As Long
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-' Reference to Microsoft Visual Basic For Applications Extensibility 5.3
-' was required in old code.
 ' Ref: http://www.cpearson.com/excel/vbe.aspx
 ' Adjusted for Microsoft Access and Late Binding. No reference needed.
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-' This returns the total number of lines in all components of the VBProject
-' referenced by VBProj. If VBProj is missing, the VBProject of the
 ' Access.Application is used. Returns -1 if the VBProject is locked.
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
     Dim VBP As Object               'VBIDE.VBProject
     Dim VBComp As Object            'VBIDE.VBComponent
@@ -667,11 +534,7 @@ Public Function CodeLinesInProjectCount() As Long
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=245480
     Const vbext_pp_locked = 1
 
-    'If VBProj Is Nothing Then
-        Set VBP = Access.Application.VBE.ActiveVBProject
-    'Else
-    '    Set VBP = VBProj
-    'End If
+    Set VBP = Access.Application.VBE.ActiveVBProject
 
     If VBP.Protection = vbext_pp_locked Then
         CodeLinesInProjectCount = -1

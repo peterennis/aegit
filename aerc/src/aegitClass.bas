@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.5.9"
-Private Const aegitVERSION_DATE As String = "January 14, 2014"
+Private Const aegitVERSION As String = "0.6.0"
+Private Const aegitVERSION_DATE As String = "January 15, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1051,7 +1051,6 @@ End Function
 
 Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
-' To test in the Immediate window:       ? getcurrentpath("Const")
 '====================================================================
 ' Procedure : GetLinkedTableCurrentPath
 ' DateTime  : 08/23/2010
@@ -1063,7 +1062,7 @@ Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 '====================================================================
     On Error GoTo PROC_ERR
     GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
-        ' non-linked table returns blank - the Instr removes the "Database="
+        ' Non-linked table returns blank - Instr removes the "Database="
 
 PROC_EXIT:
     On Error Resume Next
@@ -1071,11 +1070,9 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
-        'Case ###         ' Add your own error management or log error to logging table
+        ' Case ###         ' Add your own error management or log error to logging table
         Case Else
-            'a custom log usage function commented out
-            'function LogUsage(ByVal strFormName As String, strCallingProc As String, Optional ControlName) As Boolean
-            'call LogUsage err.Number, "basRelinkTables", "GetCurrentPath" ()
+            ' Add your own custom log usage function
     End Select
     Resume PROC_EXIT
 End Function
@@ -1099,13 +1096,13 @@ End Function
 
 Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/func-06.html
-'====================================================================
+'=============================================================================
 ' Purpose:  Display the field names, types, sizes and descriptions for a table
 ' Argument: Name of a table in the current database
 ' Updates:  Peter F. Ennis
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=============================================================================
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
@@ -1213,59 +1210,59 @@ End Function
 Private Function FieldTypeName(fld As DAO.Field) As String
 ' Ref: http://allenbrowne.com/func-06.html
 ' Purpose: Converts the numeric results of DAO Field.Type to text
-    Dim strReturn As String    'Name to return
+    Dim strReturn As String    ' Name to return
 
-    Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
-        Case dbBoolean: strReturn = "Yes/No"            ' 1
-        Case dbByte: strReturn = "Byte"                 ' 2
-        Case dbInteger: strReturn = "Integer"           ' 3
-        Case dbLong                                     ' 4
+    Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
+        Case dbBoolean: strReturn = "Yes/No"            '  1
+        Case dbByte: strReturn = "Byte"                 '  2
+        Case dbInteger: strReturn = "Integer"           '  3
+        Case dbLong                                     '  4
             If (fld.Attributes And dbAutoIncrField) = 0& Then
                 strReturn = "Long Integer"
             Else
                 strReturn = "AutoNumber"
             End If
-        Case dbCurrency: strReturn = "Currency"         ' 5
-        Case dbSingle: strReturn = "Single"             ' 6
-        Case dbDouble: strReturn = "Double"             ' 7
-        Case dbDate: strReturn = "Date/Time"            ' 8
-        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
-        Case dbText                                     '10
+        Case dbCurrency: strReturn = "Currency"         '  5
+        Case dbSingle: strReturn = "Single"             '  6
+        Case dbDouble: strReturn = "Double"             '  7
+        Case dbDate: strReturn = "Date/Time"            '  8
+        Case dbBinary: strReturn = "Binary"             '  9 (no interface)
+        Case dbText                                     ' 10
             If (fld.Attributes And dbFixedField) = 0& Then
                 strReturn = "Text"
             Else
-                strReturn = "Text (fixed width)"        '(no interface)
+                strReturn = "Text (fixed width)"        ' (no interface)
             End If
-        Case dbLongBinary: strReturn = "OLE Object"     '11
-        Case dbMemo                                     '12
+        Case dbLongBinary: strReturn = "OLE Object"     ' 11
+        Case dbMemo                                     ' 12
             If (fld.Attributes And dbHyperlinkField) = 0& Then
                 strReturn = "Memo"
             Else
                 strReturn = "Hyperlink"
             End If
-        Case dbGUID: strReturn = "GUID"                 '15
+        Case dbGUID: strReturn = "GUID"                 ' 15
 
-        'Attached tables only: cannot create these in JET.
-        Case dbBigInt: strReturn = "Big Integer"        '16
-        Case dbVarBinary: strReturn = "VarBinary"       '17
-        Case dbChar: strReturn = "Char"                 '18
-        Case dbNumeric: strReturn = "Numeric"           '19
-        Case dbDecimal: strReturn = "Decimal"           '20
-        Case dbFloat: strReturn = "Float"               '21
-        Case dbTime: strReturn = "Time"                 '22
-        Case dbTimeStamp: strReturn = "Time Stamp"      '23
+        ' Attached tables only: cannot create these in JET.
+        Case dbBigInt: strReturn = "Big Integer"        ' 16
+        Case dbVarBinary: strReturn = "VarBinary"       ' 17
+        Case dbChar: strReturn = "Char"                 ' 18
+        Case dbNumeric: strReturn = "Numeric"           ' 19
+        Case dbDecimal: strReturn = "Decimal"           ' 20
+        Case dbFloat: strReturn = "Float"               ' 21
+        Case dbTime: strReturn = "Time"                 ' 22
+        Case dbTimeStamp: strReturn = "Time Stamp"      ' 23
 
-        'Constants for complex types don't work
-        'prior to Access 2007 and later.
-        Case 101&: strReturn = "Attachment"             'dbAttachment
-        Case 102&: strReturn = "Complex Byte"           'dbComplexByte
-        Case 103&: strReturn = "Complex Integer"        'dbComplexInteger
-        Case 104&: strReturn = "Complex Long"           'dbComplexLong
-        Case 105&: strReturn = "Complex Single"         'dbComplexSingle
-        Case 106&: strReturn = "Complex Double"         'dbComplexDouble
-        Case 107&: strReturn = "Complex GUID"           'dbComplexGUID
-        Case 108&: strReturn = "Complex Decimal"        'dbComplexDecimal
-        Case 109&: strReturn = "Complex Text"           'dbComplexText
+        ' Constants for complex types don't work
+        ' prior to Access 2007 and later.
+        Case 101&: strReturn = "Attachment"             ' dbAttachment
+        Case 102&: strReturn = "Complex Byte"           ' dbComplexByte
+        Case 103&: strReturn = "Complex Integer"        ' dbComplexInteger
+        Case 104&: strReturn = "Complex Long"           ' dbComplexLong
+        Case 105&: strReturn = "Complex Single"         ' dbComplexSingle
+        Case 106&: strReturn = "Complex Double"         ' dbComplexDouble
+        Case 107&: strReturn = "Complex GUID"           ' dbComplexGUID
+        Case 108&: strReturn = "Complex Decimal"        ' dbComplexDecimal
+        Case 109&: strReturn = "Complex Text"           ' dbComplexText
         Case Else: strReturn = "Field type " & fld.Type & " unknown"
     End Select
 
