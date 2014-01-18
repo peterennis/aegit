@@ -5,7 +5,7 @@ FIELD NAME     FIELD TYPE      SIZE    DESCRIPTION
 ===========    ============    ====    ==================================
 Item           Text            255                                       
 Quantity       Long Integer    4                                         
-Status         Text            255                                       
+Status         Text            255     A short description               
 YNO            Text            255                                       
 CHK            Yes/No          1                                         
 CBO            Text            255                                       

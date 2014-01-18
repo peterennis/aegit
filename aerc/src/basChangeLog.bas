@@ -17,6 +17,8 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140117 - v061 - Debug output for longest field name etc.
+'20140115 - v060 - Test for fixing table output field description to max of each table
 '20140114 - v059 - OutputFieldLookupControlTypeList added to aegitClass
     ' Remove ExecSql from zTesting
 '20140113 - v058 - FieldLookupControlTypeList outputs table, field, control type and count for lookup tab

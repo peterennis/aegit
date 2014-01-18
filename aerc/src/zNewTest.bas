@@ -9,10 +9,14 @@ Private Enum SizeStringSide
     TextRight = 2
 End Enum
 
-Private aeintFDLen As Long
 Private aeintFNLen As Long
-Private Const aestr4 As String = "    "
+Private aestrLFN As String
+Private aestrLFNTN As String
+Private aeintFDLen As Long
+Private aestrLFD As String
 Private aeintFTLen As Long
+Private aestrLFT As String
+Private Const aestr4 As String = "    "
 Private Const aeintFSize As Long = 4
 
 ' aeDocumentTables "debug"
@@ -39,7 +43,23 @@ Public Sub aeDocumentTables(Optional varDebug As Variant)
 
     intFailCount = 0
     
-LongestFieldPropsName
+    LongestFieldPropsName
+    Debug.Print "Longest Field Name=" & aestrLFN
+    Debug.Print "Longest Field Name Length=" & aeintFNLen
+    Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
+    Debug.Print "Longest Field Description=" & aestrLFD
+    Debug.Print "Longest Field Description Length=" & aeintFDLen
+    Debug.Print "Longest Field Type=" & aestrLFT
+    Debug.Print "Longest Field Type Length=" & aeintFTLen
+
+    ' Reset values
+    aestrLFN = ""
+    aeintFNLen = 11     ' Minimum required by design
+    'aestrLFNTN = ""
+    'aestrLFD = ""
+    aeintFDLen = 0
+    'aestrLFT = ""
+    'aeintFTLen = 0
 
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
@@ -153,8 +173,8 @@ Public Function TableInfo(strTableName As String, Optional varDebug As Variant) 
 
     If aeintFDLen < Len("DESCRIPTION") Then aeintFDLen = Len("DESCRIPTION")
 
-    'If blnDebug Then
-    If blnDebug And aeintFDLen <> 11 Then
+    If blnDebug Then
+    'If blnDebug And aeintFDLen <> 11 Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
@@ -188,8 +208,8 @@ Public Function TableInfo(strTableName As String, Optional varDebug As Variant) 
     strLinkedTablePath = ""
 
     For Each fld In tdf.Fields
-        'If blnDebug Then
-        If blnDebug And aeintFDLen <> 11 Then
+        If blnDebug Then
+        'If blnDebug And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
                 & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
@@ -200,8 +220,8 @@ Public Function TableInfo(strTableName As String, Optional varDebug As Variant) 
             & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
             & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
-    'If blnDebug Then Debug.Print
-    If blnDebug And aeintFDLen <> 11 Then Debug.Print
+    If blnDebug Then Debug.Print
+    'If blnDebug And aeintFDLen <> 11 Then Debug.Print
     'Print #1, vbCrLf
 
     TableInfo = True
@@ -422,9 +442,6 @@ Private Function LongestFieldPropsName() As Boolean
     Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
-    Dim strLFN As String
-    Dim strLFT As String
-    Dim strLFD As String
 
     ' Use a call stack and global error handler
     'If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -444,15 +461,16 @@ Private Function LongestFieldPropsName() As Boolean
                 Or Left(tblDef.Name, 3) = "zzz") Then
             For Each fld In tblDef.Fields
                 If Len(fld.Name) > aeintFNLen Then
-                    strLFN = fld.Name
+                    aestrLFNTN = tblDef.Name
+                    aestrLFN = fld.Name
                     aeintFNLen = Len(fld.Name)
                 End If
                 If Len(FieldTypeName(fld)) > aeintFTLen Then
-                    strLFT = FieldTypeName(fld)
+                    aestrLFT = FieldTypeName(fld)
                     aeintFTLen = Len(FieldTypeName(fld))
                 End If
                 If Len(GetDescrip(fld)) > aeintFDLen Then
-                    strLFD = GetDescrip(fld)
+                    aestrLFD = GetDescrip(fld)
                     aeintFDLen = Len(GetDescrip(fld))
                 End If
             Next
