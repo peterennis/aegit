@@ -493,3 +493,28 @@ PROC_ERR:
     Resume PROC_EXIT
     
 End Function
+
+Public Sub ExportRibbon()
+
+    Dim strDB As String
+    Dim lngPath As Long
+    Dim lngRev As Long
+    Dim strLeft As String
+
+    strDB = Application.CurrentDb.Name
+    lngPath = Len(strDB)
+    lngRev = InStrRev(strDB, "\")
+    strLeft = Left(strDB, lngPath - (lngPath - lngRev))
+
+    DoCmd.OutputTo acOutputTable, "listview", acFormatTXT, strLeft & "OutputRibbon.txt"
+
+End Sub
+
+Public Sub CreateRibbon()
+' Ref: http://www.nullskull.com/q/10320914/change-ribbon-programatically.aspx
+' Ref: http://www.accessribbon.de/en/index.php?Access_-_Ribbons:Load_Ribbons_Into_The_Database:..._From_XML_File
+
+    CodeDb.Properties.Append CodeDb.CreateProperty("aeRibbonID", dbText, "adaept1")
+    CodeDb.Properties("aeRibbonID") = "adaept1"
+
+End Sub

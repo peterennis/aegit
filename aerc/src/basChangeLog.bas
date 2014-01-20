@@ -17,6 +17,7 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140119 - v062 - ListOrCloseAllOpenQueries added to aegitClass
 '20140117 - v061 - Debug output for longest field name etc.
 '20140115 - v060 - Test for fixing table output field description to max of each table
 '20140114 - v059 - OutputFieldLookupControlTypeList added to aegitClass

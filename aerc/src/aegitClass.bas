@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.1"
-Private Const aegitVERSION_DATE As String = "January 17, 2014"
+Private Const aegitVERSION As String = "0.6.2"
+Private Const aegitVERSION_DATE As String = "January 19, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1851,6 +1851,33 @@ Private Function FolderExists(strPath As String) As Boolean
     FolderExists = ((GetAttr(strPath) And vbDirectory) = vbDirectory)
 End Function
 
+Private Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx
+
+    Dim obj As AccessObject
+    Dim dbs As Object
+    Set dbs = Application.CurrentData
+
+    If IsMissing(strCloseAll) Then
+        ' Search for open AccessObject objects in AllQueries collection.
+        For Each obj In dbs.AllQueries
+            If obj.IsLoaded = True Then
+                ' Print name of obj
+                Debug.Print obj.Name
+            End If
+        Next obj
+    Else
+        For Each obj In dbs.AllQueries
+            If obj.IsLoaded = True Then
+                ' Close obj
+                DoCmd.Close acQuery, obj.Name, acSaveYes
+                Debug.Print "Closed query " & obj.Name
+            End If
+        Next obj
+    End If
+
+End Sub
+
 Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
@@ -1899,7 +1926,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     If aegitUseImportFolder Then
         aestrImportLocation = aegitImportFolder
     End If
- 
+
+    ListOrCloseAllOpenQueries
+
     If blnDebug Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "SourceFolder = " & aestrSourceLocation

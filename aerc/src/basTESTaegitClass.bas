@@ -25,33 +25,6 @@ Public Function MYPROJECT_TEST()
     'aegitClassTest ("debug")
 End Function
 
-Public Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx
-
-    Dim obj As AccessObject
-    Dim dbs As Object
-    Set dbs = Application.CurrentData
-
-    If IsMissing(strCloseAll) Then
-        ' Search for open AccessObject objects in AllQueries collection.
-        For Each obj In dbs.AllQueries
-            If obj.IsLoaded = True Then
-                ' Print name of obj
-                Debug.Print obj.Name
-            End If
-        Next obj
-    Else
-        For Each obj In dbs.AllQueries
-            If obj.IsLoaded = True Then
-                ' Close obj
-                DoCmd.Close acQuery, obj.Name, acSaveYes
-                Debug.Print "Closed query " & obj.Name
-            End If
-        Next obj
-    End If
-
-End Sub
-
 Private Function PassFail(bln As Boolean) As String
     If bln Then
         PassFail = "Pass"
