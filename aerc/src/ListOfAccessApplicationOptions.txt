@@ -89,7 +89,6 @@
               XP, 2003      Form Template               Normal
               XP, 2003      Report Template             Normal
               XP, 2003      Always Use Event Procedures  0 
-!'Show Smart Tags on Forms' is an invalid name.
                   2003      Themed Form Controls        -1 
 >>>Advanced Tab
               XP, 2003      Ignore DDE Requests                        0 
@@ -107,14 +106,6 @@
               XP, 2003      Use Row Level Locking                     -1 
               XP            Save Login and Password                    0 
 >>>Pages Tab
-!'Section Indent' is an invalid name.
-!'Alternate Row Color' is an invalid name.
-!'Caption Section Style' is an invalid name.
-!'Footer Section Style' is an invalid name.
-!'Use Default Page Folder' is an invalid name.
-!'Default Page Folder' is an invalid name.
-!'Use Default Connection File' is an invalid name.
-!'Default Connection File' is an invalid name.
 >>>Spelling Tab
               XP, 2003      Spelling dictionary language                             0 
               XP, 2003      Spelling add words to                                    0 

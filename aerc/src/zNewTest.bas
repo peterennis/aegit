@@ -510,10 +510,46 @@ Public Sub ExportRibbon()
 
 End Sub
 
+Public Function LoadRibbons()
+' Load ribbons from XML file into the database
+
+    On Error GoTo Error1
+    Dim f As Long
+    Dim strText As String
+    Dim strOut As String
+
+    f = FreeFile
+    Open "C:\Folder\Ribbon\AccRibbon.xml" For Input As f
+    ' C:\Folder\... has to be replaced by your folder/filename.
+    Do While Not EOF(f)
+        Line Input #f, strText
+        strOut = strOut & strText
+    Loop
+    Application.LoadCustomUI "AppRibbon_1", strOut
+
+Error1_Exit:
+    On Error Resume Next
+    Close f
+    Exit Function
+
+Error1:
+    Select Case Err
+        Case 32609
+        ' Ribbon already loaded
+    Case Else
+        MsgBox "Error: " & Err.Number & vbCrLf & _
+               Err.Description, vbCritical, _
+               "Error", Err.HelpFile, Err.HelpContext
+    End Select
+    Resume Error1_Exit
+
+End Function
+
 Public Sub CreateRibbon()
 ' Ref: http://www.nullskull.com/q/10320914/change-ribbon-programatically.aspx
 ' Ref: http://www.accessribbon.de/en/index.php?Access_-_Ribbons:Load_Ribbons_Into_The_Database:..._From_XML_File
 
+    On Error Resume Next
     CodeDb.Properties.Append CodeDb.CreateProperty("aeRibbonID", dbText, "adaept1")
     CodeDb.Properties("aeRibbonID") = "adaept1"
 
