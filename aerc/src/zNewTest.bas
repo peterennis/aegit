@@ -487,7 +487,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
     LongestFieldPropsName = False
     'GlobalErrHandler
     Resume PROC_EXIT
@@ -510,10 +510,12 @@ Public Sub ExportRibbon()
 
 End Sub
 
-Public Function LoadRibbons()
+Public Function LoadRibbons() As Boolean
 ' Load ribbons from XML file into the database
+' Ref: http://www.accessribbon.de/en/index.php?Access_-_Ribbons:Load_Ribbons_Into_The_Database:..._From_XML_File
 
-    On Error GoTo Error1
+    On Error GoTo PROC_ERR
+    
     Dim f As Long
     Dim strText As String
     Dim strOut As String
@@ -527,21 +529,22 @@ Public Function LoadRibbons()
     Loop
     Application.LoadCustomUI "AppRibbon_1", strOut
 
-Error1_Exit:
+PROC_EXIT:
     On Error Resume Next
     Close f
+    'PopCallStack
     Exit Function
 
-Error1:
+PROC_ERR:
     Select Case Err
         Case 32609
         ' Ribbon already loaded
     Case Else
-        MsgBox "Error: " & Err.Number & vbCrLf & _
-               Err.Description, vbCritical, _
-               "Error", Err.HelpFile, Err.HelpContext
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LoadRibbons of Class aegitClass"
     End Select
-    Resume Error1_Exit
+    LoadRibbons = False
+    'GlobalErrHandler
+    Resume PROC_EXIT
 
 End Function
 
@@ -554,3 +557,52 @@ Public Sub CreateRibbon()
     CodeDb.Properties("aeRibbonID") = "adaept1"
 
 End Sub
+
+Public Function aegitClassTestXML(Optional Debugit As Variant) As Boolean
+
+    Dim oDbObjects As aegitClass
+    Set oDbObjects = New aegitClass
+
+    Dim bln1 As Boolean
+    'Dim bln2 As Boolean
+    'Dim bln3 As Boolean
+    'Dim bln4 As Boolean
+    'Dim bln5 As Boolean
+    'Dim bln6 As Boolean
+    'Dim bln7 As Boolean
+
+    'oDbObjects.SourceFolder = THE_SOURCE_FOLDER
+    'oDbObjects.XMLFolder = THE_XML_FOLDER
+
+Test1:
+    '=============
+    ' TEST 1
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "1. aegitClassTestXML => DocumentTheDatabase"
+    Debug.Print "aegitClassTestXML"
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln1 = oDbObjects.DocumentTablesXML()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln1 = oDbObjects.DocumentTablesXML("WithDebugging")
+    End If
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
+
+RESULTS:
+    'Debug.Print "Test 1: DocumentTheDatabase"
+    'Debug.Print "Test 2: Exists"
+    'Debug.Print "Test 3: ReadDocDatabase"
+    'Debug.Print "Test 4: GetReferences"
+    'Debug.Print "Test 5: DocumentTables"
+    'Debug.Print "Test 6: DocumentRelations"
+    'Debug.Print "Test 7: CompactAndRepair"
+    'Debug.Print
+    'Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7"
+    'Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7)
+
+End Function

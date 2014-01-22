@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.2"
-Private Const aegitVERSION_DATE As String = "January 19, 2014"
+Private Const aegitVERSION As String = "0.6.3"
+Private Const aegitVERSION_DATE As String = "January 21, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -47,6 +47,7 @@ Private Type mySetupType
     SourceFolder As String
     ImportFolder As String
     UseImportFolder As Boolean
+    XMLFolder As String
 End Type
 
 ' Current pointer to the array element of the call stack
@@ -60,10 +61,12 @@ Private mfInErrorHandler As Boolean
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitImportFolder As String
+Private aegitXMLFolder As String
 Private aegitUseImportFolder As Boolean
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
 Private aestrImportLocation As String
+Private aestrXMLLocation As String
 Private aeintLTN As Long
 Private aeintFNLen As Long
 Private aeintFTLen As Long
@@ -72,6 +75,7 @@ Private aeintFDLen As Long
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
+Private Const aeTblXMLFile = "OutputTblXMLSetupForTables.txt"
 Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
 Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
 Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
@@ -85,10 +89,12 @@ Private Sub Class_Initialize()
     ' provide a default value for the SourceFolder and ImportFolder properties
     aegitSourceFolder = "default"
     aegitImportFolder = "default"
+    aegitXMLFolder = "default"
     aegitUseImportFolder = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
     aegitType.UseImportFolder = False
+    aegitType.XMLFolder = "C:\ae\aegit\aerc\xml\"
     aeintLTN = LongestTableName
     LongestFieldPropsName
 
@@ -98,6 +104,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
     Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
+    Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -138,6 +145,14 @@ End Property
 
 Property Let UseImportFolder(ByVal blnUseImportFolder As Boolean)
     aegitUseImportFolder = blnUseImportFolder
+End Property
+
+Property Get XMLFolder() As String
+    XMLFolder = aegitXMLFolder
+End Property
+
+Property Let XMLFolder(ByVal strXMLFolder As String)
+    aegitXMLFolder = strXMLFolder
 End Property
 
 Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
@@ -226,6 +241,20 @@ Property Get DocumentTables(Optional DebugTheCode As Variant) As Boolean
     End If
 End Property
 
+Property Get DocumentTablesXML(Optional DebugTheCode As Variant) As Boolean
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "Get DocumentTablesXML"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING IS OFF"
+        DocumentTablesXML = aeDocumentTablesXML
+    Else
+        Debug.Print "Get DocumentTablesXML"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING TURNED ON"
+        DocumentTablesXML = aeDocumentTablesXML(DebugTheCode)
+    End If
+End Property
+
 Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
 
@@ -267,6 +296,10 @@ End Property
 
 Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "aeReadWriteStream"
+
     Dim FName As String
     Dim fname2 As String
     Dim fnr As Integer
@@ -306,9 +339,17 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
         End If
     Wend
 
+PROC_EXIT:
     Close #fnr
     Close #fnr2
     aeReadWriteStream = True
+    PopCallStack
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+    GlobalErrHandler
+    Resume Next
 
 End Function
 
@@ -368,6 +409,13 @@ Private Sub ListOfAccessApplicationOptions()
     Dim fle As Integer
 
     fle = FreeFile()
+    Debug.Print "aegitSourceFolder=" & aegitSourceFolder
+    'Stop
+
+    If aegitSourceFolder = "default" Then
+        aegitSourceFolder = aegitType.SourceFolder
+    End If
+
     Open aegitSourceFolder & "\ListOfAccessApplicationOptions.txt" For Output As #fle
 
     'On Error Resume Next
@@ -651,13 +699,13 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2091 Then          ''...' is an invalid name.
-        Debug.Print "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
         Print #fle, "!" & Err.Description
         Err.Clear
     ElseIf Err = 3270 Then      'Property not found.
         Err.Clear
     Else
-        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -707,12 +755,12 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3251 Then
-        Debug.Print "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
         Debug.Print strPropName
         Print #fle, "!" & Err.Description, strPropName
         Err.Clear
     Else
-        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -737,7 +785,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegitClass"
     Resume PROC_EXIT
 
 End Function
@@ -764,7 +812,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegitClass"
     Resume PROC_EXIT
 End Sub
 
@@ -884,8 +932,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     aeGetReferences = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -902,7 +950,7 @@ Private Function LongestTableName() As Integer
 '====================================================================
 
     Dim dbs As DAO.Database
-    Dim tblDef As DAO.TableDef
+    Dim tdf As DAO.TableDef
     Dim intTNLen As Integer
 
     ' Use a call stack and global error handler
@@ -911,26 +959,26 @@ Private Function LongestTableName() As Integer
 
     intTNLen = 0
     Set dbs = CurrentDb()
-    For Each tblDef In CurrentDb.TableDefs
-        If Not (Left(tblDef.Name, 4) = "MSys" _
-                Or Left(tblDef.Name, 4) = "~TMP" _
-                Or Left(tblDef.Name, 3) = "zzz") Then
-            If Len(tblDef.Name) > intTNLen Then
-                intTNLen = Len(tblDef.Name)
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left(tdf.Name, 4) = "MSys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
+            If Len(tdf.Name) > intTNLen Then
+                intTNLen = Len(tdf.Name)
             End If
         End If
-    Next tblDef
+    Next tdf
 
     LongestTableName = intTNLen
 
 PROC_EXIT:
-    Set tblDef = Nothing
+    Set tdf = Nothing
     Set dbs = Nothing
     PopCallStack
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
     LongestTableName = 0
     GlobalErrHandler
     Resume PROC_EXIT
@@ -947,7 +995,7 @@ Private Function LongestFieldPropsName() As Boolean
 '====================================================================
 
     Dim dbs As DAO.Database
-    Dim tblDef As DAO.TableDef
+    Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim strLFN As String
     Dim strLFT As String
@@ -963,11 +1011,11 @@ Private Function LongestFieldPropsName() As Boolean
 
     Set dbs = CurrentDb()
 
-    For Each tblDef In CurrentDb.TableDefs
-        If Not (Left(tblDef.Name, 4) = "MSys" _
-                Or Left(tblDef.Name, 4) = "~TMP" _
-                Or Left(tblDef.Name, 3) = "zzz") Then
-            For Each fld In tblDef.Fields
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left(tdf.Name, 4) = "MSys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
+            For Each fld In tdf.Fields
                 If Len(fld.Name) > aeintFNLen Then
                     strLFN = fld.Name
                     aeintFNLen = Len(fld.Name)
@@ -982,19 +1030,19 @@ Private Function LongestFieldPropsName() As Boolean
                 End If
             Next
         End If
-    Next tblDef
+    Next tdf
 
     LongestFieldPropsName = True
 
 PROC_EXIT:
     Set fld = Nothing
-    Set tblDef = Nothing
+    Set tdf = Nothing
     Set dbs = Nothing
     PopCallStack
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
     LongestFieldPropsName = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1088,7 +1136,7 @@ Private Function FileLocked(strFileName As String) As Boolean
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegitClass"
         FileLocked = True
         Err.Clear
     End If
@@ -1194,8 +1242,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
     TableInfo = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1278,7 +1326,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/func-06.html
 
     Dim strDocument As String
-    Dim tblDef As DAO.TableDef
+    Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim blnDebug As Boolean
     Dim blnResult As Boolean
@@ -1311,19 +1359,19 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
         If Not FileLocked(strFile) Then Open strFile For Append As #1
     End If
 
-    For Each tblDef In CurrentDb.TableDefs
-        If Not (Left(tblDef.Name, 4) = "MSys" _
-                Or Left(tblDef.Name, 4) = "~TMP" _
-                Or Left(tblDef.Name, 3) = "zzz") Then
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left(tdf.Name, 4) = "MSys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
             If blnDebug Then
-                blnResult = TableInfo(tblDef.Name, "WithDebugging")
+                blnResult = TableInfo(tdf.Name, "WithDebugging")
                 If Not blnResult Then intFailCount = intFailCount + 1
             Else
-                blnResult = TableInfo(tblDef.Name)
+                blnResult = TableInfo(tdf.Name)
                 If Not blnResult Then intFailCount = intFailCount + 1
             End If
         End If
-    Next tblDef
+    Next tdf
 
     If intFailCount > 0 Then
         aeDocumentTables = False
@@ -1339,24 +1387,102 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 
 PROC_EXIT:
     Set fld = Nothing
-    Set tblDef = Nothing
+    Set tdf = Nothing
     Close 1
     PopCallStack
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     aeDocumentTables = False
     GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
-Private Function isPK(tblDef As DAO.TableDef, strField As String) As Boolean
+Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
+' Ref: http://stackoverflow.com/questions/4867727/how-to-use-ms-access-saveastext-with-queries-specifically-stored-procedures
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "aeDocumentTablesXML"
+    
+    Dim dbs As DAO.Database
+    Dim tbl As DAO.TableDef
+    Dim strObjName As String
+
+    Set dbs = CurrentDb
+
+    Dim blnDebug As Boolean
+    Dim intFailCount As Integer
+
+    If aegitXMLFolder = "default" Then
+        aestrXMLLocation = aegitType.XMLFolder
+    Else
+        aestrXMLLocation = aegitXMLFolder
+    End If
+
+    If Not FolderExists(aestrXMLLocation) Then
+        MsgBox aestrXMLLocation & " does not exist!", vbCritical, "Error"
+        Stop
+    End If
+
+    intFailCount = 0
+    Debug.Print "aeDocumentTablesXML"
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTablesXML is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTablesXML is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
+
+    Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
+    For Each tbl In dbs.TableDefs
+        If tbl.Attributes = 0 Then      ' Ignore System Tables
+            strObjName = tbl.Name
+            Debug.Print , "- " & strObjName & ".xsd"
+            'Debug.Print "aestrXMLLocation=" & aestrXMLLocation
+            'Debug.Print "the XML file=" & aestrXMLLocation & strObjName
+            Application.ExportXML acExportTable, strObjName, , _
+                        aestrXMLLocation & "tables_" & strObjName & ".xsd"
+        End If
+    Next
+
+    If intFailCount > 0 Then
+        aeDocumentTablesXML = False
+    Else
+        aeDocumentTablesXML = True
+    End If
+
+    If blnDebug Then
+        Debug.Print "intFailCount = " & intFailCount
+        Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
+    End If
+
+PROC_EXIT:
+    Set tbl = Nothing
+    Set dbs = Nothing
+    Close 1
+    PopCallStack
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
+    aeDocumentTablesXML = False
+    GlobalErrHandler
+    Resume PROC_EXIT
+
+End Function
+
+Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
     Dim idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tblDef.Indexes
+    For Each idx In tdf.Indexes
         If idx.Primary Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
@@ -1368,10 +1494,10 @@ Private Function isPK(tblDef As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function isIndex(tblDef As DAO.TableDef, strField As String) As Boolean
+Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
     Dim idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tblDef.Indexes
+    For Each idx In tdf.Indexes
         For Each fld In idx.Fields
             If strField = fld.Name Then
                 isIndex = True
@@ -1381,10 +1507,10 @@ Private Function isIndex(tblDef As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function isFK(tblDef As DAO.TableDef, strField As String) As Boolean
+Private Function isFK(tdf As DAO.TableDef, strField As String) As Boolean
     Dim idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tblDef.Indexes
+    For Each idx In tdf.Indexes
         If idx.Foreign Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
@@ -1461,8 +1587,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     aeDocumentRelations = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1516,7 +1642,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
     OutputQueriesSqlText = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1540,7 +1666,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -1676,8 +1802,8 @@ PROC_ERR:
             varPropValue = Null
             Resume Next
         Case Else
-            'MsgBox "erl=" & erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-            'If blnDebug Then Debug.Print ">>>erl=" & erl & " Error " & err.Number & " (" & err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'MsgBox "Erl=" & erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'If blnDebug Then Debug.Print ">>>Erl=" & erl & " Error " & err.Number & " (" & err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
             OutputBuiltInPropertiesText = False
             GlobalErrHandler
             Resume PROC_EXIT
@@ -1687,8 +1813,11 @@ End Function
  
 Private Function IsFileLocked(PathName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
-    
-    On Error GoTo ErrHandler
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "IsFileLocked"
+
     Dim i As Integer
 
     If Len(Dir$(PathName)) Then
@@ -1698,21 +1827,25 @@ Private Function IsFileLocked(PathName As String) As Boolean
         Unlock i
         Close i
     Else
-        'err.Raise 53
+        'Err.Raise 53
     End If
 
-ExitProc:
+PROC_EXIT:
     On Error GoTo 0
+    PopCallStack
     Exit Function
 
-ErrHandler:
+PROC_ERR:
     Select Case Err.Number
         Case 70 'Unable to acquire exclusive lock
+            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
             IsFileLocked = True
         Case Else
-            MsgBox "Error " & Err.Number & " (" & Err.Description & ")"
+            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            GlobalErrHandler
+            Resume PROC_EXIT
     End Select
-    Resume ExitProc
     Resume
 
 End Function
@@ -1833,13 +1966,13 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 70 Then    ' Permission denied
-        MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass" _
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass" _
             & vbCrLf & vbCrLf & _
             "Manually delete the files from git, compact and repair database, then try again!", vbCritical, "STOP"
         Stop
     End If
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -1921,8 +2054,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
 
     If aegitImportFolder = "default" Then
-            aestrImportLocation = aegitType.ImportFolder
+        aestrImportLocation = aegitType.ImportFolder
     End If
+
     If aegitUseImportFolder Then
         aestrImportLocation = aegitImportFolder
     End If
@@ -1960,7 +2094,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         Stop
     End If
     
-    ListOfContainers ("ListOfContainers.txt")
+    ListOfContainers "ListOfContainers.txt"
     ListOfAllHiddenQueries
     ListOfAccessApplicationOptions
     ListOfApplicationProperties
@@ -2026,8 +2160,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
     aeDocumentTheDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2111,8 +2245,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
     BuildTheDirectory = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2276,8 +2410,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
     aeReadDocDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2376,8 +2510,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
     aeExists = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2514,7 +2648,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegitClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegitClass", vbCritical, "Error"
     GlobalErrHandler
     Resume PROC_EXIT
 
