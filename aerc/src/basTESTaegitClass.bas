@@ -46,8 +46,8 @@ Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
     Dim bln6 As Boolean
     Dim bln7 As Boolean
 
-    'oDbObjects.SourceFolder = THE_SOURCE_FOLDER
-    'oDbObjects.XMLFolder = THE_XML_FOLDER
+    oDbObjects.SourceFolder = THE_SOURCE_FOLDER
+    oDbObjects.XMLFolder = THE_XML_FOLDER
 
 Test1:
     '=============

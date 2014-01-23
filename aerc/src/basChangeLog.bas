@@ -17,6 +17,8 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140123 - v064 - Move licence text after option statements so that it appears in a printout
+    ' Merge changes for fix table output field description to max of each table and test
 '20140121 - v063 - Fixing LoadRibbons
     ' Add error handling to aeReadWriteStream
     ' Fix aeDocumentTablesXML

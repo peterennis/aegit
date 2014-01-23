@@ -2,6 +2,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
 'Copyright (c) 2011 Peter F. Ennis
 'This library is free software; you can redistribute it and/or
 'modify it under the terms of the GNU Lesser General Public
@@ -14,10 +17,7 @@ Attribute VB_Exposed = False
 'You should have received a copy of the GNU Lesser General Public
 'License along with this library; if not, visit
 'http://www.gnu.org/licenses/lgpl-3.0.txt
-
-Option Compare Database
-Option Explicit
-
+'
 ' Ref: http://www.di-mgt.com.au/cl_Simple.html
 '=======================================================================
 ' Author:   Peter F. Ennis
@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.3"
-Private Const aegitVERSION_DATE As String = "January 21, 2014"
+Private Const aegitVERSION As String = "0.6.4"
+Private Const aegitVERSION_DATE As String = "January 23, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -67,11 +67,15 @@ Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
 Private aestrImportLocation As String
 Private aestrXMLLocation As String
-Private aeintLTN As Long
+Private aeintLTN As Long                        ' Longest Table Name
+Private aestrLFN As String                      ' Longest Field Name
+Private aestrLFNTN As String
 Private aeintFNLen As Long
-Private aeintFTLen As Long
+Private aestrLFT As String                      ' Longest Field Type
+Private aeintFTLen As Long                      ' Field Type Length
 Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
+Private aestrLFD As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
@@ -995,48 +999,48 @@ Private Function LongestFieldPropsName() As Boolean
 '====================================================================
 
     Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDef
+    Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
-    Dim strLFN As String
-    Dim strLFT As String
-    Dim strLFD As String
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "LongestFieldPropsName"
-    
+
+    On Error GoTo PROC_ERR
+
     aeintFNLen = 0
     aeintFTLen = 0
     aeintFDLen = 0
 
     Set dbs = CurrentDb()
 
-    For Each tdf In CurrentDb.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
-            For Each fld In tdf.Fields
+    For Each tblDef In CurrentDb.TableDefs
+        If Not (Left(tblDef.Name, 4) = "MSys" _
+                Or Left(tblDef.Name, 4) = "~TMP" _
+                Or Left(tblDef.Name, 3) = "zzz") Then
+            For Each fld In tblDef.Fields
                 If Len(fld.Name) > aeintFNLen Then
-                    strLFN = fld.Name
+                    aestrLFNTN = tblDef.Name
+                    aestrLFN = fld.Name
                     aeintFNLen = Len(fld.Name)
                 End If
                 If Len(FieldTypeName(fld)) > aeintFTLen Then
-                    strLFT = FieldTypeName(fld)
+                    aestrLFT = FieldTypeName(fld)
                     aeintFTLen = Len(FieldTypeName(fld))
                 End If
                 If Len(GetDescrip(fld)) > aeintFDLen Then
-                    strLFD = GetDescrip(fld)
+                    aestrLFD = GetDescrip(fld)
                     aeintFDLen = Len(GetDescrip(fld))
                 End If
             Next
         End If
-    Next tdf
+    Next tblDef
 
     LongestFieldPropsName = True
 
 PROC_EXIT:
     Set fld = Nothing
-    Set tdf = Nothing
+    Set tblDef = Nothing
     Set dbs = Nothing
     PopCallStack
     Exit Function
@@ -1046,7 +1050,7 @@ PROC_ERR:
     LongestFieldPropsName = False
     GlobalErrHandler
     Resume PROC_EXIT
-    
+
 End Function
 
 Private Function SizeString(Text As String, Length As Long, _
@@ -1144,13 +1148,13 @@ End Function
 
 Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/func-06.html
-'=============================================================================
+'====================================================================
 ' Purpose:  Display the field names, types, sizes and descriptions for a table
 ' Argument: Name of a table in the current database
 ' Updates:  Peter F. Ennis
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'=============================================================================
+'====================================================================
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
@@ -1163,6 +1167,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "TableInfo"
+
+    On Error GoTo PROC_ERR
 
     strLinkedTablePath = ""
 
@@ -1182,9 +1188,12 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
     strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
 
+    aeintFDLen = LongestTableDescription(tdf.Name)
+
     If aeintFDLen < Len("DESCRIPTION") Then aeintFDLen = Len("DESCRIPTION")
 
     If blnDebug Then
+    'If blnDebug And aeintFDLen <> 11 Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
@@ -1200,7 +1209,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
                         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
     End If
-
+  
+    Debug.Print ">>>", SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
@@ -1219,6 +1229,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
     For Each fld In tdf.Fields
         If blnDebug Then
+        'If blnDebug And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
                 & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
@@ -1230,6 +1241,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
             & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
     If blnDebug Then Debug.Print
+    'If blnDebug And aeintFDLen <> 11 Then Debug.Print
     Print #1, vbCrLf
 
     TableInfo = True
@@ -1253,6 +1265,47 @@ End Function
 Private Function GetDescrip(obj As Object) As String
     On Error Resume Next
     GetDescrip = obj.Properties("Description")
+End Function
+
+Private Function LongestTableDescription(strTblName As String) As Integer
+' ?LongestTableDescription("tblCaseManager")
+
+    On Error GoTo PROC_ERR
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim strLFD As String
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "LongestTableDescription"
+
+    Set dbs = CurrentDb()
+    Set tdf = dbs.TableDefs(strTblName)
+
+    For Each fld In tdf.Fields
+        If Len(GetDescrip(fld)) > aeintFDLen Then
+            strLFD = GetDescrip(fld)
+            aeintFDLen = Len(GetDescrip(fld))
+        End If
+    Next
+
+    LongestTableDescription = aeintFDLen
+
+PROC_EXIT:
+    Set fld = Nothing
+    Set tdf = Nothing
+    Set dbs = Nothing
+    PopCallStack
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegitClass"
+    LongestTableDescription = -1
+    GlobalErrHandler
+    Resume PROC_EXIT
+
 End Function
 
 Private Function FieldTypeName(fld As DAO.Field) As String
@@ -1325,7 +1378,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 ' Relationships in the database with table, foreign table, primary keys, foreign keys
 ' Ref: http://allenbrowne.com/func-06.html
 
-    Dim strDocument As String
+    'Dim strDoc As String
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim blnDebug As Boolean
@@ -1336,8 +1389,29 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeDocumentTables"
-    
+
+    On Error GoTo PROC_ERR
+
     intFailCount = 0
+    
+    LongestFieldPropsName
+    Debug.Print "Longest Field Name=" & aestrLFN
+    Debug.Print "Longest Field Name Length=" & aeintFNLen
+    Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
+    Debug.Print "Longest Field Description=" & aestrLFD
+    Debug.Print "Longest Field Description Length=" & aeintFDLen
+    Debug.Print "Longest Field Type=" & aestrLFT
+    Debug.Print "Longest Field Type Length=" & aeintFTLen
+
+    ' Reset values
+    aestrLFN = ""
+    If aeintFNLen < 11 Then aeintFNLen = 11     ' Minimum required by design
+    'aestrLFNTN = ""
+    'aestrLFD = ""
+    aeintFDLen = 0
+    'aestrLFT = ""
+    'aeintFTLen = 0
+
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
         blnDebug = False
@@ -1366,21 +1440,24 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
             If blnDebug Then
                 blnResult = TableInfo(tdf.Name, "WithDebugging")
                 If Not blnResult Then intFailCount = intFailCount + 1
+                If blnDebug And aeintFDLen <> 11 Then Debug.Print "aeintFDLen=" & aeintFDLen
             Else
                 blnResult = TableInfo(tdf.Name)
                 If Not blnResult Then intFailCount = intFailCount + 1
             End If
+            'Debug.Print
+            aeintFDLen = 0
         End If
     Next tdf
 
-    If intFailCount > 0 Then
-        aeDocumentTables = False
-    Else
-        aeDocumentTables = True
-    End If
+    'If intFailCount > 0 Then
+    '    aeDocumentTables = False
+    'Else
+    '    aeDocumentTables = True
+    'End If
     If blnDebug Then
         Debug.Print "intFailCount = " & intFailCount
-        Debug.Print "aeDocumentTables = " & aeDocumentTables
+        'Debug.Print "aeDocumentTables = " & aeDocumentTables
     End If
 
     aeDocumentTables = True
@@ -1650,25 +1727,25 @@ PROC_ERR:
 End Function
 
 Private Sub KillProperly(Killfile As String)
-' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
+      ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "KillProperly"
+          ' Use a call stack and global error handler
+10        If gcfHandleErrors Then On Error GoTo PROC_ERR
+20        PushCallStack "KillProperly"
 
-    If Len(Dir(Killfile)) > 0 Then
-        SetAttr Killfile, vbNormal
-        Kill Killfile
-    End If
+30        If Len(Dir(Killfile)) > 0 Then
+40            SetAttr Killfile, vbNormal
+50            Kill Killfile
+60        End If
 
 PROC_EXIT:
-    PopCallStack
-    Exit Sub
+70        PopCallStack
+80        Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
-    GlobalErrHandler
-    Resume PROC_EXIT
+90        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
+100       GlobalErrHandler
+110       Resume PROC_EXIT
 
 End Sub
 
@@ -1802,8 +1879,8 @@ PROC_ERR:
             varPropValue = Null
             Resume Next
         Case Else
-            'MsgBox "Erl=" & erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-            'If blnDebug Then Debug.Print ">>>Erl=" & erl & " Error " & err.Number & " (" & err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
             OutputBuiltInPropertiesText = False
             GlobalErrHandler
             Resume PROC_EXIT
@@ -1851,83 +1928,86 @@ PROC_ERR:
 End Function
 
 Private Function DocumentTheContainer(strContainerType As String, strExt As String, Optional varDebug As Variant) As Boolean
-' strContainerType: Forms, Reports, Scripts (Macros), Modules
+      ' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "DocumentTheContainer"
+          ' Use a call stack and global error handler
+10        If gcfHandleErrors Then On Error GoTo PROC_ERR
+20        PushCallStack "DocumentTheContainer"
 
-    Dim dbs As DAO.Database
-    Dim cnt As DAO.Container
-    Dim doc As DAO.Document
-    Dim i As Integer
-    Dim intAcObjType As Integer
-    Dim blnDebug As Boolean
-    Dim strTheCurrentPathAndFile As String
+          Dim dbs As DAO.Database
+          Dim cnt As DAO.Container
+          Dim doc As DAO.Document
+          Dim i As Integer
+          Dim intAcObjType As Integer
+          Dim blnDebug As Boolean
+          Dim strTheCurrentPathAndFile As String
 
-    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+30        Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
-    If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
-    Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
-        Debug.Print , "NOW DEBUGGING..."
-    End If
+40        If IsMissing(varDebug) Then
+50            blnDebug = False
+60            Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
+70            Debug.Print , "DEBUGGING IS OFF"
+80        Else
+90            blnDebug = True
+100           Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
+110           Debug.Print , "NOW DEBUGGING..."
+120       End If
 
-    i = 0
-    Set cnt = dbs.Containers(strContainerType)
+130       i = 0
+140       Set cnt = dbs.Containers(strContainerType)
 
-    Select Case strContainerType
-        Case "Forms": intAcObjType = 2   'acForm
-        Case "Reports": intAcObjType = 3 'acReport
-        Case "Scripts": intAcObjType = 4 'acMacro
-        Case "Modules": intAcObjType = 5 'acModule
-        Case Else
-            MsgBox "Wrong Case Select in DocumentTheContainer"
-    End Select
+150       Select Case strContainerType
+              Case "Forms": intAcObjType = 2   'acForm
+160           Case "Reports": intAcObjType = 3 'acReport
+170           Case "Scripts": intAcObjType = 4 'acMacro
+180           Case "Modules": intAcObjType = 5 'acModule
+190           Case Else
+200               MsgBox "Wrong Case Select in DocumentTheContainer"
+210       End Select
 
-    If blnDebug Then Debug.Print UCase(strContainerType)
+220       If blnDebug Then Debug.Print UCase(strContainerType)
 
-    For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
-            i = i + 1
-            strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
-            If IsFileLocked(strTheCurrentPathAndFile) Then
-                MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
-                Stop
-            End If
-            'If intAcObjType = 2 Then Pause (0.5)
-            Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
-            ' Convert UTF-16 to txt - fix for Access 2013
-            If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-                KillProperly (strTheCurrentPathAndFile)
-                Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
-            End If
-        End If
-    Next doc
+230       For Each doc In cnt.Documents
+240           If blnDebug Then Debug.Print , doc.Name
+250           If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+260               i = i + 1
+270               strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
+280               If IsFileLocked(strTheCurrentPathAndFile) Then
+290                   MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
+300                   Stop
+310               End If
+                  'Debug.Print ">Here", doc.Name, strTheCurrentPathAndFile
+320               KillProperly (strTheCurrentPathAndFile)
+330               Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
+                  ' Convert UTF-16 to txt - fix for Access 2013
+340               If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
+350                   If intAcObjType = 2 Then Pause (0.5)
+360                   KillProperly (strTheCurrentPathAndFile)
+370                   Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+380               End If
+390           End If
+400       Next doc
 
-    If blnDebug Then
-        Debug.Print , i & " EXPORTED!"
-        Debug.Print , cnt.Documents.Count & " EXISTING!"
-    End If
+410       If blnDebug Then
+420           Debug.Print , i & " EXPORTED!"
+430           Debug.Print , cnt.Documents.Count & " EXISTING!"
+440       End If
 
-    DocumentTheContainer = True
+450       DocumentTheContainer = True
 
 PROC_EXIT:
-    Set doc = Nothing
-    Set cnt = Nothing
-    Set dbs = Nothing
-    PopCallStack
-    Exit Function
+460       Set doc = Nothing
+470       Set cnt = Nothing
+480       Set dbs = Nothing
+490       PopCallStack
+500       Exit Function
 
 PROC_ERR:
-    DocumentTheContainer = False
-    GlobalErrHandler
-    Resume PROC_EXIT
+510       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
+520       DocumentTheContainer = False
+530       GlobalErrHandler
+540       Resume PROC_EXIT
 
 End Function
 
@@ -2654,6 +2734,73 @@ PROC_ERR:
 
 End Function
 
+Public Function ListOfContainers(strTheFileName As String) As Boolean
+' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
+' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
+
+    Dim dbs As DAO.Database
+    Dim conItem As DAO.Container
+    Dim prpLoop As DAO.Property
+    Dim strName As String
+    Dim strOwner As String
+    Dim strText As String
+    Dim strFile As String
+    Dim lngFileNum As Long
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "ListOfContainers"
+
+    Set dbs = CurrentDb
+    lngFileNum = FreeFile
+
+    strFile = aestrSourceLocation & strTheFileName
+
+    If Dir(strFile) <> "" Then
+        ' The file exists
+        If Not FileLocked(strFile) Then KillProperly (strFile)
+        Open strFile For Append As lngFileNum
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As lngFileNum
+    End If
+
+    With dbs
+        ' Enumerate Containers collection.
+        For Each conItem In .Containers
+            Debug.Print "Properties of " & conItem.Name _
+                & " container"
+            WriteStringToFile lngFileNum, "Properties of " & conItem.Name _
+                & " container", strFile
+            
+            ' Enumerate Properties collection of each Container object.
+            For Each prpLoop In conItem.Properties
+                Debug.Print "  " & prpLoop.Name _
+                    & " = "; prpLoop
+                WriteStringToFile lngFileNum, "  " & prpLoop.Name _
+                    & " = " & prpLoop, strFile
+            Next prpLoop
+        Next conItem
+        .Close
+    End With
+
+    ListOfContainers = True
+
+PROC_EXIT:
+    Set prpLoop = Nothing
+    Set conItem = Nothing
+    Set dbs = Nothing
+    Close lngFileNum
+    PopCallStack
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfContainers of Class aegitClass", vbCritical, "Error"
+    ListOfContainers = False
+    GlobalErrHandler
+    Resume PROC_EXIT
+
+End Function
+
 '==================================================
 ' Global Error Handler Routines
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
@@ -2785,69 +2932,3 @@ Private Sub WriteStringToFile(lngFileNum As Long, strTheString As String, strThe
     Close lngFileNum
 
 End Sub
-
-Public Function ListOfContainers(strTheFileName As String) As Boolean
-' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
-' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
-
-    Dim dbs As DAO.Database
-    Dim conItem As DAO.Container
-    Dim prpLoop As DAO.Property
-    Dim strName As String
-    Dim strOwner As String
-    Dim strText As String
-    Dim strFile As String
-    Dim lngFileNum As Long
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListOfContainers"
-
-    Set dbs = CurrentDb
-    lngFileNum = FreeFile
-
-    strFile = aestrSourceLocation & strTheFileName
-
-    If Dir(strFile) <> "" Then
-        ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
-        Open strFile For Append As lngFileNum
-    Else
-        If Not FileLocked(strFile) Then Open strFile For Append As lngFileNum
-    End If
-
-    With dbs
-        ' Enumerate Containers collection.
-        For Each conItem In .Containers
-            Debug.Print "Properties of " & conItem.Name _
-                & " container"
-            WriteStringToFile lngFileNum, "Properties of " & conItem.Name _
-                & " container", strFile
-            
-            ' Enumerate Properties collection of each Container object.
-            For Each prpLoop In conItem.Properties
-                Debug.Print "  " & prpLoop.Name _
-                    & " = "; prpLoop
-                WriteStringToFile lngFileNum, "  " & prpLoop.Name _
-                    & " = " & prpLoop, strFile
-            Next prpLoop
-        Next conItem
-        .Close
-    End With
-
-    ListOfContainers = True
-
-PROC_EXIT:
-    Set prpLoop = Nothing
-    Set conItem = Nothing
-    Set dbs = Nothing
-    Close lngFileNum
-    PopCallStack
-    Exit Function
-
-PROC_ERR:
-    ListOfContainers = False
-    GlobalErrHandler
-    Resume PROC_EXIT
-
-End Function

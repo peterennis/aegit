@@ -5,6 +5,8 @@ Private Const TEST_FILE_PATH As String = "C:\TEMP"
 Private Const FOR_READING = 1
 ' Remove this after integration with aegitClass
 Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
+Public Const THE_XML_FOLDER = "C:\ae\aegit\aerc\xml\"
+'
 
 Public Sub TestCreateDbScript()
     'CreateDbScript "C:\Temp\Schema.txt"
