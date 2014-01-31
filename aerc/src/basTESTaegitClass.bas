@@ -23,7 +23,7 @@ Dim ref As Reference
 '
 Public Function MYPROJECT_TEST()
     'aegitClassTest
-    'aegitClassTest ("debug")
+    'aegitClassTest "debug"
 End Function
 
 Private Function PassFail(bln As Boolean) As String

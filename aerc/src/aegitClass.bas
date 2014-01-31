@@ -1957,88 +1957,88 @@ PROC_ERR:
 End Function
 
 Private Function DocumentTheContainer(strContainerType As String, strExt As String, Optional varDebug As Variant) As Boolean
-      ' strContainerType: Forms, Reports, Scripts (Macros), Modules
+' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
-          ' Use a call stack and global error handler
-10        If gcfHandleErrors Then On Error GoTo PROC_ERR
-20        PushCallStack "DocumentTheContainer"
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "DocumentTheContainer"
 
-          Dim dbs As DAO.Database
-          Dim cnt As DAO.Container
-          Dim doc As DAO.Document
-          Dim i As Integer
-          Dim intAcObjType As Integer
-          Dim blnDebug As Boolean
-          Dim strTheCurrentPathAndFile As String
+    Dim dbs As DAO.Database
+    Dim cnt As DAO.Container
+    Dim doc As DAO.Document
+    Dim i As Integer
+    Dim intAcObjType As Integer
+    Dim blnDebug As Boolean
+    Dim strTheCurrentPathAndFile As String
 
-30        Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
-40        If IsMissing(varDebug) Then
-50            blnDebug = False
-60            Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
-70            Debug.Print , "DEBUGGING IS OFF"
-80        Else
-90            blnDebug = True
-100           Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
-110           Debug.Print , "NOW DEBUGGING..."
-120       End If
+    If IsMissing(varDebug) Then
+        blnDebug = False
+        Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        blnDebug = True
+        Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
+        Debug.Print , "NOW DEBUGGING..."
+    End If
 
-130       i = 0
-140       Set cnt = dbs.Containers(strContainerType)
+    i = 0
+    Set cnt = dbs.Containers(strContainerType)
 
-150       Select Case strContainerType
-              Case "Forms": intAcObjType = 2   'acForm
-160           Case "Reports": intAcObjType = 3 'acReport
-170           Case "Scripts": intAcObjType = 4 'acMacro
-180           Case "Modules": intAcObjType = 5 'acModule
-190           Case Else
-200               MsgBox "Wrong Case Select in DocumentTheContainer"
-210       End Select
+    Select Case strContainerType
+        Case "Forms": intAcObjType = 2   'acForm
+        Case "Reports": intAcObjType = 3 'acReport
+        Case "Scripts": intAcObjType = 4 'acMacro
+        Case "Modules": intAcObjType = 5 'acModule
+        Case Else
+            MsgBox "Wrong Case Select in DocumentTheContainer"
+    End Select
 
-220       If blnDebug Then Debug.Print UCase(strContainerType)
+    If blnDebug Then Debug.Print UCase(strContainerType)
 
-230       For Each doc In cnt.Documents
-240           If blnDebug Then Debug.Print , doc.Name
-250           If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
-260               i = i + 1
-270               strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
-280               If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
-290               If IsFileLocked(strTheCurrentPathAndFile) Then
-300                   MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
-                      'Stop
-310               End If
-320               If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
-330               KillProperly (strTheCurrentPathAndFile)
-340               If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
-350               Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
-                  ' Convert UTF-16 to txt - fix for Access 2013
-360               If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-370                   If intAcObjType = 2 Then Pause (0.5)
-380                   KillProperly (strTheCurrentPathAndFile)
-390                   Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
-400               End If
-410           End If
-420       Next doc
+    For Each doc In cnt.Documents
+        If blnDebug Then Debug.Print , doc.Name
+        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+            i = i + 1
+            strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
+            If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
+            If IsFileLocked(strTheCurrentPathAndFile) Then
+                MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
+                'Stop
+            End If
+            If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
+            KillProperly (strTheCurrentPathAndFile)
+            If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
+            Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
+            ' Convert UTF-16 to txt - fix for Access 2013
+            If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
+                If intAcObjType = 2 Then Pause (0.5)
+                KillProperly (strTheCurrentPathAndFile)
+                Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+            End If
+        End If
+    Next doc
 
-430       If blnDebug Then
-440           Debug.Print , i & " EXPORTED!"
-450           Debug.Print , cnt.Documents.Count & " EXISTING!"
-460       End If
+    If blnDebug Then
+        Debug.Print , i & " EXPORTED!"
+        Debug.Print , cnt.Documents.Count & " EXISTING!"
+    End If
 
-470       DocumentTheContainer = True
+    DocumentTheContainer = True
 
 PROC_EXIT:
-480       Set doc = Nothing
-490       Set cnt = Nothing
-500       Set dbs = Nothing
-510       PopCallStack
-520       Exit Function
+    Set doc = Nothing
+    Set cnt = Nothing
+    Set dbs = Nothing
+    PopCallStack
+    Exit Function
 
 PROC_ERR:
-530       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
-540       DocumentTheContainer = False
-550       GlobalErrHandler
-560       Resume PROC_EXIT
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
+    DocumentTheContainer = False
+    GlobalErrHandler
+    Resume PROC_EXIT
 
 End Function
 
