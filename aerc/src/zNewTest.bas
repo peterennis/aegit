@@ -212,7 +212,7 @@ Public Function TableInfo(strTableName As String, Optional varDebug As Variant) 
         'If blnDebug And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
         End If
         'Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _

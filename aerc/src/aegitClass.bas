@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.4"
-Private Const aegitVERSION_DATE As String = "January 23, 2014"
+Private Const aegitVERSION As String = "0.6.5"
+Private Const aegitVERSION_DATE As String = "January 29, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -83,6 +83,7 @@ Private Const aeTblXMLFile = "OutputTblXMLSetupForTables.txt"
 Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
 Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
 Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
+Private Const aeFLkCtrFile = "OutputFieldLookupControlTypeList.txt"
 '
 
 Private Sub Class_Initialize()
@@ -113,7 +114,8 @@ Private Sub Class_Initialize()
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
     Debug.Print , "aeintFSize = " & aeintFSize
-    Debug.Print , "aeintFDLen = " & aeintFDLen
+    'Debug.Print , "aeintFDLen = " & aeintFDLen
+
 End Sub
 
 Private Sub Class_Terminate()
@@ -300,9 +302,13 @@ End Property
 
 Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
+    Debug.Print "aeReadWriteStream Entry strPathFileName=" & strPathFileName
+
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeReadWriteStream"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeReadWriteStream"
+
+    On Error GoTo PROC_ERR
 
     Dim FName As String
     Dim fname2 As String
@@ -347,13 +353,22 @@ PROC_EXIT:
     Close #fnr
     Close #fnr2
     aeReadWriteStream = True
-    PopCallStack
+    'PopCallStack
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
-    GlobalErrHandler
-    Resume Next
+    Select Case Err.Number
+        Case 9
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass" & _
+                    vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
+            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+            'GlobalErrHandler
+            Resume Next
+    Case Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+        'GlobalErrHandler
+        Resume Next
+    End Select
 
 End Function
 
@@ -1210,7 +1225,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
     End If
   
-    Debug.Print ">>>", SizeString("-", sLen, TextLeft, "-")
+    'Debug.Print ">>>", SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
@@ -1232,12 +1247,12 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
         'If blnDebug And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
         End If
         Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
             & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-            & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+            & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
             & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
     If blnDebug Then Debug.Print
@@ -1705,7 +1720,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
+            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.sql
         End If
     Next
 
@@ -1727,25 +1742,27 @@ PROC_ERR:
 End Function
 
 Private Sub KillProperly(Killfile As String)
-      ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
+' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
-          ' Use a call stack and global error handler
-10        If gcfHandleErrors Then On Error GoTo PROC_ERR
-20        PushCallStack "KillProperly"
+    ' Use a call stack and global error handler
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "KillProperly"
 
-30        If Len(Dir(Killfile)) > 0 Then
-40            SetAttr Killfile, vbNormal
-50            Kill Killfile
-60        End If
+    On Error GoTo PROC_ERR
+
+    If Len(Dir(Killfile)) > 0 Then
+        SetAttr Killfile, vbNormal
+        Kill Killfile
+    End If
 
 PROC_EXIT:
-70        PopCallStack
-80        Exit Sub
+    'PopCallStack
+    Exit Sub
 
 PROC_ERR:
-90        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
-100       GlobalErrHandler
-110       Resume PROC_EXIT
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
+    'GlobalErrHandler
+    Resume PROC_EXIT
 
 End Sub
 
@@ -1888,18 +1905,22 @@ PROC_ERR:
 
 End Function
  
-Private Function IsFileLocked(PathName As String) As Boolean
+Private Function IsFileLocked(PathFileName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
 
+    Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "IsFileLocked"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "IsFileLocked"
+
+    On Error GoTo PROC_ERR
 
     Dim i As Integer
 
-    If Len(Dir$(PathName)) Then
+    Debug.Print , Len(Dir$(PathFileName))
+    If Len(Dir$(PathFileName)) Then
         i = FreeFile()
-        Open PathName For Random Access Read Write Lock Read Write As #i
+        Open PathFileName For Random Access Read Write Lock Read Write As #i
         Lock i 'Redundant but let's be 100% sure
         Unlock i
         Close i
@@ -1909,7 +1930,7 @@ Private Function IsFileLocked(PathName As String) As Boolean
 
 PROC_EXIT:
     On Error GoTo 0
-    PopCallStack
+    'PopCallStack
     Exit Function
 
 PROC_ERR:
@@ -1917,10 +1938,17 @@ PROC_ERR:
         Case 70 'Unable to acquire exclusive lock
             MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
             IsFileLocked = True
-        Case Else
-            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+        Case 9
+            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass" & _
+                    vbCrLf & "IsFileLocked Entry PathFileName=" & PathFileName, vbCritical, "ERROR=9"
+            IsFileLocked = False
             'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
-            GlobalErrHandler
+            'GlobalErrHandler
+            Resume PROC_EXIT
+        Case Else
+            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'GlobalErrHandler
             Resume PROC_EXIT
     End Select
     Resume
@@ -1973,41 +2001,43 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
 250           If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
 260               i = i + 1
 270               strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
-280               If IsFileLocked(strTheCurrentPathAndFile) Then
-290                   MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
-300                   Stop
+280               If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
+290               If IsFileLocked(strTheCurrentPathAndFile) Then
+300                   MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
+                      'Stop
 310               End If
-                  'Debug.Print ">Here", doc.Name, strTheCurrentPathAndFile
-320               KillProperly (strTheCurrentPathAndFile)
-330               Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
+320               If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
+330               KillProperly (strTheCurrentPathAndFile)
+340               If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
+350               Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
                   ' Convert UTF-16 to txt - fix for Access 2013
-340               If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-350                   If intAcObjType = 2 Then Pause (0.5)
-360                   KillProperly (strTheCurrentPathAndFile)
-370                   Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
-380               End If
-390           End If
-400       Next doc
+360               If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
+370                   If intAcObjType = 2 Then Pause (0.5)
+380                   KillProperly (strTheCurrentPathAndFile)
+390                   Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+400               End If
+410           End If
+420       Next doc
 
-410       If blnDebug Then
-420           Debug.Print , i & " EXPORTED!"
-430           Debug.Print , cnt.Documents.Count & " EXISTING!"
-440       End If
+430       If blnDebug Then
+440           Debug.Print , i & " EXPORTED!"
+450           Debug.Print , cnt.Documents.Count & " EXISTING!"
+460       End If
 
-450       DocumentTheContainer = True
+470       DocumentTheContainer = True
 
 PROC_EXIT:
-460       Set doc = Nothing
-470       Set cnt = Nothing
-480       Set dbs = Nothing
-490       PopCallStack
-500       Exit Function
+480       Set doc = Nothing
+490       Set cnt = Nothing
+500       Set dbs = Nothing
+510       PopCallStack
+520       Exit Function
 
 PROC_ERR:
-510       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
-520       DocumentTheContainer = False
-530       GlobalErrHandler
-540       Resume PROC_EXIT
+530       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
+540       DocumentTheContainer = False
+550       GlobalErrHandler
+560       Resume PROC_EXIT
 
 End Function
 
@@ -2651,8 +2681,7 @@ Private Function FieldLookupControlTypeList() As Boolean
     Dim fle As Integer
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\OutputFieldLookupControlTypeList.txt" For Output As #fle
-    'Open "C:\TEMP\OutputFieldLookupControlTypeList.txt" For Output As #fle
+    Open aegitSourceFolder & "\" & aeFLkCtrFile For Output As #fle
 
     intChk = 0
     intTxt = 0
@@ -2664,12 +2693,12 @@ Private Function FieldLookupControlTypeList() As Boolean
     On Error Resume Next
     For Each tbl In tdf
         If Left(tbl.Name, 4) <> "MSys" Then
-            Debug.Print tbl.Name
+            'Debug.Print tbl.Name
             Print #fle, tbl.Name
             For Each fld In tbl.Fields
                 intAllFieldsCount = intAllFieldsCount + 1
                 lng = fld.Properties("DisplayControl").Value
-                Debug.Print , fld.Name, lng, GetType(lng)
+                'Debug.Print , fld.Name, lng, GetType(lng)
                 Print #fle, , fld.Name, lng, GetType(lng)
                 Select Case lng
                     Case acCheckBox
@@ -2767,14 +2796,14 @@ Public Function ListOfContainers(strTheFileName As String) As Boolean
     With dbs
         ' Enumerate Containers collection.
         For Each conItem In .Containers
-            Debug.Print "Properties of " & conItem.Name _
+            'Debug.Print "Properties of " & conItem.Name _
                 & " container"
             WriteStringToFile lngFileNum, "Properties of " & conItem.Name _
                 & " container", strFile
             
             ' Enumerate Properties collection of each Container object.
             For Each prpLoop In conItem.Properties
-                Debug.Print "  " & prpLoop.Name _
+                'Debug.Print "  " & prpLoop.Name _
                     & " = "; prpLoop
                 WriteStringToFile lngFileNum, "  " & prpLoop.Name _
                     & " = " & prpLoop, strFile

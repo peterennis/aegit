@@ -18,6 +18,7 @@ Dim ref As Reference
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
 ' For custom configuration of the output source folder in aegitClassTest use:
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
+' oDbObjects.XMLFolder = THE_XML_FOLDER
 ' Run in immediate window: MYPROJECT_TEST
 '
 Public Function MYPROJECT_TEST()
@@ -33,7 +34,9 @@ Private Function PassFail(bln As Boolean) As String
     End If
 End Function
 
-Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
+Public Function aegitClassTest(Optional Debugit As Variant, _
+                                Optional varSrcFldr As Variant, _
+                                Optional varXmlFldr As Variant) As Boolean
 
     Dim oDbObjects As aegitClass
     Set oDbObjects = New aegitClass
@@ -46,8 +49,8 @@ Public Function aegitClassTest(Optional Debugit As Variant) As Boolean
     Dim bln6 As Boolean
     Dim bln7 As Boolean
 
-    oDbObjects.SourceFolder = THE_SOURCE_FOLDER
-    oDbObjects.XMLFolder = THE_XML_FOLDER
+    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = THE_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = THE_XML_FOLDER
 
 Test1:
     '=============
@@ -194,7 +197,7 @@ End Function
 
 Public Function aegitClassImportTest(Optional Debugit As Variant) As Boolean
 ' Usage:
-' Run in immediate window:                  aegitClassImportTest
+' Run in immediate window: aegitClassImportTest
 
     Dim oDbObjects As aegitClass
     Set oDbObjects = New aegitClass
@@ -270,7 +273,7 @@ Public Sub ListOfAllQueries()
     If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
         Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
     End If
-    qdfCurr.SQL = strSQL
+    qdfCurr.sql = strSQL
     'Debug.Print """" & strTempQuery & """"
     DoCmd.OpenQuery strTempQuery
     'DoCmd.Close acQuery, strTempQuery

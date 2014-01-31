@@ -5,7 +5,7 @@ Private Const TEST_FILE_PATH As String = "C:\TEMP"
 Private Const FOR_READING = 1
 ' Remove this after integration with aegitClass
 Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
-Public Const THE_XML_FOLDER = "C:\ae\aegit\aerc\xml\"
+Public Const THE_XML_FOLDER = "C:\ae\aegit\aerc\src\"
 '
 
 Public Sub TestCreateDbScript()
@@ -63,7 +63,7 @@ Stop
                 Select Case fld.Type
                     Case dbText
                         'No look-up fields
-                        strFlds = strFlds & "Text (" & fld.Size & ")"
+                        strFlds = strFlds & "Text (" & fld.size & ")"
                     Case dbLong
                         If (fld.Attributes And dbAutoIncrField) = 0& Then
                             strFlds = strFlds & "Long"
