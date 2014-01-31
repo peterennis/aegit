@@ -302,7 +302,7 @@ End Property
 
 Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
-    Debug.Print "aeReadWriteStream Entry strPathFileName=" & strPathFileName
+    'Debug.Print "aeReadWriteStream Entry strPathFileName=" & strPathFileName
 
     ' Use a call stack and global error handler
     'If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -1908,7 +1908,8 @@ End Function
 Private Function IsFileLocked(PathFileName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
 
-    Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
+    'Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
+
     ' Use a call stack and global error handler
     'If gcfHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "IsFileLocked"
@@ -1917,7 +1918,7 @@ Private Function IsFileLocked(PathFileName As String) As Boolean
 
     Dim i As Integer
 
-    Debug.Print , Len(Dir$(PathFileName))
+    'Debug.Print , Len(Dir$(PathFileName))
     If Len(Dir$(PathFileName)) Then
         i = FreeFile()
         Open PathFileName For Random Access Read Write Lock Read Write As #i
