@@ -1,0 +1,28 @@
+Public Sub CreateTheDb()
+
+Dim strSQL As String
+On Error GoTo ErrorTrap
+
+'Local Table
+
+strSQL="CREATE TABLE [Items] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )"
+Currentdb.Execute strSQL
+
+'Local Table
+
+strSQL="CREATE TABLE [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [id] ON [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description]) "
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Access 2010 - Compact And Repair
+SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
+Exit Sub
+ErrorTrap:
+MsgBox "Erl=" & vbCrLf & "Err.Number=" & Err.Number & vbCrLf & "Err.Description=" & Err.Description
+
+End Sub

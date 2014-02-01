@@ -84,6 +84,7 @@ Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
 Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
 Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
 Private Const aeFLkCtrFile = "OutputFieldLookupControlTypeList.txt"
+Private Const aeSchemaFile = "OutputSchemaFile.txt"
 '
 
 Private Sub Class_Initialize()
@@ -1585,6 +1586,156 @@ PROC_ERR:
 
 End Function
 
+Private Sub OutputTheSchemaFile()               ' CreateDbScript()
+' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim ndx As DAO.Index
+    Dim strSQL As String
+    Dim strFlds As String
+    Dim strCn As String
+    Dim strLinkedTablePath As String
+    Dim fs As Object
+    Dim f As Object
+
+    Set dbs = CurrentDb
+    Set fs = CreateObject("Scripting.FileSystemObject")
+    Set f = fs.CreateTextFile(aegitSourceFolder & aeSchemaFile)
+
+    strSQL = "Public Sub CreateTheDb()" & vbCrLf
+    f.WriteLine strSQL
+    strSQL = "Dim strSQL As String"
+    f.WriteLine strSQL
+    strSQL = "On Error GoTo ErrorTrap"
+    f.WriteLine strSQL
+
+    For Each tdf In dbs.TableDefs
+        If Not (Left(tdf.Name, 4) = "MSys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
+
+            strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
+            If strLinkedTablePath <> "" Then
+                f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
+            Else
+                f.WriteLine vbCrLf & "'Local Table"
+            End If
+
+            strSQL = "strSQL=""CREATE TABLE [" & tdf.Name & "] ("
+            strFlds = ""
+
+            For Each fld In tdf.Fields
+
+                strFlds = strFlds & ",[" & fld.Name & "] "
+
+                Select Case fld.Type
+                    Case dbText
+                        'No look-up fields
+                        strFlds = strFlds & "Text (" & fld.size & ")"
+                    Case dbLong
+                        If (fld.Attributes And dbAutoIncrField) = 0& Then
+                            strFlds = strFlds & "Long"
+                        Else
+                            strFlds = strFlds & "Counter"
+                        End If
+                    Case dbBoolean
+                        strFlds = strFlds & "YesNo"
+                    Case dbByte
+                        strFlds = strFlds & "Byte"
+                    Case dbInteger
+                        strFlds = strFlds & "Integer"
+                    Case dbCurrency
+                        strFlds = strFlds & "Currency"
+                    Case dbSingle
+                        strFlds = strFlds & "Single"
+                    Case dbDouble
+                        strFlds = strFlds & "Double"
+                    Case dbDate
+                        strFlds = strFlds & "DateTime"
+                    Case dbBinary
+                        strFlds = strFlds & "Binary"
+                    Case dbLongBinary
+                        strFlds = strFlds & "OLE Object"
+                    Case dbMemo
+                        If (fld.Attributes And dbHyperlinkField) = 0& Then
+                            strFlds = strFlds & "Memo"
+                        Else
+                            strFlds = strFlds & "Hyperlink"
+                        End If
+                    Case dbGUID
+                        strFlds = strFlds & "GUID"
+                End Select
+
+            Next
+
+            strSQL = strSQL & Mid(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+            f.WriteLine vbCrLf & strSQL
+
+            'Indexes
+            For Each ndx In tdf.Indexes
+
+                If ndx.Unique Then
+                    strSQL = "strSQL=""CREATE UNIQUE INDEX "
+                Else
+                    strSQL = "strSQL=""CREATE INDEX "
+                End If
+
+                strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
+                strFlds = ""
+
+                For Each fld In tdf.Fields
+                    strFlds = ",[" & fld.Name & "]"
+                Next
+
+                strSQL = strSQL & Mid(strFlds, 2) & ") "
+                strCn = ""
+
+                If ndx.Primary Then
+                    strCn = " PRIMARY"
+                End If
+
+                If ndx.Required Then
+                    strCn = strCn & " DISALLOW NULL"
+                End If
+
+                If ndx.IgnoreNulls Then
+                    strCn = strCn & " IGNORE NULL"
+                End If
+
+                If Trim(strCn) <> vbNullString Then
+                    strSQL = strSQL & " WITH" & strCn & " "
+                End If
+
+                f.WriteLine vbCrLf & strSQL & """" & vbCrLf & "Currentdb.Execute strSQL"
+            Next
+        End If
+    Next
+
+    'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
+    'f.WriteLine strSQL
+    f.WriteLine
+    f.WriteLine "'Access 2010 - Compact And Repair"
+    strSQL = "SendKeys " & """" & "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}" & """" & ", False"
+    f.WriteLine strSQL
+    strSQL = "Exit Sub"
+    f.WriteLine strSQL
+    strSQL = "ErrorTrap:"
+    f.WriteLine strSQL
+    'MsgBox "Erl=" & Erl & vbCrLf & "Err.Number=" & Err.Number & vbCrLf & "Err.Description=" & Err.Description
+    strSQL = "MsgBox " & """" & "Erl=" & """" & " & vbCrLf & " & _
+                """" & "Err.Number=" & """" & " & Err.Number & vbCrLf & " & _
+                """" & "Err.Description=" & """" & " & Err.Description"
+    f.WriteLine strSQL & vbCrLf
+    strSQL = "End Sub"
+    f.WriteLine strSQL
+
+    f.Close
+    Debug.Print "Done"
+
+End Sub
+
 Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
     Dim idx As DAO.Index
     Dim fld As DAO.Field
@@ -2279,6 +2430,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputQueriesSqlText
     OutputBuiltInPropertiesText
     OutputFieldLookupControlTypeList
+    OutputTheSchemaFile
 
     aeDocumentTheDatabase = True
 
