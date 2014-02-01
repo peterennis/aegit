@@ -49,8 +49,8 @@ Public Function aegitClassTest(Optional Debugit As Variant, _
     Dim bln6 As Boolean
     Dim bln7 As Boolean
 
-    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = THE_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = THE_XML_FOLDER
+    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      'THE_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr         'THE_XML_FOLDER
 
 Test1:
     '=============

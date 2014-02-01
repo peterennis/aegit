@@ -1,23 +1,48 @@
 Option Compare Database
 Option Explicit
 
-Private Const TEST_FILE_PATH As String = "C:\TEMP"
+Private Const TEST_FILE_PATH As String = "C:\TEMP\"
 Private Const FOR_READING = 1
-' Remove this after integration with aegitClass
-Public Const THE_SOURCE_FOLDER = "C:\ae\aegit\aerc\src\"
-Public Const THE_XML_FOLDER = "C:\ae\aegit\aerc\src\"
 '
 
 Public Sub TestCreateDbScript()
     'CreateDbScript "C:\Temp\Schema.txt"
-    Debug.Print "THE_SOURCE_FOLDER=" & THE_SOURCE_FOLDER
-    CreateDbScript THE_SOURCE_FOLDER & "Schema.txt"
+    'Debug.Print "THE_SOURCE_FOLDER=" & THE_SOURCE_FOLDER
+    CreateDbScript TEST_FILE_PATH & "Schema.txt"
 End Sub
 
-Public Sub CreateDbScript(strScriptFile As String)
+Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
+'====================================================================
+' Procedure : GetLinkedTableCurrentPath
+' DateTime  : 08/23/2010
+' Author    : Rx
+' Purpose   : Returns Current Path of a Linked Table in Access
+' Updates   : Peter F. Ennis
+' Updated   : All notes moved to change log
+' History   : See comment details, basChangeLog, commit messages on github
+'====================================================================
+    On Error GoTo PROC_ERR
+    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
+        ' Non-linked table returns blank - Instr removes the "Database="
+
+PROC_EXIT:
+    On Error Resume Next
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        ' Case ###         ' Add your own error management or log error to logging table
+        Case Else
+            ' Add your own custom log usage function
+    End Select
+    Resume PROC_EXIT
+End Function
+
+Private Sub CreateDbScript(strScriptFile As String)
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
-    Dim db As DAO.Database
+    Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim ndx As DAO.Index
@@ -28,7 +53,7 @@ Public Sub CreateDbScript(strScriptFile As String)
     Dim fs As Object
     Dim f As Object
 
-    Set db = CurrentDb
+    Set dbs = CurrentDb
     Set fs = CreateObject("Scripting.FileSystemObject")
     Set f = fs.CreateTextFile(strScriptFile)
 
@@ -39,14 +64,14 @@ Public Sub CreateDbScript(strScriptFile As String)
     strSQL = "On Error GoTo ErrorTrap"
     f.WriteLine strSQL
 
-    For Each tdf In db.TableDefs
+    For Each tdf In dbs.TableDefs
         If Not (Left(tdf.Name, 4) = "MSys" _
                 Or Left(tdf.Name, 4) = "~TMP" _
                 Or Left(tdf.Name, 3) = "zzz") Then
 
-MsgBox "FIXME"
-Stop
-'strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
+'MsgBox "FIXME"
+'Stop
+strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
             If strLinkedTablePath <> "" Then
                 f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
             Else
@@ -557,7 +582,7 @@ Public Function CodeLinesInProjectCount() As Long
 End Function
 
 Public Sub ListFilesRecursively()
-'Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
+' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 '====================================================================
 ' Purpose:  List Files Recursively
 ' Author:   Peter Ennis
@@ -600,7 +625,7 @@ Public Sub ListFilesRecursively()
 End Sub
  
 Private Sub ShowSubFolders(objFolder)
-'Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
+' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 
    Dim objFile As Object
    Dim objSubFolder As Object

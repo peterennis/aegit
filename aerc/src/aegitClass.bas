@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.5"
-Private Const aegitVERSION_DATE As String = "January 29, 2014"
+Private Const aegitVERSION As String = "0.6.6"
+Private Const aegitVERSION_DATE As String = "January 31, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -397,7 +397,8 @@ Private Sub ListOfAllHiddenQueries()
 
 End Sub
 
-Private Sub ListOfAccessApplicationOptions()
+Private Sub ListOfAccessApplicationOptions(Optional DebugTheCode As Variant)
+
 ' Note: If you are developing a database application, add-in, library database, or referenced database, make sure that the
 ' Error Trapping option is set to 2 (Break On Unhandled Errors) when you have finished debugging your code.
 '
@@ -426,6 +427,19 @@ Private Sub ListOfAccessApplicationOptions()
     Set dbs = CurrentDb
     Dim str As String
     Dim fle As Integer
+    Dim Debugit As Boolean
+
+    If IsMissing(DebugTheCode) Then
+        Debug.Print "ListOfAccessApplicationOptions"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to ListOfAccessApplicationOptions"
+        Debug.Print , "DEBUGGING IS OFF"
+        Debugit = False
+    Else
+        Debug.Print "ListOfAccessApplicationOptions"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to ListOfAccessApplicationOptions"
+        Debug.Print , "DEBUGGING TURNED ON"
+        Debugit = True
+    End If
 
     fle = FreeFile()
     Debug.Print "aegitSourceFolder=" & aegitSourceFolder
@@ -718,7 +732,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2091 Then          ''...' is an invalid name.
-        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        If Debugit Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
         Print #fle, "!" & Err.Description
         Err.Clear
     ElseIf Err = 3270 Then      'Property not found.
@@ -2141,7 +2155,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
     Dim i As Integer
-    Dim blnDebug As Boolean
+    Dim Debugit As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -2149,11 +2163,11 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentTheDatabase"
     If IsMissing(varDebug) Then
-        blnDebug = False
+        Debugit = False
         Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTheDatabase is set to False"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
+        Debugit = True
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTheDatabase is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
@@ -2174,7 +2188,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     ListOrCloseAllOpenQueries
 
-    If blnDebug Then
+    If Debugit Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "SourceFolder = " & aestrSourceLocation
         Debug.Print , "ImportFolder = " & aestrImportLocation
@@ -2189,7 +2203,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
     If FolderExists(aestrSourceLocation) Then
-        If blnDebug Then
+        If Debugit Then
             DocumentTheContainer "Forms", "frm", "WithDebugging"
             DocumentTheContainer "Reports", "rpt", "WithDebugging"
             DocumentTheContainer "Scripts", "mac", "WithDebugging"
@@ -2207,7 +2221,13 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     
     ListOfContainers "ListOfContainers.txt"
     ListOfAllHiddenQueries
-    ListOfAccessApplicationOptions
+
+    If Debugit Then
+        ListOfAccessApplicationOptions "Debug"
+    Else
+        ListOfAccessApplicationOptions
+    End If
+
     ListOfApplicationProperties
     'Stop
 
@@ -2217,7 +2237,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' QUERIES
     '=============
     i = 0
-    If blnDebug Then Debug.Print "QUERIES"
+    If Debugit Then Debug.Print "QUERIES"
 
     ' Delete all TEMP queries ...
     For Each qdf In CurrentDb.QueryDefs
@@ -2228,7 +2248,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Next qdf
 
     For Each qdf In CurrentDb.QueryDefs
-        If blnDebug Then Debug.Print , qdf.Name
+        If Debugit Then Debug.Print , qdf.Name
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
@@ -2242,7 +2262,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         End If
     Next qdf
 
-    If blnDebug Then
+    If Debugit Then
         If i = 1 Then
             Debug.Print , "1 Query EXPORTED!"
         Else
@@ -2272,7 +2292,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    If Debugit Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
     aeDocumentTheDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT

@@ -17,8 +17,9 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 '
 
+'20140131 - v066 -
+'20140130 - v066 - Fix debug in ListOfAccessApplicationOptions
 '20140129 - v065 - Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=247561 => Error 5 and 9
-    '
 '20140123 - v064 - Move licence text after option statements so that it appears in a printout
     ' Merge changes for fix table output field description to max of each table and test
 '20140121 - v063 - Fixing LoadRibbons
