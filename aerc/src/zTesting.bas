@@ -172,8 +172,9 @@ Public Sub GetPropertyDescription()
 End Sub
 
 Public Sub TestListAllProperties()
-    'ListAllProperties ("modules")
+    Debug.Print "Container information for properties of saved Tables and Queries"
     ListAllProperties ("tables")
+    'ListAllProperties ("modules")
 End Sub
 
 Public Sub ListGUID()
@@ -232,13 +233,13 @@ Public Sub ListAllProperties(strContainer As String)
             For Each prp In doc.Properties
                 On Error Resume Next
                     If prp.Name = "GUID" And strContainer = "tables" Then
-                        Debug.Print prp.Name, fListGUID(doc.Name)
+                        Debug.Print , prp.Name, fListGUID(doc.Name)
                     ElseIf prp.Name = "DOL" Then
                         Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
                     ElseIf prp.Name = "NameMap" Then
-                        Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
+                        Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
                     Else
-                        Debug.Print prp.Name, prp.Value
+                        Debug.Print , prp.Name, prp.Value
                     End If
                 On Error GoTo 0
             Next

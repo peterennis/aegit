@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.6"
-Private Const aegitVERSION_DATE As String = "January 31, 2014"
+Private Const aegitVERSION As String = "0.6.7"
+Private Const aegitVERSION_DATE As String = "February 3, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -2167,14 +2167,14 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
             strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
-            If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
+            'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
             If IsFileLocked(strTheCurrentPathAndFile) Then
                 MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
                 'Stop
             End If
-            If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
+            'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
             KillProperly (strTheCurrentPathAndFile)
-            If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
+            'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
             Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             ' Convert UTF-16 to txt - fix for Access 2013
             If aeReadWriteStream(strTheCurrentPathAndFile) = True Then

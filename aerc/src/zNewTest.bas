@@ -496,15 +496,15 @@ End Function
 
 Public Sub ExportRibbon()
 
-    Dim strDB As String
+    Dim strDb As String
     Dim lngPath As Long
     Dim lngRev As Long
     Dim strLeft As String
 
-    strDB = Application.CurrentDb.Name
-    lngPath = Len(strDB)
-    lngRev = InStrRev(strDB, "\")
-    strLeft = Left(strDB, lngPath - (lngPath - lngRev))
+    strDb = Application.CurrentDb.Name
+    lngPath = Len(strDb)
+    lngRev = InStrRev(strDb, "\")
+    strLeft = Left(strDb, lngPath - (lngPath - lngRev))
 
     DoCmd.OutputTo acOutputTable, "listview", acFormatTXT, strLeft & "OutputRibbon.txt"
 

@@ -15,9 +15,13 @@ Option Explicit
 ' Guides:
 ' Office VBA Basic Debugging Techniques
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
+' *** Ref: http://www.vb123.com/toolshed/02_accvb/remotequeries.htm - Remote Queries In Microsoft Access
 '
 
-'20140131 - v066 -
+'20140203 - v067 - Tables and queries are the same container
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
+    ' Ref: http://www.office-archive.com/16-ms-access/8a3929131ae55e2e.htm
+    '
 '20140130 - v066 - Fix debug in ListOfAccessApplicationOptions
 '20140129 - v065 - Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=247561 => Error 5 and 9
 '20140123 - v064 - Move licence text after option statements so that it appears in a printout
