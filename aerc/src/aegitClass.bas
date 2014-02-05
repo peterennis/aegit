@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.7"
-Private Const aegitVERSION_DATE As String = "February 3, 2014"
+Private Const aegitVERSION As String = "0.6.8"
+Private Const aegitVERSION_DATE As String = "February 5, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1546,11 +1546,11 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
 
-    Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
+    If blnDebug Then Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
     For Each tbl In dbs.TableDefs
         If tbl.Attributes = 0 Then      ' Ignore System Tables
             strObjName = tbl.Name
-            Debug.Print , "- " & strObjName & ".xsd"
+            If blnDebug Then Debug.Print , "- " & strObjName & ".xsd"
             'Debug.Print "aestrXMLLocation=" & aestrXMLLocation
             'Debug.Print "the XML file=" & aestrXMLLocation & strObjName
             Application.ExportXML acExportTable, strObjName, , _
@@ -1914,6 +1914,7 @@ Private Sub KillProperly(Killfile As String)
 
     On Error GoTo PROC_ERR
 
+TryAgain:
     If Len(Dir(Killfile)) > 0 Then
         SetAttr Killfile, vbNormal
         Kill Killfile
@@ -1924,6 +1925,10 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
+    If Err = 70 Then
+        Pause (0.25)
+        Resume TryAgain
+    End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
     'GlobalErrHandler
     Resume PROC_EXIT
@@ -2178,7 +2183,7 @@ SaveAsText:
             Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             ' Convert UTF-16 to txt - fix for Access 2013
             If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-                If intAcObjType = 2 Then Pause (0.25)
+                'If intAcObjType = 2 Then Pause (0.25)
                 KillProperly (strTheCurrentPathAndFile)
                 Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
             End If
@@ -2201,8 +2206,9 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2220 Then
-        Debug.Print "Err=3220 : Resume SaveAsText"
+        Debug.Print "Err=3220 : Resume SaveAsText", doc.Name, strTheCurrentPathAndFile
         Err.Clear
+        Pause (0.25)
         Resume SaveAsText
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
@@ -2232,13 +2238,20 @@ Private Sub KillAllFiles(Optional varDebug As Variant)
         Debug.Print , "NOW DEBUGGING..."
     End If
 
-    ' Delete all the files in a given directory:
-    ' Loop through all the files in the directory by using Dir$ function
+    ' Delete all the exported files
     strFile = Dir(aestrSourceLocation & "*.*")
     Do While strFile <> ""
         KillProperly (aestrSourceLocation & strFile)
         ' Need to specify full path again because a file was deleted
         strFile = Dir(aestrSourceLocation & "*.*")
+    Loop
+
+    ' Delete files in xml location
+    strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
+    Do While strFile <> ""
+        KillProperly (aestrSourceLocation & "xml\" & strFile)
+        ' Need to specify full path again because a file was deleted
+        strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
     Loop
 
 PROC_EXIT:

@@ -48,6 +48,7 @@ Public Function aegitClassTest(Optional Debugit As Variant, _
     Dim bln5 As Boolean
     Dim bln6 As Boolean
     Dim bln7 As Boolean
+    Dim bln8 As Boolean
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      'THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr         'THE_XML_FOLDER
@@ -163,20 +164,39 @@ Test6:
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
-    
+
 Test7:
+       '=============
+       ' TEST 7
+       '=============
+       Debug.Print
+       Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+       Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
+       Debug.Print "aegitClassTestXML"
+       If IsMissing(Debugit) Then
+           Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+           Debug.Print , "DEBUGGING IS OFF"
+           bln7 = oDbObjects.DocumentTablesXML()
+       Else
+           Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+           bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
+       End If
+       Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+       Debug.Print
+
+Test8:
     '=============
-    ' TEST 7
+    ' TEST 8
     '=============
     ' CompactAndRepair
     ' When run this will close the database so obviously no results will be seen.
     ' Use True/False parameter to run it or not.
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "7. aegitClassTest => CompactAndRepair"
+    Debug.Print "8. aegitClassTest => CompactAndRepair"
     Debug.Print "aegitClassTest"
 
-        bln7 = oDbObjects.CompactAndRepair("Do Not Run")
+        bln8 = oDbObjects.CompactAndRepair("Do Not Run")
 
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -188,10 +208,11 @@ RESULTS:
     Debug.Print "Test 4: GetReferences"
     Debug.Print "Test 5: DocumentTables"
     Debug.Print "Test 6: DocumentRelations"
-    Debug.Print "Test 7: CompactAndRepair"
+    Debug.Print "Test 7: DocumentTablesXML"
+    Debug.Print "Test 8: CompactAndRepair"
     Debug.Print
-    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7"
-    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7)
+    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
+    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7), PassFail(bln8)
 
 End Function
 
