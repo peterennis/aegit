@@ -373,7 +373,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub ListOfAllHiddenQueries()
+Private Sub ListOfAllHiddenQueries(Optional varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
     Const strTempTable As String = "zzzTmpTblQueries"
@@ -391,14 +391,14 @@ Private Sub ListOfAllHiddenQueries()
     ' RunSQL works for Action queries
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
-    Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+    If Not IsMissing(varDebug) Then Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
     DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "ListOfAllHiddenQueries.txt", False
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
 End Sub
 
-Private Sub ListOfAccessApplicationOptions(Optional DebugTheCode As Variant)
+Private Sub ListOfAccessApplicationOptions(Optional varDebug As Variant)
 
 ' Note: If you are developing a database application, add-in, library database, or referenced database, make sure that the
 ' Error Trapping option is set to 2 (Break On Unhandled Errors) when you have finished debugging your code.
@@ -430,7 +430,7 @@ Private Sub ListOfAccessApplicationOptions(Optional DebugTheCode As Variant)
     Dim fle As Integer
     Dim Debugit As Boolean
 
-    If IsMissing(DebugTheCode) Then
+    If IsMissing(varDebug) Then
         Debug.Print "ListOfAccessApplicationOptions"
         Debug.Print , "DebugTheCode IS missing so no parameter is passed to ListOfAccessApplicationOptions"
         Debug.Print , "DEBUGGING IS OFF"
@@ -443,7 +443,7 @@ Private Sub ListOfAccessApplicationOptions(Optional DebugTheCode As Variant)
     End If
 
     fle = FreeFile()
-    Debug.Print "aegitSourceFolder=" & aegitSourceFolder
+    If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
     'Stop
 
     If aegitSourceFolder = "default" Then
@@ -789,8 +789,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3251 Then
-        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
-        Debug.Print strPropName
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
         Print #fle, "!" & Err.Description, strPropName
         Err.Clear
     Else
@@ -1425,13 +1424,13 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     intFailCount = 0
     
     LongestFieldPropsName
-    Debug.Print "Longest Field Name=" & aestrLFN
-    Debug.Print "Longest Field Name Length=" & aeintFNLen
-    Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
-    Debug.Print "Longest Field Description=" & aestrLFD
-    Debug.Print "Longest Field Description Length=" & aeintFDLen
-    Debug.Print "Longest Field Type=" & aestrLFT
-    Debug.Print "Longest Field Type Length=" & aeintFTLen
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name=" & aestrLFN
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Length=" & aeintFNLen
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description=" & aestrLFD
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description Length=" & aeintFDLen
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type=" & aestrLFT
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type Length=" & aeintFTLen
 
     ' Reset values
     aestrLFN = ""
@@ -1732,7 +1731,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
     f.WriteLine strSQL
 
     f.Close
-    Debug.Print "Done"
+    'Debug.Print "Done"
 
 End Sub
 
@@ -1925,7 +1924,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
     'GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2175,10 +2174,11 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
             'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
             KillProperly (strTheCurrentPathAndFile)
             'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
+SaveAsText:
             Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             ' Convert UTF-16 to txt - fix for Access 2013
             If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-                If intAcObjType = 2 Then Pause (0.5)
+                If intAcObjType = 2 Then Pause (0.25)
                 KillProperly (strTheCurrentPathAndFile)
                 Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
             End If
@@ -2200,6 +2200,11 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
+    If Err = 2220 Then
+        Debug.Print "Err=3220 : Resume SaveAsText"
+        Err.Clear
+        Resume SaveAsText
+    End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
     DocumentTheContainer = False
     GlobalErrHandler
@@ -2431,6 +2436,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputBuiltInPropertiesText
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
+    OutputAllContainerProperties
 
     aeDocumentTheDatabase = True
 
@@ -2823,7 +2829,7 @@ Private Sub OutputFieldLookupControlTypeList()
     bln = FieldLookupControlTypeList
 End Sub
 
-Private Function FieldLookupControlTypeList() As Boolean
+Private Function FieldLookupControlTypeList(Optional varDebug As Variant) As Boolean
 ' Ref: http://support.microsoft.com/kb/304274
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
 ' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
@@ -2895,13 +2901,13 @@ Private Function FieldLookupControlTypeList() As Boolean
             Next fld
         End If
     Next tbl
-    Debug.Print "Count of Check box = " & intChk
-    Debug.Print "Count of Text box  = " & intTxt
-    Debug.Print "Count of List box  = " & intLst
-    Debug.Print "Count of Combo box = " & intCbo
-    Debug.Print "Count of Else      = " & intElse
-    Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
-    Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
+    If Not IsMissing(varDebug) Then Debug.Print "Count of Check box = " & intChk
+    If Not IsMissing(varDebug) Then Debug.Print "Count of Text box  = " & intTxt
+    If Not IsMissing(varDebug) Then Debug.Print "Count of List box  = " & intLst
+    If Not IsMissing(varDebug) Then Debug.Print "Count of Combo box = " & intCbo
+    If Not IsMissing(varDebug) Then Debug.Print "Count of Else      = " & intElse
+    If Not IsMissing(varDebug) Then Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
+    If Not IsMissing(varDebug) Then Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
     'Debug.Print "Table with check box is " & strChkTbl
     'Debug.Print "Field with check box is " & strChkFld
 
@@ -3002,6 +3008,105 @@ PROC_ERR:
     Resume PROC_EXIT
 
 End Function
+
+Public Sub OutputAllContainerProperties(Optional varDebug As Variant)
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "OutputAllContainerProperties"
+
+    If Not IsMissing(varDebug) Then Debug.Print "Container information for properties of saved Databases"
+    ListAllContainerProperties "Databases"
+    If Not IsMissing(varDebug) Then Debug.Print "Container information for properties of saved Tables and Queries"
+    ListAllContainerProperties "Tables"
+    If Not IsMissing(varDebug) Then Debug.Print "Container information for properties of saved Relationships"
+    ListAllContainerProperties "Relationships"
+
+PROC_EXIT:
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
+    GlobalErrHandler
+    Resume PROC_EXIT
+
+End Sub
+
+Private Function fListGUID(strTableName As String) As String
+' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
+' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
+
+    Dim i As Integer
+    Dim arrGUID8() As Byte
+    Dim strArrGUID8(8) As String
+    Dim strGuid As String
+
+    strGuid = ""
+    arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
+    For i = 1 To 8
+        If Len(Hex(arrGUID8(i))) = 1 Then
+            strArrGUID8(i) = "0" & CStr(Hex(arrGUID8(i)))
+        Else
+            strArrGUID8(i) = Hex(arrGUID8(i))
+        End If
+    Next
+
+    For i = 1 To 8
+        strGuid = strGuid & strArrGUID8(i) & "-"
+    Next
+    fListGUID = Left(strGuid, 23)
+
+End Function
+
+Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug As Variant)
+' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
+    
+    Dim dbs As DAO.Database
+    Dim obj As Object
+    Dim prp As Property
+    Dim doc As Document
+    Dim fle As Integer
+
+    Set dbs = Application.CurrentDb
+    Set obj = dbs.Containers(strContainer)
+
+    fle = FreeFile()
+    Open aegitSourceFolder & "\OutputContainer" & strContainer & "Properties.txt" For Output As #fle
+
+    ' Ref: http://stackoverflow.com/questions/16642362/how-to-get-the-following-code-to-continue-on-error
+    For Each doc In obj.Documents
+        If Left(doc.Name, 4) <> "MSys" And Left(doc.Name, 3) <> "zzz" _
+                And Left(doc.Name, 1) <> "~" Then
+            If Not IsMissing(varDebug) Then Debug.Print ">>>" & doc.Name
+            Print #fle, ">>>" & doc.Name
+            For Each prp In doc.Properties
+                On Error Resume Next
+                    If prp.Name = "GUID" And strContainer = "tables" Then
+                        If Not IsMissing(varDebug) Then Debug.Print , prp.Name, fListGUID(doc.Name)
+                        Print #fle, , prp.Name, fListGUID(doc.Name)
+                    ElseIf prp.Name = "DOL" Then
+                        If Not IsMissing(varDebug) Then Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
+                        Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
+                    ElseIf prp.Name = "NameMap" Then
+                        If Not IsMissing(varDebug) Then Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
+                        Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
+                    Else
+                        If Not IsMissing(varDebug) Then Debug.Print , prp.Name, prp.Value
+                        Print #fle, , prp.Name, prp.Value
+                    End If
+                On Error GoTo 0
+            Next
+        End If
+    Next
+
+    Set obj = Nothing
+    Set dbs = Nothing
+    Close fle
+
+End Sub
 
 '==================================================
 ' Global Error Handler Routines

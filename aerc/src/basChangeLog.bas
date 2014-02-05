@@ -21,7 +21,9 @@ Option Explicit
 '20140203 - v067 - Tables and queries are the same container
     ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
     ' Ref: http://www.office-archive.com/16-ms-access/8a3929131ae55e2e.htm
-    '
+    ' Merge code - output of container properties for tables and queries
+    ' Set varDebug for limiting output
+    ' Force retry on Err=2220
 '20140130 - v066 - Fix debug in ListOfAccessApplicationOptions
 '20140129 - v065 - Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=247561 => Error 5 and 9
 '20140123 - v064 - Move licence text after option statements so that it appears in a printout

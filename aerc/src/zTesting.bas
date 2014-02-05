@@ -3,35 +3,9 @@ Option Explicit
 
 Private Const TEST_FILE_PATH As String = "C:\TEMP\"
 Private Const FOR_READING = 1
+Public Const Desktop = &H10&
+Public Const MyDocuments = &H5&
 '
-
-Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
-' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
-'====================================================================
-' Procedure : GetLinkedTableCurrentPath
-' DateTime  : 08/23/2010
-' Author    : Rx
-' Purpose   : Returns Current Path of a Linked Table in Access
-' Updates   : Peter F. Ennis
-' Updated   : All notes moved to change log
-' History   : See comment details, basChangeLog, commit messages on github
-'====================================================================
-    On Error GoTo PROC_ERR
-    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
-        ' Non-linked table returns blank - Instr removes the "Database="
-
-PROC_EXIT:
-    On Error Resume Next
-    Exit Function
-
-PROC_ERR:
-    Select Case Err.Number
-        ' Case ###         ' Add your own error management or log error to logging table
-        Case Else
-            ' Add your own custom log usage function
-    End Select
-    Resume PROC_EXIT
-End Function
 
 Public Sub ObjectCounts()
  
@@ -94,9 +68,6 @@ Public Sub ExportAllModulesToFile()
 ' The reference for the FileSystemObject Object is Windows Script Host Object Model
 ' but it not necessary to add the reference for this procedure.
 
-    Const Desktop = &H10&
-    Const MyDocuments = &H5&
-
     Dim fso As Object
     Dim fil As Object
     Dim strMod As String
@@ -133,121 +104,6 @@ Public Sub ExportAllModulesToFile()
     'Close eveything
     fil.Close
     Set fso = Nothing
-
-End Sub
-
-Public Function PropertyExists(obj As Object, strPropertyName As String) As Boolean
-' Ref: http://www.utteraccess.com/forum/Description-property-Mic-t552348.html
-' e.g. ? PropertyExists(CurrentDB. ("The Name Of Your Table"), "Description")
-    Dim var As Variant
-
-    On Error Resume Next
-    Set var = obj.Properties(strPropertyName)
-    If Err.Number > 0 Then
-        PropertyExists = False
-    Else
-        PropertyExists = True
-    End If
-
-End Function
-
-Public Sub GetPropertyDescription()
-' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
-
-    Dim dbs As DAO.Database
-    Dim obj As Object
-    Dim prp As Property
-
-    Set dbs = Application.CurrentDb
-    Set obj = dbs.Containers("modules").Documents("aegitClass")
-
-    On Error Resume Next
-    For Each prp In obj.Properties
-        Debug.Print prp.Name, prp.Value
-    Next prp
-
-    Set obj = Nothing
-    Set dbs = Nothing
-
-End Sub
-
-Public Sub TestListAllProperties()
-    Debug.Print "Container information for properties of saved Tables and Queries"
-    ListAllProperties ("tables")
-    'ListAllProperties ("modules")
-End Sub
-
-Public Sub ListGUID()
-' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
-
-    Dim i As Integer
-    Dim arrGUID8() As Byte
-    Dim strGuid As String
-
-    arrGUID8 = CurrentDb.TableDefs("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger").Properties("GUID").Value
-    For i = 1 To 8
-        strGuid = strGuid & Hex(arrGUID8(i)) & "-"
-    Next
-    Debug.Print Left(strGuid, 23)
-
-End Sub
-
-Public Function fListGUID(strTableName As String) As String
-' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
-' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
-
-    Dim i As Integer
-    Dim arrGUID8() As Byte
-    Dim strGuid As String
-
-    arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
-    For i = 1 To 8
-        strGuid = strGuid & Hex(arrGUID8(i)) & "-"
-    Next
-    'Debug.Print Left(strGUID, 23)
-    fListGUID = Left(strGuid, 23)
-
-End Function
-
-Public Sub ListAllProperties(strContainer As String)
-' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
-' Ref: http://ms-access.veryhelper.com/q_ms-access-database_153855.html
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
-    
-    Dim dbs As DAO.Database
-    Dim obj As Object
-    Dim prp As Property
-    Dim doc As Document
-
-    Set dbs = Application.CurrentDb
-    Set obj = dbs.Containers(strContainer)
-
-    'Debug.Print "Modules", obj.Documents.Count
-    'Debug.Print "Modules", obj.Documents(1).Name
-    'Debug.Print "Modules", obj.Documents(2).Name
-
-    ' Ref: http://stackoverflow.com/questions/16642362/how-to-get-the-following-code-to-continue-on-error
-    For Each doc In obj.Documents
-        If Left(doc.Name, 4) <> "MSys" And Left(doc.Name, 3) <> "zzz" Then
-            Debug.Print ">>>" & doc.Name
-            For Each prp In doc.Properties
-                On Error Resume Next
-                    If prp.Name = "GUID" And strContainer = "tables" Then
-                        Debug.Print , prp.Name, fListGUID(doc.Name)
-                    ElseIf prp.Name = "DOL" Then
-                        Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
-                    ElseIf prp.Name = "NameMap" Then
-                        Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
-                    Else
-                        Debug.Print , prp.Name, prp.Value
-                    End If
-                On Error GoTo 0
-            Next
-        End If
-    Next
-
-    Set obj = Nothing
-    Set dbs = Nothing
 
 End Sub
 

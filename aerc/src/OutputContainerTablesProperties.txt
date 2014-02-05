@@ -1,0 +1,109 @@
+>>>Items
+              Name          Items
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   10/3/2013 3:35:01 PM 
+              LastUpdated   1/17/2014 6:52:26 PM 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              GUID          A8-72-43-C1-65-62-4F-AA
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+              PublishToWeb   1 
+              FCMinWriteVer 14.0.0000.0000
+              FCMinDesignVer              14.0.0000.0000
+>>>qpt_Dummy
+              Name          qpt_Dummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   9/17/2013 5:00:32 PM 
+              LastUpdated   9/26/2013 6:17:05 PM 
+              ODBCTimeout    60 
+              LogMessages   False
+              Orientation    0 
+              PublishToWeb   1 
+              Description   Don't be a dummy!
+>>>qry_HiddenDummy
+              Name          qry_HiddenDummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   9/19/2013 9:54:58 AM 
+              LastUpdated   9/26/2013 6:17:05 PM 
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+              Description   This is hidden dummy
+>>>qryLastUpdated
+              Name          qryLastUpdated
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   9/24/2013 7:09:51 PM 
+              LastUpdated   9/26/2013 6:17:05 PM 
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+              RecordsetType  0 
+              TotalsRow     False
+>>>tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+              Name          tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   12/1/2012 3:33:09 PM 
+              LastUpdated   9/26/2013 6:17:05 PM 
+              GUID          6F-22-C8-55-D9-C2-41-84
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+              PublishToWeb   1 
