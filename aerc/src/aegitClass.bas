@@ -1569,7 +1569,7 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
 
-    TestOutputTableDataAsXML
+    OutputTheTableDataAsXML
 
 PROC_EXIT:
     Set tbl = Nothing
@@ -3123,11 +3123,12 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
 
 End Sub
 
-Private Sub TestOutputTableDataAsXML()
+Private Sub OutputTheTableDataAsXML()
 
     Dim astrTbls() As String
     Dim i As Integer
 
+    MsgBox "FIXME!", vbInformation, "XML Data Export"
     i = 1
     ReDim Preserve astrTbls(i)
     astrTbls(i) = "tlkpStates"
