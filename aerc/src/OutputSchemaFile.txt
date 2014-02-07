@@ -19,6 +19,17 @@ Currentdb.Execute strSQL
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
+'Local Table
+
+strSQL="CREATE TABLE [tlkpStates] ([StateCode] Text (3),[StateAbbreviation] Text (2),[StateName] Text (15) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tlkpStates] ([StateName])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [State Code] ON [tlkpStates] ([StateName]) "
+Currentdb.Execute strSQL
+
 'Access 2010 - Compact And Repair
 SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
 Exit Sub

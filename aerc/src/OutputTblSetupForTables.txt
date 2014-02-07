@@ -1,23 +1,33 @@
 ------------
 TABLE: Items
 ------------
-FIELD NAME     FIELD TYPE      SIZE    DESCRIPTION        
-===========    ============    ====    ===================
-Item           Text            255                        
-Quantity       Long Integer    4                          
-Status         Text            255     A short description
-YNO            Text            255                        
-CHK            Yes/No          1                          
-CBO            Text            255                        
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION        
+=================    ============    ====    ===================
+Item                 Text            255                        
+Quantity             Long Integer    4                          
+Status               Text            255     A short description
+YNO                  Text            255                        
+CHK                  Yes/No          1                          
+CBO                  Text            255                        
 
 
 --------------------------------------------------------------
 TABLE: tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 --------------------------------------------------------------
-FIELD NAME     FIELD TYPE      SIZE    DESCRIPTION                       
-===========    ============    ====    ==================================
-id             AutoNumber      4                                         
-Desc           Text            255                                       
-Description    Text            255     This is a description of the field
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION                       
+=================    ============    ====    ==================================
+id                   AutoNumber      4                                         
+Desc                 Text            255                                       
+Description          Text            255     This is a description of the field
+
+
+-----------------
+TABLE: tlkpStates
+-----------------
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
+=================    ============    ====    ===========
+StateCode            Text            3                  
+StateAbbreviation    Text            2                  
+StateName            Text            15                 
 
 

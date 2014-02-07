@@ -9,10 +9,14 @@ tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
               id             111          ComboBox
               Desc           109          TextBox
               Description    109          TextBox
+tlkpStates
+              StateCode      109          TextBox
+              StateAbbreviation            109          TextBox
+              StateName      109          TextBox
 Count of Check box = 1
-Count of Text box  = 5
+Count of Text box  = 8
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 9
-Count of All Fields = 9
+Count of Display Controls = 12
+Count of All Fields = 12

@@ -5,6 +5,7 @@ Private Const TEST_FILE_PATH As String = "C:\TEMP\"
 Private Const FOR_READING = 1
 Public Const Desktop = &H10&
 Public Const MyDocuments = &H5&
+Private aestrXMLLocation As String
 '
 
 Public Sub ObjectCounts()
@@ -349,5 +350,46 @@ Private Sub ShowSubFolders(objFolder)
 
    Set wsh = Nothing
    Set colFolders = Nothing
+
+End Sub
+
+Public Sub TestOutputTableDataAsXML()
+    
+    Dim astrTbls() As String
+    Dim i As Integer
+
+    i = 1
+    ReDim Preserve astrTbls(i)
+    astrTbls(i) = "tlkpStates"
+    OutputTableDataAsXML astrTbls()
+
+End Sub
+
+Public Sub OutputTableDataAsXML(astrTableNames() As String)
+' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
+
+    Const adOpenStatic = 3
+    Const adLockOptimistic = 3
+    Const adPersistXML = 1
+
+    Dim cnn As Object
+    Dim rst As Object
+
+    Set cnn = CurrentProject.Connection
+    Set rst = CreateObject("ADODB.Recordset")
+
+    aestrXMLLocation = "C:\Temp\"
+    rst.Open "Select * from " & astrTableNames(1), cnn, adOpenStatic, adLockOptimistic
+
+    If Not rst.EOF Then
+        rst.MoveFirst
+        rst.Save aestrXMLLocation & astrTableNames(1) & ".xml", adPersistXML
+    End If
+
+    rst.Close
+    cnn.Close
+    Set rst = Nothing
+    Set cnn = Nothing
 
 End Sub

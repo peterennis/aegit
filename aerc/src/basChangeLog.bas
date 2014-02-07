@@ -19,10 +19,10 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140206 - v069 - Load tlkpStates for test of xml output, from Census 1999 data
 '20140205 - v068 - Xml output of tables to xsd
     ' Delete src\xml\* files on export
     ' KillProperly TryAgain for Err=70 permission denied
-    '
 '20140203 - v067 - Tables and queries are the same container
     ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
     ' Ref: http://www.office-archive.com/16-ms-access/8a3929131ae55e2e.htm

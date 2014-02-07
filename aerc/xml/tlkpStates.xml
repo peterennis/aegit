@@ -1,0 +1,93 @@
+<xml xmlns:s='uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882'
+	xmlns:dt='uuid:C2F41010-65B3-11d1-A29F-00AA00C14882'
+	xmlns:rs='urn:schemas-microsoft-com:rowset'
+	xmlns:z='#RowsetSchema'>
+<s:Schema id='RowsetSchema'>
+	<s:ElementType name='row' content='eltOnly' rs:updatable='true'>
+		<s:AttributeType name='StateAbbreviation' rs:number='2' rs:nullable='true' rs:maydefer='true' rs:write='true'
+			 rs:basetable='tlkpStates' rs:basecolumn='StateAbbreviation'>
+			<s:datatype dt:type='string' dt:maxLength='2'/>
+		</s:AttributeType>
+		<s:AttributeType name='StateCode' rs:number='1' rs:nullable='true' rs:maydefer='true' rs:write='true' rs:basetable='tlkpStates'
+			 rs:basecolumn='StateCode'>
+			<s:datatype dt:type='string' dt:maxLength='3'/>
+		</s:AttributeType>
+		<s:AttributeType name='StateName' rs:number='3' rs:nullable='true' rs:maydefer='true' rs:write='true' rs:basetable='tlkpStates'
+			 rs:basecolumn='StateName'>
+			<s:datatype dt:type='string' dt:maxLength='15'/>
+		</s:AttributeType>
+		<s:extends type='rs:rowbase'/>
+	</s:ElementType>
+</s:Schema>
+<rs:data>
+	<z:row StateAbbreviation='AL' StateCode='01' StateName='Alabama'/>
+	<z:row StateAbbreviation='AK' StateCode='02' StateName='Alaska'/>
+	<z:row StateAbbreviation='AZ' StateCode='04' StateName='Arizona'/>
+	<z:row StateAbbreviation='AR' StateCode='05' StateName='Arkansas'/>
+	<z:row StateAbbreviation='CA' StateCode='06' StateName='California'/>
+	<z:row StateAbbreviation='CO' StateCode='08' StateName='Colorado'/>
+	<z:row StateAbbreviation='CT' StateCode='09' StateName='Connecticut'/>
+	<z:row StateAbbreviation='DE' StateCode='10' StateName='Delaware'/>
+	<z:row StateAbbreviation='DC' StateCode='11' StateName='District of Col'/>
+	<z:row StateAbbreviation='FL' StateCode='12' StateName='Florida'/>
+	<z:row StateAbbreviation='GA' StateCode='13' StateName='Georgia'/>
+	<z:row StateAbbreviation='HI' StateCode='15' StateName='Hawaii'/>
+	<z:row StateAbbreviation='ID' StateCode='16' StateName='Idaho'/>
+	<z:row StateAbbreviation='IL' StateCode='17' StateName='Illinois'/>
+	<z:row StateAbbreviation='IN' StateCode='18' StateName='Indiana'/>
+	<z:row StateAbbreviation='IA' StateCode='19' StateName='Iowa'/>
+	<z:row StateAbbreviation='KS' StateCode='20' StateName='Kansas'/>
+	<z:row StateAbbreviation='KY' StateCode='21' StateName='Kentucky'/>
+	<z:row StateAbbreviation='LA' StateCode='22' StateName='Louisiana'/>
+	<z:row StateAbbreviation='ME' StateCode='23' StateName='Maine'/>
+	<z:row StateAbbreviation='MD' StateCode='24' StateName='Maryland'/>
+	<z:row StateAbbreviation='MA' StateCode='25' StateName='Massachusetts'/>
+	<z:row StateAbbreviation='MI' StateCode='26' StateName='Michigan'/>
+	<z:row StateAbbreviation='MN' StateCode='27' StateName='Minnesota'/>
+	<z:row StateAbbreviation='MS' StateCode='28' StateName='Mississippi'/>
+	<z:row StateAbbreviation='MO' StateCode='29' StateName='Missouri'/>
+	<z:row StateAbbreviation='MT' StateCode='30' StateName='Montana'/>
+	<z:row StateAbbreviation='NE' StateCode='31' StateName='Nebraska'/>
+	<z:row StateAbbreviation='NV' StateCode='32' StateName='Nevada'/>
+	<z:row StateAbbreviation='NH' StateCode='33' StateName='New Hampshire'/>
+	<z:row StateAbbreviation='NJ' StateCode='34' StateName='New Jersey'/>
+	<z:row StateAbbreviation='NM' StateCode='35' StateName='New Mexico'/>
+	<z:row StateAbbreviation='NY' StateCode='36' StateName='New York'/>
+	<z:row StateAbbreviation='NC' StateCode='37' StateName='North Carolina'/>
+	<z:row StateAbbreviation='ND' StateCode='38' StateName='North Dakota'/>
+	<z:row StateAbbreviation='OH' StateCode='39' StateName='Ohio'/>
+	<z:row StateAbbreviation='OK' StateCode='40' StateName='Oklahoma'/>
+	<z:row StateAbbreviation='OR' StateCode='41' StateName='Oregon'/>
+	<z:row StateAbbreviation='PA' StateCode='42' StateName='Pennsylvania'/>
+	<z:row StateAbbreviation='RI' StateCode='44' StateName='Rhode Island'/>
+	<z:row StateAbbreviation='SC' StateCode='45' StateName='South Carolina'/>
+	<z:row StateAbbreviation='SD' StateCode='46' StateName='South Dakota'/>
+	<z:row StateAbbreviation='TN' StateCode='47' StateName='Tennessee'/>
+	<z:row StateAbbreviation='TX' StateCode='48' StateName='Texas'/>
+	<z:row StateAbbreviation='UT' StateCode='49' StateName='Utah'/>
+	<z:row StateAbbreviation='VT' StateCode='50' StateName='Vermont'/>
+	<z:row StateAbbreviation='VA' StateCode='51' StateName='Virginia'/>
+	<z:row StateAbbreviation='WA' StateCode='53' StateName='Washington'/>
+	<z:row StateAbbreviation='WV' StateCode='54' StateName='West Virginia'/>
+	<z:row StateAbbreviation='WI' StateCode='55' StateName='Wisconsin'/>
+	<z:row StateAbbreviation='WY' StateCode='56' StateName='Wyoming'/>
+	<z:row StateAbbreviation='AS' StateCode='60' StateName='American Samoa'/>
+	<z:row StateAbbreviation='FM' StateCode='64' StateName='Federated State'/>
+	<z:row StateAbbreviation='GU' StateCode='66' StateName='Guam'/>
+	<z:row StateCode='67' StateName='Johnston Atoll'/>
+	<z:row StateAbbreviation='MH' StateCode='68' StateName='Marshall Island'/>
+	<z:row StateAbbreviation='MP' StateCode='69' StateName='Northern Marian'/>
+	<z:row StateAbbreviation='PW' StateCode='70' StateName='Palau'/>
+	<z:row StateCode='71' StateName='Midway Islands'/>
+	<z:row StateAbbreviation='PR' StateCode='72' StateName='Puerto Rico'/>
+	<z:row StateAbbreviation='UM' StateCode='74' StateName='U.S. Minor Outl'/>
+	<z:row StateCode='76' StateName='Navassa Island'/>
+	<z:row StateAbbreviation='VI' StateCode='78' StateName='Virgin Islands '/>
+	<z:row StateCode='79' StateName='Wake Island'/>
+	<z:row StateCode='81' StateName='Baker Island'/>
+	<z:row StateCode='84' StateName='Howland Island'/>
+	<z:row StateCode='86' StateName='Jarvis Island'/>
+	<z:row StateCode='89' StateName='Kingman Reef'/>
+	<z:row StateCode='95' StateName='Palmyra Atoll'/>
+</rs:data>
+</xml>

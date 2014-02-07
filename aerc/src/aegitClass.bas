@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.8"
-Private Const aegitVERSION_DATE As String = "February 5, 2014"
+Private Const aegitVERSION As String = "0.6.9"
+Private Const aegitVERSION_DATE As String = "February 6, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1569,6 +1569,8 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
 
+    TestOutputTableDataAsXML
+
 PROC_EXIT:
     Set tbl = Nothing
     Set dbs = Nothing
@@ -2206,7 +2208,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2220 Then
-        Debug.Print "Err=3220 : Resume SaveAsText", doc.Name, strTheCurrentPathAndFile
+        Debug.Print "Err=3220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
         Err.Clear
         Pause (0.25)
         Resume SaveAsText
@@ -3118,6 +3120,46 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
     Set obj = Nothing
     Set dbs = Nothing
     Close fle
+
+End Sub
+
+Private Sub TestOutputTableDataAsXML()
+
+    Dim astrTbls() As String
+    Dim i As Integer
+
+    i = 1
+    ReDim Preserve astrTbls(i)
+    astrTbls(i) = "tlkpStates"
+    OutputTableDataAsXML astrTbls()
+
+End Sub
+
+Private Sub OutputTableDataAsXML(astrTableNames() As String)
+' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
+
+    Const adOpenStatic = 3
+    Const adLockOptimistic = 3
+    Const adPersistXML = 1
+
+    Dim cnn As Object
+    Dim rst As Object
+
+    Set cnn = CurrentProject.Connection
+    Set rst = CreateObject("ADODB.Recordset")
+
+    rst.Open "Select * from " & astrTableNames(1), cnn, adOpenStatic, adLockOptimistic
+
+    If Not rst.EOF Then
+        rst.MoveFirst
+        rst.Save aestrXMLLocation & astrTableNames(1) & ".xml", adPersistXML
+    End If
+
+    rst.Close
+    cnn.Close
+    Set rst = Nothing
+    Set cnn = Nothing
 
 End Sub
 
