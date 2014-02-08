@@ -3179,7 +3179,7 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDeb
     strFileName = aestrXMLLocation & avarTableNames(1) & ".xml"
 
     If aegitSetup Then
-        'MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
+        MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
         If Not rst.EOF Then
             rst.MoveFirst
             rst.Save strFileName, adPersistXML
