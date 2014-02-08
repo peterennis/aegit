@@ -58,6 +58,7 @@ Private mastrCallStack() As String
 Private Const mcintIncrementStackSize As Integer = 10
 Private mfInErrorHandler As Boolean
 
+Private aegitSetup As Boolean
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitImportFolder As String
@@ -1579,7 +1580,8 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
 
-    'MsgBox "aegitDataXML(1)=" & aegitDataXML(1), vbInformation, "CHECK"
+    MsgBox "LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
+        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
     OutputTheTableDataAsXML aegitDataXML()
 
 PROC_EXIT:
@@ -2260,12 +2262,21 @@ Private Sub KillAllFiles(Optional varDebug As Variant)
     Loop
 
     ' Delete files in xml location
-    strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
-    Do While strFile <> ""
-        KillProperly (aestrSourceLocation & "xml\" & strFile)
-        ' Need to specify full path again because a file was deleted
+    If aegitSetup Then
+        strFile = Dir(aestrXMLLocation & "*.*")
+        Do While strFile <> ""
+            KillProperly (aestrXMLLocation & strFile)
+            ' Need to specify full path again because a file was deleted
+            strFile = Dir(aestrXMLLocation & "*.*")
+        Loop
+    Else
         strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
-    Loop
+        Do While strFile <> ""
+            KillProperly (aestrSourceLocation & "xml\" & strFile)
+            ' Need to specify full path again because a file was deleted
+            strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
+        Loop
+    End If
 
 PROC_EXIT:
     PopCallStack
@@ -2356,6 +2367,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     
     If aegitSourceFolder = "default" Then
         aestrSourceLocation = aegitType.SourceFolder
+        aegitSetup = True
     Else
         aestrSourceLocation = aegitSourceFolder
     End If
@@ -3148,15 +3160,22 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant)
 
     Dim cnn As Object
     Dim rst As Object
+    Dim strFileName As String
 
     Set cnn = CurrentProject.Connection
     Set rst = CreateObject("ADODB.Recordset")
 
     rst.Open "Select * from " & avarTableNames(1), cnn, adOpenStatic, adLockOptimistic
 
-    If Not rst.EOF Then
-        rst.MoveFirst
-        rst.Save aestrXMLLocation & avarTableNames(1) & ".xml", adPersistXML
+    strFileName = aestrXMLLocation & avarTableNames(1) & ".xml"
+
+    If aegitSetup Then
+        MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
+        If Not rst.EOF Then
+            rst.MoveFirst
+            rst.Save strFileName, adPersistXML
+        End If
+    Else
     End If
 
     rst.Close

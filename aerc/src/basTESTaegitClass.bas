@@ -22,7 +22,7 @@ Dim ref As Reference
 ' Run in immediate window: MYPROJECT_TEST
 '
 Public Function MYPROJECT_TEST()
-    'aegitClassTest
+    aegitClassTest
     'aegitClassTest "debug"
 End Function
 
