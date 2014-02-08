@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.6.9"
-Private Const aegitVERSION_DATE As String = "February 6, 2014"
+Private Const aegitVERSION As String = "0.7.0"
+Private Const aegitVERSION_DATE As String = "February 7, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -62,6 +62,7 @@ Private aegitType As mySetupType
 Private aegitSourceFolder As String
 Private aegitImportFolder As String
 Private aegitXMLFolder As String
+Private aegitDataXML() As Variant
 Private aegitUseImportFolder As Boolean
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
@@ -92,10 +93,12 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
-    ' provide a default value for the SourceFolder and ImportFolder properties
+    ' provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitImportFolder = "default"
     aegitXMLFolder = "default"
+    ReDim Preserve aegitDataXML(1 To 1)
+    aegitDataXML(1) = "tlkpStates"
     aegitUseImportFolder = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
@@ -160,6 +163,13 @@ End Property
 
 Property Let XMLFolder(ByVal strXMLFolder As String)
     aegitXMLFolder = strXMLFolder
+End Property
+
+Property Let TablesExportToXML(ByRef avarTables() As Variant)
+    MsgBox "Size of avarTables()=" & UBound(avarTables()), vbInformation, "adaept"
+    MsgBox "avarTables(0)=" & avarTables(0), vbInformation, "adaept"
+    MsgBox "Size of avarTables(1)=" & avarTables(1), vbInformation, "adaept"
+    'aegitDataXML = avarTables
 End Property
 
 Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
@@ -1569,7 +1579,8 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
 
-    OutputTheTableDataAsXML
+    'MsgBox "aegitDataXML(1)=" & aegitDataXML(1), vbInformation, "CHECK"
+    OutputTheTableDataAsXML aegitDataXML()
 
 PROC_EXIT:
     Set tbl = Nothing
@@ -3123,22 +3134,25 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
 
 End Sub
 
-Private Sub OutputTheTableDataAsXML()
+'Private Sub OutputTheTableDataAsXML()
+'
+'    Dim astrTbls() As String
+'    Dim i As Integer
+'
+'    i = 1
+'    ReDim Preserve astrTbls(i)
+'    astrTbls(i) = "tlkpStates"
+'    OutputTableDataAsXML astrTbls()
+'
+'End Sub
 
-    Dim astrTbls() As String
-    Dim i As Integer
-
-    MsgBox "FIXME!", vbInformation, "XML Data Export"
-    i = 1
-    ReDim Preserve astrTbls(i)
-    astrTbls(i) = "tlkpStates"
-    OutputTableDataAsXML astrTbls()
-
-End Sub
-
-Private Sub OutputTableDataAsXML(astrTableNames() As String)
+Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant)
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
+
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "OutputTheTableDataAsXML"
 
     Const adOpenStatic = 3
     Const adLockOptimistic = 3
@@ -3150,17 +3164,27 @@ Private Sub OutputTableDataAsXML(astrTableNames() As String)
     Set cnn = CurrentProject.Connection
     Set rst = CreateObject("ADODB.Recordset")
 
-    rst.Open "Select * from " & astrTableNames(1), cnn, adOpenStatic, adLockOptimistic
+    rst.Open "Select * from " & avarTableNames(1), cnn, adOpenStatic, adLockOptimistic
 
     If Not rst.EOF Then
         rst.MoveFirst
-        rst.Save aestrXMLLocation & astrTableNames(1) & ".xml", adPersistXML
+        rst.Save aestrXMLLocation & avarTableNames(1) & ".xml", adPersistXML
     End If
 
     rst.Close
     cnn.Close
     Set rst = Nothing
     Set cnn = Nothing
+
+PROC_EXIT:
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
+    GlobalErrHandler
+    Resume PROC_EXIT
 
 End Sub
 

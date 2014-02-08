@@ -19,6 +19,8 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140207 - v070 - Allow array of tables for xml data export to be provided via let property
+    '
 '20140206 - v069 - Load tlkpStates for test of xml output, from Census 1999 data
 '20140205 - v068 - Xml output of tables to xsd
     ' Delete src\xml\* files on export

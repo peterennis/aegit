@@ -36,7 +36,8 @@ End Function
 
 Public Function aegitClassTest(Optional Debugit As Variant, _
                                 Optional varSrcFldr As Variant, _
-                                Optional varXmlFldr As Variant) As Boolean
+                                Optional varXmlFldr As Variant, _
+                                Optional varXmlData As Variant) As Boolean
 
     Dim oDbObjects As aegitClass
     Set oDbObjects = New aegitClass
@@ -52,6 +53,13 @@ Public Function aegitClassTest(Optional Debugit As Variant, _
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      'THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr         'THE_XML_FOLDER
+
+    ' Define tables for xml data export
+    If Not IsMissing(varXmlData) Then
+        Dim MyArray() As Variant
+        MyArray = Array("tblRace", "tblYear")
+        oDbObjects.TablesExportToXML = MyArray()
+    End If
 
 Test1:
     '=============
@@ -166,23 +174,23 @@ Test6:
     Debug.Print
 
 Test7:
-       '=============
-       ' TEST 7
-       '=============
-       Debug.Print
-       Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-       Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
-       Debug.Print "aegitClassTestXML"
-       If IsMissing(Debugit) Then
-           Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
-           Debug.Print , "DEBUGGING IS OFF"
-           bln7 = oDbObjects.DocumentTablesXML()
-       Else
-           Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-           bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
-       End If
-       Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-       Debug.Print
+    '=============
+    ' TEST 7
+    '=============
+    Debug.Print
+    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
+    Debug.Print "aegitClassTestXML"
+    If IsMissing(Debugit) Then
+        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        bln7 = oDbObjects.DocumentTablesXML()
+    Else
+        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
+    End If
+    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    Debug.Print
 
 Test8:
     '=============
