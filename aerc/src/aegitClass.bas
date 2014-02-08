@@ -3134,18 +3134,6 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
 
 End Sub
 
-'Private Sub OutputTheTableDataAsXML()
-'
-'    Dim astrTbls() As String
-'    Dim i As Integer
-'
-'    i = 1
-'    ReDim Preserve astrTbls(i)
-'    astrTbls(i) = "tlkpStates"
-'    OutputTableDataAsXML astrTbls()
-'
-'End Sub
-
 Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant)
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
