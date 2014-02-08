@@ -167,9 +167,8 @@ Property Let XMLFolder(ByVal strXMLFolder As String)
 End Property
 
 Property Let TablesExportToXML(ByRef avarTables() As Variant)
-    MsgBox "Size of avarTables()=" & UBound(avarTables()), vbInformation, "adaept"
-    MsgBox "avarTables(0)=" & avarTables(0), vbInformation, "adaept"
-    MsgBox "Size of avarTables(1)=" & avarTables(1), vbInformation, "adaept"
+    MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
+        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
     'aegitDataXML = avarTables
 End Property
 
@@ -1545,6 +1544,10 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Stop
     End If
 
+    'MsgBox "aeDocumentTablesXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
+        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
+    OutputTheTableDataAsXML aegitDataXML()
+
     intFailCount = 0
     Debug.Print "aeDocumentTablesXML"
     If IsMissing(varDebug) Then
@@ -1579,10 +1582,6 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print "intFailCount = " & intFailCount
         Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
-
-    MsgBox "LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
-        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    OutputTheTableDataAsXML aegitDataXML()
 
 PROC_EXIT:
     Set tbl = Nothing
@@ -2233,7 +2232,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub KillAllFiles(Optional varDebug As Variant)
+Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
 
     Dim strFile As String
     Dim blnDebug As Boolean
@@ -2253,29 +2252,33 @@ Private Sub KillAllFiles(Optional varDebug As Variant)
         Debug.Print , "NOW DEBUGGING..."
     End If
 
-    ' Delete all the exported files
-    strFile = Dir(aestrSourceLocation & "*.*")
-    Do While strFile <> ""
-        KillProperly (aestrSourceLocation & strFile)
-        ' Need to specify full path again because a file was deleted
+    If strLoc = "src" Then
+        ' Delete all the exported src files
         strFile = Dir(aestrSourceLocation & "*.*")
-    Loop
-
-    ' Delete files in xml location
-    If aegitSetup Then
-        strFile = Dir(aestrXMLLocation & "*.*")
         Do While strFile <> ""
-            KillProperly (aestrXMLLocation & strFile)
+            KillProperly (aestrSourceLocation & strFile)
             ' Need to specify full path again because a file was deleted
-            strFile = Dir(aestrXMLLocation & "*.*")
+            strFile = Dir(aestrSourceLocation & "*.*")
         Loop
-    Else
         strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
         Do While strFile <> ""
             KillProperly (aestrSourceLocation & "xml\" & strFile)
             ' Need to specify full path again because a file was deleted
             strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
         Loop
+    ElseIf strLoc = "xml" Then
+        ' Delete files in xml location
+        If aegitSetup Then
+            strFile = Dir(aestrXMLLocation & "*.*")
+            Do While strFile <> ""
+                KillProperly (aestrXMLLocation & strFile)
+                ' Need to specify full path again because a file was deleted
+                strFile = Dir(aestrXMLLocation & "*.*")
+            Loop
+        End If
+    Else
+        MsgBox "Bad strLoc", vbCritical, "STOP"
+        Stop
     End If
 
 PROC_EXIT:
@@ -2390,9 +2393,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     'Stop
 
     If IsMissing(varDebug) Then
-        KillAllFiles
+        KillAllFiles "src"
     Else
-        KillAllFiles varDebug
+        KillAllFiles "src", varDebug
     End If
 
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
@@ -3146,7 +3149,7 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
 
 End Sub
 
-Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant)
+Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDebug As Variant)
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
 
@@ -3165,12 +3168,18 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant)
     Set cnn = CurrentProject.Connection
     Set rst = CreateObject("ADODB.Recordset")
 
+    If IsMissing(varDebug) Then
+        KillAllFiles "xml"
+    Else
+        KillAllFiles "xml", varDebug
+    End If
+
     rst.Open "Select * from " & avarTableNames(1), cnn, adOpenStatic, adLockOptimistic
 
     strFileName = aestrXMLLocation & avarTableNames(1) & ".xml"
 
     If aegitSetup Then
-        MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
+        'MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
         If Not rst.EOF Then
             rst.MoveFirst
             rst.Save strFileName, adPersistXML
