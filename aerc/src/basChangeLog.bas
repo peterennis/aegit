@@ -20,7 +20,15 @@ Option Explicit
 
 
 '20140207 - v070 - Allow array of tables for xml data export to be provided via let property
-    '
+    ' Office 2010: File > Options > Client Settings > General > Show add-in user interface errors
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/dd548010(v=office.12).aspx
+    ' Ribbon development: By default, you won't see any errors if there are problems with the XML that you've defined
+    ' for a ribbon customization. To display errors during development, be sure to set the Show add-in user interface errors
+    ' option in the Advanced page of the Access Options dialog box. Without this option set, ribbon customizations
+    ' may not load and it may not necessarily be clear why.
+    ' There is no VBA setting for Show add-in user interface errors
+    ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/c3c54c12-6cbd-404a-8709-dba485f82377/access-2010-set-option-show-addin-user-interface-errors-via-vba?forum=accessdev
+    ' Need to develop a registry settings test/output routine
 '20140206 - v069 - Load tlkpStates for test of xml output, from Census 1999 data
 '20140205 - v068 - Xml output of tables to xsd
     ' Delete src\xml\* files on export
