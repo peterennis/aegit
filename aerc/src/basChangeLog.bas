@@ -29,6 +29,7 @@ Option Explicit
     ' There is no VBA setting for Show add-in user interface errors
     ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/c3c54c12-6cbd-404a-8709-dba485f82377/access-2010-set-option-show-addin-user-interface-errors-via-vba?forum=accessdev
     ' Need to develop a registry settings test/output routine
+    ' Add code to test for reg key "ReportAddinCustomUIErrors"
 '20140206 - v069 - Load tlkpStates for test of xml output, from Census 1999 data
 '20140205 - v068 - Xml output of tables to xsd
     ' Delete src\xml\* files on export

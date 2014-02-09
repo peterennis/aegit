@@ -352,3 +352,39 @@ Private Sub ShowSubFolders(objFolder)
    Set colFolders = Nothing
 
 End Sub
+
+Public Sub TestRegKey()
+
+    Dim strKey As String
+
+    'strKey = "theKey"
+    strKey = "HKEY_CURRENT_USER\Software\Microsoft\Office\14.0\Common\General\ReportAddinCustomUIErrors"
+    If RegKeyExists(strKey) Then
+        Debug.Print strKey & " Exists!"
+    Else
+        Debug.Print strKey & " Does NOT Exist!"
+    End If
+
+End Sub
+
+Public Function RegKeyExists(strRegKey As String) As Boolean
+' Return True if the registry key i_RegKey was found and False if not
+' Ref: http://vba-corner.livejournal.com/3054.html
+
+    Dim myWS As Object
+
+    On Error GoTo ErrorHandler
+
+    ' Use Windows scripting and try to read the registry key
+    Set myWS = CreateObject("WScript.Shell")
+
+    myWS.RegRead strRegKey
+    ' Key was found
+    RegKeyExists = True
+    Exit Function
+  
+ErrorHandler:
+    ' Key was not found
+    RegKeyExists = False
+
+End Function
