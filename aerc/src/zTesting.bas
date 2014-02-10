@@ -357,8 +357,10 @@ Public Sub TestRegKey()
 
     Dim strKey As String
 
-    'strKey = "theKey"
-    strKey = "HKEY_CURRENT_USER\Software\Microsoft\Office\14.0\Common\General\ReportAddinCustomUIErrors"
+    ' Office 2010
+    'strKey = "HKEY_CURRENT_USER\Software\Microsoft\Office\14.0\Common\General\ReportAddinCustomUIErrors"
+    ' Office 2013
+    strKey = "HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Common\General\ReportAddinCustomUIErrors"
     If RegKeyExists(strKey) Then
         Debug.Print strKey & " Exists!"
     Else

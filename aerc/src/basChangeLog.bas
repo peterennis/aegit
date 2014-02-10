@@ -19,6 +19,7 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140210 - v072 - Office 2013 test for "Show add-in user interface errors" reg key setting
 '20140208 - v071 - Office 2010: File > Options > Client Settings > General > Show add-in user interface errors
     ' Ref: http://msdn.microsoft.com/en-us/library/office/dd548010(v=office.12).aspx
     ' Ribbon development: By default, you won't see any errors if there are problems with the XML that you've defined
