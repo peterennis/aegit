@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.7.3"
-Private Const aegitVERSION_DATE As String = "February 10, 2014"
+Private Const aegitVERSION As String = "0.7.4"
+Private Const aegitVERSION_DATE As String = "February 11, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -772,7 +772,7 @@ Private Sub ListOfApplicationProperties()
     fle = FreeFile()
     Open aegitSourceFolder & "\ListOfApplicationProperties.txt" For Output As #fle
 
-    Dim prp As Property
+    Dim prp As DAO.Property
     Dim i As Integer
     Dim strPropName As String
     Dim varPropValue As Variant
@@ -817,11 +817,12 @@ Private Function Pause(NumberOfSeconds As Variant)
 
     On Error GoTo PROC_ERR
 
-    Dim PauseTime As Variant, start As Variant
+    Dim PauseTime As Variant
+    Dim Start As Variant
 
     PauseTime = NumberOfSeconds
-    start = Timer
-    Do While Timer < start + PauseTime
+    Start = Timer
+    Do While Timer < Start + PauseTime
         Sleep 100
         DoEvents
     Loop
@@ -2890,7 +2891,7 @@ Private Function FieldLookupControlTypeList(Optional varDebug As Variant) As Boo
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDefs
     Dim tbl As DAO.TableDef
-    Dim fld As Field
+    Dim fld As DAO.Field
     Dim lng As Long
     Dim strChkTbl As String
     Dim strChkFld As String
@@ -3064,12 +3065,18 @@ Public Sub OutputAllContainerProperties(Optional varDebug As Variant)
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "OutputAllContainerProperties"
 
-    If Not IsMissing(varDebug) Then Debug.Print "Container information for properties of saved Databases"
-    ListAllContainerProperties "Databases"
-    If Not IsMissing(varDebug) Then Debug.Print "Container information for properties of saved Tables and Queries"
-    ListAllContainerProperties "Tables"
-    If Not IsMissing(varDebug) Then Debug.Print "Container information for properties of saved Relationships"
-    ListAllContainerProperties "Relationships"
+    If Not IsMissing(varDebug) Then
+        Debug.Print "Container information for properties of saved Databases"
+        ListAllContainerProperties "Databases", varDebug
+        Debug.Print "Container information for properties of saved Tables and Queries"
+        ListAllContainerProperties "Tables", varDebug
+        Debug.Print "Container information for properties of saved Relationships"
+        ListAllContainerProperties "Relationships", varDebug
+    Else
+        ListAllContainerProperties "Databases"
+        ListAllContainerProperties "Tables"
+        ListAllContainerProperties "Relationships"
+    End If
 
 PROC_EXIT:
     PopCallStack
@@ -3113,9 +3120,13 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
 ' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
     
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "ListAllContainerProperties"
+
     Dim dbs As DAO.Database
     Dim obj As Object
-    Dim prp As Property
+    Dim prp As DAO.Property
     Dim doc As Document
     Dim fle As Integer
 
@@ -3128,13 +3139,13 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
     ' Ref: http://stackoverflow.com/questions/16642362/how-to-get-the-following-code-to-continue-on-error
     For Each doc In obj.Documents
         If Left(doc.Name, 4) <> "MSys" And Left(doc.Name, 3) <> "zzz" _
-                And Left(doc.Name, 1) <> "~" Then
+            And Left(doc.Name, 1) <> "~" Then
             If Not IsMissing(varDebug) Then Debug.Print ">>>" & doc.Name
             Print #fle, ">>>" & doc.Name
             For Each prp In doc.Properties
                 On Error Resume Next
-                    If prp.Name = "GUID" And strContainer = "tables" Then
-                        If Not IsMissing(varDebug) Then Debug.Print , prp.Name, fListGUID(doc.Name)
+                If prp.Name = "GUID" And strContainer = "tables" Then
+                    If Not IsMissing(varDebug) Then Debug.Print , prp.Name, fListGUID(doc.Name)
                         Print #fle, , prp.Name, fListGUID(doc.Name)
                     ElseIf prp.Name = "DOL" Then
                         If Not IsMissing(varDebug) Then Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
@@ -3154,6 +3165,16 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
     Set obj = Nothing
     Set dbs = Nothing
     Close fle
+
+PROC_EXIT:
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
+    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
+    GlobalErrHandler
+    Resume PROC_EXIT
 
 End Sub
 
