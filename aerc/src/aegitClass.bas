@@ -29,7 +29,7 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.7.2"
+Private Const aegitVERSION As String = "0.7.3"
 Private Const aegitVERSION_DATE As String = "February 10, 2014"
 Private Const THE_DRIVE As String = "C"
 
@@ -64,6 +64,7 @@ Private aegitSourceFolder As String
 Private aegitImportFolder As String
 Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
+Private aegitExportDataToXML As Boolean
 Private aegitUseImportFolder As Boolean
 Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
@@ -101,6 +102,7 @@ Private Sub Class_Initialize()
     ReDim Preserve aegitDataXML(1 To 1)
     aegitDataXML(1) = "tlkpStates"
     aegitUseImportFolder = False
+    aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
     aegitType.UseImportFolder = False
@@ -1546,7 +1548,7 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
 
     'MsgBox "aeDocumentTablesXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    OutputTheTableDataAsXML aegitDataXML()
+    If aegitExportDataToXML Then OutputTheTableDataAsXML aegitDataXML()
 
     intFailCount = 0
     Debug.Print "aeDocumentTablesXML"
@@ -2383,12 +2385,18 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrImportLocation = aegitImportFolder
     End If
 
+    If aegitXMLFolder = "default" Then
+        aestrXMLLocation = aegitType.XMLFolder
+    End If
+
     ListOrCloseAllOpenQueries
 
     If Debugit Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
-        Debug.Print , "SourceFolder = " & aestrSourceLocation
-        Debug.Print , "ImportFolder = " & aestrImportLocation
+        Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
+        Debug.Print , "aegitUseImportFolder = " & aegitUseImportFolder
+        Debug.Print , "Property Get ImportFolder = " & aestrImportLocation
+        Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
     End If
     'Stop
 
