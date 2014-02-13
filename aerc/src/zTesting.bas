@@ -399,6 +399,7 @@ Public Sub PrinterInfo()
     Dim prtCount As Integer
     Dim i As Integer
 
+    Debug.Print "Default Printer=" & Application.Printer.DeviceName
     prtCount = Application.Printers.Count
     Debug.Print "Number of Printers=" & prtCount
     For Each prt In Printers
