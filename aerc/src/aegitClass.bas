@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.7.4"
-Private Const aegitVERSION_DATE As String = "February 11, 2014"
+Private Const aegitVERSION As String = "0.7.5"
+Private Const aegitVERSION_DATE As String = "February 12, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -2921,7 +2921,8 @@ Private Function FieldLookupControlTypeList(Optional varDebug As Variant) As Boo
 
     On Error Resume Next
     For Each tbl In tdf
-        If Left(tbl.Name, 4) <> "MSys" Then
+        If Left(tbl.Name, 4) <> "MSys" And Left(tbl.Name, 3) <> "zzz" _
+            And Left(tbl.Name, 1) <> "~" Then
             'Debug.Print tbl.Name
             Print #fle, tbl.Name
             For Each fld In tbl.Fields

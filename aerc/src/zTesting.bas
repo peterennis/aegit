@@ -391,41 +391,43 @@ ErrorHandler:
 
 End Function
 
+Public Sub PrinterInfo()
+' Ref: http://msdn.microsoft.com/en-us/library/office/aa139946(v=office.10).aspx
+' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/how-do-i-change-default-printers-in-vba/d046a937-6548-4d2b-9517-7f622e2cfed2
 
-Public Sub ViewAppProperties()
-' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
+    Dim prt As Printer
+    Dim prtCount As Integer
+    Dim i As Integer
 
-    On Error GoTo tagError
+    prtCount = Application.Printers.Count
+    Debug.Print "Number of Printers=" & prtCount
+    For Each prt In Printers
+        Debug.Print , prt.DeviceName
+    Next prt
 
-    Dim prp As Property, i As Integer
-    Dim strPropName As String, varPropValue As Variant, varPropType As Variant
-    Dim varPropInherited As Variant, intPropPropCount As Integer
-    Dim strError As String
-
-    With CurrentDb
-
-        For i = 0 To (.Properties.Count - 1)
-            strPropName = .Properties(i).Name
-            varPropValue = Null
-            varPropValue = .Properties(i).Value
-            varPropType = .Properties(i).Type
-            varPropInherited = .Properties(i).Inherited
-            Debug.Print strPropName & ": " & varPropValue & ", " & _
-                varPropType & ", " & varPropInherited & ";" & strError
-            strError = ""
-        Next i
-
-    End With
-    Exit Sub
-
-tagError:
-    Select Case Err.Number
-        Case 3251
-            strError = Err.Number & "," & Err.Description
-            Resume Next
-        Case Else
-            MsgBox Err.Description
-        Exit Sub
-    End Select
+    For i = 0 To prtCount - 1
+        Debug.Print "DeviceName=" & Application.Printers(i).DeviceName
+        Debug.Print , "BottomMargin=" & Application.Printers(i).BottomMargin
+        Debug.Print , "ColorMode=" & Application.Printers(i).ColorMode
+        Debug.Print , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
+        Debug.Print , "Copies=" & Application.Printers(i).Copies
+        Debug.Print , "DataOnly=" & Application.Printers(i).DataOnly
+        Debug.Print , "DefaultSize=" & Application.Printers(i).DefaultSize
+        Debug.Print , "DriverName=" & Application.Printers(i).DriverName
+        Debug.Print , "Duplex=" & Application.Printers(i).Duplex
+        Debug.Print , "ItemLayout=" & Application.Printers(i).ItemLayout
+        Debug.Print , "ItemsAcross=" & Application.Printers(i).ItemsAcross
+        Debug.Print , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
+        Debug.Print , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
+        Debug.Print , "LeftMargin=" & Application.Printers(i).LeftMargin
+        Debug.Print , "Orientation=" & Application.Printers(i).Orientation
+        Debug.Print , "PaperBin=" & Application.Printers(i).PaperBin
+        Debug.Print , "PaperSize=" & Application.Printers(i).PaperSize
+        Debug.Print , "Port=" & Application.Printers(i).Port
+        Debug.Print , "PrintQuality=" & Application.Printers(i).PrintQuality
+        Debug.Print , "RightMargin=" & Application.Printers(i).RightMargin
+        Debug.Print , "RowSpacing=" & Application.Printers(i).RowSpacing
+        Debug.Print , "TopMargin=" & Application.Printers(i).TopMargin
+    Next
 
 End Sub
