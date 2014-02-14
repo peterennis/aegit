@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.7.5"
-Private Const aegitVERSION_DATE As String = "February 12, 2014"
+Private Const aegitVERSION As String = "0.7.6"
+Private Const aegitVERSION_DATE As String = "February 13, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -377,10 +377,10 @@ PROC_ERR:
             'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
             'GlobalErrHandler
             Resume Next
-    Case Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
-        'GlobalErrHandler
-        Resume Next
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+            'GlobalErrHandler
+            Resume Next
     End Select
 
 End Function
