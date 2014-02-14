@@ -22,6 +22,7 @@ Option Explicit
 
 
 '20140213 - v076 - Output PrinterInfo to file
+    ' Integrate PrinterInfo in aegitClass, turn on global error handler
 '20140212 - v075 - PrinterInfo procedure
 '20140211 - v074 - Fix some dim statements as DAO, varDebug for output of properties
 '20140210 - v073 - Use aegitExportDataToXML as flag for xml data output

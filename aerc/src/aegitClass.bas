@@ -3245,10 +3245,8 @@ Public Sub OutputPrinterInfo(Optional varDebug As Variant)
 ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/how-do-i-change-default-printers-in-vba/d046a937-6548-4d2b-9517-7f622e2cfed2
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "PrinterInfo"
-
-    On Error GoTo PROC_ERR
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "PrinterInfo"
 
     Dim prt As Printer
     Dim prtCount As Integer
@@ -3257,8 +3255,6 @@ Public Sub OutputPrinterInfo(Optional varDebug As Variant)
 
     fle = FreeFile()
     Open aegitSourceFolder & "\OutputPrinterInfo.txt" For Output As #fle
-    'Open "C:\Temp\OutputPrinterInfo.txt" For Output As #fle
-
 
     If Not IsMissing(varDebug) Then Debug.Print "Default Printer=" & Application.Printer.DeviceName
     Print #fle, "Default Printer=" & Application.Printer.DeviceName
@@ -3324,18 +3320,18 @@ Public Sub OutputPrinterInfo(Optional varDebug As Variant)
 
 PROC_EXIT:
     Close fle
-    'PopCallStack
+    PopCallStack
     Exit Sub
 
 PROC_ERR:
     Select Case Err.Number
         Case 9
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegitClass"
-            'GlobalErrHandler
+            GlobalErrHandler
             Resume Next
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegitClass"
-            'GlobalErrHandler
+            GlobalErrHandler
             Resume Next
     End Select
 
