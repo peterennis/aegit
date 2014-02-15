@@ -30,7 +30,7 @@ Option Explicit
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
 Private Const aegitVERSION As String = "0.7.6"
-Private Const aegitVERSION_DATE As String = "February 13, 2014"
+Private Const aegitVERSION_DATE As String = "February 14, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -323,7 +323,7 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
 
     On Error GoTo PROC_ERR
 
-    Dim FName As String
+    Dim fName As String
     Dim fname2 As String
     Dim fnr As Integer
     Dim fnr2 As Integer
@@ -335,11 +335,11 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
     ' If the file has no Byte Order Mark (BOM)
     ' Ref: http://msdn.microsoft.com/en-us/library/windows/desktop/dd374101%28v=vs.85%29.aspx
     ' then do nothing
-    FName = strPathFileName
+    fName = strPathFileName
     fname2 = strPathFileName & ".clean.txt"
 
     fnr = FreeFile()
-    Open FName For Binary Access Read As #fnr
+    Open fName For Binary Access Read As #fnr
     Get #fnr, , tstring
     ' #FFFE, #FFFF, #0000
     ' If no BOM then it is a txt file and header stripping is not needed
@@ -1606,6 +1606,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
     Dim dbs As DAO.Database
+    Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim ndx As DAO.Index
@@ -1613,10 +1614,9 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
     Dim strFlds As String
     Dim strCn As String
     Dim strLinkedTablePath As String
-    Dim fs As Object
     Dim f As Object
 
-    Set dbs = CurrentDb
+    Dim fs As Object
     Set fs = CreateObject("Scripting.FileSystemObject")
     Set f = fs.CreateTextFile(aegitSourceFolder & aeSchemaFile)
 
@@ -1901,7 +1901,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.sql
+            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
         End If
     Next
 
@@ -3197,11 +3197,11 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDeb
     Const adLockOptimistic = 3
     Const adPersistXML = 1
 
-    Dim cnn As Object
-    Dim rst As Object
     Dim strFileName As String
 
+    Dim cnn As Object
     Set cnn = CurrentProject.Connection
+    Dim rst As Object
     Set rst = CreateObject("ADODB.Recordset")
 
     If IsMissing(varDebug) Then

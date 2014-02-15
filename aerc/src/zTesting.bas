@@ -51,12 +51,10 @@ End Sub
 Public Function SpFolder(SpName)
 
     Dim objShell As Object
-    Dim objFolder As Object
-    Dim objFolderItem As Object
-
     Set objShell = CreateObject("Shell.Application")
+    Dim objFolder As Object
     Set objFolder = objShell.Namespace(SpName)
-
+    Dim objFolderItem As Object
     Set objFolderItem = objFolder.Self
 
     SpFolder = objFolderItem.Path
@@ -70,13 +68,14 @@ Public Sub ExportAllModulesToFile()
 ' but it not necessary to add the reference for this procedure.
 
     Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+
     Dim fil As Object
     Dim strMod As String
     Dim mdl As Object
     Dim i As Integer
     Dim strTxtFile As String
 
-    Set fso = CreateObject("Scripting.FileSystemObject")
 
     ' Set up the file
     Debug.Print "CurrentProject.Name = " & CurrentProject.Name
@@ -170,8 +169,8 @@ Public Sub SaveTableMacros()
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:stylesheet>"
 
     Dim objXMLResDoc As Object
-
     Set objXMLStyleSheet = CreateObject("Msxml2.DOMDocument.6.0")
+
     With objXMLStyleSheet
         'Turn off Async I/O
         .async = False
@@ -332,8 +331,8 @@ Private Sub ShowSubFolders(objFolder)
    Dim colFolders As Object
    Dim colFiles As Object
    Dim wsh As Object  ' As Object if late-bound
-
    Set wsh = CreateObject("WScript.Shell")
+
    Set colFolders = objFolder.SubFolders
     
    For Each objSubFolder In colFolders
@@ -373,11 +372,10 @@ Public Function RegKeyExists(strRegKey As String) As Boolean
 ' Return True if the registry key i_RegKey was found and False if not
 ' Ref: http://vba-corner.livejournal.com/3054.html
 
-    Dim myWS As Object
-
     On Error GoTo ErrorHandler
 
     ' Use Windows scripting and try to read the registry key
+    Dim myWS As Object
     Set myWS = CreateObject("WScript.Shell")
 
     myWS.RegRead strRegKey

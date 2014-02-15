@@ -302,7 +302,7 @@ Public Sub ListOfAllQueries()
     If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
         Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
     End If
-    qdfCurr.sql = strSQL
+    qdfCurr.SQL = strSQL
     'Debug.Print """" & strTempQuery & """"
     DoCmd.OpenQuery strTempQuery
     'DoCmd.Close acQuery, strTempQuery

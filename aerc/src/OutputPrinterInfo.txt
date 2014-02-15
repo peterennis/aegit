@@ -1,31 +1,29 @@
 Default Printer=UPSTAIRS RICOH Aficio MP C3501 PCL 6 (redirected 1)
-Number of Printers=7
-              Fax (redirected 1)
-              CutePDF Writer (redirected 1)
-              Microsoft XPS Document Writer (redirected 1)
+Number of Printers=5
               UPSTAIRS RICOH Aficio MP C3501 PCL 6 (redirected 1)
+              CutePDF Writer (redirected 1)
               Microsoft XPS Document Writer
               Fax
               CutePDF Writer
-DeviceName=Fax (redirected 1)
+DeviceName=UPSTAIRS RICOH Aficio MP C3501 PCL 6 (redirected 1)
               BottomMargin=360
               ColorMode=1
               ColumnSpacing=360
-              Copies=0
+              Copies=1
               DataOnly=False
               DefaultSize=True
               DriverName=winspool
-              Duplex=1
+              Duplex=2
               ItemLayout=1953
               ItemsAcross=1
               ItemSizeHeight=4320
               ItemSizeWidth=7200
               LeftMargin=360
               Orientation=1
-              PaperBin=1
+              PaperBin=7
               PaperSize=1
-              Port=TS003
-              PrintQuality=200
+              Port=TS001
+              PrintQuality=600
               RightMargin=360
               RowSpacing=0
               TopMargin=360
@@ -47,50 +45,6 @@ DeviceName=CutePDF Writer (redirected 1)
               PaperBin=15
               PaperSize=1
               Port=TS002
-              PrintQuality=600
-              RightMargin=360
-              RowSpacing=0
-              TopMargin=360
-DeviceName=Microsoft XPS Document Writer (redirected 1)
-              BottomMargin=360
-              ColorMode=2
-              ColumnSpacing=360
-              Copies=1
-              DataOnly=False
-              DefaultSize=True
-              DriverName=winspool
-              Duplex=1
-              ItemLayout=1953
-              ItemsAcross=1
-              ItemSizeHeight=4320
-              ItemSizeWidth=7200
-              LeftMargin=360
-              Orientation=1
-              PaperBin=15
-              PaperSize=1
-              Port=TS004
-              PrintQuality=600
-              RightMargin=360
-              RowSpacing=0
-              TopMargin=360
-DeviceName=UPSTAIRS RICOH Aficio MP C3501 PCL 6 (redirected 1)
-              BottomMargin=360
-              ColorMode=1
-              ColumnSpacing=360
-              Copies=1
-              DataOnly=False
-              DefaultSize=True
-              DriverName=winspool
-              Duplex=2
-              ItemLayout=1953
-              ItemsAcross=1
-              ItemSizeHeight=4320
-              ItemSizeWidth=7200
-              LeftMargin=360
-              Orientation=1
-              PaperBin=7
-              PaperSize=1
-              Port=TS001
               PrintQuality=600
               RightMargin=360
               RowSpacing=0

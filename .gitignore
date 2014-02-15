@@ -8,6 +8,8 @@
 ## Microsoft Access
 ###################
 
+*.mdb
+*.ldb
 *.accdb
 *.laccdb
 ~TMP*

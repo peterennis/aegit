@@ -2,6 +2,7 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 ' Create Let property for setting aegitExportDataToXML
 ' Check if ViewAppProperties includes anything new
 ' Modify ObjectCounts to provide more details and export results for development tracking, charting
@@ -21,8 +22,12 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
-'20140213 - v076 - Output PrinterInfo to file
+'20140214 - v076 - Output PrinterInfo to file
     ' Integrate PrinterInfo in aegitClass, turn on global error handler
+    ' Export OfficeUI files
+    ' Ref: http://msdn.microsoft.com/en-us/library/ee704589(v=office.14).aspx
+    ' Add some data handlers Ref: http://www.saplsmw.com
+    ' Testing GetSQLServerData
 '20140212 - v075 - PrinterInfo procedure
 '20140211 - v074 - Fix some dim statements as DAO, varDebug for output of properties
 '20140210 - v073 - Use aegitExportDataToXML as flag for xml data output
