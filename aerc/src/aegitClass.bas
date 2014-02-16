@@ -104,9 +104,9 @@ Private Sub Class_Initialize()
     aegitUseImportFolder = False
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-    aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
+    aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
     aegitType.UseImportFolder = False
-    aegitType.XMLFolder = "C:\ae\aegit\aerc\xml\"
+    aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
     aeintLTN = LongestTableName
     LongestFieldPropsName
 
