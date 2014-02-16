@@ -21,7 +21,7 @@ Show Navigation Pane Search Bar: 1, 4, False
 Build: 24, 4, False
 ProjVer: 119, 3, False
 HasOfflineLists: 70, 3, False
-UseMDIMode: 0, 2, False
+UseMDIMode: 1, 2, False
 ShowDocumentTabs: True, 1, False
 Picture Property Storage Format: 0, 4, False
 WebDesignMode: 0, 2, False
