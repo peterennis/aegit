@@ -5,7 +5,8 @@ Option Explicit
 
 Public Sub TestGetSQLServerData()
     Dim bln As Boolean
-    bln = GetSQLServerData("theServer", "theDatabase")
+    bln = GetSQLServerData("LAPTOP\SQLEXPRESS", "AdventureWorks2012")
+    'bln = GetSQLServerData("theServer", "theDatabase")
 End Sub
 
 Public Function GetSQLServerData(strServer As String, strDatabase As String) As Boolean
@@ -44,6 +45,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     cnn.Open
     Dim cmd As ADODB.Command
     Dim orst As ADODB.Recordset
+    Set orst = New ADODB.Recordset
     Dim ofld As ADODB.Field
     Dim ocat As ADOX.Catalog
     Set ocat = New ADOX.Catalog
@@ -69,14 +71,15 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     Dim fSize As Integer
     Dim rst As DAO.Recordset
 
-    Debug.Print "Count of tables=" & ocat.Tables.Count
+    ' Ref: http://technet.microsoft.com/en-us/library/ms189082(v=sql.105).aspx
+    Debug.Print "Count of itmes in tables catalog=" & ocat.Tables.Count
     For Each otbl In ocat.Tables
-        Debug.Print otbl.Name
+        Debug.Print otbl.Type, otbl.Name
         If otbl.Type = "TABLE" Then
 
             orst.Open otbl.Name, cnn, adOpenDynamic, adLockOptimistic
             For Each tdf In dbs.TableDefs
-                Debug.Print , tdf.Name
+                'Debug.Print , tdf.Name
                 If tdf.Name = otbl.Name Then
                     ' This table already exists!  Delete it.
                     dbs.TableDefs.Delete (otbl.Name)

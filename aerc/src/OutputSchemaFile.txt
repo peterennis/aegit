@@ -5,29 +5,29 @@ On Error GoTo ErrorTrap
 
 'Local Table
 
-strSQL="CREATE TABLE [Items] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )"
+strSQL="CREATE TABLE [aeItems] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )"
 Currentdb.Execute strSQL
 
 'Local Table
 
-strSQL="CREATE TABLE [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )"
+strSQL="CREATE TABLE [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [id] ON [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description]) "
+strSQL="CREATE INDEX [id] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description]) "
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description])  WITH PRIMARY DISALLOW NULL "
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
 'Local Table
 
-strSQL="CREATE TABLE [tlkpStates] ([StateCode] Text (3),[StateAbbreviation] Text (2),[StateName] Text (15) )"
+strSQL="CREATE TABLE [aetlkpStates] ([StateCode] Text (3),[StateAbbreviation] Text (2),[StateName] Text (15) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tlkpStates] ([StateName])  WITH PRIMARY DISALLOW NULL "
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [aetlkpStates] ([StateName])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [State Code] ON [tlkpStates] ([StateName]) "
+strSQL="CREATE INDEX [State Code] ON [aetlkpStates] ([StateName]) "
 Currentdb.Execute strSQL
 
 'Access 2010 - Compact And Repair

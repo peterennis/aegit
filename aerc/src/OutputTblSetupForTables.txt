@@ -1,6 +1,6 @@
-------------
-TABLE: Items
-------------
+--------------
+TABLE: aeItems
+--------------
 FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION        
 =================    ============    ====    ===================
 Item                 Text            255                        
@@ -11,9 +11,9 @@ CHK                  Yes/No          1
 CBO                  Text            255                        
 
 
---------------------------------------------------------------
-TABLE: tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
---------------------------------------------------------------
+----------------------------------------------------------------
+TABLE: aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+----------------------------------------------------------------
 FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION                       
 =================    ============    ====    ==================================
 id                   AutoNumber      4                                         
@@ -21,9 +21,9 @@ Desc                 Text            255
 Description          Text            255     This is a description of the field
 
 
------------------
-TABLE: tlkpStates
------------------
+-------------------
+TABLE: aetlkpStates
+-------------------
 FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
 =================    ============    ====    ===========
 StateCode            Text            3                  
