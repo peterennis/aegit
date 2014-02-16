@@ -1,4 +1,4 @@
-Default Printer=\\MARS\HP Photosmart C5200 series
+Default Printer=Send To OneNote 2010
 Number of Printers=5
               Send To OneNote 2010
               Microsoft XPS Document Writer

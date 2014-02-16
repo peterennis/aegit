@@ -34,7 +34,7 @@ AllowFullMenus: True, 1, False
 AllowBuiltInToolbars: True, 1, False
 AllowToolbarChanges: True, 1, False
 AllowSpecialKeys: True, 1, False
-UseAppIconForFrmRpt: False, 1, False
+UseAppIconForFrmRpt: True, 1, False
 AllowDatasheetSchema: True, 1, False
 DesignWithData: True, 1, False
 Show Values Limit: 1000, 4, False

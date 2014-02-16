@@ -175,7 +175,7 @@ Inherited: False;
 ---
 Name: UseAppIconForFrmRpt
 Type: dbBoolean
-Value: False
+Value: True
 Inherited: False;
 ---
 Name: AllowDatasheetSchema
