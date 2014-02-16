@@ -115,7 +115,7 @@ Inherited: False;
 ---
 Name: ShowDocumentTabs
 Type: dbBoolean
-Value: True
+Value: False
 Inherited: False;
 ---
 Name: Picture Property Storage Format
