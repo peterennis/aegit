@@ -100,7 +100,7 @@ Private Sub Class_Initialize()
     aegitImportFolder = "default"
     aegitXMLFolder = "default"
     ReDim Preserve aegitDataXML(1 To 1)
-    aegitDataXML(1) = "tlkpStates"
+    aegitDataXML(1) = "aetlkpStates"
     aegitUseImportFolder = False
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"

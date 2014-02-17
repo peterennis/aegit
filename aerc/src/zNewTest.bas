@@ -64,3 +64,48 @@ Public Sub CreateRibbon()
     CodeDb.Properties("aeRibbonID") = "adaept1"
 
 End Sub
+
+Public Function OutputTableDataMacros() As Boolean
+' Ref: http://stackoverflow.com/questions/9206153/how-to-export-access-2010-data-macros
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     February 16, 2014
+'====================================================================
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+
+    ' Use a call stack and global error handler
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputTableDataMacros"
+
+    On Error GoTo PROC_ERR
+
+    OutputTableDataMacros = True
+
+    Set dbs = CurrentDb()
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left(tdf.Name, 4) = "MSys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
+            Debug.Print tdf.Name
+            SaveAsText acTableDataMacro, tdf.Name, "C:\Temp\table_" & tdf.Name & "_DataMacro.xml"
+        End If
+    Next tdf
+
+PROC_EXIT:
+    Set tdf = Nothing
+    Set dbs = Nothing
+    'PopCallStack
+    Exit Function
+
+PROC_ERR:
+    If Err = 2950 Then ' Reserved Error
+        Resume Next
+    End If
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegitClass"
+    OutputTableDataMacros = False
+    'GlobalErrHandler
+    Resume PROC_EXIT
+
+End Function
