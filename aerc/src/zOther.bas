@@ -5,8 +5,7 @@ Option Explicit
 
 Public Sub TestGetSQLServerData()
     Dim bln As Boolean
-    bln = GetSQLServerData("LAPTOP\SQLEXPRESS", "AdventureWorks2012")
-    'bln = GetSQLServerData("theServer", "theDatabase")
+    bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
 End Sub
 
 Public Function GetSQLServerData(strServer As String, strDatabase As String) As Boolean
@@ -72,7 +71,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     Dim rst As DAO.Recordset
 
     ' Ref: http://technet.microsoft.com/en-us/library/ms189082(v=sql.105).aspx
-    Debug.Print "Count of itmes in tables catalog=" & ocat.Tables.Count
+    Debug.Print "Count of items in tables catalog=" & ocat.Tables.Count
     For Each otbl In ocat.Tables
         Debug.Print otbl.Type, otbl.Name
         If otbl.Type = "TABLE" Then
