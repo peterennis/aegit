@@ -386,7 +386,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub ListOfAllHiddenQueries(Optional varDebug As Variant)
+Private Sub OutputListOfAllHiddenQueries(Optional varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
     Const strTempTable As String = "zzzTmpTblQueries"
@@ -405,13 +405,13 @@ Private Sub ListOfAllHiddenQueries(Optional varDebug As Variant)
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
     If Not IsMissing(varDebug) Then Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "ListOfAllHiddenQueries.txt", False
+    DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
 End Sub
 
-Private Sub ListOfAccessApplicationOptions(Optional varDebug As Variant)
+Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
 
 ' Note: If you are developing a database application, add-in, library database, or referenced database, make sure that the
 ' Error Trapping option is set to 2 (Break On Unhandled Errors) when you have finished debugging your code.
@@ -435,7 +435,7 @@ Private Sub ListOfAccessApplicationOptions(Optional varDebug As Variant)
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListOfAccessApplicationOptions"
+    PushCallStack "OutputListOfAccessApplicationOptions"
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
@@ -444,13 +444,13 @@ Private Sub ListOfAccessApplicationOptions(Optional varDebug As Variant)
     Dim Debugit As Boolean
 
     If IsMissing(varDebug) Then
-        Debug.Print "ListOfAccessApplicationOptions"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to ListOfAccessApplicationOptions"
+        Debug.Print "OutputListOfAccessApplicationOptions"
+        Debug.Print , "DebugTheCode IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
         Debug.Print , "DEBUGGING IS OFF"
         Debugit = False
     Else
-        Debug.Print "ListOfAccessApplicationOptions"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to ListOfAccessApplicationOptions"
+        Debug.Print "OutputListOfAccessApplicationOptions"
+        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
         Debug.Print , "DEBUGGING TURNED ON"
         Debugit = True
     End If
@@ -463,7 +463,7 @@ Private Sub ListOfAccessApplicationOptions(Optional varDebug As Variant)
         aegitSourceFolder = aegitType.SourceFolder
     End If
 
-    Open aegitSourceFolder & "\ListOfAccessApplicationOptions.txt" For Output As #fle
+    Open aegitSourceFolder & "\OutputListOfAccessApplicationOptions.txt" For Output As #fle
 
     'On Error Resume Next
     Print #fle, ">>>Standard Options"
@@ -746,32 +746,32 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2091 Then          ''...' is an invalid name.
-        If Debugit Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        If Debugit Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegitClass"
         Print #fle, "!" & Err.Description
         Err.Clear
     ElseIf Err = 3270 Then      'Property not found.
         Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfAccessApplicationOptions of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
 
 End Sub
 
-Private Sub ListOfApplicationProperties()
+Private Sub OutputListOfApplicationProperties()
 ' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListOfApplicationProperties"
+    PushCallStack "OutputListOfApplicationProperties"
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim fle As Integer
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\ListOfApplicationProperties.txt" For Output As #fle
+    Open aegitSourceFolder & "\OutputListOfApplicationProperties.txt" For Output As #fle
 
     Dim prp As DAO.Property
     Dim i As Integer
@@ -802,11 +802,11 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3251 Then
-        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegitClass"
         Print #fle, "!" & Err.Description, strPropName
         Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfApplicationProperties of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegitClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -2426,16 +2426,16 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         Stop
     End If
     
-    ListOfContainers "ListOfContainers.txt"
-    ListOfAllHiddenQueries
+    OutputListOfContainers "OutputListOfContainers.txt"
+    OutputListOfAllHiddenQueries
 
     If Debugit Then
-        ListOfAccessApplicationOptions "Debug"
+        OutputListOfAccessApplicationOptions "Debug"
     Else
-        ListOfAccessApplicationOptions
+        OutputListOfAccessApplicationOptions
     End If
 
-    ListOfApplicationProperties
+    OutputListOfApplicationProperties
     'Stop
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
@@ -3000,7 +3000,7 @@ PROC_ERR:
 
 End Function
 
-Public Function ListOfContainers(strTheFileName As String) As Boolean
+Public Function OutputListOfContainers(strTheFileName As String) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
 
@@ -3015,7 +3015,7 @@ Public Function ListOfContainers(strTheFileName As String) As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListOfContainers"
+    PushCallStack "OutputListOfContainers"
 
     Set dbs = CurrentDb
     lngFileNum = FreeFile
@@ -3049,7 +3049,7 @@ Public Function ListOfContainers(strTheFileName As String) As Boolean
         .Close
     End With
 
-    ListOfContainers = True
+    OutputListOfContainers = True
 
 PROC_EXIT:
     Set prpLoop = Nothing
@@ -3060,8 +3060,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListOfContainers of Class aegitClass", vbCritical, "Error"
-    ListOfContainers = False
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegitClass", vbCritical, "Error"
+    OutputListOfContainers = False
     GlobalErrHandler
     Resume PROC_EXIT
 

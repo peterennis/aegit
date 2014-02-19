@@ -1,0 +1,263 @@
+>>>Standard Options
+              2000          AppTitle                    aegit
+              2000          AppIcon                     .\adaept64.ico
+              2000          AllowFullMenus              True
+              2000          AllowShortcutMenus          True
+              2000          StartupShowDBWindow         True
+              2000          StartupShowStatusBar        True
+              2000          AllowBuiltInToolbars        True
+              2000          AllowToolbarChanges         True
+>>>Advanced Option
+              2000          AllowSpecialKeys            True
+>>>Extra Options
+>>>View Tab
+              XP, 2003      Show Status Bar                           -1 
+              XP, 2003      Show Startup Dialog Box                   -1 
+              XP, 2003      Show New Object Shortcuts                 -1 
+              XP, 2003      Show Hidden Objects                       -1 
+              XP, 2003      Show System Objects                        0 
+              XP, 2003      ShowWindowsInTaskbar                      -1 
+              XP, 2003      Show Macro Names Column                    0 
+              XP, 2003      Show Conditions Column                     0 
+              XP, 2003      Database Explorer Click Behavior           1 
+>>>General Tab
+              XP, 2003      Left Margin                               0.25"
+              XP, 2003      Right Margin                              0.25"
+              XP, 2003      Top Margin                                0.25"
+              XP, 2003      Bottom Margin                             0.25"
+              XP, 2003      Four-Digit Year Formatting                 0 
+              XP, 2003      Four-Digit Year Formatting All Databases   0 
+              XP, 2003      Track Name AutoCorrect Info                0 
+              XP, 2003      Perform Name AutoCorrect                   0 
+              XP, 2003      Log Name AutoCorrect Changes               0 
+              XP, 2003      Enable MRU File List                      -1 
+              XP, 2003      Size of MRU File List                      2 
+              XP, 2003      Provide Feedback with Sound                0 
+              XP, 2003      Auto Compact                               0 
+              XP, 2003      New Database Sort Order                    1033 
+              XP, 2003      Remove Personal Information                0 
+              XP, 2003      Default Database Directory                C:\Users\peterennis\Documents\
+>>>Edit/Find Tab
+              XP, 2003      Default Find/Replace Behavior              0 
+              XP, 2003      Confirm Record Changes                    -1 
+              XP, 2003      Confirm Document Deletions                -1 
+              XP, 2003      Confirm Action Queries                    -1 
+              XP, 2003      Show Values in Indexed                    -1 
+              XP, 2003      Show Values in Non-Indexed                -1 
+              XP, 2003      Show Values in Remote                      0 
+              XP, 2003      Show Values in Snapshot                   -1 
+              XP, 2003      Show Values in Server                      0 
+              XP, 2003      Show Values Limit                          1000 
+>>>Datasheet Tab
+              XP, 2003      Default Font Color                        -1 
+              XP, 2003      Default Background Color                  -1 
+              XP, 2003      Default Gridlines Color                   -1 
+              XP, 2003      Default Gridlines Horizontal              -1 
+              XP, 2003      Default Gridlines Vertical                -1 
+              XP, 2003      Default Column Width                      1"
+              XP, 2003      Default Font Name                         Calibri
+              XP, 2003      Default Font Weight                        3 
+              XP, 2003      Default Font Size                          11 
+              XP, 2003      Default Font Underline                     0 
+              XP, 2003      Default Font Italic                        0 
+              XP, 2003      Default Cell Effect                        0 
+              XP, 2003      Show Animations                           -1 
+                  2003      Show Smart Tags on Datasheets             -1 
+>>>Keyboard Tab
+              XP, 2003      Move After Enter                           1 
+              XP, 2003      Behavior Entering Field                    0 
+              XP, 2003      Arrow Key Behavior                         0 
+              XP, 2003      Cursor Stops at First/Last Field           0 
+              XP, 2003      Ime Autocommit                            -1 
+              XP, 2003      Datasheet Ime Control                      0 
+>>>Tables/Queries Tab
+              XP, 2003      Default Text Field Size                    255 
+              XP, 2003      Default Number Field Size                  2 
+              XP, 2003      Default Field Type                         0 
+              XP, 2003      AutoIndex on Import/Create                ID;key;code;num
+              XP, 2003      Show Table Names                          -1 
+              XP, 2003      Output All Fields                          0 
+              XP, 2003      Enable AutoJoin                           -1 
+              XP, 2003      Run Permissions                            1 
+              XP, 2003      ANSI Query Mode                            0 
+              XP, 2003      ANSI Query Mode Default                    0 
+                  2003      Query Design Font Name                    Segoe UI
+                  2003      Query Design Font Size                     8 
+                  2003      Show Property Update Options buttons      -1 
+>>>Forms/Reports Tab
+              XP, 2003      Selection Behavior           0 
+              XP, 2003      Form Template               Normal
+              XP, 2003      Report Template             Normal
+              XP, 2003      Always Use Event Procedures  0 
+!'Show Smart Tags on Forms' is an invalid name.
+                  2003      Themed Form Controls        -1 
+>>>Advanced Tab
+              XP, 2003      Ignore DDE Requests                        0 
+              XP, 2003      Enable DDE Refresh                        -1 
+              XP, 2003      Default File Format                        12 
+              XP            Row Limit                                  10000 
+              XP, 2003      Default Open Mode for Databases            0 
+              XP, 2003      Command-Line Arguments                    
+              XP, 2003      OLE/DDE Timeout (sec)                      30 
+              XP, 2003      Default Record Locking                     0 
+              XP, 2003      Refresh Interval (sec)                     60 
+              XP, 2003      Number of Update Retries                   2 
+              XP, 2003      ODBC Refresh Interval (sec)                1500 
+              XP, 2003      Update Retry Interval (msec)               250 
+              XP, 2003      Use Row Level Locking                     -1 
+              XP            Save Login and Password                    0 
+>>>Pages Tab
+!'Section Indent' is an invalid name.
+!'Alternate Row Color' is an invalid name.
+!'Caption Section Style' is an invalid name.
+!'Footer Section Style' is an invalid name.
+!'Use Default Page Folder' is an invalid name.
+!'Default Page Folder' is an invalid name.
+!'Use Default Connection File' is an invalid name.
+!'Default Connection File' is an invalid name.
+>>>Spelling Tab
+              XP, 2003      Spelling dictionary language                             0 
+              XP, 2003      Spelling add words to                                    0 
+              XP, 2003      Spelling suggest from main dictionary only              False
+              XP, 2003      Spelling ignore words in UPPERCASE                      True
+              XP, 2003      Spelling ignore words with number                       True
+              XP, 2003      Spelling ignore Internet and file addresses             True
+              XP, 2003      Spelling use German post-reform rules                   True
+              XP, 2003      Spelling combine aux verb/adj                           True
+              XP, 2003      Spelling use auto-change list                           True
+              XP, 2003      Spelling process compound nouns                         True
+              XP, 2003      Spelling Hebrew modes                                    0 
+              XP, 2003      Spelling Arabic modes                                    2 
+>>>International Tab
+                  2003      Default direction            0 
+                  2003      General alignment            0 
+                  2003      Cursor movement              0 
+                  2003      Use Hijri Calendar           0 
+>>>Error Checking Tab
+                  2003      Enable Error Checking                                   -1 
+                  2003      Error Checking Indicator Color                          -256 
+                  2003      Unassociated Label and Control Error Checking           -1 
+                  2003      Keyboard Shortcut Errors Error Checking                 -1 
+                  2003      Invalid Control Properties Error Checking               -1 
+                  2003      Common Report Errors Error Checking                     -1 
+>>>Popular Tab
+   >>>Creating databases section
+              2007, 2010, 2013            Default File Format          12 
+              2007, 2010, 2013            Default Database Directory  C:\Users\peterennis\Documents\
+              2007, 2010, 2013            New Database Sort Order      1033 
+>>>Current Database Tab
+   >>>Application Options section
+              2007, 2010, 2013            Auto Compact                               0 
+              2007, 2010, 2013            Remove Personal Information                0 
+              2007, 2010, 2013            Themed Form Controls                      -1 
+              2007, 2010, 2013            DesignWithData                            -1 
+              2007, 2010, 2013            CheckTruncatedNumFields                   -1 
+              2007, 2010, 2013            Picture Property Storage Format            0 
+   >>>Name AutoCorrect Options section
+              2007, 2010, 2013            Track Name AutoCorrect Info                0 
+              2007, 2010, 2013            Perform Name AutoCorrect                   0 
+              2007, 2010, 2013            Log Name AutoCorrect Changes               0 
+   >>>Filter Lookup options for <Database Name> Database section
+              2007, 2010, 2013            Show Values in Indexed      -1 
+              2007, 2010, 2013            Show Values in Non-Indexed  -1 
+              2007, 2010, 2013            Show Values in Remote        0 
+              2007, 2010, 2013            Show Values in Snapshot     -1 
+              2007, 2010, 2013            Show Values in Server        0 
+              2007, 2010, 2013            Show Values Limit            1000 
+>>>Datasheet Tab
+   >>>Default colors section
+              2007, 2010, 2013            Default Font Color          -1 
+              2007, 2010, 2013            Default Background Color    -1 
+              2007, 2010, 2013            _64                         -1 
+              2007, 2010, 2013            Default Gridlines Color     -1 
+   >>>Gridlines and cell effects section
+              2007, 2010, 2013            Default Gridlines Horizontal              -1 
+              2007, 2010, 2013            Default Gridlines Vertical                -1 
+              2007, 2010, 2013            Default Cell Effect                        0 
+              2007, 2010, 2013            Default Column Width                      1"
+   >>>Default font section
+              2007, 2010, 2013            Default Font Name           Calibri
+              2007, 2010, 2013            Default Font Size            11 
+              2007, 2010, 2013            Default Font Weight          3 
+              2007, 2010, 2013            Default Font Underline       0 
+              2007, 2010, 2013            Default Font Italic          0 
+>>>Object Designers Tab
+   >>>Table design section
+              2007, 2010, 2013            Default Text Field Size                    255 
+              2007, 2010, 2013            Default Number Field Size                  2 
+              2007, 2010, 2013            Default Field Type                         0 
+              2007, 2010, 2013            AutoIndex on Import/Create                ID;key;code;num
+              2007, 2010, 2013            Show Property Update Options Buttons      -1 
+   >>>Query design section
+              2007, 2010, 2013            Show Table Names            -1 
+              2007, 2010, 2013            Output All Fields            0 
+              2007, 2010, 2013            Enable AutoJoin             -1 
+              2007, 2010, 2013            ANSI Query Mode              0 
+              2007, 2010, 2013            ANSI Query Mode Default      0 
+              2007, 2010, 2013            Query Design Font Name      Segoe UI
+              2007, 2010, 2013            Query Design Font Size       8 
+   >>>Forms/Reports section
+              2007, 2010, 2013            Selection Behavior           0 
+              2007, 2010, 2013            Form Template               Normal
+              2007, 2010, 2013            Report Template             Normal
+              2007, 2010, 2013            Always Use Event Procedures  0 
+   >>>Error checking section
+              2007, 2010, 2013            Enable Error Checking                                   -1 
+              2007, 2010, 2013            Error Checking Indicator Color                          -256 
+              2007, 2010, 2013            Unassociated Label and Control Error Checking           -1 
+              2007, 2010, 2013            New Unassociated Labels Error Checking                  -1 
+              2007, 2010, 2013            Keyboard Shortcut Errors Error Checking                 -1 
+              2007, 2010, 2013            Invalid Control Properties Error Checking               -1 
+              2007, 2010, 2013            Common Report Errors Error Checking                     -1 
+>>>Proofing Tab
+   >>>When correcting spelling in Microsoft Office programs section
+              2007, 2010, 2013            Spelling ignore words in UPPERCASE                      True
+              2007, 2010, 2013            Spelling ignore words with number                       True
+              2007, 2010, 2013            Spelling ignore Internet and file addresses             True
+              2007, 2010, 2013            Spelling suggest from main dictionary only              False
+              2007, 2010, 2013            Spelling dictionary language                             0 
+>>>Advanced Tab
+   >>>Editing section
+              2007, 2010, 2013            Move After Enter                           1 
+              2007, 2010, 2013            Behavior Entering Field                    0 
+              2007, 2010, 2013            Arrow Key Behavior                         0 
+              2007, 2010, 2013            Cursor Stops at First/Last Field           0 
+              2007, 2010, 2013            Default Find/Replace Behavior              0 
+              2007, 2010, 2013            Confirm Record Changes                    -1 
+              2007, 2010, 2013            Confirm Document Deletions                -1 
+              2007, 2010, 2013            Confirm Action Queries                    -1 
+              2007, 2010, 2013            Default Direction                          0 
+              2007, 2010, 2013            General Alignment                          0 
+              2007, 2010, 2013            Cursor Movement                            0 
+              2007, 2010, 2013            Datasheet Ime Control                      0 
+              2007, 2010, 2013            Use Hijri Calendar                         0 
+   >>>Display section
+              2007, 2010, 2013            Size of MRU File List                      2 
+              2007, 2010, 2013            Show Status Bar                           -1 
+              2007, 2010, 2013            Show Animations                           -1 
+              2007, 2010, 2013            Show Smart Tags on Datasheets             -1 
+              2007, 2010, 2013            Show Smart Tags on Forms and Reports      -1 
+              2007, 2010, 2013            Show Macro Names Column                    0 
+              2007, 2010, 2013            Show Conditions Column                     0 
+   >>>Printing section
+              2007, 2010, 2013            Left Margin   0.25"
+              2007, 2010, 2013            Right Margin  0.25"
+              2007, 2010, 2013            Top Margin    0.25"
+              2007, 2010, 2013            Bottom Margin 0.25"
+   >>>General section
+              2007, 2010, 2013            Provide Feedback with Sound                0 
+              2007, 2010, 2013            Four-Digit Year Formatting                 0 
+              2007, 2010, 2013            Four-Digit Year Formatting All Databases   0 
+   >>>Advanced section
+              2007, 2010, 2013            Open Last Used Database When Access Starts               0 
+              2007, 2010, 2013            Default Open Mode for Databases                          0 
+              2007, 2010, 2013            Default Record Locking                                   0 
+              2007, 2010, 2013            Use Row Level Locking                                   -1 
+              2007, 2010, 2013            OLE/DDE Timeout (sec)                                    30 
+              2007, 2010, 2013            Refresh Interval (sec)                                   60 
+              2007, 2010, 2013            Number of Update Retries                                 2 
+              2007, 2010, 2013            ODBC Refresh Interval (sec)                              1500 
+              2007, 2010, 2013            Update Retry Interval (msec)                             250 
+              2007, 2010, 2013            Ignore DDE Requests                                      0 
+              2007, 2010, 2013            Enable DDE Refresh                                      -1 
+              2007, 2010, 2013            Command-Line Arguments                                  

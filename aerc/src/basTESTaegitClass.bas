@@ -302,7 +302,7 @@ Public Function IsQryHidden(strQueryName As String) As Boolean
     IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
 End Function
 
-Public Sub ListOfAllQueries()
+Public Sub OutputListOfAllQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
     Const strSQL As String = "SELECT m.Name " & vbCrLf & _
@@ -374,7 +374,7 @@ Public Sub MakeTableWithListOfAllHiddenQueries()
     DoCmd.RunSQL strSQL
     DoCmd.SetWarnings True
     Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    ExportTheTableData strTempTable, "", "C:\Temp\ListOfHiddenQueries.txt", False
+    ExportTheTableData strTempTable, "", "C:\Temp\OutputListOfHiddenQueries.txt", False
 
 End Sub
 
