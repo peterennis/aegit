@@ -53,7 +53,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     Set cnn = New ADODB.Connection
     cnn.ConnectionString = strODBC
     cnn.Properties("Prompt") = adPromptAlways
-    cnn.Open
+'''x    cnn.Open
     Dim cmd As ADODB.Command
     Dim orst As ADODB.Recordset
     Set orst = New ADODB.Recordset
@@ -77,9 +77,9 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
-    Dim fName As String
-    Dim fType As Integer
-    Dim fSize As Integer
+'''x    Dim fName As String
+'''x    Dim fType As Integer
+'''x    Dim fSize As Integer
     Dim rst As DAO.Recordset
 
     ' Ref: http://technet.microsoft.com/en-us/library/ms189082(v=sql.105).aspx

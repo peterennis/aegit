@@ -2,10 +2,10 @@ Option Compare Database
 Option Explicit
 
 Private Const TEST_FILE_PATH As String = "C:\TEMP\"
-Private Const FOR_READING = 1
+'''x Private Const FOR_READING = 1
 Public Const Desktop = &H10&
 Public Const MyDocuments = &H5&
-Private aestrXMLLocation As String
+'''x Private aestrXMLLocation As String
 '
 
 Public Sub ObjectCounts()
@@ -168,7 +168,7 @@ Public Sub SaveTableMacros()
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:template>" & vbCrLf & vbCrLf
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:stylesheet>"
 
-    Dim objXMLResDoc As Object
+'''x    Dim objXMLResDoc As Object
     Set objXMLStyleSheet = CreateObject("Msxml2.DOMDocument.6.0")
 
     With objXMLStyleSheet

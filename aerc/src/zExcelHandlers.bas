@@ -57,9 +57,14 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
     End If
         
     Dim rs As DAO.Recordset
-    Dim nFieldCount As Long, nRecordCount As Long
-    Dim RetVal As Variant, nCurRec As Long, dnow As Date, nCurSec As Long
-    Dim nTotalSeconds As Long, nSecondsLeft As Long
+    Dim nFieldCount As Long
+    Dim nRecordCount As Long
+    Dim RetVal As Variant
+    Dim nCurRec As Long
+'''x    Dim dnow As Date
+    Dim nCurSec As Long
+    Dim nTotalSeconds As Long
+    Dim nSecondsLeft As Long
     Dim strTest As String
     
     Set rs = CurrentDb.OpenRecordset("select * from " & strTableName)

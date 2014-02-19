@@ -66,7 +66,7 @@ Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
 Private aegitUseImportFolder As Boolean
-Private aegitblnCustomSourceFolder As Boolean
+'''x Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
 Private aestrImportLocation As String
 Private aestrXMLLocation As String
@@ -82,7 +82,7 @@ Private aestrLFD As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
-Private Const aeTblXMLFile = "OutputTblXMLSetupForTables.txt"
+'''x Private Const aeTblXMLFile = "OutputTblXMLSetupForTables.txt"
 Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
 Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
 Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
@@ -329,7 +329,7 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
     Dim fnr As Integer
     Dim fnr2 As Integer
     Dim tstring As String * 1
-    Dim i As Integer
+'''x    Dim i As Integer
 
     aeReadWriteStream = False
 
@@ -439,7 +439,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
-    Dim str As String
+'''x    Dim str As String
     Dim fle As Integer
     Dim Debugit As Boolean
 
@@ -773,14 +773,14 @@ Private Sub OutputListOfApplicationProperties()
     fle = FreeFile()
     Open aegitSourceFolder & "\OutputListOfApplicationProperties.txt" For Output As #fle
 
-    Dim prp As DAO.Property
+'''x    Dim prp As DAO.Property
     Dim i As Integer
     Dim strPropName As String
     Dim varPropValue As Variant
     Dim varPropType As Variant
     Dim varPropInherited As Variant
-    Dim intPropPropCount As Integer
-    Dim strError As String
+'''x    Dim intPropPropCount As Integer
+'''x    Dim strError As String
 
     With dbs
         For i = 0 To (.Properties.Count - 1)
@@ -3007,9 +3007,9 @@ Public Function OutputListOfContainers(strTheFileName As String) As Boolean
     Dim dbs As DAO.Database
     Dim conItem As DAO.Container
     Dim prpLoop As DAO.Property
-    Dim strName As String
-    Dim strOwner As String
-    Dim strText As String
+'''x    Dim strName As String
+'''x    Dim strOwner As String
+'''x    Dim strText As String
     Dim strFile As String
     Dim lngFileNum As Long
 
