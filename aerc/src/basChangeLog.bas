@@ -24,6 +24,7 @@ Option Explicit
 
 '20140218 - v078 - Add alternative test to output under the temp folder
     ' Formatting, source code review
+    ' Code reorg, aever - office edition version info, aefs - file system related
 '20140216 - v077 - OutputTableDataMacros test
 '20140214 - v076 - Output PrinterInfo to file
     ' Integrate PrinterInfo in aegitClass, turn on global error handler

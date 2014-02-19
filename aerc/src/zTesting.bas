@@ -1,7 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Private Const TEST_FILE_PATH As String = "C:\TEMP\"
 '''x Private Const FOR_READING = 1
 Public Const Desktop = &H10&
 Public Const MyDocuments = &H5&
@@ -104,39 +103,6 @@ Public Sub ExportAllModulesToFile()
     'Close eveything
     fil.Close
     Set fso = Nothing
-
-End Sub
-
-Public Sub TestPropertiesOutput()
-' Ref: http://www.everythingaccess.com/tutorials.asp?ID=Accessing-detailed-file-information-provided-by-the-Operating-System
-' Ref: http://www.techrepublic.com/article/a-simple-solution-for-tracking-changes-to-access-data/
-' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/480c17b3-e3d1-4f98-b1d6-fa16b23c6a0d/please-help-to-edit-the-table-query-form-and-modules-modified-date
-'
-' Ref: http://perfectparadigm.com/tip001.html
-'SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate,
-'MSysObjects.Name , MSysObjects.Type
-'FROM MSysObjects;
-
-    Debug.Print ">>>frm_Dummy"
-    Debug.Print "DateCreated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("DateCreated").Value
-    Debug.Print "LastUpdated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("LastUpdated").Value
-
-' *** Ref: http://support.microsoft.com/default.aspx?scid=kb%3Ben-us%3B299554 ***
-'When the user initially creates a new Microsoft Access specific-object, such as a form), the database engine still
-'enters the current date and time into the DateCreate and DateUpdate columns in the MSysObjects table. However, when
-'the user modifies and saves the object, Microsoft Access does not notify the database engine; therefore, the
-'DateUpdate column always stays the same.
-
-' Ref: http://questiontrack.com/how-can-i-display-a-last-modified-time-on-ms-access-form-995507.html
-
-    Dim obj As AccessObject
-    Dim dbs As Object
-
-    Set dbs = Application.CurrentData
-    Set obj = dbs.AllTables("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
-    Debug.Print ">>>" & obj.Name
-    Debug.Print "DateCreated: " & obj.DateCreated
-    Debug.Print "DateModified: " & obj.DateModified
 
 End Sub
 
@@ -245,110 +211,6 @@ Public Sub ApplicationInformation()
     Debug.Print Application.CurrentProject.FullName
     Debug.Print "Project Type", intProjType, strProjType
     lng = CodeLinesInProjectCount
-
-End Sub
-
-Public Function CodeLinesInProjectCount() As Long
-' Ref: http://www.cpearson.com/excel/vbe.aspx
-' Adjusted for Microsoft Access and Late Binding. No reference needed.
-' Access.Application is used. Returns -1 if the VBProject is locked.
-
-    Dim VBP As Object               'VBIDE.VBProject
-    Dim VBComp As Object            'VBIDE.VBComponent
-    Dim LineCount As Long
-
-    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=245480
-    Const vbext_pp_locked = 1
-
-    Set VBP = Access.Application.VBE.ActiveVBProject
-
-    If VBP.Protection = vbext_pp_locked Then
-        CodeLinesInProjectCount = -1
-        Exit Function
-    End If
-
-    For Each VBComp In VBP.VBComponents
-        If Left(VBComp.Name, 3) <> "zzz" Then
-            Debug.Print VBComp.Name, VBComp.CodeModule.CountOfLines
-        End If
-        LineCount = LineCount + VBComp.CodeModule.CountOfLines
-    Next VBComp
-
-    CodeLinesInProjectCount = LineCount
-
-    Set VBP = Nothing
-
-End Function
-
-Public Sub ListFilesRecursively()
-' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
-'====================================================================
-' Purpose:  List Files Recursively
-' Author:   Peter Ennis
-' Date:     February 10, 2011
-' Comment:  Fix to work in VBA. Based on MSDN sample for WScript
-' Requires: Reference to Microsoft Scripting Runtime
-'====================================================================
-
-   Dim strFolder As String
-   Dim objFSO As Object
-   Dim objFolder As Object
-   Dim objFile As Object
-   Dim colFiles As Object
-
-   strFolder = TEST_FILE_PATH
-
-   ' Create needed objects
-   Dim wsh As Object  ' As Object if late-bound
-   Set wsh = CreateObject("WScript.Shell")
-    
-   Set objFSO = CreateObject("Scripting.FileSystemObject")
-   Set objFolder = objFSO.GetFolder(strFolder)
-
-   Debug.Print "objFolder.Path = " & objFolder.Path
-
-   Set colFiles = objFolder.Files
-
-   For Each objFile In colFiles
-       Debug.Print "objFile.Path = " & objFile.Path
-   Next
-
-   ShowSubFolders objFolder
-   Debug.Print "DONE !!!"
-
-   Set wsh = Nothing
-   Set objFSO = Nothing
-   Set objFolder = Nothing
-   Set colFiles = Nothing
-
-End Sub
- 
-Private Sub ShowSubFolders(objFolder)
-' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
-
-   Dim objFile As Object
-   Dim objSubFolder As Object
-   Dim colFolders As Object
-   Dim colFiles As Object
-   Dim wsh As Object  ' As Object if late-bound
-   Set wsh = CreateObject("WScript.Shell")
-
-   Set colFolders = objFolder.SubFolders
-    
-   For Each objSubFolder In colFolders
-  
-       Debug.Print "objSubFolder.Path = " & objSubFolder.Path
-       Set colFiles = objSubFolder.Files
-  
-       For Each objFile In colFiles
-           Debug.Print "objFile.Path = " & objFile.Path
-       Next
-
-       ShowSubFolders objSubFolder
-   Next
-
-   Set wsh = Nothing
-   Set colFolders = Nothing
 
 End Sub
 

@@ -3,17 +3,6 @@ Option Explicit
 
 #Const conLateBinding = 0
 
-Public Sub GetAK()
-' Ref: http://compgroups.net/comp.databases.ms-access/can-t-export-a-pass-through-query/357262
-
-    On Error Resume Next
-    CurrentDb.Execute "drop table t1"
-    On Error GoTo 0
-    CurrentDb.Execute "select *.* into t1 from pq"
-    DoCmd.TransferText acExportDelim, , "t1", "c:\test.txt", True
-
-End Sub
-
 Public Sub TestGetSQLServerData()
     Dim bln As Boolean
     bln = GetSQLServerData("W64EESQL2008", "AdventureWorks2012")
