@@ -26,6 +26,26 @@ Public Function MYPROJECT_TEST()
     aegitClassTest "debug"
 End Function
 
+Public Sub ALTERNATIVE_TEST()
+
+    Dim THE_SOURCE_FOLDER As String
+    THE_SOURCE_FOLDER = "C:\TEMP\aealt\src\"
+    Dim THE_XML_FOLDER As String
+    THE_XML_FOLDER = "C:\TEMP\aealt\src\xml\"
+
+    On Error GoTo PROC_ERR
+    'aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+    aegitClassTest Debugit:="Debugit", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ALTERNATIVE_TEST"
+    Resume Next
+
+End Sub
+
 Private Function PassFail(bln As Boolean) As String
     If bln Then
         PassFail = "Pass"

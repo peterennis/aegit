@@ -3,9 +3,21 @@ Option Explicit
 
 #Const conLateBinding = 0
 
+Public Sub GetAK()
+' Ref: http://compgroups.net/comp.databases.ms-access/can-t-export-a-pass-through-query/357262
+
+    On Error Resume Next
+    CurrentDb.Execute "drop table t1"
+    On Error GoTo 0
+    CurrentDb.Execute "select *.* into t1 from pq"
+    DoCmd.TransferText acExportDelim, , "t1", "c:\test.txt", True
+
+End Sub
+
 Public Sub TestGetSQLServerData()
     Dim bln As Boolean
-    bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
+    bln = GetSQLServerData("W64EESQL2008", "AdventureWorks2012")
+    'bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
 End Sub
 
 Public Function GetSQLServerData(strServer As String, strDatabase As String) As Boolean
@@ -60,7 +72,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
 
     'Stop
 
-    ' Setup the local connection in this database.
+    ' Setup the local connection in this database
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
@@ -73,10 +85,14 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     ' Ref: http://technet.microsoft.com/en-us/library/ms189082(v=sql.105).aspx
     Debug.Print "Count of items in tables catalog=" & ocat.Tables.Count
     For Each otbl In ocat.Tables
+        If otbl.Name = "AWBuildVersion" Then
+        ElseIf otbl.Name = "DatabaseLog" Then
+        ElseIf otbl.Name = "ErrorLog" Then
+        Else
         Debug.Print otbl.Type, otbl.Name
         If otbl.Type = "TABLE" Then
 
-            orst.Open otbl.Name, cnn, adOpenDynamic, adLockOptimistic
+            orst.Open "HumanResources." & otbl.Name, cnn, adOpenDynamic, adLockOptimistic
             For Each tdf In dbs.TableDefs
                 'Debug.Print , tdf.Name
                 If tdf.Name = otbl.Name Then
@@ -87,10 +103,15 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
 
             Set tdf = dbs.CreateTableDef(otbl.Name)
             For Each ocol In otbl.Columns
-                If ocol.DefinedSize < 256 Then
+                Debug.Print "ocol=" & ocol.Name, "DefinedSize=" & ocol.DefinedSize
+                If ocol.DefinedSize < 256 And ocol.DefinedSize <> 0 Then
                     Set fld = tdf.CreateField(ocol.Name, dbText, ocol.DefinedSize)
+                ElseIf ocol.DefinedSize = 0 Then
+                    Set fld = tdf.CreateField(ocol.Name, dbText, 255)
                 Else
+                    'MsgBox "ocol.DefinedSize=" & ocol.DefinedSize
                     Set fld = tdf.CreateField(ocol.Name, dbMemo, 255)
+                    'Stop
                 End If
                 fld.AllowZeroLength = True
                 fld.Required = False
@@ -104,6 +125,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
                 rst.AddNew
                 For Each ofld In orst.Fields
                     ' Avoid type mismatch with trim and &""
+                    Debug.Print "ofld.Name=" & ofld.Name
                     rst.Fields(ofld.Name).Value = Trim("" & ofld.Value)
                 Next
                 rst.Update
@@ -117,6 +139,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
             rst.Close
 
             orst.Close
+        End If
         End If
     Next
     dbs.Close

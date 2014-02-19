@@ -29,7 +29,7 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.7.7"
+Private Const aegitVERSION As String = "0.7.8"
 Private Const aegitVERSION_DATE As String = "February 18, 2014"
 Private Const THE_DRIVE As String = "C"
 
@@ -88,6 +88,7 @@ Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
 Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
 Private Const aeFLkCtrFile = "OutputFieldLookupControlTypeList.txt"
 Private Const aeSchemaFile = "OutputSchemaFile.txt"
+Private Const aePrnterInfo = "OutputPrinterInfo.txt"
 '
 
 Private Sub Class_Initialize()
@@ -3254,7 +3255,7 @@ Public Sub OutputPrinterInfo(Optional varDebug As Variant)
     Dim fle As Integer
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\OutputPrinterInfo.txt" For Output As #fle
+    Open aegitSourceFolder & "\" & aePrnterInfo For Output As #fle
 
     If Not IsMissing(varDebug) Then Debug.Print "Default Printer=" & Application.Printer.DeviceName
     Print #fle, "Default Printer=" & Application.Printer.DeviceName

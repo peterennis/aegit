@@ -98,6 +98,19 @@
               Orientation    0 
               PublishToWeb   1 
               Description   Don't be a dummy!
+>>>qpt_SqlSchemaTablesList
+              Name          qpt_SqlSchemaTablesList
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   2/18/2014 5:30:01 PM 
+              LastUpdated   2/18/2014 6:40:46 PM 
+              ODBCTimeout    60 
+              LogMessages   False
+              Orientation    0 
+              PublishToWeb   1 
 >>>qry_HiddenDummy
               Name          qry_HiddenDummy
               Owner         admin

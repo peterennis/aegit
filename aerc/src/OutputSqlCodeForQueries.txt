@@ -1,5 +1,9 @@
 <<<qpt_Dummy>>>
 -- Select * from Nothing
+<<<qpt_SqlSchemaTablesList>>>
+-- select * from sys.tables order by name asc;
+-- Ref: http://blog.sqlauthority.com/2009/06/17/sql-server-list-schema-name-and-table-name-for-database/
+SELECT SCHEMA_NAME(schema_id)+'.'+name AS SchemaTable FROM sys.tables order by SchemaTable asc; 
 <<<qry_HiddenDummy>>>
 SELECT *
 FROM tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;

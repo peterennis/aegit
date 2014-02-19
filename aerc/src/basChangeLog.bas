@@ -22,6 +22,7 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140218 - v078 - Add alternative test to output under the temp folder
 '20140216 - v077 - OutputTableDataMacros test
 '20140214 - v076 - Output PrinterInfo to file
     ' Integrate PrinterInfo in aegitClass, turn on global error handler
