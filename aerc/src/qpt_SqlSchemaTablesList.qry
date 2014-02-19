@@ -1,0 +1,141 @@
+dbMemo "SQL" ="-- select * from sys.tables order by name asc;\015\012-- Ref: http://blog.sqlaut"
+    "hority.com/2009/06/17/sql-server-list-schema-name-and-table-name-for-database/\015"
+    "\012SELECT SCHEMA_NAME(schema_id)+'.'+name AS SchemaTable FROM sys.tables order "
+    "by SchemaTable asc; "
+dbMemo "Connect" ="ODBC;"
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "LogMessages" ="0"
+dbByte "Orientation" ="0"
+dbBinary "GUID" = Begin
+    0x7813c0c25ba5d64bb9f6c2b5261d3ff9
+End
+dbByte "PublishToWeb" ="1"
+Begin
+    Begin
+        dbText "Name" ="qpt_SqlTables.name"
+        dbInteger "ColumnWidth" ="2670"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.object_id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.principal_id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.schema_id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.parent_object_id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.type"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.type_desc"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.create_date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_merge_published"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_sync_tran_subscribed"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.has_unchecked_assembly_data"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.text_in_row_limit"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.large_value_types_out_of_row"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_tracked_by_cdc"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.lock_escalation"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.lock_escalation_desc"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_filetable"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.modify_date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_ms_shipped"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_published"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_schema_published"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.lob_data_space_id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.filestream_data_space_id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.max_column_id_used"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.lock_on_bulk_load"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.uses_ansi_nulls"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.is_replicated"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTables.has_replication_filter"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlTablesList.SchemaTable"
+        dbInteger "ColumnWidth" ="5055"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qpt_SqlSchemaTablesList.SchemaTable"
+        dbInteger "ColumnWidth" ="5055"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+End
