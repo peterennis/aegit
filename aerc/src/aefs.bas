@@ -5,7 +5,7 @@ Private mblnSubFolder As Boolean
 Private mintSubFolderLevel As Integer
 
 Public Sub TestListFilesRecursively()
-    Const TEST_FILE_PATH As String = "C:\TEMP\"
+    Const TEST_FILE_PATH As String = "C:\"
     Dim strPath As String
     strPath = TEST_FILE_PATH
     mblnSubFolder = False
@@ -67,7 +67,8 @@ End Sub
 Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 
-'    Static i As Integer
+    On Error GoTo PROC_ERR
+
     Dim objFile As Object
     Dim objSubFolder As Object
     Dim colFiles As Object
@@ -78,7 +79,6 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
 
-'    i = i + 1
     Debug.Print mintSubFolderLevel, mblnSubFolder
     For Each objSubFolder In colFolders
 
@@ -100,9 +100,30 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
             ShowSubFolders objSubFolder, varFoldersOnly
         End If
         mintSubFolderLevel = mintSubFolderLevel - 1
+NextLevel:
     Next
 
+PROC_EXIT:
     Set wsh = Nothing
     Set colFolders = Nothing
+    'Close 1
+    'PopCallStack
+    Exit Sub
 
+PROC_ERR:
+    If Err = 70 Then        ' Permission denied
+        Err.Clear
+        Resume PROC_EXIT
+'    ElseIf Err = 91 Then    ' Object variable not set
+'        Err.Clear
+'        Resume Next
+'    ElseIf Err = 424 Then    ' Object required
+'        Err.Clear
+'        Resume Next
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ShowSubFolders of Module aefs"
+        'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ShowSubFolders of Module aefs"
+        'GlobalErrHandler
+        Resume PROC_EXIT
+    End If
 End Sub
