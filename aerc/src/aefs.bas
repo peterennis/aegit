@@ -2,30 +2,41 @@ Option Compare Database
 Option Explicit
 
 Private mintSubFolderLevel As Integer
+Private Const OUTPUT_FILE As String = "C:\TEMP\OutputListOfFoldersFiles.txt"
+Private fle As Integer
+'
 
 Public Sub TestListFilesRecursively()
-    Const TEST_FILE_PATH As String = "C:\"
+    'Const TEST_FILE_PATH As String = "C:\"
+    'Const TEST_FILE_PATH As String = "C:\TEMP\"
+    'Const TEST_FILE_PATH As String = "C:\PFE\"
+    Const TEST_FILE_PATH As String = "C:\Users\"
     Dim strPath As String
     strPath = TEST_FILE_PATH
     mintSubFolderLevel = 1
-    ListFilesRecursively strPath, "FoldersOnly"
+    ListFilesRecursively strPath, varFoldersOnly:="FoldersOnly", varDebug:="DebugIt"
 End Sub
 
-Private Sub ListFilesRecursively(strRootPathName As String, Optional varFoldersOnly As Variant)
+Private Sub ListFilesRecursively(strRootPathName As String, _
+                Optional varFoldersOnly As Variant, _
+                Optional varDebug As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
-'====================================================================
+'==============================================================================
 ' Purpose:  List Files Recursively
 ' Author:   Peter Ennis
 ' Date:     February 10, 2011
 ' Comment:  Fix to work in VBA. Based on MSDN sample for WScript
-' Requires: Reference to Microsoft Scripting Runtime
-'====================================================================
+' Requires: Late binding does not need reference to Microsoft Scripting Runtime
+'==============================================================================
 
     Dim strFolder As String
     Dim objFSO As Object
     Dim objFolder As Object
     Dim objFile As Object
     Dim colFiles As Object
+
+    fle = FreeFile()
+    Open OUTPUT_FILE For Output As #fle
 
     strFolder = strRootPathName
 
@@ -38,6 +49,7 @@ Private Sub ListFilesRecursively(strRootPathName As String, Optional varFoldersO
 
     'Debug.Print "objFolder.Path = " & objFolder.Path
     Debug.Print ">" & objFolder.Path
+    'Print #fle, ">" & objFolder.Path
 
     Set colFiles = objFolder.Files
 
@@ -50,11 +62,13 @@ Private Sub ListFilesRecursively(strRootPathName As String, Optional varFoldersO
     If IsMissing(varFoldersOnly) Then
         ShowSubFolders objFolder
     Else
-        Debug.Print "Root Level=" & mintSubFolderLevel
-        ShowSubFolders objFolder, varFoldersOnly
+        Debug.Print "Top Level = " & mintSubFolderLevel
+        Print #fle, "Top Level = " & mintSubFolderLevel & " > " & objFolder.Path
+        ShowSubFolders objFolder, varFoldersOnly, varDebug
     End If
     Debug.Print "DONE !!!"
 
+    Close fle
     Set wsh = Nothing
     Set objFSO = Nothing
     Set objFolder = Nothing
@@ -62,7 +76,9 @@ Private Sub ListFilesRecursively(strRootPathName As String, Optional varFoldersO
 
 End Sub
  
-Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Variant)
+Private Sub ShowSubFolders(objFolder As Object, _
+                Optional varFoldersOnly As Variant, _
+                Optional varDebug As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 
     On Error GoTo PROC_ERR
@@ -81,7 +97,8 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
     For Each objSubFolder In colFolders
 
         'Debug.Print "objSubFolder.Path = " & objSubFolder.Path
-        Debug.Print ">>" & objSubFolder.Path
+        'If Not IsMissing(varDebug) Then Debug.Print ">>" & objSubFolder.Path
+        'Print #fle, ">>" & objSubFolder.Path
         Set colFiles = objSubFolder.Files
 
         If IsMissing(varFoldersOnly) Then
@@ -94,8 +111,9 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
             ShowSubFolders objSubFolder
         Else
             mintSubFolderLevel = mintSubFolderLevel + 1
-            Debug.Print "Sub Level=" & mintSubFolderLevel
-            ShowSubFolders objSubFolder, varFoldersOnly
+            If Not IsMissing(varDebug) Then Debug.Print "Sub Level = " & mintSubFolderLevel & " >> " & objSubFolder.Path
+            Print #fle, "Sub Level = " & mintSubFolderLevel & " >> " & objSubFolder.Path
+            ShowSubFolders objSubFolder, varFoldersOnly, varDebug
         End If
         mintSubFolderLevel = mintSubFolderLevel - 1
     Next
@@ -103,7 +121,7 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
 PROC_EXIT:
     Set wsh = Nothing
     Set colFolders = Nothing
-    'Close 1
+'''x    'Close 1
     'PopCallStack
     Exit Sub
 

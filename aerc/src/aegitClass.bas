@@ -455,7 +455,6 @@ Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
         Debugit = True
     End If
 
-    fle = FreeFile()
     If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
     'Stop
 
@@ -463,6 +462,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
         aegitSourceFolder = aegitType.SourceFolder
     End If
 
+    fle = FreeFile()
     Open aegitSourceFolder & "\OutputListOfAccessApplicationOptions.txt" For Output As #fle
 
     'On Error Resume Next
@@ -1033,13 +1033,13 @@ PROC_ERR:
 End Function
 
 Private Function LongestFieldPropsName() As Boolean
-'====================================================================
+'=======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     December 5, 2012
 ' Comment:  Return length of field properties for text output alignment
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=======================================================================
 
     Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
@@ -1146,7 +1146,7 @@ End Function
 
 Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
-'====================================================================
+'=========================================================================
 ' Procedure : GetLinkedTableCurrentPath
 ' DateTime  : 08/23/2010
 ' Author    : Rx
@@ -1154,7 +1154,7 @@ Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' Updates   : Peter F. Ennis
 ' Updated   : All notes moved to change log
 ' History   : See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=========================================================================
     On Error GoTo PROC_ERR
     GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
         ' Non-linked table returns blank - Instr removes the "Database="
@@ -1191,13 +1191,13 @@ End Function
 
 Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/func-06.html
-'====================================================================
+'=============================================================================
 ' Purpose:  Display the field names, types, sizes and descriptions for a table
 ' Argument: Name of a table in the current database
 ' Updates:  Peter F. Ennis
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=============================================================================
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
@@ -2340,7 +2340,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 ' Based on sample code from Arvin Meyer (MVP) June 2, 1999
 ' Ref: http://www.accessmvp.com/Arvin/DocDatabase.txt
 ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
-'====================================================================
+'=======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 8, 2011
 ' Comment:  Uses the undocumented [Application.SaveAsText] syntax
@@ -2348,7 +2348,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 '           Add explicit references for DAO
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=======================================================================
 
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
@@ -2521,14 +2521,14 @@ Private Function BuildTheDirectory(fso As Object, _
 '*** Requires reference to "Microsoft Scripting Runtime"
 '
 ' Ref: http://msdn.microsoft.com/en-us/library/ebkhfaaz(v=vs.85).aspx
-'====================================================================
+'=======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 8, 2011
 ' Comment:  Add optional debug parameter
 ' Requires: Reference to Microsoft Scripting Runtime
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=======================================================================
 
     Dim objImportFolder As Object
     Dim blnDebug As Boolean
@@ -2610,14 +2610,14 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
 ' vbscript get file extension
 ' Ref: http://www.experts-exchange.com/Programming/Languages/Visual_Basic/Q_24297896.html
 '
-'====================================================================
+'=======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 8, 2011
 ' Comment:  Add explicit references for objects, wscript, fso
 ' Requires: Reference to Microsoft Scripting Runtime
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=======================================================================
 
     Dim MyFile As Object
     Dim strFileType As String
@@ -2768,7 +2768,7 @@ Private Function aeExists(strAccObjType As String, _
                         strAccObjName As String, Optional varDebug As Variant) As Boolean
 ' Ref: http://vbabuff.blogspot.com/2010/03/does-access-object-exists.html
 '
-'====================================================================
+'=======================================================================
 ' Author:     Peter F. Ennis
 ' Date:       February 18, 2011
 ' Comment:    Return True if the object exists
@@ -2778,7 +2778,7 @@ Private Function aeExists(strAccObjType As String, _
 '             strAccObjName: The name of the object
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+'=======================================================================
 
     Dim objType As Object
     Dim obj As Variant

@@ -12,7 +12,7 @@ Public Sub ObjectCounts()
     Dim qry As DAO.QueryDef
     Dim cnt As DAO.Container
  
-    'Delete all TEMP queries ...
+    ' Delete all TEMP queries ...
     For Each qry In CurrentDb.QueryDefs
         If Left(qry.Name, 1) = "~" Then
             CurrentDb.QueryDefs.Delete qry.Name
@@ -20,7 +20,7 @@ Public Sub ObjectCounts()
         End If
     Next qry
  
-    'Print the values to the immediate window
+    ' Print the values to the immediate window
     With CurrentDb
  
         Debug.Print "--- From the DAO.Database ---"
@@ -34,7 +34,7 @@ Public Sub ObjectCounts()
  
     End With
  
-    'Use the "Project" collections to get the counts of objects
+    ' Use the "Project" collections to get the counts of objects
     With CurrentProject
         Debug.Print vbCrLf & "--- From the Access 'Project' ---"
         Debug.Print "---------------------------------"
@@ -100,7 +100,7 @@ Public Sub ExportAllModulesToFile()
         End If
     Next
        
-    'Close eveything
+    ' Close eveything
     fil.Close
     Set fso = Nothing
 
