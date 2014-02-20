@@ -47,9 +47,7 @@ Private Sub ListFilesRecursively(strRootPathName As String, _
     Set objFSO = CreateObject("Scripting.FileSystemObject")
     Set objFolder = objFSO.GetFolder(strFolder)
 
-    'Debug.Print "objFolder.Path = " & objFolder.Path
     Debug.Print ">" & objFolder.Path
-    'Print #fle, ">" & objFolder.Path
 
     Set colFiles = objFolder.Files
 
@@ -96,9 +94,6 @@ Private Sub ShowSubFolders(objFolder As Object, _
     Debug.Print mintSubFolderLevel
     For Each objSubFolder In colFolders
 
-        'Debug.Print "objSubFolder.Path = " & objSubFolder.Path
-        'If Not IsMissing(varDebug) Then Debug.Print ">>" & objSubFolder.Path
-        'Print #fle, ">>" & objSubFolder.Path
         Set colFiles = objSubFolder.Files
 
         If IsMissing(varFoldersOnly) Then
@@ -121,7 +116,6 @@ Private Sub ShowSubFolders(objFolder As Object, _
 PROC_EXIT:
     Set wsh = Nothing
     Set colFolders = Nothing
-'''x    'Close 1
     'PopCallStack
     Exit Sub
 
