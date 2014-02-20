@@ -1,14 +1,12 @@
 Option Compare Database
 Option Explicit
 
-Private mblnSubFolder As Boolean
 Private mintSubFolderLevel As Integer
 
 Public Sub TestListFilesRecursively()
     Const TEST_FILE_PATH As String = "C:\"
     Dim strPath As String
     strPath = TEST_FILE_PATH
-    mblnSubFolder = False
     mintSubFolderLevel = 1
     ListFilesRecursively strPath, "FoldersOnly"
 End Sub
@@ -79,7 +77,7 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
 
-    Debug.Print mintSubFolderLevel, mblnSubFolder
+    Debug.Print mintSubFolderLevel
     For Each objSubFolder In colFolders
 
         'Debug.Print "objSubFolder.Path = " & objSubFolder.Path
@@ -100,7 +98,6 @@ Private Sub ShowSubFolders(objFolder As Object, Optional varFoldersOnly As Varia
             ShowSubFolders objSubFolder, varFoldersOnly
         End If
         mintSubFolderLevel = mintSubFolderLevel - 1
-NextLevel:
     Next
 
 PROC_EXIT:
@@ -114,12 +111,6 @@ PROC_ERR:
     If Err = 70 Then        ' Permission denied
         Err.Clear
         Resume PROC_EXIT
-'    ElseIf Err = 91 Then    ' Object variable not set
-'        Err.Clear
-'        Resume Next
-'    ElseIf Err = 424 Then    ' Object required
-'        Err.Clear
-'        Resume Next
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ShowSubFolders of Module aefs"
         'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ShowSubFolders of Module aefs"
