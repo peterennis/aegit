@@ -6,23 +6,23 @@ Private Const OUTPUT_FILE As String = "C:\TEMP\OutputListOfFoldersFiles.txt"
 Private fle As Integer
 '
 
-Public Sub TestListFilesRecursively()
+Public Sub TestListFileSystemRecursively()
     'Const TEST_FILE_PATH As String = "C:\"
-    'Const TEST_FILE_PATH As String = "C:\TEMP\"
+    Const TEST_FILE_PATH As String = "C:\TEMP\"
     'Const TEST_FILE_PATH As String = "C:\PFE\"
-    Const TEST_FILE_PATH As String = "C:\Users\"
-    Dim strPath As String
-    strPath = TEST_FILE_PATH
+    'Const TEST_FILE_PATH As String = "C:\Users\"
+    Dim strStartPath As String
+    strStartPath = TEST_FILE_PATH
     mintSubFolderLevel = 1
-    ListFilesRecursively strPath, varFoldersOnly:="FoldersOnly", varDebug:="DebugIt"
+    ListFileSystemRecursively strStartPath, varDebug:="DebugIt"
 End Sub
 
-Private Sub ListFilesRecursively(strRootPathName As String, _
-                Optional varFoldersOnly As Variant, _
+Private Sub ListFileSystemRecursively(strRootPathName As String, _
+                Optional varListFiles As Variant, _
                 Optional varDebug As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 '==============================================================================
-' Purpose:  List Files Recursively
+' Purpose:  List File System Recursively
 ' Author:   Peter Ennis
 ' Date:     February 10, 2011
 ' Comment:  Fix to work in VBA. Based on MSDN sample for WScript
@@ -51,18 +51,17 @@ Private Sub ListFilesRecursively(strRootPathName As String, _
 
     Set colFiles = objFolder.Files
 
-    If IsMissing(varFoldersOnly) Then
+    If Not IsMissing(varListFiles) Then
+        'Debug.Print "ListFileSystemRecursively varListFiles=" & varListFiles
         For Each objFile In colFiles
             Debug.Print "objFile.Path = " & objFile.Path
         Next
-    End If
-
-    If IsMissing(varFoldersOnly) Then
-        ShowSubFolders objFolder
+        ShowSubFolders objFolder, varListFiles
     Else
+        'Debug.Print "ListFileSystemRecursively varListFiles IS MISSING"
         Debug.Print "Top Level = " & mintSubFolderLevel
         Print #fle, "Top Level = " & mintSubFolderLevel & " > " & objFolder.Path
-        ShowSubFolders objFolder, varFoldersOnly, varDebug
+        ShowSubFolders objFolder, varListFilesShow:=varListFiles, varDebugShow:=varDebug
     End If
     Debug.Print "DONE !!!"
 
@@ -75,8 +74,8 @@ Private Sub ListFilesRecursively(strRootPathName As String, _
 End Sub
  
 Private Sub ShowSubFolders(objFolder As Object, _
-                Optional varFoldersOnly As Variant, _
-                Optional varDebug As Variant)
+                Optional varListFilesShow As Variant, _
+                Optional varDebugShow As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 
     On Error GoTo PROC_ERR
@@ -96,19 +95,18 @@ Private Sub ShowSubFolders(objFolder As Object, _
 
         Set colFiles = objSubFolder.Files
 
-        If IsMissing(varFoldersOnly) Then
+        If Not IsMissing(varListFilesShow) Then
+            'Debug.Print "ShowSubFolders varListFilesShow=" & varListFilesShow
             For Each objFile In colFiles
                 Debug.Print "objFile.Path = " & objFile.Path
             Next
-        End If
-        
-        If IsMissing(varFoldersOnly) Then
-            ShowSubFolders objSubFolder
+            ShowSubFolders objSubFolder, varListFilesShow:=varListFilesShow, varDebugShow:=varDebugShow
         Else
+            'Debug.Print "ShowSubFolders varListFilesShow IS MISSING"
             mintSubFolderLevel = mintSubFolderLevel + 1
-            If Not IsMissing(varDebug) Then Debug.Print "Sub Level = " & mintSubFolderLevel & " >> " & objSubFolder.Path
+            If Not IsMissing(varDebugShow) Then Debug.Print "Sub Level = " & mintSubFolderLevel & " >> " & objSubFolder.Path
             Print #fle, "Sub Level = " & mintSubFolderLevel & " >> " & objSubFolder.Path
-            ShowSubFolders objSubFolder, varFoldersOnly, varDebug
+            ShowSubFolders objSubFolder, varListFilesShow:=varListFilesShow, varDebugShow:=varDebugShow
         End If
         mintSubFolderLevel = mintSubFolderLevel - 1
     Next
