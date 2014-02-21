@@ -22,6 +22,9 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140220 - v079 - Format folder level with leading zero
+    ' Add fLevelArrow to show levels in output
+    ' wsh not used
 '20140219 - v078 - Add alternative test to output under the temp folder
     ' Formatting, source code review
     ' Code reorg, aever - office edition version info, aefs - file system related
