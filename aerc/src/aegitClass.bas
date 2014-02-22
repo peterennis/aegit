@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.7.9"
-Private Const aegitVERSION_DATE As String = "February 20, 2014"
+Private Const aegitVERSION As String = "0.8.0"
+Private Const aegitVERSION_DATE As String = "February 21, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
