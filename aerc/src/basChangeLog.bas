@@ -25,6 +25,8 @@ Option Explicit
 '20140221 - v080 - Early vs. Late Binding Ref: http://support.microsoft.com/kb/245115
     ' Add path length to folder list output
     ' Module aelan started
+    ' Ref: http://www.exceltrick.com/formulas_macros/filesystemobject-in-vba/ - example of file size, modified date, etc.
+    ' Fix output for files list
 '20140220 - v079 - Format folder level with leading zero
     ' Add fLevelArrow to show levels in output, wsh not used
 '20140219 - v078 - Add alternative test to output under the temp folder

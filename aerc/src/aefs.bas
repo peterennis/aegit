@@ -2,32 +2,40 @@ Option Compare Database
 Option Explicit
 
 Private mintSubFolderLevel As Integer
-Private Const OUTPUT_FILE As String = "C:\TEMP\OutputListOfFoldersFiles.txt"
+Private Const OUTPUT_FOLDERS_ONLY As String = "C:\TEMP\OutputListOfFolders.txt"
+Private Const OUTPUT_FOLDERS_FILES As String = "C:\TEMP\OutputListOfFoldersFiles.txt"
 Private Const LEVEL_ARROW As String = ">"
 Private fle As Integer
+Private fle2 As Integer
 '
 
 Public Sub TestListFileSystemRecursively()
-    
-    ' Create output file
-    fle = FreeFile()
-    Open OUTPUT_FILE For Output As #fle
+
+    fle = FreeFile()    ' Create output file for folders only
+    Open OUTPUT_FOLDERS_ONLY For Output As #fle
     Close fle
     Dim TEST_FILE_PATH As String
 
-    Open OUTPUT_FILE For Append As #fle
+    Open OUTPUT_FOLDERS_ONLY For Append As #fle
     'TEST_FILE_PATH = "C:\"
-    'TEST_FILE_PATH = "C:\TEMP\"
     'TEST_FILE_PATH = "C:\PFE\"
     'TEST_FILE_PATH = "C:\Users\"
     'TEST_FILE_PATH = "C:\Apps\"
     'TEST_FILE_PATH = "C:\__DATA_DELETION__"
-    ' "This PC" = 192.168.0.88 = "C on ZIRCONIUM"
-    TEST_FILE_PATH = "\\192.168.0.88\TEMP"
+    TEST_FILE_PATH = "C:\TEMP\"
     mintSubFolderLevel = 1
     ListFileSystemRecursively TEST_FILE_PATH, varDebug:="DebugIt"
-    '
     Close fle
+    '
+    fle2 = FreeFile()    ' Create output file for folders only
+    Open OUTPUT_FOLDERS_FILES For Output As #fle2
+    Close fle2
+    Open OUTPUT_FOLDERS_FILES For Append As #fle2
+    TEST_FILE_PATH = "C:\TEMP\"
+    mintSubFolderLevel = 1
+    ListFileSystemRecursively TEST_FILE_PATH, varListFiles:=True, varDebug:="DebugIt"
+    Close fle
+    '
 End Sub
 
 Public Function fLevelArrow(intNum As Integer) As String
@@ -65,16 +73,18 @@ Public Sub ListFileSystemRecursively(strRootPathName As String, _
 
     Set colFiles = objFolder.Files
 
-    Debug.Print "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFolder.Path), "000") & " " & LEVEL_ARROW & " " & objFolder.Path
-    Print #fle, "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFolder.Path), "000") & " " & LEVEL_ARROW & " " & objFolder.Path
-
     If Not IsMissing(varListFiles) Then
+        Debug.Print "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFolder.Path), "000") & " " & LEVEL_ARROW & " " & objFolder.Path
+        Print #fle, "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFolder.Path), "000") & " " & LEVEL_ARROW & " " & objFolder.Path
         'Debug.Print "ListFileSystemRecursively varListFiles=" & varListFiles
         For Each objFile In colFiles
-            Debug.Print "objFile.Path = " & objFile.Path
+            Debug.Print "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFile.Path), "000") & " " & LEVEL_ARROW & " " & objFile.Path
+            Print #fle, "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFile.Path), "000") & " " & LEVEL_ARROW & " " & objFile.Path
         Next
         ShowSubFolders objFolder, varListFilesShow:=varListFiles, varDebugShow:=varDebug
     Else
+        Debug.Print "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFolder.Path), "000") & " " & LEVEL_ARROW & " " & objFolder.Path
+        Print #fle, "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFolder.Path), "000") & " " & LEVEL_ARROW & " " & objFolder.Path
         'Debug.Print "ListFileSystemRecursively varListFiles IS MISSING"
         ShowSubFolders objFolder, varListFilesShow:=varListFiles, varDebugShow:=varDebug
     End If
@@ -108,8 +118,10 @@ Public Sub ShowSubFolders(objFolder As Object, _
 
         If Not IsMissing(varListFilesShow) Then
             'Debug.Print "ShowSubFolders varListFilesShow=" & varListFilesShow
+            mintSubFolderLevel = mintSubFolderLevel + 1
             For Each objFile In colFiles
-                Debug.Print "objFile.Path = " & objFile.Path
+                Debug.Print "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFile.Path), "000") & " " & LEVEL_ARROW & " " & objFile.Path
+                Print #fle, "Top Level = " & Format(mintSubFolderLevel, "00") & " Len = " & Format(Len(objFile.Path), "000") & " " & LEVEL_ARROW & " " & objFile.Path
             Next
             ShowSubFolders objSubFolder, varListFilesShow:=varListFilesShow, varDebugShow:=varDebugShow
         Else
