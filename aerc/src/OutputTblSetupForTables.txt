@@ -31,3 +31,13 @@ StateAbbreviation    Text            2
 StateName            Text            15                 
 
 
+------------------
+TABLE: USysRibbons
+------------------
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
+=================    ============    ====    ===========
+ID                   AutoNumber      4                  
+RibbonName           Text            255                
+RibbonXML            Memo            0                  
+
+

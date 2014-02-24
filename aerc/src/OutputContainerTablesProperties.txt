@@ -148,3 +148,31 @@
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+>>>USysRibbons
+              Name          USysRibbons
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   2/24/2014 1:14:05 PM 
+              LastUpdated   2/24/2014 1:14:05 PM 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              GUID          AC-95-06-35-7B-E3-4B-BC
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+              PublishToWeb   1 

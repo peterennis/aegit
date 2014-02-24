@@ -30,6 +30,17 @@ Currentdb.Execute strSQL
 strSQL="CREATE INDEX [State Code] ON [aetlkpStates] ([StateName]) "
 Currentdb.Execute strSQL
 
+'Local Table
+
+strSQL="CREATE TABLE [USysRibbons] ([ID] Counter,[RibbonName] Text (255),[RibbonXML] Memo )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [ID] ON [USysRibbons] ([RibbonXML]) "
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [USysRibbons] ([RibbonXML])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
 'Access 2010 - Compact And Repair
 SendKeys "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}", False
 Exit Sub

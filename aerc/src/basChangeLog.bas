@@ -22,7 +22,9 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
-'20140223 - v081 - Fix file list output
+'20140224 - v081 - Fix file list output
+    ' Add USysRibbons table - Ref: http://office.microsoft.com/en-us/access-help/customize-the-ribbon-HA010211415.aspx
+    '
 '20140221 - v080 - Early vs. Late Binding Ref: http://support.microsoft.com/kb/245115
     ' Add path length to folder list output
     ' Module aelan started
