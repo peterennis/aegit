@@ -100,7 +100,7 @@ Inherited: False;
 ---
 Name: ProjVer
 Type: dbInteger
-Value: 139
+Value: 119
 Inherited: False;
 ---
 Name: HasOfflineLists
@@ -255,6 +255,6 @@ Inherited: False;
 ---
 Name: aeRibbonID
 Type: dbText
-Value: adaept1
+Value: adaept
 Inherited: False;
 ---

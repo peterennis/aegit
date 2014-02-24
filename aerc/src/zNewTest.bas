@@ -13,7 +13,7 @@ Public Sub ExportRibbon()
     lngRev = InStrRev(strDb, "\")
     strLeft = Left(strDb, lngPath - (lngPath - lngRev))
 
-    DoCmd.OutputTo acOutputTable, "listview", acFormatTXT, strLeft & "OutputRibbon.txt"
+    DoCmd.OutputTo acOutputTable, "listview", acFormatTXT, strLeft & "C:\TEMP\OutputRibbon.txt"
 
 End Sub
 
@@ -23,22 +23,22 @@ Public Function LoadRibbons() As Boolean
 
     On Error GoTo PROC_ERR
     
-    Dim f As Long
+    Dim fle As Long
     Dim strText As String
     Dim strOut As String
 
-    f = FreeFile
-    Open "C:\Folder\Ribbon\AccRibbon.xml" For Input As f
+    fle = FreeFile
+    Open "C:\Folder\Ribbon\AccRibbon.xml" For Input As fle
     ' C:\Folder\... has to be replaced by your folder/filename.
-    Do While Not EOF(f)
-        Line Input #f, strText
+    Do While Not EOF(fle)
+        Line Input #fle, strText
         strOut = strOut & strText
     Loop
     Application.LoadCustomUI "AppRibbon_1", strOut
 
 PROC_EXIT:
     On Error Resume Next
-    Close f
+    Close fle
     'PopCallStack
     Exit Function
 
@@ -60,8 +60,8 @@ Public Sub CreateRibbon()
 ' Ref: http://www.accessribbon.de/en/index.php?Access_-_Ribbons:Load_Ribbons_Into_The_Database:..._From_XML_File
 
     On Error Resume Next
-    CodeDb.Properties.Append CodeDb.CreateProperty("aeRibbonID", dbText, "adaept1")
-    CodeDb.Properties("aeRibbonID") = "adaept1"
+    CodeDb.Properties.Append CodeDb.CreateProperty("aeRibbonID", dbText, "adaept")
+    CodeDb.Properties("aeRibbonID") = "adaept"
 
 End Sub
 
