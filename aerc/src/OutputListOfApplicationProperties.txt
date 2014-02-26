@@ -19,7 +19,7 @@ AccessVersion: 09.50, 10, False
 NavPane Category: 0, 4, False
 Show Navigation Pane Search Bar: 1, 4, False
 Build: 24, 4, False
-ProjVer: 139, 3, False
+ProjVer: 140, 3, False
 HasOfflineLists: 70, 3, False
 UseMDIMode: 1, 2, False
 ShowDocumentTabs: False, 1, False
@@ -51,3 +51,4 @@ Perform Name AutoCorrect: 0, 4, False
 AppTitle: aegit, 10, False
 AppIcon: .\adaept64.ico, 10, False
 aeRibbonID: adaept, 10, False
+CustomRibbonID: HideRibbon, 10, False

@@ -5,8 +5,7 @@ Option Explicit
 
 Public Sub TestGetSQLServerData()
     Dim bln As Boolean
-    bln = GetSQLServerData("W64EESQL2008", "AdventureWorks2012")
-    'bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
+    bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
 End Sub
 
 Public Function GetSQLServerData(strServer As String, strDatabase As String) As Boolean

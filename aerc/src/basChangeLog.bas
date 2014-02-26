@@ -24,7 +24,7 @@ Option Explicit
 
 '20140224 - v081 - Fix file list output
     ' Add USysRibbons table - Ref: http://office.microsoft.com/en-us/access-help/customize-the-ribbon-HA010211415.aspx
-    '
+    ' Create HideRibbon XML in USysRibbons table and set as default Ribbon Name for test
 '20140221 - v080 - Early vs. Late Binding Ref: http://support.microsoft.com/kb/245115
     ' Add path length to folder list output
     ' Module aelan started
