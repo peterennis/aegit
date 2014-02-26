@@ -66,7 +66,6 @@ Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
 Private aegitUseImportFolder As Boolean
-'''x Private aegitblnCustomSourceFolder As Boolean
 Private aestrSourceLocation As String
 Private aestrImportLocation As String
 Private aestrXMLLocation As String
@@ -82,7 +81,6 @@ Private aestrLFD As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
-'''x Private Const aeTblXMLFile = "OutputTblXMLSetupForTables.txt"
 Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
 Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
 Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
@@ -329,7 +327,6 @@ Private Function aeReadWriteStream(strPathFileName As String) As Boolean
     Dim fnr As Integer
     Dim fnr2 As Integer
     Dim tstring As String * 1
-'''x    Dim i As Integer
 
     aeReadWriteStream = False
 
@@ -439,7 +436,6 @@ Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
-'''x    Dim str As String
     Dim fle As Integer
     Dim Debugit As Boolean
 
@@ -773,14 +769,11 @@ Private Sub OutputListOfApplicationProperties()
     fle = FreeFile()
     Open aegitSourceFolder & "\OutputListOfApplicationProperties.txt" For Output As #fle
 
-'''x    Dim prp As DAO.Property
     Dim i As Integer
     Dim strPropName As String
     Dim varPropValue As Variant
     Dim varPropType As Variant
     Dim varPropInherited As Variant
-'''x    Dim intPropPropCount As Integer
-'''x    Dim strError As String
 
     With dbs
         For i = 0 To (.Properties.Count - 1)
@@ -2488,7 +2481,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
     OutputAllContainerProperties
-    
+    OutputTableDataMacros
+
     If Debugit Then
         OutputPrinterInfo "Debug"
     Else
@@ -3007,9 +3001,6 @@ Public Function OutputListOfContainers(strTheFileName As String) As Boolean
     Dim dbs As DAO.Database
     Dim conItem As DAO.Container
     Dim prpLoop As DAO.Property
-'''x    Dim strName As String
-'''x    Dim strOwner As String
-'''x    Dim strText As String
     Dim strFile As String
     Dim lngFileNum As Long
 
@@ -3335,6 +3326,51 @@ PROC_ERR:
             GlobalErrHandler
             Resume Next
     End Select
+
+End Sub
+
+Private Sub OutputTableDataMacros()
+' Ref: http://stackoverflow.com/questions/9206153/how-to-export-access-2010-data-macros
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     February 16, 2014
+'====================================================================
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+
+    ' Use a call stack and global error handler
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputTableDataMacros"
+
+    On Error GoTo PROC_ERR
+
+'''x    OutputTableDataMacros = True
+
+    Set dbs = CurrentDb()
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left(tdf.Name, 4) = "MSys" _
+                Or Left(tdf.Name, 4) = "~TMP" _
+                Or Left(tdf.Name, 3) = "zzz") Then
+            Debug.Print tdf.Name
+            SaveAsText acTableDataMacro, tdf.Name, aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml"
+        End If
+    Next tdf
+
+PROC_EXIT:
+    Set tdf = Nothing
+    Set dbs = Nothing
+    'PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    If Err = 2950 Then ' Reserved Error
+        Resume Next
+    End If
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegitClass"
+'''x    OutputTableDataMacros = False
+    'GlobalErrHandler
+    Resume PROC_EXIT
 
 End Sub
 
