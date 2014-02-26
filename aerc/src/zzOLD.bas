@@ -116,3 +116,43 @@ Public Sub TestPropertiesOutput()
     Debug.Print "DateModified: " & obj.DateModified
 
 End Sub
+
+Public Sub ObjectCounts()
+ 
+    Dim qry As DAO.QueryDef
+    Dim cnt As DAO.Container
+ 
+    ' Delete all TEMP queries ...
+    For Each qry In CurrentDb.QueryDefs
+        If Left(qry.Name, 1) = "~" Then
+            CurrentDb.QueryDefs.Delete qry.Name
+            CurrentDb.QueryDefs.Refresh
+        End If
+    Next qry
+ 
+    ' Print the values to the immediate window
+    With CurrentDb
+ 
+        Debug.Print "--- From the DAO.Database ---"
+        Debug.Print "-----------------------------"
+        Debug.Print "Tables (Inc. System tbls): " & .TableDefs.Count
+        Debug.Print "Querys: " & .QueryDefs.Count & vbCrLf
+ 
+        For Each cnt In .Containers
+            Debug.Print cnt.Name & ":" & cnt.Documents.Count
+        Next cnt
+ 
+    End With
+ 
+    ' Use the "Project" collections to get the counts of objects
+    With CurrentProject
+        Debug.Print vbCrLf & "--- From the Access 'Project' ---"
+        Debug.Print "---------------------------------"
+        Debug.Print "Forms: " & .AllForms.Count
+        Debug.Print "Reports: " & .AllReports.Count
+        Debug.Print "DataAccessPages: " & .AllDataAccessPages.Count
+        Debug.Print "Modules: " & .AllModules.Count
+        Debug.Print "Macros (aka Scripts): " & .AllMacros.Count
+    End With
+ 
+End Sub
