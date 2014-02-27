@@ -3382,7 +3382,9 @@ Private Sub OutputTableDataAsFormattedText(strTblName As String)
     strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
     Debug.Print strPathFileName
     'Stop
-    DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
+    If aeExists("Tables", strTblName) Then
+        DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
+    End If
 
 End Sub
 
