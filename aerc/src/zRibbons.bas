@@ -1,7 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Sub ExportRibbon()
+Public Sub ExportTableDataAsFormattedText(strTblName As String)
+' Ref: http://bytes.com/topic/access/answers/856136-access-2007-vba-select-external-data-ribbon
 
     Dim strDb As String
     Dim lngPath As Long
@@ -12,8 +13,9 @@ Public Sub ExportRibbon()
     lngPath = Len(strDb)
     lngRev = InStrRev(strDb, "\")
     strLeft = Left(strDb, lngPath - (lngPath - lngRev))
+    Debug.Print strLeft
 
-    DoCmd.OutputTo acOutputTable, "listview", acFormatTXT, strLeft & "C:\TEMP\OutputRibbon.txt"
+    DoCmd.OutputTo acOutputTable, "aetlkpStates", acFormatTXT, strLeft & "OutputData.txt"
 
 End Sub
 
