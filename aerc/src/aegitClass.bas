@@ -29,7 +29,7 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.8.2"
+Private Const aegitVERSION As String = "0.8.3"
 Private Const aegitVERSION_DATE As String = "February 26, 2014"
 Private Const THE_DRIVE As String = "C"
 
@@ -2482,7 +2482,10 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputTheSchemaFile
     OutputAllContainerProperties
     OutputTableDataMacros
-    OutputTableDataAsFormattedText "aetlkpStates"
+
+    If aeExists("Tables", "aetlkpStates", "DebugIt") Then
+        OutputTableDataAsFormattedText "aetlkpStates"
+    End If
 
     If Debugit Then
         OutputPrinterInfo "Debug"
@@ -2838,12 +2841,10 @@ Private Function aeExists(strAccObjType As String, _
             aeExists = False
         End If
     Next
-    If blnDebug Then
+    If blnDebug And aeExists = False Then
         Debug.Print , strAccObjName & " DOES NOT EXIST!"
         Debug.Print "<==<"
     End If
-
-    aeExists = True
 
 PROC_EXIT:
     Set obj = Nothing
@@ -2851,9 +2852,14 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-    aeExists = False
+    If Err = 3011 Then
+        aeExists = False
+        Resume PROC_EXIT
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+        If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+        aeExists = False
+    End If
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -3382,9 +3388,9 @@ Private Sub OutputTableDataAsFormattedText(strTblName As String)
     strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
     Debug.Print strPathFileName
     'Stop
-    If aeExists("Tables", strTblName) Then
+    '''x If aeExists("Tables", strTblName) Then
         DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
-    End If
+    '''x End If
 
 End Sub
 

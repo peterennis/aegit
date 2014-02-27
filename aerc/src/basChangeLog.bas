@@ -22,9 +22,12 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140226 - v083 -
 '20140226 - v082 - OutputTableDataMacros included in aegitClass
     ' ExportTableDataAsFormattedText test
     ' OutputTableDataAsFormattedText added to aegitClass with aetlkpStates as hardcoded example - to be fixed
+    ' Only output aetlkpStates if it exists
+    ' Fix error message when aetlkpStates does not exist
 '20140224 - v081 - Fix file list output
     ' Add USysRibbons table - Ref: http://office.microsoft.com/en-us/access-help/customize-the-ribbon-HA010211415.aspx
     ' Create HideRibbon XML in USysRibbons table and set as default Ribbon Name for test

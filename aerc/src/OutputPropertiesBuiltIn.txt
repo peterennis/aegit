@@ -258,8 +258,3 @@ Type: dbText
 Value: adaept
 Inherited: False;
 ---
-Name: CustomRibbonID
-Type: dbText
-Value: HideRibbon
-Inherited: False;
----
