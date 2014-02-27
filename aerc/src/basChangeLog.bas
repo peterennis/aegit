@@ -24,6 +24,7 @@ Option Explicit
 
 '20140226 - v082 - OutputTableDataMacros included in aegitClass
     ' ExportTableDataAsFormattedText test
+    ' OutputTableDataAsFormattedText added to aegitClass with aetlkpStates as hardcoded example - to be fixed
 '20140224 - v081 - Fix file list output
     ' Add USysRibbons table - Ref: http://office.microsoft.com/en-us/access-help/customize-the-ribbon-HA010211415.aspx
     ' Create HideRibbon XML in USysRibbons table and set as default Ribbon Name for test

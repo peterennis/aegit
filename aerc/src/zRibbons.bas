@@ -1,24 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Public Sub ExportTableDataAsFormattedText(strTblName As String)
-' Ref: http://bytes.com/topic/access/answers/856136-access-2007-vba-select-external-data-ribbon
-
-    Dim strDb As String
-    Dim lngPath As Long
-    Dim lngRev As Long
-    Dim strLeft As String
-
-    strDb = Application.CurrentDb.Name
-    lngPath = Len(strDb)
-    lngRev = InStrRev(strDb, "\")
-    strLeft = Left(strDb, lngPath - (lngPath - lngRev))
-    Debug.Print strLeft
-
-    DoCmd.OutputTo acOutputTable, "aetlkpStates", acFormatTXT, strLeft & "OutputData.txt"
-
-End Sub
-
 Public Function LoadRibbons() As Boolean
 ' Load ribbons from XML file into the database
 ' Ref: http://www.accessribbon.de/en/index.php?Access_-_Ribbons:Load_Ribbons_Into_The_Database:..._From_XML_File

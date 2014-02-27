@@ -2482,6 +2482,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputTheSchemaFile
     OutputAllContainerProperties
     OutputTableDataMacros
+    OutputTableDataAsFormattedText "aetlkpStates"
 
     If Debugit Then
         OutputPrinterInfo "Debug"
@@ -3371,6 +3372,17 @@ PROC_ERR:
 '''x    OutputTableDataMacros = False
     'GlobalErrHandler
     Resume PROC_EXIT
+
+End Sub
+
+Private Sub OutputTableDataAsFormattedText(strTblName As String)
+' Ref: http://bytes.com/topic/access/answers/856136-access-2007-vba-select-external-data-ribbon
+
+    Dim strPathFileName As String
+    strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
+    Debug.Print strPathFileName
+    'Stop
+    DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
 
 End Sub
 
