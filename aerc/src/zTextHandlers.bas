@@ -9,18 +9,13 @@ Option Explicit
 
 Public Function RemoveTableDuplicates(strTableName As String) As Boolean
 
-'''x    Dim dbs As DAO.Database
     Dim rs As DAO.Recordset
     Dim nCurrent As Long
     Dim nFieldCount As Long
     Dim nRecordCount As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Long
-'''x    Dim nTotalSeconds As Long
-'''x    Dim nSecondsLeft As Long
-'''x    Dim strTest As String
     Dim strLastRecord As String
     Dim strThisRecord As String
     Dim strSQL As String
@@ -79,10 +74,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
     Dim nRecordCount As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Long
-'''x    Dim nTotalSeconds As Long
-'''x    Dim nSecondsLeft As Long
     Dim strTest As String
     
     strSQL = "SELECT * FROM " & strTableName & ";"
@@ -170,10 +162,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     Dim nRecordCount As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Long
-'''x    Dim nTotalSeconds As Long
-'''x    Dim nSecondsLeft As Long
     Dim strTest As String
 
     strSQL = "SELECT * FROM " & strTableName & ";"
@@ -256,13 +245,11 @@ End Function
 Public Function ImportFromAccess(strSourceFile As String, strSourceTable As String, strTargetTable As String, Optional ByVal isAppend As Boolean = True) As Boolean
 
     Dim nCurrent As Long
-'''x    Dim nFieldCount As Long
     Dim nRecordCount As Long
     Dim nFileLen As Long
     Dim nTotalBytes As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Long
 
     Dim db As Database
@@ -308,18 +295,14 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
   
     Dim rs As DAO.Recordset
     Dim nCurrent As Long
-'''x    Dim nFieldCount As Long
-'''x    Dim nRecordCount As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Long
     Dim nTotalSeconds As Long
     Dim nSecondsLeft As Long
     Dim nTotalBytes As Long
     Dim nFileLen As Long
     Dim strTest As Variant
-'''x    Dim strTemp As String
     Dim strHeadersIn() As String
     Dim strHeaders(999) As String
     Const nReadAhead As Long = 30000
@@ -474,7 +457,6 @@ Public Function CreateTable(strTableName As String, strFields() As String, nSize
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
     Dim fld1 As DAO.Field
-'''x    Dim fld2 As DAO.Field
     Dim fName As String
     Dim fType As Integer
     Dim fSize As Integer
@@ -521,7 +503,6 @@ Public Function TableScrub(strTableName As String) As Long
     Dim nLength As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Integer
     Dim nTotalSeconds As Integer
     Dim nSecondsLeft As Integer

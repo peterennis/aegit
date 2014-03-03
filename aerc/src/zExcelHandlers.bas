@@ -61,7 +61,6 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
     Dim nRecordCount As Long
     Dim RetVal As Variant
     Dim nCurRec As Long
-'''x    Dim dnow As Date
     Dim nCurSec As Long
     Dim nTotalSeconds As Long
     Dim nSecondsLeft As Long

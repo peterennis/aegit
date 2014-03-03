@@ -3352,8 +3352,6 @@ Private Sub OutputTableDataMacros()
 
     On Error GoTo PROC_ERR
 
-'''x    OutputTableDataMacros = True
-
     Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
         If Not (Left(tdf.Name, 4) = "MSys" _
@@ -3375,7 +3373,6 @@ PROC_ERR:
         Resume Next
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegitClass"
-'''x    OutputTableDataMacros = False
     'GlobalErrHandler
     Resume PROC_EXIT
 
@@ -3387,10 +3384,7 @@ Private Sub OutputTableDataAsFormattedText(strTblName As String)
     Dim strPathFileName As String
     strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
     Debug.Print strPathFileName
-    'Stop
-    '''x If aeExists("Tables", strTblName) Then
-        DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
-    '''x End If
+    DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
 
 End Sub
 
