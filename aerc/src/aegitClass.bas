@@ -34,6 +34,7 @@ Private Const aegitVERSION_DATE As String = "February 26, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
+Private Const gblnOutputPrinterInfo = False
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
 ' This enum is used by SizeString to indicate whether the supplied text
@@ -3252,6 +3253,8 @@ Public Sub OutputPrinterInfo(Optional varDebug As Variant)
     Dim i As Integer
     Dim fle As Integer
 
+    If Not gblnOutputPrinterInfo Then Exit Sub
+    
     fle = FreeFile()
     Open aegitSourceFolder & "\" & aePrnterInfo For Output As #fle
 
