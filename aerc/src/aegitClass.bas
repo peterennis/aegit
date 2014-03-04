@@ -1567,6 +1567,7 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
             'Debug.Print "the XML file=" & aestrXMLLocation & strObjName
             Application.ExportXML acExportTable, strObjName, , _
                         aestrXMLLocation & "tables_" & strObjName & ".xsd"
+            PrettyXML aestrXMLLocation & "tables_" & strObjName & ".xsd"
         End If
     Next
 
@@ -3185,6 +3186,68 @@ PROC_ERR:
 
 End Sub
 
+Public Sub PrettyXML(strPathFileName As String)
+
+    ' Beautify XML in VBA with MSXML6 only
+    ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
+    Dim objXMLStyleSheet As Object
+    Dim strXMLStyleSheet As String
+    Dim objXMLDOMDoc As Object
+
+    strXMLStyleSheet = "<xsl:stylesheet" & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "  xmlns:xsl=""http://www.w3.org/1999/XSL/Transform""" & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "  version=""1.0"">" & vbCrLf & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "<xsl:output method=""xml"" indent=""yes""/>" & vbCrLf & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "<xsl:template match=""@* | node()"">" & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "  <xsl:copy>" & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "    <xsl:apply-templates select=""@* | node()""/>" & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "  </xsl:copy>" & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "</xsl:template>" & vbCrLf & vbCrLf
+    strXMLStyleSheet = strXMLStyleSheet & "</xsl:stylesheet>"
+
+'''x    Dim objXMLResDoc As Object
+    Set objXMLStyleSheet = CreateObject("Msxml2.DOMDocument.6.0")
+
+    With objXMLStyleSheet
+        ' Turn off Async I/O
+        .async = False
+        .validateOnParse = False
+        .resolveExternals = False
+    End With
+
+    objXMLStyleSheet.LoadXML (strXMLStyleSheet)
+    If objXMLStyleSheet.parseError.errorCode <> 0 Then
+        Debug.Print "Some Error..."
+        Exit Sub
+    End If
+
+    Set objXMLDOMDoc = CreateObject("Msxml2.DOMDocument.6.0")
+    With objXMLDOMDoc
+        ' Turn off Async I/O
+        .async = False
+        .validateOnParse = False
+        .resolveExternals = False
+    End With
+
+    ' Ref: http://msdn.microsoft.com/en-us/library/ms762722(v=vs.85).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/ms754585(v=vs.85).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/aa468547.aspx
+    objXMLDOMDoc.Load (strPathFileName)
+
+    Dim strXMLResDoc
+    Set strXMLResDoc = CreateObject("Msxml2.DOMDocument.6.0")
+
+    objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
+    strXMLResDoc = strXMLResDoc.XML
+    strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr(32) & Chr(32), , , vbBinaryCompare)
+    Debug.Print "Pretty XML Sample Output"
+    Debug.Print strXMLResDoc
+
+    Set objXMLDOMDoc = Nothing
+    Set objXMLStyleSheet = Nothing
+
+End Sub
+
 Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDebug As Variant)
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
@@ -3222,6 +3285,8 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDeb
         End If
     Else
     End If
+
+    PrettyXML strFileName
 
     rst.Close
     cnn.Close

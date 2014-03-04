@@ -1,6 +1,78 @@
 Option Compare Database
 Option Explicit
 
+Public Const Desktop = &H10&
+Public Const MyDocuments = &H5&
+'
+
+Public Function SpFolder(SpName)
+
+    Dim objShell As Object
+    Set objShell = CreateObject("Shell.Application")
+    Dim objFolder As Object
+    Set objFolder = objShell.Namespace(SpName)
+    Dim objFolderItem As Object
+    Set objFolderItem = objFolder.Self
+
+    SpFolder = objFolderItem.Path
+
+End Function
+   
+Public Sub ExportAllModulesToFile()
+' Ref: http://wiki.lessthandot.com/index.php/Code_and_Code_Windows
+' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
+' The reference for the FileSystemObject Object is Windows Script Host Object Model
+' but it not necessary to add the reference for this procedure.
+
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+
+    Dim fil As Object
+    Dim strMod As String
+    Dim mdl As Object
+    Dim i As Integer
+    Dim strTxtFile As String
+
+
+    ' Set up the file
+    Debug.Print "CurrentProject.Name = " & CurrentProject.Name
+    strTxtFile = SpFolder(Desktop) & "\" & Replace(CurrentProject.Name, ".", "_") & ".txt"
+    Debug.Print "strTxtFile = " & strTxtFile
+    Set fil = fso.CreateTextFile(SpFolder(Desktop) & "\" _
+            & Replace(CurrentProject.Name, ".", " ") & ".txt")
+
+    ' For each component in the project ...
+    For Each mdl In VBE.ActiveVBProject.VBComponents
+        ' using the count of lines ...
+        If Left(mdl.Name, 3) <> "zzz" Then
+            Debug.Print mdl.Name
+            i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
+            ' put the code in a string ...
+            If i > 0 Then
+                strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, i)
+            End If
+            ' and then write it to a file, first marking the start with
+            ' some equal signs and the component name.
+            fil.WriteLine String(15, "=") & vbCrLf & mdl.Name _
+                & vbCrLf & String(15, "=") & vbCrLf & strMod
+        End If
+    Next
+       
+    ' Close eveything
+    fil.Close
+    Set fso = Nothing
+
+End Sub
+
+Public Sub SetRefToLibrary()
+' http://www.exceltoolset.com/setting-a-reference-to-the-vba-extensibility-library-by-code/
+' Adjusted for Microsoft Access
+' Create a reference to the VBA Extensibility library
+    On Error Resume Next        ' in case the reference already exits
+    Access.Application.VBE.ActiveVBProject.References _
+                  .AddFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 0
+End Sub
+
 Public Function CodeLinesInProjectCount() As Long
 ' Ref: http://www.cpearson.com/excel/vbe.aspx
 ' Adjusted for Microsoft Access and Late Binding. No reference needed.

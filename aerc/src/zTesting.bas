@@ -1,79 +1,7 @@
 Option Compare Database
 Option Explicit
 
-Public Const Desktop = &H10&
-Public Const MyDocuments = &H5&
-'
-
-Public Function SpFolder(SpName)
-
-    Dim objShell As Object
-    Set objShell = CreateObject("Shell.Application")
-    Dim objFolder As Object
-    Set objFolder = objShell.Namespace(SpName)
-    Dim objFolderItem As Object
-    Set objFolderItem = objFolder.Self
-
-    SpFolder = objFolderItem.Path
-
-End Function
-   
-Public Sub ExportAllModulesToFile()
-' Ref: http://wiki.lessthandot.com/index.php/Code_and_Code_Windows
-' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
-' The reference for the FileSystemObject Object is Windows Script Host Object Model
-' but it not necessary to add the reference for this procedure.
-
-    Dim fso As Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
-
-    Dim fil As Object
-    Dim strMod As String
-    Dim mdl As Object
-    Dim i As Integer
-    Dim strTxtFile As String
-
-
-    ' Set up the file
-    Debug.Print "CurrentProject.Name = " & CurrentProject.Name
-    strTxtFile = SpFolder(Desktop) & "\" & Replace(CurrentProject.Name, ".", "_") & ".txt"
-    Debug.Print "strTxtFile = " & strTxtFile
-    Set fil = fso.CreateTextFile(SpFolder(Desktop) & "\" _
-            & Replace(CurrentProject.Name, ".", " ") & ".txt")
-
-    ' For each component in the project ...
-    For Each mdl In VBE.ActiveVBProject.VBComponents
-        ' using the count of lines ...
-        If Left(mdl.Name, 3) <> "zzz" Then
-            Debug.Print mdl.Name
-            i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
-            ' put the code in a string ...
-            If i > 0 Then
-                strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, i)
-            End If
-            ' and then write it to a file, first marking the start with
-            ' some equal signs and the component name.
-            fil.WriteLine String(15, "=") & vbCrLf & mdl.Name _
-                & vbCrLf & String(15, "=") & vbCrLf & strMod
-        End If
-    Next
-       
-    ' Close eveything
-    fil.Close
-    Set fso = Nothing
-
-End Sub
-
-Public Sub SaveTableMacros()
-
-    ' Export Table Data to XML
-    ' Ref: http://technet.microsoft.com/en-us/library/ee692914.aspx
-    Application.ExportXML acExportTable, "Items", "C:\Temp\ItemsData.xml"
-
-    ' Save table macros as XML
-    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=99179
-    Application.SaveAsText acTableDataMacro, "Items", "C:\Temp\Items.xml"
-    Debug.Print , "Items table macros saved to C:\Temp\Items.xml"
+Public Sub PrettyXML(strPathFileName As String)
 
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
@@ -119,7 +47,7 @@ Public Sub SaveTableMacros()
     ' Ref: http://msdn.microsoft.com/en-us/library/ms762722(v=vs.85).aspx
     ' Ref: http://msdn.microsoft.com/en-us/library/ms754585(v=vs.85).aspx
     ' Ref: http://msdn.microsoft.com/en-us/library/aa468547.aspx
-    objXMLDOMDoc.Load ("C:\Temp\Items.xml")
+    objXMLDOMDoc.Load (strPathFileName)
 
     Dim strXMLResDoc
     Set strXMLResDoc = CreateObject("Msxml2.DOMDocument.6.0")
@@ -135,13 +63,19 @@ Public Sub SaveTableMacros()
 
 End Sub
 
-Public Sub SetRefToLibrary()
-' http://www.exceltoolset.com/setting-a-reference-to-the-vba-extensibility-library-by-code/
-' Adjusted for Microsoft Access
-' Create a reference to the VBA Extensibility library
-    On Error Resume Next        ' in case the reference already exits
-    Access.Application.VBE.ActiveVBProject.References _
-                  .AddFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 0
+Public Sub SaveTableMacros()
+
+    ' Export Table Data to XML
+    ' Ref: http://technet.microsoft.com/en-us/library/ee692914.aspx
+'    Application.ExportXML acExportTable, "aeItems", "C:\Temp\aeItemsData.xml"
+
+    ' Save table macros as XML
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=99179
+    Application.SaveAsText acTableDataMacro, "aeItems", "C:\Temp\aeItems.xml"
+    Debug.Print , "Items table macros saved to C:\Temp\aeItems.xml"
+
+    PrettyXML "C:\Temp\aeItems.xml"
+
 End Sub
 
 Public Sub ApplicationInformation()
