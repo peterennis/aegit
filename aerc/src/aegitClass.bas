@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.8.4"
-Private Const aegitVERSION_DATE As String = "February 4, 2014"
+Private Const aegitVERSION As String = "0.8.5"
+Private Const aegitVERSION_DATE As String = "February 5, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1942,7 +1942,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    If Err = 70 Then
+    If Err = 70 Or Err = 75 Then
         Pause (0.25)
         Resume TryAgain
     End If
