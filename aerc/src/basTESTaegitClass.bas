@@ -22,8 +22,8 @@ Dim ref As Reference
 ' Run in immediate window: MYPROJECT_TEST
 '
 Public Function MYPROJECT_TEST()
-    'aegitClassTest
-    aegitClassTest "debug"
+    aegitClassTest
+    'aegitClassTest "debug"
 End Function
 
 Public Sub ALTERNATIVE_TEST()

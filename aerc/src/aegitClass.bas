@@ -1567,7 +1567,11 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
             'Debug.Print "the XML file=" & aestrXMLLocation & strObjName
             Application.ExportXML acExportTable, strObjName, , _
                         aestrXMLLocation & "tables_" & strObjName & ".xsd"
-            PrettyXML aestrXMLLocation & "tables_" & strObjName & ".xsd"
+            If Not IsMissing(varDebug) Then
+                PrettyXML aestrXMLLocation & "tables_" & strObjName & ".xsd", varDebug
+            Else
+                PrettyXML aestrXMLLocation & "tables_" & strObjName & ".xsd"
+            End If
         End If
     Next
 
@@ -3186,7 +3190,7 @@ PROC_ERR:
 
 End Sub
 
-Public Sub PrettyXML(strPathFileName As String)
+Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
 
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
@@ -3241,7 +3245,7 @@ Public Sub PrettyXML(strPathFileName As String)
     strXMLResDoc = strXMLResDoc.XML
     strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr(32) & Chr(32), , , vbBinaryCompare)
     Debug.Print "Pretty XML Sample Output"
-    Debug.Print strXMLResDoc
+    If Not IsMissing(varDebug) Then Debug.Print strXMLResDoc
 
     Set objXMLDOMDoc = Nothing
     Set objXMLStyleSheet = Nothing
@@ -3286,7 +3290,11 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDeb
     Else
     End If
 
-    PrettyXML strFileName
+    If Not IsMissing(varDebug) Then
+        PrettyXML strFileName, varDebug
+    Else
+        PrettyXML strFileName
+    End If
 
     rst.Close
     cnn.Close
