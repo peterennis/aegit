@@ -3198,6 +3198,9 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
     Dim strXMLStyleSheet As String
     Dim objXMLDOMDoc As Object
 
+    Dim fle As Integer
+    fle = FreeFile()
+
     strXMLStyleSheet = "<xsl:stylesheet" & vbCrLf
     strXMLStyleSheet = strXMLStyleSheet & "  xmlns:xsl=""http://www.w3.org/1999/XSL/Transform""" & vbCrLf
     strXMLStyleSheet = strXMLStyleSheet & "  version=""1.0"">" & vbCrLf & vbCrLf
@@ -3209,7 +3212,6 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:template>" & vbCrLf & vbCrLf
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:stylesheet>"
 
-'''x    Dim objXMLResDoc As Object
     Set objXMLStyleSheet = CreateObject("Msxml2.DOMDocument.6.0")
 
     With objXMLStyleSheet
@@ -3246,6 +3248,11 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
     strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr(32) & Chr(32), , , vbBinaryCompare)
     Debug.Print "Pretty XML Sample Output"
     If Not IsMissing(varDebug) Then Debug.Print strXMLResDoc
+
+    ' Rewrite the file as pretty xml
+    Open strPathFileName For Output As #fle
+    Print #fle, strXMLResDoc
+    Close fle
 
     Set objXMLDOMDoc = Nothing
     Set objXMLStyleSheet = Nothing

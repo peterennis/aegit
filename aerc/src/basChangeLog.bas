@@ -23,7 +23,7 @@ Option Explicit
 
 
 '20140303 - v083 - Use gblnOutputPrinterInfo to determine printer output info
-    '
+    ' Write pretty xml
 '20140226 - v082 - OutputTableDataMacros included in aegitClass
     ' ExportTableDataAsFormattedText test
     ' OutputTableDataAsFormattedText added to aegitClass with aetlkpStates as hardcoded example - to be fixed
