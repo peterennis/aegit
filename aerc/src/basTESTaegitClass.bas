@@ -59,8 +59,8 @@ Public Function aegitClassTest(Optional Debugit As Variant, _
                                 Optional varXmlFldr As Variant, _
                                 Optional varXmlData As Variant) As Boolean
 
-    Dim oDbObjects As aegitClass
-    Set oDbObjects = New aegitClass
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
 
     Dim bln1 As Boolean
     Dim bln2 As Boolean
@@ -123,15 +123,15 @@ Test3:
     ' TEST 3
     '=============
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "3. aegitClassTest => ReadDocDatabase"
+    Debug.Print "3. aegitClassTest => ReadDocDatabase - NOT USED !!!"
     Debug.Print "aegitClassTest"
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        bln3 = oDbObjects.ReadDocDatabase(False)
+'''x         bln3 = oDbObjects.ReadDocDatabase(False)
     Else
         Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-        bln3 = oDbObjects.ReadDocDatabase(False, "WithDebugging")
+'''x         bln3 = oDbObjects.ReadDocDatabase(False, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -248,8 +248,8 @@ Public Function aegitClassImportTest(Optional Debugit As Variant) As Boolean
 ' Usage:
 ' Run in immediate window: aegitClassImportTest
 
-    Dim oDbObjects As aegitClass
-    Set oDbObjects = New aegitClass
+    Dim oDbObjects As aegit_impClass
+    Set oDbObjects = New aegit_impClass
 
     Dim bln1 As Boolean
 
@@ -262,7 +262,7 @@ ImportTest1:
     Debug.Print "1. aegitClassImportTest => ReadDocDatabase"
     Debug.Print "aegitClassImportTest"
 
-    oDbObjects.UseImportFolder = True
+'''x     oDbObjects.UseImportFolder = True
 
     If IsMissing(Debugit) Then
         Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"

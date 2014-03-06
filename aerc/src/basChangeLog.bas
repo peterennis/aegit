@@ -23,6 +23,7 @@ Option Explicit
 
 
 '20140305 - v085 - Trap Err 75 in KillProperly after rename of database
+    ' Split class to aegit_expClass and aegit_impClass
 '20140304 - v084 - Bump
 '20140303 - v083 - Use gblnOutputPrinterInfo to determine if printer output info will be exported
     ' Write pretty xml
