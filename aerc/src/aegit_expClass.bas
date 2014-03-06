@@ -62,13 +62,12 @@ Private mfInErrorHandler As Boolean
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
 Private aegitSourceFolder As String
-'''x Private aegitImportFolder As String
 Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
-Private aegitUseImportFolder As Boolean
+'''x Private aegitUseImportFolder As Boolean
 Private aestrSourceLocation As String
-Private aestrImportLocation As String
+'''x Private aestrImportLocation As String
 Private aestrXMLLocation As String
 Private aeintLTN As Long                        ' Longest Table Name
 Private aestrLFN As String                      ' Longest Field Name
@@ -101,7 +100,7 @@ Private Sub Class_Initialize()
     aegitXMLFolder = "default"
     ReDim Preserve aegitDataXML(1 To 1)
     aegitDataXML(1) = "aetlkpStates"
-    aegitUseImportFolder = False
+'''x     aegitUseImportFolder = False
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
@@ -156,9 +155,9 @@ End Property
 '''x     aegitImportFolder = strImportFolder
 '''x End Property
 
-Property Let UseImportFolder(ByVal blnUseImportFolder As Boolean)
-    aegitUseImportFolder = blnUseImportFolder
-End Property
+'''x Property Let UseImportFolder(ByVal blnUseImportFolder As Boolean)
+'''x     aegitUseImportFolder = blnUseImportFolder
+'''x End Property
 
 Property Get XMLFolder() As String
     XMLFolder = aegitXMLFolder
@@ -2381,8 +2380,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     If Debugit Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
-        Debug.Print , "aegitUseImportFolder = " & aegitUseImportFolder
-        Debug.Print , "Property Get ImportFolder = " & aestrImportLocation
+'''x         Debug.Print , "aegitUseImportFolder = " & aegitUseImportFolder
+'''x         Debug.Print , "Property Get ImportFolder = " & aestrImportLocation
         Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
     End If
     'Stop
