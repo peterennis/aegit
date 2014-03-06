@@ -85,6 +85,9 @@ Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
 Private Const aeFLkCtrFile = "OutputFieldLookupControlTypeList.txt"
 Private Const aeSchemaFile = "OutputSchemaFile.txt"
 Private Const aePrnterInfo = "OutputPrinterInfo.txt"
+Private Const aeAppOptions = "OutputListOfAccessApplicationOptions.txt"
+Private Const aeAppListPrp = "OutputListOfApplicationProperties.txt"
+Private Const aeAppListCnt = "OutputListOfContainers.txt"
 '
 
 Private Sub Class_Initialize()
@@ -428,7 +431,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
     End If
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\OutputListOfAccessApplicationOptions.txt" For Output As #fle
+    Open aegitSourceFolder & "\" & aeAppOptions For Output As #fle
 
     'On Error Resume Next
     Print #fle, ">>>Standard Options"
@@ -736,7 +739,7 @@ Private Sub OutputListOfApplicationProperties()
     Dim fle As Integer
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\OutputListOfApplicationProperties.txt" For Output As #fle
+    Open aegitSourceFolder & "\" & aeAppListPrp For Output As #fle
 
     Dim i As Integer
     Dim strPropName As String
@@ -2383,7 +2386,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         Stop
     End If
     
-    OutputListOfContainers "OutputListOfContainers.txt"
+    OutputListOfContainers aeAppListCnt
     OutputListOfAllHiddenQueries
 
     If Debugit Then
