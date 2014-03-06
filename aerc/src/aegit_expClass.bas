@@ -65,9 +65,7 @@ Private aegitSourceFolder As String
 Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
-'''x Private aegitUseImportFolder As Boolean
 Private aestrSourceLocation As String
-'''x Private aestrImportLocation As String
 Private aestrXMLLocation As String
 Private aeintLTN As Long                        ' Longest Table Name
 Private aestrLFN As String                      ' Longest Field Name
@@ -96,11 +94,9 @@ Private Sub Class_Initialize()
 
     ' provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
-'''x     aegitImportFolder = "default"
     aegitXMLFolder = "default"
     ReDim Preserve aegitDataXML(1 To 1)
     aegitDataXML(1) = "aetlkpStates"
-'''x     aegitUseImportFolder = False
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
@@ -111,7 +107,6 @@ Private Sub Class_Initialize()
 
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
-'''x     Debug.Print , "Default for aegitImportFolder = " & aegitImportFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
     Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
@@ -146,18 +141,6 @@ Property Let SourceFolder(ByVal strSourceFolder As String)
     ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
     aegitSourceFolder = strSourceFolder
 End Property
-
-'''x Property Get ImportFolder() As String
-'''x     ImportFolder = aegitImportFolder
-'''x End Property
-
-'''x Property Let ImportFolder(ByVal strImportFolder As String)
-'''x     aegitImportFolder = strImportFolder
-'''x End Property
-
-'''x Property Let UseImportFolder(ByVal blnUseImportFolder As Boolean)
-'''x     aegitUseImportFolder = blnUseImportFolder
-'''x End Property
 
 Property Get XMLFolder() As String
     XMLFolder = aegitXMLFolder
@@ -2363,14 +2346,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         aestrSourceLocation = aegitSourceFolder
     End If
 
-'''x     If aegitImportFolder = "default" Then
-'''x         aestrImportLocation = aegitType.ImportFolder
-'''x     End If
-
-'''x     If aegitUseImportFolder Then
-'''x         aestrImportLocation = aegitImportFolder
-'''x     End If
-
     If aegitXMLFolder = "default" Then
         aestrXMLLocation = aegitType.XMLFolder
     End If
@@ -2380,8 +2355,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     If Debugit Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
-'''x         Debug.Print , "aegitUseImportFolder = " & aegitUseImportFolder
-'''x         Debug.Print , "Property Get ImportFolder = " & aestrImportLocation
         Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
     End If
     'Stop
