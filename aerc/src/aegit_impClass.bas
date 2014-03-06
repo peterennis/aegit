@@ -36,14 +36,6 @@ Private Const THE_DRIVE As String = "C"
 Private Const gcfHandleErrors As Boolean = True
 Private Const gblnOutputPrinterInfo = False
 
-' Ref: http://www.cpearson.com/excel/sizestring.htm
-' This enum is used by SizeString to indicate whether the supplied text
-' appears on the left or right side of result string.
-Private Enum SizeStringSide
-    TextLeft = 1
-    TextRight = 2
-End Enum
-
 Private Type mySetupType
     SourceFolder As String
     ImportFolder As String
@@ -66,11 +58,8 @@ Private aegitImportFolder As String
 Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
-'''x Private aegitUseImportFolder As Boolean
-'''x Private aestrSourceLocation As String
 Private aestrImportLocation As String
-'''x Private aestrXMLLocation As String
-Private aeintLTN As Long                        ' Longest Table Name
+'''x Private aeintLTN As Long                        ' Longest Table Name
 Private aestrLFN As String                      ' Longest Field Name
 Private aestrLFNTN As String
 Private aeintFNLen As Long
@@ -80,14 +69,6 @@ Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
 Private Const aestr4 As String = "    "
-'''x Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
-'''x Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
-'''x Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
-'''x Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
-'''x Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
-'''x Private Const aeFLkCtrFile = "OutputFieldLookupControlTypeList.txt"
-'''x Private Const aeSchemaFile = "OutputSchemaFile.txt"
-'''x Private Const aePrnterInfo = "OutputPrinterInfo.txt"
 '
 
 Private Sub Class_Initialize()
@@ -101,14 +82,13 @@ Private Sub Class_Initialize()
     aegitXMLFolder = "default"
     ReDim Preserve aegitDataXML(1 To 1)
     aegitDataXML(1) = "aetlkpStates"
-'''x    aegitUseImportFolder = False
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
     aegitType.UseImportFolder = False
     aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
-    aeintLTN = LongestTableName
-    LongestFieldPropsName
+'''x     aeintLTN = LongestTableName
+'''x     LongestFieldPropsName
 
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
@@ -117,7 +97,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
     Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
     Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
-    Debug.Print , "aeintLTN = " & aeintLTN
+'''x     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
     Debug.Print , "aeintFSize = " & aeintFSize
@@ -155,10 +135,6 @@ End Property
 Property Let ImportFolder(ByVal strImportFolder As String)
     aegitImportFolder = strImportFolder
 End Property
-
-'''x Property Let UseImportFolder(ByVal blnUseImportFolder As Boolean)
-'''x     aegitUseImportFolder = blnUseImportFolder
-'''x End Property
 
 Property Get XMLFolder() As String
     XMLFolder = aegitXMLFolder
@@ -229,20 +205,6 @@ Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
         Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING TURNED ON"
         DocumentRelations = aeDocumentRelations(DebugTheCode)
-    End If
-End Property
-
-Property Get DocumentTables(Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
-        Debug.Print "Get DocumentTables"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTables"
-        Debug.Print , "DEBUGGING IS OFF"
-        DocumentTables = aeDocumentTables
-    Else
-        Debug.Print "Get DocumentTables"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTables"
-        Debug.Print , "DEBUGGING TURNED ON"
-        DocumentTables = aeDocumentTables(DebugTheCode)
     End If
 End Property
 
@@ -530,163 +492,6 @@ PROC_ERR:
 
 End Function
 
-Private Function LongestTableName() As Integer
-'====================================================================
-' Author:   Peter F. Ennis
-' Date:     November 30, 2012
-' Comment:  Return the length of the longest table name
-' Updated:  All notes moved to change log
-' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
-
-    Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDef
-    Dim intTNLen As Integer
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "LongestTableName"
-
-    intTNLen = 0
-    Set dbs = CurrentDb()
-    For Each tdf In CurrentDb.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
-            If Len(tdf.Name) > intTNLen Then
-                intTNLen = Len(tdf.Name)
-            End If
-        End If
-    Next tdf
-
-    LongestTableName = intTNLen
-
-PROC_EXIT:
-    Set tdf = Nothing
-    Set dbs = Nothing
-    PopCallStack
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
-    LongestTableName = 0
-    GlobalErrHandler
-    Resume PROC_EXIT
-
-End Function
-
-Private Function LongestFieldPropsName() As Boolean
-'=======================================================================
-' Author:   Peter F. Ennis
-' Date:     December 5, 2012
-' Comment:  Return length of field properties for text output alignment
-' Updated:  All notes moved to change log
-' History:  See comment details, basChangeLog, commit messages on github
-'=======================================================================
-
-    Dim dbs As DAO.Database
-    Dim tblDef As DAO.TableDef
-    Dim fld As DAO.Field
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "LongestFieldPropsName"
-
-    On Error GoTo PROC_ERR
-
-    aeintFNLen = 0
-    aeintFTLen = 0
-    aeintFDLen = 0
-
-    Set dbs = CurrentDb()
-
-    For Each tblDef In CurrentDb.TableDefs
-        If Not (Left(tblDef.Name, 4) = "MSys" _
-                Or Left(tblDef.Name, 4) = "~TMP" _
-                Or Left(tblDef.Name, 3) = "zzz") Then
-            For Each fld In tblDef.Fields
-                If Len(fld.Name) > aeintFNLen Then
-                    aestrLFNTN = tblDef.Name
-                    aestrLFN = fld.Name
-                    aeintFNLen = Len(fld.Name)
-                End If
-                If Len(FieldTypeName(fld)) > aeintFTLen Then
-                    aestrLFT = FieldTypeName(fld)
-                    aeintFTLen = Len(FieldTypeName(fld))
-                End If
-                If Len(GetDescrip(fld)) > aeintFDLen Then
-                    aestrLFD = GetDescrip(fld)
-                    aeintFDLen = Len(GetDescrip(fld))
-                End If
-            Next
-        End If
-    Next tblDef
-
-    LongestFieldPropsName = True
-
-PROC_EXIT:
-    Set fld = Nothing
-    Set tblDef = Nothing
-    Set dbs = Nothing
-    PopCallStack
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
-    LongestFieldPropsName = False
-    GlobalErrHandler
-    Resume PROC_EXIT
-
-End Function
-
-Private Function SizeString(Text As String, Length As Long, _
-    Optional ByVal TextSide As SizeStringSide = TextLeft, _
-    Optional PadChar As String = " ") As String
-' Ref: http://www.cpearson.com/excel/sizestring.htm
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-' SizeString
-' This procedure creates a string of a specified length. Text is the original string
-' to include, and Length is the length of the result string. TextSide indicates whether
-' Text should appear on the left (in which case the result is padded on the right with
-' PadChar) or on the right (in which case the string is padded on the left). When padding on
-' either the left or right, padding is done using the PadChar. character. If PadChar is omitted,
-' a space is used. If PadChar is longer than one character, the left-most character of PadChar
-' is used. If PadChar is an empty string, a space is used. If TextSide is neither
-' TextLeft or TextRight, the procedure uses TextLeft.
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-    Dim sPadChar As String
-
-    If Len(Text) >= Length Then
-        ' if the source string is longer than the specified length, return the
-        ' Length left characters
-        SizeString = Left(Text, Length)
-        Exit Function
-    End If
-
-    If Len(PadChar) = 0 Then
-        ' PadChar is an empty string. use a space.
-        sPadChar = " "
-    Else
-        ' use only the first character of PadChar
-        sPadChar = Left(PadChar, 1)
-    End If
-
-    If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
-        ' if TextSide was neither TextLeft nor TextRight, use TextLeft.
-        TextSide = TextLeft
-    End If
-
-    If TextSide = TextLeft Then
-        ' if the text goes on the left, fill out the right with spaces
-        SizeString = Text & String(Length - Len(Text), sPadChar)
-    Else
-        ' otherwise fill on the left and put the Text on the right
-        SizeString = String(Length - Len(Text), sPadChar) & Text
-    End If
-
-End Function
-
 Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
 '=========================================================================
@@ -732,166 +537,9 @@ Private Function FileLocked(strFileName As String) As Boolean
     End If
 End Function
 
-Private Function TableInfo(strTableName As String, Optional varDebug As Variant) As Boolean
-' Ref: http://allenbrowne.com/func-06.html
-'=============================================================================
-' Purpose:  Display the field names, types, sizes and descriptions for a table
-' Argument: Name of a table in the current database
-' Updates:  Peter F. Ennis
-' Updated:  All notes moved to change log
-' History:  See comment details, basChangeLog, commit messages on github
-'=============================================================================
-
-    Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDef
-    Dim fld As DAO.Field
-    Dim sLen As Long
-    Dim strLinkedTablePath As String
-    
-    Dim blnDebug As Boolean
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "TableInfo"
-
-    On Error GoTo PROC_ERR
-
-    strLinkedTablePath = ""
-
-    If IsMissing(varDebug) Then
-        blnDebug = False
-        'Debug.Print , "varDebug IS missing so blnDebug of TableInfo is set to False"
-        'Debug.Print , "DEBUGGING IS OFF"
-    Else
-        blnDebug = True
-        'Debug.Print , "varDebug IS NOT missing so blnDebug of TableInfo is set to True"
-        'Debug.Print , "NOW DEBUGGING..."
-    End If
-
-    Set dbs = CurrentDb()
-    Set tdf = dbs.TableDefs(strTableName)
-    sLen = Len("TABLE: ") + Len(strTableName)
-
-    strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
-
-    aeintFDLen = LongestTableDescription(tdf.Name)
-
-    If aeintFDLen < Len("DESCRIPTION") Then aeintFDLen = Len("DESCRIPTION")
-
-    If blnDebug Then
-    'If blnDebug And aeintFDLen <> 11 Then
-        Debug.Print SizeString("-", sLen, TextLeft, "-")
-        Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
-        Debug.Print SizeString("-", sLen, TextLeft, "-")
-        If strLinkedTablePath <> "" Then
-            Debug.Print strLinkedTablePath
-        End If
-        Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
-                        & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
-                        & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
-                        & aestr4 & SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
-        Debug.Print SizeString("=", aeintFNLen, TextLeft, "=") _
-                        & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
-                        & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
-                        & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
-    End If
-  
-    'Debug.Print ">>>", SizeString("-", sLen, TextLeft, "-")
-    Print #1, SizeString("-", sLen, TextLeft, "-")
-    Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
-    Print #1, SizeString("-", sLen, TextLeft, "-")
-    If strLinkedTablePath <> "" Then
-        Print #1, "Linked=>" & strLinkedTablePath
-    End If
-    Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
-                        & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
-                        & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
-                        & aestr4 & SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
-    Print #1, SizeString("=", aeintFNLen, TextLeft, "=") _
-                        & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
-                        & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
-                        & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
-    strLinkedTablePath = ""
-
-    For Each fld In tdf.Fields
-        If blnDebug Then
-        'If blnDebug And aeintFDLen <> 11 Then
-            Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
-                & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
-                & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
-        End If
-        Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
-            & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-            & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
-            & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
-    Next
-    If blnDebug Then Debug.Print
-    'If blnDebug And aeintFDLen <> 11 Then Debug.Print
-    Print #1, vbCrLf
-
-    TableInfo = True
-
-PROC_EXIT:
-    Set fld = Nothing
-    Set tdf = Nothing
-    Set dbs = Nothing
-    PopCallStack
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-    TableInfo = False
-    GlobalErrHandler
-    Resume PROC_EXIT
-
-End Function
-
 Private Function GetDescrip(obj As Object) As String
     On Error Resume Next
     GetDescrip = obj.Properties("Description")
-End Function
-
-Private Function LongestTableDescription(strTblName As String) As Integer
-' ?LongestTableDescription("tblCaseManager")
-
-    On Error GoTo PROC_ERR
-
-    Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDef
-    Dim fld As DAO.Field
-    Dim strLFD As String
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "LongestTableDescription"
-
-    Set dbs = CurrentDb()
-    Set tdf = dbs.TableDefs(strTblName)
-
-    For Each fld In tdf.Fields
-        If Len(GetDescrip(fld)) > aeintFDLen Then
-            strLFD = GetDescrip(fld)
-            aeintFDLen = Len(GetDescrip(fld))
-        End If
-    Next
-
-    LongestTableDescription = aeintFDLen
-
-PROC_EXIT:
-    Set fld = Nothing
-    Set tdf = Nothing
-    Set dbs = Nothing
-    PopCallStack
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegitClass"
-    LongestTableDescription = -1
-    GlobalErrHandler
-    Resume PROC_EXIT
-
 End Function
 
 Private Function FieldTypeName(fld As DAO.Field) As String
@@ -954,113 +602,6 @@ Private Function FieldTypeName(fld As DAO.Field) As String
     End Select
 
     FieldTypeName = strReturn
-
-End Function
-
-Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
-' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
-' Document the tables, fields, and relationships
-' Tables, field type, primary keys, foreign keys, indexes
-' Relationships in the database with table, foreign table, primary keys, foreign keys
-' Ref: http://allenbrowne.com/func-06.html
-
-    'Dim strDoc As String
-    Dim tdf As DAO.TableDef
-    Dim fld As DAO.Field
-    Dim blnDebug As Boolean
-    Dim blnResult As Boolean
-    Dim intFailCount As Integer
-    Dim strFile As String
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeDocumentTables"
-
-    On Error GoTo PROC_ERR
-
-    intFailCount = 0
-    
-    LongestFieldPropsName
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name=" & aestrLFN
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Length=" & aeintFNLen
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description=" & aestrLFD
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description Length=" & aeintFDLen
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type=" & aestrLFT
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type Length=" & aeintFTLen
-
-    ' Reset values
-    aestrLFN = ""
-    If aeintFNLen < 11 Then aeintFNLen = 11     ' Minimum required by design
-    'aestrLFNTN = ""
-    'aestrLFD = ""
-    aeintFDLen = 0
-    'aestrLFT = ""
-    'aeintFTLen = 0
-
-    Debug.Print "aeDocumentTables"
-    If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
-    Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
-        Debug.Print , "NOW DEBUGGING..."
-    End If
-
-'''x     strFile = aestrSourceLocation & aeTblTxtFile
-    
-    If Dir(strFile) <> "" Then
-        ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
-        Open strFile For Append As #1
-    Else
-        If Not FileLocked(strFile) Then Open strFile For Append As #1
-    End If
-
-    For Each tdf In CurrentDb.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
-            If blnDebug Then
-                blnResult = TableInfo(tdf.Name, "WithDebugging")
-                If Not blnResult Then intFailCount = intFailCount + 1
-                If blnDebug And aeintFDLen <> 11 Then Debug.Print "aeintFDLen=" & aeintFDLen
-            Else
-                blnResult = TableInfo(tdf.Name)
-                If Not blnResult Then intFailCount = intFailCount + 1
-            End If
-            'Debug.Print
-            aeintFDLen = 0
-        End If
-    Next tdf
-
-    'If intFailCount > 0 Then
-    '    aeDocumentTables = False
-    'Else
-    '    aeDocumentTables = True
-    'End If
-    If blnDebug Then
-        Debug.Print "intFailCount = " & intFailCount
-        'Debug.Print "aeDocumentTables = " & aeDocumentTables
-    End If
-
-    aeDocumentTables = True
-
-PROC_EXIT:
-    Set fld = Nothing
-    Set tdf = Nothing
-    Close 1
-    PopCallStack
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    aeDocumentTables = False
-    GlobalErrHandler
-    Resume PROC_EXIT
 
 End Function
 
@@ -1406,33 +947,6 @@ Private Function FolderExists(strPath As String) As Boolean
     On Error Resume Next
     FolderExists = ((GetAttr(strPath) And vbDirectory) = vbDirectory)
 End Function
-
-Private Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx
-
-    Dim obj As AccessObject
-    Dim dbs As Object
-    Set dbs = Application.CurrentData
-
-    If IsMissing(strCloseAll) Then
-        ' Search for open AccessObject objects in AllQueries collection.
-        For Each obj In dbs.AllQueries
-            If obj.IsLoaded = True Then
-                ' Print name of obj
-                Debug.Print obj.Name
-            End If
-        Next obj
-    Else
-        For Each obj In dbs.AllQueries
-            If obj.IsLoaded = True Then
-                ' Close obj
-                DoCmd.Close acQuery, obj.Name, acSaveYes
-                Debug.Print "Closed query " & obj.Name
-            End If
-        Next obj
-    End If
-
-End Sub
 
 Private Function BuildTheDirectory(fso As Object, _
                                         Optional varDebug As Variant) As Boolean
@@ -1829,75 +1343,6 @@ Private Function fListGUID(strTableName As String) As String
     fListGUID = Left(strGuid, 23)
 
 End Function
-
-Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
-
-    ' Beautify XML in VBA with MSXML6 only
-    ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
-    Dim objXMLStyleSheet As Object
-    Dim strXMLStyleSheet As String
-    Dim objXMLDOMDoc As Object
-
-    Dim fle As Integer
-    fle = FreeFile()
-
-    strXMLStyleSheet = "<xsl:stylesheet" & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "  xmlns:xsl=""http://www.w3.org/1999/XSL/Transform""" & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "  version=""1.0"">" & vbCrLf & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "<xsl:output method=""xml"" indent=""yes""/>" & vbCrLf & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "<xsl:template match=""@* | node()"">" & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "  <xsl:copy>" & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "    <xsl:apply-templates select=""@* | node()""/>" & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "  </xsl:copy>" & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "</xsl:template>" & vbCrLf & vbCrLf
-    strXMLStyleSheet = strXMLStyleSheet & "</xsl:stylesheet>"
-
-    Set objXMLStyleSheet = CreateObject("Msxml2.DOMDocument.6.0")
-
-    With objXMLStyleSheet
-        ' Turn off Async I/O
-        .async = False
-        .validateOnParse = False
-        .resolveExternals = False
-    End With
-
-    objXMLStyleSheet.LoadXML (strXMLStyleSheet)
-    If objXMLStyleSheet.parseError.errorCode <> 0 Then
-        Debug.Print "Some Error..."
-        Exit Sub
-    End If
-
-    Set objXMLDOMDoc = CreateObject("Msxml2.DOMDocument.6.0")
-    With objXMLDOMDoc
-        ' Turn off Async I/O
-        .async = False
-        .validateOnParse = False
-        .resolveExternals = False
-    End With
-
-    ' Ref: http://msdn.microsoft.com/en-us/library/ms762722(v=vs.85).aspx
-    ' Ref: http://msdn.microsoft.com/en-us/library/ms754585(v=vs.85).aspx
-    ' Ref: http://msdn.microsoft.com/en-us/library/aa468547.aspx
-    objXMLDOMDoc.Load (strPathFileName)
-
-    Dim strXMLResDoc
-    Set strXMLResDoc = CreateObject("Msxml2.DOMDocument.6.0")
-
-    objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
-    strXMLResDoc = strXMLResDoc.XML
-    strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr(32) & Chr(32), , , vbBinaryCompare)
-    Debug.Print "Pretty XML Sample Output"
-    If Not IsMissing(varDebug) Then Debug.Print strXMLResDoc
-
-    ' Rewrite the file as pretty xml
-    Open strPathFileName For Output As #fle
-    Print #fle, strXMLResDoc
-    Close fle
-
-    Set objXMLDOMDoc = Nothing
-    Set objXMLStyleSheet = Nothing
-
-End Sub
 
 '==================================================
 ' Global Error Handler Routines
