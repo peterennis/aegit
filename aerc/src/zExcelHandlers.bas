@@ -1,14 +1,22 @@
-'* * * * * * * * * * * * * * * * * * * *
-'*                                     *  +--------------------------+
-'*      Written by James Kauffman      *  |                          |
-'*                                     *  |  http://www.saplsmw.com  |
-'*     Ver 1.20 Updated 17Jun2010      *  |                          |
-'*                                     *  +--------------------------+
-'* * * * * * * * * * * * * * * * * * * *
-
 Option Compare Database
+Option Explicit
 
-Function ExportToExcel(strTableName, strFileName, Optional strTabName As String = "Sheet1") As Boolean
+#Const LATEBINDING = True
+
+#If LATEBINDING Then
+   Dim xlwb As Object
+ #Else
+   Dim xlwb As Excel.Workbook
+ #End If
+
+Public Sub TestExportToExcel()
+    Dim bln As Boolean
+    bln = ExportToExcel("aeItems", "C:\TEMP\Exported_aeItems.xls")
+End Sub
+
+Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As String = "Sheet1") As Boolean
+' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
+' Ref: http://www.granite.ab.ca/access/latebinding.htm
 
     '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     '*                                                         *
@@ -20,43 +28,46 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
 
     Dim objExcel As Object
     Set objExcel = CreateObject("Excel.Application")
-    Dim wb As Object
-    Set wb = objExcel.Workbook
-    Dim ws As Object
-    Set ws = objExcel.Worksheet
-    Dim ws2 As Object
-    Set ws2 = objExcel.Worksheet
-    Dim nCurrent As Long, isFound As Boolean
+    Dim wkb As Object
+'''x    Set wkb = objExcel.Workbook
+    Dim wks As Object
+'''x    Set wks = objExcel.Worksheet
+    Dim wks2 As Object
+'''x    Set wks2 = objExcel.Worksheet
+    Dim nCurrent As Long
+    Dim isFound As Boolean
 
     On Error Resume Next
     isFound = False
     If Len(Dir(strFileName, vbNormal)) > 0 Then 'File exists!
-        Set wb = objExcel.Workbooks.Open(strFileName, False, False)
-        nCurrent = wb.Worksheets.Count
+        Set wkb = objExcel.Workbooks.Open(strFileName, False, False)
+        nCurrent = wkb.Worksheets.Count
         Do While nCurrent > 0
-            If wb.Worksheets(nCurrent).Name = strTabName Then
+            If wkb.Worksheets(nCurrent).Name = strTabName Then
                 objExcel.DisplayAlerts = False
-                Set ws2 = wb.Worksheets(nCurrent)
-                Set ws = wb.Worksheets.Add
-                ws2.Delete
-                ws.Name = strTabName
+                Set wks2 = wkb.Worksheets(nCurrent)
+                Set wks = wkb.Worksheets.Add
+                wks2.Delete
+                wks.Name = strTabName
                 isFound = True
             End If
             nCurrent = nCurrent - 1
         Loop
         If Not isFound Then
-            Set ws = wb.Worksheets.Add
-            ws.Name = strTabName
+            Set wks = wkb.Worksheets.Add
+            wks.Name = strTabName
         End If
     Else
-        Set wb = objExcel.Workbooks.Add
-        wb.Worksheets(3).Delete
-        wb.Worksheets(2).Delete
-        wb.Worksheets(1).Name = strTabName
-        Set ws = wb.Worksheets(1)
+        Set wkb = objExcel.Workbooks.Add
+        wkb.Worksheets(3).Delete
+        wkb.Worksheets(2).Delete
+        wkb.Worksheets(1).Name = strTabName
+        Set wks = wkb.Worksheets(1)
     End If
         
-    Dim rs As DAO.Recordset
+    Dim rst As DAO.Recordset
+    Set rst = CurrentDb.OpenRecordset("select * from " & strTableName)
+
     Dim nFieldCount As Long
     Dim nRecordCount As Long
     Dim RetVal As Variant
@@ -66,33 +77,32 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
     Dim nSecondsLeft As Long
     Dim strTest As String
     
-    Set rs = CurrentDb.OpenRecordset("select * from " & strTableName)
-    nFieldCount = rs.Fields.Count
+    nFieldCount = rst.Fields.Count
     
-    If Not rs.EOF Then
-        rs.MoveLast
-        nRecordCount = rs.RecordCount
-        rs.MoveFirst
+    If Not rst.EOF Then
+        rst.MoveLast
+        nRecordCount = rst.RecordCount
+        rst.MoveFirst
     End If
     
     RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to " & strFileName & ". . .", nRecordCount)
 
     
     For nCurrent = 0 To nFieldCount - 1
-        strTest = rs.Fields(nCurrent).Name
+        strTest = rst.Fields(nCurrent).Name
         Do While InStr(strTest, "/") > 0
             strTest = Replace(strTest, "/", "")
         Loop
-        ws.Range(FindExcelCell(nCurrent + 1, 1)) = strTest
-        ws.Range(FindExcelCell(nCurrent + 1, 1)).Font.Bold = True
-        ws.Range(FindExcelCell(nCurrent + 1, 1)).Interior.Color = RGB(222, 222, 222)
+        wks.Range(FindExcelCell(nCurrent + 1, 1)) = strTest
+        wks.Range(FindExcelCell(nCurrent + 1, 1)).Font.Bold = True
+        wks.Range(FindExcelCell(nCurrent + 1, 1)).Interior.Color = RGB(222, 222, 222)
     Next
     
     nCurSec = Second(Now())
     Do While nCurSec = Second(Now())
     Loop
     nCurSec = Second(Now())
-    Do While Not rs.EOF
+    Do While Not rst.EOF
         nCurRec = nCurRec + 1
         If Second(Now()) <> nCurSec And nCurRec < nRecordCount Then
             nCurSec = Second(Now())
@@ -100,7 +110,7 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
             If nTotalSeconds > 3 Then
                 nSecondsLeft = Int(((nTotalSeconds / nCurRec) * nRecordCount) * ((nRecordCount - nCurRec) / nRecordCount))
                 RetVal = SysCmd(acSysCmdRemoveMeter)
-                RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to tab " & strTabName & " in " & strFileName & ". . .  " & nSecondsLeft & " seconds remaining.", rs.RecordCount())
+                RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to tab " & strTabName & " in " & strFileName & ". . .  " & nSecondsLeft & " seconds remaining.", rst.RecordCount())
                 RetVal = SysCmd(acSysCmdUpdateMeter, nCurRec)
                 RetVal = DoEvents()
             End If
@@ -108,30 +118,30 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
         strTest = ""
         'Check for blank lines--no need to export those!
         For nCurrent = 0 To nFieldCount - 1
-            strTest = strTest & IIf(IsNull(rs.Fields), "", rs.Fields(nCurrent).Value)
+            strTest = strTest & IIf(IsNull(rst.Fields), "", rst.Fields(nCurrent).Value)
         Next
         If Len(Trim(strTest)) > 0 Then
             For nCurrent = 0 To nFieldCount - 1
-                If Not IsNull(rs.Fields(nCurrent).Value) Then
-                    If rs.Fields(nCurrent).Value <> "" Then
-                        If IsNumeric(rs.Fields(nCurrent).Value & "") Then
-                            ws.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = "'" & Trim(rs.Fields(nCurrent).Value)
+                If Not IsNull(rst.Fields(nCurrent).Value) Then
+                    If rst.Fields(nCurrent).Value <> "" Then
+                        If IsNumeric(rst.Fields(nCurrent).Value & "") Then
+                            wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = "'" & Trim(rst.Fields(nCurrent).Value)
                         Else
-                            ws.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = Trim(rs.Fields(nCurrent).Value)
+                            wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = Trim(rst.Fields(nCurrent).Value)
                         End If
                     End If
                 End If
             Next
         End If
-        rs.MoveNext
+        rst.MoveNext
     Loop
-    rs.Close
-    Set rs = Nothing
+    rst.Close
+    Set rst = Nothing
     
-    ws.Range("A1").Select  'Move the cursor to the very first field
+    wks.Range("A1").Select  'Move the cursor to the very first field
     If Len(Dir(strFileName, vbNormal)) > 0 Then
         'File already exists, just close and save.
-        wb.Close (True)
+        wkb.Close (True)
     Else
         'File must be created.  Save and then close without saving.
         objExcel.Workbooks(1).SaveAs (strFileName)
@@ -143,9 +153,11 @@ Function ExportToExcel(strTableName, strFileName, Optional strTabName As String 
     
     ExportToExcel = True
     RetVal = SysCmd(acSysCmdRemoveMeter)
+
 End Function
 
-Function IsNumeric(strCheck As String) As Boolean
+Private Function IsNumeric(strCheck As String) As Boolean
+
     Dim nCurrent As Long
     IsNumeric = True
     nCurrent = 0
@@ -156,10 +168,13 @@ Function IsNumeric(strCheck As String) As Boolean
             IsNumeric = False 'Part of the string is not a digit!
         End If
     Loop
+
 End Function
 
-Function FindExcelCell(nX As Long, nY As Long) As String
-    Dim nPower1 As Long, nPower2 As Long
+Private Function FindExcelCell(nX As Long, nY As Long) As String
+
+    Dim nPower1 As Long
+    Dim nPower2 As Long
     nPower2 = 0
     If nX > 26 Then
         nPower2 = Int((nX - 1) / 26)
@@ -170,4 +185,5 @@ Function FindExcelCell(nX As Long, nY As Long) As String
     Else
         FindExcelCell = Chr(64 + nPower1) & nY
     End If
+
 End Function
