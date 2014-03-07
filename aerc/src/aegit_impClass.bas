@@ -34,13 +34,11 @@ Private Const aegit_impVERSION_DATE As String = "February 5, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
-Private Const gblnOutputPrinterInfo = False
+'''x Private Const gblnOutputPrinterInfo = False
 
 Private Type mySetupType
-    SourceFolder As String
     ImportFolder As String
-    UseImportFolder As Boolean
-    XMLFolder As String
+    NotUsed As Boolean
 End Type
 
 ' Current pointer to the array element of the call stack
@@ -53,22 +51,22 @@ Private mfInErrorHandler As Boolean
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
-Private aegitSourceFolder As String
+'''x Private aegitSourceFolder As String
 Private aegitImportFolder As String
-Private aegitXMLFolder As String
-Private aegitDataXML() As Variant
-Private aegitExportDataToXML As Boolean
+'''x Private aegitXMLFolder As String
+'''x Private aegitDataXML() As Variant
+'''x Private aegitExportDataToXML As Boolean
 Private aestrImportLocation As String
 '''x Private aeintLTN As Long                        ' Longest Table Name
-Private aestrLFN As String                      ' Longest Field Name
-Private aestrLFNTN As String
-Private aeintFNLen As Long
-Private aestrLFT As String                      ' Longest Field Type
-Private aeintFTLen As Long                      ' Field Type Length
-Private Const aeintFSize As Long = 4
-Private aeintFDLen As Long
-Private aestrLFD As String
-Private Const aestr4 As String = "    "
+'''x Private aestrLFN As String                      ' Longest Field Name
+'''x Private aestrLFNTN As String
+'''x Private aeintFNLen As Long
+'''x Private aestrLFT As String                      ' Longest Field Type
+'''x Private aeintFTLen As Long                      ' Field Type Length
+'''x Private Const aeintFSize As Long = 4
+'''x Private aeintFDLen As Long
+'''x Private aestrLFD As String
+'''x Private Const aestr4 As String = "    "
 '
 
 Private Sub Class_Initialize()
@@ -77,56 +75,56 @@ Private Sub Class_Initialize()
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
     ' provide a default value for the SourceFolder, ImportFolder and other properties
-    aegitSourceFolder = "default"
+'''x     aegitSourceFolder = "default"
     aegitImportFolder = "default"
-    aegitXMLFolder = "default"
-    ReDim Preserve aegitDataXML(1 To 1)
-    aegitDataXML(1) = "aetlkpStates"
-    aegitExportDataToXML = False
-    aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
+'''x     aegitXMLFolder = "default"
+'''x     ReDim Preserve aegitDataXML(1 To 1)
+'''x     aegitDataXML(1) = "aetlkpStates"
+'''x     aegitExportDataToXML = False
+'''x     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
-    aegitType.UseImportFolder = False
-    aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
+'''x     aegitType.UseImportFolder = False
+'''x     aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
 '''x     aeintLTN = LongestTableName
 '''x     LongestFieldPropsName
 
     Debug.Print "Class_Initialize"
-    Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
+'''x     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitImportFolder = " & aegitImportFolder
-    Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
+'''x     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
-    Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
-    Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
+'''x     Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
+'''x     Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
 '''x     Debug.Print , "aeintLTN = " & aeintLTN
-    Debug.Print , "aeintFNLen = " & aeintFNLen
-    Debug.Print , "aeintFTLen = " & aeintFTLen
-    Debug.Print , "aeintFSize = " & aeintFSize
+'''x     Debug.Print , "aeintFNLen = " & aeintFNLen
+'''x     Debug.Print , "aeintFTLen = " & aeintFTLen
+'''x     Debug.Print , "aeintFSize = " & aeintFSize
     'Debug.Print , "aeintFDLen = " & aeintFDLen
 
 End Sub
 
 Private Sub Class_Terminate()
-    Dim strFile As String
-    strFile = aegitSourceFolder & "export.ini"
-    If Dir(strFile) <> "" Then
-        ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
-    End If
+'''x     Dim strFile As String
+'''x     strFile = aegitSourceFolder & "export.ini"
+'''x     If Dir(strFile) <> "" Then
+'''x         ' The file exists
+'''x         If Not FileLocked(strFile) Then KillProperly (strFile)
+'''x     End If
     Debug.Print
     Debug.Print "Class_Terminate"
     Debug.Print , "aegit VERSION: " & aegit_impVERSION
     Debug.Print , "aegit VERSION_DATE: " & aegit_impVERSION_DATE
 End Sub
 
-Property Get SourceFolder() As String
-    SourceFolder = aegitSourceFolder
-End Property
+'''x Property Get SourceFolder() As String
+'''x     SourceFolder = aegitSourceFolder
+'''x End Property
 
-Property Let SourceFolder(ByVal strSourceFolder As String)
-    ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
-    ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
-    aegitSourceFolder = strSourceFolder
-End Property
+'''x Property Let SourceFolder(ByVal strSourceFolder As String)
+'''x     ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
+'''x     ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
+'''x     aegitSourceFolder = strSourceFolder
+'''x End Property
 
 Property Get ImportFolder() As String
     ImportFolder = aegitImportFolder
@@ -136,19 +134,19 @@ Property Let ImportFolder(ByVal strImportFolder As String)
     aegitImportFolder = strImportFolder
 End Property
 
-Property Get XMLFolder() As String
-    XMLFolder = aegitXMLFolder
-End Property
+'''x Property Get XMLFolder() As String
+'''x     XMLFolder = aegitXMLFolder
+'''x End Property
 
-Property Let XMLFolder(ByVal strXMLFolder As String)
-    aegitXMLFolder = strXMLFolder
-End Property
+'''x Property Let XMLFolder(ByVal strXMLFolder As String)
+'''x     aegitXMLFolder = strXMLFolder
+'''x End Property
 
-Property Let TablesExportToXML(ByRef avarTables() As Variant)
-    MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
-        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    'aegitDataXML = avarTables
-End Property
+'''x Property Let TablesExportToXML(ByRef avarTables() As Variant)
+'''x     MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
+'''x         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
+'''x     'aegitDataXML = avarTables
+'''x End Property
 
 Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
@@ -1082,11 +1080,11 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     
     Const acQuery = 1
 
-    If aegitSourceFolder = "default" Then
+'''x     If aegitSourceFolder = "default" Then
 '''x         aestrSourceLocation = aegitType.SourceFolder
-    Else
+'''x     Else
 '''x         aestrSourceLocation = aegitSourceFolder
-    End If
+'''x     End If
 
     If aegitImportFolder = "default" Then
         aestrImportLocation = aegitType.ImportFolder
