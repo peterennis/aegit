@@ -2215,7 +2215,7 @@ Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "KillAllFiles"
 
-    Debug.Print "aeDocumentTheDatabase"
+    Debug.Print "KillAllFiles"
     If IsMissing(varDebug) Then
         blnDebug = False
         Debug.Print , "varDebug IS missing so blnDebug of KillAllFiles is set to False"

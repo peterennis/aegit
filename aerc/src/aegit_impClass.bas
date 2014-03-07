@@ -51,22 +51,8 @@ Private mfInErrorHandler As Boolean
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
-'''x Private aegitSourceFolder As String
 Private aegitImportFolder As String
-'''x Private aegitXMLFolder As String
-'''x Private aegitDataXML() As Variant
-'''x Private aegitExportDataToXML As Boolean
 Private aestrImportLocation As String
-'''x Private aeintLTN As Long                        ' Longest Table Name
-'''x Private aestrLFN As String                      ' Longest Field Name
-'''x Private aestrLFNTN As String
-'''x Private aeintFNLen As Long
-'''x Private aestrLFT As String                      ' Longest Field Type
-'''x Private aeintFTLen As Long                      ' Field Type Length
-'''x Private Const aeintFSize As Long = 4
-'''x Private aeintFDLen As Long
-'''x Private aestrLFD As String
-'''x Private Const aestr4 As String = "    "
 '
 
 Private Sub Class_Initialize()
@@ -74,57 +60,28 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
-    ' provide a default value for the SourceFolder, ImportFolder and other properties
-'''x     aegitSourceFolder = "default"
+    ' provide default values
     aegitImportFolder = "default"
-'''x     aegitXMLFolder = "default"
-'''x     ReDim Preserve aegitDataXML(1 To 1)
-'''x     aegitDataXML(1) = "aetlkpStates"
-'''x     aegitExportDataToXML = False
-'''x     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
-'''x     aegitType.UseImportFolder = False
-'''x     aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
-'''x     aeintLTN = LongestTableName
-'''x     LongestFieldPropsName
 
     Debug.Print "Class_Initialize"
-'''x     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitImportFolder = " & aegitImportFolder
-'''x     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
-'''x     Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
-'''x     Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
-'''x     Debug.Print , "aeintLTN = " & aeintLTN
-'''x     Debug.Print , "aeintFNLen = " & aeintFNLen
-'''x     Debug.Print , "aeintFTLen = " & aeintFTLen
-'''x     Debug.Print , "aeintFSize = " & aeintFSize
-    'Debug.Print , "aeintFDLen = " & aeintFDLen
 
 End Sub
 
 Private Sub Class_Terminate()
-'''x     Dim strFile As String
-'''x     strFile = aegitSourceFolder & "export.ini"
-'''x     If Dir(strFile) <> "" Then
-'''x         ' The file exists
-'''x         If Not FileLocked(strFile) Then KillProperly (strFile)
-'''x     End If
+'''     Dim strFile As String
+'''     strFile = aegitSourceFolder & "export.ini"
+'''     If Dir(strFile) <> "" Then
+'''         ' The file exists
+'''         If Not FileLocked(strFile) Then KillProperly (strFile)
+'''     End If
     Debug.Print
     Debug.Print "Class_Terminate"
     Debug.Print , "aegit VERSION: " & aegit_impVERSION
     Debug.Print , "aegit VERSION_DATE: " & aegit_impVERSION_DATE
 End Sub
-
-'''x Property Get SourceFolder() As String
-'''x     SourceFolder = aegitSourceFolder
-'''x End Property
-
-'''x Property Let SourceFolder(ByVal strSourceFolder As String)
-'''x     ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
-'''x     ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
-'''x     aegitSourceFolder = strSourceFolder
-'''x End Property
 
 Property Get ImportFolder() As String
     ImportFolder = aegitImportFolder
@@ -133,20 +90,6 @@ End Property
 Property Let ImportFolder(ByVal strImportFolder As String)
     aegitImportFolder = strImportFolder
 End Property
-
-'''x Property Get XMLFolder() As String
-'''x     XMLFolder = aegitXMLFolder
-'''x End Property
-
-'''x Property Let XMLFolder(ByVal strXMLFolder As String)
-'''x     aegitXMLFolder = strXMLFolder
-'''x End Property
-
-'''x Property Let TablesExportToXML(ByRef avarTables() As Variant)
-'''x     MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
-'''x         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-'''x     'aegitDataXML = avarTables
-'''x End Property
 
 Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
@@ -245,77 +188,6 @@ Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
     
 End Property
 
-Private Function aeReadWriteStream(strPathFileName As String) As Boolean
-
-    'Debug.Print "aeReadWriteStream Entry strPathFileName=" & strPathFileName
-
-    ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeReadWriteStream"
-
-    On Error GoTo PROC_ERR
-
-    Dim fName As String
-    Dim fname2 As String
-    Dim fnr As Integer
-    Dim fnr2 As Integer
-    Dim tstring As String * 1
-
-    aeReadWriteStream = False
-
-    ' If the file has no Byte Order Mark (BOM)
-    ' Ref: http://msdn.microsoft.com/en-us/library/windows/desktop/dd374101%28v=vs.85%29.aspx
-    ' then do nothing
-    fName = strPathFileName
-    fname2 = strPathFileName & ".clean.txt"
-
-    fnr = FreeFile()
-    Open fName For Binary Access Read As #fnr
-    Get #fnr, , tstring
-    ' #FFFE, #FFFF, #0000
-    ' If no BOM then it is a txt file and header stripping is not needed
-    If Asc(tstring) <> 254 And Asc(tstring) <> 255 And _
-                Asc(tstring) <> 0 Then
-        Close #fnr
-        aeReadWriteStream = False
-        Exit Function
-    End If
-
-    fnr2 = FreeFile()
-    Open fname2 For Binary Lock Read Write As #fnr2
-
-    While Not EOF(fnr)
-        Get #fnr, , tstring
-        If Asc(tstring) = 254 Or Asc(tstring) = 255 Or _
-                Asc(tstring) = 0 Then
-        Else
-            Put #fnr2, , tstring
-        End If
-    Wend
-
-PROC_EXIT:
-    Close #fnr
-    Close #fnr2
-    aeReadWriteStream = True
-    'PopCallStack
-    Exit Function
-
-PROC_ERR:
-    Select Case Err.Number
-        Case 9
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass" & _
-                    vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
-            'GlobalErrHandler
-            Resume Next
-        Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
-            'GlobalErrHandler
-            Resume Next
-    End Select
-
-End Function
-
 Private Function Pause(NumberOfSeconds As Variant)
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?p=952355
 
@@ -405,9 +277,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeGetReferences is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
-
-'''x     strFile = aestrSourceLocation & aeRefTxtFile
-    
+   
     If Dir(strFile) <> "" Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
@@ -672,9 +542,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentRelations is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
-
-'''x     strFile = aestrSourceLocation & aeRelTxtFile
-    
+   
     If Dir(strFile) <> "" Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
@@ -749,79 +617,6 @@ PROC_ERR:
 
 End Sub
 
-Private Function GetPropEnum(typeNum As Long) As String
-' Ref: http://msdn.microsoft.com/en-us/library/bb242635.aspx
- 
-    Select Case typeNum
-        Case 1
-            GetPropEnum = "dbBoolean"
-        Case 2
-            GetPropEnum = "dbByte"
-        Case 3
-            GetPropEnum = "dbInteger"
-        Case 4
-            GetPropEnum = "dbLong"
-        Case 5
-            GetPropEnum = "dbCurrency"
-        Case 6
-            GetPropEnum = "dbSingle"
-        Case 7
-            GetPropEnum = "dbDouble"
-        Case 8
-            GetPropEnum = "dbDate"
-        Case 9
-            GetPropEnum = "dbBinary"
-        Case 10
-            GetPropEnum = "dbText"
-        Case 11
-            GetPropEnum = "dbLongBinary"
-        Case 12
-            GetPropEnum = "dbMemo"
-        Case 15
-            GetPropEnum = "dbGUID"
-        Case 16
-            GetPropEnum = "dbBigInt"
-        Case 17
-            GetPropEnum = "dbVarBinary"
-        Case 18
-            GetPropEnum = "dbChar"
-        Case 19
-            GetPropEnum = "dbNumeric"
-        Case 20
-            GetPropEnum = "dbDecimal"
-        Case 21
-            GetPropEnum = "dbFloat"
-        Case 22
-            GetPropEnum = "dbTime"
-        Case 23
-            GetPropEnum = "dbTimeStamp"
-        Case 101
-            GetPropEnum = "dbAttachment"
-        Case 102
-            GetPropEnum = "dbComplexByte"
-        Case 103
-            GetPropEnum = "dbComplexInteger"
-        Case 104
-            GetPropEnum = "dbComplexLong"
-        Case 105
-            GetPropEnum = "dbComplexSingle"
-        Case 106
-            GetPropEnum = "dbComplexDouble"
-        Case 107
-            GetPropEnum = "dbComplexGUID"
-        Case 108
-            GetPropEnum = "dbComplexDecimal"
-        Case 109
-            GetPropEnum = "dbComplexText"
-    End Select
-
-End Function
-
-Private Function GetPrpValue(obj As Object) As String
-    'On Error Resume Next
-    GetPrpValue = obj.Properties("Value")
-End Function
- 
 Private Function IsFileLocked(PathFileName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
 
@@ -872,73 +667,6 @@ PROC_ERR:
     Resume
 
 End Function
-
-Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
-
-    Dim strFile As String
-    Dim blnDebug As Boolean
-
-    ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "KillAllFiles"
-
-    Debug.Print "aeDocumentTheDatabase"
-    If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of KillAllFiles is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
-    Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of KillAllFiles is set to True"
-        Debug.Print , "NOW DEBUGGING..."
-    End If
-
-    If strLoc = "src" Then
-        ' Delete all the exported src files
-'''x         strFile = Dir(aestrSourceLocation & "*.*")
-        Do While strFile <> ""
-'''x             KillProperly (aestrSourceLocation & strFile)
-            ' Need to specify full path again because a file was deleted
-'''x             strFile = Dir(aestrSourceLocation & "*.*")
-        Loop
-'''x         strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
-        Do While strFile <> ""
-'''x             KillProperly (aestrSourceLocation & "xml\" & strFile)
-            ' Need to specify full path again because a file was deleted
-'''x             strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
-        Loop
-    ElseIf strLoc = "xml" Then
-        ' Delete files in xml location
-        If aegitSetup Then
-'''x             strFile = Dir(aestrXMLLocation & "*.*")
-            Do While strFile <> ""
-'''x                 KillProperly (aestrXMLLocation & strFile)
-                ' Need to specify full path again because a file was deleted
-'''x                 strFile = Dir(aestrXMLLocation & "*.*")
-            Loop
-        End If
-    Else
-        MsgBox "Bad strLoc", vbCritical, "STOP"
-        Stop
-    End If
-
-PROC_EXIT:
-    PopCallStack
-    Exit Sub
-
-PROC_ERR:
-    If Err = 70 Then    ' Permission denied
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass" _
-            & vbCrLf & vbCrLf & _
-            "Manually delete the files from git, compact and repair database, then try again!", vbCritical, "STOP"
-        Stop
-    End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
-    GlobalErrHandler
-    Resume PROC_EXIT
-
-End Sub
 
 Private Function FolderExists(strPath As String) As Boolean
 ' Ref: http://allenbrowne.com/func-11.html
@@ -992,14 +720,10 @@ Private Function BuildTheDirectory(fso As Object, _
         Exit Function
     End If
     If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
-'''x     If blnDebug Then Debug.Print , , "aegitUseImportFolder = " & aegitUseImportFolder
     
     If aegitImportFolder = "default" Then
         aestrImportLocation = aegitType.ImportFolder
     End If
-'''x     If aegitUseImportFolder And aegitImportFolder <> "default" Then
-'''x         aestrImportLocation = aegitImportFolder
-'''x     End If
         
     If blnDebug Then Debug.Print , , "The import directory is: " & aestrImportLocation
    
@@ -1009,11 +733,6 @@ Private Function BuildTheDirectory(fso As Object, _
         Exit Function
     End If
     If blnDebug Then Debug.Print , , "The import directory does NOT EXIST !!!"
-
-'''x     If aegitUseImportFolder Then
-'''x         Set objImportFolder = fso.CreateFolder(aestrImportLocation)
-'''x         If blnDebug Then Debug.Print , , aestrImportLocation & " has been CREATED !!!"
-'''x     End If
 
     BuildTheDirectory = True
 
@@ -1080,25 +799,14 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     
     Const acQuery = 1
 
-'''x     If aegitSourceFolder = "default" Then
-'''x         aestrSourceLocation = aegitType.SourceFolder
-'''x     Else
-'''x         aestrSourceLocation = aegitSourceFolder
-'''x     End If
-
     If aegitImportFolder = "default" Then
         aestrImportLocation = aegitType.ImportFolder
     End If
-'''x     If aegitUseImportFolder And aegitImportFolder <> "default" Then
-'''x         aestrImportLocation = aegitImportFolder
-'''x     End If
 
     If blnDebug Then
         Debug.Print ">==> aeReadDocDatabase >==>"
         Debug.Print , "aegit VERSION: " & aegit_impVERSION
         Debug.Print , "aegit VERSION_DATE: " & aegit_impVERSION_DATE
-'''x         Debug.Print , "SourceFolder = " & aestrSourceLocation
-'''x         Debug.Print , "UseImportFolder = " & aegitUseImportFolder
         Debug.Print , "ImportFolder = " & aestrImportLocation
         'Stop
     End If
@@ -1114,7 +822,6 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
 
     ' Create needed objects
     Dim fso As Object
-'    Dim FSO As Scripting.FileSystemObject
     Set fso = CreateObject("Scripting.FileSystemObject")
 
     If blnDebug Then
@@ -1124,55 +831,53 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
         bln = BuildTheDirectory(fso)
     End If
 
-'''x     If aegitUseImportFolder Then
-        Dim objFolder As Object
-        Set objFolder = fso.GetFolder(aegitType.ImportFolder)
+    Dim objFolder As Object
+    Set objFolder = fso.GetFolder(aegitType.ImportFolder)
 
-        For Each MyFile In objFolder.Files
-            If blnDebug Then Debug.Print "myFile = " & MyFile
-            If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
-            strFileBaseName = fso.GetBaseName(MyFile.Name)
-            strFileType = fso.GetExtensionName(MyFile.Name)
-            If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
+    For Each MyFile In objFolder.Files
+        If blnDebug Then Debug.Print "myFile = " & MyFile
+        If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
+        strFileBaseName = fso.GetBaseName(MyFile.Name)
+        strFileType = fso.GetExtensionName(MyFile.Name)
+        If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
 
-            If (strFileType = "frm") Then
-                If Exists("FORMS", strFileBaseName) Then
-                    MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                    If blnDebug Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-                Else
-                    Application.LoadFromText acForm, strFileBaseName, MyFile.Path
-                End If
-            ElseIf (strFileType = "rpt") Then
-                If Exists("REPORTS", strFileBaseName) Then
-                    MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                    If blnDebug Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-                Else
-                    Application.LoadFromText acReport, strFileBaseName, MyFile.Path
-                End If
-            ElseIf (strFileType = "bas") Then
-                If Exists("MODULES", strFileBaseName) Then
-                    MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                    If blnDebug Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-                Else
-                    Application.LoadFromText acModule, strFileBaseName, MyFile.Path
-                End If
-            ElseIf (strFileType = "mac") Then
-                If Exists("MACROS", strFileBaseName) Then
-                    MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                    If blnDebug Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-                Else
-                    Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
-                End If
-            ElseIf (strFileType = "qry") Then
-                If Exists("QUERIES", strFileBaseName) Then
-                    MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                    If blnDebug Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
-                Else
-                    Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
-                End If
+        If (strFileType = "frm") Then
+            If Exists("FORMS", strFileBaseName) Then
+                MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                If blnDebug Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+            Else
+                Application.LoadFromText acForm, strFileBaseName, MyFile.Path
             End If
-        Next
-'''x     End If
+        ElseIf (strFileType = "rpt") Then
+            If Exists("REPORTS", strFileBaseName) Then
+                MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                If blnDebug Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+            Else
+                Application.LoadFromText acReport, strFileBaseName, MyFile.Path
+            End If
+        ElseIf (strFileType = "bas") Then
+            If Exists("MODULES", strFileBaseName) Then
+                MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                If blnDebug Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+            Else
+                Application.LoadFromText acModule, strFileBaseName, MyFile.Path
+            End If
+        ElseIf (strFileType = "mac") Then
+            If Exists("MACROS", strFileBaseName) Then
+                MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                If blnDebug Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+            Else
+                Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
+            End If
+        ElseIf (strFileType = "qry") Then
+            If Exists("QUERIES", strFileBaseName) Then
+                MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
+                If blnDebug Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+            Else
+                Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
+            End If
+        End If
+    Next
 
     If blnDebug Then Debug.Print "<==<"
     
@@ -1180,7 +885,6 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
 
 PROC_EXIT:
     Set MyFile = Nothing
-    'Set ojbFolder = Nothing
     Set fso = Nothing
     Set wsh = Nothing
     aeReadDocDatabase = True
