@@ -1,14 +1,6 @@
 Option Compare Database
 Option Explicit
 
-#Const LATEBINDING = True
-
-#If LATEBINDING Then
-   Dim xlwb As Object
- #Else
-   Dim xlwb As Excel.Workbook
- #End If
-
 Public Sub TestExportToExcel()
     Dim bln As Boolean
     bln = ExportToExcel("aeItems", "C:\TEMP\Exported_aeItems.xls")
@@ -18,22 +10,11 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
 ' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
 ' Ref: http://www.granite.ab.ca/access/latebinding.htm
 
-    '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    '*                                                         *
-    '*   Requires reference to Microsoft Excel Object Library  *
-    '*                                                         *
-    '*   Tools->References...->Microsoft Excel Ojbect Library  *
-    '*                                                         *
-    '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
     Dim objExcel As Object
     Set objExcel = CreateObject("Excel.Application")
     Dim wkb As Object
-'''x    Set wkb = objExcel.Workbook
     Dim wks As Object
-'''x    Set wks = objExcel.Worksheet
     Dim wks2 As Object
-'''x    Set wks2 = objExcel.Worksheet
     Dim nCurrent As Long
     Dim isFound As Boolean
 
