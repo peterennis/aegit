@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegitVERSION As String = "0.8.6"
-Private Const aegitVERSION_DATE As String = "March 7, 2014"
+Private Const aegit_expVERSION As String = "0.8.6"
+Private Const aegit_expVERSION_DATE As String = "March 7, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -131,8 +131,8 @@ Private Sub Class_Terminate()
     End If
     Debug.Print
     Debug.Print "Class_Terminate"
-    Debug.Print , "aegit VERSION: " & aegitVERSION
-    Debug.Print , "aegit VERSION_DATE: " & aegitVERSION_DATE
+    Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
+    Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
 End Sub
 
 Property Get SourceFolder() As String
@@ -2450,7 +2450,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputAllContainerProperties
     OutputTableDataMacros
 
-    If aeExists("Tables", "aetlkpStates", "DebugIt") Then
+    If aeExists("Tables", "aetlkpStates", "Debugit") Then
         OutputTableDataAsFormattedText "aetlkpStates"
     End If
 

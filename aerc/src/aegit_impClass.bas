@@ -79,8 +79,8 @@ Private Sub Class_Terminate()
 '''     End If
     Debug.Print
     Debug.Print "Class_Terminate"
-    Debug.Print , "aegit VERSION: " & aegit_impVERSION
-    Debug.Print , "aegit VERSION_DATE: " & aegit_impVERSION_DATE
+    Debug.Print , "aegit_imp VERSION: " & aegit_impVERSION
+    Debug.Print , "aegit_imp VERSION_DATE: " & aegit_impVERSION_DATE
 End Sub
 
 Property Get ImportFolder() As String
@@ -754,7 +754,7 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     Dim wsh As Object  ' As Object if late-bound
     Set wsh = CreateObject("WScript.Shell")
 
-    If Not FolderExists("aestrImportLocation") Then
+    If Not FolderExists(aestrImportLocation) Then
         MsgBox "The Import folder does not exist!" & vbCrLf & _
             "aestrImportLocation=" & aestrImportLocation, vbCritical, "aegit"
         Stop
@@ -778,7 +778,7 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     End If
 
     Dim objFolder As Object
-    Set objFolder = fso.GetFolder(aegitType.ImportFolder)
+    Set objFolder = fso.GetFolder(aestrImportLocation)
 
     For Each MyFile In objFolder.Files
         If blnDebug Then Debug.Print "myFile = " & MyFile

@@ -23,12 +23,12 @@ Dim ref As Reference
 '
 Public Function MYPROJECT_TEST()
     aegitClassTest
-    'aegitClassTest varDebug:="DebugIt"
+    'aegitClassTest varDebug:="Debugit"
 End Function
 
 Public Function IMPORT_TEST()
     'aegitClassImportTest
-    aegitClassImportTest varDebug:="DebugIt", varImpFldr:="C:\TEMP\imp\"
+    aegitClassImportTest varDebug:="Debugit", varImpFldr:="C:\TEMP\imp"
 End Function
 
 Public Sub ALTERNATIVE_TEST()
@@ -40,7 +40,7 @@ Public Sub ALTERNATIVE_TEST()
 
     On Error GoTo PROC_ERR
     'aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
-    aegitClassTest varDebug:="DebugIt", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+    aegitClassTest varDebug:="Debugit", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
 
 PROC_EXIT:
     Exit Sub
