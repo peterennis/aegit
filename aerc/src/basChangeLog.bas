@@ -22,6 +22,7 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140307 - v086 - Start initial import testing
 '20140305 - v085 - Trap Err 75 in KillProperly after rename of database
     ' Split class to aegit_expClass and aegit_impClass
     ' Testing updates to ExportToExcel by James Kauffman, using late binding

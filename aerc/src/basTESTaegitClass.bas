@@ -23,7 +23,12 @@ Dim ref As Reference
 '
 Public Function MYPROJECT_TEST()
     aegitClassTest
-    'aegitClassTest "debug"
+    'aegitClassTest varDebug:="DebugIt"
+End Function
+
+Public Function IMPORT_TEST()
+    'aegitClassImportTest
+    aegitClassImportTest varDebug:="DebugIt", varImpFldr:="C:\TEMP\imp\"
 End Function
 
 Public Sub ALTERNATIVE_TEST()
@@ -35,7 +40,7 @@ Public Sub ALTERNATIVE_TEST()
 
     On Error GoTo PROC_ERR
     'aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
-    aegitClassTest Debugit:="Debugit", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+    aegitClassTest varDebug:="DebugIt", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
 
 PROC_EXIT:
     Exit Sub
@@ -54,7 +59,7 @@ Private Function PassFail(bln As Boolean) As String
     End If
 End Function
 
-Public Function aegitClassTest(Optional Debugit As Variant, _
+Public Function aegitClassTest(Optional varDebug As Variant, _
                                 Optional varSrcFldr As Variant, _
                                 Optional varXmlFldr As Variant, _
                                 Optional varXmlData As Variant) As Boolean
@@ -71,8 +76,8 @@ Public Function aegitClassTest(Optional Debugit As Variant, _
     Dim bln7 As Boolean
     Dim bln8 As Boolean
 
-    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      'THE_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr         'THE_XML_FOLDER
+    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr         ' THE_XML_FOLDER
 
     ' Define tables for xml data export
     If Not IsMissing(varXmlData) Then
@@ -89,12 +94,12 @@ Test1:
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"
     Debug.Print "aegitClassTest"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
         bln1 = oDbObjects.DocumentTheDatabase()
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln1 = oDbObjects.DocumentTheDatabase("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -107,12 +112,12 @@ Test2:
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "2. aegitClassTest => Exists"
     Debug.Print "aegitClassTest"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to Exists"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to Exists"
         Debug.Print , "DEBUGGING IS OFF"
         bln2 = oDbObjects.Exists("Modules", "zzzaegitClass")
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln2 = oDbObjects.Exists("Modules", "zzzaegitClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -123,15 +128,15 @@ Test3:
     ' TEST 3
     '=============
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "3. aegitClassTest => ReadDocDatabase - NOT USED !!!"
+    Debug.Print "3. aegitClassTest => - NOT USED !!!"
     Debug.Print "aegitClassTest"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-'''x         bln3 = oDbObjects.ReadDocDatabase(False)
+'        bln3 = oDbObjects.ReadDocDatabase(False)
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
-'''x         bln3 = oDbObjects.ReadDocDatabase(False, "WithDebugging")
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+'        bln3 = oDbObjects.ReadDocDatabase(False, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -144,12 +149,12 @@ Test4:
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "4. aegitClassTest => GetReferences"
     Debug.Print "aegitClassTest"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to GetReferences"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to GetReferences"
         Debug.Print , "DEBUGGING IS OFF"
         bln4 = oDbObjects.GetReferences()
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln4 = oDbObjects.GetReferences("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -163,12 +168,12 @@ Test5:
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "5. aegitClassTest => DocumentTables"
     Debug.Print "aegitClassTest"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTables"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTables"
         Debug.Print , "DEBUGGING IS OFF"
         bln5 = oDbObjects.DocumentTables()
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln5 = oDbObjects.DocumentTables("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -182,12 +187,12 @@ Test6:
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "6. aegitClassTest => DocumentRelations"
     Debug.Print "aegitClassTest"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentRelations"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentRelations"
         Debug.Print , "DEBUGGING IS OFF"
         bln6 = oDbObjects.DocumentRelations()
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln6 = oDbObjects.DocumentRelations("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -201,12 +206,12 @@ Test7:
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
     Debug.Print "aegitClassTestXML"
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to DocumentTheDatabase"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
         bln7 = oDbObjects.DocumentTablesXML()
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -244,7 +249,8 @@ RESULTS:
 
 End Function
 
-Public Function aegitClassImportTest(Optional Debugit As Variant) As Boolean
+Public Function aegitClassImportTest(Optional varDebug As Variant, _
+                                Optional varImpFldr As Variant) As Boolean
 ' Usage:
 ' Run in immediate window: aegitClassImportTest
 
@@ -252,6 +258,8 @@ Public Function aegitClassImportTest(Optional Debugit As Variant) As Boolean
     Set oDbObjects = New aegit_impClass
 
     Dim bln1 As Boolean
+
+    If Not IsMissing(varImpFldr) Then oDbObjects.ImportFolder = varImpFldr      ' THE_IMPORT_FOLDER
 
 ImportTest1:
     '==============
@@ -262,14 +270,12 @@ ImportTest1:
     Debug.Print "1. aegitClassImportTest => ReadDocDatabase"
     Debug.Print "aegitClassImportTest"
 
-'''x     oDbObjects.UseImportFolder = True
-
-    If IsMissing(Debugit) Then
-        Debug.Print , "Debugit IS missing so no parameter is passed to ReadDocDatabase"
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
         bln1 = oDbObjects.ReadDocDatabase(True)
     Else
-        Debug.Print , "Debugit IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
         bln1 = oDbObjects.ReadDocDatabase(True, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"

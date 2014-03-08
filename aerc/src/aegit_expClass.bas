@@ -159,89 +159,89 @@ Property Let TablesExportToXML(ByRef avarTables() As Variant)
     'aegitDataXML = avarTables
 End Property
 
-Property Get DocumentTheDatabase(Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
+Property Get DocumentTheDatabase(Optional varDebug As Variant) As Boolean
+    If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTheDatabase"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
         DocumentTheDatabase = aeDocumentTheDatabase
     Else
         Debug.Print "Get DocumentTheDatabase"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        DocumentTheDatabase = aeDocumentTheDatabase(DebugTheCode)
+        DocumentTheDatabase = aeDocumentTheDatabase(varDebug)
     End If
 End Property
 
 Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
-                        Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
+                        Optional varDebug As Variant) As Boolean
+    If IsMissing(varDebug) Then
         Debug.Print "Get Exists"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeExists"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
         Debug.Print , "DEBUGGING IS OFF"
         Exists = aeExists(strAccObjType, strAccObjName)
     Else
         Debug.Print "Get Exists"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeExists"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
         Debug.Print , "DEBUGGING TURNED ON"
-        Exists = aeExists(strAccObjType, strAccObjName, DebugTheCode)
+        Exists = aeExists(strAccObjType, strAccObjName, varDebug)
     End If
 End Property
 
-Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
+Property Get GetReferences(Optional varDebug As Variant) As Boolean
+    If IsMissing(varDebug) Then
         Debug.Print "Get GetReferences"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeGetReferences"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING IS OFF"
         GetReferences = aeGetReferences
     Else
         Debug.Print "Get GetReferences"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeGetReferences"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING TURNED ON"
-        GetReferences = aeGetReferences(DebugTheCode)
+        GetReferences = aeGetReferences(varDebug)
     End If
 End Property
 
-Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
+Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
+    If IsMissing(varDebug) Then
         Debug.Print "Get DocumentRelations"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentRelations"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING IS OFF"
         DocumentRelations = aeDocumentRelations
     Else
         Debug.Print "Get DocumentRelations"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING TURNED ON"
-        DocumentRelations = aeDocumentRelations(DebugTheCode)
+        DocumentRelations = aeDocumentRelations(varDebug)
     End If
 End Property
 
-Property Get DocumentTables(Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
+Property Get DocumentTables(Optional varDebug As Variant) As Boolean
+    If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTables"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTables"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
         Debug.Print , "DEBUGGING IS OFF"
         DocumentTables = aeDocumentTables
     Else
         Debug.Print "Get DocumentTables"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTables"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
         Debug.Print , "DEBUGGING TURNED ON"
-        DocumentTables = aeDocumentTables(DebugTheCode)
+        DocumentTables = aeDocumentTables(varDebug)
     End If
 End Property
 
-Property Get DocumentTablesXML(Optional DebugTheCode As Variant) As Boolean
-    If IsMissing(DebugTheCode) Then
+Property Get DocumentTablesXML(Optional varDebug As Variant) As Boolean
+    If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTablesXML"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
         Debug.Print , "DEBUGGING IS OFF"
         DocumentTablesXML = aeDocumentTablesXML
     Else
         Debug.Print "Get DocumentTablesXML"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
         Debug.Print , "DEBUGGING TURNED ON"
-        DocumentTablesXML = aeDocumentTablesXML(DebugTheCode)
+        DocumentTablesXML = aeDocumentTablesXML(varDebug)
     End If
 End Property
 
@@ -413,12 +413,12 @@ Private Sub OutputListOfAccessApplicationOptions(Optional varDebug As Variant)
 
     If IsMissing(varDebug) Then
         Debug.Print "OutputListOfAccessApplicationOptions"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
+        Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
         Debug.Print , "DEBUGGING IS OFF"
         Debugit = False
     Else
         Debug.Print "OutputListOfAccessApplicationOptions"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
         Debug.Print , "DEBUGGING TURNED ON"
         Debugit = True
     End If
