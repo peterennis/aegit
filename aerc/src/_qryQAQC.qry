@@ -1,0 +1,223 @@
+Operation =1
+Option =0
+Begin InputTables
+    Name ="_tblQAQC"
+End
+Begin OutputColumns
+    Alias ="id"
+    Expression ="[_tblQAQC].ID"
+    Alias ="appVer"
+    Expression ="[_tblQAQC].VersionApp"
+    Alias ="dataVer"
+    Expression ="[_tblQAQC].VersionData"
+    Alias ="EnterDate"
+    Expression ="[_tblQAQC].EnterDate"
+    Expression ="[_tblQAQC].QA001"
+    Expression ="[_tblQAQC].QA002"
+    Alias ="Expr3"
+    Expression ="[_tblQAQC].QA003"
+    Alias ="Expr4"
+    Expression ="[_tblQAQC].QA004"
+    Alias ="Expr5"
+    Expression ="[_tblQAQC].QA005"
+    Alias ="Expr6"
+    Expression ="[_tblQAQC].QA006"
+    Alias ="Expr7"
+    Expression ="[_tblQAQC].QA007"
+    Alias ="Expr8"
+    Expression ="[_tblQAQC].QA008"
+    Alias ="Expr9"
+    Expression ="[_tblQAQC].QA009"
+    Alias ="Expr10"
+    Expression ="[_tblQAQC].QA010"
+    Alias ="Expr11"
+    Expression ="[_tblQAQC].QA011"
+    Alias ="Expr12"
+    Expression ="[_tblQAQC].QA012"
+    Alias ="Expr13"
+    Expression ="[_tblQAQC].QA013"
+    Alias ="Expr14"
+    Expression ="[_tblQAQC].QA014"
+    Alias ="Expr15"
+    Expression ="[_tblQAQC].QA015"
+    Alias ="Expr16"
+    Expression ="[_tblQAQC].QA016"
+    Alias ="Expr17"
+    Expression ="[_tblQAQC].QA017"
+    Expression ="[_tblQAQC].QA018"
+    Expression ="[_tblQAQC].QA019"
+    Expression ="[_tblQAQC].QA020"
+    Expression ="[_tblQAQC].QA021"
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbByte "RecordsetType" ="0"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbBoolean "TotalsRow" ="0"
+dbLongBinary "DOL" = Begin
+    0x0acc0e5500000000af7d9c804aeddf4f85c6203c87d25590000000001bafc909 ,
+    0x3341e44000000000000000005f005f005f00740062006c005100410051004300 ,
+    0x0000000000009f5c60c3e2bb254bad7ab0c60ad4c45007000000af7d9c804aed ,
+    0xdf4f85c6203c87d2559049004400000000000000b4e97c1db140624ea49ef639 ,
+    0x88ea121f07000000af7d9c804aeddf4f85c6203c87d255904d00490053005600 ,
+    0x65007200730069006f006e004e0075006d006200650072004600450000000000 ,
+    0x0000092b2245c3b3f84aa40d4d80955e65bb07000000af7d9c804aeddf4f85c6 ,
+    0x203c87d255904d004900530051004100460069006c0065004200450000000000 ,
+    0x00007ae65f8cf0eab84284f5a3b2d28aa34c07000000af7d9c804aeddf4f85c6 ,
+    0x203c87d2559042004500460069006c0065004400610074006500000000000000 ,
+    0xc9f438570a60ec469cb49e8985c7db1d07000000af7d9c804aeddf4f85c6203c ,
+    0x87d2559051004100300030003100000000000000ee792de850e91d4a82037dab ,
+    0x1b90f93107000000af7d9c804aeddf4f85c6203c87d255905100410030003000 ,
+    0x320000000000000022b8946e0bd5a244988c5999c1d727a707000000af7d9c80 ,
+    0x4aeddf4f85c6203c87d255905100410030003000330000000000000045888524 ,
+    0x6340fa4daf0b6495e772f54407000000af7d9c804aeddf4f85c6203c87d25590 ,
+    0x51004100300030003400000000000000c3b216b7e5083346a569f7618ae0fd5d ,
+    0x07000000af7d9c804aeddf4f85c6203c87d25590510041003000300035000000 ,
+    0x00000000d4449de3107a8148b313bb3bd90690f207000000af7d9c804aeddf4f ,
+    0x85c6203c87d255905100410030003000360000000000000029c367a15cfd4f43 ,
+    0xa1be3808e39f1bb007000000af7d9c804aeddf4f85c6203c87d2559051004100 ,
+    0x300030003700000000000000a648456eee53b2428442ee91259e2fd607000000 ,
+    0xaf7d9c804aeddf4f85c6203c87d2559051004100300030003800000000000000 ,
+    0x21776a36d38c6b4586fc4a8d0ab0d18e07000000af7d9c804aeddf4f85c6203c ,
+    0x87d255905100410030003000390000000000000044a4a09ff759ff4a83944d41 ,
+    0x3944d8f607000000af7d9c804aeddf4f85c6203c87d255905100410030003100 ,
+    0x300000000000000055e0dcff2b1edb42ac262b3640efed7a07000000af7d9c80 ,
+    0x4aeddf4f85c6203c87d2559051004100300031003100000000000000e0796c5d ,
+    0x1869284798459a74250e09d607000000af7d9c804aeddf4f85c6203c87d25590 ,
+    0x51004100300031003200000000000000f8c8a61f1162d343b9553e64d1081357 ,
+    0x07000000af7d9c804aeddf4f85c6203c87d25590510041003000310033000000 ,
+    0x00000000f5698e2776ae8c46b9f7583088dbc2af07000000af7d9c804aeddf4f ,
+    0x85c6203c87d2559051004100300031003400000000000000e36b707db9156945 ,
+    0xbf70de59161b75f707000000af7d9c804aeddf4f85c6203c87d2559051004100 ,
+    0x30003100350000000000000012602795960b964791d700f7f916f60007000000 ,
+    0xaf7d9c804aeddf4f85c6203c87d2559051004100300031003600000000000000 ,
+    0xa0f0914e3ac871449189fba33f8de72807000000af7d9c804aeddf4f85c6203c ,
+    0x87d2559051004100300031003700000000000000000000000000000000000000 ,
+    0x000000000c000000050000000000000000000000000000000000
+End
+dbByte "PublishToWeb" ="1"
+Begin
+    Begin
+        dbText "Name" ="Expr1"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr2"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr3"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr4"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr5"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr6"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr7"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr8"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="id"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="appVer"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="dataVer"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="EnterDate"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr9"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr10"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr11"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr12"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr13"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr14"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr15"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr16"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr17"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblQAQC].QA021"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblQAQC].QA001"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblQAQC].QA002"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =40
+    Right =1293
+    Bottom =877
+    Left =-1
+    Top =-1
+    Right =1261
+    Bottom =300
+    Left =0
+    Top =0
+    ColumnsShown =539
+    Begin
+        Left =48
+        Top =12
+        Right =192
+        Bottom =156
+        Top =0
+        Name ="_tblQAQC"
+        Name =""
+    End
+End

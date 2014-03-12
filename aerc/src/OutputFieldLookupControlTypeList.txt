@@ -1,3 +1,32 @@
+_tblQAQC
+              ID             109          TextBox
+              VersionApp     109          TextBox
+              VersionData    109          TextBox
+              EnterDate      109          TextBox
+              QA001          109          TextBox
+              QA002          109          TextBox
+              QA003          109          TextBox
+              QA004          109          TextBox
+              QA005          109          TextBox
+              QA006          109          TextBox
+              QA007          109          TextBox
+              QA008          109          TextBox
+              QA009          109          TextBox
+              QA010          109          TextBox
+              QA011          109          TextBox
+              QA012          109          TextBox
+              QA013          109          TextBox
+              QA014          109          TextBox
+              QA015          109          TextBox
+              QA016          109          TextBox
+              QA017          109          TextBox
+              QA018          109          TextBox
+              QA019          109          TextBox
+              QA020          109          TextBox
+              QA021          109          TextBox
+              QA022          109          TextBox
+              QA023          109          TextBox
+              QA024          109          TextBox
 aeItems
               Item           109          TextBox
               Quantity       109          TextBox
@@ -18,9 +47,9 @@ USysRibbons
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 11
+Count of Text box  = 39
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 15
-Count of All Fields = 15
+Count of Display Controls = 43
+Count of All Fields = 43

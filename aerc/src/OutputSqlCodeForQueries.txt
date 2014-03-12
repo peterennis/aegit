@@ -1,3 +1,7 @@
+<<<_qryQAQC>>>
+SELECT [_tblQAQC].ID AS id, [_tblQAQC].VersionApp AS appVer, [_tblQAQC].VersionData AS dataVer, [_tblQAQC].EnterDate AS EnterDate, [_tblQAQC].QA001, [_tblQAQC].QA002, [_tblQAQC].QA003 AS Expr3, [_tblQAQC].QA004 AS Expr4, [_tblQAQC].QA005 AS Expr5, [_tblQAQC].QA006 AS Expr6, [_tblQAQC].QA007 AS Expr7, [_tblQAQC].QA008 AS Expr8, [_tblQAQC].QA009 AS Expr9, [_tblQAQC].QA010 AS Expr10, [_tblQAQC].QA011 AS Expr11, [_tblQAQC].QA012 AS Expr12, [_tblQAQC].QA013 AS Expr13, [_tblQAQC].QA014 AS Expr14, [_tblQAQC].QA015 AS Expr15, [_tblQAQC].QA016 AS Expr16, [_tblQAQC].QA017 AS Expr17, [_tblQAQC].QA018, [_tblQAQC].QA019, [_tblQAQC].QA020, [_tblQAQC].QA021
+FROM _tblQAQC;
+
 <<<qpt_Dummy>>>
 -- Select * from Nothing
 <<<qpt_SqlSchemaTablesList>>>

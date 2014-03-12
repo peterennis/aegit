@@ -5,6 +5,14 @@ On Error GoTo ErrorTrap
 
 'Local Table
 
+strSQL="CREATE TABLE [_tblQAQC] ([ID] Long,[VersionApp] Text (255),[VersionData] Text (255),[EnterDate] DateTime,[QA001] Long,[QA002] Long,[QA003] Long,[QA004] Long,[QA005] Long,[QA006] Long,[QA007] Long,[QA008] Long,[QA009] Long,[QA010] Long,[QA011] Long,[QA012] Long,[QA013] Long,[QA014] Long,[QA015] Long,[QA016] Long,[QA017] Long,[QA018] Long,[QA019] Long,[QA020] Long,[QA021] Long,[QA022] Long,[QA023] Long,[QA024] Long )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblQAQC] ([QA024])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [aeItems] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )"
 Currentdb.Execute strSQL
 

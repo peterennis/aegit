@@ -23,6 +23,7 @@ Option Explicit
 
 
 '20140307 - v086 - Start initial import testing
+    ' QAQC template structure, _tblQAQC, _qryQAQC, _chtQAQC
 '20140305 - v085 - Trap Err 75 in KillProperly after rename of database
     ' Split class to aegit_expClass and aegit_impClass
     ' Testing updates to ExportToExcel by James Kauffman, using late binding

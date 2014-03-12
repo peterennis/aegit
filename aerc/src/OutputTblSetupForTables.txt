@@ -1,3 +1,38 @@
+---------------
+TABLE: _tblQAQC
+---------------
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
+=================    ============    ====    ===========
+ID                   Long Integer    4                  
+VersionApp           Text            255                
+VersionData          Text            255                
+EnterDate            Date/Time       8                  
+QA001                Long Integer    4                  
+QA002                Long Integer    4                  
+QA003                Long Integer    4                  
+QA004                Long Integer    4                  
+QA005                Long Integer    4                  
+QA006                Long Integer    4                  
+QA007                Long Integer    4                  
+QA008                Long Integer    4                  
+QA009                Long Integer    4                  
+QA010                Long Integer    4                  
+QA011                Long Integer    4                  
+QA012                Long Integer    4                  
+QA013                Long Integer    4                  
+QA014                Long Integer    4                  
+QA015                Long Integer    4                  
+QA016                Long Integer    4                  
+QA017                Long Integer    4                  
+QA018                Long Integer    4                  
+QA019                Long Integer    4                  
+QA020                Long Integer    4                  
+QA021                Long Integer    4                  
+QA022                Long Integer    4                  
+QA023                Long Integer    4                  
+QA024                Long Integer    4                  
+
+
 --------------
 TABLE: aeItems
 --------------

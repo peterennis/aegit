@@ -1,3 +1,49 @@
+>>>_qryQAQC
+              Name          _qryQAQC
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   3/12/2014 3:59:32 PM 
+              LastUpdated   3/12/2014 3:59:32 PM 
+              RecordLocks    0 
+              ODBCTimeout    60 
+              RecordsetType  0 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              TotalsRow     False
+              DOL           Track name AutoCorrect info is ON!
+              PublishToWeb   1 
+>>>_tblQAQC
+              Name          _tblQAQC
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   3/12/2014 3:59:31 PM 
+              LastUpdated   3/12/2014 3:59:32 PM 
+              PublishToWeb   1 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
 >>>aeItems
               Name          aeItems
               Owner         admin
