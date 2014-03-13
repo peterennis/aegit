@@ -2,9 +2,7 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
-' OLE data change when chart saved: I changed the design view "Row Source Type" to "List" and then set "Row Source" to "1".
-' Then in code, for the "Form_Current" event, I set "Row Source" to my SQL string, then set "Row Source Type" to "Table/Query".
-' Ref: http://www.tek-tips.com/viewthread.cfm?qid=1092848
+' Rewrite UTF-16 files to standard text as optional
 ' Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 ' Create Let property for setting aegitExportDataToXML
 ' Check if ViewAppProperties includes anything new
@@ -25,6 +23,12 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140313 - v087 - Solving embedded binary code in forms and reports
+    ' OLE data change when chart saved: I changed the design view "Row Source Type" to "List" and then set "Row Source" to "1".
+    ' Then in code, for the "Form_Current" event, I set "Row Source" to my SQL string, then set "Row Source Type" to "Table/Query".
+    ' Ref: http://www.tek-tips.com/viewthread.cfm?qid=1092848
+    ' There seems no reasonable way to manager PrtDevMode and OLEData in forms and reports.
+    ' Strategy is to rewrite, remove hex chunks, and save new files a FormName_frm.txt
 '20140307 - v086 - Start initial import testing
     ' QAQC template structure, _tblQAQC, _qryQAQC, _chtQAQC
     ' _tlkpQAQC for _chtQAQC X axis descriptions

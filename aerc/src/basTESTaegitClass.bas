@@ -22,9 +22,6 @@ Dim ref As Reference
 ' Run in immediate window: MYPROJECT_TEST
 '
 Public Function MYPROJECT_TEST()
-    DoCmd.OpenForm "_chtQAQC"
-    DoEvents
-    DoCmd.Close acForm, "_chtQAQC"
     aegitClassTest
     'aegitClassTest varDebug:="Debugit"
 End Function
