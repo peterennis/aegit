@@ -1,6 +1,21 @@
 Option Compare Database
 Option Explicit
 
+Public Sub FormUseDefaultPrinter()
+' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
+
+    Dim obj As Object
+    For Each obj In CurrentProject.AllForms
+        DoCmd.OpenForm FormName:=obj.Name, View:=acViewDesign
+        If Not Forms(obj.Name).UseDefaultPrinter Then
+            Forms(obj.Name).UseDefaultPrinter = True
+            DoCmd.Save ObjectType:=acForm, ObjectName:=obj.Name
+        End If
+        DoCmd.Close
+    Next obj
+
+End Sub
+
 Public Sub ReportUseDefaultPrinter()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
 
