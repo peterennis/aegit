@@ -27,6 +27,10 @@ _tblQAQC
               QA022          109          TextBox
               QA023          109          TextBox
               QA024          109          TextBox
+_tlkpQAQC
+              ID             109          TextBox
+              QAQCnum        109          TextBox
+              QAQCdesc       109          TextBox
 aeItems
               Item           109          TextBox
               Quantity       109          TextBox
@@ -47,9 +51,9 @@ USysRibbons
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 39
+Count of Text box  = 42
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 43
-Count of All Fields = 43
+Count of Display Controls = 46
+Count of All Fields = 46

@@ -13,6 +13,20 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [_tlkpQAQC] ([ID] Counter,[QAQCnum] Text (255),[QAQCdesc] Text (255) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [id] ON [_tlkpQAQC] ([QAQCdesc]) "
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpQAQC] ([QAQCdesc])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [QAQCnum] ON [_tlkpQAQC] ([QAQCdesc]) "
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [aeItems] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )"
 Currentdb.Execute strSQL
 

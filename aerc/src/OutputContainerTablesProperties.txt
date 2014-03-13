@@ -44,6 +44,34 @@
               AlternateBackShade           95 
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+>>>_tlkpQAQC
+              Name          _tlkpQAQC
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   3/12/2014 5:17:26 PM 
+              LastUpdated   3/12/2014 5:25:44 PM 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              GUID          73-8C-D5-DD-89-D7-49-8A
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+              PublishToWeb   1 
 >>>aeItems
               Name          aeItems
               Owner         admin

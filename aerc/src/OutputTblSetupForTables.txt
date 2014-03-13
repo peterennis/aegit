@@ -33,6 +33,16 @@ QA023                Long Integer    4
 QA024                Long Integer    4                  
 
 
+----------------
+TABLE: _tlkpQAQC
+----------------
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
+=================    ============    ====    ===========
+ID                   AutoNumber      4                  
+QAQCnum              Text            255                
+QAQCdesc             Text            255                
+
+
 --------------
 TABLE: aeItems
 --------------
