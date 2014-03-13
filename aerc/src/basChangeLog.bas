@@ -2,6 +2,9 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' OLE data change when chart saved: I changed the design view "Row Source Type" to "List" and then set "Row Source" to "1".
+' Then in code, for the "Form_Current" event, I set "Row Source" to my SQL string, then set "Row Source Type" to "Table/Query".
+' Ref: http://www.tek-tips.com/viewthread.cfm?qid=1092848
 ' Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 ' Create Let property for setting aegitExportDataToXML
 ' Check if ViewAppProperties includes anything new
