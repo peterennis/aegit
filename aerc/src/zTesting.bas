@@ -1,6 +1,21 @@
 Option Compare Database
 Option Explicit
 
+Public Sub ReportUseDefaultPrinter()
+' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
+
+    Dim obj As Object
+    For Each obj In CurrentProject.AllReports
+        DoCmd.OpenReport ReportName:=obj.Name, View:=acViewDesign
+        If Not Reports(obj.Name).UseDefaultPrinter Then
+            Reports(obj.Name).UseDefaultPrinter = True
+            DoCmd.Save ObjectType:=acReport, ObjectName:=obj.Name
+        End If
+        DoCmd.Close
+    Next obj
+
+End Sub
+
 Public Sub SaveTableMacros()
 
     ' Export Table Data to XML
