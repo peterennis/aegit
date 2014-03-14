@@ -30,7 +30,7 @@ Option Explicit
     ' Ref: http://www.tek-tips.com/viewthread.cfm?qid=1092848
     ' There seems no reasonable way to manager PrtDevMode and OLEData in forms and reports.
     ' Strategy is to rewrite, remove hex chunks, and save new files a FormName_frm.txt
-    ' Start CreateFormReportTextFile testing
+    ' Start TestForCreateFormReportTextFile testing
     ' Output line numbers of markers for checksum and hex data
 '20140307 - v086 - Start initial import testing
     ' QAQC template structure, _tblQAQC, _qryQAQC, _chtQAQC

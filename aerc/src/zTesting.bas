@@ -1,7 +1,7 @@
 Option Compare Database
 Option Explicit
 
-Public Sub CreateFormReportTextFile()
+Public Sub TestForCreateFormReportTextFile()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
 ' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
 ' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
