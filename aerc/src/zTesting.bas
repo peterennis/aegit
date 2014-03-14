@@ -1,11 +1,39 @@
 Option Compare Database
 Option Explicit
 
-Public Sub TestForCreateFormReportTextFile()
+Public Function FoundkeyWordInLine(strLine As String) As Boolean
+
+    FoundkeyWordInLine = False
+    If InStr(1, strLine, "NameMap = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+    If InStr(1, strLine, "PrtMip = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+    If InStr(1, strLine, "PrtDevMode = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+    If InStr(1, strLine, "PrtDevNames = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+    If InStr(1, strLine, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+    If InStr(1, strLine, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+    If InStr(1, strLine, "OleData = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+    End If
+
+End Function
+
+Public Sub CreateFormReportTextFile()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
 ' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
 ' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
 ' Ref: http://www.techonthenet.com/excel/formulas/instr.php
+' Ref: http://stackoverflow.com/questions/8680640/vba-how-to-conditionally-skip-a-for-loop-iteration
 '
 ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
 ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
@@ -19,7 +47,6 @@ Public Sub TestForCreateFormReportTextFile()
     Dim strOut As String
     Dim i As Integer
 
-    i = 0
     fleIn = FreeFile()
     strFileIn = "C:\TEMP\_chtQAQC.frm"
     Open strFileIn For Input As #fleIn
@@ -30,31 +57,24 @@ Public Sub TestForCreateFormReportTextFile()
 
     Debug.Print "fleIn=" & fleIn, "fleOut=" & fleOut
 
+    i = 0
     Do While Not EOF(fleIn)
         i = i + 1
         Line Input #fleIn, strIn
         If Left(strIn, Len("Checksum =")) = "Checksum =" Then
+            Exit Do
+        Else
             Print #fleOut, strIn
             Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "NameMap = Begin", vbTextCompare) > 0 Then
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "PrtMip = Begin", vbTextCompare) > 0 Then
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "PrtDevMode = Begin", vbTextCompare) > 0 Then
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "PrtDevNames = Begin", vbTextCompare) > 0 Then
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        ElseIf InStr(1, strIn, "OleData = Begin", vbTextCompare) > 0 Then
+        End If
+    Loop
+    Do While Not EOF(fleIn)
+        i = i + 1
+        Line Input #fleIn, strIn
+        If FoundkeyWordInLine(strIn) Then
+            Debug.Print strIn
+            Stop
+        Else
             Print #fleOut, strIn
             Debug.Print i, strIn
         End If
