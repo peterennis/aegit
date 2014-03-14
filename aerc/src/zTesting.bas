@@ -5,10 +5,11 @@ Public Sub CreateFormReportTextFile()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
 ' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
 ' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
+' Ref: http://www.techonthenet.com/excel/formulas/instr.php
 '
 ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
 ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
-' "OldData = Begin"
+' "OleData = Begin"
 
     Dim fleIn As Integer
     Dim fleOut As Integer
@@ -35,7 +36,27 @@ Public Sub CreateFormReportTextFile()
         If Left(strIn, Len("Checksum =")) = "Checksum =" Then
             Print #fleOut, strIn
             Debug.Print i, strIn
-            Exit Do
+        ElseIf InStr(1, strIn, "NameMap = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        ElseIf InStr(1, strIn, "PrtMip = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        ElseIf InStr(1, strIn, "PrtDevMode = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        ElseIf InStr(1, strIn, "PrtDevNames = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        ElseIf InStr(1, strIn, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        ElseIf InStr(1, strIn, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        ElseIf InStr(1, strIn, "OleData = Begin", vbTextCompare) > 0 Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
         End If
     Loop
 
