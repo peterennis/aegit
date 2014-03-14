@@ -2,6 +2,7 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
 ' Rewrite UTF-16 files to standard text as optional
 ' Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 ' Create Let property for setting aegitExportDataToXML
@@ -29,6 +30,7 @@ Option Explicit
     ' Ref: http://www.tek-tips.com/viewthread.cfm?qid=1092848
     ' There seems no reasonable way to manager PrtDevMode and OLEData in forms and reports.
     ' Strategy is to rewrite, remove hex chunks, and save new files a FormName_frm.txt
+    ' Start CreateFormReportTextFile testing
 '20140307 - v086 - Start initial import testing
     ' QAQC template structure, _tblQAQC, _qryQAQC, _chtQAQC
     ' _tlkpQAQC for _chtQAQC X axis descriptions

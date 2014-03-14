@@ -1,6 +1,49 @@
 Option Compare Database
 Option Explicit
 
+Public Sub CreateFormReportTextFile()
+' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
+' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
+' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
+'
+' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
+' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
+' "OldData = Begin"
+
+    Dim fleIn As Integer
+    Dim fleOut As Integer
+    Dim strFileIn As String
+    Dim strFileOut As String
+    Dim strIn As String
+    Dim strOut As String
+    Dim i As Integer
+
+    i = 0
+    fleIn = FreeFile()
+    strFileIn = "C:\TEMP\_chtQAQC.frm"
+    Open strFileIn For Input As #fleIn
+
+    fleOut = FreeFile()
+    strFileOut = "C:\TEMP\_chtQAQC_frm.txt"
+    Open strFileOut For Output As #fleOut
+
+    Debug.Print "fleIn=" & fleIn, "fleOut=" & fleOut
+
+    Do While Not EOF(fleIn)
+        i = i + 1
+        Line Input #fleIn, strIn
+        If Left(strIn, Len("Checksum =")) = "Checksum =" Then
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+            Exit Do
+        End If
+    Loop
+
+    Close fleIn
+    Close fleOut
+
+End Sub
+
 Public Sub SaveTableMacros()
 
     ' Export Table Data to XML
