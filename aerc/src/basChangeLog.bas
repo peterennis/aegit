@@ -32,6 +32,7 @@ Option Explicit
     ' Strategy is to rewrite, remove hex chunks, and save new files a FormName_frm.txt
     ' Start TestForCreateFormReportTextFile testing
     ' Output line numbers of markers for checksum and hex data
+    ' CreateFormReportTextFile working and diff tested with WinMerge
 '20140307 - v086 - Start initial import testing
     ' QAQC template structure, _tblQAQC, _qryQAQC, _chtQAQC
     ' _tlkpQAQC for _chtQAQC X axis descriptions

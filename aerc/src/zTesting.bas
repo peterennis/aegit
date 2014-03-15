@@ -1,33 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Public Function FoundkeyWordInLine(strLine As String) As Boolean
-
-    FoundkeyWordInLine = False
-    If InStr(1, strLine, "NameMap = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-    If InStr(1, strLine, "PrtMip = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-    If InStr(1, strLine, "PrtDevMode = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-    If InStr(1, strLine, "PrtDevNames = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-    If InStr(1, strLine, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-    If InStr(1, strLine, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-    If InStr(1, strLine, "OleData = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
-    End If
-
-End Function
-
 Public Sub CreateFormReportTextFile()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
 ' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
@@ -64,17 +37,37 @@ Public Sub CreateFormReportTextFile()
         If Left(strIn, Len("Checksum =")) = "Checksum =" Then
             Exit Do
         Else
-            Print #fleOut, strIn
             Debug.Print i, strIn
+            Print #fleOut, strIn
         End If
     Loop
     Do While Not EOF(fleIn)
         i = i + 1
         Line Input #fleIn, strIn
+NextIteration:
         If FoundkeyWordInLine(strIn) Then
-            Debug.Print strIn
-            Stop
+            Debug.Print i & ">", strIn
+            Print #fleOut, strIn
+            Do While Not EOF(fleIn)
+                i = i + 1
+                Line Input #fleIn, strIn
+                If Not FoundkeyWordInLine(strIn, "End") Then
+                    'Debug.Print "Not Found!!!", i
+                    GoTo SearchForEnd
+                Else
+                    Debug.Print i & ">", "Found End!!!"
+                    Print #fleOut, strIn
+                    i = i + 1
+                    Line Input #fleIn, strIn
+                    Debug.Print i & ":", strIn
+                    'Stop
+                    GoTo NextIteration
+                End If
+                'Stop
+SearchForEnd:
+            Loop
         Else
+            'Stop
             Print #fleOut, strIn
             Debug.Print i, strIn
         End If
@@ -84,6 +77,46 @@ Public Sub CreateFormReportTextFile()
     Close fleOut
 
 End Sub
+
+Public Function FoundkeyWordInLine(strLine As String, Optional varEnd As Variant) As Boolean
+
+    FoundkeyWordInLine = False
+    If Not IsMissing(varEnd) Then
+        If InStr(1, strLine, "End", vbTextCompare) > 0 Then
+            FoundkeyWordInLine = True
+            Exit Function
+        End If
+    End If
+    If InStr(1, strLine, "NameMap = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtMip = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevMode = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevNames = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "OleData = Begin", vbTextCompare) > 0 Then
+        FoundkeyWordInLine = True
+        Exit Function
+    End If
+
+End Function
 
 Public Sub SaveTableMacros()
 
