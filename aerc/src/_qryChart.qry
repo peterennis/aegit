@@ -1,53 +1,64 @@
 Operation =1
 Option =0
 Begin InputTables
-    Name ="_tblQAQC"
+    Name ="_tblChart"
 End
 Begin OutputColumns
     Alias ="id"
-    Expression ="[_tblQAQC].ID"
+    Expression ="[_tblChart].ID"
     Alias ="appVer"
-    Expression ="[_tblQAQC].VersionApp"
+    Expression ="[_tblChart].VersionApp"
     Alias ="dataVer"
-    Expression ="[_tblQAQC].VersionData"
+    Expression ="[_tblChart].VersionData"
     Alias ="EnterDate"
-    Expression ="[_tblQAQC].EnterDate"
-    Expression ="[_tblQAQC].QA001"
-    Expression ="[_tblQAQC].QA002"
+    Expression ="[_tblChart].EnterDate"
+    Expression ="[_tblChart].FLD01"
+    Alias ="Expr2"
+    Expression ="[_tblChart].FLD02"
     Alias ="Expr3"
-    Expression ="[_tblQAQC].QA003"
+    Expression ="[_tblChart].FLD03"
     Alias ="Expr4"
-    Expression ="[_tblQAQC].QA004"
+    Expression ="[_tblChart].FLD04"
     Alias ="Expr5"
-    Expression ="[_tblQAQC].QA005"
+    Expression ="[_tblChart].FLD05"
     Alias ="Expr6"
-    Expression ="[_tblQAQC].QA006"
+    Expression ="[_tblChart].FLD06"
     Alias ="Expr7"
-    Expression ="[_tblQAQC].QA007"
+    Expression ="[_tblChart].FLD07"
     Alias ="Expr8"
-    Expression ="[_tblQAQC].QA008"
+    Expression ="[_tblChart].FLD08"
     Alias ="Expr9"
-    Expression ="[_tblQAQC].QA009"
+    Expression ="[_tblChart].FLD09"
     Alias ="Expr10"
-    Expression ="[_tblQAQC].QA010"
+    Expression ="[_tblChart].FLD10"
     Alias ="Expr11"
-    Expression ="[_tblQAQC].QA011"
+    Expression ="[_tblChart].FLD11"
     Alias ="Expr12"
-    Expression ="[_tblQAQC].QA012"
+    Expression ="[_tblChart].FLD12"
     Alias ="Expr13"
-    Expression ="[_tblQAQC].QA013"
+    Expression ="[_tblChart].FLD13"
     Alias ="Expr14"
-    Expression ="[_tblQAQC].QA014"
+    Expression ="[_tblChart].FLD14"
     Alias ="Expr15"
-    Expression ="[_tblQAQC].QA015"
+    Expression ="[_tblChart].FLD15"
     Alias ="Expr16"
-    Expression ="[_tblQAQC].QA016"
+    Expression ="[_tblChart].FLD16"
     Alias ="Expr17"
-    Expression ="[_tblQAQC].QA017"
-    Expression ="[_tblQAQC].QA018"
-    Expression ="[_tblQAQC].QA019"
-    Expression ="[_tblQAQC].QA020"
-    Expression ="[_tblQAQC].QA021"
+    Expression ="[_tblChart].FLD17"
+    Alias ="Expr18"
+    Expression ="[_tblChart].FLD18"
+    Alias ="Expr19"
+    Expression ="[_tblChart].FLD19"
+    Alias ="Expr20"
+    Expression ="[_tblChart].FLD20"
+    Alias ="Expr21"
+    Expression ="[_tblChart].FLD21"
+    Alias ="Expr22"
+    Expression ="[_tblChart].FLD22"
+    Alias ="Expr23"
+    Expression ="[_tblChart].FLD23"
+    Alias ="Expr24"
+    Expression ="[_tblChart].FLD24"
 End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -100,11 +111,10 @@ dbLongBinary "DOL" = Begin
     0x000000000c000000050000000000000000000000000000000000
 End
 dbByte "PublishToWeb" ="1"
+dbBinary "GUID" = Begin
+    0x29bb010bf1e28c45a942618412da1ddc
+End
 Begin
-    Begin
-        dbText "Name" ="Expr1"
-        dbLong "AggregateType" ="-1"
-    End
     Begin
         dbText "Name" ="Expr2"
         dbLong "AggregateType" ="-1"
@@ -186,15 +196,35 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="[_tblQAQC].QA021"
+        dbText "Name" ="Expr19"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="[_tblQAQC].QA001"
+        dbText "Name" ="Expr23"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="[_tblQAQC].QA002"
+        dbText "Name" ="Expr20"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr24"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr21"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr18"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Expr22"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD01"
         dbLong "AggregateType" ="-1"
     End
 End
@@ -207,17 +237,17 @@ Begin
     Left =-1
     Top =-1
     Right =1261
-    Bottom =300
+    Bottom =215
     Left =0
     Top =0
     ColumnsShown =539
     Begin
-        Left =48
+        Left =240
         Top =12
-        Right =192
-        Bottom =156
+        Right =449
+        Bottom =222
         Top =0
-        Name ="_tblQAQC"
+        Name ="_tblChart"
         Name =""
     End
 End

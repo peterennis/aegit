@@ -1,6 +1,6 @@
-<<<_qryQAQC>>>
-SELECT [_tblQAQC].ID AS id, [_tblQAQC].VersionApp AS appVer, [_tblQAQC].VersionData AS dataVer, [_tblQAQC].EnterDate AS EnterDate, [_tblQAQC].QA001, [_tblQAQC].QA002, [_tblQAQC].QA003 AS Expr3, [_tblQAQC].QA004 AS Expr4, [_tblQAQC].QA005 AS Expr5, [_tblQAQC].QA006 AS Expr6, [_tblQAQC].QA007 AS Expr7, [_tblQAQC].QA008 AS Expr8, [_tblQAQC].QA009 AS Expr9, [_tblQAQC].QA010 AS Expr10, [_tblQAQC].QA011 AS Expr11, [_tblQAQC].QA012 AS Expr12, [_tblQAQC].QA013 AS Expr13, [_tblQAQC].QA014 AS Expr14, [_tblQAQC].QA015 AS Expr15, [_tblQAQC].QA016 AS Expr16, [_tblQAQC].QA017 AS Expr17, [_tblQAQC].QA018, [_tblQAQC].QA019, [_tblQAQC].QA020, [_tblQAQC].QA021
-FROM _tblQAQC;
+<<<_qryChart>>>
+SELECT [_tblChart].ID AS id, [_tblChart].VersionApp AS appVer, [_tblChart].VersionData AS dataVer, [_tblChart].EnterDate AS EnterDate, [_tblChart].FLD01, [_tblChart].FLD02 AS Expr2, [_tblChart].FLD03 AS Expr3, [_tblChart].FLD04 AS Expr4, [_tblChart].FLD05 AS Expr5, [_tblChart].FLD06 AS Expr6, [_tblChart].FLD07 AS Expr7, [_tblChart].FLD08 AS Expr8, [_tblChart].FLD09 AS Expr9, [_tblChart].FLD10 AS Expr10, [_tblChart].FLD11 AS Expr11, [_tblChart].FLD12 AS Expr12, [_tblChart].FLD13 AS Expr13, [_tblChart].FLD14 AS Expr14, [_tblChart].FLD15 AS Expr15, [_tblChart].FLD16 AS Expr16, [_tblChart].FLD17 AS Expr17, [_tblChart].FLD18 AS Expr18, [_tblChart].FLD19 AS Expr19, [_tblChart].FLD20 AS Expr20, [_tblChart].FLD21 AS Expr21, [_tblChart].FLD22 AS Expr22, [_tblChart].FLD23 AS Expr23, [_tblChart].FLD24 AS Expr24
+FROM _tblChart;
 
 <<<qpt_Dummy>>>
 -- Select * from Nothing

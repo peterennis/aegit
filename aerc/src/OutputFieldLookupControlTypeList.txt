@@ -1,36 +1,36 @@
-_tblQAQC
+_tblChart
               ID             109          TextBox
               VersionApp     109          TextBox
               VersionData    109          TextBox
               EnterDate      109          TextBox
-              QA001          109          TextBox
-              QA002          109          TextBox
-              QA003          109          TextBox
-              QA004          109          TextBox
-              QA005          109          TextBox
-              QA006          109          TextBox
-              QA007          109          TextBox
-              QA008          109          TextBox
-              QA009          109          TextBox
-              QA010          109          TextBox
-              QA011          109          TextBox
-              QA012          109          TextBox
-              QA013          109          TextBox
-              QA014          109          TextBox
-              QA015          109          TextBox
-              QA016          109          TextBox
-              QA017          109          TextBox
-              QA018          109          TextBox
-              QA019          109          TextBox
-              QA020          109          TextBox
-              QA021          109          TextBox
-              QA022          109          TextBox
-              QA023          109          TextBox
-              QA024          109          TextBox
-_tlkpQAQC
+              FLD01          109          TextBox
+              FLD02          109          TextBox
+              FLD03          109          TextBox
+              FLD04          109          TextBox
+              FLD05          109          TextBox
+              FLD06          109          TextBox
+              FLD07          109          TextBox
+              FLD08          109          TextBox
+              FLD09          109          TextBox
+              FLD10          109          TextBox
+              FLD11          109          TextBox
+              FLD12          109          TextBox
+              FLD13          109          TextBox
+              FLD14          109          TextBox
+              FLD15          109          TextBox
+              FLD16          109          TextBox
+              FLD17          109          TextBox
+              FLD18          109          TextBox
+              FLD19          109          TextBox
+              FLD20          109          TextBox
+              FLD21          109          TextBox
+              FLD22          109          TextBox
+              FLD23          109          TextBox
+              FLD24          109          TextBox
+_tlkpChart
               ID             109          TextBox
-              QAQCnum        109          TextBox
-              QAQCdesc       109          TextBox
+              ChartNum       109          TextBox
+              ChartDesc      109          TextBox
 aeItems
               Item           109          TextBox
               Quantity       109          TextBox

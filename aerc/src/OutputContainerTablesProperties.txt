@@ -1,12 +1,12 @@
->>>_qryQAQC
-              Name          _qryQAQC
+>>>_qryChart
+              Name          _qryChart
               Owner         admin
               UserName      admin
               Permissions    1048575 
               AllPermissions               1048575 
               Container     Tables
               DateCreated   3/12/2014 3:59:32 PM 
-              LastUpdated   3/12/2014 3:59:32 PM 
+              LastUpdated   3/17/2014 4:19:49 PM 
               RecordLocks    0 
               ODBCTimeout    60 
               RecordsetType  0 
@@ -18,15 +18,15 @@
               TotalsRow     False
               DOL           Track name AutoCorrect info is ON!
               PublishToWeb   1 
->>>_tblQAQC
-              Name          _tblQAQC
+>>>_tblChart
+              Name          _tblChart
               Owner         admin
               UserName      admin
               Permissions    1048319 
               AllPermissions               1048319 
               Container     Tables
               DateCreated   3/12/2014 3:59:31 PM 
-              LastUpdated   3/12/2014 3:59:32 PM 
+              LastUpdated   3/17/2014 3:47:40 PM 
               PublishToWeb   1 
               Orientation    0 
               OrderByOn     False
@@ -44,15 +44,17 @@
               AlternateBackShade           95 
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
->>>_tlkpQAQC
-              Name          _tlkpQAQC
+              GUID          9B-9F-FF-A3-4E-63-41-8B
+              ReadOnlyWhenDisconnected    False
+>>>_tlkpChart
+              Name          _tlkpChart
               Owner         admin
               UserName      admin
               Permissions    1048319 
               AllPermissions               1048319 
               Container     Tables
               DateCreated   3/12/2014 5:17:26 PM 
-              LastUpdated   3/12/2014 5:25:44 PM 
+              LastUpdated   3/17/2014 3:51:47 PM 
               Orientation    0 
               OrderByOn     False
               DefaultView    2 

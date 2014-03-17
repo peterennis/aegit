@@ -5,24 +5,24 @@ On Error GoTo ErrorTrap
 
 'Local Table
 
-strSQL="CREATE TABLE [_tblQAQC] ([ID] Long,[VersionApp] Text (255),[VersionData] Text (255),[EnterDate] DateTime,[QA001] Long,[QA002] Long,[QA003] Long,[QA004] Long,[QA005] Long,[QA006] Long,[QA007] Long,[QA008] Long,[QA009] Long,[QA010] Long,[QA011] Long,[QA012] Long,[QA013] Long,[QA014] Long,[QA015] Long,[QA016] Long,[QA017] Long,[QA018] Long,[QA019] Long,[QA020] Long,[QA021] Long,[QA022] Long,[QA023] Long,[QA024] Long )"
+strSQL="CREATE TABLE [_tblChart] ([ID] Long,[VersionApp] Text (255),[VersionData] Text (255),[EnterDate] DateTime,[FLD01] Long,[FLD02] Long,[FLD03] Long,[FLD04] Long,[FLD05] Long,[FLD06] Long,[FLD07] Long,[FLD08] Long,[FLD09] Long,[FLD10] Long,[FLD11] Long,[FLD12] Long,[FLD13] Long,[FLD14] Long,[FLD15] Long,[FLD16] Long,[FLD17] Long,[FLD18] Long,[FLD19] Long,[FLD20] Long,[FLD21] Long,[FLD22] Long,[FLD23] Long,[FLD24] Long )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblQAQC] ([QA024])  WITH PRIMARY DISALLOW NULL "
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblChart] ([FLD24])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
 'Local Table
 
-strSQL="CREATE TABLE [_tlkpQAQC] ([ID] Counter,[QAQCnum] Text (255),[QAQCdesc] Text (255) )"
+strSQL="CREATE TABLE [_tlkpChart] ([ID] Counter,[ChartNum] Text (255),[ChartDesc] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [id] ON [_tlkpQAQC] ([QAQCdesc]) "
+strSQL="CREATE INDEX [id] ON [_tlkpChart] ([ChartDesc]) "
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpQAQC] ([QAQCdesc])  WITH PRIMARY DISALLOW NULL "
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpChart] ([ChartDesc])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [QAQCnum] ON [_tlkpQAQC] ([QAQCdesc]) "
+strSQL="CREATE INDEX [QAQCnum] ON [_tlkpChart] ([ChartDesc]) "
 Currentdb.Execute strSQL
 
 'Local Table
