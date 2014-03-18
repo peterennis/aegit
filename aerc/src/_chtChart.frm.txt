@@ -970,8 +970,8 @@ Private Sub Form_Load()
 
     With Me.chtChart
         .HasTitle = True
-        
         With .ChartTitle
+            ' Test with DLookup from _tblChart
             .Text = "Chart Title in Form_Load Event"
         End With
     End With
