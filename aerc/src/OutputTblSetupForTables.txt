@@ -41,6 +41,7 @@ FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
 ID                   AutoNumber      4                  
 ChartNum             Text            255                
 ChartDesc            Text            255                
+ChartTitle           Text            255                
 
 
 --------------

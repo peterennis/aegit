@@ -842,126 +842,158 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
+Private Sub SetChartTitle(strTitle As String)
+    With Me.chtChart
+        .HasTitle = True
+        With .ChartTitle
+            .Text = strTitle
+        End With
+    End With
+End Sub
+
 Private Sub cmd01_Click()
     Me.chtChart.RowSourceType = "Table/Query"
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD01]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT01'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
-    Debug.Print Me.chtChart.RowSource
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT01'"))
+    'Debug.Print Me.chtChart.RowSource
     Me.Requery
 End Sub
 
 Private Sub cmd02_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD02]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT02'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT02'"))
     Me.Requery
-    Debug.Print Me.chtChart.RowSource
 End Sub
 
 Private Sub cmd03_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD03]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT03'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT03'"))
     Me.Requery
 End Sub
 
 Private Sub cmd04_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD04]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT04'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT04'"))
     Me.Requery
 End Sub
 
 Private Sub cmd05_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD05]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT05'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT05'"))
     Me.Requery
 End Sub
 
 Private Sub cmd06_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD06]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT06'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT06'"))
     Me.Requery
 End Sub
 
 Private Sub cmd07_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD07]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT07'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT07'"))
     Me.Requery
 End Sub
 
 Private Sub cmd08_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD08]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT08'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT08'"))
     Me.Requery
 End Sub
 
 Private Sub cmd09_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD09]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT09'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT09'"))
     Me.Requery
 End Sub
 
 Private Sub cmd10_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD10]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT10'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT10'"))
     Me.Requery
 End Sub
 
 Private Sub cmd11_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD11]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT11'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT11'"))
     Me.Requery
 End Sub
 
 Private Sub cmd12_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD12]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT12'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT12'"))
     Me.Requery
 End Sub
 
 Private Sub cmd13_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD13]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT13'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT13'"))
     Me.Requery
 End Sub
 
 Private Sub cmd14_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD14]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT14'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT14'"))
     Me.Requery
 End Sub
 
 Private Sub cmd15_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD15]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT15'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT15'"))
     Me.Requery
 End Sub
 
 Private Sub cmd16_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD16]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT16'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT16'"))
     Me.Requery
 End Sub
 
 Private Sub cmd17_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD17]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT17'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT17'"))
     Me.Requery
 End Sub
 
 Private Sub cmd18_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD18]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT18'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT18'"))
     Me.Requery
 End Sub
 
 Private Sub cmd19_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD19]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT19'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT19'"))
     Me.Requery
 End Sub
 
 Private Sub cmd20_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD20]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT20'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT20'"))
     Me.Requery
 End Sub
 
 Private Sub cmd21_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD21]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT21'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT21'"))
     Me.Requery
 End Sub
 
 Private Sub cmd22_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD22]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT22'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT22'"))
     Me.Requery
 End Sub
 
 Private Sub cmd23_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD23]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT23'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT23'"))
     Me.Requery
 End Sub
 
 Private Sub cmd24_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD24]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT24'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT24'"))
     Me.Requery
 End Sub
 

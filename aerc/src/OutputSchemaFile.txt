@@ -13,16 +13,16 @@ Currentdb.Execute strSQL
 
 'Local Table
 
-strSQL="CREATE TABLE [_tlkpChart] ([ID] Counter,[ChartNum] Text (255),[ChartDesc] Text (255) )"
+strSQL="CREATE TABLE [_tlkpChart] ([ID] Counter,[ChartNum] Text (255),[ChartDesc] Text (255),[ChartTitle] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [id] ON [_tlkpChart] ([ChartDesc]) "
+strSQL="CREATE INDEX [id] ON [_tlkpChart] ([ChartTitle]) "
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpChart] ([ChartDesc])  WITH PRIMARY DISALLOW NULL "
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpChart] ([ChartTitle])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [QAQCnum] ON [_tlkpChart] ([ChartDesc]) "
+strSQL="CREATE INDEX [QAQCnum] ON [_tlkpChart] ([ChartTitle]) "
 Currentdb.Execute strSQL
 
 'Local Table
