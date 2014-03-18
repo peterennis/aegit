@@ -15,11 +15,11 @@ Begin Form
     GridY =24
     Width =12240
     DatasheetFontHeight =11
-    ItemSuffix =45
+    ItemSuffix =57
     Left =390
     Top =570
     Right =12885
-    Bottom =11355
+    Bottom =11835
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x6a1ab29d755ee440
@@ -116,7 +116,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin Section
-            Height =10800
+            Height =11280
             Name ="Detail"
             GUID = Begin
                 0x1d5f564b393a794ea61b1b45690b2a4a
@@ -830,6 +830,330 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =360
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =25
+                    ForeColor =4210752
+                    Name ="cmd25"
+                    Caption ="CHT25"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x4f718ebef182944e897567143ceab96c
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =360
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =1200
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =1260
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =26
+                    ForeColor =4210752
+                    Name ="cmd26"
+                    Caption ="CHT26"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x40448a6998fd7846b7dc680b8d61b57f
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1260
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =2100
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =2160
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =27
+                    ForeColor =4210752
+                    Name ="cmd27"
+                    Caption ="CHT27"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xa0ea0b753f8f2547ad2674637cc01577
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2160
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =3000
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =3060
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =28
+                    ForeColor =4210752
+                    Name ="cmd28"
+                    Caption ="CHT28"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xed4e437b6e03f149a3944fb6a4f68ee4
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3060
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =3960
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =29
+                    ForeColor =4210752
+                    Name ="cmd29"
+                    Caption ="CHT29"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x7d9cfae5824e664983497f7183e80846
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3960
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =4800
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4860
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =30
+                    ForeColor =4210752
+                    Name ="cmd30"
+                    Caption ="CHT30"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x9d30ac5252d49b4fadbe3b7a763ccba2
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4860
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =5700
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5760
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =31
+                    ForeColor =4210752
+                    Name ="cmd31"
+                    Caption ="CHT31"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x603ed1f540245143a0292175eed778fa
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5760
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =6600
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6660
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =32
+                    ForeColor =4210752
+                    Name ="cmd32"
+                    Caption ="CHT32"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x45d7f9da3572304187bcb48e86495d42
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6660
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =7500
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =7560
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =33
+                    ForeColor =4210752
+                    Name ="cmd33"
+                    Caption ="CHT33"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x754f1b0fd232c244a2b7f6b207593cd6
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7560
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =8400
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =8460
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =34
+                    ForeColor =4210752
+                    Name ="cmd34"
+                    Caption ="CHT34"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x5dc3ca094b8e1147a0c79ac5003f6d83
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =8460
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =9300
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =9360
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =35
+                    ForeColor =4210752
+                    Name ="cmd35"
+                    Caption ="CHT35"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x112ef2bbe6a4794d923bcb9e9c1f1c46
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =9360
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =10200
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =10260
+                    Top =10665
+                    Width =840
+                    Height =405
+                    TabIndex =36
+                    ForeColor =4210752
+                    Name ="cmd36"
+                    Caption ="CHT36"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xc70e50f6bc1af148aae9491e6bc7423f
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =10260
+                    LayoutCachedTop =10665
+                    LayoutCachedWidth =11100
+                    LayoutCachedHeight =11070
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
             End
         End
     End
@@ -994,6 +1318,78 @@ End Sub
 Private Sub cmd24_Click()
     Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD24]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT24'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
     SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT24'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd25_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD25]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT25'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT25'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd26_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD26]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT26'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT26'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd27_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD27]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT27'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT27'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd28_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD28]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT28'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT28'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd29_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD29]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT29'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT29'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd30_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD30]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT30'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT30'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd31_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD31]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT31'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT31'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd32_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD32]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT32'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT32'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd33_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD33]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT33'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT33'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd34_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD34]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT34'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT34'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd35_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD35]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT35'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT35'"))
+    Me.Requery
+End Sub
+
+Private Sub cmd36_Click()
+    Me.chtChart.RowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD36]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT36'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    SetChartTitle (DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT36'"))
     Me.Requery
 End Sub
 

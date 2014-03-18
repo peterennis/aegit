@@ -31,6 +31,18 @@ FLD21                Long Integer    4
 FLD22                Long Integer    4                  
 FLD23                Long Integer    4                  
 FLD24                Long Integer    4                  
+FLD25                Long Integer    4                  
+FLD26                Long Integer    4                  
+FLD27                Long Integer    4                  
+FLD28                Long Integer    4                  
+FLD29                Long Integer    4                  
+FLD30                Long Integer    4                  
+FLD31                Long Integer    4                  
+FLD32                Long Integer    4                  
+FLD33                Long Integer    4                  
+FLD34                Long Integer    4                  
+FLD35                Long Integer    4                  
+FLD36                Long Integer    4                  
 
 
 -----------------

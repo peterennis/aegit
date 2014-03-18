@@ -1,21 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Public Sub SaveTableMacros()
-
-    ' Export Table Data to XML
-    ' Ref: http://technet.microsoft.com/en-us/library/ee692914.aspx
-'    Application.ExportXML acExportTable, "aeItems", "C:\Temp\aeItemsData.xml"
-
-    ' Save table macros as XML
-    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=99179
-    Application.SaveAsText acTableDataMacro, "aeItems", "C:\Temp\aeItems.xml"
-    Debug.Print , "Items table macros saved to C:\Temp\aeItems.xml"
-
-    PrettyXML "C:\Temp\aeItems.xml"
-
-End Sub
-
 Public Sub ApplicationInformation()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa223101(v=office.11).aspx
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa173218(v=office.11).aspx

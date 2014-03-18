@@ -28,6 +28,7 @@ Option Explicit
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase
     ' PrettyXML for table data macros
+    ' Expand chart to 36 items
 '20140313 - v087 - Solving embedded binary code in forms and reports
     ' OLE data change when chart saved: I changed the design view "Row Source Type" to "List" and then set "Row Source" to "1".
     ' Then in code, for the "Form_Current" event, I set "Row Source" to my SQL string, then set "Row Source Type" to "Table/Query".

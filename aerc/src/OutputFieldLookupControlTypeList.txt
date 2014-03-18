@@ -27,6 +27,18 @@ _tblChart
               FLD22          109          TextBox
               FLD23          109          TextBox
               FLD24          109          TextBox
+              FLD25          109          TextBox
+              FLD26          109          TextBox
+              FLD27          109          TextBox
+              FLD28          109          TextBox
+              FLD29          109          TextBox
+              FLD30          109          TextBox
+              FLD31          109          TextBox
+              FLD32          109          TextBox
+              FLD33          109          TextBox
+              FLD34          109          TextBox
+              FLD35          109          TextBox
+              FLD36          109          TextBox
 _tlkpChart
               ID             109          TextBox
               ChartNum       109          TextBox
@@ -52,9 +64,9 @@ USysRibbons
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 43
+Count of Text box  = 55
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 47
-Count of All Fields = 47
+Count of Display Controls = 59
+Count of All Fields = 59

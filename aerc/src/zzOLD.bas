@@ -501,3 +501,18 @@ Public Function FoundkeyWordInLine(strLine As String, Optional varEnd As Variant
     End If
 
 End Function
+
+Public Sub SaveTableMacros()
+
+    ' Export Table Data to XML
+    ' Ref: http://technet.microsoft.com/en-us/library/ee692914.aspx
+'    Application.ExportXML acExportTable, "aeItems", "C:\Temp\aeItemsData.xml"
+
+    ' Save table macros as XML
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=99179
+    Application.SaveAsText acTableDataMacro, "aeItems", "C:\Temp\aeItems.xml"
+    Debug.Print , "Items table macros saved to C:\Temp\aeItems.xml"
+
+    PrettyXML "C:\Temp\aeItems.xml"
+
+End Sub
