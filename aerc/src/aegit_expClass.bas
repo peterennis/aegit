@@ -2336,7 +2336,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
     Dim i As Integer
-    Dim Debugit As Boolean
+    '''x Dim Debugit As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -2344,11 +2344,11 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentTheDatabase"
     If IsMissing(varDebug) Then
-        Debugit = False
+        '''x Debugit = False
         Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTheDatabase is set to False"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        Debugit = True
+        '''x Debugit = True
         Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTheDatabase is set to True"
         Debug.Print , "NOW DEBUGGING..."
     End If
@@ -2366,7 +2366,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     ListOrCloseAllOpenQueries
 
-    If Debugit Then
+    If Not IsMissing(varDebug) Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
         Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
@@ -2381,11 +2381,11 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
     If FolderExists(aestrSourceLocation) Then
-        If Debugit Then
-            DocumentTheContainer "Forms", "frm", "WithDebugging"
-            DocumentTheContainer "Reports", "rpt", "WithDebugging"
-            DocumentTheContainer "Scripts", "mac", "WithDebugging"
-            DocumentTheContainer "Modules", "bas", "WithDebugging"
+        If Not IsMissing(varDebug) Then
+            DocumentTheContainer "Forms", "frm", varDebug
+            DocumentTheContainer "Reports", "rpt", varDebug
+            DocumentTheContainer "Scripts", "mac", varDebug
+            DocumentTheContainer "Modules", "bas", varDebug
         Else
             DocumentTheContainer "Forms", "frm"
             DocumentTheContainer "Reports", "rpt"
@@ -2400,8 +2400,8 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputListOfContainers aeAppListCnt
     OutputListOfAllHiddenQueries
 
-    If Debugit Then
-        OutputListOfAccessApplicationOptions "Debug"
+    If Not IsMissing(varDebug) Then
+        OutputListOfAccessApplicationOptions varDebug
     Else
         OutputListOfAccessApplicationOptions
     End If
@@ -2415,7 +2415,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     ' QUERIES
     '=============
     i = 0
-    If Debugit Then Debug.Print "QUERIES"
+    If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
     ' Delete all TEMP queries ...
     For Each qdf In CurrentDb.QueryDefs
@@ -2426,7 +2426,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Next qdf
 
     For Each qdf In CurrentDb.QueryDefs
-        If Debugit Then Debug.Print , qdf.Name
+        If Not IsMissing(varDebug) Then Debug.Print , qdf.Name
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
@@ -2440,7 +2440,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         End If
     Next qdf
 
-    If Debugit Then
+    If Not IsMissing(varDebug) Then
         If i = 1 Then
             Debug.Print , "1 Query EXPORTED!"
         Else
@@ -2459,13 +2459,18 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
     OutputAllContainerProperties
-    OutputTableDataMacros
+
+    If Not IsMissing(varDebug) Then
+        OutputTableDataMacros varDebug
+    Else
+        OutputTableDataMacros
+    End If
 
     If aeExists("Tables", "aetlkpStates", "Debugit") Then
         OutputTableDataAsFormattedText "aetlkpStates"
     End If
 
-    If Debugit Then
+    If Not IsMissing(varDebug) Then
         OutputPrinterInfo "Debug"
     Else
         OutputPrinterInfo
@@ -2483,7 +2488,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-    If Debugit Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
     aeDocumentTheDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -3141,7 +3146,7 @@ PROC_ERR:
 
 End Sub
 
-Private Sub OutputTableDataMacros()
+Private Sub OutputTableDataMacros(Optional varDebug As Variant)
 ' Ref: http://stackoverflow.com/questions/9206153/how-to-export-access-2010-data-macros
 '====================================================================
 ' Author:   Peter F. Ennis
@@ -3162,9 +3167,15 @@ Private Sub OutputTableDataMacros()
         If Not (Left(tdf.Name, 4) = "MSys" _
                 Or Left(tdf.Name, 4) = "~TMP" _
                 Or Left(tdf.Name, 3) = "zzz") Then
-            Debug.Print tdf.Name
+            'Debug.Print tdf.Name
             SaveAsText acTableDataMacro, tdf.Name, aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml"
+            If Not IsMissing(varDebug) Then
+                PrettyXML aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml", varDebug
+            Else
+                PrettyXML aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml"
+            End If
         End If
+NextTdf:
     Next tdf
 
 PROC_EXIT:
@@ -3175,7 +3186,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2950 Then ' Reserved Error
-        Resume Next
+        Resume NextTdf
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegitClass"
     'GlobalErrHandler
