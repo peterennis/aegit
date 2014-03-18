@@ -24,6 +24,7 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140318 - v089 - Bump
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase
