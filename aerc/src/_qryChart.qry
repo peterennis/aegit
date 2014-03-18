@@ -1,65 +1,12 @@
-Operation =1
-Option =0
-Begin InputTables
-    Name ="_tblChart"
-End
-Begin OutputColumns
-    Alias ="id"
-    Expression ="[_tblChart].ID"
-    Alias ="appVer"
-    Expression ="[_tblChart].VersionApp"
-    Alias ="dataVer"
-    Expression ="[_tblChart].VersionData"
-    Alias ="EnterDate"
-    Expression ="[_tblChart].EnterDate"
-    Expression ="[_tblChart].FLD01"
-    Alias ="Expr2"
-    Expression ="[_tblChart].FLD02"
-    Alias ="Expr3"
-    Expression ="[_tblChart].FLD03"
-    Alias ="Expr4"
-    Expression ="[_tblChart].FLD04"
-    Alias ="Expr5"
-    Expression ="[_tblChart].FLD05"
-    Alias ="Expr6"
-    Expression ="[_tblChart].FLD06"
-    Alias ="Expr7"
-    Expression ="[_tblChart].FLD07"
-    Alias ="Expr8"
-    Expression ="[_tblChart].FLD08"
-    Alias ="Expr9"
-    Expression ="[_tblChart].FLD09"
-    Alias ="Expr10"
-    Expression ="[_tblChart].FLD10"
-    Alias ="Expr11"
-    Expression ="[_tblChart].FLD11"
-    Alias ="Expr12"
-    Expression ="[_tblChart].FLD12"
-    Alias ="Expr13"
-    Expression ="[_tblChart].FLD13"
-    Alias ="Expr14"
-    Expression ="[_tblChart].FLD14"
-    Alias ="Expr15"
-    Expression ="[_tblChart].FLD15"
-    Alias ="Expr16"
-    Expression ="[_tblChart].FLD16"
-    Alias ="Expr17"
-    Expression ="[_tblChart].FLD17"
-    Alias ="Expr18"
-    Expression ="[_tblChart].FLD18"
-    Alias ="Expr19"
-    Expression ="[_tblChart].FLD19"
-    Alias ="Expr20"
-    Expression ="[_tblChart].FLD20"
-    Alias ="Expr21"
-    Expression ="[_tblChart].FLD21"
-    Alias ="Expr22"
-    Expression ="[_tblChart].FLD22"
-    Alias ="Expr23"
-    Expression ="[_tblChart].FLD23"
-    Alias ="Expr24"
-    Expression ="[_tblChart].FLD24"
-End
+dbMemo "SQL" ="SELECT [_tblChart].ID AS id, [_tblChart].VersionApp AS appVer, [_tblChart].Versi"
+    "onData AS dataVer, [_tblChart].EnterDate AS EnterDate, [_tblChart].FLD01, [_tblC"
+    "hart].FLD02, [_tblChart].FLD03, [_tblChart].FLD04, [_tblChart].FLD05, [_tblChart"
+    "].FLD06, [_tblChart].FLD07, [_tblChart].FLD08, [_tblChart].FLD09, [_tblChart].FL"
+    "D10, [_tblChart].FLD11, [_tblChart].FLD12, [_tblChart].FLD13, [_tblChart].FLD14,"
+    " [_tblChart].FLD15, [_tblChart].FLD16, [_tblChart].FLD17, [_tblChart].FLD18, [_t"
+    "blChart].FLD19, [_tblChart].FLD20, [_tblChart].FLD21, [_tblChart].FLD22, [_tblCh"
+    "art].FLD23, [_tblChart].FLD24\015\012FROM _tblChart;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -226,28 +173,5 @@ Begin
     Begin
         dbText "Name" ="[_tblChart].FLD01"
         dbLong "AggregateType" ="-1"
-    End
-End
-Begin
-    State =0
-    Left =0
-    Top =40
-    Right =1293
-    Bottom =877
-    Left =-1
-    Top =-1
-    Right =1261
-    Bottom =215
-    Left =0
-    Top =0
-    ColumnsShown =539
-    Begin
-        Left =240
-        Top =12
-        Right =449
-        Bottom =222
-        Top =0
-        Name ="_tblChart"
-        Name =""
     End
 End
