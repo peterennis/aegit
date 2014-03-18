@@ -24,6 +24,7 @@ Option Explicit
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 
 
+'20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
 '20140313 - v087 - Solving embedded binary code in forms and reports
     ' OLE data change when chart saved: I changed the design view "Row Source Type" to "List" and then set "Row Source" to "1".
     ' Then in code, for the "Form_Current" event, I set "Row Source" to my SQL string, then set "Row Source Type" to "Table/Query".
@@ -34,6 +35,7 @@ Option Explicit
     ' Output line numbers of markers for checksum and hex data
     ' CreateFormReportTextFile working and diff tested with WinMerge
     ' Make chart more generic
+    ' Chart Title in Form_Load Event
 '20140307 - v086 - Start initial import testing
     ' QAQC template structure, _tblQAQC, _qryQAQC, _chtQAQC
     ' _tlkpQAQC for _chtQAQC X axis descriptions
