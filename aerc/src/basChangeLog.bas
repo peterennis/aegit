@@ -25,6 +25,7 @@ Option Explicit
 
 
 '20140318 - v089 - Bump
+    ' Use GetRowSource to reduce code in _chtChart
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase
