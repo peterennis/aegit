@@ -1165,6 +1165,30 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
+' aeConst       ChartType     97 Constant         97 Value    95 /2 Equiv     95/2 Value
+' Bar           Bar           xlBarClustered      57          XlBar           2
+' StackedBar    Stacked Bar   xlBarStacked        58          N/A             N/A
+' Line          Line          xlLine              4           xlLine          4
+' ThreeDLine    3d Line       xl3DLine            -4101       xl3DLine        -4101
+' Area          Area          xlAreaStacked       76          xlArea          1
+' ThreeDArea    3D Area       xl3DAreaStacked     78          xl3DArea        -4098
+' Column        Column        xColumnClustered    51          xlColumn        3
+' ThreeDColumn  3D Column     xl3DColumn          -4100       xl3DColumn      -4100
+' Pie           Pie           xlPie               5           xlPie           5
+' ThreeDPie     3D Pie        xl3DPie             -4102       xl3DPie         -4102
+'
+
+Private Const Bar = 57
+Private Const StackedBar = 58
+Private Const Line = 4
+Private Const ThreeDLine = -4101
+Private Const Area = 76
+Private Const ThreeDArea = 78
+Private Const Column = 51
+Private Const ThreeDColumn = -4100
+Private Const Pie = 5
+Private Const ThreeDPie = -4102
+
 Private Sub SetChartTitle(strTitle As String)
     With Me.chtChart
         .HasTitle = True
@@ -1175,9 +1199,13 @@ Private Sub SetChartTitle(strTitle As String)
 End Sub
 
 Private Function GetRowSource(strChart As String) As String
+    Dim strQry As String
     Me.chtChart.RowSourceType = "Table/Query"
-    GetRowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    strQry = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    GetRowSource = strQry
+    Debug.Print "GetRowSource=" & strQry
     Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
+    Me.chtChart.ChartType = 51
 End Function
 
 Private Sub cmd01_Click()

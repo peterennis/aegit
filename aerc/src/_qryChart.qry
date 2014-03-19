@@ -1,12 +1,54 @@
-dbMemo "SQL" ="SELECT [_tblChart].ID AS id, [_tblChart].VersionApp AS appVer, [_tblChart].Versi"
-    "onData AS dataVer, [_tblChart].EnterDate AS EnterDate, [_tblChart].FLD01, [_tblC"
-    "hart].FLD02, [_tblChart].FLD03, [_tblChart].FLD04, [_tblChart].FLD05, [_tblChart"
-    "].FLD06, [_tblChart].FLD07, [_tblChart].FLD08, [_tblChart].FLD09, [_tblChart].FL"
-    "D10, [_tblChart].FLD11, [_tblChart].FLD12, [_tblChart].FLD13, [_tblChart].FLD14,"
-    " [_tblChart].FLD15, [_tblChart].FLD16, [_tblChart].FLD17, [_tblChart].FLD18, [_t"
-    "blChart].FLD19, [_tblChart].FLD20, [_tblChart].FLD21, [_tblChart].FLD22, [_tblCh"
-    "art].FLD23, [_tblChart].FLD24\015\012FROM _tblChart;\015\012"
-dbMemo "Connect" =""
+Operation =1
+Option =0
+Begin InputTables
+    Name ="_tblChart"
+End
+Begin OutputColumns
+    Alias ="id"
+    Expression ="[_tblChart].ID"
+    Alias ="appVer"
+    Expression ="[_tblChart].VersionApp"
+    Alias ="dataVer"
+    Expression ="[_tblChart].VersionData"
+    Alias ="EnterDate"
+    Expression ="[_tblChart].EnterDate"
+    Expression ="[_tblChart].FLD01"
+    Expression ="[_tblChart].FLD02"
+    Expression ="[_tblChart].FLD03"
+    Expression ="[_tblChart].FLD04"
+    Expression ="[_tblChart].FLD05"
+    Expression ="[_tblChart].FLD06"
+    Expression ="[_tblChart].FLD07"
+    Expression ="[_tblChart].FLD08"
+    Expression ="[_tblChart].FLD09"
+    Expression ="[_tblChart].FLD10"
+    Expression ="[_tblChart].FLD11"
+    Expression ="[_tblChart].FLD12"
+    Expression ="[_tblChart].FLD13"
+    Expression ="[_tblChart].FLD14"
+    Expression ="[_tblChart].FLD15"
+    Expression ="[_tblChart].FLD16"
+    Expression ="[_tblChart].FLD17"
+    Expression ="[_tblChart].FLD18"
+    Expression ="[_tblChart].FLD19"
+    Expression ="[_tblChart].FLD20"
+    Expression ="[_tblChart].FLD21"
+    Expression ="[_tblChart].FLD22"
+    Expression ="[_tblChart].FLD23"
+    Expression ="[_tblChart].FLD24"
+    Expression ="[_tblChart].FLD25"
+    Expression ="[_tblChart].FLD26"
+    Expression ="[_tblChart].FLD27"
+    Expression ="[_tblChart].FLD28"
+    Expression ="[_tblChart].FLD29"
+    Expression ="[_tblChart].FLD30"
+    Expression ="[_tblChart].FLD31"
+    Expression ="[_tblChart].FLD32"
+    Expression ="[_tblChart].FLD33"
+    Expression ="[_tblChart].FLD34"
+    Expression ="[_tblChart].FLD35"
+    Expression ="[_tblChart].FLD36"
+End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -63,34 +105,6 @@ dbBinary "GUID" = Begin
 End
 Begin
     Begin
-        dbText "Name" ="Expr2"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr3"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr4"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr5"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr6"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr7"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr8"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="id"
         dbLong "AggregateType" ="-1"
     End
@@ -107,71 +121,126 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Expr9"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr10"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr11"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr12"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr13"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr14"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr15"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr16"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr17"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr19"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr23"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr20"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr24"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr21"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr18"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="Expr22"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="[_tblChart].FLD01"
         dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD02"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD04"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD12"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD14"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD16"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD18"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD20"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD22"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD24"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD03"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD13"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD15"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD17"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD19"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD21"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD23"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD36"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD05"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD07"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD09"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD11"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD06"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD08"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD10"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =40
+    Right =1293
+    Bottom =877
+    Left =-1
+    Top =-1
+    Right =1261
+    Bottom =272
+    Left =0
+    Top =0
+    ColumnsShown =539
+    Begin
+        Left =240
+        Top =12
+        Right =449
+        Bottom =222
+        Top =0
+        Name ="_tblChart"
+        Name =""
     End
 End

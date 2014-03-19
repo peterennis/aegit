@@ -25,11 +25,15 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 ' *** Ref: http://www.vb123.com/toolshed/02_accvb/remotequeries.htm - Remote Queries In Microsoft Access
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
+'
+' Challenges:
+' Create an adaept Chart Object as ["_tblChart", "_tlkpChart",
 
 
 '20140318 - v089 - Bump
     ' Use GetRowSource to reduce code in _chtChart
     ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response
+    ' Use constants to display for different ChartType values
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase
