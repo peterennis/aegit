@@ -2,6 +2,9 @@ Option Compare Database
 Option Explicit
 
 ' Problems:
+' Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
+' Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
+' How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 ' Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
 ' Rewrite UTF-16 files to standard text as optional
 ' Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
@@ -26,6 +29,7 @@ Option Explicit
 
 '20140318 - v089 - Bump
     ' Use GetRowSource to reduce code in _chtChart
+    ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase

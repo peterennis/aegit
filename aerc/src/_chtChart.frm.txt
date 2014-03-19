@@ -1175,225 +1175,226 @@ Private Sub SetChartTitle(strTitle As String)
 End Sub
 
 Private Function GetRowSource(strChart As String) As String
+    Me.chtChart.RowSourceType = "Table/Query"
     GetRowSource = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
 End Function
 
 Private Sub cmd01_Click()
-    Me.chtChart.RowSourceType = "Table/Query"
     Me.chtChart.RowSource = GetRowSource("01")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT01'")
     'Debug.Print Me.chtChart.RowSource
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd02_Click()
     Me.chtChart.RowSource = GetRowSource("02")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT02'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd03_Click()
     Me.chtChart.RowSource = GetRowSource("03")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT03'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd04_Click()
     Me.chtChart.RowSource = GetRowSource("04")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT04'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd05_Click()
     Me.chtChart.RowSource = GetRowSource("05")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT05'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd06_Click()
     Me.chtChart.RowSource = GetRowSource("06")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT06'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd07_Click()
     Me.chtChart.RowSource = GetRowSource("07")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT07'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd08_Click()
     Me.chtChart.RowSource = GetRowSource("08")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT08'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd09_Click()
     Me.chtChart.RowSource = GetRowSource("09")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT09'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd10_Click()
     Me.chtChart.RowSource = GetRowSource("10")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT10'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd11_Click()
     Me.chtChart.RowSource = GetRowSource("11")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT11'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd12_Click()
     Me.chtChart.RowSource = GetRowSource("12")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT12'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd13_Click()
     Me.chtChart.RowSource = GetRowSource("13")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT13'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd14_Click()
     Me.chtChart.RowSource = GetRowSource("14")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT14'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd15_Click()
     Me.chtChart.RowSource = GetRowSource("15")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT15'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd16_Click()
     Me.chtChart.RowSource = GetRowSource("16")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT16'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd17_Click()
     Me.chtChart.RowSource = GetRowSource("17")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT17'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd18_Click()
     Me.chtChart.RowSource = GetRowSource("18")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT18'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd19_Click()
     Me.chtChart.RowSource = GetRowSource("19")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT19'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd20_Click()
     Me.chtChart.RowSource = GetRowSource("20")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT20'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd21_Click()
     Me.chtChart.RowSource = GetRowSource("21")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT21'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd22_Click()
     Me.chtChart.RowSource = GetRowSource("22")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT22'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd23_Click()
     Me.chtChart.RowSource = GetRowSource("23")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT23'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd24_Click()
     Me.chtChart.RowSource = GetRowSource("24")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT24'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd25_Click()
     Me.chtChart.RowSource = GetRowSource("25")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT25'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd26_Click()
     Me.chtChart.RowSource = GetRowSource("26")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT26'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd27_Click()
     Me.chtChart.RowSource = GetRowSource("27")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT27'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd28_Click()
     Me.chtChart.RowSource = GetRowSource("28")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT28'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd29_Click()
     Me.chtChart.RowSource = GetRowSource("29")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT29'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd30_Click()
     Me.chtChart.RowSource = GetRowSource("30")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT30'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd31_Click()
     Me.chtChart.RowSource = GetRowSource("31")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT31'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd32_Click()
     Me.chtChart.RowSource = GetRowSource("32")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT32'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd33_Click()
     Me.chtChart.RowSource = GetRowSource("33")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT33'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd34_Click()
     Me.chtChart.RowSource = GetRowSource("34")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT34'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd35_Click()
     Me.chtChart.RowSource = GetRowSource("35")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT35'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub cmd36_Click()
     Me.chtChart.RowSource = GetRowSource("36")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT36'")
-    Me.Requery
+    Me.Refresh
 End Sub
 
 Private Sub Form_Load()
