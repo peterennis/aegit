@@ -1203,10 +1203,24 @@ Private Function GetRowSource(strChart As String) As String
     Me.chtChart.RowSourceType = "Table/Query"
     strQry = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
     GetRowSource = strQry
-    Debug.Print "GetRowSource=" & strQry
-    Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
-    Me.chtChart.ChartType = 51
+    'Debug.Print "GetRowSource=" & strQry
+    'Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
+    'Me.chtChart.ChartType = 51
 End Function
+
+Private Sub SetButtonsCaption()
+    Dim ctrl As Control
+    For Each ctrl In Me.Controls
+        'Debug.Print ctrl.Name
+        On Error GoTo NextIteration:
+        'Debug.Print ctrl.Caption
+        If Left(ctrl.Caption, 3) = "CHT" Then
+            ctrl.Caption = Mid(ctrl.Caption, 4, 2)
+        End If
+        'Debug.Print ctrl.Caption
+NextIteration:
+    Next
+End Sub
 
 Private Sub cmd01_Click()
     Me.chtChart.RowSource = GetRowSource("01")
@@ -1435,5 +1449,7 @@ Private Sub Form_Load()
             .Text = "Chart Title in Form_Load Event"
         End With
     End With
+    '
+    SetButtonsCaption
 
 End Sub
