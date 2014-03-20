@@ -35,6 +35,7 @@ Option Explicit
     ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response
     ' Use constants to display for different ChartType values
     ' Show command button numbers only using SetButtonsCaption - Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=157256
+    ' Test for control type acLabel on chart form
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase
