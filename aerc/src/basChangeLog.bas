@@ -36,6 +36,7 @@ Option Explicit
     ' Use constants to display for different ChartType values
     ' Show command button numbers only using SetButtonsCaption - Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=157256
     ' Test for control type acLabel on chart form
+    ' Set label caption to chart title
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase

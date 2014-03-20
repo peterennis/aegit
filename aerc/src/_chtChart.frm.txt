@@ -1162,7 +1162,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl01"
-                    Caption ="lbl01"
+                    Caption ="LBL01"
                     GUID = Begin
                         0xbc02683e7c3d81448d00506247a118b3
                     End
@@ -1181,7 +1181,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl02"
-                    Caption ="lbl02"
+                    Caption ="LBL02"
                     GUID = Begin
                         0xfad6d0837f96054e8f69ea360fa0d3c0
                     End
@@ -1200,7 +1200,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl03"
-                    Caption ="lbl03"
+                    Caption ="LBL03"
                     GUID = Begin
                         0x342a79b8da7bab41958df83c82a751b6
                     End
@@ -1219,7 +1219,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl04"
-                    Caption ="lbl04"
+                    Caption ="LBL04"
                     GUID = Begin
                         0x28ea6343a20fe9429ae0756cdc7087f3
                     End
@@ -1238,7 +1238,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl05"
-                    Caption ="lbl05"
+                    Caption ="LBL05"
                     GUID = Begin
                         0xb0171b03fada2a47bf8b86c7dd6f52e9
                     End
@@ -1257,7 +1257,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl06"
-                    Caption ="lbl06"
+                    Caption ="LBL06"
                     GUID = Begin
                         0xdaad9e9d063b6041a4927f3b509f62c7
                     End
@@ -1276,7 +1276,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl07"
-                    Caption ="lbl07"
+                    Caption ="LBL07"
                     GUID = Begin
                         0xa1d1d0b7127fa84fbb4d393faf48d864
                     End
@@ -1295,7 +1295,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl08"
-                    Caption ="lbl08"
+                    Caption ="LBL08"
                     GUID = Begin
                         0x997075005aca41488ffac032f84b63fd
                     End
@@ -1314,7 +1314,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl09"
-                    Caption ="lbl09"
+                    Caption ="LBL09"
                     GUID = Begin
                         0x1821756c4a7630459c2f2f40e00c3f4e
                     End
@@ -1333,7 +1333,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl10"
-                    Caption ="lbl10"
+                    Caption ="LBL10"
                     GUID = Begin
                         0xb4887c8cc4732e4e8b4d373967722ec2
                     End
@@ -1419,7 +1419,10 @@ Private Sub SetLabelsCaption()
     For Each ctrl In Me.Controls
         'Debug.Print ctrl.Name
         On Error GoTo NextIteration:
-        If ctrl.ControlType = acLabel Then Debug.Print ctrl.Name, "Label"
+        'If ctrl.ControlType = acLabel Then Debug.Print ctrl.Name, "Label"
+        If ctrl.ControlType = acLabel And Left(ctrl.Caption, 3) = "LBL" Then
+            ctrl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid(ctrl.Caption, 4, 2) & "'")
+        End If
 NextIteration:
     Next
 End Sub
