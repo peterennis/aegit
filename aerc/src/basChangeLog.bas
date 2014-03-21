@@ -43,6 +43,8 @@ Public Const gblnTEST = False
     ' Set label caption to chart title
     ' Fix ribbons, test HideExport ribbon, add Access 2010 Controls IDs to doc - Ref: http://www.microsoft.com/en-us/download/details.aspx?id=6627
     ' Add AJP Ribbon Edit 2010 xlam to doc - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
+    ' imageMso values from here Ref: http://soltechs.net/CustomUI/imageMso01.asp
+    ' imageMso size="large" - case sensitive, add chart images to sample tab
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase

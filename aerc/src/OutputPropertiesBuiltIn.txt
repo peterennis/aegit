@@ -260,6 +260,6 @@ Inherited: False;
 ---
 Name: CustomRibbonID
 Type: dbText
-Value: HideExport
+Value: PngRibbon
 Inherited: False;
 ---

@@ -51,4 +51,4 @@ Perform Name AutoCorrect: 0, 4, False
 AppTitle: aegit, 10, False
 AppIcon: .\adaept64.ico, 10, False
 aeRibbonID: adaept, 10, False
-CustomRibbonID: HideExport, 10, False
+CustomRibbonID: PngRibbon, 10, False

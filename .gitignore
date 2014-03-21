@@ -4,6 +4,7 @@
 
 *.xlsm
 *.xlsx
+*.xll
 
 ###################
 ## Microsoft Access
