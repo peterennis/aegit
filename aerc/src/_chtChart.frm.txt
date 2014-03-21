@@ -1401,27 +1401,27 @@ Private Function GetRowSource(strChart As String) As String
 End Function
 
 Private Sub SetButtonsCaption()
-    Dim ctrl As Control
-    For Each ctrl In Me.Controls
-        'Debug.Print ctrl.Name
+    Dim ctl As control
+    For Each ctl In Me.Controls
+        'Debug.Print ctl.Name
         On Error GoTo NextIteration:
-        'Debug.Print ctrl.Caption
-        If Left(ctrl.Caption, 3) = "CHT" Then
-            ctrl.Caption = Mid(ctrl.Caption, 4, 2)
+        'Debug.Print ctl.Caption
+        If Left(ctl.Caption, 3) = "CHT" Then
+            ctl.Caption = Mid(ctl.Caption, 4, 2)
         End If
-        'Debug.Print ctrl.Caption
+        'Debug.Print ctl.Caption
 NextIteration:
     Next
 End Sub
 
 Private Sub SetLabelsCaption()
-    Dim ctrl As Control
-    For Each ctrl In Me.Controls
-        'Debug.Print ctrl.Name
+    Dim ctl As control
+    For Each ctl In Me.Controls
+        'Debug.Print ctl.Name
         On Error GoTo NextIteration:
-        'If ctrl.ControlType = acLabel Then Debug.Print ctrl.Name, "Label"
-        If ctrl.ControlType = acLabel And Left(ctrl.Caption, 3) = "LBL" Then
-            ctrl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid(ctrl.Caption, 4, 2) & "'")
+        'If ctl.ControlType = acLabel Then Debug.Print ctl.Name, "Label"
+        If ctl.ControlType = acLabel And Left(ctl.Caption, 3) = "LBL" Then
+            ctl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid(ctl.Caption, 4, 2) & "'")
         End If
 NextIteration:
     Next
@@ -1646,6 +1646,9 @@ End Sub
 
 Private Sub Form_Load()
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=227612
+
+    ' Hide the ribbon
+    'DoCmd.ShowToolbar "Ribbon", acToolbarNo
 
     With Me.chtChart
         .HasTitle = True

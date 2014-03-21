@@ -17,9 +17,6 @@
                             stdole        OLE Automation
                                           C:\Windows\System32\stdole2.tlb
                                           {00020430-0000-0000-C000-000000000046}
-                            DAO           Microsoft Office 15.0 Access database engine Object Library
-                                          C:\Program Files\Common Files\Microsoft Shared\OFFICE15\ACEDAO.DLL
-                                          {4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}
                             Scripting     Microsoft Scripting Runtime
                                           C:\Windows\System32\scrrun.dll
                                           {420B2830-E718-11CF-893D-00A0C9054228}
@@ -29,5 +26,8 @@
                             ADOX          Microsoft ADO Ext. 6.0 for DDL and Security
                                           C:\Program Files\Common Files\System\ado\msadox.dll
                                           {00000600-0000-0010-8000-00AA006D2EA4}
+                            DAO           Microsoft DAO 3.6 Object Library
+                                          C:\Program Files\Common Files\Microsoft Shared\DAO\dao360.dll
+                                          {00025E01-0000-0000-C000-000000000046}
               <*_*>
 <==<

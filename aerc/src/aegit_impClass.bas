@@ -324,11 +324,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
         If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
         If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
-        If blnDebug Then Debug.Print , , , vbaProj.References(i).Guid
+        If blnDebug Then Debug.Print , , , vbaProj.References(i).GUID
 
         Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
         Print #1, , , , vbaProj.References(i).FullPath
-        Print #1, , , , vbaProj.References(i).Guid
+        Print #1, , , , vbaProj.References(i).GUID
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then

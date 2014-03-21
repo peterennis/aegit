@@ -916,11 +916,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
         If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
         If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
-        If blnDebug Then Debug.Print , , , vbaProj.References(i).Guid
+        If blnDebug Then Debug.Print , , , vbaProj.References(i).GUID
 
         Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
         Print #1, , , , vbaProj.References(i).FullPath
-        Print #1, , , , vbaProj.References(i).Guid
+        Print #1, , , , vbaProj.References(i).GUID
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
@@ -1240,12 +1240,12 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
         'If blnDebug And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
         End If
         Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
             & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-            & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
+            & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
             & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
     If blnDebug Then Debug.Print
@@ -1620,7 +1620,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                 Select Case fld.Type
                     Case dbText
                         'No look-up fields
-                        strFlds = strFlds & "Text (" & fld.size & ")"
+                        strFlds = strFlds & "Text (" & fld.Size & ")"
                     Case dbLong
                         If (fld.Attributes And dbAutoIncrField) = 0& Then
                             strFlds = strFlds & "Long"

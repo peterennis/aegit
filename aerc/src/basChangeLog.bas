@@ -1,6 +1,10 @@
 Option Compare Database
 Option Explicit
 
+Public Const gstrDATE = "March 20, 2014"
+Public Const gstrVERSION = "0.8.9"
+Public Const gblnTEST = False
+
 ' Problems:
 ' Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
 ' Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
@@ -37,6 +41,8 @@ Option Explicit
     ' Show command button numbers only using SetButtonsCaption - Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=157256
     ' Test for control type acLabel on chart form
     ' Set label caption to chart title
+    ' Fix ribbons, test HideExport ribbon, add Access 2010 Controls IDs to doc - Ref: http://www.microsoft.com/en-us/download/details.aspx?id=6627
+    ' Add AJP Ribbon Edit 2010 xlam to doc - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
 '20140317 - v088 - Add CreateFormReportTextFile and FoundkeyWordInLine to aegit_expClass
     ' Add varDebug option to CreateFormReportTextFile
     ' Use varDebug in aeDocumentTheDatabase
