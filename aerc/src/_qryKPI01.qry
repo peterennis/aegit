@@ -1,0 +1,127 @@
+Operation =1
+Option =0
+Where ="((([_tblChart].EnterDate)=[Forms]![_chtKPI01].[Controls]![txtMonth] & \"/\" & [F"
+    "orms]![_chtKPI01].[Controls]![txtYear]))"
+Begin InputTables
+    Name ="_tblChart"
+End
+Begin OutputColumns
+    Alias ="id"
+    Expression ="[_tblChart].ID"
+    Alias ="appVer"
+    Expression ="[_tblChart].VersionApp"
+    Alias ="dataVer"
+    Expression ="[_tblChart].VersionData"
+    Alias ="TheYear"
+    Expression ="Format([EnterDate],\"yyyy\")"
+    Alias ="TheMonth"
+    Expression ="Format([EnterDate],\"mm\")"
+    Alias ="EnterDate"
+    Expression ="[_tblChart].EnterDate"
+    Expression ="[_tblChart].FLD01"
+    Expression ="[_tblChart].FLD02"
+    Expression ="[_tblChart].FLD03"
+    Expression ="[_tblChart].FLD04"
+    Expression ="[_tblChart].FLD05"
+    Expression ="[_tblChart].FLD06"
+    Expression ="[_tblChart].FLD07"
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbByte "RecordsetType" ="0"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbBoolean "TotalsRow" ="0"
+dbByte "PublishToWeb" ="1"
+Begin
+    Begin
+        dbText "Name" ="id"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x0d7a50f887894e479e191507cf5e993d
+        End
+    End
+    Begin
+        dbText "Name" ="appVer"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xcce8bb8f2fc4ff469ddeeaf96f910321
+        End
+    End
+    Begin
+        dbText "Name" ="dataVer"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x3b1d40a60add96418a069fea45d266f0
+        End
+    End
+    Begin
+        dbText "Name" ="EnterDate"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x1627fbd4ed1cca4fa34b0b9b281b204f
+        End
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD01"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD02"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD04"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD03"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD05"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD07"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="[_tblChart].FLD06"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="TheYear"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="TheMonth"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =0
+    Right =1235
+    Bottom =857
+    Left =-1
+    Top =-1
+    Right =1219
+    Bottom =261
+    Left =0
+    Top =0
+    ColumnsShown =539
+    Begin
+        Left =240
+        Top =12
+        Right =449
+        Bottom =222
+        Top =0
+        Name ="_tblChart"
+        Name =""
+    End
+End

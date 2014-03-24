@@ -44,6 +44,14 @@ _tlkpChart
               ChartNum       109          TextBox
               ChartDesc      109          TextBox
               ChartTitle     109          TextBox
+_tlkpMonth
+              ID             109          TextBox
+              TheMonthShort  109          TextBox
+              TheMonthLong   109          TextBox
+              TheMonthCode   109          TextBox
+_tlkpYear
+              ID             109          TextBox
+              TheYear        109          TextBox
 aeItems
               Item           109          TextBox
               Quantity       109          TextBox
@@ -64,9 +72,9 @@ USysRibbons
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 55
+Count of Text box  = 61
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 59
-Count of All Fields = 59
+Count of Display Controls = 65
+Count of All Fields = 65

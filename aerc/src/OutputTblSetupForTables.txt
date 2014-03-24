@@ -56,6 +56,26 @@ ChartDesc            Text            255
 ChartTitle           Text            255                
 
 
+-----------------
+TABLE: _tlkpMonth
+-----------------
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
+=================    ============    ====    ===========
+ID                   AutoNumber      4                  
+TheMonthShort        Text            3                  
+TheMonthLong         Text            9                  
+TheMonthCode         Text            2                  
+
+
+----------------
+TABLE: _tlkpYear
+----------------
+FIELD NAME           FIELD TYPE      SIZE    DESCRIPTION
+=================    ============    ====    ===========
+ID                   AutoNumber      4                  
+TheYear              Text            4                  
+
+
 --------------
 TABLE: aeItems
 --------------

@@ -13,21 +13,19 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =17280
+    Width =22320
     DatasheetFontHeight =11
-    ItemSuffix =87
-    Left =390
-    Top =570
-    Right =17925
-    Bottom =11835
+    ItemSuffix =79
+    Right =22575
+    Bottom =11265
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
-        0x6a1ab29d755ee440
+        0xe51f90fed85ee440
     End
     GUID = Begin
-        0x918147498afb284ab94f2afe2a22d847
+        0x57da32b0cb1684499b9162a8c05d6178
     End
-    RecordSource ="_tblChart"
+    Caption ="Charts"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
     End
@@ -119,7 +117,7 @@ Begin Form
             Height =11280
             Name ="Detail"
             GUID = Begin
-                0x1d5f564b393a794ea61b1b45690b2a4a
+                0xa5a448076149b942b3cdabe3e6d57d65
             End
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -134,49 +132,49 @@ Begin Form
                     RowSourceTypeInt =2
                     OverlapFlags =85
                     Left =120
-                    Top =180
-                    Width =11160
-                    Height =9120
+                    Top =750
+                    Width =15915
+                    Height =8550
                     BorderColor =10921638
                     ForeColor =4138256
                     Name ="chtChart"
                     OleData = Begin
                     End
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD25]) AS [25] FROM [_qryChart] GRO"
-                        "UP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
+                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD05]) AS [ABCom-SO_WCDF] FROM [_qr"
+                        "yChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
                     Class ="MSGraph.Chart.8"
                     OLEClass ="Microsoft Graph Chart"
                     GUID = Begin
-                        0xe0617b93ac3deb4598213ef8ea78bf3c
+                        0x7145a7efdd6fe2458821631f2d4a2bd3
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =11280
+                    LayoutCachedTop =750
+                    LayoutCachedWidth =16035
                     LayoutCachedHeight =9300
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =360
-                    Top =9600
+                    Left =16440
+                    Top =480
                     Width =840
                     Height =405
                     TabIndex =1
                     ForeColor =4210752
                     Name ="cmd01"
-                    Caption ="CHT01"
+                    Caption ="01"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9fe532103586e14f8bdce243411bfba7
+                        0x6785988d31b4c3439ef59fed12a30315
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =360
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =1200
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =885
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -187,24 +185,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =1260
-                    Top =9600
+                    Left =16440
+                    Top =960
                     Width =840
                     Height =405
                     TabIndex =2
                     ForeColor =4210752
                     Name ="cmd02"
-                    Caption ="CHT02"
+                    Caption ="02"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x27e90ea60dfe7b408300b9a80bfe7e26
+                        0x069ee9df8f7f8a4b919cecc1c74de038
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1260
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =2100
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =1365
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -215,24 +213,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =2160
-                    Top =9600
+                    Left =16440
+                    Top =1440
                     Width =840
                     Height =405
                     TabIndex =3
                     ForeColor =4210752
                     Name ="cmd03"
-                    Caption ="CHT03"
+                    Caption ="03"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9163dc2d65353c44ae707605a91b066c
+                        0x8897eed55a7ac446b63c300d355212da
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2160
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =1440
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =1845
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -243,24 +241,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =3060
-                    Top =9600
+                    Left =16440
+                    Top =1920
                     Width =840
                     Height =405
                     TabIndex =4
                     ForeColor =4210752
                     Name ="cmd04"
-                    Caption ="CHT04"
+                    Caption ="04"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x92ee9a3c8c2b024a9f374e1ae8e7077f
+                        0xec0bd3ecc559db469935cb47c087e0d4
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3060
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =3900
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =1920
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =2325
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -271,24 +269,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =3960
-                    Top =9600
+                    Left =16440
+                    Top =2400
                     Width =840
                     Height =405
                     TabIndex =5
                     ForeColor =4210752
                     Name ="cmd05"
-                    Caption ="CHT05"
+                    Caption ="05"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xd6f3476d9830734ca7dfdd5197f28c9d
+                        0xac8c8e6b24e63e45bdf983132e429112
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3960
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =4800
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =2400
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =2805
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -299,24 +297,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =4860
-                    Top =9600
+                    Left =16440
+                    Top =2880
                     Width =840
                     Height =405
                     TabIndex =6
                     ForeColor =4210752
                     Name ="cmd06"
-                    Caption ="CHT06"
+                    Caption ="06"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x6939aeed75300c47975a45c1d84ce43f
+                        0x9a08af6fe6faed4b8688538e2210d0ea
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4860
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =5700
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =2880
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =3285
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -327,24 +325,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5760
-                    Top =9600
+                    Left =16440
+                    Top =3360
                     Width =840
                     Height =405
                     TabIndex =7
                     ForeColor =4210752
                     Name ="cmd07"
-                    Caption ="CHT07"
+                    Caption ="07"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xaec391380b4fc34d9d1aee7ee5c62885
+                        0x1556659a8022e04bae2e0dd4d7031c4c
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5760
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =6600
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =3360
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =3765
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -355,24 +353,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =6660
-                    Top =9600
+                    Left =16440
+                    Top =3840
                     Width =840
                     Height =405
                     TabIndex =8
                     ForeColor =4210752
                     Name ="cmd08"
-                    Caption ="CHT08"
+                    Caption ="08"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x6f4081d410c1b5408607330e0fefbd16
+                        0xcb7489a2449b814c9190d447bec6921d
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6660
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =7500
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =3840
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =4245
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -383,24 +381,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =7560
-                    Top =9600
+                    Left =16440
+                    Top =4320
                     Width =840
                     Height =405
                     TabIndex =9
                     ForeColor =4210752
                     Name ="cmd09"
-                    Caption ="CHT09"
+                    Caption ="09"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9f77898d243d3745a3ad2eeaca320f92
+                        0xa4bae49fc3565f4487d1cb5e000cd7bc
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7560
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =8400
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =4320
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =4725
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -411,24 +409,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =8460
-                    Top =9600
+                    Left =16440
+                    Top =4800
                     Width =840
                     Height =405
                     TabIndex =10
                     ForeColor =4210752
                     Name ="cmd10"
-                    Caption ="CHT10"
+                    Caption ="10"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x99fd35d17e9a2a409d71fb79503eecc4
+                        0x1275830ac929e949ba6b2ac387410216
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =8460
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =9300
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =4800
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =5205
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -439,24 +437,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =9360
-                    Top =9600
+                    Left =16440
+                    Top =5280
                     Width =840
                     Height =405
                     TabIndex =11
                     ForeColor =4210752
                     Name ="cmd11"
-                    Caption ="CHT11"
+                    Caption ="11"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x230a28e7a26a9644807dfaae36b26d49
+                        0xf706457154d1b544a0021f82be10089e
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9360
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =10200
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =5280
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =5685
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -467,24 +465,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =10260
-                    Top =9600
+                    Left =16440
+                    Top =5760
                     Width =840
                     Height =405
                     TabIndex =12
                     ForeColor =4210752
                     Name ="cmd12"
-                    Caption ="CHT12"
+                    Caption ="12"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xf82f30264ea9c4449715df8042fc4a69
+                        0xdfd0bd677abe274aa81db91f9e5d50c7
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =10260
-                    LayoutCachedTop =9600
-                    LayoutCachedWidth =11100
-                    LayoutCachedHeight =10005
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =5760
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =6165
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -495,24 +493,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =360
-                    Top =10140
+                    Left =16440
+                    Top =6240
                     Width =840
-                    Height =405
+                    Height =420
                     TabIndex =13
                     ForeColor =4210752
                     Name ="cmd13"
-                    Caption ="CHT13"
+                    Caption ="13"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xd07e9b4b5d57c747b9081d3e922cdccf
+                        0xbeacf319f59bad40aff8de78029c3971
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =360
-                    LayoutCachedTop =10140
-                    LayoutCachedWidth =1200
-                    LayoutCachedHeight =10545
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =6240
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =6660
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -523,24 +521,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =1260
-                    Top =10140
+                    Left =16440
+                    Top =6720
                     Width =840
-                    Height =405
+                    Height =420
                     TabIndex =14
                     ForeColor =4210752
                     Name ="cmd14"
-                    Caption ="CHT14"
+                    Caption ="14"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x94e4e1f0c11d9e4ca3f404ed4d130526
+                        0xe0958a973566cb44835c6df1a5ec20c6
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1260
-                    LayoutCachedTop =10140
-                    LayoutCachedWidth =2100
-                    LayoutCachedHeight =10545
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =6720
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =7140
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -551,24 +549,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =2160
-                    Top =10140
+                    Left =16440
+                    Top =7200
                     Width =840
-                    Height =405
+                    Height =420
                     TabIndex =15
                     ForeColor =4210752
                     Name ="cmd15"
-                    Caption ="CHT15"
+                    Caption ="15"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xea813891964e9c46b849b5b1ba8a7629
+                        0xf3b6c775fe99024a9dda6169abf87014
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2160
-                    LayoutCachedTop =10140
-                    LayoutCachedWidth =3000
-                    LayoutCachedHeight =10545
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =7200
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =7620
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -579,24 +577,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =3060
-                    Top =10140
+                    Left =16440
+                    Top =7680
                     Width =840
-                    Height =405
+                    Height =420
                     TabIndex =16
                     ForeColor =4210752
                     Name ="cmd16"
-                    Caption ="CHT16"
+                    Caption ="16"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x8c30e8e573aed9418145291dffef76a8
+                        0x9a14524257d6b745818bd2d094a78347
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3060
-                    LayoutCachedTop =10140
-                    LayoutCachedWidth =3900
-                    LayoutCachedHeight =10545
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =7680
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =8100
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -607,24 +605,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =3960
-                    Top =10140
+                    Left =16440
+                    Top =8160
                     Width =840
-                    Height =405
+                    Height =420
                     TabIndex =17
                     ForeColor =4210752
                     Name ="cmd17"
-                    Caption ="CHT17"
+                    Caption ="17"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x09ce96f31d09724c8962e363802e5754
+                        0x1b4d6a6ae0845c42b777f202ea163ca7
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3960
-                    LayoutCachedTop =10140
-                    LayoutCachedWidth =4800
-                    LayoutCachedHeight =10545
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =8160
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =8580
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -635,24 +633,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =4860
-                    Top =10125
+                    Left =16440
+                    Top =8640
                     Width =840
                     Height =405
                     TabIndex =18
                     ForeColor =4210752
                     Name ="cmd18"
-                    Caption ="CHT18"
+                    Caption ="18"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x720d710dec5e6a47a45b1e6b51af9750
+                        0x0a7fda502231b6498eb96cbf7da95ee0
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4860
-                    LayoutCachedTop =10125
-                    LayoutCachedWidth =5700
-                    LayoutCachedHeight =10530
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =8640
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =9045
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -663,24 +661,24 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =5760
-                    Top =10125
+                    Left =16440
+                    Top =9120
                     Width =840
                     Height =405
                     TabIndex =19
                     ForeColor =4210752
                     Name ="cmd19"
-                    Caption ="CHT19"
+                    Caption ="19"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xc92a9120b7151a4683a204feea30b6bb
+                        0xd00f76c642de39408f55e53d7068b6c7
                     End
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5760
-                    LayoutCachedTop =10125
-                    LayoutCachedWidth =6600
-                    LayoutCachedHeight =10530
+                    LayoutCachedLeft =16440
+                    LayoutCachedTop =9120
+                    LayoutCachedWidth =17280
+                    LayoutCachedHeight =9525
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -690,6 +688,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =10125
@@ -698,10 +697,10 @@ Begin Form
                     TabIndex =20
                     ForeColor =4210752
                     Name ="cmd20"
-                    Caption ="CHT20"
+                    Caption ="20"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xbf1d6b2cbb82ba4980a76ef61ab4777c
+                        0x9e861a82546cbe49a29afe130f4bd24e
                     End
                     GridlineColor =10921638
 
@@ -718,6 +717,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7560
                     Top =10125
@@ -726,10 +726,10 @@ Begin Form
                     TabIndex =21
                     ForeColor =4210752
                     Name ="cmd21"
-                    Caption ="CHT21"
+                    Caption ="21"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x3cf9a223dfa01d48b8bab200242d6121
+                        0xecba6b63843c0a4b8dd6437971d6b429
                     End
                     GridlineColor =10921638
 
@@ -746,6 +746,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =8460
                     Top =10125
@@ -754,10 +755,10 @@ Begin Form
                     TabIndex =22
                     ForeColor =4210752
                     Name ="cmd22"
-                    Caption ="CHT22"
+                    Caption ="22"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x161e3322cfd0ea428797148a595624b1
+                        0x7657fad82c8a1140b04beaf31f7801ef
                     End
                     GridlineColor =10921638
 
@@ -774,6 +775,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =9360
                     Top =10125
@@ -782,10 +784,10 @@ Begin Form
                     TabIndex =23
                     ForeColor =4210752
                     Name ="cmd23"
-                    Caption ="CHT23"
+                    Caption ="23"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x2a42edba4d53b348bd999e148ffd3f0f
+                        0xd754a4ee85776345af1002d488eed6d6
                     End
                     GridlineColor =10921638
 
@@ -802,6 +804,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =10260
                     Top =10125
@@ -810,10 +813,10 @@ Begin Form
                     TabIndex =24
                     ForeColor =4210752
                     Name ="cmd24"
-                    Caption ="CHT24"
+                    Caption ="24"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xfb046e809a4c6841bc0bc88633a0fc17
+                        0xc6bde75059bd674285c103e7db5af253
                     End
                     GridlineColor =10921638
 
@@ -830,25 +833,26 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =360
-                    Top =10680
+                    Top =10665
                     Width =840
                     Height =405
                     TabIndex =25
                     ForeColor =4210752
                     Name ="cmd25"
-                    Caption ="CHT25"
+                    Caption ="25"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x4f718ebef182944e897567143ceab96c
+                        0xee4329bc1e775d45938333832fb8042a
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =360
-                    LayoutCachedTop =10680
+                    LayoutCachedTop =10665
                     LayoutCachedWidth =1200
-                    LayoutCachedHeight =11085
+                    LayoutCachedHeight =11070
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -857,25 +861,26 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =1260
-                    Top =10680
+                    Top =10665
                     Width =840
                     Height =405
                     TabIndex =26
                     ForeColor =4210752
                     Name ="cmd26"
-                    Caption ="CHT26"
+                    Caption ="26"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x40448a6998fd7846b7dc680b8d61b57f
+                        0x2a23ee4bdf068a4f8c3ee99a33a79d32
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =1260
-                    LayoutCachedTop =10680
+                    LayoutCachedTop =10665
                     LayoutCachedWidth =2100
-                    LayoutCachedHeight =11085
+                    LayoutCachedHeight =11070
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -884,25 +889,26 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =2160
-                    Top =10680
+                    Top =10665
                     Width =840
                     Height =405
                     TabIndex =27
                     ForeColor =4210752
                     Name ="cmd27"
-                    Caption ="CHT27"
+                    Caption ="27"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xa0ea0b753f8f2547ad2674637cc01577
+                        0x473f31a6002d144881eacfba177a5647
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2160
-                    LayoutCachedTop =10680
+                    LayoutCachedTop =10665
                     LayoutCachedWidth =3000
-                    LayoutCachedHeight =11085
+                    LayoutCachedHeight =11070
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -911,25 +917,26 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =3060
-                    Top =10680
+                    Top =10665
                     Width =840
                     Height =405
                     TabIndex =28
                     ForeColor =4210752
                     Name ="cmd28"
-                    Caption ="CHT28"
+                    Caption ="28"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xed4e437b6e03f149a3944fb6a4f68ee4
+                        0x18e033825ab5414a99e2ae9205ed7788
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3060
-                    LayoutCachedTop =10680
+                    LayoutCachedTop =10665
                     LayoutCachedWidth =3900
-                    LayoutCachedHeight =11085
+                    LayoutCachedHeight =11070
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -938,25 +945,26 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =3960
-                    Top =10680
+                    Top =10665
                     Width =840
                     Height =405
                     TabIndex =29
                     ForeColor =4210752
                     Name ="cmd29"
-                    Caption ="CHT29"
+                    Caption ="29"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x7d9cfae5824e664983497f7183e80846
+                        0x152602d056cc154383c9e97cffd4643e
                     End
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3960
-                    LayoutCachedTop =10680
+                    LayoutCachedTop =10665
                     LayoutCachedWidth =4800
-                    LayoutCachedHeight =11085
+                    LayoutCachedHeight =11070
                     BackColor =14136213
                     BorderColor =14136213
                     WebImagePaddingLeft =2
@@ -965,6 +973,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =4860
                     Top =10665
@@ -973,10 +982,10 @@ Begin Form
                     TabIndex =30
                     ForeColor =4210752
                     Name ="cmd30"
-                    Caption ="CHT30"
+                    Caption ="30"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9d30ac5252d49b4fadbe3b7a763ccba2
+                        0xee382cae78064e4888a35129c381856b
                     End
                     GridlineColor =10921638
 
@@ -992,6 +1001,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =5760
                     Top =10665
@@ -1000,10 +1010,10 @@ Begin Form
                     TabIndex =31
                     ForeColor =4210752
                     Name ="cmd31"
-                    Caption ="CHT31"
+                    Caption ="31"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x603ed1f540245143a0292175eed778fa
+                        0x9cf28b5a713dcc4796552456d53deec2
                     End
                     GridlineColor =10921638
 
@@ -1019,6 +1029,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =6660
                     Top =10665
@@ -1027,10 +1038,10 @@ Begin Form
                     TabIndex =32
                     ForeColor =4210752
                     Name ="cmd32"
-                    Caption ="CHT32"
+                    Caption ="32"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x45d7f9da3572304187bcb48e86495d42
+                        0x729196f7ddcd0743990ca46337808e39
                     End
                     GridlineColor =10921638
 
@@ -1046,6 +1057,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7560
                     Top =10665
@@ -1054,10 +1066,10 @@ Begin Form
                     TabIndex =33
                     ForeColor =4210752
                     Name ="cmd33"
-                    Caption ="CHT33"
+                    Caption ="33"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x754f1b0fd232c244a2b7f6b207593cd6
+                        0x8144f1ff93f4d643abfac486a2d2d0df
                     End
                     GridlineColor =10921638
 
@@ -1073,6 +1085,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =8460
                     Top =10665
@@ -1081,10 +1094,10 @@ Begin Form
                     TabIndex =34
                     ForeColor =4210752
                     Name ="cmd34"
-                    Caption ="CHT34"
+                    Caption ="34"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x5dc3ca094b8e1147a0c79ac5003f6d83
+                        0xe08e6371d7c43949aa6c99b5c37c3492
                     End
                     GridlineColor =10921638
 
@@ -1100,6 +1113,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =9360
                     Top =10665
@@ -1108,10 +1122,10 @@ Begin Form
                     TabIndex =35
                     ForeColor =4210752
                     Name ="cmd35"
-                    Caption ="CHT35"
+                    Caption ="35"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x112ef2bbe6a4794d923bcb9e9c1f1c46
+                        0x57e951bdd6633e439754856e0f800b4f
                     End
                     GridlineColor =10921638
 
@@ -1127,6 +1141,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =10260
                     Top =10665
@@ -1135,10 +1150,10 @@ Begin Form
                     TabIndex =36
                     ForeColor =4210752
                     Name ="cmd36"
-                    Caption ="CHT36"
+                    Caption ="36"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xc70e50f6bc1af148aae9491e6bc7423f
+                        0x2670273f4705364eaf4d7d6c29899139
                     End
                     GridlineColor =10921638
 
@@ -1155,193 +1170,364 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =180
-                    Width =2760
+                    Left =17340
+                    Top =540
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl01"
-                    Caption ="LBL01"
+                    Caption ="lbl01"
                     GUID = Begin
-                        0xbc02683e7c3d81448d00506247a118b3
+                        0x377c3a1c92148841ac735364ccaf8c59
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =480
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =840
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =600
-                    Width =2760
+                    Left =17340
+                    Top =1020
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl02"
-                    Caption ="LBL02"
+                    Caption ="lbl02"
                     GUID = Begin
-                        0xfad6d0837f96054e8f69ea360fa0d3c0
+                        0x08ca7219e6797e4e81f28a14f54a501a
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =900
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =11580
-                    Top =1020
-                    Width =2760
-                    Height =300
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lbl03"
-                    Caption ="LBL03"
-                    GUID = Begin
-                        0x342a79b8da7bab41958df83c82a751b6
-                    End
-                    GridlineColor =10921638
-                    LayoutCachedLeft =11580
+                    LayoutCachedLeft =17340
                     LayoutCachedTop =1020
-                    LayoutCachedWidth =14340
+                    LayoutCachedWidth =21600
                     LayoutCachedHeight =1320
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =1440
-                    Width =2760
+                    Left =17340
+                    Top =1500
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl03"
+                    Caption ="lbl03"
+                    GUID = Begin
+                        0x32d36f18c480da4eb73b24426f58ff62
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =1500
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =1800
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =1980
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl04"
-                    Caption ="LBL04"
+                    Caption ="lbl04"
                     GUID = Begin
-                        0x28ea6343a20fe9429ae0756cdc7087f3
+                        0xea52364f48910c4a9b7006b2df25971f
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =1440
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =1740
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =1980
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =2280
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =1860
-                    Width =2760
+                    Left =17340
+                    Top =2460
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl05"
-                    Caption ="LBL05"
+                    Caption ="lbl05"
                     GUID = Begin
-                        0xb0171b03fada2a47bf8b86c7dd6f52e9
+                        0x2a438f86b409d5459e8940ec6e25f680
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =1860
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =2160
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =2460
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =2760
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =2280
-                    Width =2760
+                    Left =17340
+                    Top =2940
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl06"
-                    Caption ="LBL06"
+                    Caption ="lbl06"
                     GUID = Begin
-                        0xdaad9e9d063b6041a4927f3b509f62c7
+                        0xc64f523976fde44daa950641d64a2e11
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =2280
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =2580
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =2940
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =3240
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =2700
-                    Width =2760
+                    Left =17340
+                    Top =3420
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl07"
-                    Caption ="LBL07"
+                    Caption ="lbl07"
                     GUID = Begin
-                        0xa1d1d0b7127fa84fbb4d393faf48d864
+                        0x14b21d3d50787947b2e9275db8c9f44c
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =2700
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =3000
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =3420
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =3720
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =3120
-                    Width =2760
+                    Left =17340
+                    Top =3900
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl08"
-                    Caption ="LBL08"
+                    Caption ="lbl08"
                     GUID = Begin
-                        0x997075005aca41488ffac032f84b63fd
+                        0x1db0cd4e7b669f4e9cd2ae2cebc49a63
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =3120
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =3420
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =3900
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =4200
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =3540
-                    Width =2760
+                    Left =17340
+                    Top =4380
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl09"
-                    Caption ="LBL09"
+                    Caption ="lbl09"
                     GUID = Begin
-                        0x1821756c4a7630459c2f2f40e00c3f4e
+                        0xf66467b48c82c1458add2144db882c75
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =3540
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =3840
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =4380
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =4680
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =11580
-                    Top =3960
-                    Width =2760
+                    Left =17340
+                    Top =4860
+                    Width =4260
                     Height =300
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl10"
-                    Caption ="LBL10"
+                    Caption ="lbl10"
                     GUID = Begin
-                        0xb4887c8cc4732e4e8b4d373967722ec2
+                        0xe42733f1efc6f74eb8a14050559932a4
                     End
                     GridlineColor =10921638
-                    LayoutCachedLeft =11580
-                    LayoutCachedTop =3960
-                    LayoutCachedWidth =14340
-                    LayoutCachedHeight =4260
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =4860
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =5160
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =5340
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl11"
+                    Caption ="lbl11"
+                    GUID = Begin
+                        0x2f73dc1f02ea4741b489f70b06c00418
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =5340
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =5640
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =5820
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl12"
+                    Caption ="lbl12"
+                    GUID = Begin
+                        0x13fd0feb7fd11d43aa7dbc0e1cb70084
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =5820
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =6120
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =6300
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl13"
+                    Caption ="lbl13"
+                    GUID = Begin
+                        0x0c375ac89996ed4797b3bc09eed7cc94
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =6300
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =6600
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =6780
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl14"
+                    Caption ="lbl14"
+                    GUID = Begin
+                        0x5749efbf2a44814d8ad785332b7ec920
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =6780
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =7080
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =7260
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl15"
+                    Caption ="lbl15"
+                    GUID = Begin
+                        0xd1f345386734954cabbdae27b949350c
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =7260
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =7560
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =7740
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl16"
+                    Caption ="lbl16"
+                    GUID = Begin
+                        0x1a3249b70a0cb14ebabc326121e67cd6
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =7740
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =8040
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =8220
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl17"
+                    Caption ="lbl17"
+                    GUID = Begin
+                        0x806c2d7b0d5b91429a7bbf9c6cc1e021
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =8220
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =8520
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =8700
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl18"
+                    Caption ="lbl18"
+                    GUID = Begin
+                        0xdf6bcded99f9244ebfa305ac1f78280e
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =8700
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =9000
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =17340
+                    Top =9180
+                    Width =4260
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lbl19"
+                    Caption ="lbl19"
+                    GUID = Begin
+                        0xc74aaae61210534f99a3ac57b0c90c93
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =17340
+                    LayoutCachedTop =9180
+                    LayoutCachedWidth =21600
+                    LayoutCachedHeight =9480
                 End
             End
         End
@@ -1391,9 +1577,8 @@ End Sub
 Private Function GetRowSource(strChart As String) As String
     Dim strQry As String
     Me.chtChart.RowSourceType = "Table/Query"
-    strQry = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
-    ' Sample RowSource query when the data is counts per month and EnterDate format is MM/YYYY
-    'strQry = "SELECT (Format([EnterDate],""MM/YYYY"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""MM/YYYY""));"
+    'strQry = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
+    strQry = "SELECT (Format([EnterDate],""MM/YYYY"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""MM/YYYY""));"
     GetRowSource = strQry
     'Debug.Print "GetRowSource=" & strQry
     'Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
@@ -1404,12 +1589,12 @@ Private Sub SetButtonsCaption()
     Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
-        On Error GoTo NextIteration:
+        On Error GoTo NextIteration
         'Debug.Print ctl.Caption
         If Left(ctl.Caption, 3) = "CHT" Then
             ctl.Caption = Mid(ctl.Caption, 4, 2)
         End If
-        'Debug.Print ctl.Caption
+        'Debug.Print ctrl.Caption
 NextIteration:
     Next
 End Sub
@@ -1418,7 +1603,7 @@ Private Sub SetLabelsCaption()
     Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
-        On Error GoTo NextIteration:
+        On Error GoTo NextIteration
         'If ctl.ControlType = acLabel Then Debug.Print ctl.Name, "Label"
         If ctl.ControlType = acLabel And Left(ctl.Caption, 3) = "LBL" Then
             ctl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid(ctl.Caption, 4, 2) & "'")
@@ -1646,15 +1831,28 @@ End Sub
 
 Private Sub Form_Load()
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=227612
+' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/0a34dbec-5078-4e16-b6a7-78f62c39f1bf/vba-navigation-pane?forum=accessdev
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb()
+    Dim strNewAppTitle
+
+    Set strNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
+    dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & gstrVERSION
+    Application.RefreshTitleBar
 
     ' Hide the ribbon
     'DoCmd.ShowToolbar "Ribbon", acToolbarNo
+
+    ' Hide the Navigation Pane
+    'DoCmd.NavigateTo "acNavigationCategoryObjectType"
+    'DoCmd.RunCommand acCmdWindowHide
 
     With Me.chtChart
         .HasTitle = True
         With .ChartTitle
             ' Test with DLookup from _tblChart
-            .Text = "Chart Title in Form_Load Event"
+            .Text = "SAMPLE - Select from list to display a chart"
         End With
     End With
     '

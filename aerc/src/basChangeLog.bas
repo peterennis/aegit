@@ -2,7 +2,8 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE = "March 20, 2014"
-Public Const gstrVERSION = "0.8.9"
+Public Const gstrVERSION = "0.9.0"
+Public Const gstrProject = "TheProject"
 Public Const gblnTEST = False
 
 ' Problems:
@@ -34,6 +35,7 @@ Public Const gblnTEST = False
 ' Create an adaept Chart Object as ["_tblChart", "_tlkpChart",
 
 
+'20140324 - v090 - Add KPI chart test
 '20140318 - v089 - Bump
     ' Use GetRowSource to reduce code in _chtChart
     ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response

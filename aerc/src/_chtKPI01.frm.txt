@@ -1,0 +1,1171 @@
+Version =20
+VersionRequired =20
+PublishOption =1
+Begin Form
+    RecordSelectors = NotDefault
+    MaxButton = NotDefault
+    MinButton = NotDefault
+    NavigationButtons = NotDefault
+    DividingLines = NotDefault
+    AllowDesignChanges = NotDefault
+    DefaultView =0
+    PictureAlignment =2
+    DatasheetGridlinesBehavior =3
+    GridX =24
+    GridY =24
+    Width =17280
+    DatasheetFontHeight =11
+    ItemSuffix =86
+    Right =17535
+    Bottom =11265
+    DatasheetGridlinesColor =14806254
+    RecSrcDt = Begin
+        0xe51f90fed85ee440
+    End
+    GUID = Begin
+        0x528289031601484d90992d3bd94f009f
+    End
+    Caption ="KPI01"
+    DatasheetFontName ="Calibri"
+    PrtMip = Begin
+    End
+    PrtDevMode = Begin
+    End
+    PrtDevNames = Begin
+    End
+    OnLoad ="[Event Procedure]"
+    AllowDatasheetView =0
+    FilterOnLoad =0
+    ShowPageMargins =0
+    DisplayOnSharePointSite =1
+    DatasheetAlternateBackColor =15921906
+    DatasheetGridlinesColor12 =0
+    FitToScreen =1
+    DatasheetBackThemeColorIndex =1
+    BorderThemeColorIndex =3
+    ThemeFontIndex =1
+    ForeThemeColorIndex =0
+    AlternateBackThemeColorIndex =1
+    AlternateBackShade =95.0
+    PrtDevModeW = Begin
+    End
+    PrtDevNamesW = Begin
+    End
+    NoSaveCTIWhenDisabled =1
+    Begin
+        Begin Label
+            BackStyle =0
+            FontSize =11
+            FontName ="Calibri"
+            ThemeFontIndex =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =0
+            BorderTint =50.0
+            ForeThemeColorIndex =0
+            ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin CommandButton
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderColor =16777215
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+        End
+        Begin TextBox
+            AddColon = NotDefault
+            FELineBreak = NotDefault
+            BorderLineStyle =0
+            LabelX =-1800
+            FontSize =11
+            FontName ="Calibri"
+            AsianLineBreak =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ThemeFontIndex =1
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Chart
+            SpecialEffect =2
+            OldBorderStyle =1
+            ThemeFontIndex =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ForeThemeColorIndex =2
+            ForeShade =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Section
+            Height =11280
+            Name ="Detail"
+            GUID = Begin
+                0xa5a448076149b942b3cdabe3e6d57d65
+            End
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+            Begin
+                Begin Chart
+                    ColumnHeads = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    SizeMode =1
+                    RowSourceTypeInt =2
+                    OverlapFlags =85
+                    Left =120
+                    Top =750
+                    Width =15915
+                    Height =8550
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="chtKPI01"
+                    OleData = Begin
+                    End
+                    RowSourceType ="Table/Query"
+                    RowSource ="SELECT (Format([EnterDate],\"MM/YYYY\")), FLD01, FLD02, FLD03, FLD04, FLD05, FLD"
+                        "06, FLD07 FROM [_qryKPI01];"
+                    Class ="MSGraph.Chart.8"
+                    OLEClass ="Microsoft Graph Chart"
+                    GUID = Begin
+                        0x7145a7efdd6fe2458821631f2d4a2bd3
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =750
+                    LayoutCachedWidth =16035
+                    LayoutCachedHeight =9300
+                End
+                Begin CommandButton
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =780
+                    Top =9660
+                    Width =840
+                    Height =405
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="cmdKPI01"
+                    Caption ="KPI01"
+                    GUID = Begin
+                        0x6785988d31b4c3439ef59fed12a30315
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =780
+                    LayoutCachedTop =9660
+                    LayoutCachedWidth =1620
+                    LayoutCachedHeight =10065
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =780
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =2
+                    ForeColor =4210752
+                    Name ="cmdKPI02"
+                    Caption ="KPI02"
+                    GUID = Begin
+                        0x069ee9df8f7f8a4b919cecc1c74de038
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =780
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =1620
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =780
+                    Top =10620
+                    Width =840
+                    Height =405
+                    TabIndex =3
+                    ForeColor =4210752
+                    Name ="cmdKPI03"
+                    Caption ="KPI03"
+                    GUID = Begin
+                        0x8897eed55a7ac446b63c300d355212da
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =780
+                    LayoutCachedTop =10620
+                    LayoutCachedWidth =1620
+                    LayoutCachedHeight =11025
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4320
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =4
+                    ForeColor =4210752
+                    Name ="cmdY01"
+                    Caption ="2011"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x9e861a82546cbe49a29afe130f4bd24e
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =5160
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5220
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =5
+                    ForeColor =4210752
+                    Name ="cmdY02"
+                    Caption ="2012"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xecba6b63843c0a4b8dd6437971d6b429
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5220
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6120
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =6
+                    ForeColor =4210752
+                    Name ="cmdY03"
+                    Caption ="2013"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x7657fad82c8a1140b04beaf31f7801ef
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6120
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =6960
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =7020
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =7
+                    ForeColor =4210752
+                    Name ="cmdY04"
+                    Caption ="2014"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xd754a4ee85776345af1002d488eed6d6
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7020
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =7920
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =8
+                    ForeColor =4210752
+                    Name ="cmdY05"
+                    Caption ="2015"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xc6bde75059bd674285c103e7db5af253
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7920
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =8760
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =4320
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =9
+                    ForeColor =4210752
+                    Name ="cmdM01"
+                    Caption ="Jan"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xee4329bc1e775d45938333832fb8042a
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =5160
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =5220
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =10
+                    ForeColor =4210752
+                    Name ="cmdM02"
+                    Caption ="Feb"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x2a23ee4bdf068a4f8c3ee99a33a79d32
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5220
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =6120
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =11
+                    ForeColor =4210752
+                    Name ="cmdM03"
+                    Caption ="Mar"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x473f31a6002d144881eacfba177a5647
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6120
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =6960
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =7020
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =12
+                    ForeColor =4210752
+                    Name ="cmdM04"
+                    Caption ="Apr"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x18e033825ab5414a99e2ae9205ed7788
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7020
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =7860
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =7920
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =13
+                    ForeColor =4210752
+                    Name ="cmdM05"
+                    Caption ="May"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x152602d056cc154383c9e97cffd4643e
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7920
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =8760
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =8820
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =14
+                    ForeColor =4210752
+                    Name ="cmdM06"
+                    Caption ="Jun"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xee382cae78064e4888a35129c381856b
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =8820
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =9660
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =9720
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =15
+                    ForeColor =4210752
+                    Name ="cmdM07"
+                    Caption ="Jul"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x9cf28b5a713dcc4796552456d53deec2
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =9720
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =10560
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =10620
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =16
+                    ForeColor =4210752
+                    Name ="cmdM08"
+                    Caption ="Aug"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x729196f7ddcd0743990ca46337808e39
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =10620
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =11460
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =11520
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =17
+                    ForeColor =4210752
+                    Name ="cmdM09"
+                    Caption ="Sep"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x8144f1ff93f4d643abfac486a2d2d0df
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =11520
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =12360
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =12420
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =18
+                    ForeColor =4210752
+                    Name ="cmdM10"
+                    Caption ="Oct"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xe08e6371d7c43949aa6c99b5c37c3492
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =12420
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =13260
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =13320
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =19
+                    ForeColor =4210752
+                    Name ="cmdM11"
+                    Caption ="Nov"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x57e951bdd6633e439754856e0f800b4f
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =13320
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =14160
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =14220
+                    Top =10680
+                    Width =840
+                    Height =405
+                    TabIndex =20
+                    ForeColor =4210752
+                    Name ="cmdM12"
+                    Caption ="Dec"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x2670273f4705364eaf4d7d6c29899139
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =14220
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =15060
+                    LayoutCachedHeight =11085
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =1680
+                    Top =9720
+                    Width =1860
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblKPI01"
+                    Caption ="lblKPI01"
+                    GUID = Begin
+                        0x377c3a1c92148841ac735364ccaf8c59
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1680
+                    LayoutCachedTop =9720
+                    LayoutCachedWidth =3540
+                    LayoutCachedHeight =10020
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =1680
+                    Top =10200
+                    Width =1860
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblKPI02"
+                    Caption ="lblKPI02"
+                    GUID = Begin
+                        0x08ca7219e6797e4e81f28a14f54a501a
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1680
+                    LayoutCachedTop =10200
+                    LayoutCachedWidth =3540
+                    LayoutCachedHeight =10500
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =1680
+                    Top =10680
+                    Width =1860
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="lblKPI03"
+                    Caption ="lblKPI03"
+                    GUID = Begin
+                        0x32d36f18c480da4eb73b24426f58ff62
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1680
+                    LayoutCachedTop =10680
+                    LayoutCachedWidth =3540
+                    LayoutCachedHeight =10980
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =7920
+                    Top =9660
+                    Width =1740
+                    Height =360
+                    TabIndex =21
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="txtMonth"
+                    GUID = Begin
+                        0x8c93ddf83200964ea583a38c2a0bcbd3
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =7920
+                    LayoutCachedTop =9660
+                    LayoutCachedWidth =9660
+                    LayoutCachedHeight =10020
+                    Begin
+                        Begin Label
+                            OverlapFlags =93
+                            TextAlign =3
+                            Left =6960
+                            Top =9660
+                            Width =900
+                            Height =360
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblMonth"
+                            Caption ="Month"
+                            GUID = Begin
+                                0x78fbffdad69d6f49b3ad8b8451a695b1
+                            End
+                            GridlineColor =10921638
+                            LayoutCachedLeft =6960
+                            LayoutCachedTop =9660
+                            LayoutCachedWidth =7860
+                            LayoutCachedHeight =10020
+                        End
+                    End
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OverlapFlags =87
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =5280
+                    Top =9660
+                    Width =1680
+                    Height =360
+                    TabIndex =22
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="txtYear"
+                    GUID = Begin
+                        0xb288619b0079de43b8c593c178b5babe
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5280
+                    LayoutCachedTop =9660
+                    LayoutCachedWidth =6960
+                    LayoutCachedHeight =10020
+                    Begin
+                        Begin Label
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =4320
+                            Top =9660
+                            Width =900
+                            Height =360
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblYear"
+                            Caption ="Year"
+                            GUID = Begin
+                                0x05e294dc1f6eb34a9629f88c2881863f
+                            End
+                            GridlineColor =10921638
+                            LayoutCachedLeft =4320
+                            LayoutCachedTop =9660
+                            LayoutCachedWidth =5220
+                            LayoutCachedHeight =10020
+                        End
+                    End
+                End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =8820
+                    Top =10140
+                    Width =840
+                    Height =405
+                    TabIndex =23
+                    ForeColor =4210752
+                    Name ="cmdY06"
+                    Caption ="2016"
+                    GUID = Begin
+                        0x6a57ace0edff11468d646aa657c4b5e3
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =8820
+                    LayoutCachedTop =10140
+                    LayoutCachedWidth =9660
+                    LayoutCachedHeight =10545
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =4320
+                    Top =180
+                    Width =7200
+                    Height =360
+                    TabIndex =24
+                    BorderColor =10921638
+                    Name ="txtMainTitle"
+                    ControlSource ="=GetMainTitle()"
+                    GUID = Begin
+                        0xe7631c771522094a9a9b502e573dcdfe
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =11520
+                    LayoutCachedHeight =540
+                    ForeTint =100.0
+                    Begin
+                        Begin Label
+                            Visible = NotDefault
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =2880
+                            Top =180
+                            Width =1380
+                            Height =360
+                            BorderColor =8355711
+                            ForeColor =8355711
+                            Name ="lblMainTitle"
+                            Caption ="Main Title"
+                            GUID = Begin
+                                0xfca4d41b16c89141a063d1f31cc8c384
+                            End
+                            GridlineColor =10921638
+                            LayoutCachedLeft =2880
+                            LayoutCachedTop =180
+                            LayoutCachedWidth =4260
+                            LayoutCachedHeight =540
+                        End
+                    End
+                End
+            End
+        End
+    End
+End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+Private Sub SetChartTitle(strTitle As String)
+    With Me.chtKPI01
+        .HasTitle = True
+        With .ChartTitle
+            .Text = strTitle
+        End With
+    End With
+End Sub
+
+Private Function GetMainTitle()
+    GetMainTitle = "KPI-01 " & Me.txtMonth & " " & Me.txtYear
+End Function
+
+Private Function GetRowSource(strChart As String, strKPI As String) As String
+    Dim strQry As String
+    Me.chtKPI01.RowSourceType = "Table/Query"
+    'strQry = "SELECT (Format([EnterDate],""MM/YYYY"")), FLD01, FLD02, FLD03, FLD04, FLD05, FLD06, FLD07 FROM [_qryKPI" & strKPI & "];"
+    Dim strFLD01 As String
+    strFLD01 = DLookup("ChartDesc", "_tlkpChart", "ID=1")
+    Debug.Print "strFLD01=" & strFLD01
+    Dim strFLD02 As String
+    strFLD02 = DLookup("ChartDesc", "_tlkpChart", "ID=2")
+    Dim strFLD03 As String
+    strFLD03 = DLookup("ChartDesc", "_tlkpChart", "ID=3")
+    Dim strFLD04 As String
+    strFLD04 = DLookup("ChartDesc", "_tlkpChart", "ID=4")
+    Dim strFLD05 As String
+    strFLD05 = DLookup("ChartDesc", "_tlkpChart", "ID=5")
+    Dim strFLD06 As String
+    strFLD06 = DLookup("ChartDesc", "_tlkpChart", "ID=6")
+    Dim strFLD07 As String
+    strFLD07 = DLookup("ChartDesc", "_tlkpChart", "ID=7")
+    strQry = "SELECT (Format([EnterDate],""MM/YYYY"")), FLD01 AS " & """" & strFLD01 & """" & ", " & _
+                "FLD02 AS " & """" & strFLD02 & """" & ", " & _
+                "FLD03 AS " & """" & strFLD03 & """" & ", " & _
+                "FLD04 AS " & """" & strFLD04 & """" & ", " & _
+                "FLD05 AS " & """" & strFLD05 & """" & ", " & _
+                "FLD06 AS " & """" & strFLD06 & """" & ", " & _
+                "FLD07 AS " & """" & strFLD07 & """" & " FROM [_qryKPI" & strKPI & "];"
+    GetRowSource = strQry
+    Debug.Print "GetRowSource=" & strQry
+    'Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
+    'Me.chtChart.ChartType = 51
+End Function
+
+Private Sub SetMonthsCaption()
+    Dim ctl As control
+    For Each ctl In Me.Controls
+        'Debug.Print ctl.Name
+        On Error Resume Next
+        If ctl.ControlType = acCommandButton And Left(ctl.Caption, 1) = "M" Then
+            ctl.Caption = DLookup("TheMonth", "_tlkpMonth", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
+        End If
+        'Debug.Print ctrl.Caption
+    Next
+End Sub
+
+Private Sub SetYearsCaption()
+    Dim ctl As control
+    For Each ctl In Me.Controls
+        'Debug.Print ctl.Name
+        On Error Resume Next
+        If ctl.ControlType = acCommandButton And Left(ctl.Caption, 1) = "Y" Then
+            ctl.Caption = DLookup("TheYear", "_tlkpYear", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
+        End If
+    Next
+End Sub
+
+Private Sub cmdM01_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=1")
+    Me.chtKPI01.RowSource = GetRowSource("01", "01")
+    Debug.Print GetRowSource("01", "01")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM02_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=2")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM03_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=3")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM04_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=4")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM05_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=5")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM06_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=6")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM07_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=7")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM08_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=8")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM09_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=9")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM10_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=10")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM11_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=11")
+    Me.Refresh
+End Sub
+
+Private Sub cmdM12_Click()
+    If IsNull(Me.txtYear) Then
+        MsgBox "Select a year", vbExclamation, gstrProject
+        Exit Sub
+    End If
+    Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=12")
+    Me.Refresh
+End Sub
+
+Private Sub cmdY01_Click()
+    Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=1")
+End Sub
+
+Private Sub cmdY02_Click()
+    Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=2")
+End Sub
+
+Private Sub cmdY03_Click()
+    Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=3")
+End Sub
+
+Private Sub cmdY04_Click()
+    Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=4")
+End Sub
+
+Private Sub cmdY05_Click()
+    Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=5")
+End Sub
+
+Private Sub Form_Load()
+
+    SetYearsCaption
+    SetMonthsCaption
+    ' Set some defaults to display a chart
+    Me.txtYear = "2011"
+    Me.txtMonth = "Jan"
+    With Me.chtKPI01
+        .HasTitle = True
+        With .ChartTitle
+            .Text = "Select Year and then click on Month to display a chart"
+        End With
+    End With
+    cmdM01_Click
+
+End Sub

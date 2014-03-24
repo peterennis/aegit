@@ -27,6 +27,25 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [_tlkpMonth] ([ID] Counter,[TheMonthShort] Text (3),[TheMonthLong] Text (9),[TheMonthCode] Text (2) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpMonth] ([TheMonthCode])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [TheMonthCode] ON [_tlkpMonth] ([TheMonthCode]) "
+Currentdb.Execute strSQL
+
+'Local Table
+
+strSQL="CREATE TABLE [_tlkpYear] ([ID] Counter,[TheYear] Text (4) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpYear] ([TheYear])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [aeItems] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )"
 Currentdb.Execute strSQL
 

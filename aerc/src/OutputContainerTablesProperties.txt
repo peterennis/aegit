@@ -5,8 +5,8 @@
               Permissions    1048575 
               AllPermissions               1048575 
               Container     Tables
-              DateCreated   3/12/2014 3:59:32 PM 
-              LastUpdated   3/18/2014 7:58:29 PM 
+              DateCreated   3/24/2014 2:45:28 PM 
+              LastUpdated   3/24/2014 2:46:02 PM 
               RecordLocks    0 
               ODBCTimeout    60 
               RecordsetType  0 
@@ -16,7 +16,25 @@
               FilterOnLoad  False
               OrderByOnLoad True
               TotalsRow     False
-              DOL           Track name AutoCorrect info is ON!
+              PublishToWeb   1 
+>>>_qryKPI01
+              Name          _qryKPI01
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   3/24/2014 2:45:28 PM 
+              LastUpdated   3/24/2014 2:45:29 PM 
+              RecordLocks    0 
+              ODBCTimeout    60 
+              RecordsetType  0 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              TotalsRow     False
               PublishToWeb   1 
 >>>_tblChart
               Name          _tblChart
@@ -74,6 +92,60 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
+>>>_tlkpMonth
+              Name          _tlkpMonth
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   3/24/2014 2:45:26 PM 
+              LastUpdated   3/24/2014 2:45:27 PM 
+              PublishToWeb   1 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+>>>_tlkpYear
+              Name          _tlkpYear
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   3/24/2014 2:45:27 PM 
+              LastUpdated   3/24/2014 2:45:28 PM 
+              PublishToWeb   1 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
 >>>aeItems
               Name          aeItems
               Owner         admin
