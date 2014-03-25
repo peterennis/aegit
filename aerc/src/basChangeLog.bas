@@ -36,6 +36,7 @@ Public Const gblnTEST = False
 
 
 '20140324 - v090 - Add KPI chart test
+    ' Show KPI chart as bar or pie with command button click
 '20140318 - v089 - Bump
     ' Use GetRowSource to reduce code in _chtChart
     ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response

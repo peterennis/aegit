@@ -15,7 +15,7 @@ Begin Form
     GridY =24
     Width =17280
     DatasheetFontHeight =11
-    ItemSuffix =86
+    ItemSuffix =88
     Right =17535
     Bottom =11265
     DatasheetGridlinesColor =14806254
@@ -156,96 +156,12 @@ Begin Form
                     LayoutCachedHeight =9300
                 End
                 Begin CommandButton
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =780
-                    Top =9660
-                    Width =840
-                    Height =405
-                    TabIndex =1
-                    ForeColor =4210752
-                    Name ="cmdKPI01"
-                    Caption ="KPI01"
-                    GUID = Begin
-                        0x6785988d31b4c3439ef59fed12a30315
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =780
-                    LayoutCachedTop =9660
-                    LayoutCachedWidth =1620
-                    LayoutCachedHeight =10065
-                    BackColor =14136213
-                    BorderColor =14136213
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin CommandButton
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =780
-                    Top =10140
-                    Width =840
-                    Height =405
-                    TabIndex =2
-                    ForeColor =4210752
-                    Name ="cmdKPI02"
-                    Caption ="KPI02"
-                    GUID = Begin
-                        0x069ee9df8f7f8a4b919cecc1c74de038
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =780
-                    LayoutCachedTop =10140
-                    LayoutCachedWidth =1620
-                    LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin CommandButton
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =780
-                    Top =10620
-                    Width =840
-                    Height =405
-                    TabIndex =3
-                    ForeColor =4210752
-                    Name ="cmdKPI03"
-                    Caption ="KPI03"
-                    GUID = Begin
-                        0x8897eed55a7ac446b63c300d355212da
-                    End
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =780
-                    LayoutCachedTop =10620
-                    LayoutCachedWidth =1620
-                    LayoutCachedHeight =11025
-                    BackColor =14136213
-                    BorderColor =14136213
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
-                    Overlaps =1
-                End
-                Begin CommandButton
                     OverlapFlags =85
                     Left =4320
                     Top =10140
                     Width =840
                     Height =405
-                    TabIndex =4
+                    TabIndex =1
                     ForeColor =4210752
                     Name ="cmdY01"
                     Caption ="2011"
@@ -268,12 +184,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =5220
                     Top =10140
                     Width =840
                     Height =405
-                    TabIndex =5
+                    TabIndex =2
                     ForeColor =4210752
                     Name ="cmdY02"
                     Caption ="2012"
@@ -296,12 +213,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =6120
                     Top =10140
                     Width =840
                     Height =405
-                    TabIndex =6
+                    TabIndex =3
                     ForeColor =4210752
                     Name ="cmdY03"
                     Caption ="2013"
@@ -330,7 +248,7 @@ Begin Form
                     Top =10140
                     Width =840
                     Height =405
-                    TabIndex =7
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="cmdY04"
                     Caption ="2014"
@@ -359,7 +277,7 @@ Begin Form
                     Top =10140
                     Width =840
                     Height =405
-                    TabIndex =8
+                    TabIndex =5
                     ForeColor =4210752
                     Name ="cmdY05"
                     Caption ="2015"
@@ -387,7 +305,7 @@ Begin Form
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =9
+                    TabIndex =6
                     ForeColor =4210752
                     Name ="cmdM01"
                     Caption ="Jan"
@@ -415,7 +333,7 @@ Begin Form
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =10
+                    TabIndex =7
                     ForeColor =4210752
                     Name ="cmdM02"
                     Caption ="Feb"
@@ -443,7 +361,7 @@ Begin Form
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =11
+                    TabIndex =8
                     ForeColor =4210752
                     Name ="cmdM03"
                     Caption ="Mar"
@@ -466,12 +384,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =7020
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =12
+                    TabIndex =9
                     ForeColor =4210752
                     Name ="cmdM04"
                     Caption ="Apr"
@@ -494,12 +413,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =7920
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =13
+                    TabIndex =10
                     ForeColor =4210752
                     Name ="cmdM05"
                     Caption ="May"
@@ -522,12 +442,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =8820
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =14
+                    TabIndex =11
                     ForeColor =4210752
                     Name ="cmdM06"
                     Caption ="Jun"
@@ -550,12 +471,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =9720
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =15
+                    TabIndex =12
                     ForeColor =4210752
                     Name ="cmdM07"
                     Caption ="Jul"
@@ -578,12 +500,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =10620
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =16
+                    TabIndex =13
                     ForeColor =4210752
                     Name ="cmdM08"
                     Caption ="Aug"
@@ -606,12 +529,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =11520
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =17
+                    TabIndex =14
                     ForeColor =4210752
                     Name ="cmdM09"
                     Caption ="Sep"
@@ -634,12 +558,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =12420
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =18
+                    TabIndex =15
                     ForeColor =4210752
                     Name ="cmdM10"
                     Caption ="Oct"
@@ -662,12 +587,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =13320
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =19
+                    TabIndex =16
                     ForeColor =4210752
                     Name ="cmdM11"
                     Caption ="Nov"
@@ -690,12 +616,13 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =14220
                     Top =10680
                     Width =840
                     Height =405
-                    TabIndex =20
+                    TabIndex =17
                     ForeColor =4210752
                     Name ="cmdM12"
                     Caption ="Dec"
@@ -717,66 +644,6 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =1680
-                    Top =9720
-                    Width =1860
-                    Height =300
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblKPI01"
-                    Caption ="lblKPI01"
-                    GUID = Begin
-                        0x377c3a1c92148841ac735364ccaf8c59
-                    End
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1680
-                    LayoutCachedTop =9720
-                    LayoutCachedWidth =3540
-                    LayoutCachedHeight =10020
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =1680
-                    Top =10200
-                    Width =1860
-                    Height =300
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblKPI02"
-                    Caption ="lblKPI02"
-                    GUID = Begin
-                        0x08ca7219e6797e4e81f28a14f54a501a
-                    End
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1680
-                    LayoutCachedTop =10200
-                    LayoutCachedWidth =3540
-                    LayoutCachedHeight =10500
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =1680
-                    Top =10680
-                    Width =1860
-                    Height =300
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="lblKPI03"
-                    Caption ="lblKPI03"
-                    GUID = Begin
-                        0x32d36f18c480da4eb73b24426f58ff62
-                    End
-                    GridlineColor =10921638
-                    LayoutCachedLeft =1680
-                    LayoutCachedTop =10680
-                    LayoutCachedWidth =3540
-                    LayoutCachedHeight =10980
-                End
                 Begin TextBox
                     Enabled = NotDefault
                     OverlapFlags =85
@@ -786,7 +653,7 @@ Begin Form
                     Top =9660
                     Width =1740
                     Height =360
-                    TabIndex =21
+                    TabIndex =18
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txtMonth"
@@ -831,7 +698,7 @@ Begin Form
                     Top =9660
                     Width =1680
                     Height =360
-                    TabIndex =22
+                    TabIndex =19
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txtYear"
@@ -874,7 +741,7 @@ Begin Form
                     Top =10140
                     Width =840
                     Height =405
-                    TabIndex =23
+                    TabIndex =20
                     ForeColor =4210752
                     Name ="cmdY06"
                     Caption ="2016"
@@ -905,7 +772,7 @@ Begin Form
                     Top =180
                     Width =7200
                     Height =360
-                    TabIndex =24
+                    TabIndex =21
                     BorderColor =10921638
                     Name ="txtMainTitle"
                     ControlSource ="=GetMainTitle()"
@@ -942,6 +809,243 @@ Begin Form
                             LayoutCachedHeight =540
                         End
                     End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =1980
+                    Top =10260
+                    Width =840
+                    Height =780
+                    TabIndex =22
+                    ForeColor =4210752
+                    Name ="cmdBar"
+                    Caption ="Bar"
+                    OnClick ="[Event Procedure]"
+                    Picture ="48x48bar.png"
+                    GUID = Begin
+                        0x7c7e3b9233772a48ad568003fda8f8b1
+                    End
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x89504e470d0a1a0a0000000d49484452000000300000003008060000005702f9 ,
+                        0x87000000017352474200aece1ce90000000467414d410000b18f0bfc61050000 ,
+                        0x11f7494441546843c599498c65d759c7fff7bef7ee1b6be82a7775b7edb6d3ed ,
+                        0x3832431c30c656b2639058b089902596ac8240b062031b8484103b0808890847 ,
+                        0x8984c088440a0a9640b2ec1847711239c1316ec771dcddeeb6dd537555bd7ae3 ,
+                        0x9d277edfb9efb51d89558cd4a7fbd49dce3de71bfedffffbce7d5e95d5b53ab7 ,
+                        0x3529e66ab5cfa8d2916add2faf6e4b5ea181386aa954915ad59e5ab5783e93ca ,
+                        0xa57ad57df27a3cbe8bcd2bf2babe3e7b45fff3f6cbba74fdbbbab5784e7eab54 ,
+                        0x877fddcdb9debff980da839b2afd42c3ee0904df56bfd7d6139ffaac9e7cf873 ,
+                        0xba4f0fafa6ba3bcd1b5717ebe7bef3977ae4e3bfa160d051bf33d2bdbd2795a7 ,
+                        0xdb6ab51205ed038685caf180745ad3fc9aae1cbca0bcac75fbe09a7efbf1a7dd ,
+                        0x4477abf91def94aedc7853c1c853117c578bea59cdf5051d657f41ff134da72f ,
+                        0x6b197f4b87d3afeafacd6754d5cfeba1fba4fb771fd56b3f786335cddd6b3e01 ,
+                        0xa0fda3cb587b53cbf496168b8596c5422d4f1af53774d80f35ebfb2ab6fb3a6c ,
+                        0x57ba145fd5e5f240d1f0633ada5aaca6b97b0d64f795e5b1767ae73418541a0d ,
+                        0x37b92668cb99c6b303c5d1058d0fdf56952d757a7852bbdd44cbf1abaaeb1f2a ,
+                        0xf3de5c4d73f79adf03ddfd5ea2a4087563ff0d4de6631d4dc6aa7c4fb517e8fe ,
+                        0x13a1baf58f55cc5f54317d51adf0756d841ddd9f3da5edc3ddd53477aff9aa3b ,
+                        0xd023d45810033a50a77facdc7f4b69fb358df397f4fa625ffbad91a28df33a2c ,
+                        0x1ed4ad7ca845bfada49bea7d7fbc9ae6ee351fb915d58122ef5865fda0e6f554 ,
+                        0xcb6c4f07e1429936d5c90bb43cd4e178a678e31b8acb1e819c6a127e4f67bcfe ,
+                        0x6a9a8fd0e25a2e92f26372d04c65c13969e6308e45f21156c5bac7aa97ef23a8 ,
+                        0x941ddae0547975a83c73412c5555a5b22c5514c59da3f59cd9f23c6fee33663d ,
+                        0x2eaf4a94e05e8deb3e621b071569b250d5a93445c2a88dc423f8bddf57da920e ,
+                        0x8a443150ce47279561af6a079d35d1ccbfa13818635cda5ae8b4c8952270c679 ,
+                        0x86f0769ee629d739ca642a2a3b3296638112c5ff8302bbe396ce1c5f50f8f5a7 ,
+                        0x75f35f9fd28fbe74bfbef3379eae3eebe9db5ff474e99f1fd3f79eded0b7fe61 ,
+                        0xa057bfece99b7fe5e9e2977f453b2fbea1cd6bdbf266755dffd1e73dfddeef7c ,
+                        0x5d176effb1faa396f2f0048c3455cb42a4ec8a13556547edfe42f1b223b54b9d ,
+                        0xdbfe737de199dfd23ffe41b912e5a76b5938d17ffff8af75aafe653d703e5127 ,
+                        0x7850254ab5b61e621d30d239c2c2c8a021c733bc7015237e03ba9fe8ead1bf50 ,
+                        0x3534f334d0c0ea0e3e9c675838e53aabcdda4d4f8b54313d057ce60140b57afb ,
+                        0xa76f417aacf0e23fe9dce6913ae9bf4bd3bf27077d51c5953f05f37f467f465a ,
+                        0xfc9dca5b9f5379f5f7098edf5527fb0fedd4a7e45d593410a29cbb0323a704c2 ,
+                        0x651510a2e7061bae9332559281c7345144de3065f28f2e3f787f48bd1e4471ea ,
+                        0xe35adcbaacf19557a4dea1da5d8238b8ad2abc8a27267864a9566faa32b885c0 ,
+                        0x78468fe8685a0ab6e71a1438e11de68901b3bcc501e716a8867fb3ba091f26a1 ,
+                        0x221822cd13ee3b113e529b902cf717375479917a148fbdeda98ade4da97bac9b ,
+                        0xf35749a66f2b9c5e5592bca708e6597857354b2ff3bc50327aaff100e472c703 ,
+                        0x1f8692631b1eba80e5da823cc9b0bcc1c805b693e123b513fd3d9d0101c58d96 ,
+                        0x3ac948c3a8a7f05d7834ded6896c4327833d0dc35df5c66734583ea2edec9cfa ,
+                        0x0be2216a6958d4a600645b8f34cf6f2a85d78f634f651b98443b080a2497d271 ,
+                        0x14e976f28e8e970312dc5c6106a4f27df5fc0d29895547b8dbf1b5fb4f0c59af ,
+                        0xdd7905cfbb6706b70f77531e2444a39838dd9177866cc03aeab635ca774894df ,
+                        0x579f8c9fe5efaa6e5d72134f369fe74f57018452ecded2e67c47be05e29adf9d ,
+                        0xf5579636c824061bb4c890284588bcc41b0856bade8c57c797c7a256555540ac ,
+                        0x44a136b3b6c9301eb9c2eb5392f03843e239f09bc54b85c0cfc821f373f11408 ,
+                        0x575402a675c1b141819b9b6ee8a81a8b3839eb062ebc933becb34c238c09677c ,
+                        0xef842e3285694a194dd0267823e11ed64a89da24ab39da0235d45a6b491d9240 ,
+                        0x65093365bd16f8a5ccf04a327bae49196932becdde2254c0f3cd41575b7486b1 ,
+                        0xcff05cb718244baa20de6a8b390c56d1ed6810b0f8ac818a53c69470f7d3e6b9 ,
+                        0x2960e550c5730bda24c3f25981b0b996090ad0e728129947189fe63e2ef55c0a ,
+                        0xb7f7cd18a3a2afdeaca4a7ea25b57a71a5de34d1206ee94439d2cece29050198 ,
+                        0xad7043d974bf4403730bdd29000d9a072ad67602ae2c6e9d5d2d8223606e1ec5 ,
+                        0x68769f38acf0800fc1f83e59aaae118a174d81c8f50ca1f1029ac6ae63655320 ,
+                        0xf3c42394606ee7855253e4586cf5946e8d54627db6742a465d655837035e86f7 ,
+                        0x7c1651ea80f1d42c89d57d922173e451ca8e9b6b2c680a58f70c4eabde4005a1 ,
+                        0x8d2d50c294715043800a2b1afca05182968186f9080c1b55c69c270c4c782934 ,
+                        0xc538370f9812094a2419d48a458aa27285184bb9808da209de9da8ddae15746a ,
+                        0x1252a5490b8f6e53cbdcc3be6300b4d84fdcae263a0ed8570c2dd753f7ac1428 ,
+                        0x0dffac5799e05cd7085e61bc8af5cce50dbc8826f25185173cd892a5b03e5aa6 ,
+                        0x29968f810a33765b6011375b92b0a0aec039de6552330a01cf4406b51c363a3b ,
+                        0x45829bd775f5e5e775e58dd7944c8fd56e05249f3ed06eabf4330588d9ad7df9 ,
+                        0x0864b966b8b3ad4f3df9b8fa4f3c4e3ebab721111310cbd698b9324230cc63a4 ,
+                        0xb205dccc7a086b0a16a68c25511428990b059a207609cc02d56a0bd314eb8202 ,
+                        0x946bdc6759d72c65c14f627079214371f9877af5eab7b5f40ff4c4539fd1c6bd ,
+                        0xa7a579c8185ede63f31cb0f8826b13c2146391a3c37d5d9adc56f8fd7fd3a71f ,
+                        0xf943845bb120ebd6d459508dc3ba230a270bc2a3809d170516c60b0510b7d8f5 ,
+                        0x03f7fda7ada3e2ba16c9bdae1e2f67815a75a470d9561b97540bb4223f24d911 ,
+                        0x161c284f4e6a1efd501bad3d69f384defdfc57f4994f3e28ff8567157fed6f55 ,
+                        0xbcf655c5b75e905eff9af426dc7df99b8ade7a4ee90fbea2c94b5f9277e1253d ,
+                        0xba795217fff30259a80fdc460ac6af6b31dc9337be071299a97f3cd4518511a2 ,
+                        0x8eba5e0bc35ed1f09ae585034ae94c7bb35b9ab7870e8204319ae2c6a61b4cc0 ,
+                        0x37962eb17c81e933ac633033f898e5d7dd98cbd05f5abde4a82da667ca924869 ,
+                        0x38c7f27355b3b192f94c59bc50c1fd2a23f19107e4c6725cad6f5e6802d7b8be ,
+                        0xa14c3b2fd28cb862ced4e067ebe25c106070b238710a98fb4c5013d83c90bb20 ,
+                        0x65a03105384426d72d0f642b1caf3ba3181783cd48a525b238a4449e2b9a4e15 ,
+                        0x1e8fb5002ee114cfcd66646c948a96243bd23bca6469f355639d48cd28eb0036 ,
+                        0x0ab59848c94329993e2549e7c090b20c0430d698e80305484260b3b09778d784 ,
+                        0x2646385ae6e5885216c4a6bd8dcd2d069c57b8010799f55332b0b18361bc8e60 ,
+                        0x89c542e562a97c31a3a29cc92303b710c48bf142444ca08479c4d8eb4e106310 ,
+                        0x87793b2779d6f49c3c644ab0317345a82940127763d0a051c004cb1daf371e30 ,
+                        0xcb3710627343d0ac3cebba951205d193d36d616be6e21ca14b8ea6a987a5fc84 ,
+                        0x3221ca3866146999da712a9f315e18aa0e972889c7282d9c0258c9bc59c284d6 ,
+                        0x2beb58b83025608d92395de50031f81814b91ddc5c1e30011aab330808191c2b ,
+                        0x928d2952570430745a9576640c9d21ab58c10b6e4b69c98d5c817079c4c2248b ,
+                        0x1ac1cb250ac48d32a608691d7258289b2ca0da855298a940296bce0358d13c60 ,
+                        0xbd4696da94a07ef18d6accd828e05590094b1a9d1b344c993b0a1806cda02693 ,
+                        0x656653c452bdb3b609cf7d7bee029b7baec4b61799b4a43e4a42f60c089985d0 ,
+                        0xf102382e50689eaa08c1ef828ed0c978a1e870aa98ac9cd83d04341a37050cf7 ,
+                        0x1603b6584d7e719032412da09df5e996c5e9e601f39ac9ea147056b74910bcb9 ,
+                        0x6e8e665db3bc096e478b0777ce9fa63384b18ea9b0744670e5865b2c9e460437 ,
+                        0x8931a35cc842708cc0f13c52b480a14c51eaacc272834db1624183c59d793977 ,
+                        0x42f3cce4b3a2ce84afd71eb1f19cfa5515a3e1ae96d525555d4addb82fbf6b41 ,
+                        0xcd1c3901d72fc8cc9e7a4069c80e3a43657f546b4ac61d543d2cd6d6a541a2cd ,
+                        0x37df5597ba2a9a5764f4b63acb42cbc56dc5d78ee4bd77a46a7faa2358c92786 ,
+                        0xb6c35ad1cd99e6fdbe136c89114eb075acf3969280cc9deee87898331f8253ba ,
+                        0xb4a9d8cca455f780bd08157cc0fe25febe5a4567ed819505387a1e6e721d8df9 ,
+                        0x63d6689edb71dd8190654bb314e31c0512070556ad2d0e42f08e958b25291feb ,
+                        0x177824072ee6919218c9e936d668d7779bda664e8fb9d7eb5a5b1dee5cff5fcd ,
+                        0x6f846c5c67ad11be51c047f3b5d01f6e4e19b2a47b877146c1e93202f7e48359 ,
+                        0x4ce5c9710cdf8f636554a2e9843e459105c287400de50c46c65c56b9d80256a6 ,
+                        0x5833514d997533a5eceb9bc96372398bafeedb7b7714302bae5f5c1fedd9ba79 ,
+                        0x2c65ddf11ecdc6ac63c514307c27d310e1299dc7a1d223eb4b1448b88f523312 ,
+                        0xdf124f91c3523c93a070ce86c91c6073d9fa9c38016d5627f86a797beeeed1ed ,
+                        0xb929e48c479cdc51a0b02c683769f6c2ea74d51abdd79eb1eb86a94c1bf204fc ,
+                        0x6fb4989bf5e7667504b40e1b5511816d962726d8aac1f1c460bc0a762064d319 ,
+                        0x0319ebd8fa3665b31f603d938173abdaecdc045f3fb7fb56daa0e44f2a60bd49 ,
+                        0xeb1f44bac1c51d9dd0766c14344ab556407bc63686f71281332bcb61a48c0d4c ,
+                        0x99325fc2fc26383b3a4b90996d4bc9b096bccc3456f95ac5694299a0b6feca21 ,
+                        0xacdd2860e74e1eee3b391960747a47017ba96260736e2e6d267219d93d6bc6b8 ,
+                        0xfb960b58d08a2ad72c8b1398253514af32a629bfdd9ec9c6b2ba4b803099713b ,
+                        0x44e2f6de89abcd6d3cca315f43a376c3b4407827ec0734ea92d84aa9b52c0e1b ,
+                        0x8d4557d676e7cda4766cce4da1e67e73dd4c608b5a4cd884965878e47a89a7c8 ,
+                        0xbf6c09cc6318c8eed933fe986c26b64b84f68066eb3aabba053e90c1eedb8beb ,
+                        0xf3f5b53db76ee77ea46379d950f5710f9ec732157407bd1790f024966613828e ,
+                        0xc155502a061a235eda84a127b3632dfa4cd29e1317b5e6fb94cbcc3fea751591 ,
+                        0x81865c6de191988dfeacefe968ab64d393d9671f6d6c6dead2adf71b81f28966 ,
+                        0x9bbfa4fdd90d9d1b543a66fef9b05437ec6868fb22566bd55b0a6a7206d77dcf ,
+                        0x7e90e9ebe0886ab6c52e2f60a9074e3f2c3f1e427bf00c5bc4ce745b3be53d3a ,
+                        0xed6febece85e6d54bbeaf1bc97b454a35074bbd6567d4abf70fe93685cebfc43 ,
+                        0x9f50b5bda3a4bdadc9d68ea2514f8bd1091d7b036df5ee53d0de51a71aa07600 ,
+                        0xcc7acae6bece8c1ed0af3ffa98015867d9dc04794ff343049e11bcf106498dcd ,
+                        0x8a372273cf1552d14654b214bcce8879bed0a8efebec7d3becbf51e0d33ff7ab ,
+                        0x7af572adebd39642b683b729b2a8825cb9dbdde2254adf00cb0dc89c25556699 ,
+                        0xb5b4f7c09e7ef6ec2f2a1c0e75f2377f4daf3cff5fba498db31c4f6584b31b30 ,
+                        0x07266e33c79452d8d8669739ec87fd020f0d4e3ca8538f61804ea8e1f98f6976 ,
+                        0xe59cf6a7d77508befcb0af747ea413ed4cf37217454a0578d92310a8f4e5b183 ,
+                        0xebef9ed2e6263bb8baaceb0b3f7a4defecbfa116254480c41e297a7bb801d80a ,
+                        0x853e8c420d6f1fa1fa281053062fe1f6ddad3d9d3fff09053b6775f39db77474 ,
+                        0xf1a2fb0ae18dba6a777ada6a8fc042a229305b14b1da81a72dee1724b505492c ,
+                        0x387b9ff67efe6774a6b3a1fdb7aeb1957c9f5d1c7b04846b619470714b9b5d98 ,
+                        0xd13b4fe0932ff0540bcac9ade8231f0db7efd1cede1914c83113f9e9707c1d01 ,
+                        0x8985b2871772050c6edbd709406b5b46985f9d4ec7056c8a17eabaa54e3bd0f6 ,
+                        0xa087453a8a26c7f6b90d866958ac036596142ec52e5eb3c5ed4b9c656ff83fe2 ,
+                        0xfd2a00cb1b23f9045ec186a76bc4007579f611acc3fe3b9d68d0ab602b188c8d ,
+                        0x9241cdd6b70ad83eebb4381f8c36e52d26653ddaf2e1e670f505ad8974e773ba ,
+                        0x7d3ab10466516fc776b7496aaed9582b0110cea8d23e8ad5a6789b8db8ab1178 ,
+                        0xb46410c1e6e67337e816bceb66d3adafed684524dc5d5b2a666cbb1bfc843c77 ,
+                        0x9adda3518218d1e12af669bed72543fa686afb5f98a06734693561d35c696d8b ,
+                        0x0095ca7efc607f87a15964802e4dc5b8929b0a9382ce6be9b43a4ddd42334f24 ,
+                        0xbc0ba75195b26bc338bd2e9b5d9244dd0ae499a2ee6bb95906c1ad1e4d4d0b04 ,
+                        0xb212c0f8d49a538449c9235e6141a0040be7786e40c0fa0a7a2d365033f57ba4 ,
+                        0xb9bc51a00d5c6c129b222f63755a6d27489b6da7057b7b3852458de3078cb774 ,
+                        0xdac6f5be6556108a89ecc72c3b4024982b93fd400b205977a863ac9e1949a0bd ,
+                        0x5b0d0f9817edd3fe80505afbdc92a321c1ca7b3394a74aff0bbd070fd1775472 ,
+                        0x410000000049454e44ae426082
+                    End
+
+                    LayoutCachedLeft =1980
+                    LayoutCachedTop =10260
+                    LayoutCachedWidth =2820
+                    LayoutCachedHeight =11040
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =3000
+                    Top =10260
+                    Width =840
+                    Height =780
+                    TabIndex =23
+                    ForeColor =4210752
+                    Name ="cmdPie"
+                    Caption ="Pie"
+                    OnClick ="[Event Procedure]"
+                    Picture ="48x48pie.jpg"
+                    GUID = Begin
+                        0x444d7fb40f97f645a698d69d610cf5ff
+                    End
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0xffd8ffe000104a46494600010100000100010000ffdb00840009060608060509 ,
+                        0x0807080a09090a0d160e0d0c0c0d26131410161f1c21201f1c1e1e2327322a23 ,
+                        0x252f251e1e2b3b2c2f3335383838212a3d413c3c41322c363501090a0a0d0b0d ,
+                        0x190e0e1935241e24353535353535353435353535353535353535353535353535 ,
+                        0x35353535353535352c3535343535353435352c35353435353535ffc000110800 ,
+                        0x30003003012200021101031101ffc4001b000100020203000000000000000000 ,
+                        0x00000604070205010308ffc400381000010204010808020b0000000000000001 ,
+                        0x020300040511510612132131416171072232428191a1b172d11443526292a3b2 ,
+                        0xc1d2e1f0ffc4001801000301010000000000000000000000000204050603ffc4 ,
+                        0x00291100010303010607010000000000000000020001040305111221313241b1 ,
+                        0xf014225161a1d1e113ffda000c03010002110311003f00bc6214f55a5e40842c ,
+                        0x95ba763681757f51856aa429922569234ab39addf71c7908053753528aacb575 ,
+                        0x8dd4a27aca3898933ee1e1fc81c4808b4a5131956ea3b0cb0d7071db9f211365 ,
+                        0xeb6e29b4175a6d79c013a25ebd9b81f9c568f4e5ced858daad2ed7c09f6110aa ,
+                        0x5d64860b3d3e9350c46b316530959c666d24b4ad69ed24ea29e623be05a271c6 ,
+                        0x9c4ad2b295a7b2bc381c4708574e9e4d424d2f2466abb2b4def9aa1b47fb7111 ,
+                        0x7edf70198387d84c8abd07a7b5b7211d20d554dd5db974abaadb4091c49d7e81 ,
+                        0x302dea9df68f2853d24c9b6dd79b985a1443cc8d7a45017048b581b61021e2c0 ,
+                        0xfaafcd57f28912818a41397aa6a9d8ce503551a9867f6fd59aea092a1aced8b0 ,
+                        0x03e90cb7afb89f61157baf300f5980a4ef1a456b1e708a839461d4b72536e671 ,
+                        0x3d561f3dfc10ac1581dfcf6a72633906a1e49d8d683842f92ce527766708dde4 ,
+                        0x6cea9537312ea24e72038301636fdc794175ae37f90ed29753987bba86b34f32 ,
+                        0x411fa4c0daf232831dec452819a81656d72ce806bd452961379962eb686ccec5 ,
+                        0x3e3ee0451f3c5c975a92e0208241b8b58e07031e8f83594f9094fca42a781329 ,
+                        0x3845b4c84dc2fe34eff43c63552623557d63bd70b6dc9a337f3a9c3d1502f4c7 ,
+                        0x188c99b2da88b67215a9493be2c3a8743d5a6dd3a0449cca37290f16cfe122c3 ,
+                        0xce39a7f4335779c1f4a325268dea52cbcaf048b0f585c639b725a17b8c5d39d6 ,
+                        0xddfca87935595cfa5a95992a716b39ac3b6eb3a7ec1fbdc77f3db7064ed24d26 ,
+                        0x9a12e01a774e7b96dd80f0f9c43c96c89a6e4ab6552e16fcd2c59730ef6b901b ,
+                        0x123978de104778f069d1a8f579acbce98359f4d3e15fffd9
+                    End
+
+                    LayoutCachedLeft =3000
+                    LayoutCachedTop =10260
+                    LayoutCachedWidth =3840
+                    LayoutCachedHeight =11040
+                    BackColor =14136213
+                    BorderColor =14136213
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
             End
         End
@@ -1021,6 +1125,11 @@ Private Sub SetYearsCaption()
             ctl.Caption = DLookup("TheYear", "_tlkpYear", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
         End If
     Next
+End Sub
+
+Private Sub cmdBar_Click()
+    Me.chtKPI01.ChartType = 51
+    Me.Refresh
 End Sub
 
 Private Sub cmdM01_Click()
@@ -1130,6 +1239,11 @@ Private Sub cmdM12_Click()
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=12")
+    Me.Refresh
+End Sub
+
+Private Sub cmdPie_Click()
+    Me.chtKPI01.ChartType = 5
     Me.Refresh
 End Sub
 
