@@ -31,12 +31,13 @@ Public Const gblnTEST = False
 ' *** Ref: http://www.vb123.com/toolshed/02_accvb/remotequeries.htm - Remote Queries In Microsoft Access
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
 '
-' Challenges:
-' Create an adaept Chart Object as ["_tblChart", "_tlkpChart",
 
 
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
+    ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653
+    ' This is a size limit "feature" - set the Width property to 23.9cm or 9.4"
+    ' DONE: Create an adaept Chart Object as ["_tblChart", "_tlkpChart", _qryChart, _chtChart]
 '20140318 - v089 - Bump
     ' Use GetRowSource to reduce code in _chtChart
     ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response
