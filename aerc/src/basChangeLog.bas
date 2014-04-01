@@ -38,6 +38,8 @@ Public Const gblnTEST = False
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653
     ' This is a size limit "feature" - set the Width property to 23.9cm or 9.4"
     ' DONE: Create an adaept Chart Object as ["_tblChart", "_tlkpChart", _qryChart, _chtChart]
+    ' Tidy output for no debugging, use () explicitly for functions
+    ' Remove all blnDebug references, replace with IsMissing and standardize the messages
 '20140318 - v089 - Bump
     ' Use GetRowSource to reduce code in _chtChart
     ' Add debug statement to test ChartType, changing Requery to Refresh gives better chart redraw response

@@ -83,7 +83,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
     nCurrent = 0
     Do While nCurrent < CurrentDb.QueryDefs.Count
         If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
-            strSQL = CurrentDb.QueryDefs(nCurrent).SQL
+            strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
         nCurrent = nCurrent + 1
     Loop
@@ -171,7 +171,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     nCurrent = 0
     Do While nCurrent < CurrentDb.QueryDefs.Count
         If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
-            strSQL = CurrentDb.QueryDefs(nCurrent).SQL
+            strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
         nCurrent = nCurrent + 1
     Loop

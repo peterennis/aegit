@@ -30,7 +30,7 @@ Option Explicit
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
 Private Const aegit_expVERSION As String = "0.9.0"
-Private Const aegit_expVERSION_DATE As String = "March 24, 2014"
+Private Const aegit_expVERSION_DATE As String = "April 1, 2014"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -164,7 +164,7 @@ Property Get DocumentTheDatabase(Optional varDebug As Variant) As Boolean
         Debug.Print "Get DocumentTheDatabase"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        DocumentTheDatabase = aeDocumentTheDatabase
+        DocumentTheDatabase = aeDocumentTheDatabase()
     Else
         Debug.Print "Get DocumentTheDatabase"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
@@ -194,7 +194,7 @@ Property Get GetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print "Get GetReferences"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING IS OFF"
-        GetReferences = aeGetReferences
+        GetReferences = aeGetReferences()
     Else
         Debug.Print "Get GetReferences"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
@@ -208,7 +208,7 @@ Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
         Debug.Print "Get DocumentRelations"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING IS OFF"
-        DocumentRelations = aeDocumentRelations
+        DocumentRelations = aeDocumentRelations()
     Else
         Debug.Print "Get DocumentRelations"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
@@ -222,7 +222,7 @@ Property Get DocumentTables(Optional varDebug As Variant) As Boolean
         Debug.Print "Get DocumentTables"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
         Debug.Print , "DEBUGGING IS OFF"
-        DocumentTables = aeDocumentTables
+        DocumentTables = aeDocumentTables()
     Else
         Debug.Print "Get DocumentTables"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
@@ -236,7 +236,7 @@ Property Get DocumentTablesXML(Optional varDebug As Variant) As Boolean
         Debug.Print "Get DocumentTablesXML"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
         Debug.Print , "DEBUGGING IS OFF"
-        DocumentTablesXML = aeDocumentTablesXML
+        DocumentTablesXML = aeDocumentTablesXML()
     Else
         Debug.Print "Get DocumentTablesXML"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
@@ -344,7 +344,7 @@ PROC_ERR:
         Case 9
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass" & _
                     vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
             'GlobalErrHandler
             Resume Next
         Case Else
@@ -847,7 +847,6 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
     Dim RefName As String
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
-    Dim blnDebug As Boolean
     Dim strFile As String
 
     Dim vbaProj As Object
@@ -859,13 +858,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeGetReferences is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeGetReferences is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     strFile = aestrSourceLocation & aeRefTxtFile
@@ -878,7 +875,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         If Not FileLocked(strFile) Then Open strFile For Append As #1
     End If
 
-    If blnDebug Then
+    If Not IsMissing(varDebug) Then
         Debug.Print ">==> aeGetReferences >==>"
         Debug.Print , "vbaProj.Name = " & vbaProj.Name
         Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
@@ -914,9 +911,9 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         ' Get the Description of Reference
         RefDesc = vbaProj.References(i).Description
 
-        If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
-        If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
-        If blnDebug Then Debug.Print , , , vbaProj.References(i).GUID
+        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
 
         Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
         Print #1, , , , vbaProj.References(i).FullPath
@@ -925,12 +922,12 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
               blnRefBroken = True
-              If blnDebug Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
               Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
-    If blnDebug Then Debug.Print , "<*_*>"
-    If blnDebug Then Debug.Print "<==<"
+    If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
+    If Not IsMissing(varDebug) Then Debug.Print "<==<"
 
     Print #1, , "<*_*>"
     Print #1, "<==<"
@@ -945,7 +942,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
     aeGetReferences = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1169,8 +1166,6 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Dim fld As DAO.Field
     Dim sLen As Long
     Dim strLinkedTablePath As String
-    
-    Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -1181,13 +1176,11 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     strLinkedTablePath = ""
 
     If IsMissing(varDebug) Then
-        blnDebug = False
-        'Debug.Print , "varDebug IS missing so blnDebug of TableInfo is set to False"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to TableInfo"
         'Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        'Debug.Print , "varDebug IS NOT missing so blnDebug of TableInfo is set to True"
-        'Debug.Print , "NOW DEBUGGING..."
+        'Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to TableInfo"
+        'Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     Set dbs = CurrentDb()
@@ -1200,8 +1193,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
     If aeintFDLen < Len("DESCRIPTION") Then aeintFDLen = Len("DESCRIPTION")
 
-    If blnDebug Then
-    'If blnDebug And aeintFDLen <> 11 Then
+    If Not IsMissing(varDebug) Then
+    'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
@@ -1236,8 +1229,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     strLinkedTablePath = ""
 
     For Each fld In tdf.Fields
-        If blnDebug Then
-        'If blnDebug And aeintFDLen <> 11 Then
+        If Not IsMissing(varDebug) Then
+        'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
                 & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
@@ -1248,8 +1241,8 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
             & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
             & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
-    If blnDebug Then Debug.Print
-    'If blnDebug And aeintFDLen <> 11 Then Debug.Print
+    If Not IsMissing(varDebug) Then Debug.Print
+    'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then Debug.Print
     Print #1, vbCrLf
 
     TableInfo = True
@@ -1263,7 +1256,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
     TableInfo = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1389,7 +1382,6 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     'Dim strDoc As String
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
-    Dim blnDebug As Boolean
     Dim blnResult As Boolean
     Dim intFailCount As Integer
     Dim strFile As String
@@ -1422,13 +1414,11 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTables is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTables is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     strFile = aestrSourceLocation & aeTblTxtFile
@@ -1445,10 +1435,10 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
         If Not (Left(tdf.Name, 4) = "MSys" _
                 Or Left(tdf.Name, 4) = "~TMP" _
                 Or Left(tdf.Name, 3) = "zzz") Then
-            If blnDebug Then
+            If Not IsMissing(varDebug) Then
                 blnResult = TableInfo(tdf.Name, "WithDebugging")
                 If Not blnResult Then intFailCount = intFailCount + 1
-                If blnDebug And aeintFDLen <> 11 Then Debug.Print "aeintFDLen=" & aeintFDLen
+                If Not IsMissing(varDebug) And aeintFDLen <> 11 Then Debug.Print "aeintFDLen=" & aeintFDLen
             Else
                 blnResult = TableInfo(tdf.Name)
                 If Not blnResult Then intFailCount = intFailCount + 1
@@ -1458,12 +1448,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
         End If
     Next tdf
 
-    'If intFailCount > 0 Then
-    '    aeDocumentTables = False
-    'Else
-    '    aeDocumentTables = True
-    'End If
-    If blnDebug Then
+    If Not IsMissing(varDebug) Then
         Debug.Print "intFailCount = " & intFailCount
         'Debug.Print "aeDocumentTables = " & aeDocumentTables
     End If
@@ -1479,7 +1464,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
     aeDocumentTables = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1499,7 +1484,6 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
 
     Set dbs = CurrentDb
 
-    Dim blnDebug As Boolean
     Dim intFailCount As Integer
 
     If aegitXMLFolder = "default" Then
@@ -1520,20 +1504,18 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
     intFailCount = 0
     Debug.Print "aeDocumentTablesXML"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTablesXML is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTablesXML is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-    If blnDebug Then Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
+    If Not IsMissing(varDebug) Then Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
     For Each tbl In dbs.TableDefs
         If tbl.Attributes = 0 Then      ' Ignore System Tables
             strObjName = tbl.Name
-            If blnDebug Then Debug.Print , "- " & strObjName & ".xsd"
+            If Not IsMissing(varDebug) Then Debug.Print , "- " & strObjName & ".xsd"
             'Debug.Print "aestrXMLLocation=" & aestrXMLLocation
             'Debug.Print "the XML file=" & aestrXMLLocation & strObjName
             Application.ExportXML acExportTable, strObjName, , _
@@ -1552,7 +1534,7 @@ Private Function aeDocumentTablesXML(Optional varDebug As Variant) As Boolean
         aeDocumentTablesXML = True
     End If
 
-    If blnDebug Then
+    If Not IsMissing(varDebug) Then
         Debug.Print "intFailCount = " & intFailCount
         Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
@@ -1566,7 +1548,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
     aeDocumentTablesXML = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1775,8 +1757,6 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     Dim idx As DAO.Index
     Dim prop As DAO.Property
     Dim strFile As String
-    
-    Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -1784,13 +1764,11 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentRelations is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentRelations is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     strFile = aestrSourceLocation & aeRelTxtFile
@@ -1816,7 +1794,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
             Next fld
         End If
     Next rel
-    If blnDebug Then Debug.Print strDocument
+    If Not IsMissing(varDebug) Then Debug.Print strDocument
     Print #1, strDocument
     
     aeDocumentRelations = True
@@ -1832,7 +1810,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
     aeDocumentRelations = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1872,7 +1850,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
                         Or Left(qdf.Name, 4) = "~TMP" _
                         Or Left(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
+            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.sql
         End If
     Next
 
@@ -2054,7 +2032,7 @@ PROC_ERR:
             Resume Next
         Case Else
             'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
             OutputBuiltInPropertiesText = False
             GlobalErrHandler
             Resume PROC_EXIT
@@ -2100,12 +2078,12 @@ PROC_ERR:
             MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass" & _
                     vbCrLf & "IsFileLocked Entry PathFileName=" & PathFileName, vbCritical, "ERROR=9"
             IsFileLocked = False
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
             'GlobalErrHandler
             Resume PROC_EXIT
         Case Else
             MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
             'GlobalErrHandler
             Resume PROC_EXIT
     End Select
@@ -2125,19 +2103,16 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
     Dim doc As DAO.Document
     Dim i As Integer
     Dim intAcObjType As Integer
-    Dim blnDebug As Boolean
     Dim strTheCurrentPathAndFile As String
 
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of DocumentTheContainer is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheContainer"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of DocumentTheContainer is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheContainer"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     i = 0
@@ -2152,10 +2127,10 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
             MsgBox "Wrong Case Select in DocumentTheContainer"
     End Select
 
-    If blnDebug Then Debug.Print UCase(strContainerType)
+    If Not IsMissing(varDebug) Then Debug.Print UCase(strContainerType)
 
     For Each doc In cnt.Documents
-        If blnDebug Then Debug.Print , doc.Name
+        If Not IsMissing(varDebug) Then Debug.Print , doc.Name
         If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
             i = i + 1
             strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
@@ -2189,7 +2164,7 @@ SaveAsText:
         End If
     Next doc
 
-    If blnDebug Then
+    If Not IsMissing(varDebug) Then
         Debug.Print , i & " EXPORTED!"
         Debug.Print , cnt.Documents.Count & " EXISTING!"
     End If
@@ -2220,7 +2195,6 @@ End Function
 Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
 
     Dim strFile As String
-    Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -2228,13 +2202,11 @@ Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
 
     Debug.Print "KillAllFiles"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of KillAllFiles is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of KillAllFiles is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to KillAllFiles"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     If strLoc = "src" Then
@@ -2278,7 +2250,7 @@ PROC_ERR:
         Stop
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2336,7 +2308,6 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
     Dim i As Integer
-    '''x Dim Debugit As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -2344,15 +2315,13 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentTheDatabase"
     If IsMissing(varDebug) Then
-        '''x Debugit = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentTheDatabase is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        '''x Debugit = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentTheDatabase is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
-    
+
     If aegitSourceFolder = "default" Then
         aestrSourceLocation = aegitType.SourceFolder
         aegitSetup = True
@@ -2513,7 +2482,6 @@ Private Function aeExists(strAccObjType As String, _
 
     Dim objType As Object
     Dim obj As Variant
-    Dim blnDebug As Boolean
     
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -2521,16 +2489,14 @@ Private Function aeExists(strAccObjType As String, _
 
     Debug.Print "aeExists"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeExists is set to False"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
         Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeExists is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-    If blnDebug Then Debug.Print ">==> aeExists >==>"
+    If Not IsMissing(varDebug) Then Debug.Print ">==> aeExists >==>"
 
     Select Case strAccObjType
         Case "Tables"
@@ -2547,7 +2513,7 @@ Private Function aeExists(strAccObjType As String, _
             Set objType = CurrentProject.AllModules
         Case Else
             MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegitClass"
-            If blnDebug Then
+            If Not IsMissing(varDebug) Then
                 Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
                 Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
                 Debug.Print "<==<"
@@ -2557,13 +2523,13 @@ Private Function aeExists(strAccObjType As String, _
             Exit Function
     End Select
 
-    If blnDebug Then Debug.Print , "strAccObjType = " & strAccObjType
-    If blnDebug Then Debug.Print , "strAccObjName = " & strAccObjName
+    If Not IsMissing(varDebug) Then Debug.Print , "strAccObjType = " & strAccObjType
+    If Not IsMissing(varDebug) Then Debug.Print , "strAccObjName = " & strAccObjName
 
     For Each obj In objType
-        If blnDebug Then Debug.Print , obj.Name, strAccObjName
+        If Not IsMissing(varDebug) Then Debug.Print , obj.Name, strAccObjName
         If obj.Name = strAccObjName Then
-            If blnDebug Then
+            If Not IsMissing(varDebug) Then
                 Debug.Print , strAccObjName & " EXISTS!"
                 Debug.Print "<==<"
             End If
@@ -2574,7 +2540,7 @@ Private Function aeExists(strAccObjType As String, _
             aeExists = False
         End If
     Next
-    If blnDebug And aeExists = False Then
+    If Not IsMissing(varDebug) And aeExists = False Then
         Debug.Print , strAccObjName & " DOES NOT EXIST!"
         Debug.Print "<==<"
     End If
@@ -2590,7 +2556,7 @@ PROC_ERR:
         Resume PROC_EXIT
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-        If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+        If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
         aeExists = False
     End If
     GlobalErrHandler
@@ -2823,7 +2789,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
-    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2911,7 +2877,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
-    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2973,7 +2939,7 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
     objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
     strXMLResDoc = strXMLResDoc.XML
     strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr(32) & Chr(32), , , vbBinaryCompare)
-    Debug.Print "Pretty XML Sample Output"
+    Debug.Print , "Pretty XML Sample Output"
     If Not IsMissing(varDebug) Then Debug.Print strXMLResDoc
 
     ' Rewrite the file as pretty xml
@@ -3041,7 +3007,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
-    'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
     GlobalErrHandler
     Resume PROC_EXIT
 

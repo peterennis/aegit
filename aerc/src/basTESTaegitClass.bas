@@ -99,7 +99,8 @@ Test1:
         Debug.Print , "DEBUGGING IS OFF"
         bln1 = oDbObjects.DocumentTheDatabase()
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
         bln1 = oDbObjects.DocumentTheDatabase("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -117,7 +118,8 @@ Test2:
         Debug.Print , "DEBUGGING IS OFF"
         bln2 = oDbObjects.Exists("Modules", "zzzaegitClass")
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to Exists"
+        Debug.Print , "DEBUGGING TURNED ON"
         bln2 = oDbObjects.Exists("Modules", "zzzaegitClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -135,7 +137,8 @@ Test3:
         Debug.Print , "DEBUGGING IS OFF"
 '        bln3 = oDbObjects.ReadDocDatabase(False)
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to ReadDocDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
 '        bln3 = oDbObjects.ReadDocDatabase(False, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -154,7 +157,8 @@ Test4:
         Debug.Print , "DEBUGGING IS OFF"
         bln4 = oDbObjects.GetReferences()
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to GetReferences"
+        Debug.Print , "DEBUGGING TURNED ON"
         bln4 = oDbObjects.GetReferences("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -173,7 +177,8 @@ Test5:
         Debug.Print , "DEBUGGING IS OFF"
         bln5 = oDbObjects.DocumentTables()
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTables"
+        Debug.Print , "DEBUGGING TURNED ON"
         bln5 = oDbObjects.DocumentTables("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -192,7 +197,8 @@ Test6:
         Debug.Print , "DEBUGGING IS OFF"
         bln6 = oDbObjects.DocumentRelations()
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentRelations"
+        Debug.Print , "DEBUGGING TURNED ON"
         bln6 = oDbObjects.DocumentRelations("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -211,7 +217,8 @@ Test7:
         Debug.Print , "DEBUGGING IS OFF"
         bln7 = oDbObjects.DocumentTablesXML()
     Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
         bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -328,7 +335,7 @@ Public Sub OutputListOfAllQueries()
     If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
         Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
     End If
-    qdfCurr.SQL = strSQL
+    qdfCurr.sql = strSQL
     'Debug.Print """" & strTempQuery & """"
     DoCmd.OpenQuery strTempQuery
     'DoCmd.Close acQuery, strTempQuery
