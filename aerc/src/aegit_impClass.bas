@@ -74,7 +74,7 @@ End Sub
 Private Sub Class_Terminate()
 '''     Dim strFile As String
 '''     strFile = aegitSourceFolder & "export.ini"
-'''     If Dir(strFile) <> "" Then
+'''     If Dir(strFile) <> vbNullString Then
 '''         ' The file exists
 '''         If Not FileLocked(strFile) Then KillProperly (strFile)
 '''     End If
@@ -279,7 +279,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
    
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -481,7 +481,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
    
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -976,7 +976,7 @@ Private Function fListGUID(strTableName As String) As String
     Dim strArrGUID8(8) As String
     Dim strGuid As String
 
-    strGuid = ""
+    strGuid = vbNullString
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
     For i = 1 To 8
         If Len(Hex$(arrGUID8(i))) = 1 Then
@@ -1003,7 +1003,7 @@ Private Sub ResetWorkspace()
 
     On Error Resume Next
 
-    Application.MenuBar = ""
+    Application.MenuBar = vbNullString
     DoCmd.SetWarnings False
     DoCmd.Hourglass False
     DoCmd.Echo True
@@ -1090,7 +1090,7 @@ Private Sub PopCallStack()
 ' Remove a procedure name from the call stack
 
     If mintStackPointer <= UBound(mastrCallStack) Then
-        mastrCallStack(mintStackPointer) = ""
+        mastrCallStack(mintStackPointer) = vbNullString
     End If
 
     ' Reset pointer to previous element

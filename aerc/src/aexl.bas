@@ -72,7 +72,7 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
     For nCurrent = 0 To nFieldCount - 1
         strTest = rst.Fields(nCurrent).Name
         Do While InStr(strTest, "/") > 0
-            strTest = Replace(strTest, "/", "")
+            strTest = Replace(strTest, "/", vbNullString)
         Loop
         wks.Range(FindExcelCell(nCurrent + 1, 1)) = strTest
         wks.Range(FindExcelCell(nCurrent + 1, 1)).Font.Bold = True
@@ -96,16 +96,16 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
                 RetVal = DoEvents()
             End If
         End If
-        strTest = ""
+        strTest = vbNullString
         'Check for blank lines--no need to export those!
         For nCurrent = 0 To nFieldCount - 1
-            strTest = strTest & IIf(IsNull(rst.Fields), "", rst.Fields(nCurrent).Value)
+            strTest = strTest & IIf(IsNull(rst.Fields), vbNullString, rst.Fields(nCurrent).Value)
         Next
         If Len(Trim(strTest)) > 0 Then
             For nCurrent = 0 To nFieldCount - 1
                 If Not IsNull(rst.Fields(nCurrent).Value) Then
-                    If rst.Fields(nCurrent).Value <> "" Then
-                        If IsNumeric(rst.Fields(nCurrent).Value & "") Then
+                    If rst.Fields(nCurrent).Value <> vbNullString Then
+                        If IsNumeric(rst.Fields(nCurrent).Value & vbNullString) Then
                             wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = "'" & Trim(rst.Fields(nCurrent).Value)
                         Else
                             wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = Trim(rst.Fields(nCurrent).Value)
@@ -162,9 +162,9 @@ Private Function FindExcelCell(nX As Long, nY As Long) As String
     End If
     nPower1 = nX - (26 * nPower2)
     If nPower2 > 0 Then
-        FindExcelCell = Chr(64 + nPower2) & Chr(64 + nPower1) & nY
+        FindExcelCell = Chr$(64 + nPower2) & Chr$(64 + nPower1) & nY
     Else
-        FindExcelCell = Chr(64 + nPower1) & nY
+        FindExcelCell = Chr$(64 + nPower1) & nY
     End If
 
 End Function

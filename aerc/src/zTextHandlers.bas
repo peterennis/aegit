@@ -47,7 +47,7 @@ Public Function RemoveTableDuplicates(strTableName As String) As Boolean
             RetVal = DoEvents()
         End If
         
-        strThisRecord = ""
+        strThisRecord = vbNullString
         For nCurrent = 0 To rs.Fields.Count - 1
             strThisRecord = strThisRecord & rs.Fields(nCurrent).Value
         Next
@@ -108,7 +108,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
             Print #1, rs.Fields(nCurrent).Name & strDelim;
         End If
     Next
-    Print #1, ""        ' New line.
+    Print #1, vbNullString        ' New line.
     nCurSec = Second(Now())
     Do While nCurSec = Second(Now())
     Loop
@@ -120,9 +120,9 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
             RetVal = SysCmd(acSysCmdUpdateMeter, nCurRec)
             RetVal = DoEvents()
         End If
-        strTest = ""
+        strTest = vbNullString
         For nCurrent = 0 To nFieldCount - 1  'Check for blank lines--no need to export those!
-            strTest = strTest & IIf(IsNull(rs.Fields), "", rs.Fields(nCurrent))
+            strTest = strTest & IIf(IsNull(rs.Fields), vbNullString, rs.Fields(nCurrent))
         Next
         If Len(Trim(strTest)) > 0 Then  'Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
@@ -132,7 +132,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
                 If nCurrent < nFieldCount - 1 Then
                     Print #1, strDelim;
                 Else       'new line.
-                    Print #1, ""
+                    Print #1, vbNullString
                 End If
             Next
         End If
@@ -210,9 +210,9 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
             RetVal = SysCmd(acSysCmdUpdateMeter, nCurRec)
             RetVal = DoEvents()
         End If
-        strTest = ""
+        strTest = vbNullString
         For nCurrent = 0 To nFieldCount - 1  ' Check for blank lines--no need to export those!
-            strTest = strTest & IIf(IsNull(rs.Fields), "", rs.Fields(nCurrent))
+            strTest = strTest & IIf(IsNull(rs.Fields), vbNullString, rs.Fields(nCurrent))
         Next
         If Len(Trim(strTest)) > 0 Then  ' Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
@@ -343,8 +343,8 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
     
     For Each strTest In strHeadersIn
         nHeaders = nHeaders + 1
-        strTest = Replace(Replace(strTest, " ", ""), ".", "")
-        strTest = Replace(Replace(strTest, " ", ""), ".", "")
+        strTest = Replace(Replace(strTest, " ", vbNullString), ".", vbNullString)
+        strTest = Replace(Replace(strTest, " ", vbNullString), ".", vbNullString)
         If Len(Trim(strTest)) = 0 Then
             strHeaders(nHeaders) = "HEADER" & Right("000" & nHeaders, 3)
         Else
@@ -368,7 +368,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
             strTest = Left(strTest, Len(strTest) - 1)
         End If
         If isSAP And Left(strTest, 20) = "--------------------" Then
-            strTest = ""  ' Skip this line!
+            strTest = vbNullString  ' Skip this line!
         End If
         If Len(strTest) > 0 Then
             nRecords = nRecords + 1
@@ -393,7 +393,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
         If isSAP Then
             For nCurrent = 1 To nHeaders
                 If Left(strHeaders(nCurrent), 8) = "HEADER00" Then
-                    strHeaders(nCurrent) = ""  ' Don't bother importing this field.
+                    strHeaders(nCurrent) = vbNullString  ' Don't bother importing this field.
                 End If
             Next
         End If
@@ -427,7 +427,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
                 strTest = Left(strTest, Len(strTest) - 1)
             End If
             If isSAP And Left(strTest, 20) = "--------------------" Then
-                strTest = ""  ' Skip this line!
+                strTest = vbNullString  ' Skip this line!
             End If
             If Len(strTest) > 0 Then
                 strFields = Split(strTest, strDelim)
@@ -555,7 +555,7 @@ End Function
 
 Public Function FixCase(strText) As String
 ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
-    strText = Trim(strText & "")
+    strText = Trim(strText & vbNullString)
     Dim nCurrent As Long
     For nCurrent = 2 To Len(strText)
         If Mid(strText, nCurrent - 1, 1) <> " " And Mid(strText, nCurrent - 1, 1) <> "." Then

@@ -387,7 +387,7 @@ Public Sub MakeTableWithListOfAllHiddenQueries()
     DoCmd.RunSQL strSQL
     DoCmd.SetWarnings True
     Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    ExportTheTableData strTempTable, "", "C:\Temp\OutputListOfHiddenQueries.txt", False
+    ExportTheTableData strTempTable, vbNullString, "C:\Temp\OutputListOfHiddenQueries.txt", False
 
 End Sub
 

@@ -2942,7 +2942,7 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
 
     objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
     strXMLResDoc = strXMLResDoc.XML
-    strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr(32) & Chr(32), , , vbBinaryCompare)
+    strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr$(32) & Chr$(32), , , vbBinaryCompare)
     Debug.Print , "Pretty XML Sample Output"
     If Not IsMissing(varDebug) Then Debug.Print strXMLResDoc
 
