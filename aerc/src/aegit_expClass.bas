@@ -124,7 +124,7 @@ End Sub
 Private Sub Class_Terminate()
     Dim strFile As String
     strFile = aegitSourceFolder & "export.ini"
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
@@ -373,7 +373,7 @@ Private Sub OutputListOfAllHiddenQueries(Optional varDebug As Variant)
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
     If Not IsMissing(varDebug) Then Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    DoCmd.TransferText acExportDelim, "", strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
+    DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
@@ -866,7 +866,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
     strFile = aestrSourceLocation & aeRefTxtFile
     
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1172,7 +1172,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
 
     On Error GoTo PROC_ERR
 
-    strLinkedTablePath = ""
+    strLinkedTablePath = vbNullString
 
     If IsMissing(varDebug) Then
         'Debug.Print , "varDebug IS missing so no parameter is passed to TableInfo"
@@ -1197,7 +1197,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
-        If strLinkedTablePath <> "" Then
+        If strLinkedTablePath <> vbNullString Then
             Debug.Print strLinkedTablePath
         End If
         Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -1214,7 +1214,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
     Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
-    If strLinkedTablePath <> "" Then
+    If strLinkedTablePath <> vbNullString Then
         Print #1, "Linked=>" & strLinkedTablePath
     End If
     Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -1225,7 +1225,7 @@ Private Function TableInfo(strTableName As String, Optional varDebug As Variant)
                         & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
-    strLinkedTablePath = ""
+    strLinkedTablePath = vbNullString
 
     For Each fld In tdf.Fields
         If Not IsMissing(varDebug) Then
@@ -1403,12 +1403,12 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type Length=" & aeintFTLen
 
     ' Reset values
-    aestrLFN = ""
+    aestrLFN = vbNullString
     If aeintFNLen < 11 Then aeintFNLen = 11     ' Minimum required by design
-    'aestrLFNTN = ""
-    'aestrLFD = ""
+    'aestrLFNTN = vbNullString
+    'aestrLFD = vbNullString
     aeintFDLen = 0
-    'aestrLFT = ""
+    'aestrLFT = vbNullString
     'aeintFTLen = 0
 
     Debug.Print "aeDocumentTables"
@@ -1422,7 +1422,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 
     strFile = aestrSourceLocation & aeTblTxtFile
     
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1585,14 +1585,14 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                 Or Left(tdf.Name, 3) = "zzz") Then
 
             strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
-            If strLinkedTablePath <> "" Then
+            If strLinkedTablePath <> vbNullString Then
                 f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
             Else
                 f.WriteLine vbCrLf & "'Local Table"
             End If
 
             strSQL = "strSQL=""CREATE TABLE [" & tdf.Name & "] ("
-            strFlds = ""
+            strFlds = vbNullString
 
             For Each fld In tdf.Fields
 
@@ -1653,14 +1653,14 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                 End If
 
                 strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
-                strFlds = ""
+                strFlds = vbNullString
 
                 For Each fld In tdf.Fields
                     strFlds = ",[" & fld.Name & "]"
                 Next
 
                 strSQL = strSQL & Mid(strFlds, 2) & ") "
-                strCn = ""
+                strCn = vbNullString
 
                 If ndx.Primary Then
                     strCn = " PRIMARY"
@@ -1774,7 +1774,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
 
     strFile = aestrSourceLocation & aeRelTxtFile
     
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1838,7 +1838,7 @@ Private Function OutputQueriesSqlText() As Boolean
 
     strFile = aestrSourceLocation & aeSqlTxtFile
     
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1994,7 +1994,7 @@ Private Function OutputBuiltInPropertiesText() As Boolean
 
     strFile = aestrSourceLocation & aePrpTxtFile
 
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -2014,7 +2014,7 @@ Private Function OutputBuiltInPropertiesText() As Boolean
         varPropValue = GetPrpValue(prp)
         Print #1, "Value: " & varPropValue
         Print #1, "Inherited: " & prp.Inherited & ";" & strError
-        strError = ""
+        strError = vbNullString
         Print #1, "---"
     Next prp
 
@@ -2216,13 +2216,13 @@ Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
     If strLoc = "src" Then
         ' Delete all the exported src files
         strFile = Dir(aestrSourceLocation & "*.*")
-        Do While strFile <> ""
+        Do While strFile <> vbNullString
             KillProperly (aestrSourceLocation & strFile)
             ' Need to specify full path again because a file was deleted
             strFile = Dir(aestrSourceLocation & "*.*")
         Loop
         strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
-        Do While strFile <> ""
+        Do While strFile <> vbNullString
             KillProperly (aestrSourceLocation & "xml\" & strFile)
             ' Need to specify full path again because a file was deleted
             strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
@@ -2231,7 +2231,7 @@ Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
         ' Delete files in xml location
         If aegitSetup Then
             strFile = Dir(aestrXMLLocation & "*.*")
-            Do While strFile <> ""
+            Do While strFile <> vbNullString
                 KillProperly (aestrXMLLocation & strFile)
                 ' Need to specify full path again because a file was deleted
                 strFile = Dir(aestrXMLLocation & "*.*")
@@ -2723,7 +2723,7 @@ Public Function OutputListOfContainers(strTheFileName As String) As Boolean
 
     strFile = aestrSourceLocation & strTheFileName
 
-    If Dir(strFile) <> "" Then
+    If Dir(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As lngFileNum
@@ -2808,7 +2808,7 @@ Private Function fListGUID(strTableName As String) As String
     Dim strArrGUID8(8) As String
     Dim strGuid As String
 
-    strGuid = ""
+    strGuid = vbNullString
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
     For i = 1 To 8
         If Len(Hex$(arrGUID8(i))) = 1 Then
@@ -3297,7 +3297,7 @@ Private Sub ResetWorkspace()
 
     On Error Resume Next
 
-    Application.MenuBar = ""
+    Application.MenuBar = vbNullString
     DoCmd.SetWarnings False
     DoCmd.Hourglass False
     DoCmd.Echo True
@@ -3384,7 +3384,7 @@ Private Sub PopCallStack()
 ' Remove a procedure name from the call stack
 
     If mintStackPointer <= UBound(mastrCallStack) Then
-        mastrCallStack(mintStackPointer) = ""
+        mastrCallStack(mintStackPointer) = vbNullString
     End If
 
     ' Reset pointer to previous element
