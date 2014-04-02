@@ -29,8 +29,9 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "0.9.0"
-Private Const aegit_expVERSION_DATE As String = "April 1, 2014"
+Private Const aegit_expVERSION As String = "0.9.1"
+Private Const aegit_expVERSION_DATE As String = "April 2, 2014"
+Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
@@ -1635,6 +1636,8 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                         End If
                     Case dbGUID
                         strFlds = strFlds & "GUID"
+                    Case Else
+                        MsgBox "Unknown fld.Type", vbCritical, aeAPP_NAME
                 End Select
 
             Next
@@ -1965,6 +1968,8 @@ Private Function GetPropEnum(typeNum As Long) As String
             GetPropEnum = "dbComplexDecimal"
         Case 109
             GetPropEnum = "dbComplexText"
+        Case Else
+            MsgBox "Unknown typeNum:" & typeNum, vbInformation, aeAPP_NAME
     End Select
 
 End Function

@@ -1,11 +1,15 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE = "March 20, 2014"
-Public Const gstrVERSION = "0.9.0"
+Public Const gstrDATE = "April 2, 2014"
+Public Const gstrVERSION = "0.9.1"
 Public Const gstrProject = "TheProject"
 Public Const gblnTEST = False
 
+' Tools:
+' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
+' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
+'
 ' Problems:
 ' Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
 ' Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
@@ -40,7 +44,7 @@ Public Const gblnTEST = False
 ' %004 -
 ' %003 -
 ' %002 -
-' %001 -
+' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
 ' #007 -
 ' #006 -
@@ -52,6 +56,9 @@ Public Const gblnTEST = False
 '=============================================================================================================================
 
 
+'20140402 - v091 - Run TM VB-Inspector => 1460 hints in 19 objects
+    ' Verify then turn off "Forgotten command:'Stop'"
+    ' Fix 'Select Case' without 'Case Else'
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653
