@@ -490,9 +490,9 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     End If
 
     For Each rel In CurrentDb.Relations
-        If Not (Left(rel.Name, 4) = "MSys" _
-                        Or Left(rel.Name, 4) = "~TMP" _
-                        Or Left(rel.Name, 3) = "zzz") Then
+        If Not (Left$(rel.Name, 4) = "MSys" _
+                        Or Left$(rel.Name, 4) = "~TMP" _
+                        Or Left$(rel.Name, 3) = "zzz") Then
             strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
             strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
             strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
@@ -735,7 +735,7 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
         Exit Function
     End If
     
-    Const acQuery = 1
+    Const acQuery As Integer = 1
 
     If aegitImportFolder = "default" Then
         aestrImportLocation = aegitType.ImportFolder
@@ -989,7 +989,7 @@ Private Function fListGUID(strTableName As String) As String
     For i = 1 To 8
         strGuid = strGuid & strArrGUID8(i) & "-"
     Next
-    fListGUID = Left(strGuid, 23)
+    fListGUID = Left$(strGuid, 23)
 
 End Function
 

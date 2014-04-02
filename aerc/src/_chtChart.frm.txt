@@ -1554,16 +1554,16 @@ Option Explicit
 ' ThreeDPie     3D Pie        xl3DPie             -4102       xl3DPie         -4102
 '
 
-Private Const Bar = 57
-Private Const StackedBar = 58
-Private Const Line = 4
-Private Const ThreeDLine = -4101
-Private Const Area = 76
-Private Const ThreeDArea = 78
-Private Const Column = 51
-Private Const ThreeDColumn = -4100
-Private Const Pie = 5
-Private Const ThreeDPie = -4102
+Private Const Bar As Integer = 57
+Private Const StackedBar As Integer = 58
+Private Const Line As Integer = 4
+Private Const ThreeDLine As Integer = -4101
+Private Const Area As Integer = 76
+Private Const ThreeDArea As Integer = 78
+Private Const Column As Integer = 51
+Private Const ThreeDColumn As Integer = -4100
+Private Const Pie As Integer = 5
+Private Const ThreeDPie As Integer = -4102
 
 Private Sub SetChartTitle(strTitle As String)
     With Me.chtChart
@@ -1591,7 +1591,7 @@ Private Sub SetButtonsCaption()
         'Debug.Print ctl.Name
         On Error GoTo NextIteration
         'Debug.Print ctl.Caption
-        If Left(ctl.Caption, 3) = "CHT" Then
+        If Left$(ctl.Caption, 3) = "CHT" Then
             ctl.Caption = Mid(ctl.Caption, 4, 2)
         End If
         'Debug.Print ctrl.Caption
@@ -1605,7 +1605,7 @@ Private Sub SetLabelsCaption()
         'Debug.Print ctl.Name
         On Error GoTo NextIteration
         'If ctl.ControlType = acLabel Then Debug.Print ctl.Name, "Label"
-        If ctl.ControlType = acLabel And Left(ctl.Caption, 3) = "LBL" Then
+        If ctl.ControlType = acLabel And Left$(ctl.Caption, 3) = "LBL" Then
             ctl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid(ctl.Caption, 4, 2) & "'")
         End If
 NextIteration:

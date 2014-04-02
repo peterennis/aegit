@@ -103,7 +103,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
     Open strFileName For Output As #1
     For nCurrent = 0 To nFieldCount - 1
         If Right(rs.Fields(nCurrent).Name, 1) = "_" Then
-            Print #1, Left(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim;
+            Print #1, Left$(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim;
         Else
             Print #1, rs.Fields(nCurrent).Name & strDelim;
         End If
@@ -194,7 +194,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
 
     For nCurrent = 0 To nFieldCount - 1
         If Right(rs.Fields(nCurrent).Name, 1) = "_" Then
-            UnicodeStream.writetext Left(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim
+            UnicodeStream.writetext Left$(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim
         Else
             UnicodeStream.writetext rs.Fields(nCurrent).Name & strDelim
         End If
@@ -320,7 +320,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
 
     Open strFileName For Input As #1
     Line Input #1, strTest
-    If Left(strTest, 6) = "Table:" Then ' This is an SAP extract!
+    If Left$(strTest, 6) = "Table:" Then ' This is an SAP extract!
         isSAP = True
         Line Input #1, strTest
         Line Input #1, strTest
@@ -336,7 +336,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
     nTotalBytes = nTotalBytes + Len(strTest) + 2 ' +2 for vbCrLf--This line prevents div by zero later...
     strTest = Trim(strTest)
     If Right(strTest, 1) = strDelim Then
-        strTest = Left(strTest, Len(strTest) - 1)
+        strTest = Left$(strTest, Len(strTest) - 1)
     End If
     strHeadersIn = Split(Trim(strTest), strDelim)
     nHeaders = 0
@@ -365,9 +365,9 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
         Line Input #1, strTest
         strTest = Trim(strTest)
         If Right(strTest, 1) = strDelim Then
-            strTest = Left(strTest, Len(strTest) - 1)
+            strTest = Left$(strTest, Len(strTest) - 1)
         End If
-        If isSAP And Left(strTest, 20) = "--------------------" Then
+        If isSAP And Left$(strTest, 20) = "--------------------" Then
             strTest = vbNullString  ' Skip this line!
         End If
         If Len(strTest) > 0 Then
@@ -392,7 +392,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
     If CreateTable(strTableName, strHeaders, nSizes) Then
         If isSAP Then
             For nCurrent = 1 To nHeaders
-                If Left(strHeaders(nCurrent), 8) = "HEADER00" Then
+                If Left$(strHeaders(nCurrent), 8) = "HEADER00" Then
                     strHeaders(nCurrent) = vbNullString  ' Don't bother importing this field.
                 End If
             Next
@@ -424,9 +424,9 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
             nTotalBytes = nTotalBytes + Len(strTest) + 2 'vbCrLf
             strTest = Trim(strTest)
             If Right(strTest, 1) = strDelim Then
-                strTest = Left(strTest, Len(strTest) - 1)
+                strTest = Left$(strTest, Len(strTest) - 1)
             End If
-            If isSAP And Left(strTest, 20) = "--------------------" Then
+            If isSAP And Left$(strTest, 20) = "--------------------" Then
                 strTest = vbNullString  ' Skip this line!
             End If
             If Len(strTest) > 0 Then
@@ -559,7 +559,7 @@ Public Function FixCase(strText) As String
     Dim nCurrent As Long
     For nCurrent = 2 To Len(strText)
         If Mid(strText, nCurrent - 1, 1) <> " " And Mid(strText, nCurrent - 1, 1) <> "." Then
-            strText = Left(strText, nCurrent - 1) & LCase(Mid(strText, nCurrent, 1)) & Mid(strText, nCurrent + 1)
+            strText = Left$(strText, nCurrent - 1) & LCase(Mid(strText, nCurrent, 1)) & Mid(strText, nCurrent + 1)
         End If
     Next
     FixCase = strText

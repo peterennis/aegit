@@ -44,7 +44,7 @@ Public Sub ExportAllModulesToFile()
     ' For each component in the project ...
     For Each mdl In VBE.ActiveVBProject.VBComponents
         ' using the count of lines ...
-        If Left(mdl.Name, 3) <> "zzz" Then
+        If Left$(mdl.Name, 3) <> "zzz" Then
             Debug.Print mdl.Name
             i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
             ' put the code in a string ...
@@ -93,7 +93,7 @@ Public Function CodeLinesInProjectCount() As Long
     End If
 
     For Each VBComp In VBP.VBComponents
-        If Left(VBComp.Name, 3) <> "zzz" Then
+        If Left$(VBComp.Name, 3) <> "zzz" Then
             Debug.Print VBComp.Name, VBComp.CodeModule.CountOfLines
         End If
         LineCount = LineCount + VBComp.CodeModule.CountOfLines
@@ -196,7 +196,7 @@ Public Sub ObjectCounts()
  
     ' Delete all TEMP queries ...
     For Each qry In CurrentDb.QueryDefs
-        If Left(qry.Name, 1) = "~" Then
+        If Left$(qry.Name, 1) = "~" Then
             CurrentDb.QueryDefs.Delete qry.Name
             CurrentDb.QueryDefs.Refresh
         End If
@@ -353,7 +353,7 @@ Public Sub TestForCreateFormReportTextFile()
     Do While Not EOF(fleIn)
         i = i + 1
         Line Input #fleIn, strIn
-        If Left(strIn, Len("Checksum =")) = "Checksum =" Then
+        If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Print #fleOut, strIn
             Debug.Print i, strIn
         ElseIf InStr(1, strIn, "NameMap = Begin", vbTextCompare) > 0 Then
@@ -418,7 +418,7 @@ Public Sub CreateFormReportTextFile()
     Do While Not EOF(fleIn)
         i = i + 1
         Line Input #fleIn, strIn
-        If Left(strIn, Len("Checksum =")) = "Checksum =" Then
+        If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Exit Do
         Else
             Debug.Print i, strIn

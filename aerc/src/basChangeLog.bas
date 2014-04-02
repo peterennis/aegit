@@ -1,10 +1,10 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE = "April 2, 2014"
-Public Const gstrVERSION = "0.9.1"
-Public Const gstrProject = "TheProject"
-Public Const gblnTEST = False
+Public Const gstrDATE As String = "April 2, 2014"
+Public Const gstrVERSION As String = "0.9.1"
+Public Const gstrProject As String = "TheProject"
+Public Const gblnTEST As Boolean = False
 
 ' Tools:
 ' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
@@ -60,7 +60,7 @@ Public Const gblnTEST = False
     ' Verify then turn off "Forgotten command:'Stop'"
     ' Fix 'Select Case' without 'Case Else'
     ' Add aeDEBUG_PRINT boolean to explicitly verify output of Debug.Print statements
-    ' Use Hex$ for string result, use vbNullString, use Chr$
+    ' Use Hex$ for string result, use vbNullString, use Chr$, use Left$
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653

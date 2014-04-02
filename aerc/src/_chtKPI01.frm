@@ -2928,7 +2928,7 @@ Private Sub SetMonthsCaption()
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error Resume Next
-        If ctl.ControlType = acCommandButton And Left(ctl.Caption, 1) = "M" Then
+        If ctl.ControlType = acCommandButton And Left$(ctl.Caption, 1) = "M" Then
             ctl.Caption = DLookup("TheMonth", "_tlkpMonth", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
         End If
         'Debug.Print ctrl.Caption
@@ -2940,7 +2940,7 @@ Private Sub SetYearsCaption()
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error Resume Next
-        If ctl.ControlType = acCommandButton And Left(ctl.Caption, 1) = "Y" Then
+        If ctl.ControlType = acCommandButton And Left$(ctl.Caption, 1) = "Y" Then
             ctl.Caption = DLookup("TheYear", "_tlkpYear", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
         End If
     Next

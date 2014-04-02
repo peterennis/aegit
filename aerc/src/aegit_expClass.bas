@@ -77,17 +77,17 @@ Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
 Private Const aestr4 As String = "    "
-Private Const aeSqlTxtFile = "OutputSqlCodeForQueries.txt"
-Private Const aeTblTxtFile = "OutputTblSetupForTables.txt"
-Private Const aeRefTxtFile = "OutputReferencesSetup.txt"
-Private Const aeRelTxtFile = "OutputRelationsSetup.txt"
-Private Const aePrpTxtFile = "OutputPropertiesBuiltIn.txt"
-Private Const aeFLkCtrFile = "OutputFieldLookupControlTypeList.txt"
-Private Const aeSchemaFile = "OutputSchemaFile.txt"
-Private Const aePrnterInfo = "OutputPrinterInfo.txt"
-Private Const aeAppOptions = "OutputListOfAccessApplicationOptions.txt"
-Private Const aeAppListPrp = "OutputListOfApplicationProperties.txt"
-Private Const aeAppListCnt = "OutputListOfContainers.txt"
+Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
+Private Const aeTblTxtFile As String = "OutputTblSetupForTables.txt"
+Private Const aeRefTxtFile As String = "OutputReferencesSetup.txt"
+Private Const aeRelTxtFile As String = "OutputRelationsSetup.txt"
+Private Const aePrpTxtFile As String = "OutputPropertiesBuiltIn.txt"
+Private Const aeFLkCtrFile As String = "OutputFieldLookupControlTypeList.txt"
+Private Const aeSchemaFile As String = "OutputSchemaFile.txt"
+Private Const aePrnterInfo As String = "OutputPrinterInfo.txt"
+Private Const aeAppOptions As String = "OutputListOfAccessApplicationOptions.txt"
+Private Const aeAppListPrp As String = "OutputListOfApplicationProperties.txt"
+Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 '
 
 Private Sub Class_Initialize()
@@ -968,9 +968,9 @@ Private Function LongestTableName() As Integer
     intTNLen = 0
     Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
             If Len(tdf.Name) > intTNLen Then
                 intTNLen = Len(tdf.Name)
             End If
@@ -1019,9 +1019,9 @@ Private Function LongestFieldPropsName() As Boolean
     Set dbs = CurrentDb()
 
     For Each tblDef In CurrentDb.TableDefs
-        If Not (Left(tblDef.Name, 4) = "MSys" _
-                Or Left(tblDef.Name, 4) = "~TMP" _
-                Or Left(tblDef.Name, 3) = "zzz") Then
+        If Not (Left$(tblDef.Name, 4) = "MSys" _
+                Or Left$(tblDef.Name, 4) = "~TMP" _
+                Or Left$(tblDef.Name, 3) = "zzz") Then
             For Each fld In tblDef.Fields
                 If Len(fld.Name) > aeintFNLen Then
                     aestrLFNTN = tblDef.Name
@@ -1078,7 +1078,7 @@ Private Function SizeString(Text As String, Length As Long, _
     If Len(Text) >= Length Then
         ' if the source string is longer than the specified length, return the
         ' Length left characters
-        SizeString = Left(Text, Length)
+        SizeString = Left$(Text, Length)
         Exit Function
     End If
 
@@ -1087,7 +1087,7 @@ Private Function SizeString(Text As String, Length As Long, _
         sPadChar = " "
     Else
         ' use only the first character of PadChar
-        sPadChar = Left(PadChar, 1)
+        sPadChar = Left$(PadChar, 1)
     End If
 
     If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
@@ -1431,9 +1431,9 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
     End If
 
     For Each tdf In CurrentDb.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
             If Not IsMissing(varDebug) Then
                 blnResult = TableInfo(tdf.Name, "WithDebugging")
                 If Not blnResult Then intFailCount = intFailCount + 1
@@ -1580,9 +1580,9 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
     f.WriteLine strSQL
 
     For Each tdf In dbs.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
 
             strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
             If strLinkedTablePath <> vbNullString Then
@@ -1783,9 +1783,9 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     End If
 
     For Each rel In CurrentDb.Relations
-        If Not (Left(rel.Name, 4) = "MSys" _
-                        Or Left(rel.Name, 4) = "~TMP" _
-                        Or Left(rel.Name, 3) = "zzz") Then
+        If Not (Left$(rel.Name, 4) = "MSys" _
+                        Or Left$(rel.Name, 4) = "~TMP" _
+                        Or Left$(rel.Name, 3) = "zzz") Then
             strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
             strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
             strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
@@ -1848,9 +1848,9 @@ Private Function OutputQueriesSqlText() As Boolean
 
     Set dbs = CurrentDb
     For Each qdf In dbs.QueryDefs
-        If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
-                        Or Left(qdf.Name, 4) = "~TMP" _
-                        Or Left(qdf.Name, 3) = "zzz") Then
+        If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
+                        Or Left$(qdf.Name, 4) = "~TMP" _
+                        Or Left$(qdf.Name, 3) = "zzz") Then
             Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.sql
         End If
     Next
@@ -2135,7 +2135,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
 
     For Each doc In cnt.Documents
         If Not IsMissing(varDebug) Then Debug.Print , doc.Name
-        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+        If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
             i = i + 1
             strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
             'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
@@ -2157,7 +2157,7 @@ SaveAsText:
         End If
         '
         ' Ouput frm as txt
-        If Not (Left(doc.Name, 3) = "zzz" Or Left(doc.Name, 4) = "~TMP") Then
+        If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
             If strContainerType = "Forms" Then
                 If Not IsMissing(varDebug) Then
                     CreateFormReportTextFile strTheCurrentPathAndFile, strTheCurrentPathAndFile & ".txt", varDebug
@@ -2392,7 +2392,7 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     ' Delete all TEMP queries ...
     For Each qdf In CurrentDb.QueryDefs
-        If Left(qdf.Name, 1) = "~" Then
+        If Left$(qdf.Name, 1) = "~" Then
             CurrentDb.QueryDefs.Delete qdf.Name
             CurrentDb.QueryDefs.Refresh
         End If
@@ -2400,9 +2400,9 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
 
     For Each qdf In CurrentDb.QueryDefs
         If Not IsMissing(varDebug) Then Debug.Print , qdf.Name
-        If Not (Left(qdf.Name, 4) = "MSys" Or Left(qdf.Name, 4) = "~sq_" _
-                        Or Left(qdf.Name, 4) = "~TMP" _
-                        Or Left(qdf.Name, 3) = "zzz") Then
+        If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
+                        Or Left$(qdf.Name, 4) = "~TMP" _
+                        Or Left$(qdf.Name, 3) = "zzz") Then
             i = i + 1
             Application.SaveAsText acQuery, qdf.Name, aestrSourceLocation & qdf.Name & ".qry"
             ' Convert UTF-16 to txt - fix for Access 2013
@@ -2632,8 +2632,8 @@ Private Function FieldLookupControlTypeList(Optional varDebug As Variant) As Boo
 
     On Error Resume Next
     For Each tbl In tdf
-        If Left(tbl.Name, 4) <> "MSys" And Left(tbl.Name, 3) <> "zzz" _
-            And Left(tbl.Name, 1) <> "~" Then
+        If Left$(tbl.Name, 4) <> "MSys" And Left$(tbl.Name, 3) <> "zzz" _
+            And Left$(tbl.Name, 1) <> "~" Then
             'Debug.Print tbl.Name
             Print #fle, tbl.Name
             For Each fld In tbl.Fields
@@ -2821,7 +2821,7 @@ Private Function fListGUID(strTableName As String) As String
     For i = 1 To 8
         strGuid = strGuid & strArrGUID8(i) & "-"
     Next
-    fListGUID = Left(strGuid, 23)
+    fListGUID = Left$(strGuid, 23)
 
 End Function
 
@@ -2847,8 +2847,8 @@ Private Sub ListAllContainerProperties(strContainer As String, Optional varDebug
 
     ' Ref: http://stackoverflow.com/questions/16642362/how-to-get-the-following-code-to-continue-on-error
     For Each doc In obj.Documents
-        If Left(doc.Name, 4) <> "MSys" And Left(doc.Name, 3) <> "zzz" _
-            And Left(doc.Name, 1) <> "~" Then
+        If Left$(doc.Name, 4) <> "MSys" And Left$(doc.Name, 3) <> "zzz" _
+            And Left$(doc.Name, 1) <> "~" Then
             If Not IsMissing(varDebug) Then Debug.Print ">>>" & doc.Name
             Print #fle, ">>>" & doc.Name
             For Each prp In doc.Properties
@@ -2964,9 +2964,9 @@ Private Sub OutputTheTableDataAsXML(avarTableNames() As Variant, Optional varDeb
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "OutputTheTableDataAsXML"
 
-    Const adOpenStatic = 3
-    Const adLockOptimistic = 3
-    Const adPersistXML = 1
+    Const adOpenStatic As Integer = 3
+    Const adLockOptimistic As Integer = 3
+    Const adPersistXML As Integer = 1
 
     Dim strFileName As String
 
@@ -3134,9 +3134,9 @@ Private Sub OutputTableDataMacros(Optional varDebug As Variant)
 
     Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
-        If Not (Left(tdf.Name, 4) = "MSys" _
-                Or Left(tdf.Name, 4) = "~TMP" _
-                Or Left(tdf.Name, 3) = "zzz") Then
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
             'Debug.Print tdf.Name
             SaveAsText acTableDataMacro, tdf.Name, aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml"
             If Not IsMissing(varDebug) Then
@@ -3203,7 +3203,7 @@ Private Sub CreateFormReportTextFile(strFileIn As String, strFileOut As String, 
     Do While Not EOF(fleIn)
         i = i + 1
         Line Input #fleIn, strIn
-        If Left(strIn, Len("Checksum =")) = "Checksum =" Then
+        If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Exit Do
         Else
             If Not IsMissing(varDebug) Then Debug.Print i, strIn

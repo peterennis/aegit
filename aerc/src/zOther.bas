@@ -25,11 +25,11 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
     Dim cnn As Object
     Dim cmd As Object
     ' Ref: http://support.microsoft.com/kb/195982
-    Const adPromptAlways = 1
+    Const adPromptAlways As Integer = 1
     ' Ref: http://www.w3schools.com/ado/met_rs_open.asp#CommandTypeEnum
-    Const adCmdText = 1
-    Const adOpenDynamic = 2
-    Const adLockOptimistic = 3
+'''x    Const adCmdText As Integer = 1
+    Const adOpenDynamic As Integer = 2
+    Const adLockOptimistic As Integer = 3
     Dim orst As Object
     Dim ofld As Object
     Dim ocat As Object
