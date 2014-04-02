@@ -61,6 +61,7 @@ Public Const gblnTEST As Boolean = False
     ' Fix 'Select Case' without 'Case Else'
     ' Add aeDEBUG_PRINT boolean to explicitly verify output of Debug.Print statements
     ' Use Hex$ for string result, use vbNullString, use Chr$, use Left$
+    ' Use VBA-Inspector:Ignore for zzOLD module
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653

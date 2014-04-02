@@ -1,6 +1,8 @@
 Option Compare Database
 Option Explicit
 
+'VBA-Inspector:Ignore
+
 Public Const Desktop = &H10&
 Public Const MyDocuments = &H5&
 '
