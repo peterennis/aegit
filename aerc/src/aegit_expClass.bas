@@ -32,8 +32,7 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Const aegit_expVERSION As String = "0.9.1"
 Private Const aegit_expVERSION_DATE As String = "April 2, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
-Private Const THE_DRIVE As String = "C"
-
+Private Const aeDEBUG_PRINT As Boolean = True
 Private Const gcfHandleErrors As Boolean = True
 Private Const gblnOutputPrinterInfo = False
 
@@ -109,17 +108,16 @@ Private Sub Class_Initialize()
     aeintLTN = LongestTableName
     LongestFieldPropsName
 
-    Debug.Print "Class_Initialize"
-    Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
-    Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
-    Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
-    Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
-    Debug.Print , "aeintLTN = " & aeintLTN
-    Debug.Print , "aeintFNLen = " & aeintFNLen
-    Debug.Print , "aeintFTLen = " & aeintFTLen
-    Debug.Print , "aeintFSize = " & aeintFSize
-    'Debug.Print , "aeintFDLen = " & aeintFDLen
+    If aeDEBUG_PRINT Then Debug.Print "Class_Initialize"
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
+    If aeDEBUG_PRINT Then Debug.Print , "aeintLTN = " & aeintLTN
+    If aeDEBUG_PRINT Then Debug.Print , "aeintFNLen = " & aeintFNLen
+    If aeDEBUG_PRINT Then Debug.Print , "aeintFTLen = " & aeintFTLen
+    If aeDEBUG_PRINT Then Debug.Print , "aeintFSize = " & aeintFSize
 
 End Sub
 
@@ -130,10 +128,10 @@ Private Sub Class_Terminate()
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
-    Debug.Print
-    Debug.Print "Class_Terminate"
-    Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
-    Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
+    If aeDEBUG_PRINT Then Debug.Print
+    If aeDEBUG_PRINT Then Debug.Print "Class_Terminate"
+    If aeDEBUG_PRINT Then Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
+    If aeDEBUG_PRINT Then Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
 End Sub
 
 Property Get SourceFolder() As String
@@ -1969,7 +1967,8 @@ Private Function GetPropEnum(typeNum As Long) As String
         Case 109
             GetPropEnum = "dbComplexText"
         Case Else
-            MsgBox "Unknown typeNum:" & typeNum, vbInformation, aeAPP_NAME
+            'MsgBox "Unknown typeNum:" & typeNum, vbInformation, aeAPP_NAME
+            If aeDEBUG_PRINT Then Debug.Print "Unknown typeNum:" & typeNum & " in procedure GetPropEnum of aegit_expClass"
     End Select
 
 End Function
@@ -2812,10 +2811,10 @@ Private Function fListGUID(strTableName As String) As String
     strGuid = ""
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
     For i = 1 To 8
-        If Len(Hex(arrGUID8(i))) = 1 Then
-            strArrGUID8(i) = "0" & CStr(Hex(arrGUID8(i)))
+        If Len(Hex$(arrGUID8(i))) = 1 Then
+            strArrGUID8(i) = "0" & Hex$(arrGUID8(i))
         Else
-            strArrGUID8(i) = Hex(arrGUID8(i))
+            strArrGUID8(i) = Hex$(arrGUID8(i))
         End If
     Next
 

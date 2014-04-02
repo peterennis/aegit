@@ -979,10 +979,10 @@ Private Function fListGUID(strTableName As String) As String
     strGuid = ""
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
     For i = 1 To 8
-        If Len(Hex(arrGUID8(i))) = 1 Then
-            strArrGUID8(i) = "0" & CStr(Hex(arrGUID8(i)))
+        If Len(Hex$(arrGUID8(i))) = 1 Then
+            strArrGUID8(i) = "0" & Hex$(arrGUID8(i))
         Else
-            strArrGUID8(i) = Hex(arrGUID8(i))
+            strArrGUID8(i) = Hex$(arrGUID8(i))
         End If
     Next
 
