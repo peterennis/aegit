@@ -2108,11 +2108,11 @@ Private Function IsFileLocked(PathFileName As String) As Boolean
     If Len(Dir$(PathFileName)) Then
         i = FreeFile()
         Open PathFileName For Random Access Read Write Lock Read Write As #i
-        Lock i 'Redundant but let's be 100% sure
+        Lock i      ' Redundant but let's be 100% sure
         Unlock i
         Close i
     Else
-        'Err.Raise 53
+        ' Err.Raise 53
     End If
 
 PROC_EXIT:
@@ -2491,8 +2491,14 @@ Private Function aeDocumentTheDatabase(Optional varDebug As Variant) As Boolean
         OutputTableDataMacros
     End If
 
-    If aeExists("Tables", "aetlkpStates", "Debugit") Then
-        OutputTableDataAsFormattedText "aetlkpStates"
+    If Not IsMissing(varDebug) Then
+        If aeExists("Tables", "aetlkpStates", varDebug) Then
+            OutputTableDataAsFormattedText "aetlkpStates", varDebug
+        End If
+    Else
+        If aeExists("Tables", "aetlkpStates") Then
+            OutputTableDataAsFormattedText "aetlkpStates"
+        End If
     End If
 
     If Not IsMissing(varDebug) Then
@@ -2543,7 +2549,7 @@ Private Function aeExists(strAccObjType As String, _
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeExists"
 
-    Debug.Print "aeExists"
+    If aeDEBUG_PRINT Then Debug.Print "aeExists"
     If IsMissing(varDebug) Then
         If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
         If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
@@ -3220,13 +3226,16 @@ PROC_ERR:
 
 End Sub
 
-Private Sub OutputTableDataAsFormattedText(strTblName As String)
+Private Sub OutputTableDataAsFormattedText(strTblName As String, Optional varDebug As Variant)
 ' Ref: http://bytes.com/topic/access/answers/856136-access-2007-vba-select-external-data-ribbon
 
     On Error GoTo 0
     Dim strPathFileName As String
     strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
-    If aeDEBUG_PRINT Then Debug.Print strPathFileName
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print , strPathFileName
+    Else
+    End If
     DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
 
 End Sub

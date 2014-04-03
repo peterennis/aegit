@@ -12,7 +12,7 @@ Private ref As Reference
 ' aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
 ' aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
 ' Run in immediate window:                  aegitClassTest
-' Show debug output in immediate window:    aegitClassTest("debug")
+' Show debug output in immediate window:    aegitClassTest varDebug:="Debugit"
 '
 ' Custom Usage:
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
