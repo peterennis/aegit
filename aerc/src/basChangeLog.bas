@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "April 2, 2014"
-Public Const gstrVERSION As String = "0.9.1"
+Public Const gstrDATE As String = "April 3, 2014"
+Public Const gstrVERSION As String = "0.9.2"
 Public Const gstrProject As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -56,6 +56,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 
 
+'20140403 - v092 -
 '20140402 - v091 - Run TM VB-Inspector => 1460 hints in 19 objects
     ' Verify then turn off "Forgotten command:'Stop'"
     ' Fix 'Select Case' without 'Case Else'

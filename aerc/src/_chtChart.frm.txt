@@ -1873,7 +1873,8 @@ Private Sub Form_Load()
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=227612
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/0a34dbec-5078-4e16-b6a7-78f62c39f1bf/vba-navigation-pane?forum=accessdev
 
-    On Error GoTo 0
+    On Error GoTo PROC_ERR
+    
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
     Dim strNewAppTitle
@@ -1899,5 +1900,13 @@ Private Sub Form_Load()
     '
     SetButtonsCaption
     SetLabelsCaption
+
+PROC_EXIT:
+    Set dbs = Nothing
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Load of " & Me.Name
+    Resume Next
 
 End Sub
