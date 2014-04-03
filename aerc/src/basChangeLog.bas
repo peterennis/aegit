@@ -68,6 +68,7 @@ Public Const gblnTEST As Boolean = False
     ' Fix "Multiple commands divided by a colon"
     ' Fix "Data access object declared without library"
     ' Fix "Scope of a procedure is not explicitly declared"
+    ' Start to use aeDEBUG_PRINT throughout
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653

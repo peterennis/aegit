@@ -431,13 +431,13 @@ Public Sub CreateFormReportTextFile()
         i = i + 1
         Line Input #fleIn, strIn
 NextIteration:
-        If FoundkeyWordInLine(strIn) Then
+        If FoundKeywordInLine(strIn) Then
             Debug.Print i & ">", strIn
             Print #fleOut, strIn
             Do While Not EOF(fleIn)
                 i = i + 1
                 Line Input #fleIn, strIn
-                If Not FoundkeyWordInLine(strIn, "End") Then
+                If Not FoundKeywordInLine(strIn, "End") Then
                     'Debug.Print "Not Found!!!", i
                     GoTo SearchForEnd
                 Else
@@ -464,41 +464,41 @@ SearchForEnd:
 
 End Sub
 
-Public Function FoundkeyWordInLine(strLine As String, Optional varEnd As Variant) As Boolean
+Public Function FoundKeywordInLine(strLine As String, Optional varEnd As Variant) As Boolean
 
-    FoundkeyWordInLine = False
+    FoundKeywordInLine = False
     If Not IsMissing(varEnd) Then
         If InStr(1, strLine, "End", vbTextCompare) > 0 Then
-            FoundkeyWordInLine = True
+            FoundKeywordInLine = True
             Exit Function
         End If
     End If
     If InStr(1, strLine, "NameMap = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
     If InStr(1, strLine, "PrtMip = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
     If InStr(1, strLine, "PrtDevMode = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
     If InStr(1, strLine, "PrtDevNames = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
     If InStr(1, strLine, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
     If InStr(1, strLine, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
     If InStr(1, strLine, "OleData = Begin", vbTextCompare) > 0 Then
-        FoundkeyWordInLine = True
+        FoundKeywordInLine = True
         Exit Function
     End If
 
