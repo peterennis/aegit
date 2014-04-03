@@ -11,6 +11,7 @@ Private fle2 As Integer
 
 Public Sub TestListFileSystemRecursively()
 
+    On Error GoTo 0
     fle = FreeFile()    ' Create output file for folders only
     Open OUTPUT_FOLDERS_ONLY For Output As #fle
     Close fle
@@ -39,6 +40,7 @@ Public Sub TestListFileSystemRecursively()
 End Sub
 
 Public Function fLevelArrow(intNum As Integer) As String
+    On Error GoTo 0
     Dim i As Integer
     Dim str As String
     str = LEVEL_ARROW
@@ -60,6 +62,7 @@ Private Sub ListFileSystemRecursively(strRootPathName As String, _
 ' Requires: Late binding does not need reference to Microsoft Scripting Runtime
 '==============================================================================
 
+    On Error GoTo 0
     Dim strFolder As String
     Dim objFSO As Object
     Dim objFolder As Object

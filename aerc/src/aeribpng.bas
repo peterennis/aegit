@@ -38,12 +38,15 @@ Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As
 '================================================================================
 
 Public Sub GetRibbonImage(ctl As Object, image As Variant)        'IRibbonControl)
+    On Error GoTo 0
     Dim Path As String
     Path = Application.CurrentProject.Path & "\Icons\" & ctl.Tag
     Set image = LoadImage(Path)
 End Sub
 
 Private Function LoadImage(ByVal strFName As String) As IPicture
+
+    On Error GoTo 0
     Dim uGdiInput As GdiplusStartupInput
     Dim hGdiPlus As Long
     Dim hGdiImage As Long
@@ -64,6 +67,7 @@ End Function
 
 Private Function ConvertToIPicture(ByVal hPic As Long) As IPicture
 
+    On Error GoTo 0
     Dim uPicInfo As PICTDESC
     Dim IID_IDispatch As GUID
     Dim IPic As IPicture

@@ -4,6 +4,7 @@ Option Explicit
 ' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
 
 Public Sub Version_Test()
+    On Error GoTo 0
     Debug.Print GetEdition(Application.Version, Application.ProductCode)
 End Sub
 
@@ -14,6 +15,7 @@ Public Function GetEdition( _
 ' Ref: http://p2p.wrox.com/excel-vba/82653-what-best-way-get-excel-version.html
 ' Ref: http://colinlegg.wordpress.com/2013/02/02/office-edition-in-vba/
 
+    On Error GoTo 0
     Const strERR_MSG As String = "Unable to determine edition"
 
     Dim strSku As String
@@ -68,6 +70,7 @@ End Function
 Private Function GetEdition2000(ByRef strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/230848/
  
+    On Error GoTo 0
     Select Case strSku
         Case "00"
             GetEdition2000 = "Microsoft Office 2000 Premium Edition CD1"
@@ -143,6 +146,7 @@ End Function
 Private Function GetEdition2002(ByRef strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/302663/
  
+    On Error GoTo 0
     Select Case strSku
         Case "11"
             GetEdition2002 = "Microsoft Office XP Professional"
@@ -224,6 +228,7 @@ End Function
 Private Function GetEdition2003(ByRef strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/832672/
  
+    On Error GoTo 0
     Select Case strSku
         Case "11"
             GetEdition2003 = "Microsoft Office Professional Enterprise Edition 2003"
@@ -323,6 +328,7 @@ End Function
 Private Function GetEdition2007(ByRef strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/928516/
  
+    On Error GoTo 0
     Select Case strSku
         Case "0011"
             GetEdition2007 = "Microsoft Office Professional Plus 2007"
@@ -418,6 +424,7 @@ End Function
 Private Function GetEdition2010(ByRef strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/2186281
  
+    On Error GoTo 0
     Select Case strSku
         Case "0011"
             GetEdition2010 = "Microsoft Office Professional Plus 2010"
@@ -477,6 +484,7 @@ End Function
 Private Function GetEdition2013(ByRef strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/2786054
  
+    On Error GoTo 0
     Debug.Print "GetEdition2013 strSku=" & strSku
     Select Case strSku
         Case "0011"
@@ -529,6 +537,3 @@ Private Function GetEdition2013(ByRef strSku As String) As String
             GetEdition2013 = "Microsoft Lync 2013"
     End Select
 End Function
-
-
- 

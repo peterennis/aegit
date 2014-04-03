@@ -9,6 +9,7 @@ Option Explicit
 
 Public Function RemoveTableDuplicates(strTableName As String) As Boolean
 
+    On Error GoTo 0
     Dim rs As DAO.Recordset
     Dim nCurrent As Long
     Dim nFieldCount As Long
@@ -67,6 +68,7 @@ End Function
 Public Function ExportToText(strTableName As String, strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
 ' This function ONLY exports to Tab-delimited text files with the headers and without text idenitifiers (No quotes!)
     
+    On Error GoTo 0
     Dim rs As DAO.Recordset
     Dim strSQL As String
     Dim nCurrent As Long
@@ -147,6 +149,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
 End Function
 
 Public Sub TestExportToTextUnicode()
+    On Error GoTo 0
     Dim bln As Boolean
     bln = ExportToTextUnicode("Items", "C:\Temp\ExportedItemsUnicode.txt")
 End Sub
@@ -155,6 +158,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
 ' Written by Jimbo at SAPLSMW.com
 ' Special thanks: accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 
+    On Error GoTo 0
     Dim rs As DAO.Recordset
     Dim strSQL As String
     Dim nCurrent As Long
@@ -244,6 +248,7 @@ End Function
 
 Public Function ImportFromAccess(strSourceFile As String, strSourceTable As String, strTargetTable As String, Optional ByVal isAppend As Boolean = True) As Boolean
 
+    On Error GoTo 0
     Dim nCurrent As Long
     Dim nRecordCount As Long
     Dim nFileLen As Long
@@ -293,6 +298,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
 ' This function should be used only for importing extraordinarily large text files.
 ' Files of normal length should be imported using the Access import utility.
   
+    On Error GoTo 0
     Dim rs As DAO.Recordset
     Dim nCurrent As Long
     Dim RetVal As Variant
@@ -498,6 +504,7 @@ End Function
 Public Function TableScrub(strTableName As String) As Long
 ' This function removes leading spaces and trailing spaces from every string field in a table.
 
+    On Error GoTo 0
     Dim strTemp As String
     Dim A As Integer
     Dim nLength As Long
@@ -555,6 +562,7 @@ End Function
 
 Public Function FixCase(strText) As String
 ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
+    On Error GoTo 0
     strText = Trim$(strText & vbNullString)
     Dim nCurrent As Long
     For nCurrent = 2 To Len(strText)
@@ -566,6 +574,7 @@ Public Function FixCase(strText) As String
 End Function
 
 Public Function Deduplicate(strValue As String) As Boolean
+    On Error GoTo 0
     Static sValue As String
     If strValue = sValue Then
         Deduplicate = True
@@ -577,6 +586,7 @@ End Function
 
 Public Function Increment(oValue As String) As Long
 ' This function returns an incremented number each time it's called.  Resets after 2 seconds.
+    On Error GoTo 0
     Static nIncrement As Long
     'Now we put in a reset based on time!
     Static nLastSecond As Long
@@ -593,6 +603,7 @@ End Function
 
 Public Function DeleteRecords(strTableName As String) As Boolean
 ' Delete all records from a table--easier than creating a delete query.
+    On Error GoTo 0
     CurrentDb.Execute ("DELETE * FROM " & strTableName)
     DeleteRecords = True
 End Function

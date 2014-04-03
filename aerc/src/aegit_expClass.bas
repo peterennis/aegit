@@ -95,6 +95,7 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
+    On Error GoTo 0
     ' provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitXMLFolder = "default"
@@ -122,6 +123,7 @@ Private Sub Class_Initialize()
 End Sub
 
 Private Sub Class_Terminate()
+    On Error GoTo 0
     Dim strFile As String
     strFile = aegitSourceFolder & "export.ini"
     If Dir$(strFile) <> vbNullString Then
@@ -135,30 +137,36 @@ Private Sub Class_Terminate()
 End Sub
 
 Property Get SourceFolder() As String
+    On Error GoTo 0
     SourceFolder = aegitSourceFolder
 End Property
 
 Property Let SourceFolder(ByVal strSourceFolder As String)
     ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
     ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
+    On Error GoTo 0
     aegitSourceFolder = strSourceFolder
 End Property
 
 Property Get XMLFolder() As String
+    On Error GoTo 0
     XMLFolder = aegitXMLFolder
 End Property
 
 Property Let XMLFolder(ByVal strXMLFolder As String)
+    On Error GoTo 0
     aegitXMLFolder = strXMLFolder
 End Property
 
 Property Let TablesExportToXML(ByRef avarTables() As Variant)
+    On Error GoTo 0
     MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
     'aegitDataXML = avarTables
 End Property
 
 Property Get DocumentTheDatabase(Optional varDebug As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTheDatabase"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
@@ -175,6 +183,7 @@ End Property
 Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
                         Optional varDebug As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get Exists"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
@@ -189,6 +198,7 @@ Property Get Exists(strAccObjType As String, _
 End Property
 
 Property Get GetReferences(Optional varDebug As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get GetReferences"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
@@ -203,6 +213,7 @@ Property Get GetReferences(Optional varDebug As Variant) As Boolean
 End Property
 
 Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentRelations"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
@@ -217,6 +228,7 @@ Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
 End Property
 
 Property Get DocumentTables(Optional varDebug As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTables"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
@@ -231,6 +243,7 @@ Property Get DocumentTables(Optional varDebug As Variant) As Boolean
 End Property
 
 Property Get DocumentTablesXML(Optional varDebug As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTablesXML"
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
@@ -247,6 +260,7 @@ End Property
 Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
 
+    On Error GoTo 0
     Dim blnRun As Boolean
 
     Debug.Print "CompactAndRepair"
@@ -357,6 +371,7 @@ End Function
 Private Sub OutputListOfAllHiddenQueries(Optional varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
+    On Error GoTo 0
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
     Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
@@ -1073,6 +1088,7 @@ Private Function SizeString(Text As String, Length As Long, _
 ' TextLeft or TextRight, the procedure uses TextLeft.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+    On Error GoTo 0
     Dim sPadChar As String
 
     If Len(Text) >= Length Then
@@ -1311,6 +1327,7 @@ End Function
 Private Function FieldTypeName(fld As DAO.Field) As String
 ' Ref: http://allenbrowne.com/func-06.html
 ' Purpose: Converts the numeric results of DAO Field.Type to text
+    On Error GoTo 0
     Dim strReturn As String    ' Name to return
 
     Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
@@ -1585,6 +1602,7 @@ End Function
 Private Sub OutputTheSchemaFile()               ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
+    On Error GoTo 0
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
@@ -1735,6 +1753,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
 End Sub
 
 Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
+    On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
@@ -1750,6 +1769,7 @@ Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
 End Function
 
 Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
+    On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
@@ -1763,6 +1783,7 @@ Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
 End Function
 
 Private Function isFK(tdf As DAO.TableDef, strField As String) As Boolean
+    On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
@@ -1933,6 +1954,7 @@ End Sub
 Private Function GetPropEnum(typeNum As Long) As String
 ' Ref: http://msdn.microsoft.com/en-us/library/bb242635.aspx
  
+    On Error GoTo 0
     Select Case typeNum
         Case 1
             GetPropEnum = "dbBoolean"
@@ -2003,6 +2025,7 @@ End Function
 
 Private Function GetPrpValue(obj As Object) As String
     'On Error Resume Next
+    On Error GoTo 0
     GetPrpValue = obj.Properties("Value")
 End Function
  
@@ -2297,6 +2320,7 @@ End Function
 Private Sub ListOrCloseAllOpenQueries(Optional strCloseAll As Variant)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx
 
+    On Error GoTo 0
     Dim obj As AccessObject
     Dim dbs As Object
     Set dbs = Application.CurrentData
@@ -2599,6 +2623,7 @@ End Function
 Private Function GetType(Value As Long) As String
 ' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
 
+    On Error GoTo 0
     Select Case Value
         Case acCheckBox
             GetType = "CheckBox"
@@ -2614,6 +2639,7 @@ Private Function GetType(Value As Long) As String
 End Function
 
 Private Sub OutputFieldLookupControlTypeList()
+    On Error GoTo 0
     Dim bln As Boolean
     bln = FieldLookupControlTypeList
 End Sub
@@ -2831,6 +2857,7 @@ Private Function fListGUID(strTableName As String) As String
 ' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
 ' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
+    On Error GoTo 0
     Dim i As Integer
     Dim arrGUID8() As Byte
     Dim strArrGUID8(8) As String
@@ -2917,6 +2944,7 @@ End Sub
 
 Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
 
+    On Error GoTo 0
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
     Dim objXMLStyleSheet As Object
@@ -3195,6 +3223,7 @@ End Sub
 Private Sub OutputTableDataAsFormattedText(strTblName As String)
 ' Ref: http://bytes.com/topic/access/answers/856136-access-2007-vba-select-external-data-ribbon
 
+    On Error GoTo 0
     Dim strPathFileName As String
     strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
     Debug.Print strPathFileName
@@ -3213,6 +3242,7 @@ Private Sub CreateFormReportTextFile(strFileIn As String, strFileOut As String, 
 ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
 ' "OleData = Begin"
 
+    On Error GoTo 0
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
@@ -3277,6 +3307,7 @@ End Sub
 
 Private Function FoundkeyWordInLine(strLine As String, Optional varEnd As Variant) As Boolean
 
+    On Error GoTo 0
     FoundkeyWordInLine = False
     If Not IsMissing(varEnd) Then
         If InStr(1, strLine, "End", vbTextCompare) > 0 Then
@@ -3343,6 +3374,7 @@ End Sub
 Private Sub GlobalErrHandler()
 ' Main procedure to handle errors that occur.
 
+    On Error GoTo 0
     Dim strError As String
     Dim lngError As Long
     Dim intErl As Integer
@@ -3373,6 +3405,7 @@ Private Sub GlobalErrHandler()
 End Sub
 
 Private Function CurrentProcName() As String
+    On Error GoTo 0
     CurrentProcName = mastrCallStack(mintStackPointer - 1)
 End Function
 
@@ -3403,6 +3436,7 @@ Private Sub PushCallStack(strProcName As String)
 End Sub
 
 Private Sub ErrorHandlerInit()
+    On Error GoTo 0
     mfInErrorHandler = False
     mintStackPointer = 1
     ReDim mastrCallStack(1 To mcintIncrementStackSize)
@@ -3411,6 +3445,7 @@ End Sub
 Private Sub PopCallStack()
 ' Remove a procedure name from the call stack
 
+    On Error GoTo 0
     If mintStackPointer <= UBound(mastrCallStack) Then
         mastrCallStack(mintStackPointer) = vbNullString
     End If

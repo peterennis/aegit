@@ -2,6 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Sub TestExportToExcel()
+    On Error GoTo 0
     Dim bln As Boolean
     bln = ExportToExcel("aeItems", "C:\TEMP\Exported_aeItems.xls")
 End Sub
@@ -139,6 +140,7 @@ End Function
 
 Private Function IsNumeric(strCheck As String) As Boolean
 
+    On Error GoTo 0
     Dim nCurrent As Long
     IsNumeric = True
     nCurrent = 0
@@ -154,6 +156,7 @@ End Function
 
 Private Function FindExcelCell(nX As Long, nY As Long) As String
 
+    On Error GoTo 0
     Dim nPower1 As Long
     Dim nPower2 As Long
     nPower2 = 0

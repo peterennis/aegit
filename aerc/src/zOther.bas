@@ -4,6 +4,7 @@ Option Explicit
 #Const conLateBinding = 0
 
 Public Sub TestGetSQLServerData()
+    On Error GoTo 0
     Dim bln As Boolean
     bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
 End Sub
@@ -16,6 +17,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
 ' oConn.Properties("Prompt") = adPromptAlways
 ' oConn.Open "Driver={SQL Server Native Client 11.0};Server=myServerAddress;Database=myDataBase;"
 
+    On Error GoTo 0
     Dim strODBC As String
     strODBC = "DRIVER={SQL Server Native Client 11.0};SERVER=" & strServer & ";DATABASE=" & _
         strDatabase & ";Trusted_Connection=No"

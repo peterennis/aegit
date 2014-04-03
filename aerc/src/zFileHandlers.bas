@@ -9,6 +9,7 @@
 Option Compare Database
 
 Function FileDelete(strFileName As String) As Boolean
+    On Error GoTo 0
     'Use this function to delete a file
     If Len(Dir$(strFileName)) > 0 Then
         Kill strFileName

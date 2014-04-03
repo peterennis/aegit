@@ -6,6 +6,7 @@ Public Sub ApplicationInformation()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa173218(v=office.11).aspx
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff845735(v=office.15).aspx
 
+    On Error GoTo 0
     Dim intProjType As Integer
     Dim strProjType As String
     Dim lng As Long
@@ -31,6 +32,7 @@ End Sub
 
 Public Sub TestRegKey()
 
+    On Error GoTo 0
     Dim strKey As String
 
     ' Office 2010

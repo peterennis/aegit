@@ -51,6 +51,7 @@ End Sub
 
 Private Property Get ComputerName() As String
 
+    On Error GoTo 0
     Dim dwLen       As Long
     Dim strString   As String
 
@@ -64,6 +65,7 @@ End Property
 
 Private Function GetIPAddress(ByVal pstrHost As String) As String
 
+    On Error GoTo 0
     Dim lngIndex        As Integer
     Dim lngHost         As Long
     Dim lngIP           As Long
