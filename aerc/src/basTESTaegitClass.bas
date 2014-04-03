@@ -1,7 +1,7 @@
 Option Compare Database
 Option Explicit
 
-Dim ref As Reference
+Private ref As Reference
 
 ' 0 if Late Binding
 ' 1 if Reference to FSO set.

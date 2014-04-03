@@ -2174,10 +2174,14 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
     Set cnt = dbs.Containers(strContainerType)
 
     Select Case strContainerType
-        Case "Forms": intAcObjType = 2   'acForm
-        Case "Reports": intAcObjType = 3 'acReport
-        Case "Scripts": intAcObjType = 4 'acMacro
-        Case "Modules": intAcObjType = 5 'acModule
+        Case "Forms"
+            intAcObjType = 2    ' acForm
+        Case "Reports"
+            intAcObjType = 3    ' acReport
+        Case "Scripts"
+            intAcObjType = 4    ' acMacro
+        Case "Modules"
+            intAcObjType = 5    ' acModule
         Case Else
             MsgBox "Wrong Case Select in DocumentTheContainer"
     End Select

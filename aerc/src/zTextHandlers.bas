@@ -257,17 +257,17 @@ Public Function ImportFromAccess(strSourceFile As String, strSourceTable As Stri
     Dim nCurRec As Long
     Dim nCurSec As Long
 
-    Dim db As Database
-    Set db = OpenDatabase(strSourceFile)
+    Dim dbs As DAO.Database
+    Set dbs = OpenDatabase(strSourceFile)
 
-    Dim rs1 As Recordset
-    Set rs1 = db.OpenRecordset(strSourceTable)
-    
+    Dim rs1 As DAO.Recordset
+    Set rs1 = dbs.OpenRecordset(strSourceTable)
+
     Dim rs As DAO.Recordset
     rs.OpenRecordset (strTargetTable)
 
     nRecordCount = rs1.RecordCount
-    
+
     RetVal = SysCmd(acSysCmdInitMeter, "Importing " & strSourceTable & " from " & strSourceFile & "...", nFileLen)
 
     Do While Not rs1.EOF
@@ -288,7 +288,7 @@ Public Function ImportFromAccess(strSourceFile As String, strSourceTable As Stri
     Loop
     rs.Close
     rs1.Close
-    db.Close
+    dbs.Close
     RetVal = SysCmd(acSysCmdRemoveMeter)
     ImportFromAccess = True
 
@@ -567,7 +567,7 @@ Public Function FixCase(strText) As String
     Dim nCurrent As Long
     For nCurrent = 2 To Len(strText)
         If Mid$(strText, nCurrent - 1, 1) <> " " And Mid$(strText, nCurrent - 1, 1) <> "." Then
-            strText = Left$(strText, nCurrent - 1) & LCase(Mid$(strText, nCurrent, 1)) & Mid$(strText, nCurrent + 1)
+            strText = Left$(strText, nCurrent - 1) & LCase$(Mid$(strText, nCurrent, 1)) & Mid$(strText, nCurrent + 1)
         End If
     Next
     FixCase = strText

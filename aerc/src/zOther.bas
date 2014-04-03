@@ -3,6 +3,13 @@ Option Explicit
 
 #Const conLateBinding = 0
 
+Public Function FileDelete(strFileName As String) As Boolean
+    On Error GoTo 0
+    If Len(Dir$(strFileName)) > 0 Then
+        Kill strFileName
+    End If
+End Function
+
 Public Sub TestGetSQLServerData()
     On Error GoTo 0
     Dim bln As Boolean
