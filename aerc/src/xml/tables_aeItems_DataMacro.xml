@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<DataMacros xmlns="http://schemas.microsoft.com/office/accessservices/2009/11/application">
+  <DataMacro Event="BeforeChange">
+    <Statements>
+      <ConditionalBlock>
+        <If>
+          <Condition>[Items].[Quantity] Between 50 And 100</Condition>
+          <Statements>
+            <Action Name="SetField">
+              <Argument Name="Field">Items.Status</Argument>
+              <Argument Name="Value">"Levels Low"</Argument>
+            </Action>
+          </Statements>
+        </If>
+        <ElseIf>
+          <Condition>[Items].[Quantity]&lt;50</Condition>
+          <Statements>
+            <Action Name="SetField">
+              <Argument Name="Field">Items.Status</Argument>
+              <Argument Name="Value">"Order Now!"</Argument>
+            </Action>
+          </Statements>
+        </ElseIf>
+        <Else>
+          <Statements>
+            <Action Name="SetField">
+              <Argument Name="Field">Items.Status</Argument>
+              <Argument Name="Value">""</Argument>
+            </Action>
+          </Statements>
+        </Else>
+      </ConditionalBlock>
+    </Statements>
+  </DataMacro>
+</DataMacros>
+

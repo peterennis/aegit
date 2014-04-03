@@ -39,7 +39,7 @@ Public Sub TestListFileSystemRecursively()
     '
 End Sub
 
-Public Function fLevelArrow(intNum As Integer) As String
+Public Function fLevelArrow(ByVal intNum As Integer) As String
     On Error GoTo 0
     Dim i As Integer
     Dim str As String
@@ -50,9 +50,9 @@ Public Function fLevelArrow(intNum As Integer) As String
     fLevelArrow = str
 End Function
 
-Private Sub ListFileSystemRecursively(strRootPathName As String, _
-                Optional varListFiles As Variant, _
-                Optional varDebug As Variant)
+Private Sub ListFileSystemRecursively(ByVal strRootPathName As String, _
+                Optional ByVal varListFiles As Variant, _
+                Optional ByVal varDebug As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 '==============================================================================
 ' Purpose:  List File System Recursively
@@ -101,9 +101,9 @@ Private Sub ListFileSystemRecursively(strRootPathName As String, _
 
 End Sub
 
-Private Sub ShowSubFolders(objFolder As Object, _
-                Optional varListFilesShow As Variant, _
-                Optional varDebugShow As Variant)
+Private Sub ShowSubFolders(ByVal objFolder As Object, _
+                Optional ByVal varListFilesShow As Variant, _
+                Optional ByVal varDebugShow As Variant)
 ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 
     On Error GoTo PROC_ERR

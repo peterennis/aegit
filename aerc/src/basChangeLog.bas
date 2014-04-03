@@ -51,8 +51,8 @@ Public Const gblnTEST As Boolean = False
 ' #005 -
 ' #004 -
 ' #003 -
-' #002 -
-' #001 -
+' #002 - v091 Crash on edit chart - run decompile and test
+' #001 - Property Let TablesExportToXML(ByRef avarTables() As Variant) - FIX THIS!!! - Check ByRef
 '=============================================================================================================================
 
 
@@ -70,6 +70,8 @@ Public Const gblnTEST As Boolean = False
     ' Fix "Scope of a procedure is not explicitly declared"
     ' Start to use aeDEBUG_PRINT throughout
     ' Fix pass through of varDebug in aeDocumentTheDatabase to aeExists
+    ' ByVal vs ByRef - Ref: http://msdn.microsoft.com/en-us/library/ddck1z30.aspx - VBA default is ByVal
+    ' add decompile shortcut, start to add ByVal, test #002, strXMLResDoc As Variant
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653

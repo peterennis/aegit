@@ -159,6 +159,7 @@ Public Property Let XMLFolder(ByVal strXMLFolder As String)
 End Property
 
 Public Property Let TablesExportToXML(ByRef avarTables() As Variant)
+' FIX THIS!!! - Check ByRef
     On Error GoTo 0
     MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
@@ -2950,7 +2951,10 @@ End Sub
 
 Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
 
-    On Error GoTo 0
+    ' Use a call stack and global error handler
+    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    PushCallStack "PrettyXML"
+    
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
     Dim objXMLStyleSheet As Object
@@ -2999,7 +3003,7 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
     ' Ref: http://msdn.microsoft.com/en-us/library/aa468547.aspx
     objXMLDOMDoc.Load (strPathFileName)
 
-    Dim strXMLResDoc
+    Dim strXMLResDoc As Variant
     Set strXMLResDoc = CreateObject("Msxml2.DOMDocument.6.0")
 
     objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
@@ -3015,6 +3019,16 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
 
     Set objXMLDOMDoc = Nothing
     Set objXMLStyleSheet = Nothing
+
+PROC_EXIT:
+    PopCallStack
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegitClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegitClass"
+    GlobalErrHandler
+    Resume PROC_EXIT
 
 End Sub
 
@@ -3187,6 +3201,7 @@ Private Sub OutputTableDataMacros(Optional varDebug As Variant)
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
+    Dim strFile As String
 
     ' Use a call stack and global error handler
     'If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -3199,12 +3214,15 @@ Private Sub OutputTableDataMacros(Optional varDebug As Variant)
         If Not (Left$(tdf.Name, 4) = "MSys" _
                 Or Left$(tdf.Name, 4) = "~TMP" _
                 Or Left$(tdf.Name, 3) = "zzz") Then
-            'Debug.Print tdf.Name
-            SaveAsText acTableDataMacro, tdf.Name, aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml"
+            strFile = aestrXMLLocation & "tables_" & tdf.Name & "_DataMacro.xml"
             If Not IsMissing(varDebug) Then
-                PrettyXML aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml", varDebug
+                If aeDEBUG_PRINT Then Debug.Print "OutputTableDataMacros:", tdf.Name, aestrXMLLocation, strFile
+            End If
+            SaveAsText acTableDataMacro, tdf.Name, strFile
+            If Not IsMissing(varDebug) Then
+                PrettyXML strFile, varDebug
             Else
-                PrettyXML aestrXMLLocation & "\table_" & tdf.Name & "_DataMacro.xml"
+                PrettyXML strFile
             End If
         End If
 NextTdf:
@@ -3255,7 +3273,7 @@ Private Sub CreateFormReportTextFile(strFileIn As String, strFileOut As String, 
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
-    Dim strOut As String
+'''x    Dim strOut As String
     Dim i As Integer
 
     fleIn = FreeFile()
