@@ -22,17 +22,20 @@ Dim ref As Reference
 ' Run in immediate window: MYPROJECT_TEST
 '
 Public Function MYPROJECT_TEST()
+    On Error GoTo 0
     aegitClassTest
     'aegitClassTest varDebug:="Debugit"
 End Function
 
 Public Function IMPORT_TEST()
+    On Error GoTo 0
     'aegitClassImportTest
     aegitClassImportTest varDebug:="Debugit", varImpFldr:="C:\TEMP\imp"
 End Function
 
 Public Sub ALTERNATIVE_TEST()
 
+    On Error GoTo 0
     Dim THE_SOURCE_FOLDER As String
     THE_SOURCE_FOLDER = "C:\TEMP\aealt\src\"
     Dim THE_XML_FOLDER As String
@@ -52,6 +55,7 @@ PROC_ERR:
 End Sub
 
 Private Function PassFail(bln As Boolean) As String
+    On Error GoTo 0
     If bln Then
         PassFail = "Pass"
     Else
@@ -64,6 +68,7 @@ Public Function aegitClassTest(Optional varDebug As Variant, _
                                 Optional varXmlFldr As Variant, _
                                 Optional varXmlData As Variant) As Boolean
 
+    On Error GoTo 0
     Dim oDbObjects As aegit_expClass
     Set oDbObjects = New aegit_expClass
 
@@ -261,6 +266,7 @@ Public Function aegitClassImportTest(Optional varDebug As Variant, _
 ' Usage:
 ' Run in immediate window: aegitClassImportTest
 
+    On Error GoTo 0
     Dim oDbObjects As aegit_impClass
     Set oDbObjects = New aegit_impClass
 
@@ -293,6 +299,7 @@ End Function
 Public Sub TestHideQueryDef()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/25d9dafd-b446-40ba-8dbd-a0efa983f2ff/how-to-programatically-hide-a-querydef
 
+    On Error GoTo 0
     ' Query1 returns the list of all queries
     ' Ref: http://stackoverflow.com/questions/10882317/get-list-of-queries-in-project-ms-access
     Const strQueryName As String = "Query1"
@@ -312,12 +319,14 @@ Public Sub TestHideQueryDef()
 End Sub
 
 Public Function IsQryHidden(strQueryName As String) As Boolean
+    On Error GoTo 0
     IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
 End Function
 
 Public Sub OutputListOfAllQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
+    On Error GoTo 0
     Const strSQL As String = "SELECT m.Name " & vbCrLf & _
                                 "FROM MSysObjects AS m " & vbCrLf & _
                                 "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
@@ -345,6 +354,7 @@ End Sub
 
 Public Sub MakeTableWithListOfAllQueries()
 
+    On Error GoTo 0
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export
     Const strSQL As String = "SELECT m.Name, 0 AS Hidden INTO " & strTempTable & " " & vbCrLf & _
@@ -364,12 +374,14 @@ Public Function ExportTheTableData(strTbl As String, strSpec As String, _
                     strPathFileName As String, blnHasHeaders As Boolean)
 ' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
 
+    On Error GoTo 0
     DoCmd.TransferText acExportDelim, strSpec, strTbl, strPathFileName, blnHasHeaders
 
 End Function
 
 Public Sub MakeTableWithListOfAllHiddenQueries()
 
+    On Error GoTo 0
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export
     Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
@@ -865,7 +877,7 @@ Public Sub TestGetFiles()
         Dim dctDict As Dictionary
         Set dctDict = New Dictionary
     #End If
-        
+
     Dim varItem As Variant
     Dim GetTempDir As String
 

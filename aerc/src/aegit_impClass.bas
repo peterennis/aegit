@@ -35,7 +35,7 @@ Private Const aeAPP_NAME As String = "aegit_imp"
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
-Private Const gblnOutputPrinterInfo = False
+'''x Private Const gblnOutputPrinterInfo As Boolean = False
 
 Private Type mySetupType
     ImportFolder As String
@@ -373,7 +373,7 @@ Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' History   : See comment details, basChangeLog, commit messages on github
 '=========================================================================
     On Error GoTo PROC_ERR
-    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
+    GetLinkedTableCurrentPath = Mid$(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
         ' Non-linked table returns blank - Instr removes the "Database="
 
 PROC_EXIT:

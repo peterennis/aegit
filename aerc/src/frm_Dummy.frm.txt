@@ -13,15 +13,13 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =2
     Right =21870
-    Bottom =12510
+    Bottom =12165
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x79c31af5b448e440
     End
     GUID = Begin
         0x6db60f3e83530f4daef8684f8f873103
-    End
-    NameMap = Begin
     End
     DatasheetFontName ="Calibri"
     PrtMip = Begin
@@ -352,5 +350,6 @@ Option Compare Database
 Option Explicit
 
 Private Sub img_ae_Click()
+    On Error GoTo 0
     MsgBox "This is a frm dummy!", vbInformation
 End Sub

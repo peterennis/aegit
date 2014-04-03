@@ -82,7 +82,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
     ' Check to see if strTableName is actually a query.  If so, use its SQL query.
     nCurrent = 0
     Do While nCurrent < CurrentDb.QueryDefs.Count
-        If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
+        If UCase$(CurrentDb.QueryDefs(nCurrent).Name) = UCase$(strTableName) Then
             strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
         nCurrent = nCurrent + 1
@@ -124,10 +124,10 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
         For nCurrent = 0 To nFieldCount - 1  'Check for blank lines--no need to export those!
             strTest = strTest & IIf(IsNull(rs.Fields), vbNullString, rs.Fields(nCurrent))
         Next
-        If Len(Trim(strTest)) > 0 Then  'Check for blank lines--no need to export those!
+        If Len(Trim$(strTest)) > 0 Then  'Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
                 If Not IsNull(rs.Fields(nCurrent).Value) Then
-                    Print #1, Trim(rs.Fields(nCurrent));
+                    Print #1, Trim$(rs.Fields(nCurrent));
                 End If
                 If nCurrent < nFieldCount - 1 Then
                     Print #1, strDelim;
@@ -170,7 +170,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     ' Check to see if strTableName is actually a query.  If so, use its SQL query.
     nCurrent = 0
     Do While nCurrent < CurrentDb.QueryDefs.Count
-        If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
+        If UCase$(CurrentDb.QueryDefs(nCurrent).Name) = UCase$(strTableName) Then
             strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
         nCurrent = nCurrent + 1
@@ -214,10 +214,10 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
         For nCurrent = 0 To nFieldCount - 1  ' Check for blank lines--no need to export those!
             strTest = strTest & IIf(IsNull(rs.Fields), vbNullString, rs.Fields(nCurrent))
         Next
-        If Len(Trim(strTest)) > 0 Then  ' Check for blank lines--no need to export those!
+        If Len(Trim$(strTest)) > 0 Then  ' Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
                 If Not IsNull(rs.Fields(nCurrent).Value) Then
-                    UnicodeStream.writetext Trim(rs.Fields(nCurrent).Value)
+                    UnicodeStream.writetext Trim$(rs.Fields(nCurrent).Value)
                 End If
                 If nCurrent = (nFieldCount - 1) Then
                     UnicodeStream.writetext vbCrLf 'new line.
@@ -334,21 +334,21 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
     End If
 
     nTotalBytes = nTotalBytes + Len(strTest) + 2 ' +2 for vbCrLf--This line prevents div by zero later...
-    strTest = Trim(strTest)
+    strTest = Trim$(strTest)
     If Right(strTest, 1) = strDelim Then
         strTest = Left$(strTest, Len(strTest) - 1)
     End If
-    strHeadersIn = Split(Trim(strTest), strDelim)
+    strHeadersIn = Split(Trim$(strTest), strDelim)
     nHeaders = 0
     
     For Each strTest In strHeadersIn
         nHeaders = nHeaders + 1
         strTest = Replace(Replace(strTest, " ", vbNullString), ".", vbNullString)
         strTest = Replace(Replace(strTest, " ", vbNullString), ".", vbNullString)
-        If Len(Trim(strTest)) = 0 Then
+        If Len(Trim$(strTest)) = 0 Then
             strHeaders(nHeaders) = "HEADER" & Right("000" & nHeaders, 3)
         Else
-            strHeaders(nHeaders) = Trim(strTest)
+            strHeaders(nHeaders) = Trim$(strTest)
         End If
         For nCurrent = 1 To nHeaders - 1
             If strHeaders(nHeaders) = strHeaders(nCurrent) Then
@@ -363,7 +363,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
 
     Do While Not EOF(1) And nRecords < nReadAhead ' Read through the file and get the maximum sizes for fields in advance.
         Line Input #1, strTest
-        strTest = Trim(strTest)
+        strTest = Trim$(strTest)
         If Right(strTest, 1) = strDelim Then
             strTest = Left$(strTest, Len(strTest) - 1)
         End If
@@ -422,7 +422,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
                 Line Input #1, strTest
             End If
             nTotalBytes = nTotalBytes + Len(strTest) + 2 'vbCrLf
-            strTest = Trim(strTest)
+            strTest = Trim$(strTest)
             If Right(strTest, 1) = strDelim Then
                 strTest = Left$(strTest, Len(strTest) - 1)
             End If
@@ -435,8 +435,8 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
                 rs.AddNew
                 For Each strTest In strFields
                     nCurrent = nCurrent + 1
-                    If Len(Trim(strHeaders(nCurrent))) > 0 Then
-                        rs.Fields(strHeaders(nCurrent)).Value = Trim(strFields(nCurrent - 1))
+                    If Len(Trim$(strHeaders(nCurrent))) > 0 Then
+                        rs.Fields(strHeaders(nCurrent)).Value = Trim$(strFields(nCurrent - 1))
                     End If
                 Next
                 rs.Update
@@ -533,7 +533,7 @@ Public Function TableScrub(strTableName As String) As Long
             nLength = 0
             If rs.Fields(A).Type = dbText And Len(rs.Fields(A).Value) > 0 Then
                 nLength = Len(rs.Fields(A).Value)
-                strTemp = Trim(rs.Fields(A).Value)
+                strTemp = Trim$(rs.Fields(A).Value)
                 If Len(strTemp) = 0 Then
                     rs.Fields(A).Value = Null
                 Else
@@ -555,11 +555,11 @@ End Function
 
 Public Function FixCase(strText) As String
 ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
-    strText = Trim(strText & vbNullString)
+    strText = Trim$(strText & vbNullString)
     Dim nCurrent As Long
     For nCurrent = 2 To Len(strText)
-        If Mid(strText, nCurrent - 1, 1) <> " " And Mid(strText, nCurrent - 1, 1) <> "." Then
-            strText = Left$(strText, nCurrent - 1) & LCase(Mid(strText, nCurrent, 1)) & Mid(strText, nCurrent + 1)
+        If Mid$(strText, nCurrent - 1, 1) <> " " And Mid$(strText, nCurrent - 1, 1) <> "." Then
+            strText = Left$(strText, nCurrent - 1) & LCase(Mid$(strText, nCurrent, 1)) & Mid$(strText, nCurrent + 1)
         End If
     Next
     FixCase = strText

@@ -110,7 +110,7 @@ Public Function GetSQLServerData(strServer As String, strDatabase As String) As 
                 For Each ofld In orst.Fields
                     ' Avoid type mismatch with trim and &""
                     Debug.Print "ofld.Name=" & ofld.Name
-                    rst.Fields(ofld.Name).Value = Trim(vbNullString & ofld.Value)
+                    rst.Fields(ofld.Name).Value = Trim$(vbNullString & ofld.Value)
                 Next
                 rst.Update
                 orst.MoveNext

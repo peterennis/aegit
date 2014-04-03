@@ -1,7 +1,7 @@
 Version =20
 VersionRequired =20
 PublishOption =1
-Checksum =1005437279
+Checksum =942690654
 Begin Form
     RecordSelectors = NotDefault
     MaxButton = NotDefault
@@ -33,10 +33,10 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     PrtDevMode = Begin
-        0x00000000c00ed50ce83cc000e4c3be1104000000050000000600000007000000 ,
+        0x0000000058be350f010000000400000005000000060000000700000000000000 ,
         0x010400209c000c120fff800301000100ea0a6f08640001000700580201000200 ,
-        0x58020200000000006ac9be112839c00000ccbe1179ccbe115ce1cb16c00ed50c ,
-        0x9c3dc00084490000000000000000000000000000000000000000000001000000 ,
+        0x5802020000000052743e040100ccdd5279ccdd529fedc55c90bd990be8420401 ,
+        0xd04e040132c70000000000000000000000000000000000000000000001000000 ,
         0x0200000001000000010000000000000000000000000000000000000000000000 ,
         0x3d5e28493368fb5d000000004a060000789c8d545d779b300cfd2f3ce7a1ecac ,
         0xddda3fc311b6002fc2f2b14d52bab3ff3ed92604d2a4db4b88a5ebabaf2bffae ,
@@ -2879,6 +2879,7 @@ Option Compare Database
 Option Explicit
 
 Private Sub SetChartTitle(strTitle As String)
+    On Error GoTo 0
     With Me.chtKPI01
         .HasTitle = True
         With .ChartTitle
@@ -2888,10 +2889,12 @@ Private Sub SetChartTitle(strTitle As String)
 End Sub
 
 Private Function GetMainTitle()
+    On Error GoTo 0
     GetMainTitle = "KPI-01 " & Me.txtMonth & " " & Me.txtYear
 End Function
 
 Private Function GetRowSource(strChart As String, strKPI As String) As String
+    On Error GoTo 0
     Dim strQry As String
     Me.chtKPI01.RowSourceType = "Table/Query"
     'strQry = "SELECT (Format([EnterDate],""MM/YYYY"")), FLD01, FLD02, FLD03, FLD04, FLD05, FLD06, FLD07 FROM [_qryKPI" & strKPI & "];"
@@ -2924,34 +2927,38 @@ Private Function GetRowSource(strChart As String, strKPI As String) As String
 End Function
 
 Private Sub SetMonthsCaption()
+    On Error GoTo 0
     Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error Resume Next
         If ctl.ControlType = acCommandButton And Left$(ctl.Caption, 1) = "M" Then
-            ctl.Caption = DLookup("TheMonth", "_tlkpMonth", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
+            ctl.Caption = DLookup("TheMonth", "_tlkpMonth", "ID=" & CInt(Mid$(ctl.Caption, 2, 2)))
         End If
         'Debug.Print ctrl.Caption
     Next
 End Sub
 
 Private Sub SetYearsCaption()
+    On Error GoTo 0
     Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error Resume Next
         If ctl.ControlType = acCommandButton And Left$(ctl.Caption, 1) = "Y" Then
-            ctl.Caption = DLookup("TheYear", "_tlkpYear", "ID=" & CInt(Mid(ctl.Caption, 2, 2)))
+            ctl.Caption = DLookup("TheYear", "_tlkpYear", "ID=" & CInt(Mid$(ctl.Caption, 2, 2)))
         End If
     Next
 End Sub
 
 Private Sub cmdBar_Click()
+    On Error GoTo 0
     Me.chtKPI01.ChartType = 51
     Me.Refresh
 End Sub
 
 Private Sub cmdM01_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -2963,6 +2970,7 @@ Private Sub cmdM01_Click()
 End Sub
 
 Private Sub cmdM02_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -2972,6 +2980,7 @@ Private Sub cmdM02_Click()
 End Sub
 
 Private Sub cmdM03_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -2981,6 +2990,7 @@ Private Sub cmdM03_Click()
 End Sub
 
 Private Sub cmdM04_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -2990,6 +3000,7 @@ Private Sub cmdM04_Click()
 End Sub
 
 Private Sub cmdM05_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -2999,6 +3010,7 @@ Private Sub cmdM05_Click()
 End Sub
 
 Private Sub cmdM06_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3008,6 +3020,7 @@ Private Sub cmdM06_Click()
 End Sub
 
 Private Sub cmdM07_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3017,6 +3030,7 @@ Private Sub cmdM07_Click()
 End Sub
 
 Private Sub cmdM08_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3026,6 +3040,7 @@ Private Sub cmdM08_Click()
 End Sub
 
 Private Sub cmdM09_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3035,6 +3050,7 @@ Private Sub cmdM09_Click()
 End Sub
 
 Private Sub cmdM10_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3044,6 +3060,7 @@ Private Sub cmdM10_Click()
 End Sub
 
 Private Sub cmdM11_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3053,6 +3070,7 @@ Private Sub cmdM11_Click()
 End Sub
 
 Private Sub cmdM12_Click()
+    On Error GoTo 0
     If IsNull(Me.txtYear) Then
         MsgBox "Select a year", vbExclamation, gstrProject
         Exit Sub
@@ -3062,32 +3080,39 @@ Private Sub cmdM12_Click()
 End Sub
 
 Private Sub cmdPie_Click()
+    On Error GoTo 0
     Me.chtKPI01.ChartType = 5
     Me.Refresh
 End Sub
 
 Private Sub cmdY01_Click()
+    On Error GoTo 0
     Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=1")
 End Sub
 
 Private Sub cmdY02_Click()
+    On Error GoTo 0
     Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=2")
 End Sub
 
 Private Sub cmdY03_Click()
+    On Error GoTo 0
     Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=3")
 End Sub
 
 Private Sub cmdY04_Click()
+    On Error GoTo 0
     Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=4")
 End Sub
 
 Private Sub cmdY05_Click()
+    On Error GoTo 0
     Me.txtYear = DLookup("TheYear", "_tlkpYear", "ID=5")
 End Sub
 
 Private Sub Form_Load()
 
+    On Error GoTo 0
     SetYearsCaption
     SetMonthsCaption
     ' Set some defaults to display a chart

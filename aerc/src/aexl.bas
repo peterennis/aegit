@@ -101,14 +101,14 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
         For nCurrent = 0 To nFieldCount - 1
             strTest = strTest & IIf(IsNull(rst.Fields), vbNullString, rst.Fields(nCurrent).Value)
         Next
-        If Len(Trim(strTest)) > 0 Then
+        If Len(Trim$(strTest)) > 0 Then
             For nCurrent = 0 To nFieldCount - 1
                 If Not IsNull(rst.Fields(nCurrent).Value) Then
                     If rst.Fields(nCurrent).Value <> vbNullString Then
                         If IsNumeric(rst.Fields(nCurrent).Value & vbNullString) Then
-                            wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = "'" & Trim(rst.Fields(nCurrent).Value)
+                            wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = "'" & Trim$(rst.Fields(nCurrent).Value)
                         Else
-                            wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = Trim(rst.Fields(nCurrent).Value)
+                            wks.Range(FindExcelCell(nCurrent + 1, nCurRec + 1)) = Trim$(rst.Fields(nCurrent).Value)
                         End If
                     End If
                 End If
@@ -142,10 +142,10 @@ Private Function IsNumeric(strCheck As String) As Boolean
     Dim nCurrent As Long
     IsNumeric = True
     nCurrent = 0
-    strCheck = Trim(strCheck)
+    strCheck = Trim$(strCheck)
     Do While nCurrent < Len(strCheck) And IsNumeric = True
         nCurrent = nCurrent + 1
-        If InStr("01234567890", Mid(strCheck, nCurrent, 1)) < 1 Then
+        If InStr("01234567890", Mid$(strCheck, nCurrent, 1)) < 1 Then
             IsNumeric = False 'Part of the string is not a digit!
         End If
     Loop

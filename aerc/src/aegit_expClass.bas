@@ -34,7 +34,7 @@ Private Const aegit_expVERSION_DATE As String = "April 2, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const gcfHandleErrors As Boolean = True
-Private Const gblnOutputPrinterInfo = False
+Private Const gblnOutputPrinterInfo As Boolean = False
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
 ' This enum is used by SizeString to indicate whether the supplied text
@@ -1117,7 +1117,7 @@ Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
 ' History   : See comment details, basChangeLog, commit messages on github
 '=========================================================================
     On Error GoTo PROC_ERR
-    GetLinkedTableCurrentPath = Mid(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
+    GetLinkedTableCurrentPath = Mid$(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
         ' Non-linked table returns blank - Instr removes the "Database="
 
 PROC_EXIT:
@@ -1640,7 +1640,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
 
             Next
 
-            strSQL = strSQL & Mid(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+            strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
             f.WriteLine vbCrLf & strSQL
 
             'Indexes
@@ -1659,7 +1659,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                     strFlds = ",[" & fld.Name & "]"
                 Next
 
-                strSQL = strSQL & Mid(strFlds, 2) & ") "
+                strSQL = strSQL & Mid$(strFlds, 2) & ") "
                 strCn = vbNullString
 
                 If ndx.Primary Then
@@ -1674,7 +1674,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                     strCn = strCn & " IGNORE NULL"
                 End If
 
-                If Trim(strCn) <> vbNullString Then
+                If Trim$(strCn) <> vbNullString Then
                     strSQL = strSQL & " WITH" & strCn & " "
                 End If
 
@@ -2131,7 +2131,7 @@ Private Function DocumentTheContainer(strContainerType As String, strExt As Stri
             MsgBox "Wrong Case Select in DocumentTheContainer"
     End Select
 
-    If Not IsMissing(varDebug) Then Debug.Print UCase(strContainerType)
+    If Not IsMissing(varDebug) Then Debug.Print UCase$(strContainerType)
 
     For Each doc In cnt.Documents
         If Not IsMissing(varDebug) Then Debug.Print , doc.Name
