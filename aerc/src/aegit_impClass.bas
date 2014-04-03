@@ -84,15 +84,15 @@ Private Sub Class_Terminate()
     Debug.Print , "aegit_imp VERSION_DATE: " & aegit_impVERSION_DATE
 End Sub
 
-Property Get ImportFolder() As String
+Public Property Get ImportFolder() As String
     ImportFolder = aegitImportFolder
 End Property
 
-Property Let ImportFolder(ByVal strImportFolder As String)
+Public Property Let ImportFolder(ByVal strImportFolder As String)
     aegitImportFolder = strImportFolder
 End Property
 
-Property Get Exists(strAccObjType As String, _
+Public Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
                         Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
@@ -108,7 +108,7 @@ Property Get Exists(strAccObjType As String, _
     End If
 End Property
 
-Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Variant) As Boolean
+Public Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
         Debug.Print "Get ReadDocDatabase"
         Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeReadDocDatabase"
@@ -122,7 +122,7 @@ Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Vari
     End If
 End Property
 
-Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
+Public Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
         Debug.Print "Get GetReferences"
         Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeGetReferences"
@@ -136,7 +136,7 @@ Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
     End If
 End Property
 
-Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
+Public Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
         Debug.Print "Get DocumentRelations"
         Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentRelations"
@@ -150,7 +150,7 @@ Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
     End If
 End Property
 
-Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
+Public Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
 
     Dim blnRun As Boolean

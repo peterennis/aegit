@@ -136,36 +136,36 @@ Private Sub Class_Terminate()
     If aeDEBUG_PRINT Then Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
 End Sub
 
-Property Get SourceFolder() As String
+Public Property Get SourceFolder() As String
     On Error GoTo 0
     SourceFolder = aegitSourceFolder
 End Property
 
-Property Let SourceFolder(ByVal strSourceFolder As String)
+Public Property Let SourceFolder(ByVal strSourceFolder As String)
     ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
     ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
     On Error GoTo 0
     aegitSourceFolder = strSourceFolder
 End Property
 
-Property Get XMLFolder() As String
+Public Property Get XMLFolder() As String
     On Error GoTo 0
     XMLFolder = aegitXMLFolder
 End Property
 
-Property Let XMLFolder(ByVal strXMLFolder As String)
+Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
     aegitXMLFolder = strXMLFolder
 End Property
 
-Property Let TablesExportToXML(ByRef avarTables() As Variant)
+Public Property Let TablesExportToXML(ByRef avarTables() As Variant)
     On Error GoTo 0
     MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
     'aegitDataXML = avarTables
 End Property
 
-Property Get DocumentTheDatabase(Optional varDebug As Variant) As Boolean
+Public Property Get DocumentTheDatabase(Optional varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTheDatabase"
@@ -180,7 +180,7 @@ Property Get DocumentTheDatabase(Optional varDebug As Variant) As Boolean
     End If
 End Property
 
-Property Get Exists(strAccObjType As String, _
+Public Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
                         Optional varDebug As Variant) As Boolean
     On Error GoTo 0
@@ -197,7 +197,7 @@ Property Get Exists(strAccObjType As String, _
     End If
 End Property
 
-Property Get GetReferences(Optional varDebug As Variant) As Boolean
+Public Property Get GetReferences(Optional varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get GetReferences"
@@ -212,7 +212,7 @@ Property Get GetReferences(Optional varDebug As Variant) As Boolean
     End If
 End Property
 
-Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
+Public Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentRelations"
@@ -227,7 +227,7 @@ Property Get DocumentRelations(Optional varDebug As Variant) As Boolean
     End If
 End Property
 
-Property Get DocumentTables(Optional varDebug As Variant) As Boolean
+Public Property Get DocumentTables(Optional varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTables"
@@ -242,7 +242,7 @@ Property Get DocumentTables(Optional varDebug As Variant) As Boolean
     End If
 End Property
 
-Property Get DocumentTablesXML(Optional varDebug As Variant) As Boolean
+Public Property Get DocumentTablesXML(Optional varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
         Debug.Print "Get DocumentTablesXML"
@@ -257,7 +257,7 @@ Property Get DocumentTablesXML(Optional varDebug As Variant) As Boolean
     End If
 End Property
 
-Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
+Public Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
 
     On Error GoTo 0

@@ -790,7 +790,7 @@ End Sub
 ';297 Total bitrate               PDF Specification
 '
 
-Function GetFiles(strPath As String, _
+Public Function GetFiles(strPath As String, _
                 dctDict As Object, _
                 Optional blnRecursive As Boolean) As Boolean
 'Function GetFiles(strPath As String, _
