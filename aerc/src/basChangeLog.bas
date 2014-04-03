@@ -64,6 +64,8 @@ Public Const gblnTEST As Boolean = False
     ' Use VBA-Inspector:Ignore for zzOLD module
     ' Use UCase$, use Mid$, use Trim$, use On Error GoTo 0 for turning on default VBA error handling
     ' 1100 hints in 15 objects
+    ' Use Format$, use Dir$
+    ' Fix "Multiple commands divided by a colon"
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/ms-access-2010-windows-7-part-of-chart-is-not/9f8359bf-acf8-49a6-8f76-fe90d332a653

@@ -74,7 +74,7 @@ End Sub
 Private Sub Class_Terminate()
 '''     Dim strFile As String
 '''     strFile = aegitSourceFolder & "export.ini"
-'''     If Dir(strFile) <> vbNullString Then
+'''     If Dir$(strFile) <> vbNullString Then
 '''         ' The file exists
 '''         If Not FileLocked(strFile) Then KillProperly (strFile)
 '''     End If
@@ -279,7 +279,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
    
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -481,7 +481,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
         Debug.Print , "NOW DEBUGGING..."
     End If
    
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -535,7 +535,7 @@ Private Sub KillProperly(Killfile As String)
     On Error GoTo PROC_ERR
 
 TryAgain:
-    If Len(Dir(Killfile)) > 0 Then
+    If Len(Dir$(Killfile)) > 0 Then
         SetAttr Killfile, vbNormal
         Kill Killfile
     End If

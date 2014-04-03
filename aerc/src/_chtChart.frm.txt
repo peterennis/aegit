@@ -1579,8 +1579,8 @@ Private Function GetRowSource(strChart As String) As String
     On Error GoTo 0
     Dim strQry As String
     Me.chtChart.RowSourceType = "Table/Query"
-    'strQry = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
-    strQry = "SELECT (Format([EnterDate],""MM/YYYY"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""MM/YYYY""));"
+    'strQry = "SELECT (Format$([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format$([EnterDate],""DDDDD""));"
+    strQry = "SELECT (Format$([EnterDate],""MM/YYYY"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format$([EnterDate],""MM/YYYY""));"
     GetRowSource = strQry
     'Debug.Print "GetRowSource=" & strQry
     'Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType

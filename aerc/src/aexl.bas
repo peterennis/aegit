@@ -20,7 +20,7 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
 
     On Error Resume Next
     isFound = False
-    If Len(Dir(strFileName, vbNormal)) > 0 Then 'File exists!
+    If Len(Dir$(strFileName, vbNormal)) > 0 Then 'File exists!
         Set wkb = objExcel.Workbooks.Open(strFileName, False, False)
         nCurrent = wkb.Worksheets.Count
         Do While nCurrent > 0
@@ -120,7 +120,7 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
     Set rst = Nothing
     
     wks.Range("A1").Select  'Move the cursor to the very first field
-    If Len(Dir(strFileName, vbNormal)) > 0 Then
+    If Len(Dir$(strFileName, vbNormal)) > 0 Then
         'File already exists, just close and save.
         wkb.Close (True)
     Else

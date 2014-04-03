@@ -230,7 +230,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     Loop
 
     ' Check to ensure that the file doesn't already exist.
-    If Len(Dir(strFileName)) > 0 Then
+    If Len(Dir$(strFileName)) > 0 Then
         Kill strFileName  ' The file exists, so we must delete it before it be created again.
     End If
     UnicodeStream.SaveToFile strFileName

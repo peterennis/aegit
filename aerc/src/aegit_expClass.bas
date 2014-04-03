@@ -124,7 +124,7 @@ End Sub
 Private Sub Class_Terminate()
     Dim strFile As String
     strFile = aegitSourceFolder & "export.ini"
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
@@ -866,7 +866,7 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
     strFile = aestrSourceLocation & aeRefTxtFile
     
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1314,57 +1314,85 @@ Private Function FieldTypeName(fld As DAO.Field) As String
     Dim strReturn As String    ' Name to return
 
     Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
-        Case dbBoolean: strReturn = "Yes/No"            '  1
-        Case dbByte: strReturn = "Byte"                 '  2
-        Case dbInteger: strReturn = "Integer"           '  3
+        Case dbBoolean
+            strReturn = "Yes/No"                        '  1
+        Case dbByte
+            strReturn = "Byte"                          '  2
+        Case dbInteger
+            strReturn = "Integer"                       '  3
         Case dbLong                                     '  4
             If (fld.Attributes And dbAutoIncrField) = 0& Then
                 strReturn = "Long Integer"
             Else
                 strReturn = "AutoNumber"
             End If
-        Case dbCurrency: strReturn = "Currency"         '  5
-        Case dbSingle: strReturn = "Single"             '  6
-        Case dbDouble: strReturn = "Double"             '  7
-        Case dbDate: strReturn = "Date/Time"            '  8
-        Case dbBinary: strReturn = "Binary"             '  9 (no interface)
+        Case dbCurrency
+            strReturn = "Currency"                      '  5
+        Case dbSingle
+            strReturn = "Single"                        '  6
+        Case dbDouble
+            strReturn = "Double"                        '  7
+        Case dbDate
+            strReturn = "Date/Time"                     '  8
+        Case dbBinary
+            strReturn = "Binary"                        '  9 (no interface)
         Case dbText                                     ' 10
             If (fld.Attributes And dbFixedField) = 0& Then
                 strReturn = "Text"
             Else
                 strReturn = "Text (fixed width)"        ' (no interface)
             End If
-        Case dbLongBinary: strReturn = "OLE Object"     ' 11
+        Case dbLongBinary
+            strReturn = "OLE Object"                    ' 11
         Case dbMemo                                     ' 12
             If (fld.Attributes And dbHyperlinkField) = 0& Then
                 strReturn = "Memo"
             Else
                 strReturn = "Hyperlink"
             End If
-        Case dbGUID: strReturn = "GUID"                 ' 15
+        Case dbGUID
+            strReturn = "GUID"                          ' 15
 
         ' Attached tables only: cannot create these in JET.
-        Case dbBigInt: strReturn = "Big Integer"        ' 16
-        Case dbVarBinary: strReturn = "VarBinary"       ' 17
-        Case dbChar: strReturn = "Char"                 ' 18
-        Case dbNumeric: strReturn = "Numeric"           ' 19
-        Case dbDecimal: strReturn = "Decimal"           ' 20
-        Case dbFloat: strReturn = "Float"               ' 21
-        Case dbTime: strReturn = "Time"                 ' 22
-        Case dbTimeStamp: strReturn = "Time Stamp"      ' 23
+        Case dbBigInt
+            strReturn = "Big Integer"                   ' 16
+        Case dbVarBinary
+            strReturn = "VarBinary"                     ' 17
+        Case dbChar
+            strReturn = "Char"                          ' 18
+        Case dbNumeric
+            strReturn = "Numeric"                       ' 19
+        Case dbDecimal
+            strReturn = "Decimal"                       ' 20
+        Case dbFloat
+            strReturn = "Float"                         ' 21
+        Case dbTime
+            strReturn = "Time"                          ' 22
+        Case dbTimeStamp
+            strReturn = "Time Stamp"                    ' 23
 
         ' Constants for complex types don't work
         ' prior to Access 2007 and later.
-        Case 101&: strReturn = "Attachment"             ' dbAttachment
-        Case 102&: strReturn = "Complex Byte"           ' dbComplexByte
-        Case 103&: strReturn = "Complex Integer"        ' dbComplexInteger
-        Case 104&: strReturn = "Complex Long"           ' dbComplexLong
-        Case 105&: strReturn = "Complex Single"         ' dbComplexSingle
-        Case 106&: strReturn = "Complex Double"         ' dbComplexDouble
-        Case 107&: strReturn = "Complex GUID"           ' dbComplexGUID
-        Case 108&: strReturn = "Complex Decimal"        ' dbComplexDecimal
-        Case 109&: strReturn = "Complex Text"           ' dbComplexText
-        Case Else: strReturn = "Field type " & fld.Type & " unknown"
+        Case 101&
+            strReturn = "Attachment"                    ' dbAttachment
+        Case 102&
+            strReturn = "Complex Byte"                  ' dbComplexByte
+        Case 103&
+            strReturn = "Complex Integer"               ' dbComplexInteger
+        Case 104&
+            strReturn = "Complex Long"                  ' dbComplexLong
+        Case 105&
+            strReturn = "Complex Single"                ' dbComplexSingle
+        Case 106&
+            strReturn = "Complex Double"                ' dbComplexDouble
+        Case 107&
+            strReturn = "Complex GUID"                  ' dbComplexGUID
+        Case 108&
+            strReturn = "Complex Decimal"               ' dbComplexDecimal
+        Case 109&
+            strReturn = "Complex Text"                  ' dbComplexText
+        Case Else
+            strReturn = "Field type " & fld.Type & " unknown"
     End Select
 
     FieldTypeName = strReturn
@@ -1422,7 +1450,7 @@ Private Function aeDocumentTables(Optional varDebug As Variant) As Boolean
 
     strFile = aestrSourceLocation & aeTblTxtFile
     
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1774,7 +1802,7 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
 
     strFile = aestrSourceLocation & aeRelTxtFile
     
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1838,7 +1866,7 @@ Private Function OutputQueriesSqlText() As Boolean
 
     strFile = aestrSourceLocation & aeSqlTxtFile
     
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -1882,7 +1910,7 @@ Private Sub KillProperly(Killfile As String)
     On Error GoTo PROC_ERR
 
 TryAgain:
-    If Len(Dir(Killfile)) > 0 Then
+    If Len(Dir$(Killfile)) > 0 Then
         SetAttr Killfile, vbNormal
         Kill Killfile
     End If
@@ -1994,7 +2022,7 @@ Private Function OutputBuiltInPropertiesText() As Boolean
 
     strFile = aestrSourceLocation & aePrpTxtFile
 
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As #1
@@ -2215,26 +2243,26 @@ Private Sub KillAllFiles(strLoc As String, Optional varDebug As Variant)
 
     If strLoc = "src" Then
         ' Delete all the exported src files
-        strFile = Dir(aestrSourceLocation & "*.*")
+        strFile = Dir$(aestrSourceLocation & "*.*")
         Do While strFile <> vbNullString
             KillProperly (aestrSourceLocation & strFile)
             ' Need to specify full path again because a file was deleted
-            strFile = Dir(aestrSourceLocation & "*.*")
+            strFile = Dir$(aestrSourceLocation & "*.*")
         Loop
-        strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
+        strFile = Dir$(aestrSourceLocation & "xml\" & "*.*")
         Do While strFile <> vbNullString
             KillProperly (aestrSourceLocation & "xml\" & strFile)
             ' Need to specify full path again because a file was deleted
-            strFile = Dir(aestrSourceLocation & "xml\" & "*.*")
+            strFile = Dir$(aestrSourceLocation & "xml\" & "*.*")
         Loop
     ElseIf strLoc = "xml" Then
         ' Delete files in xml location
         If aegitSetup Then
-            strFile = Dir(aestrXMLLocation & "*.*")
+            strFile = Dir$(aestrXMLLocation & "*.*")
             Do While strFile <> vbNullString
                 KillProperly (aestrXMLLocation & strFile)
                 ' Need to specify full path again because a file was deleted
-                strFile = Dir(aestrXMLLocation & "*.*")
+                strFile = Dir$(aestrXMLLocation & "*.*")
             Loop
         End If
     Else
@@ -2723,7 +2751,7 @@ Public Function OutputListOfContainers(strTheFileName As String) As Boolean
 
     strFile = aestrSourceLocation & strTheFileName
 
-    If Dir(strFile) <> vbNullString Then
+    If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
         Open strFile For Append As lngFileNum

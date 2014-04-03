@@ -1078,7 +1078,7 @@ Private Function GetRowSource(strChart As String, strKPI As String) As String
     On Error GoTo 0
     Dim strQry As String
     Me.chtKPI01.RowSourceType = "Table/Query"
-    'strQry = "SELECT (Format([EnterDate],""MM/YYYY"")), FLD01, FLD02, FLD03, FLD04, FLD05, FLD06, FLD07 FROM [_qryKPI" & strKPI & "];"
+    'strQry = "SELECT (Format$([EnterDate],""MM/YYYY"")), FLD01, FLD02, FLD03, FLD04, FLD05, FLD06, FLD07 FROM [_qryKPI" & strKPI & "];"
     Dim strFLD01 As String
     strFLD01 = DLookup("ChartDesc", "_tlkpChart", "ID=1")
     Debug.Print "strFLD01=" & strFLD01
@@ -1094,7 +1094,7 @@ Private Function GetRowSource(strChart As String, strKPI As String) As String
     strFLD06 = DLookup("ChartDesc", "_tlkpChart", "ID=6")
     Dim strFLD07 As String
     strFLD07 = DLookup("ChartDesc", "_tlkpChart", "ID=7")
-    strQry = "SELECT (Format([EnterDate],""MM/YYYY"")), FLD01 AS " & """" & strFLD01 & """" & ", " & _
+    strQry = "SELECT (Format$([EnterDate],""MM/YYYY"")), FLD01 AS " & """" & strFLD01 & """" & ", " & _
                 "FLD02 AS " & """" & strFLD02 & """" & ", " & _
                 "FLD03 AS " & """" & strFLD03 & """" & ", " & _
                 "FLD04 AS " & """" & strFLD04 & """" & ", " & _
