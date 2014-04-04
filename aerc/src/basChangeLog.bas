@@ -59,7 +59,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
-'20140404 - v093 -
+'20140404 - v093 - Use aegit_expClass, aegit_impClass,
 '20140403 - v092 -
     ' Research on #002 - Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/graphs-crashing-microsoft-office-2010-component/9196aa27-ee0f-426d-bb7f-5c6e8858f6de
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2013_release-access/access-crashes-when-editing-pie-chart/c3178d1f-91a8-4dfd-98b3-86c5465546ec

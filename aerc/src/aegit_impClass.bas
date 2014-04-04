@@ -32,10 +32,10 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Const aegit_impVERSION As String = "0.9.3"
 Private Const aegit_impVERSION_DATE As String = "April 4, 2014"
 Private Const aeAPP_NAME As String = "aegit_imp"
+Private Const aeDEBUG_PRINT As Boolean = True
 Private Const THE_DRIVE As String = "C"
 
 Private Const gcfHandleErrors As Boolean = True
-'''x Private Const gblnOutputPrinterInfo As Boolean = False
 
 Private Type mySetupType
     ImportFolder As String
@@ -65,9 +65,9 @@ Private Sub Class_Initialize()
     aegitImportFolder = "default"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
 
-    Debug.Print "Class_Initialize"
-    Debug.Print , "Default for aegitImportFolder = " & aegitImportFolder
-    Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
+    If aeDEBUG_PRINT Then Debug.Print "Class_Initialize"
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitImportFolder = " & aegitImportFolder
+    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
 
 End Sub
 
@@ -78,10 +78,10 @@ Private Sub Class_Terminate()
 '''         ' The file exists
 '''         If Not FileLocked(strFile) Then KillProperly (strFile)
 '''     End If
-    Debug.Print
-    Debug.Print "Class_Terminate"
-    Debug.Print , "aegit_imp VERSION: " & aegit_impVERSION
-    Debug.Print , "aegit_imp VERSION_DATE: " & aegit_impVERSION_DATE
+    If aeDEBUG_PRINT Then Debug.Print
+    If aeDEBUG_PRINT Then Debug.Print "Class_Terminate"
+    If aeDEBUG_PRINT Then Debug.Print , "aegit_imp VERSION: " & aegit_impVERSION
+    If aeDEBUG_PRINT Then Debug.Print , "aegit_imp VERSION_DATE: " & aegit_impVERSION_DATE
 End Sub
 
 Public Property Get ImportFolder() As String
@@ -96,56 +96,56 @@ Public Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
                         Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
-        Debug.Print "Get Exists"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeExists"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print "Get Exists"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeExists"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
         Exists = aeExists(strAccObjType, strAccObjName)
     Else
-        Debug.Print "Get Exists"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeExists"
-        Debug.Print , "DEBUGGING TURNED ON"
+        If aeDEBUG_PRINT Then Debug.Print "Get Exists"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeExists"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
         Exists = aeExists(strAccObjType, strAccObjName, DebugTheCode)
     End If
 End Property
 
 Public Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
-        Debug.Print "Get ReadDocDatabase"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeReadDocDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print "Get ReadDocDatabase"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeReadDocDatabase"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
         ReadDocDatabase = aeReadDocDatabase(blnImport)
     Else
-        Debug.Print "Get ReadDocDatabase"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeReadDocDatabase"
-        Debug.Print , "DEBUGGING TURNED ON"
+        If aeDEBUG_PRINT Then Debug.Print "Get ReadDocDatabase"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeReadDocDatabase"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
         ReadDocDatabase = aeReadDocDatabase(blnImport, DebugTheCode)
     End If
 End Property
 
 Public Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
-        Debug.Print "Get GetReferences"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeGetReferences"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print "Get GetReferences"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeGetReferences"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
         GetReferences = aeGetReferences
     Else
-        Debug.Print "Get GetReferences"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeGetReferences"
-        Debug.Print , "DEBUGGING TURNED ON"
+        If aeDEBUG_PRINT Then Debug.Print "Get GetReferences"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeGetReferences"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
         GetReferences = aeGetReferences(DebugTheCode)
     End If
 End Property
 
 Public Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
     If IsMissing(DebugTheCode) Then
-        Debug.Print "Get DocumentRelations"
-        Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentRelations"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print "Get DocumentRelations"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentRelations"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
         DocumentRelations = aeDocumentRelations
     Else
-        Debug.Print "Get DocumentRelations"
-        Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentRelations"
-        Debug.Print , "DEBUGGING TURNED ON"
+        If aeDEBUG_PRINT Then Debug.Print "Get DocumentRelations"
+        If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
         DocumentRelations = aeDocumentRelations(DebugTheCode)
     End If
 End Property
@@ -158,12 +158,12 @@ Public Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolea
     Debug.Print "CompactAndRepair"
     If Not IsMissing(varTrueFalse) Then
         blnRun = False
-        Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
-        Debug.Print , "RUN CompactAndRepair IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
+        If aeDEBUG_PRINT Then Debug.Print , "RUN CompactAndRepair IS OFF"
     Else
         blnRun = True
-        Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
-        Debug.Print , "RUN CompactAndRepair IS ON..."
+        If aeDEBUG_PRINT Then Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
+        If aeDEBUG_PRINT Then Debug.Print , "RUN CompactAndRepair IS ON..."
     End If
 
 ' TableDefs not refreshed after create
@@ -208,7 +208,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegit_impClass"
     Resume PROC_EXIT
 
 End Function
@@ -235,7 +235,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegit_impClass"
     Resume PROC_EXIT
 End Sub
 
@@ -258,7 +258,6 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
     Dim RefName As String
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
-    Dim blnDebug As Boolean
     Dim strFile As String
 
     Dim vbaProj As Object
@@ -270,13 +269,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeGetReferences is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so blnDebug of aeGetReferences is set to False"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeGetReferences is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so blnDebug of aeGetReferences is set to True"
+        If aeDEBUG_PRINT Then Debug.Print , "NOW DEBUGGING..."
     End If
    
     If Dir$(strFile) <> vbNullString Then
@@ -287,18 +284,18 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         If Not FileLocked(strFile) Then Open strFile For Append As #1
     End If
 
-    If blnDebug Then
-        Debug.Print ">==> aeGetReferences >==>"
-        Debug.Print , "vbaProj.Name = " & vbaProj.Name
-        Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print ">==> aeGetReferences >==>"
+        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Name = " & vbaProj.Name
+        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
         ' Display the versions of Access, ADO and DAO
-        Debug.Print , "Access version = " & Application.Version
-        Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
-        Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
-        Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
-        Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
-        Debug.Print , "<@_@>"
-        Debug.Print , "     " & "References:"
+        If aeDEBUG_PRINT Then Debug.Print , "Access version = " & Application.Version
+        If aeDEBUG_PRINT Then Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+        If aeDEBUG_PRINT Then Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+        If aeDEBUG_PRINT Then Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+        If aeDEBUG_PRINT Then Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
+        If aeDEBUG_PRINT Then Debug.Print , "<@_@>"
+        If aeDEBUG_PRINT Then Debug.Print , "     " & "References:"
     End If
 
         Print #1, ">==> The Project References >==>"
@@ -323,9 +320,11 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         ' Get the Description of Reference
         RefDesc = vbaProj.References(i).Description
 
-        If blnDebug Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
-        If blnDebug Then Debug.Print , , , vbaProj.References(i).FullPath
-        If blnDebug Then Debug.Print , , , vbaProj.References(i).GUID
+        If Not IsMissing(varDebug) Then
+            If aeDEBUG_PRINT Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+            If aeDEBUG_PRINT Then Debug.Print , , , vbaProj.References(i).FullPath
+            If aeDEBUG_PRINT Then Debug.Print , , , vbaProj.References(i).GUID
+        End If
 
         Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
         Print #1, , , , vbaProj.References(i).FullPath
@@ -334,12 +333,15 @@ Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
         If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
               blnRefBroken = True
-              If blnDebug Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
               Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
-    If blnDebug Then Debug.Print , "<*_*>"
-    If blnDebug Then Debug.Print "<==<"
+
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print , "<*_*>"
+        If aeDEBUG_PRINT Then Debug.Print "<==<"
+    End If
 
     Print #1, , "<*_*>"
     Print #1, "<==<"
@@ -353,8 +355,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass"
     aeGetReferences = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -400,7 +402,7 @@ Private Function FileLocked(strFileName As String) As Boolean
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_impClass"
         FileLocked = True
         Err.Clear
     End If
@@ -412,6 +414,7 @@ Private Function GetDescrip(obj As Object) As String
 End Function
 
 Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
+    On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
@@ -427,6 +430,7 @@ Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
 End Function
 
 Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
+    On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
@@ -440,6 +444,7 @@ Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
 End Function
 
 Private Function isFK(tdf As DAO.TableDef, strField As String) As Boolean
+    On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
@@ -463,8 +468,6 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
     Dim idx As DAO.Index
     Dim prop As DAO.Property
     Dim strFile As String
-    
-    Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -472,13 +475,11 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeDocumentRelations is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so blnDebug of aeDocumentRelations is set to False"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentRelations is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so blnDebug of aeDocumentRelations is set to True"
+        If aeDEBUG_PRINT Then Debug.Print , "NOW DEBUGGING..."
     End If
    
     If Dir$(strFile) <> vbNullString Then
@@ -502,7 +503,10 @@ Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
             Next fld
         End If
     Next rel
-    If blnDebug Then Debug.Print strDocument
+
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print strDocument
+    End If
     Print #1, strDocument
     
     aeDocumentRelations = True
@@ -517,8 +521,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass"
     aeDocumentRelations = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -549,7 +553,7 @@ PROC_ERR:
         Pause (0.25)
         Resume TryAgain
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_impClass"
     'GlobalErrHandler
     Resume PROC_EXIT
 
@@ -587,18 +591,18 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 70 'Unable to acquire exclusive lock
-            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
             IsFileLocked = True
         Case 9
-            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass" & _
+            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass" & _
                     vbCrLf & "IsFileLocked Entry PathFileName=" & PathFileName, vbCritical, "ERROR=9"
             IsFileLocked = False
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
             'GlobalErrHandler
             Resume PROC_EXIT
         Case Else
-            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
-            'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
+            'Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
             'GlobalErrHandler
             Resume PROC_EXIT
     End Select
@@ -629,7 +633,6 @@ Private Function BuildTheDirectory(fso As Object, _
 '=======================================================================
 
     Dim objImportFolder As Object
-    Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
@@ -637,40 +640,38 @@ Private Function BuildTheDirectory(fso As Object, _
 
     Debug.Print "BuildTheDirectory"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of BuildTheDirectory is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so blnDebug of BuildTheDirectory is set to False"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of BuildTheDirectory is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so blnDebug of BuildTheDirectory is set to True"
+        If aeDEBUG_PRINT Then Debug.Print , "NOW DEBUGGING..."
     End If
 
-    If blnDebug Then Debug.Print , ">==> BuildTheDirectory >==>"
+    If Not IsMissing(varDebug) Then Debug.Print , ">==> BuildTheDirectory >==>"
 
     ' Bail out if (a) the drive does not exist, or if (b) the directory already exists.
 
-    If blnDebug Then Debug.Print , , "THE_DRIVE = " & THE_DRIVE
-    If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & fso.DriveExists(THE_DRIVE)
+    If Not IsMissing(varDebug) Then Debug.Print , , "THE_DRIVE = " & THE_DRIVE
+    If Not IsMissing(varDebug) Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = " & fso.DriveExists(THE_DRIVE)
     If Not fso.DriveExists(THE_DRIVE) Then
-        If blnDebug Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
+        If Not IsMissing(varDebug) Then Debug.Print , , "FSO.DriveExists(THE_DRIVE) = FALSE - The drive DOES NOT EXIST !!!"
         BuildTheDirectory = False
         Exit Function
     End If
-    If blnDebug Then Debug.Print , , "The drive EXISTS !!!"
+    If Not IsMissing(varDebug) Then Debug.Print , , "The drive EXISTS !!!"
     
     If aegitImportFolder = "default" Then
         aestrImportLocation = aegitType.ImportFolder
     End If
         
-    If blnDebug Then Debug.Print , , "The import directory is: " & aestrImportLocation
+    If Not IsMissing(varDebug) Then Debug.Print , , "The import directory is: " & aestrImportLocation
    
     If fso.FolderExists(aestrImportLocation) Then
-        If blnDebug Then Debug.Print , , "FSO.FolderExists(aestrImportLocation) = TRUE - The directory EXISTS !!!"
+        If Not IsMissing(varDebug) Then Debug.Print , , "FSO.FolderExists(aestrImportLocation) = TRUE - The directory EXISTS !!!"
         BuildTheDirectory = False
         Exit Function
     End If
-    If blnDebug Then Debug.Print , , "The import directory does NOT EXIST !!!"
+    If Not IsMissing(varDebug) Then Debug.Print , , "The import directory does NOT EXIST !!!"
 
     BuildTheDirectory = True
 
@@ -680,8 +681,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass"
     BuildTheDirectory = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -712,25 +713,22 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     Dim strFileType As String
     Dim strFileBaseName As String
     Dim bln As Boolean
-    Dim blnDebug As Boolean
 
     ' Use a call stack and global error handler
     If gcfHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeReadDocDatabase"
 
-    Debug.Print "aeReadDocDatabase"
+    If aeDEBUG_PRINT Then Debug.Print "aeReadDocDatabase"
     If IsMissing(varDebug) Then
-        blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeReadDocDatabase is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so blnDebug of aeReadDocDatabase is set to False"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
     Else
-        blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeReadDocDatabase is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so blnDebug of aeReadDocDatabase is set to True"
+        If aeDEBUG_PRINT Then Debug.Print , "NOW DEBUGGING..."
     End If
 
     If Not blnImport Then
-        Debug.Print , "blnImport IS FALSE so exit aeReadDocDatabase"
+        If aeDEBUG_PRINT Then Debug.Print , "blnImport IS FALSE so exit aeReadDocDatabase"
         aeReadDocDatabase = False
         Exit Function
     End If
@@ -743,11 +741,11 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
         aestrImportLocation = aegitImportFolder
     End If
 
-    If blnDebug Then
-        Debug.Print ">==> aeReadDocDatabase >==>"
-        Debug.Print , "aegit VERSION: " & aegit_impVERSION
-        Debug.Print , "aegit VERSION_DATE: " & aegit_impVERSION_DATE
-        Debug.Print , "ImportFolder = " & aestrImportLocation
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print ">==> aeReadDocDatabase >==>"
+        If aeDEBUG_PRINT Then Debug.Print , "aegit VERSION: " & aegit_impVERSION
+        If aeDEBUG_PRINT Then Debug.Print , "aegit VERSION_DATE: " & aegit_impVERSION_DATE
+        If aeDEBUG_PRINT Then Debug.Print , "ImportFolder = " & aestrImportLocation
         'Stop
     End If
 
@@ -763,17 +761,17 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
         wsh.CurrentDirectory = aestrImportLocation
     End If
 
-    If blnDebug Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
+    If Not IsMissing(varDebug) Then Debug.Print , "wsh.CurrentDirectory = " & wsh.CurrentDirectory
     ' CurDir Function
-    If blnDebug Then Debug.Print , "CurDir = " & CurDir
+    If Not IsMissing(varDebug) Then Debug.Print , "CurDir = " & CurDir
 
     ' Create needed objects
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
 
-    If blnDebug Then
+    If Not IsMissing(varDebug) Then
         bln = BuildTheDirectory(fso, "WithDebugging")
-        Debug.Print , "<==<"
+        If aeDEBUG_PRINT Then Debug.Print , "<==<"
     Else
         bln = BuildTheDirectory(fso)
     End If
@@ -782,51 +780,51 @@ Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Va
     Set objFolder = fso.GetFolder(aestrImportLocation)
 
     For Each MyFile In objFolder.Files
-        If blnDebug Then Debug.Print "myFile = " & MyFile
-        If blnDebug Then Debug.Print "myFile.Name = " & MyFile.Name
+        If Not IsMissing(varDebug) Then Debug.Print "myFile = " & MyFile
+        If Not IsMissing(varDebug) Then Debug.Print "myFile.Name = " & MyFile.Name
         strFileBaseName = fso.GetBaseName(MyFile.Name)
         strFileType = fso.GetExtensionName(MyFile.Name)
-        If blnDebug Then Debug.Print strFileBaseName & " (" & strFileType & ")"
+        If Not IsMissing(varDebug) Then Debug.Print strFileBaseName & " (" & strFileType & ")"
 
         If (strFileType = "frm") Then
             If Exists("FORMS", strFileBaseName) Then
                 MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                If Not IsMissing(varDebug) Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
                 Application.LoadFromText acForm, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "rpt") Then
             If Exists("REPORTS", strFileBaseName) Then
                 MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                If Not IsMissing(varDebug) Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
                 Application.LoadFromText acReport, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "bas") Then
             If Exists("MODULES", strFileBaseName) Then
                 MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                If Not IsMissing(varDebug) Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
                 Application.LoadFromText acModule, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "mac") Then
             If Exists("MACROS", strFileBaseName) Then
                 MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                If Not IsMissing(varDebug) Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
                 Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
             End If
         ElseIf (strFileType = "qry") Then
             If Exists("QUERIES", strFileBaseName) Then
                 MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
-                If blnDebug Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
+                If Not IsMissing(varDebug) Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
                 Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
             End If
         End If
     Next
 
-    If blnDebug Then Debug.Print "<==<"
+    If Not IsMissing(varDebug) Then Debug.Print "<==<"
     
     aeReadDocDatabase = True
 
@@ -839,8 +837,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
-    If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass"
     aeReadDocDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -874,15 +872,15 @@ Private Function aeExists(strAccObjType As String, _
     Debug.Print "aeExists"
     If IsMissing(varDebug) Then
         blnDebug = False
-        Debug.Print , "varDebug IS missing so blnDebug of aeExists is set to False"
-        Debug.Print , "DEBUGGING IS OFF"
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so blnDebug of aeExists is set to False"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
     Else
         blnDebug = True
-        Debug.Print , "varDebug IS NOT missing so blnDebug of aeExists is set to True"
-        Debug.Print , "NOW DEBUGGING..."
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so blnDebug of aeExists is set to True"
+        If aeDEBUG_PRINT Then Debug.Print , "NOW DEBUGGING..."
     End If
 
-    If blnDebug Then Debug.Print ">==> aeExists >==>"
+    If Not IsMissing(varDebug) Then Debug.Print ">==> aeExists >==>"
 
     Select Case strAccObjType
         Case "Tables"
@@ -898,26 +896,26 @@ Private Function aeExists(strAccObjType As String, _
         Case "Modules"
             Set objType = CurrentProject.AllModules
         Case Else
-            MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegitClass"
-            If blnDebug Then
-                Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
-                Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
-                Debug.Print "<==<"
+            MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegit_impClass"
+            If Not IsMissing(varDebug) Then
+                If aeDEBUG_PRINT Then Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
+                If aeDEBUG_PRINT Then Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
+                If aeDEBUG_PRINT Then Debug.Print "<==<"
             End If
             aeExists = False
             Set obj = Nothing
             Exit Function
     End Select
 
-    If blnDebug Then Debug.Print , "strAccObjType = " & strAccObjType
-    If blnDebug Then Debug.Print , "strAccObjName = " & strAccObjName
+    If Not IsMissing(varDebug) Then Debug.Print , "strAccObjType = " & strAccObjType
+    If Not IsMissing(varDebug) Then Debug.Print , "strAccObjName = " & strAccObjName
 
     For Each obj In objType
-        If blnDebug Then Debug.Print , obj.Name, strAccObjName
+        If Not IsMissing(varDebug) Then Debug.Print , obj.Name, strAccObjName
         If obj.Name = strAccObjName Then
-            If blnDebug Then
-                Debug.Print , strAccObjName & " EXISTS!"
-                Debug.Print "<==<"
+            If Not IsMissing(varDebug) Then
+                If aeDEBUG_PRINT Then Debug.Print , strAccObjName & " EXISTS!"
+                If aeDEBUG_PRINT Then Debug.Print "<==<"
             End If
             aeExists = True
             Set obj = Nothing
@@ -926,9 +924,9 @@ Private Function aeExists(strAccObjType As String, _
             aeExists = False
         End If
     Next
-    If blnDebug And aeExists = False Then
-        Debug.Print , strAccObjName & " DOES NOT EXIST!"
-        Debug.Print "<==<"
+    If Not IsMissing(varDebug) And aeExists = False Then
+        If aeDEBUG_PRINT Then Debug.Print , strAccObjName & " DOES NOT EXIST!"
+        If aeDEBUG_PRINT Then Debug.Print "<==<"
     End If
 
 PROC_EXIT:
@@ -941,8 +939,8 @@ PROC_ERR:
         aeExists = False
         Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-        If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_impClass"
+        If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_impClass"
         aeExists = False
     End If
     GlobalErrHandler

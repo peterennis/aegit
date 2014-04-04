@@ -356,13 +356,13 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 9
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass" & _
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass" & _
                     vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
-            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
             'GlobalErrHandler
             Resume Next
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegitClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
             'GlobalErrHandler
             Resume Next
     End Select
@@ -726,13 +726,13 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2091 Then          ''...' is an invalid name.
-        If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegitClass"
+        If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass"
         Print #fle, "!" & Err.Description
         Err.Clear
     ElseIf Err = 3270 Then      'Property not found.
         Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -779,11 +779,11 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3251 Then
-        If aeDEBUG_PRINT Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegitClass"
+        If aeDEBUG_PRINT Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
         Print #fle, "!" & Err.Description, strPropName
         Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
         GlobalErrHandler
     End If
     Resume Next
@@ -809,7 +809,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegit_expClass"
     Resume PROC_EXIT
 
 End Function
@@ -836,7 +836,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegit_expClass"
     Resume PROC_EXIT
 End Sub
 
@@ -953,8 +953,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
     aeGetReferences = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -999,7 +999,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass"
     LongestTableName = 0
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1063,7 +1063,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegit_expClass"
     LongestFieldPropsName = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1158,7 +1158,7 @@ Private Function FileLocked(strFileName As String) As Boolean
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass"
         FileLocked = True
         Err.Clear
     End If
@@ -1267,8 +1267,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     TableInfo = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1314,7 +1314,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegit_expClass"
     LongestTableDescription = -1
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1504,8 +1504,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
     aeDocumentTables = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1588,8 +1588,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
     aeDocumentTablesXML = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1856,8 +1856,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
     aeDocumentRelations = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1911,7 +1911,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegit_expClass"
     OutputQueriesSqlText = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -1942,7 +1942,7 @@ PROC_ERR:
         Pause (0.25)
         Resume TryAgain
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass"
     'GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2083,8 +2083,8 @@ PROC_ERR:
             varPropValue = Null
             Resume Next
         Case Else
-            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
-            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegitClass"
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             OutputBuiltInPropertiesText = False
             GlobalErrHandler
             Resume PROC_EXIT
@@ -2124,18 +2124,18 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 70 'Unable to acquire exclusive lock
-            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             IsFileLocked = True
         Case 9
-            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass" & _
+            MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass" & _
                     vbCrLf & "IsFileLocked Entry PathFileName=" & PathFileName, vbCritical, "ERROR=9"
             IsFileLocked = False
-            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             'GlobalErrHandler
             Resume PROC_EXIT
         Case Else
-            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
-            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegitClass"
+            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             'GlobalErrHandler
             Resume PROC_EXIT
     End Select
@@ -2241,7 +2241,7 @@ PROC_ERR:
         Pause (0.25)
         Resume SaveAsText
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegit_expClass"
     DocumentTheContainer = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2300,13 +2300,13 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 70 Then    ' Permission denied
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass" _
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass" _
             & vbCrLf & vbCrLf & _
             "Manually delete the files from git, compact and repair database, then try again!", vbCritical, "STOP"
         Stop
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2519,8 +2519,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     aeDocumentTheDatabase = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2575,7 +2575,7 @@ Private Function aeExists(strAccObjType As String, _
         Case "Modules"
             Set objType = CurrentProject.AllModules
         Case Else
-            MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegitClass"
+            MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegit_expClass"
             If Not IsMissing(varDebug) Then
                 If aeDEBUG_PRINT Then Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
                 If aeDEBUG_PRINT Then Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
@@ -2618,8 +2618,8 @@ PROC_ERR:
         aeExists = False
         Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
-        If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegitClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass"
+        If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass"
         aeExists = False
     End If
     GlobalErrHandler
@@ -2759,7 +2759,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegitClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegit_expClass", vbCritical, "Error"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2822,7 +2822,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegitClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass", vbCritical, "Error"
     OutputListOfContainers = False
     GlobalErrHandler
     Resume PROC_EXIT
@@ -2853,8 +2853,8 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
-    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -2942,8 +2942,8 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
-    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -3025,8 +3025,8 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegitClass"
-    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -3086,8 +3086,8 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
-    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
     GlobalErrHandler
     Resume PROC_EXIT
 
@@ -3181,11 +3181,11 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 9
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegitClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
             GlobalErrHandler
             Resume Next
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegitClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
             GlobalErrHandler
             Resume Next
     End Select
@@ -3238,7 +3238,7 @@ PROC_ERR:
     If Err = 2950 Then ' Reserved Error
         Resume NextTdf
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegitClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass"
     'GlobalErrHandler
     Resume PROC_EXIT
 
