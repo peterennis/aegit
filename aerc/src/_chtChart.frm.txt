@@ -141,8 +141,8 @@ Begin Form
                     OleData = Begin
                     End
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD05]) AS [ABCom-SO_WCDF] FROM [_qr"
-                        "yChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
+                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD01]) AS [Sum_Of_FLD01] FROM [_qry"
+                        "Chart] GROUP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
                     Class ="MSGraph.Chart.8"
                     OLEClass ="Microsoft Graph Chart"
                     GUID = Begin
@@ -1872,14 +1872,17 @@ End Sub
 Private Sub Form_Load()
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=227612
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/0a34dbec-5078-4e16-b6a7-78f62c39f1bf/vba-navigation-pane?forum=accessdev
+'
+'SELECT (Format([EnterDate],"MMM 'YY")),Count(*) AS [Count] FROM [_tblChart] GROUP BY (Year([EnterDate])*12 + Month([EnterDate])-1),(Format([EnterDate],"MMM 'YY"));
+'SELECT (Format([EnterDate],"DDDDD")),Sum([FLD01]) AS [Sum_Of_FLD01] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],"DDDDD"));
 
     On Error GoTo PROC_ERR
-    
+
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
     Dim strNewAppTitle
     Set strNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
-    
+
     dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & gstrVERSION
     Application.RefreshTitleBar
 
@@ -1889,6 +1892,15 @@ Private Sub Form_Load()
     ' Hide the Navigation Pane
     'DoCmd.NavigateTo "acNavigationCategoryObjectType"
     'DoCmd.RunCommand acCmdWindowHide
+
+'    Dim objChart As Object
+'    Set objChart = Me.chtChart.Object
+'    Dim objAxis As Object
+'    Set objAxis = objChart.Axes(1)
+'    objChart.PlotOnX = 0
+'    ' Ref: http://msdn.microsoft.com/en-us/library/microsoft.office.interop.excel.axis.scaletype.aspx
+'    objAxis.ScaleType = xlScaleLinear
+'    'objAxis.ScaleType = xlScaleLogarithmic
 
     With Me.chtChart
         .HasTitle = True
@@ -1902,6 +1914,7 @@ Private Sub Form_Load()
     SetLabelsCaption
 
 PROC_EXIT:
+    dbs.Close
     Set dbs = Nothing
     Exit Sub
 

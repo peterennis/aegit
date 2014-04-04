@@ -263,3 +263,8 @@ Type: dbText
 Value: PngRibbon
 Inherited: False;
 ---
+Name: Property Sheet Label Width
+Type: dbLong
+Value: 2310
+Inherited: False;
+---

@@ -57,6 +57,13 @@ Public Const gblnTEST As Boolean = False
 
 
 '20140403 - v092 -
+    ' Research on #002 - Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/graphs-crashing-microsoft-office-2010-component/9196aa27-ee0f-426d-bb7f-5c6e8858f6de
+    ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2013_release-access/access-crashes-when-editing-pie-chart/c3178d1f-91a8-4dfd-98b3-86c5465546ec
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=245033
+    ' Ref: http://www.accessforums.net/queries/perplexing-scatter-chart-x-axis-problem-18287.html
+    ' NT Command Script and Documented Steps to Decompile / Compact / Compile an Access DB
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219948
+    '
 '20140402 - v091 - Run TM VB-Inspector => 1460 hints in 19 objects
     ' Verify then turn off "Forgotten command:'Stop'"
     ' Fix 'Select Case' without 'Case Else'
