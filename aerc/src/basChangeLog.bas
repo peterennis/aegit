@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "April 3, 2014"
-Public Const gstrVERSION As String = "0.9.2"
+Public Const gstrDATE As String = "April 4, 2014"
+Public Const gstrVERSION As String = "0.9.3"
 Public Const gstrProject As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -34,8 +34,12 @@ Public Const gblnTEST As Boolean = False
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 ' *** Ref: http://www.vb123.com/toolshed/02_accvb/remotequeries.htm - Remote Queries In Microsoft Access
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
+' *** Ref: http://blogs.office.com/2013/01/22/visualize-your-access-2013-web-app-data-in-excel/ - Visualize your Access 2013 web app data in Excel
+' Ref: http://blogs.office.com/2013/07/02/the-access-2013-runtime-now-available-for-download/
+' Easy test for db app with Access runtime without having to install the runtime - start Access with the runtime switch or better yet,
+' just rename your ACCDB file to an ACCDR. When you double click on the ACCDR file it will start the Access client in the runtime mode.
 '
-
+'
 '=============================================================================================================================
 ' Tasks:
 ' %007 -
@@ -51,11 +55,11 @@ Public Const gblnTEST As Boolean = False
 ' #005 -
 ' #004 -
 ' #003 -
-' #002 - v091 Crash on edit chart - run decompile and test
 ' #001 - Property Let TablesExportToXML(ByRef avarTables() As Variant) - FIX THIS!!! - Check ByRef
 '=============================================================================================================================
-
-
+'
+'
+'20140404 - v093 -
 '20140403 - v092 -
     ' Research on #002 - Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/graphs-crashing-microsoft-office-2010-component/9196aa27-ee0f-426d-bb7f-5c6e8858f6de
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2013_release-access/access-crashes-when-editing-pie-chart/c3178d1f-91a8-4dfd-98b3-86c5465546ec
@@ -78,6 +82,7 @@ Public Const gblnTEST As Boolean = False
     '   Note: I found that only doing step 8) the first time through results in a completely decompiled database.
     '   This is much smaller (in my case an FE DB compiled of 18MB reduces to 13MB completely decompiled) and also completely avoids the nasty "big bang upgrade"
     '   encountered when crossing the Windows 7 SP0 to Windows 7 SP 1 / Office 2010 SP0 to Office 2010 SP1 divide.
+    ' Fixed #002 - v091 Crash on edit chart - run decompile and test
 '20140402 - v091 - Run TM VB-Inspector => 1460 hints in 19 objects
     ' Verify then turn off "Forgotten command:'Stop'"
     ' Fix 'Select Case' without 'Case Else'
@@ -93,6 +98,7 @@ Public Const gblnTEST As Boolean = False
     ' Start to use aeDEBUG_PRINT throughout
     ' Fix pass through of varDebug in aeDocumentTheDatabase to aeExists
     ' ByVal vs ByRef - Ref: http://msdn.microsoft.com/en-us/library/ddck1z30.aspx - VBA default is ByVal
+    ' How to: Force an Argument to Be Passed by Value (Visual Basic) - Ref: http://msdn.microsoft.com/en-us/library/chy4288y.aspx
     ' add decompile shortcut, start to add ByVal, test #002, strXMLResDoc As Variant
 '20140324 - v090 - Add KPI chart test
     ' Show KPI chart as bar or pie with command button click

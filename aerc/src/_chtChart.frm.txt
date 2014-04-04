@@ -1893,15 +1893,6 @@ Private Sub Form_Load()
     'DoCmd.NavigateTo "acNavigationCategoryObjectType"
     'DoCmd.RunCommand acCmdWindowHide
 
-'    Dim objChart As Object
-'    Set objChart = Me.chtChart.Object
-'    Dim objAxis As Object
-'    Set objAxis = objChart.Axes(1)
-'    objChart.PlotOnX = 0
-'    ' Ref: http://msdn.microsoft.com/en-us/library/microsoft.office.interop.excel.axis.scaletype.aspx
-'    objAxis.ScaleType = xlScaleLinear
-'    'objAxis.ScaleType = xlScaleLogarithmic
-
     With Me.chtChart
         .HasTitle = True
         With .ChartTitle

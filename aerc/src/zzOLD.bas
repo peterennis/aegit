@@ -3,6 +3,15 @@ Option Explicit
 
 'VBA-Inspector:Ignore
 
+'    Dim objChart As Object
+'    Set objChart = Me.chtChart.Object
+'    Dim objAxis As Object
+'    Set objAxis = objChart.Axes(1)
+'    objChart.PlotOnX = 0
+'    ' Ref: http://msdn.microsoft.com/en-us/library/microsoft.office.interop.excel.axis.scaletype.aspx
+'    objAxis.ScaleType = xlScaleLinear
+'    'objAxis.ScaleType = xlScaleLogarithmic
+
 Public Const Desktop = &H10&
 Public Const MyDocuments = &H5&
 '
