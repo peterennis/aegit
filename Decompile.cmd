@@ -21,14 +21,12 @@ REM /* 12/27/2011 MDL        Updated to parse out the filesize and do the compar
 REM /* 07/03/2012 MDL        Update to make UserID independent                          */
 REM /* 01/21/2013 MDL        Pre request of April15Hater, updated to make safe for DB   */
 REM /*                       filenames containing space characters                      */
+REM /* 04/03/2014 PFE        Modified for aegit for testing #002                        */
 REM /************************************************************************************/
 
 REM Support for multiple database files within the one directory
 REM Simply unREM the correct LOC to decompile that database file
-SET DBfile=Fandango_FE_2007.accdb
-REM SET DBfile=JDEFandangoReplicate.accdb
-REM SET DBfile=SchemaIdeas.accdb
-SET DBfile=Schema Ideas.accdb
+SET DBfile=adaept revision control.accdb
 
 ECHO.
 ECHO This script will Decompile the %DBfile% database.
@@ -49,7 +47,7 @@ FOR /F "delims=" %%A IN (' dir  /a-d/b "%DBfile%" ') DO (
 )
 ECHO File Size pre-decompile:  %DBfilesizepre%
 
-"C:\Program Files\Microsoft Office\Office12\MSACCESS.EXE" /decompile "%DBfilefullyqualified%"
+"C:\Program Files\Microsoft Office\Office15\MSACCESS.EXE" /decompile "%DBfilefullyqualified%"
 
 FOR /F "delims=" %%A IN (' dir  /a-d/b "%DBfile%" ') DO (
   SET DBfilesizepost=%%~zA

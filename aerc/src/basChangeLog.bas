@@ -63,7 +63,21 @@ Public Const gblnTEST As Boolean = False
     ' Ref: http://www.accessforums.net/queries/perplexing-scatter-chart-x-axis-problem-18287.html
     ' NT Command Script and Documented Steps to Decompile / Compact / Compile an Access DB
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219948
-    '
+    '   Suggested Decompile Steps from Michael D Lueck, mlueck@lueckdatasystems.com
+    '   1) The database should be in the same directory on the C: drive as the decompile.cmd script attached. Update the script as necessary to make correct for your working environment.
+    '   2) Run the decompile.cmd script which will start Access, the database, and Access will decompile it.
+    '   3) Next close the database – not all of Access.
+    '   4) Then reopen the database. (Remember the shift key if you have an autoexec macro!)
+    '   5) Compact the database at this point (MS Office icon \ Manage \ Compact and Repair) (Remember the shift key if you have an autoexec macro!)
+    '   6) Press Ctrl+G to open the VBA window
+    '   7) Click the Debug menu \ Clear All Breakpoints
+    '   8) Click the Debug menu \ Compile - ONLY do this step the FIRST time!
+    '   9) Then Compact again as in Step 6 (Remember the shift key if you have an autoexec macro!)
+    '   10) Completely exit Access (Remember the shift key if you have an autoexec macro!)
+    '   When the before / after file size are finally the same, the decompile.cmd script will end.
+    '   Note: I found that only doing step 8) the first time through results in a completely decompiled database.
+    '   This is much smaller (in my case an FE DB compiled of 18MB reduces to 13MB completely decompiled) and also completely avoids the nasty "big bang upgrade"
+    '   encountered when crossing the Windows 7 SP0 to Windows 7 SP 1 / Office 2010 SP0 to Office 2010 SP1 divide.
 '20140402 - v091 - Run TM VB-Inspector => 1460 hints in 19 objects
     ' Verify then turn off "Forgotten command:'Stop'"
     ' Fix 'Select Case' without 'Case Else'
