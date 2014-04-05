@@ -21,13 +21,13 @@ Private ref As Reference
 ' oDbObjects.XMLFolder = THE_XML_FOLDER
 ' Run in immediate window: MYPROJECT_TEST
 '
-Public Function MYPROJECT_TEST()
+Public Function MYPROJECT_TEST() As Boolean
     On Error GoTo 0
     aegitClassTest
     'aegitClassTest varDebug:="Debugit"
 End Function
 
-Public Function IMPORT_TEST()
+Public Function IMPORT_TEST() As Boolean
     On Error GoTo 0
     'aegitClassImportTest
     aegitClassImportTest varDebug:="Debugit", varImpFldr:="C:\TEMP\imp"
@@ -54,7 +54,7 @@ PROC_ERR:
 
 End Sub
 
-Private Function PassFail(bln As Boolean) As String
+Private Function PassFail(ByVal bln As Boolean) As String
     On Error GoTo 0
     If bln Then
         PassFail = "Pass"
@@ -63,10 +63,10 @@ Private Function PassFail(bln As Boolean) As String
     End If
 End Function
 
-Public Function aegitClassTest(Optional varDebug As Variant, _
-                                Optional varSrcFldr As Variant, _
-                                Optional varXmlFldr As Variant, _
-                                Optional varXmlData As Variant) As Boolean
+Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
+                                Optional ByVal varSrcFldr As Variant, _
+                                Optional ByVal varXmlFldr As Variant, _
+                                Optional ByVal varXmlData As Variant) As Boolean
 
     On Error GoTo 0
     Dim oDbObjects As aegit_expClass
@@ -261,8 +261,8 @@ RESULTS:
 
 End Function
 
-Public Function aegitClassImportTest(Optional varDebug As Variant, _
-                                Optional varImpFldr As Variant) As Boolean
+Public Function aegitClassImportTest(Optional ByVal varDebug As Variant, _
+                                Optional ByVal varImpFldr As Variant) As Boolean
 ' Usage:
 ' Run in immediate window: aegitClassImportTest
 
@@ -318,7 +318,7 @@ Public Sub TestHideQueryDef()
 
 End Sub
 
-Public Function IsQryHidden(strQueryName As String) As Boolean
+Public Function IsQryHidden(ByVal strQueryName As String) As Boolean
     On Error GoTo 0
     IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
 End Function
@@ -370,8 +370,8 @@ Public Sub MakeTableWithListOfAllQueries()
 
 End Sub
 
-Public Function ExportTheTableData(strTbl As String, strSpec As String, _
-                    strPathFileName As String, blnHasHeaders As Boolean)
+Public Function ExportTheTableData(ByVal strTbl As String, ByVal strSpec As String, _
+                    ByVal strPathFileName As String, ByVal blnHasHeaders As Boolean) As Boolean
 ' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
 
     On Error GoTo 0
@@ -473,7 +473,7 @@ End Sub
 '        Loop
 '      End If
 '      if vartypename($attribute)="long" ; Number
-'        $GetExtFileProperties=$objFolder.GetDetailsOf($objFolder.ParseName(right($FQFN,len($FQFN)-instrrev($FQFN,"\"))),$attribute)
+'        $GetExtFileProperties=$objFolder.GetDetailsOf($objFolder.ParseName(Right$$FQFN,len($FQFN)-instrrev($FQFN,"\"))),$attribute)
 '      Else
 '        exit -1
 '      End If
@@ -790,9 +790,9 @@ End Sub
 ';297 Total bitrate               PDF Specification
 '
 
-Public Function GetFiles(strPath As String, _
-                dctDict As Object, _
-                Optional blnRecursive As Boolean) As Boolean
+Public Function GetFiles(ByVal strPath As String, _
+                ByVal dctDict As Object, _
+                Optional ByVal blnRecursive As Boolean) As Boolean
 'Function GetFiles(strPath As String, _
                 dctDict As Dictionary, _
                 Optional blnRecursive As Boolean) As Boolean
@@ -889,4 +889,5 @@ Public Sub TestGetFiles()
             Debug.Print varItem
         Next
     End If
+
 End Sub

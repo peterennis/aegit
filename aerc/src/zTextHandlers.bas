@@ -104,7 +104,7 @@ Public Function ExportToText(strTableName As String, strFileName As String, Opti
 
     Open strFileName For Output As #1
     For nCurrent = 0 To nFieldCount - 1
-        If Right(rs.Fields(nCurrent).Name, 1) = "_" Then
+        If Right$(rs.Fields(nCurrent).Name, 1) = "_" Then
             Print #1, Left$(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim;
         Else
             Print #1, rs.Fields(nCurrent).Name & strDelim;
@@ -197,7 +197,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     UnicodeStream.Open
 
     For nCurrent = 0 To nFieldCount - 1
-        If Right(rs.Fields(nCurrent).Name, 1) = "_" Then
+        If Right$(rs.Fields(nCurrent).Name, 1) = "_" Then
             UnicodeStream.writetext Left$(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim
         Else
             UnicodeStream.writetext rs.Fields(nCurrent).Name & strDelim
@@ -341,7 +341,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
 
     nTotalBytes = nTotalBytes + Len(strTest) + 2 ' +2 for vbCrLf--This line prevents div by zero later...
     strTest = Trim$(strTest)
-    If Right(strTest, 1) = strDelim Then
+    If Right$(strTest, 1) = strDelim Then
         strTest = Left$(strTest, Len(strTest) - 1)
     End If
     strHeadersIn = Split(Trim$(strTest), strDelim)
@@ -352,7 +352,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
         strTest = Replace(Replace(strTest, " ", vbNullString), ".", vbNullString)
         strTest = Replace(Replace(strTest, " ", vbNullString), ".", vbNullString)
         If Len(Trim$(strTest)) = 0 Then
-            strHeaders(nHeaders) = "HEADER" & Right("000" & nHeaders, 3)
+            strHeaders(nHeaders) = "HEADER" & Right$("000" & nHeaders, 3)
         Else
             strHeaders(nHeaders) = Trim$(strTest)
         End If
@@ -370,7 +370,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
     Do While Not EOF(1) And nRecords < nReadAhead ' Read through the file and get the maximum sizes for fields in advance.
         Line Input #1, strTest
         strTest = Trim$(strTest)
-        If Right(strTest, 1) = strDelim Then
+        If Right$(strTest, 1) = strDelim Then
             strTest = Left$(strTest, Len(strTest) - 1)
         End If
         If isSAP And Left$(strTest, 20) = "--------------------" Then
@@ -429,7 +429,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
             End If
             nTotalBytes = nTotalBytes + Len(strTest) + 2 'vbCrLf
             strTest = Trim$(strTest)
-            If Right(strTest, 1) = strDelim Then
+            If Right$(strTest, 1) = strDelim Then
                 strTest = Left$(strTest, Len(strTest) - 1)
             End If
             If isSAP And Left$(strTest, 20) = "--------------------" Then

@@ -140,6 +140,8 @@ Private Function GetEdition2000(ByRef strSku As String) As String
             GetEdition2000 = "VP PUB with LVP OEM"
         Case "4F"
             GetEdition2000 = "Access 2000 SR-1 Run-Time Minimum"
+        Case Else
+            MsgBox "Error: GetEdition2000"
     End Select
 End Function
  
@@ -222,6 +224,8 @@ Private Function GetEdition2002(ByRef strSku As String) As String
             GetEdition2002 = "Microsoft Office Visio Professional 2003"
         Case "54"
             GetEdition2002 = "Microsoft Office Visio Standard 2003"
+        Case Else
+            MsgBox "Error: GetEdition2002"
     End Select
 End Function
  
@@ -322,6 +326,8 @@ Private Function GetEdition2003(ByRef strSku As String) As String
             GetEdition2003 = "Microsoft Office Visio for Enterprise Architects 2003"
         Case "5E"
             GetEdition2003 = "Microsoft Office Visio 2003 Multilingual User Interface Pack"
+        Case Else
+            MsgBox "Error: GetEdition2003"
     End Select
 End Function
  
@@ -418,6 +424,8 @@ Private Function GetEdition2007(ByRef strSku As String) As String
             GetEdition2007 = "Windows SharePoint Services Developer Resources 1.2"
         Case "0010"
             GetEdition2007 = "SKU - Microsoft Software Update for Web Folders (English) 12"
+        Case Else
+            MsgBox "Error: GetEdition2007"
     End Select
 End Function
  
@@ -478,6 +486,8 @@ Private Function GetEdition2010(ByRef strSku As String) As String
             GetEdition2010 = "Microsoft Office SharePoint Server 2010"
         Case "110F"
             GetEdition2010 = "Microsoft Project Server 2010"
+        Case Else
+            MsgBox "Error: GetEdition2010"
     End Select
 End Function
  
@@ -535,5 +545,7 @@ Private Function GetEdition2013(ByRef strSku As String) As String
             GetEdition2013 = "Microsoft Project Server 2013"
         Case "012B"
             GetEdition2013 = "Microsoft Lync 2013"
+        Case Else
+            MsgBox "Error: GetEdition2013"
     End Select
 End Function

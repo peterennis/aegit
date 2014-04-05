@@ -7,7 +7,7 @@ Public Sub TestExportToExcel()
     bln = ExportToExcel("aeItems", "C:\TEMP\Exported_aeItems.xls")
 End Sub
 
-Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As String = "Sheet1") As Boolean
+Public Function ExportToExcel(ByVal strTableName, ByVal strFileName, Optional ByVal strTabName As String = "Sheet1") As Boolean
 ' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
 ' Ref: http://www.granite.ab.ca/access/latebinding.htm
 
@@ -138,7 +138,7 @@ Public Function ExportToExcel(strTableName, strFileName, Optional strTabName As 
 
 End Function
 
-Private Function IsNumeric(strCheck As String) As Boolean
+Private Function IsNumeric(ByVal strCheck As String) As Boolean
 
     On Error GoTo 0
     Dim nCurrent As Long
@@ -154,7 +154,7 @@ Private Function IsNumeric(strCheck As String) As Boolean
 
 End Function
 
-Private Function FindExcelCell(nX As Long, nY As Long) As String
+Private Function FindExcelCell(ByVal nX As Long, ByVal nY As Long) As String
 
     On Error GoTo 0
     Dim nPower1 As Long

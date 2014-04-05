@@ -790,7 +790,7 @@ PROC_ERR:
 
 End Sub
 
-Private Function Pause(ByVal NumberOfSeconds As Variant)
+Private Function Pause(ByVal NumberOfSeconds As Variant) As Boolean
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?p=952355
 
     On Error GoTo PROC_ERR

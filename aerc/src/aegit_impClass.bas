@@ -96,9 +96,9 @@ Public Property Let ImportFolder(ByVal strImportFolder As String)
     aegitImportFolder = strImportFolder
 End Property
 
-Public Property Get Exists(strAccObjType As String, _
-                        strAccObjName As String, _
-                        Optional DebugTheCode As Variant) As Boolean
+Public Property Get Exists(ByVal strAccObjType As String, _
+                        ByVal strAccObjName As String, _
+                        Optional ByVal DebugTheCode As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get Exists"
@@ -113,7 +113,7 @@ Public Property Get Exists(strAccObjType As String, _
     End If
 End Property
 
-Public Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Variant) As Boolean
+Public Property Get ReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal DebugTheCode As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get ReadDocDatabase"
@@ -128,7 +128,7 @@ Public Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode 
     End If
 End Property
 
-Public Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
+Public Property Get GetReferences(Optional ByVal DebugTheCode As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get GetReferences"
@@ -143,7 +143,7 @@ Public Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
     End If
 End Property
 
-Public Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
+Public Property Get DocumentRelations(Optional ByVal DebugTheCode As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get DocumentRelations"
@@ -158,7 +158,7 @@ Public Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boole
     End If
 End Property
 
-Public Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
+Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
 
     On Error GoTo 0
@@ -198,7 +198,7 @@ Public Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolea
     
 End Property
 
-Private Function Pause(NumberOfSeconds As Variant)
+Private Function Pause(ByVal NumberOfSeconds As Variant) As Boolean
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?p=952355
 
     On Error GoTo PROC_ERR
@@ -222,7 +222,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub WaitSeconds(intSeconds As Integer)
+Private Sub WaitSeconds(ByVal intSeconds As Integer)
 ' Comments: Waits for a specified number of seconds
 ' Params  : intSeconds      Number of seconds to wait
 ' Source  : Total Visual SourceBook
@@ -248,7 +248,7 @@ PROC_ERR:
     Resume PROC_EXIT
 End Sub
 
-Private Function aeGetReferences(Optional varDebug As Variant) As Boolean
+Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
 ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
 ' Ref: http://www.cpearson.com/excel/missingreferences.aspx
@@ -372,7 +372,7 @@ PROC_ERR:
 
 End Function
 
-Private Function GetLinkedTableCurrentPath(MyLinkedTable As String) As String
+Private Function GetLinkedTableCurrentPath(ByVal MyLinkedTable As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
 '=========================================================================
 ' Procedure : GetLinkedTableCurrentPath
@@ -400,7 +400,7 @@ PROC_ERR:
     Resume PROC_EXIT
 End Function
 
-Private Function FileLocked(strFileName As String) As Boolean
+Private Function FileLocked(ByVal strFileName As String) As Boolean
 ' Ref: http://support.microsoft.com/kb/209189
     On Error Resume Next
     ' If the file is already opened by another process,
@@ -417,12 +417,12 @@ Private Function FileLocked(strFileName As String) As Boolean
     End If
 End Function
 
-Private Function GetDescrip(obj As Object) As String
+Private Function GetDescrip(ByVal obj As Object) As String
     On Error Resume Next
     GetDescrip = obj.Properties("Description")
 End Function
 
-Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
+Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
@@ -438,7 +438,7 @@ Private Function isPK(tdf As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
+Private Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
@@ -452,7 +452,7 @@ Private Function isIndex(tdf As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function isFK(tdf As DAO.TableDef, strField As String) As Boolean
+Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
@@ -468,7 +468,7 @@ Private Function isFK(tdf As DAO.TableDef, strField As String) As Boolean
     Next idx
 End Function
 
-Private Function aeDocumentRelations(Optional varDebug As Variant) As Boolean
+Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
   
     Dim strDocument As String
@@ -538,7 +538,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub KillProperly(Killfile As String)
+Private Sub KillProperly(ByVal Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
     ' Use a call stack and global error handler
@@ -568,7 +568,7 @@ PROC_ERR:
 
 End Sub
 
-Private Function IsFileLocked(PathFileName As String) As Boolean
+Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
 
     'Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
@@ -619,14 +619,14 @@ PROC_ERR:
 
 End Function
 
-Private Function FolderExists(strPath As String) As Boolean
+Private Function FolderExists(ByVal strPath As String) As Boolean
 ' Ref: http://allenbrowne.com/func-11.html
     On Error Resume Next
     FolderExists = ((GetAttr(strPath) And vbDirectory) = vbDirectory)
 End Function
 
-Private Function BuildTheDirectory(fso As Object, _
-                                        Optional varDebug As Variant) As Boolean
+Private Function BuildTheDirectory(ByVal fso As Object, _
+                                        Optional ByVal varDebug As Variant) As Boolean
 'Private Function BuildTheDirectory(FSO As Scripting.FileSystemObject, _
                                         Optional varDebug As Variant) As Boolean
 '*** Requires reference to "Microsoft Scripting Runtime"
@@ -698,7 +698,7 @@ PROC_ERR:
 
 End Function
 
-Private Function aeReadDocDatabase(blnImport As Boolean, Optional varDebug As Variant) As Boolean
+Private Function aeReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal varDebug As Variant) As Boolean
 ' VBScript makes use of ADOX (Microsoft's Active Data Objects Extensions for Data Definition Language and Security)
 ' to create a query on a Microsoft Access database
 ' Ref: http://stackoverflow.com/questions/859530/alternative-to-application-loadfromtext-for-ms-access-queries
@@ -854,8 +854,8 @@ PROC_ERR:
 
 End Function
 
-Private Function aeExists(strAccObjType As String, _
-                        strAccObjName As String, Optional varDebug As Variant) As Boolean
+Private Function aeExists(ByVal strAccObjType As String, _
+                        ByVal strAccObjName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://vbabuff.blogspot.com/2010/03/does-access-object-exists.html
 '
 '=======================================================================
@@ -957,7 +957,7 @@ PROC_ERR:
 
 End Function
 
-Private Function GetType(Value As Long) As String
+Private Function GetType(ByVal Value As Long) As String
 ' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
 
     On Error GoTo 0
@@ -975,7 +975,7 @@ Private Function GetType(Value As Long) As String
 
 End Function
 
-Private Function fListGUID(strTableName As String) As String
+Private Function fListGUID(ByVal strTableName As String) As String
 ' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
 ' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
@@ -1063,7 +1063,7 @@ Private Function CurrentProcName() As String
     CurrentProcName = mastrCallStack(mintStackPointer - 1)
 End Function
 
-Private Sub PushCallStack(strProcName As String)
+Private Sub PushCallStack(ByVal strProcName As String)
 ' Add the current procedure name to the Call Stack.
 ' Should be called whenever a procedure is called
 
@@ -1106,8 +1106,8 @@ Private Sub PopCallStack()
     mintStackPointer = mintStackPointer - 1
 End Sub
 
-Private Sub WriteErrorToFile(intTheErl As Integer, lngTheErrorNum As Long, _
-                strCurrentProcName As String, strErrorDescription As String)
+Private Sub WriteErrorToFile(ByVal intTheErl As Integer, ByVal lngTheErrorNum As Long, _
+                ByVal strCurrentProcName As String, ByVal strErrorDescription As String)
     
     Dim strFilePath As String
     Dim lngFileNum As Long
@@ -1124,7 +1124,7 @@ Private Sub WriteErrorToFile(intTheErl As Integer, lngTheErrorNum As Long, _
 
 End Sub
 
-Private Sub WriteStringToFile(lngFileNum As Long, strTheString As String, strTheAbsoluteFileName As String)
+Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, ByVal strTheAbsoluteFileName As String)
   
     On Error Resume Next
 

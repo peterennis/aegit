@@ -1069,7 +1069,7 @@ Private Sub SetChartTitle(strTitle As String)
     End With
 End Sub
 
-Private Function GetMainTitle()
+Private Function GetMainTitle() As Boolean
     On Error GoTo 0
     GetMainTitle = "KPI-01 " & Me.txtMonth & " " & Me.txtYear
 End Function
@@ -1103,7 +1103,7 @@ Private Function GetRowSource(strChart As String, strKPI As String) As String
                 "FLD07 AS " & """" & strFLD07 & """" & " FROM [_qryKPI" & strKPI & "];"
     GetRowSource = strQry
     Debug.Print "GetRowSource=" & strQry
-    'Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
+    Debug.Print strChart & " ChartType=" & Me.chtKPI01.ChartType
     'Me.chtChart.ChartType = 51
 End Function
 
