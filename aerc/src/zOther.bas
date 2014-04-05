@@ -3,7 +3,7 @@ Option Explicit
 
 #Const conLateBinding = 0
 
-Public Function FileDelete(strFileName As String) As Boolean
+Public Function FileDelete(ByVal strFileName As String) As Boolean
     On Error GoTo 0
     If Len(Dir$(strFileName)) > 0 Then
         Kill strFileName
@@ -16,7 +16,7 @@ Public Sub TestGetSQLServerData()
     bln = GetSQLServerData(".\SQLEXPRESS", "AdventureWorks2012")
 End Sub
 
-Public Function GetSQLServerData(strServer As String, strDatabase As String) As Boolean
+Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As String) As Boolean
 ' Ref: http://www.saplsmw.com/node/11
 ' Ref: http://www.eileenslounge.com/viewtopic.php?f=29&t=5886
 ' Ref: *** http://social.msdn.microsoft.com/Forums/office/en-US/00c3f331-15e6-44f2-9e6f-abede3a986d8/sql-server-data-connectivity-best-practices-for-ms-access-vba ***

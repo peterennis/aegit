@@ -7,7 +7,7 @@ Public Sub TestExportToExcel()
     bln = ExportToExcel("aeItems", "C:\TEMP\Exported_aeItems.xls")
 End Sub
 
-Public Function ExportToExcel(ByVal strTableName, ByVal strFileName, Optional ByVal strTabName As String = "Sheet1") As Boolean
+Public Function ExportToExcel(ByVal strTableName, ByVal strFileName As String, Optional ByVal strTabName As String = "Sheet1") As Boolean
 ' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
 ' Ref: http://www.granite.ab.ca/access/latebinding.htm
 

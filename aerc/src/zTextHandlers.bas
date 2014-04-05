@@ -7,7 +7,7 @@ Option Explicit
 
 'Note a dependency on ADODB plug-in in earlier Access versions.
 
-Public Function RemoveTableDuplicates(strTableName As String) As Boolean
+Public Function RemoveTableDuplicates(ByVal strTableName As String) As Boolean
 
     On Error GoTo 0
     Dim rs As DAO.Recordset
@@ -65,7 +65,7 @@ Public Function RemoveTableDuplicates(strTableName As String) As Boolean
 
 End Function
 
-Public Function ExportToText(strTableName As String, strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
+Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
 ' This function ONLY exports to Tab-delimited text files with the headers and without text idenitifiers (No quotes!)
     
     On Error GoTo 0
@@ -154,7 +154,7 @@ Public Sub TestExportToTextUnicode()
     bln = ExportToTextUnicode("Items", "C:\Temp\ExportedItemsUnicode.txt")
 End Sub
 
-Public Function ExportToTextUnicode(strTableName As String, strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
+Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
 ' Written by Jimbo at SAPLSMW.com
 ' Special thanks: accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 
@@ -246,7 +246,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
 
 End Function
 
-Public Function ImportFromAccess(strSourceFile As String, strSourceTable As String, strTargetTable As String, Optional ByVal isAppend As Boolean = True) As Boolean
+Public Function ImportFromAccess(ByVal strSourceFile As String, ByVal strSourceTable As String, ByVal strTargetTable As String, Optional ByVal isAppend As Boolean = True) As Boolean
 
     On Error GoTo 0
     Dim nCurrent As Long
@@ -294,7 +294,7 @@ Public Function ImportFromAccess(strSourceFile As String, strSourceTable As Stri
 
 End Function
 
-Public Function ImportFromText(strTableName As String, strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
+Public Function ImportFromText(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
 ' This function should be used only for importing extraordinarily large text files.
 ' Files of normal length should be imported using the Access import utility.
   
@@ -455,7 +455,7 @@ Public Function ImportFromText(strTableName As String, strFileName As String, Op
 
 End Function
 
-Public Function CreateTable(strTableName As String, strFields() As String, nSizes() As Long) As Boolean
+Public Function CreateTable(ByVal strTableName As String, ByRef strFields() As String, ByRef nSizes() As Long) As Boolean
 
     Dim nCounter As Long
     Dim dbs As DAO.Database
@@ -501,7 +501,7 @@ ErrorHandler:
 
 End Function
 
-Public Function TableScrub(strTableName As String) As Long
+Public Function TableScrub(ByVal strTableName As String) As Long
 ' This function removes leading spaces and trailing spaces from every string field in a table.
 
     On Error GoTo 0
@@ -560,7 +560,7 @@ Public Function TableScrub(strTableName As String) As Long
 
 End Function
 
-Public Function FixCase(strText) As String
+Public Function FixCase(ByVal strText) As String
 ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
     On Error GoTo 0
     strText = Trim$(strText & vbNullString)
@@ -573,7 +573,7 @@ Public Function FixCase(strText) As String
     FixCase = strText
 End Function
 
-Public Function Deduplicate(strValue As String) As Boolean
+Public Function Deduplicate(ByVal strValue As String) As Boolean
     On Error GoTo 0
     Static sValue As String
     If strValue = sValue Then
@@ -584,7 +584,7 @@ Public Function Deduplicate(strValue As String) As Boolean
     End If
 End Function
 
-Public Function Increment(oValue As String) As Long
+Public Function Increment(ByVal oValue As String) As Long
 ' This function returns an incremented number each time it's called.  Resets after 2 seconds.
     On Error GoTo 0
     Static nIncrement As Long
@@ -601,7 +601,7 @@ Public Function Increment(oValue As String) As Long
     Increment = nIncrement
 End Function
 
-Public Function DeleteRecords(strTableName As String) As Boolean
+Public Function DeleteRecords(ByVal strTableName As String) As Boolean
 ' Delete all records from a table--easier than creating a delete query.
     On Error GoTo 0
     CurrentDb.Execute ("DELETE * FROM " & strTableName)

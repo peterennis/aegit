@@ -1074,7 +1074,7 @@ Private Function GetMainTitle() As Boolean
     GetMainTitle = "KPI-01 " & Me.txtMonth & " " & Me.txtYear
 End Function
 
-Private Function GetRowSource(strChart As String, strKPI As String) As String
+Private Function GetRowSource(ByVal strChart As String, ByVal strKPI As String) As String
     On Error GoTo 0
     Dim strQry As String
     Me.chtKPI01.RowSourceType = "Table/Query"

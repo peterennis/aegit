@@ -868,6 +868,7 @@ End Function
 Public Sub TestGetFiles()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164475(v=office.10).aspx
 
+    On Error GoTo 0
     #If FSORef = 0 Then  ' Late binding
         Dim dctDict As Object
         ' Create new dictionary

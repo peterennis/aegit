@@ -217,7 +217,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegit_impClass", vbCritical, aeAPP_NAME
     Resume PROC_EXIT
 
 End Function
@@ -244,7 +244,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegit_impClass", vbCritical, aeAPP_NAME
     Resume PROC_EXIT
 End Sub
 
@@ -364,7 +364,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass"
     aeGetReferences = False
     GlobalErrHandler
@@ -411,7 +411,7 @@ Private Function FileLocked(ByVal strFileName As String) As Boolean
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_impClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_impClass", vbCritical, aeAPP_NAME
         FileLocked = True
         Err.Clear
     End If
@@ -530,7 +530,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass"
     aeDocumentRelations = False
     GlobalErrHandler
@@ -562,7 +562,7 @@ PROC_ERR:
         Pause (0.25)
         Resume TryAgain
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_impClass", vbCritical, aeAPP_NAME
     'GlobalErrHandler
     Resume PROC_EXIT
 
@@ -600,7 +600,7 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 70 'Unable to acquire exclusive lock
-            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
+            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass", vbCritical, aeAPP_NAME
             IsFileLocked = True
         Case 9
             MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass" & _
@@ -610,7 +610,7 @@ PROC_ERR:
             'GlobalErrHandler
             Resume PROC_EXIT
         Case Else
-            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
+            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass", vbCritical, aeAPP_NAME
             'Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
             'GlobalErrHandler
             Resume PROC_EXIT
@@ -690,7 +690,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass"
     BuildTheDirectory = False
     GlobalErrHandler
@@ -764,7 +764,7 @@ Private Function aeReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal va
 
     If Not FolderExists(aestrImportLocation) Then
         MsgBox "The Import folder does not exist!" & vbCrLf & _
-            "aestrImportLocation=" & aestrImportLocation, vbCritical, "aegit"
+            "aestrImportLocation=" & aestrImportLocation, vbCritical, aeAPP_NAME
         Stop
     Else
         wsh.CurrentDirectory = aestrImportLocation
@@ -846,7 +846,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass"
     aeReadDocDatabase = False
     GlobalErrHandler
@@ -948,7 +948,7 @@ PROC_ERR:
         aeExists = False
         Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_impClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_impClass", vbCritical, aeAPP_NAME
         If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_impClass"
         aeExists = False
     End If

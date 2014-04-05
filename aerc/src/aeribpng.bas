@@ -37,7 +37,7 @@ Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As
     RefIID As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
 '================================================================================
 
-Public Sub GetRibbonImage(ctl As Object, image As Variant)        'IRibbonControl)
+Public Sub GetRibbonImage(ByVal ctl As Object, ByVal image As Variant)        'IRibbonControl)
     On Error GoTo 0
     Dim Path As String
     Path = Application.CurrentProject.Path & "\Icons\" & ctl.Tag

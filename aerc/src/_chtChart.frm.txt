@@ -1575,7 +1575,7 @@ Private Sub SetChartTitle(strTitle As String)
     End With
 End Sub
 
-Private Function GetRowSource(strChart As String) As String
+Private Function GetRowSource(ByVal strChart As String) As String
     On Error GoTo 0
     Dim strQry As String
     Me.chtChart.RowSourceType = "Table/Query"
@@ -1880,8 +1880,8 @@ Private Sub Form_Load()
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
-    Dim strNewAppTitle
-    Set strNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
+    Dim objNewAppTitle As Object
+    Set objNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
 
     dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & gstrVERSION
     Application.RefreshTitleBar
