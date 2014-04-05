@@ -61,6 +61,7 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
+    On Error GoTo 0
     ' provide default values
     aegitImportFolder = "default"
     aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
@@ -78,6 +79,7 @@ Private Sub Class_Terminate()
 '''         ' The file exists
 '''         If Not FileLocked(strFile) Then KillProperly (strFile)
 '''     End If
+    On Error GoTo 0
     If aeDEBUG_PRINT Then Debug.Print
     If aeDEBUG_PRINT Then Debug.Print "Class_Terminate"
     If aeDEBUG_PRINT Then Debug.Print , "aegit_imp VERSION: " & aegit_impVERSION
@@ -85,16 +87,19 @@ Private Sub Class_Terminate()
 End Sub
 
 Public Property Get ImportFolder() As String
+    On Error GoTo 0
     ImportFolder = aegitImportFolder
 End Property
 
 Public Property Let ImportFolder(ByVal strImportFolder As String)
+    On Error GoTo 0
     aegitImportFolder = strImportFolder
 End Property
 
 Public Property Get Exists(strAccObjType As String, _
                         strAccObjName As String, _
                         Optional DebugTheCode As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get Exists"
         If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeExists"
@@ -109,6 +114,7 @@ Public Property Get Exists(strAccObjType As String, _
 End Property
 
 Public Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get ReadDocDatabase"
         If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeReadDocDatabase"
@@ -123,6 +129,7 @@ Public Property Get ReadDocDatabase(blnImport As Boolean, Optional DebugTheCode 
 End Property
 
 Public Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get GetReferences"
         If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeGetReferences"
@@ -137,6 +144,7 @@ Public Property Get GetReferences(Optional DebugTheCode As Variant) As Boolean
 End Property
 
 Public Property Get DocumentRelations(Optional DebugTheCode As Variant) As Boolean
+    On Error GoTo 0
     If IsMissing(DebugTheCode) Then
         If aeDEBUG_PRINT Then Debug.Print "Get DocumentRelations"
         If aeDEBUG_PRINT Then Debug.Print , "DebugTheCode IS missing so no parameter is passed to aeDocumentRelations"
@@ -153,6 +161,7 @@ End Property
 Public Property Get CompactAndRepair(Optional varTrueFalse As Variant) As Boolean
 ' Automation for Compact and Repair
 
+    On Error GoTo 0
     Dim blnRun As Boolean
 
     Debug.Print "CompactAndRepair"
@@ -951,6 +960,7 @@ End Function
 Private Function GetType(Value As Long) As String
 ' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
 
+    On Error GoTo 0
     Select Case Value
         Case acCheckBox
             GetType = "CheckBox"
@@ -969,6 +979,7 @@ Private Function fListGUID(strTableName As String) As String
 ' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
 ' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
+    On Error GoTo 0
     Dim i As Integer
     Dim arrGUID8() As Byte
     Dim strArrGUID8(8) As String
