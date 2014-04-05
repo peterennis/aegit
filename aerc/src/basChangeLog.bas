@@ -10,24 +10,9 @@ Public Const gblnTEST As Boolean = False
 ' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
 '
-' Problems:
-' Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
-' Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
-' How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
+' Research:
 ' Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
-' Rewrite UTF-16 files to standard text as optional
-' Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
-' Create Let property for setting aegitExportDataToXML
-' Check if ViewAppProperties includes anything new
-' Modify ObjectCounts to provide more details and export results for development tracking, charting
-' Fix table output field description to max of each table
-' Document custom tabs - adaept sample tab displayed, but no output indication
-' ReadDocDatabase debug output when custom test folder given
-' Import of class source code into a new database creates a module
-' http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
-' http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
-' http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated
-'   This has useful information about using tdf.attributes
+' Ref: http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated - This has useful information about using tdf.attributes
 '
 ' Guides:
 ' Office VBA Basic Debugging Techniques
@@ -46,20 +31,30 @@ Public Const gblnTEST As Boolean = False
 ' %006 -
 ' %005 -
 ' %004 -
-' %003 -
-' %002 -
+' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
+' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #007 -
-' #006 -
-' #005 -
-' #004 -
-' #003 -
+' #016 -
+' #015 -
+' #014 - ReadDocDatabase debug output when custom test folder given
+' #013 - Import of class source code into a new database creates a module
+' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
+' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
+' #010 - Check if ViewAppProperties includes anything new
+' #009 - Create Let property for setting aegitExportDataToXML
+' #008 - Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
+' #007 - Fix table output field description to max of each table
+' #006 - Rewrite UTF-16 files to standard text as optional
+' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
+' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
+' #003 - Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
 ' #001 - Property Let TablesExportToXML(ByRef avarTables() As Variant) - FIX THIS!!! - Check ByRef
 '=============================================================================================================================
 '
 '
-'20140404 - v093 - Use aegit_expClass, aegit_impClass,
+'20140404 - v093 - Use aegit_expClass, aegit_impClass, aeDEBUG_PRINT
+    ' Reorganize changelog tasks, issues, research
 '20140403 - v092 -
     ' Research on #002 - Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/graphs-crashing-microsoft-office-2010-component/9196aa27-ee0f-426d-bb7f-5c6e8858f6de
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2013_release-access/access-crashes-when-editing-pie-chart/c3178d1f-91a8-4dfd-98b3-86c5465546ec
