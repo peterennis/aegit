@@ -47,7 +47,7 @@ Public Sub TestRegKey()
 
 End Sub
 
-Public Function RegKeyExists(strRegKey As String) As Boolean
+Public Function RegKeyExists(ByVal strRegKey As String) As Boolean
 ' Return True if the registry key i_RegKey was found and False if not
 ' Ref: http://vba-corner.livejournal.com/3054.html
 

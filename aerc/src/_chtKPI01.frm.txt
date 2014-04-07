@@ -1059,7 +1059,7 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
-Private Sub SetChartTitle(strTitle As String)
+Private Sub SetChartTitle(ByVal strTitle As String)
     On Error GoTo 0
     With Me.chtKPI01
         .HasTitle = True

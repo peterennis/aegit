@@ -72,7 +72,7 @@ Private Function ConvertToIPicture(ByVal hPic As Long) As IPicture
     Dim IID_IDispatch As GUID
     Dim IPic As IPicture
 
-    Const PICTYPE_BITMAP = 1
+    Const PICTYPE_BITMAP As Integer = 1
 
     With IID_IDispatch
         .Data1 = &H7BF80980

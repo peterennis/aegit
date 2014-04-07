@@ -7,7 +7,7 @@ Public Sub TestExportToExcel()
     bln = ExportToExcel("aeItems", "C:\TEMP\Exported_aeItems.xls")
 End Sub
 
-Public Function ExportToExcel(ByVal strTableName, ByVal strFileName As String, Optional ByVal strTabName As String = "Sheet1") As Boolean
+Public Function ExportToExcel(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strTabName As String = "Sheet1") As Boolean
 ' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
 ' Ref: http://www.granite.ab.ca/access/latebinding.htm
 
@@ -100,7 +100,11 @@ Public Function ExportToExcel(ByVal strTableName, ByVal strFileName As String, O
         strTest = vbNullString
         'Check for blank lines--no need to export those!
         For nCurrent = 0 To nFieldCount - 1
-            strTest = strTest & IIf(IsNull(rst.Fields), vbNullString, rst.Fields(nCurrent).Value)
+            If IsNull(rst.Fields) Then
+                strTest = strTest & vbNullString
+            Else
+                strTest = strTest & rst.Fields(nCurrent).Value
+            End If
         Next
         If Len(Trim$(strTest)) > 0 Then
             For nCurrent = 0 To nFieldCount - 1

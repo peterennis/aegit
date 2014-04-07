@@ -69,7 +69,7 @@ Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As 
 ' This function ONLY exports to Tab-delimited text files with the headers and without text idenitifiers (No quotes!)
     
     On Error GoTo 0
-    Dim rs As DAO.Recordset
+    Dim rst As DAO.Recordset
     Dim strSQL As String
     Dim nCurrent As Long
     Dim nFieldCount As Long
@@ -90,24 +90,24 @@ Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As 
         nCurrent = nCurrent + 1
     Loop
     
-    Set rs = CurrentDb.OpenRecordset(strSQL)
-    nFieldCount = rs.Fields.Count
+    Set rst = CurrentDb.OpenRecordset(strSQL)
+    nFieldCount = rst.Fields.Count
     
-    If Not rs.EOF Then
+    If Not rst.EOF Then
         ' Now find the *actual* record count--returns a value of 1 record if we don't do these moves.
-        rs.MoveLast
-        rs.MoveFirst
+        rst.MoveLast
+        rst.MoveFirst
     End If
-    nRecordCount = rs.RecordCount
+    nRecordCount = rst.RecordCount
 
     RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to " & strFileName & ". . .", nRecordCount)
 
     Open strFileName For Output As #1
     For nCurrent = 0 To nFieldCount - 1
-        If Right$(rs.Fields(nCurrent).Name, 1) = "_" Then
-            Print #1, Left$(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim;
+        If Right$(rst.Fields(nCurrent).Name, 1) = "_" Then
+            Print #1, Left$(rst.Fields(nCurrent).Name, Len(rst.Fields(nCurrent).Name) - 1) & strDelim;
         Else
-            Print #1, rs.Fields(nCurrent).Name & strDelim;
+            Print #1, rst.Fields(nCurrent).Name & strDelim;
         End If
     Next
     Print #1, vbNullString        ' New line.
@@ -115,21 +115,25 @@ Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As 
     Do While nCurSec = Second(Now())
     Loop
     nCurSec = Second(Now())
-    Do While Not rs.EOF
+    Do While Not rst.EOF
         nCurRec = nCurRec + 1
-        If Second(Now()) <> nCurSec And nCurRec <> rs.RecordCount Then
+        If Second(Now()) <> nCurSec And nCurRec <> rst.RecordCount Then
             nCurSec = Second(Now())
             RetVal = SysCmd(acSysCmdUpdateMeter, nCurRec)
             RetVal = DoEvents()
         End If
         strTest = vbNullString
         For nCurrent = 0 To nFieldCount - 1  'Check for blank lines--no need to export those!
-            strTest = strTest & IIf(IsNull(rs.Fields), vbNullString, rs.Fields(nCurrent))
+            If IsNull(rst.Fields) Then
+                strTest = strTest & vbNullString
+            Else
+                strTest = strTest & rst.Fields(nCurrent).Value
+            End If
         Next
         If Len(Trim$(strTest)) > 0 Then  'Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
-                If Not IsNull(rs.Fields(nCurrent).Value) Then
-                    Print #1, Trim$(rs.Fields(nCurrent));
+                If Not IsNull(rst.Fields(nCurrent).Value) Then
+                    Print #1, Trim$(rst.Fields(nCurrent));
                 End If
                 If nCurrent < nFieldCount - 1 Then
                     Print #1, strDelim;
@@ -138,11 +142,11 @@ Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As 
                 End If
             Next
         End If
-        rs.MoveNext
+        rst.MoveNext
     Loop
     Close #1
-    rs.Close
-    Set rs = Nothing
+    rst.Close
+    Set rst = Nothing
     ExportToText = True
     RetVal = SysCmd(acSysCmdRemoveMeter)
 
@@ -159,7 +163,7 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
 ' Special thanks: accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 
     On Error GoTo 0
-    Dim rs As DAO.Recordset
+    Dim rst As DAO.Recordset
     Dim strSQL As String
     Dim nCurrent As Long
     Dim nFieldCount As Long
@@ -179,16 +183,16 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
         End If
         nCurrent = nCurrent + 1
     Loop
-    Set rs = CurrentDb.OpenRecordset(strSQL)
-    nFieldCount = rs.Fields.Count
+    Set rst = CurrentDb.OpenRecordset(strSQL)
+    nFieldCount = rst.Fields.Count
 
-    If Not rs.EOF Then
+    If Not rst.EOF Then
         ' Now find the *actual* record count--returns a value of 1 record if we don't do these moves.
-        rs.MoveLast
-        rs.MoveFirst
+        rst.MoveLast
+        rst.MoveFirst
     End If
 
-    nRecordCount = rs.RecordCount
+    nRecordCount = rst.RecordCount
     RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to " & strFileName & ". . .", nRecordCount)
     'Create a binary stream
     Dim UnicodeStream As Object
@@ -197,31 +201,35 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
     UnicodeStream.Open
 
     For nCurrent = 0 To nFieldCount - 1
-        If Right$(rs.Fields(nCurrent).Name, 1) = "_" Then
-            UnicodeStream.writetext Left$(rs.Fields(nCurrent).Name, Len(rs.Fields(nCurrent).Name) - 1) & strDelim
+        If Right$(rst.Fields(nCurrent).Name, 1) = "_" Then
+            UnicodeStream.writetext Left$(rst.Fields(nCurrent).Name, Len(rst.Fields(nCurrent).Name) - 1) & strDelim
         Else
-            UnicodeStream.writetext rs.Fields(nCurrent).Name & strDelim
+            UnicodeStream.writetext rst.Fields(nCurrent).Name & strDelim
         End If
     Next
 
     UnicodeStream.writetext vbCrLf
     nCurSec = Second(Now())
 
-    Do While Not rs.EOF
+    Do While Not rst.EOF
         nCurRec = nCurRec + 1
-        If Second(Now()) <> nCurSec And nCurRec <> rs.RecordCount Then
+        If Second(Now()) <> nCurSec And nCurRec <> rst.RecordCount Then
             nCurSec = Second(Now())
             RetVal = SysCmd(acSysCmdUpdateMeter, nCurRec)
             RetVal = DoEvents()
         End If
         strTest = vbNullString
         For nCurrent = 0 To nFieldCount - 1  ' Check for blank lines--no need to export those!
-            strTest = strTest & IIf(IsNull(rs.Fields), vbNullString, rs.Fields(nCurrent))
+            If IsNull(rst.Fields) Then
+                strTest = strTest & vbNullString
+            Else
+                strTest = strTest & rst.Fields(nCurrent).Value
+            End If
         Next
         If Len(Trim$(strTest)) > 0 Then  ' Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
-                If Not IsNull(rs.Fields(nCurrent).Value) Then
-                    UnicodeStream.writetext Trim$(rs.Fields(nCurrent).Value)
+                If Not IsNull(rst.Fields(nCurrent).Value) Then
+                    UnicodeStream.writetext Trim$(rst.Fields(nCurrent).Value)
                 End If
                 If nCurrent = (nFieldCount - 1) Then
                     UnicodeStream.writetext vbCrLf 'new line.
@@ -230,7 +238,7 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
                 End If
             Next
         End If
-        rs.MoveNext
+        rst.MoveNext
     Loop
 
     ' Check to ensure that the file doesn't already exist.
@@ -239,14 +247,15 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
     End If
     UnicodeStream.SaveToFile strFileName
     UnicodeStream.Close
-    rs.Close
-    Set rs = Nothing
+    rst.Close
+    Set rst = Nothing
     ExportToTextUnicode = True
     RetVal = SysCmd(acSysCmdRemoveMeter)
 
 End Function
 
-Public Function ImportFromAccess(ByVal strSourceFile As String, ByVal strSourceTable As String, ByVal strTargetTable As String, Optional ByVal isAppend As Boolean = True) As Boolean
+Public Function ImportFromAccess(ByVal strSourceFile As String, ByVal strSourceTable As String, _
+                                    ByVal strTargetTable As String) As Boolean
 
     On Error GoTo 0
     Dim nCurrent As Long
@@ -560,7 +569,7 @@ Public Function TableScrub(ByVal strTableName As String) As Long
 
 End Function
 
-Public Function FixCase(ByVal strText) As String
+Public Function FixCase(ByVal strText As String) As String
 ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
     On Error GoTo 0
     strText = Trim$(strText & vbNullString)
@@ -582,23 +591,6 @@ Public Function Deduplicate(ByVal strValue As String) As Boolean
         Deduplicate = False
         sValue = strValue
     End If
-End Function
-
-Public Function Increment(ByVal oValue As String) As Long
-' This function returns an incremented number each time it's called.  Resets after 2 seconds.
-    On Error GoTo 0
-    Static nIncrement As Long
-    'Now we put in a reset based on time!
-    Static nLastSecond As Long
-    Dim nNowSecond As Long
-    nNowSecond = 3600 * Hour(Now) + 60 * Minute(Now) + Second(Now)
-    If Math.Abs(nNowSecond - nLastSecond) < 2 Then
-        nIncrement = nIncrement + 1
-    Else
-        nIncrement = 1
-    End If
-    nLastSecond = nNowSecond
-    Increment = nIncrement
 End Function
 
 Public Function DeleteRecords(ByVal strTableName As String) As Boolean

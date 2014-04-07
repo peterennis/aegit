@@ -527,3 +527,20 @@ Public Sub SaveTableMacros()
     PrettyXML "C:\Temp\aeItems.xml"
 
 End Sub
+
+Public Function Increment(ByVal oValue As String) As Long
+' This function returns an incremented number each time it's called.  Resets after 2 seconds.
+    On Error GoTo 0
+    Static nIncrement As Long
+    'Now we put in a reset based on time!
+    Static nLastSecond As Long
+    Dim nNowSecond As Long
+    nNowSecond = 3600 * Hour(Now) + 60 * Minute(Now) + Second(Now)
+    If Math.Abs(nNowSecond - nLastSecond) < 2 Then
+        nIncrement = nIncrement + 1
+    Else
+        nIncrement = 1
+    End If
+    nLastSecond = nNowSecond
+    Increment = nIncrement
+End Function

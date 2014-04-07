@@ -163,7 +163,7 @@ Public Property Let TablesExportToXML(ByRef avarTables() As Variant)
     On Error GoTo 0
     MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    'aegitDataXML = avarTables
+    aegitDataXML = avarTables
 End Property
 
 Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean

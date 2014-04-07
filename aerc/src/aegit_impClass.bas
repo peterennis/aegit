@@ -50,7 +50,7 @@ Private mastrCallStack() As String
 Private Const mcintIncrementStackSize As Integer = 10
 Private mfInErrorHandler As Boolean
 
-Private aegitSetup As Boolean
+'''x Private aegitSetup As Boolean
 Private aegitType As mySetupType
 Private aegitImportFolder As String
 Private aestrImportLocation As String
@@ -1030,6 +1030,7 @@ End Sub
 Private Sub GlobalErrHandler()
 ' Main procedure to handle errors that occur.
 
+    On Error GoTo 0
     Dim strError As String
     Dim lngError As Long
     Dim intErl As Integer
@@ -1060,6 +1061,7 @@ Private Sub GlobalErrHandler()
 End Sub
 
 Private Function CurrentProcName() As String
+    On Error GoTo 0
     CurrentProcName = mastrCallStack(mintStackPointer - 1)
 End Function
 
@@ -1090,6 +1092,7 @@ Private Sub PushCallStack(ByVal strProcName As String)
 End Sub
 
 Private Sub ErrorHandlerInit()
+    On Error GoTo 0
     mfInErrorHandler = False
     mintStackPointer = 1
     ReDim mastrCallStack(1 To mcintIncrementStackSize)
@@ -1098,6 +1101,7 @@ End Sub
 Private Sub PopCallStack()
 ' Remove a procedure name from the call stack
 
+    On Error GoTo 0
     If mintStackPointer <= UBound(mastrCallStack) Then
         mastrCallStack(mintStackPointer) = vbNullString
     End If
