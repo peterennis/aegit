@@ -1554,17 +1554,6 @@ Option Explicit
 ' ThreeDPie     3D Pie        xl3DPie             -4102       xl3DPie         -4102
 '
 
-'''x Private Const Bar As Integer = 57
-'''x Private Const StackedBar As Integer = 58
-'''x Private Const Line As Integer = 4
-'''x Private Const ThreeDLine As Integer = -4101
-'''x Private Const Area As Integer = 76
-'''x Private Const ThreeDArea As Integer = 78
-'''x Private Const Column As Integer = 51
-'''x Private Const ThreeDColumn As Integer = -4100
-'''x Private Const Pie As Integer = 5
-'''x Private Const ThreeDPie As Integer = -4102
-
 Private Enum GraphType
     Bar = 57
     StackedBar = 2

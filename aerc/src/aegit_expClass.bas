@@ -96,6 +96,10 @@ Private Sub Class_Initialize()
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
     On Error GoTo 0
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb()
+    dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & gstrVERSION
+    Application.RefreshTitleBar
     ' provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitXMLFolder = "default"

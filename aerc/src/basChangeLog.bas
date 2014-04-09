@@ -60,7 +60,7 @@ Public Const gblnTEST As Boolean = False
     ' The solution does not work  due to HOSTENT type, test with overloading is a possibility, too much work
     ' Wontfix - #015 - Declare statement does not support parameters of type As Any - Ref: http://msdn.microsoft.com/en-us/library/wccc9bx3(v=vs.71).aspx
     ' Table field types missing, Ref: http://allenbrowne.com/ser-49.html
-    '
+    ' Update app title bar with version when export is run
 '20140404 - v093 - Use aegit_expClass, aegit_impClass, aeDEBUG_PRINT
     ' Reorganize changelog tasks, issues, research, use Right$
     ' Use chart enum
