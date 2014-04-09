@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "April 4, 2014"
-Public Const gstrVERSION As String = "0.9.3"
+Public Const gstrDATE As String = "April 7, 2014"
+Public Const gstrVERSION As String = "0.9.4"
 Public Const gstrProject As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
