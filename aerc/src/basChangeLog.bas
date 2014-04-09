@@ -35,8 +35,11 @@ Public Const gblnTEST As Boolean = False
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #016 -
-' #015 -
+' #020 -
+' #019 -
+' #018 -
+' #017 -
+' #016 - Unknown field type message 104 x1, 101 x3 for aetrak test in OutputTheSchemaFile
 ' #014 - ReadDocDatabase debug output when custom test folder given
 ' #013 - Import of class source code into a new database creates a module
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
@@ -44,18 +47,25 @@ Public Const gblnTEST As Boolean = False
 ' #010 - Check if ViewAppProperties includes anything new
 ' #009 - Create Let property for setting aegitExportDataToXML
 ' #008 - Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
-' #007 - Fix table output field description to max of each table
 ' #006 - Rewrite UTF-16 files to standard text as optional
 ' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 ' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
-' #003 - Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
 ' #001 - Property Let TablesExportToXML(ByRef avarTables() As Variant) - FIX THIS!!! - Check ByRef
 '=============================================================================================================================
 '
 '
+'20140407 - v094 -
+    ' Ref: http://www.vbmigration.com/whitepapers/apicalls.aspx
+    ' Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByVal destAddress As Long, ByVal destAddress As Long, ByVal numBytes As Long)
+    ' The solution does not work  due to HOSTENT type, test with overloading is a possibility, too much work
+    ' Wontfix - #015 - Declare statement does not support parameters of type As Any - Ref: http://msdn.microsoft.com/en-us/library/wccc9bx3(v=vs.71).aspx
+    ' Table field types missing, Ref: http://allenbrowne.com/ser-49.html
+    '
 '20140404 - v093 - Use aegit_expClass, aegit_impClass, aeDEBUG_PRINT
     ' Reorganize changelog tasks, issues, research, use Right$
     ' Use chart enum
+    ' Fixed #003 - Changing The Microsoft Access Graph Type - Ref: http://www.vb123.com.au/toolbox/99_graphs/msgraph1.htm
+    ' Verified fixed in an earlier version #007 - Fix table output field description to max of each table
 '20140403 - v092 -
     ' Research on #002 - Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/graphs-crashing-microsoft-office-2010-component/9196aa27-ee0f-426d-bb7f-5c6e8858f6de
     ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2013_release-access/access-crashes-when-editing-pie-chart/c3178d1f-91a8-4dfd-98b3-86c5465546ec
@@ -72,7 +82,7 @@ Public Const gblnTEST As Boolean = False
     '   6) Press Ctrl+G to open the VBA window
     '   7) Click the Debug menu \ Clear All Breakpoints
     '   8) Click the Debug menu \ Compile - ONLY do this step the FIRST time!
-    '   9) Then Compact again as in Step 6 (Remember the shift key if you have an autoexec macro!)
+    '   9) Then Compact again as in Step 5 (Remember the shift key if you have an autoexec macro!)
     '   10) Completely exit Access (Remember the shift key if you have an autoexec macro!)
     '   When the before / after file size are finally the same, the decompile.cmd script will end.
     '   Note: I found that only doing step 8) the first time through results in a completely decompiled database.

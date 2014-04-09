@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "0.9.3"
-Private Const aegit_expVERSION_DATE As String = "April 4, 2014"
+Private Const aegit_expVERSION As String = "0.9.4"
+Private Const aegit_expVERSION_DATE As String = "April 7, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const gcfHandleErrors As Boolean = True
@@ -1641,44 +1641,69 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
 
                 strFlds = strFlds & ",[" & fld.Name & "] "
 
+'        'Constants for complex types don't work prior to Access 2007 and later.
+
                 Select Case fld.Type
                     Case dbText
-                        'No look-up fields
+                        ' No look-up fields
                         strFlds = strFlds & "Text (" & fld.Size & ")"
-                    Case dbLong
-                        If (fld.Attributes And dbAutoIncrField) = 0& Then
-                            strFlds = strFlds & "Long"
-                        Else
-                            strFlds = strFlds & "Counter"
-                        End If
-                    Case dbBoolean
-                        strFlds = strFlds & "YesNo"
-                    Case dbByte
-                        strFlds = strFlds & "Byte"
-                    Case dbInteger
-                        strFlds = strFlds & "Integer"
-                    Case dbCurrency
-                        strFlds = strFlds & "Currency"
-                    Case dbSingle
-                        strFlds = strFlds & "Single"
-                    Case dbDouble
-                        strFlds = strFlds & "Double"
-                    Case dbDate
-                        strFlds = strFlds & "DateTime"
-                    Case dbBinary
-                        strFlds = strFlds & "Binary"
-                    Case dbLongBinary
-                        strFlds = strFlds & "OLE Object"
+                    Case 109&                                   'dbComplexText
+                        strFlds = strFlds & "Text (" & fld.Size & ")"
                     Case dbMemo
                         If (fld.Attributes And dbHyperlinkField) = 0& Then
                             strFlds = strFlds & "Memo"
                         Else
                             strFlds = strFlds & "Hyperlink"
                         End If
+                    Case dbByte
+                        strFlds = strFlds & "Byte"
+                    Case 102&                                   'dbComplexByte
+                        strFlds = strFlds & "Complex Byte"
+                    Case dbInteger
+                        strFlds = strFlds & "Integer"
+                    Case 103&                                   'dbComplexInteger
+                        strFlds = strFlds & "Complex Integer"
+                    Case dbLong
+                        If (fld.Attributes And dbAutoIncrField) = 0& Then
+                            strFlds = strFlds & "Long"
+                        Else
+                            strFlds = strFlds & "Counter"
+                        End If
+                    Case 104&                                   'dbComplexLong
+                        strFlds = strFlds & "Complex Long"
+                    Case dbSingle
+                        strFlds = strFlds & "Single"
+                    Case 105&                                   'dbComplexSingle
+                        strFlds = strFlds & "Complex Single"
+                    Case dbDouble
+                        strFlds = strFlds & "Double"
+                    Case 106&                                   'dbComplexDouble
+                        strFlds = strFlds & "Complex Double"
                     Case dbGUID
                         strFlds = strFlds & "GUID"
+                        '''x strFlds = strFlds & "Replica"
+                    Case 107&                                   'dbComplexGUID
+                        strFlds = strFlds & "Complex GUID"
+                    Case dbDecimal
+                        strFlds = strFlds & "Decimal"
+                    Case 108&                                   'dbComplexDecimal
+                        strFlds = strFlds & "Complex Decimal"
+                    Case dbDate
+                        strFlds = strFlds & "DateTime"
+                    Case dbCurrency
+                        strFlds = strFlds & "Currency"
+                    Case dbBoolean
+                        strFlds = strFlds & "YesNo"
+                    Case dbLongBinary
+                        strFlds = strFlds & "OLE Object"
+                    Case 101&                                   'dbAttachment
+                        strFlds = strFlds & "Attachment"
+                    Case dbBinary
+                        strFlds = strFlds & "Binary"
                     Case Else
-                        MsgBox "Unknown fld.Type", vbCritical, aeAPP_NAME
+                        MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, aeAPP_NAME
+                        If aeDEBUG_PRINT Then Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
+                                "tdf.Name=" & tdf.Name & " strFlds=" & strFlds
                 End Select
 
             Next
