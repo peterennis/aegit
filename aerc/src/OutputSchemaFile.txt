@@ -5,10 +5,10 @@ On Error GoTo ErrorTrap
 
 'Local Table
 
-strSQL="CREATE TABLE [_tblChart] ([ID] Long,[VersionApp] Text (255),[VersionData] Text (255),[EnterDate] DateTime,[FLD01] Long,[FLD02] Long,[FLD03] Long,[FLD04] Long,[FLD05] Long,[FLD06] Long,[FLD07] Long,[FLD08] Long,[FLD09] Long,[FLD10] Long,[FLD11] Long,[FLD12] Long,[FLD13] Long,[FLD14] Long,[FLD15] Long,[FLD16] Long,[FLD17] Long,[FLD18] Long,[FLD19] Long,[FLD20] Long,[FLD21] Long,[FLD22] Long,[FLD23] Long,[FLD24] Long,[FLD25] Long,[FLD26] Long,[FLD27] Long,[FLD28] Long,[FLD29] Long,[FLD30] Long,[FLD31] Long,[FLD32] Long,[FLD33] Long,[FLD34] Long,[FLD35] Long,[FLD36] Long )"
+strSQL="CREATE TABLE [_tblChart] ([ID] Long,[VersionApp] Text (255),[VersionData] Text (255),[EnterDate] DateTime,[FLD01] Long,[FLD02] Long,[FLD03] Long,[FLD04] Long,[FLD05] Long,[FLD06] Long,[FLD07] Long,[FLD08] Long,[FLD09] Long,[FLD10] Long,[FLD11] Long,[FLD12] Long,[FLD13] Long,[FLD14] Long,[FLD15] Long,[FLD16] Long,[FLD17] Long,[FLD18] Long,[FLD19] Long,[FLD20] Long,[FLD21] Long,[FLD22] Long,[FLD23] Long,[FLD24] Long,[FLD25] Long,[FLD26] Long,[FLD27] Long,[FLD28] Long,[FLD29] Long,[FLD30] Long,[FLD31] Long,[FLD32] Long,[FLD33] Long,[FLD34] Long,[FLD35] Long,[FLD36] Long,[FLD37] Long,[FLD38] Long,[FLD39] Long,[FLD40] Long,[FLD41] Long,[FLD42] Long,[FLD43] Long,[FLD44] Long,[FLD45] Long,[FLD46] Long,[FLD47] Long,[FLD48] Long,[FLD49] Long,[FLD50] Long,[FLD51] Long,[FLD52] Long,[FLD53] Long,[FLD54] Long,[FLD55] Long,[FLD56] Long,[FLD57] Long,[FLD58] Long,[FLD59] Long,[FLD60] Long,[FLD61] Long,[FLD62] Long,[FLD63] Long,[FLD64] Long,[FLD65] Long,[FLD66] Long,[FLD67] Long,[FLD68] Long,[FLD69] Long,[FLD70] Long )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblChart] ([FLD36])  WITH PRIMARY DISALLOW NULL "
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblChart] ([FLD70])  WITH PRIMARY DISALLOW NULL "
 Currentdb.Execute strSQL
 
 'Local Table

@@ -39,6 +39,40 @@ _tblChart
               FLD34          109          TextBox
               FLD35          109          TextBox
               FLD36          109          TextBox
+              FLD37          109          TextBox
+              FLD38          109          TextBox
+              FLD39          109          TextBox
+              FLD40          109          TextBox
+              FLD41          109          TextBox
+              FLD42          109          TextBox
+              FLD43          109          TextBox
+              FLD44          109          TextBox
+              FLD45          109          TextBox
+              FLD46          109          TextBox
+              FLD47          109          TextBox
+              FLD48          109          TextBox
+              FLD49          109          TextBox
+              FLD50          109          TextBox
+              FLD51          109          TextBox
+              FLD52          109          TextBox
+              FLD53          109          TextBox
+              FLD54          109          TextBox
+              FLD55          109          TextBox
+              FLD56          109          TextBox
+              FLD57          109          TextBox
+              FLD58          109          TextBox
+              FLD59          109          TextBox
+              FLD60          109          TextBox
+              FLD61          109          TextBox
+              FLD62          109          TextBox
+              FLD63          109          TextBox
+              FLD64          109          TextBox
+              FLD65          109          TextBox
+              FLD66          109          TextBox
+              FLD67          109          TextBox
+              FLD68          109          TextBox
+              FLD69          109          TextBox
+              FLD70          109          TextBox
 _tlkpChart
               ID             109          TextBox
               ChartNum       109          TextBox
@@ -72,9 +106,9 @@ USysRibbons
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 61
+Count of Text box  = 95
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 65
-Count of All Fields = 65
+Count of Display Controls = 99
+Count of All Fields = 99

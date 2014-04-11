@@ -43,6 +43,40 @@ FLD33                Long Integer    4
 FLD34                Long Integer    4                  
 FLD35                Long Integer    4                  
 FLD36                Long Integer    4                  
+FLD37                Long Integer    4                  
+FLD38                Long Integer    4                  
+FLD39                Long Integer    4                  
+FLD40                Long Integer    4                  
+FLD41                Long Integer    4                  
+FLD42                Long Integer    4                  
+FLD43                Long Integer    4                  
+FLD44                Long Integer    4                  
+FLD45                Long Integer    4                  
+FLD46                Long Integer    4                  
+FLD47                Long Integer    4                  
+FLD48                Long Integer    4                  
+FLD49                Long Integer    4                  
+FLD50                Long Integer    4                  
+FLD51                Long Integer    4                  
+FLD52                Long Integer    4                  
+FLD53                Long Integer    4                  
+FLD54                Long Integer    4                  
+FLD55                Long Integer    4                  
+FLD56                Long Integer    4                  
+FLD57                Long Integer    4                  
+FLD58                Long Integer    4                  
+FLD59                Long Integer    4                  
+FLD60                Long Integer    4                  
+FLD61                Long Integer    4                  
+FLD62                Long Integer    4                  
+FLD63                Long Integer    4                  
+FLD64                Long Integer    4                  
+FLD65                Long Integer    4                  
+FLD66                Long Integer    4                  
+FLD67                Long Integer    4                  
+FLD68                Long Integer    4                  
+FLD69                Long Integer    4                  
+FLD70                Long Integer    4                  
 
 
 -----------------

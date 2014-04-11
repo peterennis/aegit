@@ -1,0 +1,197 @@
+Version =20
+VersionRequired =20
+PublishOption =1
+Begin Form
+    RecordSelectors = NotDefault
+    MaxButton = NotDefault
+    MinButton = NotDefault
+    NavigationButtons = NotDefault
+    DividingLines = NotDefault
+    AllowDesignChanges = NotDefault
+    DefaultView =0
+    PictureAlignment =2
+    DatasheetGridlinesBehavior =3
+    GridX =24
+    GridY =24
+    Width =24495
+    DatasheetFontHeight =11
+    ItemSuffix =81
+    Right =24255
+    Bottom =11505
+    DatasheetGridlinesColor =14806254
+    RecSrcDt = Begin
+        0xe51f90fed85ee440
+    End
+    GUID = Begin
+        0x164b1cec23f94e4d835a695b03014a31
+    End
+    Caption ="Charts"
+    DatasheetFontName ="Calibri"
+    PrtMip = Begin
+    End
+    PrtDevMode = Begin
+    End
+    PrtDevNames = Begin
+    End
+    AllowDatasheetView =0
+    FilterOnLoad =0
+    ShowPageMargins =0
+    DisplayOnSharePointSite =1
+    DatasheetAlternateBackColor =15921906
+    DatasheetGridlinesColor12 =0
+    FitToScreen =1
+    DatasheetBackThemeColorIndex =1
+    BorderThemeColorIndex =3
+    ThemeFontIndex =1
+    ForeThemeColorIndex =0
+    AlternateBackThemeColorIndex =1
+    AlternateBackShade =95.0
+    PrtDevModeW = Begin
+    End
+    PrtDevNamesW = Begin
+    End
+    NoSaveCTIWhenDisabled =1
+    Begin
+        Begin Label
+            BackStyle =0
+            FontSize =11
+            FontName ="Calibri"
+            ThemeFontIndex =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =0
+            BorderTint =50.0
+            ForeThemeColorIndex =0
+            ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin CommandButton
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderColor =16777215
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+        End
+        Begin TextBox
+            AddColon = NotDefault
+            FELineBreak = NotDefault
+            BorderLineStyle =0
+            LabelX =-1800
+            FontSize =11
+            FontName ="Calibri"
+            AsianLineBreak =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ThemeFontIndex =1
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Subform
+            BorderLineStyle =0
+            BorderThemeColorIndex =1
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            BorderShade =65.0
+            ShowPageHeaderAndPageFooter =1
+        End
+        Begin Chart
+            SpecialEffect =2
+            OldBorderStyle =1
+            ThemeFontIndex =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ForeThemeColorIndex =2
+            ForeShade =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin Section
+            CanGrow = NotDefault
+            Height =11520
+            Name ="Detail"
+            GUID = Begin
+                0xa5a448076149b942b3cdabe3e6d57d65
+            End
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+            Begin
+                Begin Subform
+                    OverlapFlags =85
+                    Left =16380
+                    Top =360
+                    Width =6660
+                    Height =9315
+                    BorderColor =10921638
+                    Name ="_chtChartBigList"
+                    SourceObject ="Form._chtChartBigList"
+                    EventProcPrefix ="Ctl_chtChartBigList"
+                    GUID = Begin
+                        0xbead13860c79834682d6d6ffd9daf1f7
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =16380
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =23040
+                    LayoutCachedHeight =9675
+                End
+                Begin Chart
+                    ColumnHeads = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    SizeMode =1
+                    RowSourceTypeInt =2
+                    OverlapFlags =85
+                    Left =120
+                    Top =720
+                    Width =15915
+                    Height =8550
+                    TabIndex =1
+                    BorderColor =10921638
+                    ForeColor =4138256
+                    Name ="chtChart"
+                    OleData = Begin
+                    End
+                    RowSourceType ="Table/Query"
+                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD05]) AS [ABCom-SO_WCDF] FROM [_qr"
+                        "yChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
+                    Class ="MSGraph.Chart.8"
+                    OLEClass ="Microsoft Graph Chart"
+                    GUID = Begin
+                        0xcfa3223620a9b44bb2d64e1da71d1ca1
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =16035
+                    LayoutCachedHeight =9270
+                End
+            End
+        End
+    End
+End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit

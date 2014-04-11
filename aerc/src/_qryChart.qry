@@ -48,6 +48,40 @@ Begin OutputColumns
     Expression ="[_tblChart].FLD34"
     Expression ="[_tblChart].FLD35"
     Expression ="[_tblChart].FLD36"
+    Expression ="[_tblChart].FLD37"
+    Expression ="[_tblChart].FLD38"
+    Expression ="[_tblChart].FLD39"
+    Expression ="[_tblChart].FLD40"
+    Expression ="[_tblChart].FLD41"
+    Expression ="[_tblChart].FLD42"
+    Expression ="[_tblChart].FLD43"
+    Expression ="[_tblChart].FLD44"
+    Expression ="[_tblChart].FLD45"
+    Expression ="[_tblChart].FLD46"
+    Expression ="[_tblChart].FLD47"
+    Expression ="[_tblChart].FLD48"
+    Expression ="[_tblChart].FLD49"
+    Expression ="[_tblChart].FLD50"
+    Expression ="[_tblChart].FLD51"
+    Expression ="[_tblChart].FLD52"
+    Expression ="[_tblChart].FLD53"
+    Expression ="[_tblChart].FLD54"
+    Expression ="[_tblChart].FLD55"
+    Expression ="[_tblChart].FLD56"
+    Expression ="[_tblChart].FLD57"
+    Expression ="[_tblChart].FLD58"
+    Expression ="[_tblChart].FLD59"
+    Expression ="[_tblChart].FLD60"
+    Expression ="[_tblChart].FLD61"
+    Expression ="[_tblChart].FLD62"
+    Expression ="[_tblChart].FLD63"
+    Expression ="[_tblChart].FLD64"
+    Expression ="[_tblChart].FLD65"
+    Expression ="[_tblChart].FLD66"
+    Expression ="[_tblChart].FLD67"
+    Expression ="[_tblChart].FLD68"
+    Expression ="[_tblChart].FLD69"
+    Expression ="[_tblChart].FLD70"
 End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -188,17 +222,21 @@ Begin
         dbText "Name" ="[_tblChart].FLD10"
         dbLong "AggregateType" ="-1"
     End
+    Begin
+        dbText "Name" ="[_tblChart].FLD70"
+        dbLong "AggregateType" ="-1"
+    End
 End
 Begin
     State =0
     Left =0
     Top =0
-    Right =1705
+    Right =1302
     Bottom =857
     Left =-1
     Top =-1
-    Right =1689
-    Bottom =238
+    Right =1286
+    Bottom =221
     Left =0
     Top =0
     ColumnsShown =539

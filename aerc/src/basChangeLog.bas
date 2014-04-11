@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "April 7, 2014"
-Public Const gstrVERSION As String = "0.9.4"
+Public Const gstrDATE As String = "April 10, 2014"
+Public Const gstrVERSION As String = "0.9.5"
 Public Const gstrProject As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -39,7 +39,6 @@ Public Const gblnTEST As Boolean = False
 ' #019 -
 ' #018 -
 ' #017 -
-' #016 - Unknown field type message 104 x1, 101 x3 for aetrak test in OutputTheSchemaFile
 ' #014 - ReadDocDatabase debug output when custom test folder given
 ' #013 - Import of class source code into a new database creates a module
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
@@ -54,6 +53,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140410 - v095 - Big charts test
 '20140407 - v094 -
     ' Ref: http://www.vbmigration.com/whitepapers/apicalls.aspx
     ' Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByVal destAddress As Long, ByVal destAddress As Long, ByVal numBytes As Long)
@@ -61,6 +61,7 @@ Public Const gblnTEST As Boolean = False
     ' Wontfix - #015 - Declare statement does not support parameters of type As Any - Ref: http://msdn.microsoft.com/en-us/library/wccc9bx3(v=vs.71).aspx
     ' Table field types missing, Ref: http://allenbrowne.com/ser-49.html
     ' Update app title bar with version when export is run
+    ' Fixed #016 - Unknown field type message 104 x1, 101 x3 for aetrak test in OutputTheSchemaFile
 '20140404 - v093 - Use aegit_expClass, aegit_impClass, aeDEBUG_PRINT
     ' Reorganize changelog tasks, issues, research, use Right$
     ' Use chart enum
