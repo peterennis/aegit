@@ -170,8 +170,8 @@ Begin Form
                     OleData = Begin
                     End
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD05]) AS [ABCom-SO_WCDF] FROM [_qr"
-                        "yChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
+                    RowSource ="SELECT (Format([EnterDate],\"DDDDD\")),Sum([FLD05]) AS [someXval] FROM [_qryChar"
+                        "t] GROUP BY (Int([EnterDate])),(Format([EnterDate],\"DDDDD\"));"
                     Class ="MSGraph.Chart.8"
                     OLEClass ="Microsoft Graph Chart"
                     GUID = Begin

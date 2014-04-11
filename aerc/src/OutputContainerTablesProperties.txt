@@ -44,7 +44,7 @@
               AllPermissions               1048319 
               Container     Tables
               DateCreated   4/10/2014 5:10:55 PM 
-              LastUpdated   4/10/2014 5:13:40 PM 
+              LastUpdated   4/10/2014 5:27:27 PM 
               PublishToWeb   1 
               Orientation    0 
               OrderByOn     False
@@ -63,6 +63,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               ReadOnlyWhenDisconnected    False
+              GUID          25-06-6D-F7-05-09-49-9E
 >>>_tlkpChart
               Name          _tlkpChart
               Owner         admin
@@ -71,7 +72,7 @@
               AllPermissions               1048319 
               Container     Tables
               DateCreated   3/12/2014 5:17:26 PM 
-              LastUpdated   4/2/2014 4:14:04 PM 
+              LastUpdated   4/10/2014 5:27:45 PM 
               Orientation    0 
               OrderByOn     False
               DefaultView    2 

@@ -1,7 +1,7 @@
 Version =20
 VersionRequired =20
 PublishOption =1
-Checksum =644524724
+Checksum =-1853497956
 Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
@@ -16,8 +16,10 @@ Begin Form
     Width =9419
     DatasheetFontHeight =11
     ItemSuffix =112
-    Right =19275
-    Bottom =12930
+    Left =16875
+    Top =1485
+    Right =23265
+    Bottom =10530
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7741e1fa7061e440
@@ -31,10 +33,10 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     PrtDevMode = Begin
-        0x00bb0802e4c318120400000005000000060000000700000034000000dcc70802 ,
+        0x0000000078fcbc110100000000000000a82a0902da6e2c12ffffffff84fa1812 ,
         0x010400209c000c120fff800301000100ea0a6f08640001000700580201000200 ,
-        0x580202000000000200cc181279cc1812bbe1e658f0d5b611f4bb0802dcc70802 ,
-        0x32c71812a0760000000000000000000000000000000000000000000001000000 ,
+        0x5802020000000012b42a090200cc181279cc18128f7ce758f0d5b611282f0902 ,
+        0x103b090232c70000000000000000000000000000000000000000000001000000 ,
         0x0200000001000000010000000000000000000000000000000000000000000000 ,
         0x3d5e28493368fb5d000000004a060000789c8d545d779b300cfd2f3ce7a1ecac ,
         0xddda3fc311b6002fc2f2b14d52bab3ff3ed92604d2a4db4b88a5ebabaf2bffae ,
@@ -185,7 +187,7 @@ Begin Form
     PrtDevNames = Begin
         0x0800240049000100000000000000000000000000000000000000000000000000 ,
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-        0x0000000000000000003139322e3136382e302e3230310000000000
+        0x0000000000000000003139322e3136382e302e323031000000000000000000
     End
     OnLoad ="[Event Procedure]"
     FilterOnLoad =0
@@ -201,12 +203,12 @@ Begin Form
     AlternateBackThemeColorIndex =1
     AlternateBackShade =95.0
     PrtDevModeW = Begin
-        0x000011bb8006551ab858920c8006551ac458920c8006551a905e920cb858920c ,
-        0x5cf9090275981f0180f9090278fa090284f909026e430e0141cc11bb78fa0902 ,
+        0x0000fffff3821c016c891401308a140125b312bb020000000600000068860a02 ,
+        0x9007681a0000000001000000770100000e000000e1b012bbe5b012bba4880a02 ,
         0x01040020dc000c120fff800301000100ea0a6f08640001000700580201000200 ,
-        0x5802020000000000e81e16023c26551ab858920c283c13012000000000000000 ,
-        0x0000000098f90902ec22551ae81e1602f942200109000000a023551a2bd51f01 ,
-        0x7c23551a70fa0000000000000000000000000000000000000000000001000000 ,
+        0x5802020000000000bc1e0c23c4da0a0200800000e81e16020080000005000000 ,
+        0x05000000bc1e0c23f4850a02eca10a022c659401fffffffff06f4101f35a2c01 ,
+        0x1d552c01d1940000000000000000000000000000000000000000000001000000 ,
         0x0200000001000000010000000000000000000000000000000000000000000000 ,
         0x3d5e28493368fb5d000000004a060000789c8d545d779b300cfd2f3ce7a1ecac ,
         0xddda3fc311b6002fc2f2b14d52bab3ff3ed92604d2a4db4b88a5ebabaf2bffae ,
@@ -360,7 +362,7 @@ Begin Form
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
         0x000000000000000000003100390032002e003100360038002e0030002e003200 ,
-        0x3000310000000000000000000000
+        0x30003100000000000000000000000000000000000000
     End
     NoSaveCTIWhenDisabled =1
     Begin
@@ -947,7 +949,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl01"
-                    Caption ="lbl01"
+                    Caption ="Code Review QA"
                     GUID = Begin
                         0x28ed1891e9b2cd42bd8d2d5bb9d2129f
                     End
@@ -966,7 +968,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl02"
-                    Caption ="lbl02"
+                    Caption ="2"
                     GUID = Begin
                         0x4a3aa7a539697a429262b60a0ead92af
                     End
@@ -985,7 +987,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl03"
-                    Caption ="lbl03"
+                    Caption ="3"
                     GUID = Begin
                         0x12388d6b74864d4690d8e4836bdf299b
                     End
@@ -1004,7 +1006,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl04"
-                    Caption ="lbl04"
+                    Caption ="4"
                     GUID = Begin
                         0x3112e7adc70b294eb530773dc0c84c0c
                     End
@@ -1023,7 +1025,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl05"
-                    Caption ="lbl05"
+                    Caption ="5"
                     GUID = Begin
                         0x44e10985d6c3f743bad97de6825e6042
                     End
@@ -1042,7 +1044,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl06"
-                    Caption ="lbl06"
+                    Caption ="6"
                     GUID = Begin
                         0x66084307da0d8d4a8597f06b5909d425
                     End
@@ -1061,7 +1063,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl07"
-                    Caption ="lbl07"
+                    Caption ="7"
                     GUID = Begin
                         0x89bd1a7cd53427429d2c2212224c3c74
                     End
@@ -1080,7 +1082,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl08"
-                    Caption ="lbl08"
+                    Caption ="8"
                     GUID = Begin
                         0xfbc4f82063f7d74eb49a4004f764a4dd
                     End
@@ -1099,7 +1101,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl09"
-                    Caption ="lbl09"
+                    Caption ="9"
                     GUID = Begin
                         0x189aa6e678d1d843b7d335c191f49271
                     End
@@ -1118,7 +1120,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl10"
-                    Caption ="lbl10"
+                    Caption ="10"
                     GUID = Begin
                         0x0452c46f9e333a40af72818d2a2ee975
                     End
@@ -1137,7 +1139,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl11"
-                    Caption ="lbl11"
+                    Caption ="11"
                     GUID = Begin
                         0x6c08114d2905ac47bb119ea1febdce1a
                     End
@@ -1156,7 +1158,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl12"
-                    Caption ="lbl12"
+                    Caption ="12"
                     GUID = Begin
                         0xe4f0c6b2f3b7434e81bef3ffb3e1ef5a
                     End
@@ -1175,7 +1177,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl13"
-                    Caption ="lbl13"
+                    Caption ="13"
                     GUID = Begin
                         0xbc2b551307bb7747aed8bcf7f5c1cf62
                     End
@@ -1194,7 +1196,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl14"
-                    Caption ="lbl14"
+                    Caption ="14"
                     GUID = Begin
                         0xafc8b9ae13a6bc42b162acc60287d416
                     End
@@ -1213,7 +1215,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl15"
-                    Caption ="lbl15"
+                    Caption ="15"
                     GUID = Begin
                         0x9082c2db6e953444bd947f905cab5567
                     End
@@ -1232,7 +1234,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl16"
-                    Caption ="lbl16"
+                    Caption ="16"
                     GUID = Begin
                         0x419ee95e35209042a7086ffa6361781d
                     End
@@ -1251,7 +1253,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl17"
-                    Caption ="lbl17"
+                    Caption ="17"
                     GUID = Begin
                         0x67a76ab133623f499aacadd885769357
                     End
@@ -1270,7 +1272,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl18"
-                    Caption ="lbl18"
+                    Caption ="18"
                     GUID = Begin
                         0x3c603bb4e87b1348a3033b8d6a33433d
                     End
@@ -1289,7 +1291,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl19"
-                    Caption ="lbl19"
+                    Caption ="19"
                     GUID = Begin
                         0x2624358de904894fa1a83cbebb5ead25
                     End
@@ -1335,7 +1337,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl20"
-                    Caption ="lbl20"
+                    Caption ="20"
                     GUID = Begin
                         0xb4050ccb21884f4f8b67a5d1a38daa71
                     End
@@ -1381,7 +1383,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl21"
-                    Caption ="lbl21"
+                    Caption ="21"
                     GUID = Begin
                         0xff06a110d1358c4282c3488a85d6f5d5
                     End
@@ -1427,7 +1429,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl22"
-                    Caption ="lbl22"
+                    Caption ="22"
                     GUID = Begin
                         0x62b1e5d6040a524fae088d76f912dbf4
                     End
@@ -1473,7 +1475,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl23"
-                    Caption ="lbl23"
+                    Caption ="23"
                     GUID = Begin
                         0xbf357eb57deb5642a2aef664b7334bb3
                     End
@@ -1519,7 +1521,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl24"
-                    Caption ="lbl24"
+                    Caption ="24"
                     GUID = Begin
                         0x00fdb049b6747a4bac2bc9d1fff4bea3
                     End
@@ -1565,7 +1567,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl25"
-                    Caption ="lbl25"
+                    Caption ="25"
                     GUID = Begin
                         0x9e790f92e76d894497683b7c46d02dc9
                     End
@@ -1611,7 +1613,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl26"
-                    Caption ="lbl26"
+                    Caption ="26"
                     GUID = Begin
                         0x2091f99fcd39fd4f808290005c140503
                     End
@@ -1657,7 +1659,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl27"
-                    Caption ="lbl27"
+                    Caption ="27"
                     GUID = Begin
                         0x740c8bf5c3530f40b31a043aeb491865
                     End
@@ -1703,7 +1705,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl28"
-                    Caption ="lbl28"
+                    Caption ="28"
                     GUID = Begin
                         0x02c02528eb9d42469ddb37cfec45898e
                     End
@@ -1749,7 +1751,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl29"
-                    Caption ="lbl29"
+                    Caption ="29"
                     GUID = Begin
                         0xb2355444110f594e87304ca4e56e514d
                     End
@@ -1795,7 +1797,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl30"
-                    Caption ="lbl30"
+                    Caption ="30"
                     GUID = Begin
                         0x292261f16b34fc4bbd3e1d87b54cd11e
                     End
@@ -1841,7 +1843,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl31"
-                    Caption ="lbl31"
+                    Caption ="31"
                     GUID = Begin
                         0x18b71d1251e65d4b8277045e186b364c
                     End
@@ -1887,7 +1889,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl32"
-                    Caption ="lbl32"
+                    Caption ="32"
                     GUID = Begin
                         0x022f5ff4249a5b41883189f4e1e6b4bc
                     End
@@ -1933,7 +1935,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl33"
-                    Caption ="lbl33"
+                    Caption ="33"
                     GUID = Begin
                         0x5d44f7d14c209b4490fe3afc41346f4a
                     End
@@ -1979,7 +1981,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl34"
-                    Caption ="lbl34"
+                    Caption ="34"
                     GUID = Begin
                         0x53b5506ab1ab704a93edb5ab67f59934
                     End
@@ -2025,7 +2027,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl35"
-                    Caption ="lbl35"
+                    Caption ="35"
                     GUID = Begin
                         0xceffe628fa457c43b420c77914d7c042
                     End
@@ -2071,7 +2073,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl36"
-                    Caption ="lbl36"
+                    Caption ="36"
                     GUID = Begin
                         0x219b36be54166b4dae5edd25bdccba56
                     End
@@ -2117,7 +2119,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl37"
-                    Caption ="lbl37"
+                    Caption ="37"
                     GUID = Begin
                         0x546a4e08b8163246b92ddef0404cfb80
                     End
@@ -2163,7 +2165,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl38"
-                    Caption ="lbl38"
+                    Caption ="38"
                     GUID = Begin
                         0xa1bc9116e19ca142acf0d0783919922e
                     End
@@ -2209,7 +2211,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl39"
-                    Caption ="lbl39"
+                    Caption ="39"
                     GUID = Begin
                         0x5c283118def39349a9c268b649cff89d
                     End
@@ -2255,7 +2257,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl40"
-                    Caption ="lbl40"
+                    Caption ="40"
                     GUID = Begin
                         0xa31521f5747b834597c1cc5384a51c23
                     End
@@ -2301,7 +2303,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl41"
-                    Caption ="lbl41"
+                    Caption ="41"
                     GUID = Begin
                         0xe6aa238f377e844b83c808db8128d15d
                     End
@@ -2347,7 +2349,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl42"
-                    Caption ="lbl42"
+                    Caption ="42"
                     GUID = Begin
                         0x9c0c653a16cb294a979a4126bfce325d
                     End
@@ -2393,7 +2395,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl43"
-                    Caption ="lbl43"
+                    Caption ="43"
                     GUID = Begin
                         0x4bfa2185d78dd84cb605bdb18ea1025d
                     End
@@ -2439,7 +2441,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl44"
-                    Caption ="lbl44"
+                    Caption ="44"
                     GUID = Begin
                         0x2091679058b0594285a020fbcc1b879b
                     End
@@ -2485,7 +2487,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl45"
-                    Caption ="lbl45"
+                    Caption ="45"
                     GUID = Begin
                         0x6a22a4c6d9dcde409b5417e33398e074
                     End
@@ -2531,7 +2533,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl46"
-                    Caption ="lbl46"
+                    Caption ="46"
                     GUID = Begin
                         0xb302446e2c2ac04f8068a6443780e22f
                     End
@@ -2577,7 +2579,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl47"
-                    Caption ="lbl47"
+                    Caption ="47"
                     GUID = Begin
                         0x0182e608bf66e2418f9a7a97fca0690a
                     End
@@ -2623,7 +2625,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl48"
-                    Caption ="lbl48"
+                    Caption ="48"
                     GUID = Begin
                         0x526cf98185ee7b488a0c464bbf422dec
                     End
@@ -2669,7 +2671,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl49"
-                    Caption ="lbl49"
+                    Caption ="49"
                     GUID = Begin
                         0xaa042e10936a6b448ae4efef2930d374
                     End
@@ -2715,7 +2717,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl50"
-                    Caption ="lbl50"
+                    Caption ="50"
                     GUID = Begin
                         0xf4d01915caa1e949836b1d0d7ddc4332
                     End
@@ -2761,7 +2763,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl51"
-                    Caption ="lbl51"
+                    Caption ="51"
                     GUID = Begin
                         0x6fd8a8a866227446ba8702b9e99b0e4e
                     End
@@ -2807,7 +2809,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl52"
-                    Caption ="lbl52"
+                    Caption ="52"
                     GUID = Begin
                         0xb46a6527ff93aa49a9a4f3bbc2e1a7ce
                     End
@@ -2853,7 +2855,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl53"
-                    Caption ="lbl53"
+                    Caption ="53"
                     GUID = Begin
                         0x9ac81e2e250c12489c696dd389a44f18
                     End
@@ -2899,7 +2901,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl54"
-                    Caption ="lbl54"
+                    Caption ="54"
                     GUID = Begin
                         0x0d6ab2037f7c8b47a6f09b7687beb6b0
                     End
@@ -2945,7 +2947,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl55"
-                    Caption ="lbl55"
+                    Caption ="55"
                     GUID = Begin
                         0x6d454794bb8c264297cda675b60b5bec
                     End
@@ -2991,7 +2993,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl56"
-                    Caption ="lbl56"
+                    Caption ="56"
                     GUID = Begin
                         0xbb9d6af9c60ce84f86f86c790322a56d
                     End
@@ -3037,7 +3039,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl57"
-                    Caption ="lbl57"
+                    Caption ="57"
                     GUID = Begin
                         0xd5149534a5f7ce4595b1055cd44df29c
                     End
@@ -3083,7 +3085,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl58"
-                    Caption ="lbl58"
+                    Caption ="58"
                     GUID = Begin
                         0x2a13ec40bd9cb44db2bc19070d70f2ef
                     End
@@ -3129,7 +3131,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl59"
-                    Caption ="lbl59"
+                    Caption ="59"
                     GUID = Begin
                         0x5009064d0dc7f94b84d1ac4d7762f04f
                     End
@@ -3175,7 +3177,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl60"
-                    Caption ="lbl60"
+                    Caption ="60"
                     GUID = Begin
                         0xbceb4c48f23e614aa0d918ac24f4c754
                     End
@@ -3221,7 +3223,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl61"
-                    Caption ="lbl61"
+                    Caption ="61"
                     GUID = Begin
                         0x67a8b92ccd9e5d4c8d0f898e34894651
                     End
@@ -3267,7 +3269,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl62"
-                    Caption ="lbl62"
+                    Caption ="62"
                     GUID = Begin
                         0xda1368443e2e514ca046d8e8e3ba7b08
                     End
@@ -3313,7 +3315,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl63"
-                    Caption ="lbl63"
+                    Caption ="63"
                     GUID = Begin
                         0xeddad708c62e22419378dd8b12e9725b
                     End
@@ -3359,7 +3361,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl64"
-                    Caption ="lbl64"
+                    Caption ="64"
                     GUID = Begin
                         0xcedc16e71caa704d9166f04d384c548b
                     End
@@ -3405,7 +3407,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl65"
-                    Caption ="lbl65"
+                    Caption ="65"
                     GUID = Begin
                         0xd5d633db615b8749abeb7d41351b87ea
                     End
@@ -3451,7 +3453,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl66"
-                    Caption ="lbl66"
+                    Caption ="66"
                     GUID = Begin
                         0x57068990d0ee004592507292bc7aafc5
                     End
@@ -3497,7 +3499,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl67"
-                    Caption ="lbl67"
+                    Caption ="67"
                     GUID = Begin
                         0xaa41b2cdf3e0a8478023491ae15e4af2
                     End
@@ -3543,7 +3545,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl68"
-                    Caption ="lbl68"
+                    Caption ="68"
                     GUID = Begin
                         0xde5f2607660df84cbcf8da60dff89cb6
                     End
@@ -3589,7 +3591,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl69"
-                    Caption ="lbl69"
+                    Caption ="69"
                     GUID = Begin
                         0x5432ab39fd58534b8ada260653bedd39
                     End
@@ -3635,7 +3637,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =8355711
                     Name ="lbl70"
-                    Caption ="lbl70"
+                    Caption ="70"
                     GUID = Begin
                         0xe381259011ab1e4eb3041d4a60542016
                     End
