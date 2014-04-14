@@ -1,7 +1,7 @@
 Version =20
 VersionRequired =20
 PublishOption =1
-Checksum =-1853497956
+Checksum =930637782
 Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
@@ -33,10 +33,10 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     PrtDevMode = Begin
-        0x0000000078fcbc110100000000000000a82a0902da6e2c12ffffffff84fa1812 ,
+        0x00c33b110400000005000000060000000700000034000000b8517d0034000000 ,
         0x010400209c000c120fff800301000100ea0a6f08640001000700580201000200 ,
-        0x5802020000000012b42a090200cc181279cc18128f7ce758f0d5b611282f0902 ,
-        0x103b090232c70000000000000000000000000000000000000000000001000000 ,
+        0x580202000000001179cc3b11cebe7bad101a1e0fd0457d00b8517d0032c73b11 ,
+        0xe068e21700000000000000000000000000000000000000000000000001000000 ,
         0x0200000001000000010000000000000000000000000000000000000000000000 ,
         0x3d5e28493368fb5d000000004a060000789c8d545d779b300cfd2f3ce7a1ecac ,
         0xddda3fc311b6002fc2f2b14d52bab3ff3ed92604d2a4db4b88a5ebabaf2bffae ,
@@ -185,9 +185,9 @@ Begin Form
         0x0000000000000000
     End
     PrtDevNames = Begin
-        0x0800240049000100000000000000000000000000000000000000000000000000 ,
+        0x0800220056000100000000000000000000000000000000000000000000000000 ,
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-        0x0000000000000000003139322e3136382e302e323031000000000000000000
+        0x00000000000000000000000000000000000000000000545330303600
     End
     OnLoad ="[Event Procedure]"
     FilterOnLoad =0
@@ -203,12 +203,12 @@ Begin Form
     AlternateBackThemeColorIndex =1
     AlternateBackShade =95.0
     PrtDevModeW = Begin
-        0x0000fffff3821c016c891401308a140125b312bb020000000600000068860a02 ,
-        0x9007681a0000000001000000770100000e000000e1b012bbe5b012bba4880a02 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x66006900630069006f0020004d00500020004300330035003000310000000000 ,
         0x01040020dc000c120fff800301000100ea0a6f08640001000700580201000200 ,
-        0x5802020000000000bc1e0c23c4da0a0200800000e81e16020080000005000000 ,
-        0x05000000bc1e0c23f4850a02eca10a022c659401fffffffff06f4101f35a2c01 ,
-        0x1d552c01d1940000000000000000000000000000000000000000000001000000 ,
+        0x5802020000000000000000000000000000000000000000000000000000000000 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x0000000000000000000000000000000000000000000000000000000001000000 ,
         0x0200000001000000010000000000000000000000000000000000000000000000 ,
         0x3d5e28493368fb5d000000004a060000789c8d545d779b300cfd2f3ce7a1ecac ,
         0xddda3fc311b6002fc2f2b14d52bab3ff3ed92604d2a4db4b88a5ebabaf2bffae ,
@@ -357,12 +357,12 @@ Begin Form
         0x0000000000000000
     End
     PrtDevNamesW = Begin
-        0x0400200045000100000000000000000000000000000000000000000000000000 ,
+        0x04001e0052000100000000000000000000000000000000000000000000000000 ,
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-        0x000000000000000000003100390032002e003100360038002e0030002e003200 ,
-        0x30003100000000000000000000000000000000000000
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x00000000540053003000300036000000
     End
     NoSaveCTIWhenDisabled =1
     Begin
@@ -3672,45 +3672,35 @@ Option Explicit
 ' ThreeDPie     3D Pie        xl3DPie             -4102       xl3DPie         -4102
 '
 
-Private Const Bar = 57
-Private Const StackedBar = 58
-Private Const Line = 4
-Private Const ThreeDLine = -4101
-Private Const Area = 76
-Private Const ThreeDArea = 78
-Private Const Column = 51
-Private Const ThreeDColumn = -4100
-Private Const Pie = 5
-Private Const ThreeDPie = -4102
-
-'x Private Sub SetButtonsCaption()
-'x    Dim ctl As Control
-'x    For Each ctl In Me.Controls
-'x        'Debug.Print ctl.Name
-'x        On Error GoTo NextIteration
-'x        'Debug.Print ctl.Caption
-'x        If Left(ctl.Caption, 3) = "CHT" Then
-'x            ctl.Caption = Mid(ctl.Caption, 4, 2)
-'x        End If
-'x        'Debug.Print ctrl.Caption
-'xNextIteration:
-'x    Next
-'xEnd Sub
+Private Enum GraphType
+    Bar = 57
+    StackedBar = 2
+    Line = 4
+    ThreeDLine = -4101
+    Area = 76
+    ThreeDArea = 78
+    Column = 51
+    ThreeDColumn = -4100
+    Pie = 5
+    ThreeDPie = -4102
+End Enum
 
 Private Sub SetLabelsCaption()
+    On Error GoTo 0
     Dim ctl As Control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error GoTo NextIteration
         'If ctl.ControlType = acLabel Then Debug.Print ctl.Name, "Label"
-        If ctl.ControlType = acLabel And Left(ctl.Caption, 3) = "LBL" Then
-            ctl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid(ctl.Caption, 4, 2) & "'")
+        If ctl.ControlType = acLabel And Left$(ctl.Caption, 3) = "LBL" Then
+            ctl.Caption = DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT" & Mid$(ctl.Caption, 4, 2) & "'")
         End If
 NextIteration:
     Next
 End Sub
 
-Private Sub SetChartTitle(strTitle As String)
+Private Sub SetChartTitle(ByVal strTitle As String)
+    On Error GoTo 0
     With Forms("_chtChartBig").chtChart
         .HasTitle = True
         With .ChartTitle
@@ -3719,18 +3709,19 @@ Private Sub SetChartTitle(strTitle As String)
     End With
 End Sub
 
-Private Function GetRowSource(strChart As String) As String
+Private Function GetRowSource(ByVal strChart As String) As String
+    On Error GoTo 0
     Dim strQry As String
     Forms("_chtChartBig").chtChart.RowSourceType = "Table/Query"
     'strQry = "SELECT (Format([EnterDate],""DDDDD"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""DDDDD""));"
     strQry = "SELECT (Format([EnterDate],""MM/YYYY"")),Sum([FLD" & strChart & "]) AS [" & DLookup("ChartDesc", "_tlkpChart", "ChartNum='CHT" & strChart & "'") & "] FROM [_qryChart] GROUP BY (Int([EnterDate])),(Format([EnterDate],""MM/YYYY""));"
     GetRowSource = strQry
     'Debug.Print "GetRowSource=" & strQry
-    'Debug.Print strChart & " ChartType=" & Me.chtChart.ChartType
-    'Me.chtChart.ChartType = 51
+    Forms("_chtChartBig").chtChart.ChartType = GraphType.Column
 End Function
 
 Private Sub cmd01_Click()
+    On Error GoTo 0
     Debug.Print GetRowSource("01")
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("01")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT01'")
@@ -3739,415 +3730,483 @@ Private Sub cmd01_Click()
 End Sub
 
 Private Sub cmd02_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("02")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT02'")
     Me.Refresh
 End Sub
 
 Private Sub cmd03_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("03")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT03'")
     Me.Refresh
 End Sub
 
 Private Sub cmd04_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("04")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT04'")
     Me.Refresh
 End Sub
 
 Private Sub cmd05_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("05")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT05'")
     Me.Refresh
 End Sub
 
 Private Sub cmd06_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("06")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT06'")
     Me.Refresh
 End Sub
 
 Private Sub cmd07_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("07")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT07'")
     Me.Refresh
 End Sub
 
 Private Sub cmd08_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("08")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT08'")
     Me.Refresh
 End Sub
 
 Private Sub cmd09_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("09")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT09'")
     Me.Refresh
 End Sub
 
 Private Sub cmd10_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("10")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT10'")
     Me.Refresh
 End Sub
 
 Private Sub cmd11_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("11")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT11'")
     Me.Refresh
 End Sub
 
 Private Sub cmd12_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("12")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT12'")
     Me.Refresh
 End Sub
 
 Private Sub cmd13_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("13")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT13'")
     Me.Refresh
 End Sub
 
 Private Sub cmd14_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("14")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT14'")
     Me.Refresh
 End Sub
 
 Private Sub cmd15_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("15")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT15'")
     Me.Refresh
 End Sub
 
 Private Sub cmd16_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("16")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT16'")
     Me.Refresh
 End Sub
 
 Private Sub cmd17_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("17")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT17'")
     Me.Refresh
 End Sub
 
 Private Sub cmd18_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("18")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT18'")
     Me.Refresh
 End Sub
 
 Private Sub cmd19_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("19")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT19'")
     Me.Refresh
 End Sub
 
 Private Sub cmd20_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("20")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT20'")
     Me.Refresh
 End Sub
 
 Private Sub cmd21_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("21")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT21'")
     Me.Refresh
 End Sub
 
 Private Sub cmd22_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("22")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT22'")
     Me.Refresh
 End Sub
 
 Private Sub cmd23_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("23")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT23'")
     Me.Refresh
 End Sub
 
 Private Sub cmd24_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("24")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT24'")
     Me.Refresh
 End Sub
 
 Private Sub cmd25_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("25")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT25'")
     Me.Refresh
 End Sub
 
 Private Sub cmd26_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("26")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT26'")
     Me.Refresh
 End Sub
 
 Private Sub cmd27_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("27")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT27'")
     Me.Refresh
 End Sub
 
 Private Sub cmd28_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("28")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT28'")
     Me.Refresh
 End Sub
 
 Private Sub cmd29_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("29")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT29'")
     Me.Refresh
 End Sub
 
 Private Sub cmd30_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("30")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT30'")
     Me.Refresh
 End Sub
 
 Private Sub cmd31_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("31")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT31'")
     Me.Refresh
 End Sub
 
 Private Sub cmd32_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("32")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT32'")
     Me.Refresh
 End Sub
 
 Private Sub cmd33_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("33")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT33'")
     Me.Refresh
 End Sub
 
 Private Sub cmd34_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("34")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT34'")
     Me.Refresh
 End Sub
 
 Private Sub cmd35_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("35")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT35'")
     Me.Refresh
 End Sub
 
 Private Sub cmd36_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("36")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT36'")
     Me.Refresh
 End Sub
 
 Private Sub cmd37_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("37")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT37'")
     Me.Refresh
 End Sub
 
 Private Sub cmd38_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("38")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT38'")
     Me.Refresh
 End Sub
 
 Private Sub cmd39_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("39")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT39'")
     Me.Refresh
 End Sub
 
 Private Sub cmd40_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("40")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT40'")
     Me.Refresh
 End Sub
 
 Private Sub cmd41_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("41")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT41'")
     Me.Refresh
 End Sub
 
 Private Sub cmd42_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("42")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT42'")
     Me.Refresh
 End Sub
 
 Private Sub cmd43_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("43")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT43'")
     Me.Refresh
 End Sub
 
 Private Sub cmd44_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("44")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT44'")
     Me.Refresh
 End Sub
 
 Private Sub cmd45_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("45")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT45'")
     Me.Refresh
 End Sub
 
 Private Sub cmd46_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("46")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT46'")
     Me.Refresh
 End Sub
 
 Private Sub cmd47_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("47")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT47'")
     Me.Refresh
 End Sub
 
 Private Sub cmd48_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("48")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT48'")
     Me.Refresh
 End Sub
 
 Private Sub cmd49_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("49")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT49'")
     Me.Refresh
-
 End Sub
 
 Private Sub cmd50_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("50")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT50'")
     Me.Refresh
 End Sub
 
 Private Sub cmd51_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("51")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT51'")
     Me.Refresh
 End Sub
 
 Private Sub cmd52_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("52")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT52'")
     Me.Refresh
 End Sub
 
 Private Sub cmd53_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("53")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT53'")
     Me.Refresh
 End Sub
 
 Private Sub cmd54_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("54")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT54'")
     Me.Refresh
 End Sub
 
 Private Sub cmd55_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("55")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT55'")
     Me.Refresh
 End Sub
 
 Private Sub cmd56_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("56")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT56'")
     Me.Refresh
 End Sub
 
 Private Sub cmd57_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("57")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT57'")
     Me.Refresh
 End Sub
 
 Private Sub cmd58_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("58")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT58'")
     Me.Refresh
 End Sub
 
 Private Sub cmd59_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("59")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT59'")
     Me.Refresh
 End Sub
 
 Private Sub cmd60_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("60")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT60'")
     Me.Refresh
 End Sub
 
 Private Sub cmd61_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("61")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT61'")
     Me.Refresh
 End Sub
 
 Private Sub cmd62_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("62")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT62'")
     Me.Refresh
 End Sub
 
 Private Sub cmd63_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("63")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT63'")
     Me.Refresh
 End Sub
 
 Private Sub cmd64_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("64")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT64'")
     Me.Refresh
 End Sub
 
 Private Sub cmd65_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("65")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT65'")
     Me.Refresh
 End Sub
 
 Private Sub cmd66_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("66")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT66'")
     Me.Refresh
 End Sub
 
 Private Sub cmd67_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("67")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT67'")
     Me.Refresh
 End Sub
 
 Private Sub cmd68_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("68")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT68'")
     Me.Refresh
 End Sub
 
 Private Sub cmd69_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("69")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT69'")
     Me.Refresh
 End Sub
 
 Private Sub cmd70_Click()
+    On Error GoTo 0
     Forms("_chtChartBig").chtChart.RowSource = GetRowSource("70")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT70'")
     Me.Refresh
@@ -4157,11 +4216,12 @@ Private Sub Form_Load()
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=227612
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/0a34dbec-5078-4e16-b6a7-78f62c39f1bf/vba-navigation-pane?forum=accessdev
 
+    On Error GoTo 0
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
-    Dim strNewAppTitle
+    Dim objNewAppTitle As Object
 
-    Set strNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
+    Set objNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
     dbs.Properties("AppTitle").Value = gstrProject & " " & gstrVERSION
     Application.RefreshTitleBar
     Set dbs = Nothing
@@ -4182,17 +4242,6 @@ Private Sub Form_Load()
 '''        End With
 '''    End With
     
-    '''x SetButtonsCaption
     SetLabelsCaption
-
-Exit Sub
-    '
-'
-'    DoCmd.OpenForm "_chtKPI01", acNormal
-'    DoCmd.OpenForm "_chtT01", acNormal
-'    DoCmd.OpenForm "_chtKPI02", acNormal
-'    DoCmd.OpenForm "_chtT02", acNormal
-'    DoCmd.OpenForm "_chtKPI03", acNormal
-'    DoCmd.OpenForm "_chtT03", acNormal
 
 End Sub

@@ -53,7 +53,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
-'20140410 - v095 - Big charts test
+'20140410 - v095 - Big charts test, KPI chart test
 '20140407 - v094 -
     ' Ref: http://www.vbmigration.com/whitepapers/apicalls.aspx
     ' Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByVal destAddress As Long, ByVal destAddress As Long, ByVal numBytes As Long)

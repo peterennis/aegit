@@ -10,7 +10,6 @@ Begin OutputColumns
     Expression ="[_tblChart].VersionApp"
     Alias ="dataVer"
     Expression ="[_tblChart].VersionData"
-    Alias ="EnterDate"
     Expression ="[_tblChart].EnterDate"
     Expression ="[_tblChart].FLD01"
     Expression ="[_tblChart].FLD02"
@@ -93,6 +92,9 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 dbByte "PublishToWeb" ="1"
+dbBinary "GUID" = Begin
+    0x0823ac37950502498806e08b17edccd7
+End
 Begin
     Begin
         dbText "Name" ="id"
@@ -226,6 +228,10 @@ Begin
         dbText "Name" ="[_tblChart].FLD70"
         dbLong "AggregateType" ="-1"
     End
+    Begin
+        dbText "Name" ="[_tblChart].EnterDate"
+        dbLong "AggregateType" ="-1"
+    End
 End
 Begin
     State =0
@@ -235,8 +241,8 @@ Begin
     Bottom =857
     Left =-1
     Top =-1
-    Right =1286
-    Bottom =221
+    Right =1270
+    Bottom =204
     Left =0
     Top =0
     ColumnsShown =539

@@ -184,7 +184,6 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =5220
                     Top =10140
@@ -1069,7 +1068,7 @@ Private Sub SetChartTitle(ByVal strTitle As String)
     End With
 End Sub
 
-Private Function GetMainTitle() As Boolean
+Private Function GetMainTitle() As String
     On Error GoTo 0
     GetMainTitle = "KPI-01 " & Me.txtMonth & " " & Me.txtYear
 End Function
@@ -1293,11 +1292,10 @@ End Sub
 
 Private Sub Form_Load()
 
-    On Error GoTo 0
-    SetYearsCaption
-    SetMonthsCaption
+    On Error GoTo PROC_ERR
+
     ' Set some defaults to display a chart
-    Me.txtYear = "2011"
+    Me.txtYear = "2012"
     Me.txtMonth = "Jan"
     With Me.chtKPI01
         .HasTitle = True
@@ -1305,6 +1303,17 @@ Private Sub Form_Load()
             .Text = "Select Year and then click on Month to display a chart"
         End With
     End With
+
+    SetYearsCaption
+    SetMonthsCaption
+
     cmdM01_Click
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Load of " & Me.Name
+    Resume Next
 
 End Sub
