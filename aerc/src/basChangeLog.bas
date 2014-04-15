@@ -38,7 +38,7 @@ Public Const gblnTEST As Boolean = False
 ' #020 -
 ' #019 -
 ' #018 -
-' #017 -
+' #017 - KPI chart test not working
 ' #014 - ReadDocDatabase debug output when custom test folder given
 ' #013 - Import of class source code into a new database creates a module
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
@@ -54,6 +54,7 @@ Public Const gblnTEST As Boolean = False
 '
 '
 '20140410 - v095 - Big charts test, KPI chart test
+    ' Chart big, HasModule set to no
 '20140407 - v094 -
     ' Ref: http://www.vbmigration.com/whitepapers/apicalls.aspx
     ' Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByVal destAddress As Long, ByVal destAddress As Long, ByVal numBytes As Long)
