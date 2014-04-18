@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "April 10, 2014"
-Public Const gstrVERSION As String = "0.9.5"
+Public Const gstrDATE As String = "April 18, 2014"
+Public Const gstrVERSION As String = "0.9.6"
 Public Const gstrProject As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -53,6 +53,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140418 - v096 - Bump
 '20140410 - v095 - Big charts test, KPI chart test
     ' Chart big, HasModule set to no
 '20140407 - v094 -

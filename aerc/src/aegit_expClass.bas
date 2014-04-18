@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "0.9.5"
-Private Const aegit_expVERSION_DATE As String = "April 10, 2014"
+Private Const aegit_expVERSION As String = "0.9.6"
+Private Const aegit_expVERSION_DATE As String = "April 18, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const gcfHandleErrors As Boolean = True
