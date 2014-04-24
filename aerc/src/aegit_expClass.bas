@@ -2846,7 +2846,7 @@ PROC_ERR:
 
 End Function
 
-Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional varDebug As Variant) As Boolean
+Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
 
@@ -3608,7 +3608,7 @@ Private Sub WriteErrorToFile(ByVal intTheErl As Integer, ByVal lngTheErrorNum As
 End Sub
 
 Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, _
-                                ByVal strTheAbsoluteFileName As String, Optional varDebug As Variant)
+                                ByVal strTheAbsoluteFileName As String, Optional ByVal varDebug As Variant)
   
     On Error GoTo PROC_ERR
 
