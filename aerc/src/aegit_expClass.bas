@@ -2496,8 +2496,13 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         MsgBox aestrSourceLocation & " Does not exist!", vbCritical, "aegit"
         Stop
     End If
-    
-    OutputListOfContainers aeAppListCnt
+
+    If Not IsMissing(varDebug) Then
+        OutputListOfContainers aeAppListCnt, varDebug
+    Else
+        OutputListOfContainers aeAppListCnt
+    End If
+
     OutputListOfAllHiddenQueries
 
     If Not IsMissing(varDebug) Then
@@ -2841,7 +2846,7 @@ PROC_ERR:
 
 End Function
 
-Public Function OutputListOfContainers(ByVal strTheFileName As String) As Boolean
+Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional varDebug As Variant) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
 
@@ -2876,16 +2881,14 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String) As Boolea
     With dbs
         ' Enumerate Containers collection.
         For Each conItem In .Containers
-            Debug.Print lngFileNum, "Properties of " & conItem.Name _
-                & " container", strFile
-            WriteStringToFile lngFileNum, "Properties of " & conItem.Name _
-                & " container", strFile
+            If Not IsMissing(varDebug) Then Debug.Print "Properties of " & conItem.Name _
+                & " container", lngFileNum, strFile
+            WriteStringToFile lngFileNum, "Properties of " & conItem.Name & " container", strFile
 
             ' Enumerate Properties collection of each Container object.
             For Each prpLoop In conItem.Properties
-                Debug.Print , lngFileNum, prpLoop.Name & " = " & prpLoop
-                WriteStringToFile lngFileNum, "  " & prpLoop.Name _
-                    & " = " & prpLoop, strFile
+                If Not IsMissing(varDebug) Then Debug.Print , lngFileNum, prpLoop.Name & " = " & prpLoop
+                WriteStringToFile lngFileNum, "  " & prpLoop.Name & " = " & prpLoop, strFile
             Next prpLoop
         Next conItem
         .Close
@@ -3092,8 +3095,10 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
     strXMLResDoc = strXMLResDoc.XML
     strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr$(32) & Chr$(32), , , vbBinaryCompare)
-    If aeDEBUG_PRINT Then Debug.Print , "Pretty XML Sample Output"
-    If Not IsMissing(varDebug) Then Debug.Print strXMLResDoc
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print , "Pretty XML Sample Output"
+        Debug.Print strXMLResDoc
+    End If
 
     ' Rewrite the file as pretty xml
     Open strPathFileName For Output As #fle

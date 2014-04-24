@@ -56,7 +56,8 @@ Public Const gblnTEST As Boolean = False
     ' LongestTableName used in class initialize - give default value 11 instead
     ' LongestFieldPropsName raises Error 9
     ' FIXED - #018 - Error 9, subscript out of range in PopCallStack
-    ' Delete some old code
+    ' Delete some old code, add varDebug to PrettyXML
+    ' Fix varDebug for OutputListOfContainers
 '20140418 - v096 - Bump
     ' Use aegit_expVERSION in the class and not gstrVERSION
 '20140410 - v095 - Big charts test, KPI chart test

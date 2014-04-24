@@ -240,7 +240,7 @@ Public Sub ObjectCounts()
  
 End Sub
 
-Public Sub PrettyXML(strPathFileName As String)
+Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
 
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
@@ -293,7 +293,7 @@ Public Sub PrettyXML(strPathFileName As String)
     objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
     strXMLResDoc = strXMLResDoc.XML
     strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr$(32) & Chr$(32), , , vbBinaryCompare)
-    Debug.Print "Pretty XML Sample Output"
+    If Not IsMissing(varDebug) Then Debug.Print "Pretty XML Sample Output"
     Debug.Print strXMLResDoc
 
     Set objXMLDOMDoc = Nothing

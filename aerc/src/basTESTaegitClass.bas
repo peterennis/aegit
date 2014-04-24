@@ -154,7 +154,6 @@ Test4:
     '=============
     ' TEST 4
     '=============
-    Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "4. aegitClassTest => GetReferences"
     Debug.Print "aegitClassTest"
@@ -174,7 +173,6 @@ Test5:
     '=============
     ' TEST 5
     '=============
-    Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "5. aegitClassTest => DocumentTables"
     Debug.Print "aegitClassTest"
@@ -194,7 +192,6 @@ Test6:
     '=============
     ' TEST 6
     '=============
-    Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "6. aegitClassTest => DocumentRelations"
     Debug.Print "aegitClassTest"
@@ -214,7 +211,6 @@ Test7:
     '=============
     ' TEST 7
     '=============
-    Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
     Debug.Print "aegitClassTestXML"
@@ -237,7 +233,6 @@ Test8:
     ' CompactAndRepair
     ' When run this will close the database so obviously no results will be seen.
     ' Use True/False parameter to run it or not.
-    Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "8. aegitClassTest => CompactAndRepair"
     Debug.Print "aegitClassTest"
