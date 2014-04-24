@@ -2861,8 +2861,17 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional 
     'PushCallStack "OutputListOfContainers"
     On Error GoTo PROC_ERR
 
+    If aeDEBUG_PRINT Then Debug.Print "OutputListOfContainers"
+    If IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+    Else
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfContainers"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+    End If
+
     Set dbs = CurrentDb
-    lngFileNum = FreeFile
+    lngFileNum = FreeFile()
 
     strFile = aestrSourceLocation & strTheFileName
 
@@ -3598,7 +3607,8 @@ Private Sub WriteErrorToFile(ByVal intTheErl As Integer, ByVal lngTheErrorNum As
 
 End Sub
 
-Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, ByVal strTheAbsoluteFileName As String)
+Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, _
+                                ByVal strTheAbsoluteFileName As String, Optional varDebug As Variant)
   
     On Error GoTo PROC_ERR
 
@@ -3612,7 +3622,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 55 Then            ' File already open
-        Debug.Print lngFileNum, strTheString, strTheAbsoluteFileName
+        If Not IsMissing(varDebug) Then Debug.Print "Err=55", strTheString, lngFileNum, strTheAbsoluteFileName
         Err.Clear
         Resume ERR55
     Else
