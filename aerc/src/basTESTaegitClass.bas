@@ -95,6 +95,7 @@ Test1:
     '=============
     ' TEST 1
     '=============
+    'MsgBox "oDbObjects.XMLFolder=" & oDbObjects.XMLFolder
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"

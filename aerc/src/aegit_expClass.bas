@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "0.9.6"
-Private Const aegit_expVERSION_DATE As String = "April 18, 2014"
+Private Const aegit_expVERSION As String = "0.9.7"
+Private Const aegit_expVERSION_DATE As String = "April 24, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const gcfHandleErrors As Boolean = True
@@ -95,11 +95,13 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
-    On Error GoTo 0
+    'On Error GoTo 0
+    On Error GoTo PROC_ERR
+    
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         Dim dbs As DAO.Database
         Set dbs = CurrentDb()
-        dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & gstrVERSION
+        dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & aegit_expVERSION
         Application.RefreshTitleBar
         Set dbs = Nothing
     End If
@@ -110,22 +112,32 @@ Private Sub Class_Initialize()
     aegitDataXML(1) = "aetlkpStates"
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-    aegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
-    aegitType.UseImportFolder = False
+    '''xaegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
+    '''xaegitType.UseImportFolder = False
     aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
-    aeintLTN = LongestTableName
-    LongestFieldPropsName
+    aeintLTN = 11           ' Set a minimum default
+    'LongestFieldPropsName
+    aeintFNLen = 4          ' Set a minimum default
+    aeintFTLen = 4          ' Set a minimum default
+    aeintFDLen = 4          ' Set a minimum default
 
     If aeDEBUG_PRINT Then Debug.Print "Class_Initialize"
     If aeDEBUG_PRINT Then Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
-    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
+    '''xIf aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
+    '''xIf aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
     If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
     If aeDEBUG_PRINT Then Debug.Print , "aeintLTN = " & aeintLTN
     If aeDEBUG_PRINT Then Debug.Print , "aeintFNLen = " & aeintFNLen
     If aeDEBUG_PRINT Then Debug.Print , "aeintFTLen = " & aeintFTLen
     If aeDEBUG_PRINT Then Debug.Print , "aeintFSize = " & aeintFSize
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class aegit_expClass"
+    Resume PROC_EXIT
 
 End Sub
 
@@ -357,7 +369,7 @@ PROC_EXIT:
     Close #fnr
     Close #fnr2
     aeReadWriteStream = True
-    'PopCallStack
+    'PopCallStack "aeReadWriteStream"
     Exit Function
 
 PROC_ERR:
@@ -425,8 +437,9 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
 ' This makes finding and fixing the problem a real pain.
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputListOfAccessApplicationOptions"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputListOfAccessApplicationOptions"
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
@@ -728,7 +741,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
 PROC_EXIT:
     Set dbs = Nothing
     Close fle
-    PopCallStack
+    'PopCallStack "OutputListOfAccessApplicationOptions"
     Exit Sub
 
 PROC_ERR:
@@ -740,7 +753,7 @@ PROC_ERR:
         Err.Clear
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass"
-        GlobalErrHandler
+        'GlobalErrHandler
     End If
     Resume Next
 
@@ -750,8 +763,9 @@ Private Sub OutputListOfApplicationProperties()
 ' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputListOfApplicationProperties"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputListOfApplicationProperties"
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
@@ -781,7 +795,7 @@ Private Sub OutputListOfApplicationProperties()
 PROC_EXIT:
     Set dbs = Nothing
     Close fle
-    PopCallStack
+    'PopCallStack "OutputListOfApplicationProperties"
     Exit Sub
 
 PROC_ERR:
@@ -791,7 +805,7 @@ PROC_ERR:
         Err.Clear
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
-        GlobalErrHandler
+        'GlobalErrHandler
     End If
     Resume Next
 
@@ -872,8 +886,9 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
     Set vbaProj = Application.VBE.ActiveVBProject
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeGetReferences"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeGetReferences"
+    On Error GoTo PROC_ERR
 
     Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
@@ -956,14 +971,14 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 PROC_EXIT:
     Set vbaProj = Nothing
     Close 1
-    PopCallStack
+    'PopCallStack "aeGetReferences"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
     aeGetReferences = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -982,8 +997,9 @@ Private Function LongestTableName() As Integer
     Dim intTNLen As Integer
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "LongestTableName"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "LongestTableName"
+    On Error GoTo PROC_ERR
 
     intTNLen = 0
     Set dbs = CurrentDb()
@@ -1002,13 +1018,13 @@ Private Function LongestTableName() As Integer
 PROC_EXIT:
     Set tdf = Nothing
     Set dbs = Nothing
-    PopCallStack
+    PopCallStack "LongestTableName"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass"
     LongestTableName = 0
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1027,8 +1043,8 @@ Private Function LongestFieldPropsName() As Boolean
     Dim fld As DAO.Field
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "LongestFieldPropsName"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "LongestFieldPropsName"
 
     On Error GoTo PROC_ERR
 
@@ -1066,13 +1082,13 @@ PROC_EXIT:
     Set fld = Nothing
     Set tblDef = Nothing
     Set dbs = Nothing
-    PopCallStack
+    'PopCallStack "LongestFieldPropsName"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegit_expClass"
     LongestFieldPropsName = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1156,19 +1172,32 @@ End Function
 
 Private Function FileLocked(ByVal strFileName As String) As Boolean
 ' Ref: http://support.microsoft.com/kb/209189
+
+    On Error GoTo PROC_ERR
+
+    Dim fle As Long
+    fle = FreeFile()
     On Error Resume Next
     ' If the file is already opened by another process,
     ' and the specified type of access is not allowed,
     ' the Open operation fails and an error occurs.
-    Open strFileName For Binary Access Read Write Lock Read Write As #1
-    Close 1
+    Open strFileName For Binary Access Read Write Lock Read Write As #fle
+    Close fle
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass"
+        MsgBox ">>> Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass"
         FileLocked = True
         Err.Clear
     End If
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass"
+    Resume PROC_EXIT
+
 End Function
 
 Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug As Variant) As Boolean
@@ -1188,9 +1217,8 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     Dim strLinkedTablePath As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "TableInfo"
-
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "TableInfo"
     On Error GoTo PROC_ERR
 
     strLinkedTablePath = vbNullString
@@ -1270,14 +1298,14 @@ PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
     Set dbs = Nothing
-    PopCallStack
+    'PopCallStack "TableInfo"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     TableInfo = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1298,8 +1326,9 @@ Private Function LongestTableDescription(ByVal strTblName As String) As Integer
     Dim strLFD As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "LongestTableDescription"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "LongestTableDescription"
+    On Error GoTo PROC_ERR
 
     Set dbs = CurrentDb()
     Set tdf = dbs.TableDefs(strTblName)
@@ -1317,13 +1346,13 @@ PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
     Set dbs = Nothing
-    PopCallStack
+    'PopCallStack "LongestTableDescription"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegit_expClass"
     LongestTableDescription = -1
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1435,9 +1464,8 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeDocumentTables"
-
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeDocumentTables"
     On Error GoTo PROC_ERR
 
     intFailCount = 0
@@ -1507,14 +1535,14 @@ PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
     Close 1
-    PopCallStack
+    'PopCallStack "aeDocumentTables"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
     aeDocumentTables = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1523,9 +1551,10 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 ' Ref: http://stackoverflow.com/questions/4867727/how-to-use-ms-access-saveastext-with-queries-specifically-stored-procedures
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeDocumentTablesXML"
-    
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeDocumentTablesXML"
+    On Error GoTo PROC_ERR
+
     Dim dbs As DAO.Database
     Dim tbl As DAO.TableDef
     Dim strObjName As String
@@ -1591,14 +1620,14 @@ PROC_EXIT:
     Set tbl = Nothing
     Set dbs = Nothing
     Close 1
-    PopCallStack
+    'PopCallStack "aeDocumentTablesXML"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
     aeDocumentTablesXML = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1838,8 +1867,9 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeDocumentRelations"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeDocumentRelations"
+    On Error GoTo PROC_ERR
 
     Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
@@ -1884,14 +1914,14 @@ PROC_EXIT:
     Set fld = Nothing
     Set rel = Nothing
     Close 1
-    PopCallStack
+    'PopCallStack "aeDocumentRelations"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
     aeDocumentRelations = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1911,8 +1941,9 @@ Private Function OutputQueriesSqlText() As Boolean
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputQueriesSqlText"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputQueriesSqlText"
+    On Error GoTo PROC_ERR
 
     strFile = aestrSourceLocation & aeSqlTxtFile
     
@@ -1939,13 +1970,13 @@ PROC_EXIT:
     Set qdf = Nothing
     Set dbs = Nothing
     Close 1
-    PopCallStack
+    'PopCallStack "OutputQueriesSqlText"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegit_expClass"
     OutputQueriesSqlText = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1966,7 +1997,7 @@ TryAgain:
     End If
 
 PROC_EXIT:
-    'PopCallStack
+    'PopCallStack "KillProperly"
     Exit Sub
 
 PROC_ERR:
@@ -2069,8 +2100,9 @@ Private Function OutputBuiltInPropertiesText() As Boolean
     Dim strError As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputBuiltInPropertiesText"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputBuiltInPropertiesText"
+    On Error GoTo PROC_ERR
 
     strFile = aestrSourceLocation & aePrpTxtFile
 
@@ -2105,7 +2137,7 @@ PROC_EXIT:
     Set prps = Nothing
     Set dbs = Nothing
     Close 1
-    PopCallStack
+    'PopCallStack "OutputBuiltInPropertiesText"
     Exit Function
 
 PROC_ERR:
@@ -2118,7 +2150,7 @@ PROC_ERR:
             'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             OutputBuiltInPropertiesText = False
-            GlobalErrHandler
+            'GlobalErrHandler
             Resume PROC_EXIT
     End Select
 
@@ -2150,7 +2182,7 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 
 PROC_EXIT:
     On Error GoTo 0
-    'PopCallStack
+    'PopCallStack "IsFileLocked"
     Exit Function
 
 PROC_ERR:
@@ -2179,8 +2211,9 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
 ' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "DocumentTheContainer"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "DocumentTheContainer"
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
@@ -2263,7 +2296,7 @@ PROC_EXIT:
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
-    PopCallStack
+    'PopCallStack "DocumentTheContainer"
     Exit Function
 
 PROC_ERR:
@@ -2275,7 +2308,7 @@ PROC_ERR:
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegit_expClass"
     DocumentTheContainer = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2285,8 +2318,9 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "KillAllFiles"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "KillAllFiles"
+    On Error GoTo PROC_ERR
 
     If aeDEBUG_PRINT Then Debug.Print "KillAllFiles"
     If IsMissing(varDebug) Then
@@ -2327,7 +2361,7 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
     End If
 
 PROC_EXIT:
-    PopCallStack
+    'PopCallStack "KillAllFiles"
     Exit Sub
 
 PROC_ERR:
@@ -2339,7 +2373,7 @@ PROC_ERR:
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -2399,8 +2433,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim i As Integer
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeDocumentTheDatabase"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeDocumentTheDatabase"
+    On Error GoTo PROC_ERR
 
     Debug.Print "aeDocumentTheDatabase"
     If IsMissing(varDebug) Then
@@ -2417,10 +2452,15 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Else
         aestrSourceLocation = aegitSourceFolder
     End If
-
     If aegitXMLFolder = "default" Then
         aestrXMLLocation = aegitType.XMLFolder
+    Else
+        aestrXMLLocation = aegitXMLFolder
     End If
+
+    If aeDEBUG_PRINT Then Debug.Print , "Value for aestrSourceLocation = " & aestrSourceLocation
+    If aeDEBUG_PRINT Then Debug.Print , "Value for aegitXMLFolder = " & aegitXMLFolder
+    If aeDEBUG_PRINT Then Debug.Print , "Value for aestrXMLLocation = " & aestrXMLLocation
 
     ListOrCloseAllOpenQueries
 
@@ -2429,7 +2469,14 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aeDEBUG_PRINT Then Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
         If aeDEBUG_PRINT Then Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
     End If
-    'Stop
+    If aestrSourceLocation = vbNullString Then
+        MsgBox "aestrSourceLocation is not set!"
+        Stop
+    End If
+    If aestrXMLLocation = vbNullString Then
+        MsgBox "aestrXMLLocation is not set!"
+        Stop
+    End If
 
     If IsMissing(varDebug) Then
         KillAllFiles "src"
@@ -2547,14 +2594,14 @@ PROC_EXIT:
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
-    PopCallStack
+    'PopCallStack "aeDocumentTheDatabase"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     aeDocumentTheDatabase = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2579,8 +2626,9 @@ Private Function aeExists(ByVal strAccObjType As String, _
     Dim obj As Variant
     
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeExists"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeExists"
+    On Error GoTo PROC_ERR
 
     If aeDEBUG_PRINT Then Debug.Print "aeExists"
     If IsMissing(varDebug) Then
@@ -2642,7 +2690,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
 
 PROC_EXIT:
     Set obj = Nothing
-    PopCallStack
+    'PopCallStack "aeExists"
     Exit Function
 
 PROC_ERR:
@@ -2654,7 +2702,7 @@ PROC_ERR:
         If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass"
         aeExists = False
     End If
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2689,8 +2737,9 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
 ' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "FieldLookupControlTypeList"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "FieldLookupControlTypeList"
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDefs
@@ -2787,12 +2836,12 @@ PROC_EXIT:
     Close fle
     Set tdf = Nothing
     Set dbs = Nothing
-    PopCallStack
+    'PopCallStack "FieldLookupControlTypeList"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegit_expClass", vbCritical, "Error"
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2808,8 +2857,9 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String) As Boolea
     Dim lngFileNum As Long
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputListOfContainers"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputListOfContainers"
+    On Error GoTo PROC_ERR
 
     Set dbs = CurrentDb
     lngFileNum = FreeFile
@@ -2818,24 +2868,27 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String) As Boolea
 
     If Dir$(strFile) <> vbNullString Then
         ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
+        If Not FileLocked(strFile) Then
+            KillProperly (strFile)
+        End If
         Open strFile For Append As lngFileNum
     Else
-        If Not FileLocked(strFile) Then Open strFile For Append As lngFileNum
+        If Not FileLocked(strFile) Then
+            Open strFile For Append As lngFileNum
+        End If
     End If
 
     With dbs
         ' Enumerate Containers collection.
         For Each conItem In .Containers
-            'Debug.Print "Properties of " & conItem.Name _
-                & " container"
+            Debug.Print lngFileNum, "Properties of " & conItem.Name _
+                & " container", strFile
             WriteStringToFile lngFileNum, "Properties of " & conItem.Name _
                 & " container", strFile
-            
+
             ' Enumerate Properties collection of each Container object.
             For Each prpLoop In conItem.Properties
-                'Debug.Print "  " & prpLoop.Name _
-                    & " = "; prpLoop
+                Debug.Print , lngFileNum, prpLoop.Name & " = " & prpLoop
                 WriteStringToFile lngFileNum, "  " & prpLoop.Name _
                     & " = " & prpLoop, strFile
             Next prpLoop
@@ -2850,13 +2903,13 @@ PROC_EXIT:
     Set conItem = Nothing
     Set dbs = Nothing
     Close lngFileNum
-    PopCallStack
+    'PopCallStack "OutputListOfContainers"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass", vbCritical, "Error"
     OutputListOfContainers = False
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2864,8 +2917,9 @@ End Function
 Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputAllContainerProperties"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputAllContainerProperties"
+    On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
         If aeDEBUG_PRINT Then Debug.Print "Container information for properties of saved Databases"
@@ -2881,13 +2935,13 @@ Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
     End If
 
 PROC_EXIT:
-    PopCallStack
+    'PopCallStack "OutputAllContainerProperties"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -2924,8 +2978,9 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
     
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "ListAllContainerProperties"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "ListAllContainerProperties"
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Dim obj As Object
@@ -2970,13 +3025,13 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
     Close fle
 
 PROC_EXIT:
-    PopCallStack
+    'PopCallStack "ListAllContainerProperties"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -2984,9 +3039,10 @@ End Sub
 Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As Variant)
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "PrettyXML"
-    
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "PrettyXML"
+    On Error GoTo PROC_ERR
+
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
     Dim objXMLStyleSheet As Object
@@ -3053,13 +3109,13 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     Set objXMLStyleSheet = Nothing
 
 PROC_EXIT:
-    PopCallStack
+    'PopCallStack "PrettyXML"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -3114,7 +3170,7 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Set cnn = Nothing
 
 PROC_EXIT:
-    PopCallStack
+    PopCallStack "OutputTheTableDataAsXML"
     Exit Sub
 
 PROC_ERR:
@@ -3130,8 +3186,9 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/how-do-i-change-default-printers-in-vba/d046a937-6548-4d2b-9517-7f622e2cfed2
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "PrinterInfo"
+    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputPrinterInfo"
+    On Error GoTo PROC_ERR
 
     Dim prt As Printer
     Dim prtCount As Integer
@@ -3207,18 +3264,18 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 
 PROC_EXIT:
     Close fle
-    PopCallStack
+    'PopCallStack "OutputPrinterInfo"
     Exit Sub
 
 PROC_ERR:
     Select Case Err.Number
         Case 9
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
-            GlobalErrHandler
+            'GlobalErrHandler
             Resume Next
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
-            GlobalErrHandler
+            'GlobalErrHandler
             Resume Next
     End Select
 
@@ -3263,7 +3320,7 @@ NextTdf:
 PROC_EXIT:
     Set tdf = Nothing
     Set dbs = Nothing
-    'PopCallStack
+    'PopCallStack "OutputTableDataMacros"
     Exit Sub
 
 PROC_ERR:
@@ -3468,10 +3525,12 @@ Private Function CurrentProcName() As String
 End Function
 
 Private Sub PushCallStack(ByVal strProcName As String)
-' Add the current procedure name to the Call Stack.
+' Add the current procedure name to the Call Stack
 ' Should be called whenever a procedure is called
 
-    On Error Resume Next
+    Debug.Print "strProcName=" & strProcName
+    On Error GoTo PROC_ERR
+    'If Err.Number = 9 Then ErrorHandlerInit
 
     ' Verify the stack array can handle the current array element
     If mintStackPointer > UBound(mastrCallStack) Then
@@ -3491,6 +3550,14 @@ Private Sub PushCallStack(ByVal strProcName As String)
 
     ' Increment pointer to next element
     mintStackPointer = mintStackPointer + 1
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PushCallStack of Class aegit_expClass"
+    Resume Next
+
 End Sub
 
 Private Sub ErrorHandlerInit()
@@ -3500,10 +3567,11 @@ Private Sub ErrorHandlerInit()
     ReDim mastrCallStack(1 To mcintIncrementStackSize)
 End Sub
 
-Private Sub PopCallStack()
+Private Sub PopCallStack(ByVal strProc As String)
 ' Remove a procedure name from the call stack
 
     On Error GoTo 0
+    Debug.Print strProc
     If mintStackPointer <= UBound(mastrCallStack) Then
         mastrCallStack(mintStackPointer) = vbNullString
     End If
@@ -3532,10 +3600,24 @@ End Sub
 
 Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, ByVal strTheAbsoluteFileName As String)
   
-    On Error Resume Next
+    On Error GoTo PROC_ERR
 
     Open strTheAbsoluteFileName For Append Access Write Lock Write As lngFileNum
-        Print #lngFileNum, strTheString
+ERR55:
+    Print #lngFileNum, strTheString
     Close lngFileNum
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    If Err = 55 Then            ' File already open
+        Debug.Print lngFileNum, strTheString, strTheAbsoluteFileName
+        Err.Clear
+        Resume ERR55
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WriteStringToFile of Class aegit_expClass"
+        Resume Next
+    End If
 
 End Sub
