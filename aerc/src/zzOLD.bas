@@ -259,7 +259,6 @@ Public Sub PrettyXML(strPathFileName As String)
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:template>" & vbCrLf & vbCrLf
     strXMLStyleSheet = strXMLStyleSheet & "</xsl:stylesheet>"
 
-'''x    Dim objXMLResDoc As Object
     Set objXMLStyleSheet = CreateObject("Msxml2.DOMDocument.6.0")
 
     With objXMLStyleSheet

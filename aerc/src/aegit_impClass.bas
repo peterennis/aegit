@@ -50,7 +50,6 @@ Private mastrCallStack() As String
 Private Const mcintIncrementStackSize As Integer = 10
 Private mfInErrorHandler As Boolean
 
-'''x Private aegitSetup As Boolean
 Private aegitType As mySetupType
 Private aegitImportFolder As String
 Private aestrImportLocation As String

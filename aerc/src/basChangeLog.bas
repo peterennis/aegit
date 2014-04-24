@@ -37,7 +37,6 @@ Public Const gblnTEST As Boolean = False
 ' Issues:
 ' #020 -
 ' #019 -
-' #018 - Error 9, subscript out of range in PopCallStack
 ' #017 - KPI chart test not working
 ' #014 - ReadDocDatabase debug output when custom test folder given - applies to aegit_impClass
 ' #013 - Import of class source code into a new database creates a module
@@ -56,6 +55,8 @@ Public Const gblnTEST As Boolean = False
 '20140424 - v097 - Add paramater to PopCallStack to trace #018 - problem is in LongestTableName
     ' LongestTableName used in class initialize - give default value 11 instead
     ' LongestFieldPropsName raises Error 9
+    ' FIXED - #018 - Error 9, subscript out of range in PopCallStack
+    ' Delete some old code
 '20140418 - v096 - Bump
     ' Use aegit_expVERSION in the class and not gstrVERSION
 '20140410 - v095 - Big charts test, KPI chart test

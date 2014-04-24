@@ -112,11 +112,8 @@ Private Sub Class_Initialize()
     aegitDataXML(1) = "aetlkpStates"
     aegitExportDataToXML = False
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-    '''xaegitType.ImportFolder = "C:\ae\aegit\aerc\src\imp\"
-    '''xaegitType.UseImportFolder = False
     aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
     aeintLTN = 11           ' Set a minimum default
-    'LongestFieldPropsName
     aeintFNLen = 4          ' Set a minimum default
     aeintFTLen = 4          ' Set a minimum default
     aeintFDLen = 4          ' Set a minimum default
@@ -124,8 +121,6 @@ Private Sub Class_Initialize()
     If aeDEBUG_PRINT Then Debug.Print "Class_Initialize"
     If aeDEBUG_PRINT Then Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    '''xIf aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.ImportFolder = " & aegitType.ImportFolder
-    '''xIf aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.UseImportFolder = " & aegitType.UseImportFolder
     If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
     If aeDEBUG_PRINT Then Debug.Print , "aeintLTN = " & aeintLTN
     If aeDEBUG_PRINT Then Debug.Print , "aeintFNLen = " & aeintFNLen

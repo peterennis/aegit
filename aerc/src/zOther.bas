@@ -32,11 +32,9 @@ Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As
 
 #If conLateBinding = 1 Then
     Dim cnn As Object
-'''x    Dim cmd As Object
     ' Ref: http://support.microsoft.com/kb/195982
     Const adPromptAlways As Integer = 1
     ' Ref: http://www.w3schools.com/ado/met_rs_open.asp#CommandTypeEnum
-'''x    Const adCmdText As Integer = 1
     Const adOpenDynamic As Integer = 2
     Const adLockOptimistic As Integer = 3
     Dim orst As Object
@@ -50,7 +48,6 @@ Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As
     Set cnn = New ADODB.Connection
     cnn.ConnectionString = strODBC
     cnn.Properties("Prompt") = adPromptAlways
-'''x    Dim cmd As ADODB.Command
     Dim orst As ADODB.Recordset
     Set orst = New ADODB.Recordset
     Dim ofld As ADODB.Field
