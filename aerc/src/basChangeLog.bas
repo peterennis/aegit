@@ -1,9 +1,9 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "April 24, 2014"
-Public Const gstrVERSION As String = "0.9.7"
-Public Const gstrProject As String = "TheProject"
+Public Const gstrDATE As String = "May 23, 2014"
+Public Const gstrVERSION As String = "0.9.8"
+Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
 ' Tools:
@@ -35,8 +35,9 @@ Public Const gblnTEST As Boolean = False
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #020 -
-' #019 -
+' #021 -
+' #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
+' #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
 ' #017 - KPI chart test not working
 ' #014 - ReadDocDatabase debug output when custom test folder given - applies to aegit_impClass
 ' #013 - Import of class source code into a new database creates a module
@@ -52,6 +53,9 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140523 - v098 - #020 showed output like strQueryName=~sq_ffrmImages_35BF4C8896444268BB942DACE45FF252
+    ' MSComctlLib (Microsoft Windows Common Controls 6.0 (SP6))causes error in aeGetReferences
+    ' Work Around - Remove the reference
 '20140424 - v097 - Add paramater to PopCallStack to trace #018 - problem is in LongestTableName
     ' LongestTableName used in class initialize - give default value 11 instead
     ' LongestFieldPropsName raises Error 9

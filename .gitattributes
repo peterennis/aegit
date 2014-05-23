@@ -1,5 +1,5 @@
 ###################
 ## Ref: http://stackoverflow.com/questions/5046032/git-says-binary-files-a-and-b-differ-on-for-reg-files
-## github was no showing diff on qry file
+## github was not showing diff on qry file
 ###################
 *.qry diff

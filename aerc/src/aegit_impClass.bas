@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_impVERSION As String = "0.9.6"
-Private Const aegit_impVERSION_DATE As String = "April 18, 2014"
+Private Const aegit_impVERSION As String = "0.9.8"
+Private Const aegit_impVERSION_DATE As String = "May 23, 2014"
 Private Const aeAPP_NAME As String = "aegit_imp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const THE_DRIVE As String = "C"
@@ -318,7 +318,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
         Print #1, , "<@_@>"
         Print #1, , "     " & "References:"
 
-    For i = 1 To vbaProj.References.Count
+    For i = 1 To vbaProj.References.count
 
         blnRefBroken = False
 
@@ -1017,11 +1017,11 @@ Private Sub ResetWorkspace()
     DoCmd.Echo True
 
     ' Clean up workspace by closing open forms and reports
-    For intCounter = 0 To Forms.Count - 1
+    For intCounter = 0 To Forms.count - 1
         DoCmd.Close acForm, Forms(intCounter).Name
     Next intCounter
 
-    For intCounter = 0 To Reports.Count - 1
+    For intCounter = 0 To Reports.count - 1
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
 End Sub

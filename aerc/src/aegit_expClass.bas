@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "0.9.7"
-Private Const aegit_expVERSION_DATE As String = "April 24, 2014"
+Private Const aegit_expVERSION As String = "0.9.8"
+Private Const aegit_expVERSION_DATE As String = "May 23, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const gcfHandleErrors As Boolean = True
@@ -383,17 +383,32 @@ PROC_ERR:
 
 End Function
 
+Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
+    On Error GoTo 0
+    Debug.Print "strQueryName=" & strQueryName
+    If IsNull(strQueryName) Or strQueryName = vbNullString Then
+        IsQryHidden = False
+    Else
+        IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
+    End If
+End Function
+
 Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
-    On Error GoTo 0
+    On Error GoTo PROC_ERR
+
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
     Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
                                 "FROM MSysObjects AS m " & vbCrLf & _
-                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
+                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
                                 "ORDER BY m.Name;"
-    
+
+    Debug.Print strSQL
+    ''' FIXME - #020 IsQryHidden - Required to be Public function outside of the class when used as below
+    ''' and no queries exist in the database
+'
 '    "SELECT m.Name, IIf(IsQryHidden([Name]),1,0) AS Hidden INTO " & strTempTable & " " & vbCrLf & _
 '                                "FROM MSysObjects AS m " & vbCrLf & _
 '                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
@@ -402,10 +417,24 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     ' RunSQL works for Action queries
     DoCmd.SetWarnings False
     DoCmd.RunSQL strSQL
-    If Not IsMissing(varDebug) Then Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+    If Not IsMissing(varDebug) Then
+        Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+    End If
     DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+'    If Err = 2091 Then          ''...' is an invalid name.
+'        If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+'    ElseIf Err = 3270 Then      'Property not found.
+'        Err.Clear
+'    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+'    End If
 
 End Sub
 
@@ -776,7 +805,7 @@ Private Sub OutputListOfApplicationProperties()
     Dim varPropInherited As Variant
 
     With dbs
-        For i = 0 To (.Properties.Count - 1)
+        For i = 0 To (.Properties.count - 1)
             strPropName = .Properties(i).Name
             varPropValue = Null
             varPropValue = .Properties(i).Value
@@ -857,124 +886,124 @@ PROC_ERR:
 End Sub
 
 Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
-' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
-' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
-' Ref: http://www.cpearson.com/excel/missingreferences.aspx
-' Ref: http://allenbrowne.com/ser-38.html
-' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
-' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
-'====================================================================
-' Author:   Peter F. Ennis
-' Date:     November 28, 2012
-' Comment:  Added and adapted from aeladdin (tm) code
-' Updated:  All notes moved to change log
-' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+      ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
+      ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
+      ' Ref: http://www.cpearson.com/excel/missingreferences.aspx
+      ' Ref: http://allenbrowne.com/ser-38.html
+      ' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
+      ' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
+      '====================================================================
+      ' Author:   Peter F. Ennis
+      ' Date:     November 28, 2012
+      ' Comment:  Added and adapted from aeladdin (tm) code
+      ' Updated:  All notes moved to change log
+      ' History:  See comment details, basChangeLog, commit messages on github
+      '====================================================================
 
-    Dim i As Integer
-    Dim RefName As String
-    Dim RefDesc As String
-    Dim blnRefBroken As Boolean
-    Dim strFile As String
+          Dim i As Integer
+          Dim RefName As String
+          Dim RefDesc As String
+          Dim blnRefBroken As Boolean
+          Dim strFile As String
 
-    Dim vbaProj As Object
-    Set vbaProj = Application.VBE.ActiveVBProject
+          Dim vbaProj As Object
+10        Set vbaProj = Application.VBE.ActiveVBProject
 
-    ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeGetReferences"
-    On Error GoTo PROC_ERR
+          ' Use a call stack and global error handler
+          'If gcfHandleErrors Then On Error GoTo PROC_ERR
+          'PushCallStack "aeGetReferences"
+20        On Error GoTo PROC_ERR
 
-    Debug.Print "aeGetReferences"
-    If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
-    Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
-    End If
+30        Debug.Print "aeGetReferences"
+40        If IsMissing(varDebug) Then
+50            If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+60            If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+70        Else
+80            If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
+90            If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+100       End If
 
-    strFile = aestrSourceLocation & aeRefTxtFile
-    
-    If Dir$(strFile) <> vbNullString Then
-        ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
-        Open strFile For Append As #1
-    Else
-        If Not FileLocked(strFile) Then Open strFile For Append As #1
-    End If
+110       strFile = aestrSourceLocation & aeRefTxtFile
+          
+120       If Dir$(strFile) <> vbNullString Then
+              ' The file exists
+130           If Not FileLocked(strFile) Then KillProperly (strFile)
+140           Open strFile For Append As #1
+150       Else
+160           If Not FileLocked(strFile) Then Open strFile For Append As #1
+170       End If
 
-    If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print ">==> aeGetReferences >==>"
-        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Name = " & vbaProj.Name
-        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
-        ' Display the versions of Access, ADO and DAO
-        If aeDEBUG_PRINT Then Debug.Print , "Access version = " & Application.Version
-        If aeDEBUG_PRINT Then Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
-        If aeDEBUG_PRINT Then Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
-        If aeDEBUG_PRINT Then Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
-        If aeDEBUG_PRINT Then Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
-        If aeDEBUG_PRINT Then Debug.Print , "<@_@>"
-        If aeDEBUG_PRINT Then Debug.Print , "     " & "References:"
-    End If
+180       If Not IsMissing(varDebug) Then
+190           If aeDEBUG_PRINT Then Debug.Print ">==> aeGetReferences >==>"
+200           If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Name = " & vbaProj.Name
+210           If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
+              ' Display the versions of Access, ADO and DAO
+220           If aeDEBUG_PRINT Then Debug.Print , "Access version = " & Application.Version
+230           If aeDEBUG_PRINT Then Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+240           If aeDEBUG_PRINT Then Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+250           If aeDEBUG_PRINT Then Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+260           If aeDEBUG_PRINT Then Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
+270           If aeDEBUG_PRINT Then Debug.Print , "<@_@>"
+280           If aeDEBUG_PRINT Then Debug.Print , "     " & "References:"
+290       End If
 
-        Print #1, ">==> The Project References >==>"
-        Print #1, , "vbaProj.Name = " & vbaProj.Name
-        Print #1, , "vbaProj.Type = '" & vbaProj.Type & "'"
-        ' Display the versions of Access, ADO and DAO
-        Print #1, , "Access version = " & Application.Version
-        Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
-        Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.Version
-        Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.Version
-        Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
-        Print #1, , "<@_@>"
-        Print #1, , "     " & "References:"
+300           Print #1, ">==> The Project References >==>"
+310           Print #1, , "vbaProj.Name = " & vbaProj.Name
+320           Print #1, , "vbaProj.Type = '" & vbaProj.Type & "'"
+              ' Display the versions of Access, ADO and DAO
+330           Print #1, , "Access version = " & Application.Version
+340           Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+350           Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+360           Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+370           Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
+380           Print #1, , "<@_@>"
+390           Print #1, , "     " & "References:"
 
-    For i = 1 To vbaProj.References.Count
+400       For i = 1 To vbaProj.References.count
 
-        blnRefBroken = False
+410           blnRefBroken = False
 
-        ' Get the Name of the Reference
-        RefName = vbaProj.References(i).Name
+              ' Get the Name of the Reference
+420           RefName = vbaProj.References(i).Name
 
-        ' Get the Description of Reference
-        RefDesc = vbaProj.References(i).Description
+              ' Get the Description of Reference
+430           RefDesc = vbaProj.References(i).Description
 
-        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
-        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
-        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
+440           If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+450           If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
+460           If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
 
-        Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
-        Print #1, , , , vbaProj.References(i).FullPath
-        Print #1, , , , vbaProj.References(i).GUID
+470           Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
+480           Print #1, , , , vbaProj.References(i).FullPath
+490           Print #1, , , , vbaProj.References(i).GUID
 
-        ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
-        If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
-              blnRefBroken = True
-              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
-              Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
-        End If
-    Next
-    If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
-    If Not IsMissing(varDebug) Then Debug.Print "<==<"
+              ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
+500           If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
+510                 blnRefBroken = True
+520                 If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+530                 Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+540           End If
+550       Next
+560       If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
+570       If Not IsMissing(varDebug) Then Debug.Print "<==<"
 
-    Print #1, , "<*_*>"
-    Print #1, "<==<"
+580       Print #1, , "<*_*>"
+590       Print #1, "<==<"
 
-    aeGetReferences = True
+600       aeGetReferences = True
 
 PROC_EXIT:
-    Set vbaProj = Nothing
-    Close 1
-    'PopCallStack "aeGetReferences"
-    Exit Function
+610       Set vbaProj = Nothing
+620       Close 1
+          'PopCallStack "aeGetReferences"
+630       Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
-    aeGetReferences = False
-    'GlobalErrHandler
-    Resume PROC_EXIT
+640       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
+650       If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
+660       aeGetReferences = False
+          'GlobalErrHandler
+670       Resume PROC_EXIT
 
 End Function
 
@@ -2282,7 +2311,7 @@ SaveAsText:
 
     If Not IsMissing(varDebug) Then
         If aeDEBUG_PRINT Then Debug.Print , i & " EXPORTED!"
-        If aeDEBUG_PRINT Then Debug.Print , cnt.Documents.Count & " EXISTING!"
+        If aeDEBUG_PRINT Then Debug.Print , cnt.Documents.count & " EXISTING!"
     End If
 
     DocumentTheContainer = True
@@ -2552,10 +2581,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             If aeDEBUG_PRINT Then Debug.Print , i & " Queries EXPORTED!"
         End If
         
-        If CurrentDb.QueryDefs.Count = 1 Then
+        If CurrentDb.QueryDefs.count = 1 Then
             If aeDEBUG_PRINT Then Debug.Print , "1 Query EXISTING!"
         Else
-            If aeDEBUG_PRINT Then Debug.Print , CurrentDb.QueryDefs.Count & " Queries EXISTING!"
+            If aeDEBUG_PRINT Then Debug.Print , CurrentDb.QueryDefs.count & " Queries EXISTING!"
         End If
     End If
 
@@ -3211,7 +3240,7 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 
     If Not IsMissing(varDebug) Then Debug.Print "Default Printer=" & Application.Printer.DeviceName
     Print #fle, "Default Printer=" & Application.Printer.DeviceName
-    prtCount = Application.Printers.Count
+    prtCount = Application.Printers.count
     If Not IsMissing(varDebug) Then Debug.Print "Number of Printers=" & prtCount
     Print #fle, "Number of Printers=" & prtCount
     For Each prt In Printers
@@ -3486,11 +3515,11 @@ Private Sub ResetWorkspace()
     DoCmd.Echo True
 
     ' Clean up workspace by closing open forms and reports
-    For intCounter = 0 To Forms.Count - 1
+    For intCounter = 0 To Forms.count - 1
         DoCmd.Close acForm, Forms(intCounter).Name
     Next intCounter
 
-    For intCounter = 0 To Reports.Count - 1
+    For intCounter = 0 To Reports.count - 1
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
 End Sub

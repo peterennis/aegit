@@ -218,11 +218,11 @@ Public Sub ObjectCounts()
  
         Debug.Print "--- From the DAO.Database ---"
         Debug.Print "-----------------------------"
-        Debug.Print "Tables (Inc. System tbls): " & .TableDefs.Count
-        Debug.Print "Querys: " & .QueryDefs.Count & vbCrLf
+        Debug.Print "Tables (Inc. System tbls): " & .TableDefs.count
+        Debug.Print "Querys: " & .QueryDefs.count & vbCrLf
  
         For Each cnt In .Containers
-            Debug.Print cnt.Name & ":" & cnt.Documents.Count
+            Debug.Print cnt.Name & ":" & cnt.Documents.count
         Next cnt
  
     End With
@@ -231,11 +231,11 @@ Public Sub ObjectCounts()
     With CurrentProject
         Debug.Print vbCrLf & "--- From the Access 'Project' ---"
         Debug.Print "---------------------------------"
-        Debug.Print "Forms: " & .AllForms.Count
-        Debug.Print "Reports: " & .AllReports.Count
-        Debug.Print "DataAccessPages: " & .AllDataAccessPages.Count
-        Debug.Print "Modules: " & .AllModules.Count
-        Debug.Print "Macros (aka Scripts): " & .AllMacros.Count
+        Debug.Print "Forms: " & .AllForms.count
+        Debug.Print "Reports: " & .AllReports.count
+        Debug.Print "DataAccessPages: " & .AllDataAccessPages.count
+        Debug.Print "Modules: " & .AllModules.count
+        Debug.Print "Macros (aka Scripts): " & .AllMacros.count
     End With
  
 End Sub

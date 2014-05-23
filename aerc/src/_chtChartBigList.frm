@@ -4222,7 +4222,7 @@ Private Sub Form_Load()
     Dim objNewAppTitle As Object
 
     Set objNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
-    dbs.Properties("AppTitle").Value = gstrProject & " " & gstrVERSION
+    dbs.Properties("AppTitle").Value = gstrPROJECT & " " & gstrVERSION
     Application.RefreshTitleBar
     Set dbs = Nothing
 

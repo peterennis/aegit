@@ -314,9 +314,14 @@ Public Sub TestHideQueryDef()
 
 End Sub
 
-Public Function IsQryHidden(ByVal strQueryName As String) As Boolean
+Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     On Error GoTo 0
-    IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
+    Debug.Print "strQueryName=" & strQueryName
+    If IsNull(strQueryName) Or strQueryName = vbNullString Then
+        IsQryHidden = False
+    Else
+        IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
+    End If
 End Function
 
 Public Sub OutputListOfAllQueries()

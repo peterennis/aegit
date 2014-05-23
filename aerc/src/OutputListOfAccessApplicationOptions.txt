@@ -1,5 +1,5 @@
 >>>Standard Options
-              2000          AppTitle                    aegit 0.9.7
+              2000          AppTitle                    aegit 0.9.8
               2000          AppIcon                     .\adaept64.ico
               2000          AllowFullMenus              True
               2000          AllowShortcutMenus          True
@@ -55,7 +55,7 @@
               XP, 2003      Default Gridlines Horizontal              -1 
               XP, 2003      Default Gridlines Vertical                -1 
               XP, 2003      Default Column Width                      1"
-              XP, 2003      Default Font Name                         Calibri
+              XP, 2003      Default Font Name                         Consolas
               XP, 2003      Default Font Weight                        3 
               XP, 2003      Default Font Size                          11 
               XP, 2003      Default Font Underline                     0 
@@ -81,8 +81,8 @@
               XP, 2003      Run Permissions                            1 
               XP, 2003      ANSI Query Mode                            0 
               XP, 2003      ANSI Query Mode Default                    0 
-                  2003      Query Design Font Name                    Segoe UI
-                  2003      Query Design Font Size                     8 
+                  2003      Query Design Font Name                    Consolas
+                  2003      Query Design Font Size                     10 
                   2003      Show Property Update Options buttons      -1 
 >>>Forms/Reports Tab
               XP, 2003      Selection Behavior           0 
@@ -176,7 +176,7 @@
               2007, 2010, 2013            Default Cell Effect                        0 
               2007, 2010, 2013            Default Column Width                      1"
    >>>Default font section
-              2007, 2010, 2013            Default Font Name           Calibri
+              2007, 2010, 2013            Default Font Name           Consolas
               2007, 2010, 2013            Default Font Size            11 
               2007, 2010, 2013            Default Font Weight          3 
               2007, 2010, 2013            Default Font Underline       0 
@@ -194,8 +194,8 @@
               2007, 2010, 2013            Enable AutoJoin             -1 
               2007, 2010, 2013            ANSI Query Mode              0 
               2007, 2010, 2013            ANSI Query Mode Default      0 
-              2007, 2010, 2013            Query Design Font Name      Segoe UI
-              2007, 2010, 2013            Query Design Font Size       8 
+              2007, 2010, 2013            Query Design Font Name      Consolas
+              2007, 2010, 2013            Query Design Font Size       10 
    >>>Forms/Reports section
               2007, 2010, 2013            Selection Behavior           0 
               2007, 2010, 2013            Form Template               Normal

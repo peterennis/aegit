@@ -2960,7 +2960,7 @@ End Sub
 Private Sub cmdM01_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=1")
@@ -2972,7 +2972,7 @@ End Sub
 Private Sub cmdM02_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=2")
@@ -2982,7 +2982,7 @@ End Sub
 Private Sub cmdM03_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=3")
@@ -2992,7 +2992,7 @@ End Sub
 Private Sub cmdM04_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=4")
@@ -3002,7 +3002,7 @@ End Sub
 Private Sub cmdM05_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=5")
@@ -3012,7 +3012,7 @@ End Sub
 Private Sub cmdM06_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=6")
@@ -3022,7 +3022,7 @@ End Sub
 Private Sub cmdM07_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=7")
@@ -3032,7 +3032,7 @@ End Sub
 Private Sub cmdM08_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=8")
@@ -3042,7 +3042,7 @@ End Sub
 Private Sub cmdM09_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=9")
@@ -3052,7 +3052,7 @@ End Sub
 Private Sub cmdM10_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=10")
@@ -3062,7 +3062,7 @@ End Sub
 Private Sub cmdM11_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=11")
@@ -3072,7 +3072,7 @@ End Sub
 Private Sub cmdM12_Click()
     On Error GoTo 0
     If IsNull(Me.txtYear) Then
-        MsgBox "Select a year", vbExclamation, gstrProject
+        MsgBox "Select a year", vbExclamation, gstrPROJECT
         Exit Sub
     End If
     Me.txtMonth = DLookup("TheMonthShort", "_tlkpMonth", "ID=12")

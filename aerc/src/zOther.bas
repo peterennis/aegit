@@ -73,7 +73,7 @@ Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As
     Dim rst As DAO.Recordset
 
     ' Ref: http://technet.microsoft.com/en-us/library/ms189082(v=sql.105).aspx
-    Debug.Print "Count of items in tables catalog=" & ocat.Tables.Count
+    Debug.Print "Count of items in tables catalog=" & ocat.Tables.count
     For Each otbl In ocat.Tables
         If otbl.Name = "AWBuildVersion" Then
         ElseIf otbl.Name = "DatabaseLog" Then

@@ -1,1 +1,7 @@
+"_qryChart"
+"_qryKPI01"
+"qpt_Dummy"
+"qpt_SqlSchemaTablesList"
 "qry_HiddenDummy"
+"qryLastUpdated"
+"zzz___MyTempQuery___"
