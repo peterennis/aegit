@@ -251,41 +251,6 @@ RESULTS:
 
 End Function
 
-Public Function aegitClassImportTest(Optional ByVal varDebug As Variant, _
-                                Optional ByVal varImpFldr As Variant) As Boolean
-' Usage:
-' Run in immediate window: aegitClassImportTest
-
-    On Error GoTo 0
-    Dim oDbObjects As aegit_impClass
-    Set oDbObjects = New aegit_impClass
-
-    Dim bln1 As Boolean
-
-    If Not IsMissing(varImpFldr) Then oDbObjects.ImportFolder = varImpFldr      ' THE_IMPORT_FOLDER
-
-ImportTest1:
-    '==============
-    ' IMPORT TEST 1
-    '==============
-    Debug.Print
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "1. aegitClassImportTest => ReadDocDatabase"
-    Debug.Print "aegitClassImportTest"
-
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to ReadDocDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
-        bln1 = oDbObjects.ReadDocDatabase(True)
-    Else
-        Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
-        bln1 = oDbObjects.ReadDocDatabase(True, "WithDebugging")
-    End If
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-
-End Function
-
 Public Sub TestHideQueryDef()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/25d9dafd-b446-40ba-8dbd-a0efa983f2ff/how-to-programatically-hide-a-querydef
 

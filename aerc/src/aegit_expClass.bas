@@ -29,12 +29,13 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "0.9.8"
+Private Const aegit_expVERSION As String = "1.0.0"
 Private Const aegit_expVERSION_DATE As String = "May 23, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
-Private Const gcfHandleErrors As Boolean = True
-Private Const gblnOutputPrinterInfo As Boolean = False
+Private Const mblnHandleErrors As Boolean = True
+Private Const mblnOutputPrinterInfo As Boolean = False
+Private Const mblnUTF16 As Boolean = True
 
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
 ' This enum is used by SizeString to indicate whether the supplied text
@@ -317,7 +318,7 @@ Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
     'Debug.Print "aeReadWriteStream Entry strPathFileName=" & strPathFileName
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "aeReadWriteStream"
 
     On Error GoTo PROC_ERR
@@ -461,7 +462,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
 ' This makes finding and fixing the problem a real pain.
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputListOfAccessApplicationOptions"
     On Error GoTo PROC_ERR
 
@@ -787,7 +788,7 @@ Private Sub OutputListOfApplicationProperties()
 ' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputListOfApplicationProperties"
     On Error GoTo PROC_ERR
 
@@ -910,7 +911,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 10        Set vbaProj = Application.VBE.ActiveVBProject
 
           ' Use a call stack and global error handler
-          'If gcfHandleErrors Then On Error GoTo PROC_ERR
+          'If mblnHandleErrors Then On Error GoTo PROC_ERR
           'PushCallStack "aeGetReferences"
 20        On Error GoTo PROC_ERR
 
@@ -1021,7 +1022,7 @@ Private Function LongestTableName() As Integer
     Dim intTNLen As Integer
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "LongestTableName"
     On Error GoTo PROC_ERR
 
@@ -1067,7 +1068,7 @@ Private Function LongestFieldPropsName() As Boolean
     Dim fld As DAO.Field
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "LongestFieldPropsName"
 
     On Error GoTo PROC_ERR
@@ -1241,7 +1242,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     Dim strLinkedTablePath As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "TableInfo"
     On Error GoTo PROC_ERR
 
@@ -1350,7 +1351,7 @@ Private Function LongestTableDescription(ByVal strTblName As String) As Integer
     Dim strLFD As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "LongestTableDescription"
     On Error GoTo PROC_ERR
 
@@ -1488,7 +1489,7 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "aeDocumentTables"
     On Error GoTo PROC_ERR
 
@@ -1575,7 +1576,7 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 ' Ref: http://stackoverflow.com/questions/4867727/how-to-use-ms-access-saveastext-with-queries-specifically-stored-procedures
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "aeDocumentTablesXML"
     On Error GoTo PROC_ERR
 
@@ -1891,7 +1892,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "aeDocumentRelations"
     On Error GoTo PROC_ERR
 
@@ -1965,7 +1966,7 @@ Private Function OutputQueriesSqlText() As Boolean
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputQueriesSqlText"
     On Error GoTo PROC_ERR
 
@@ -2009,7 +2010,7 @@ Private Sub KillProperly(ByVal Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "KillProperly"
 
     On Error GoTo PROC_ERR
@@ -2124,7 +2125,7 @@ Private Function OutputBuiltInPropertiesText() As Boolean
     Dim strError As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputBuiltInPropertiesText"
     On Error GoTo PROC_ERR
 
@@ -2186,7 +2187,7 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
     'Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "IsFileLocked"
 
     On Error GoTo PROC_ERR
@@ -2235,7 +2236,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
 ' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "DocumentTheContainer"
     On Error GoTo PROC_ERR
 
@@ -2289,11 +2290,16 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
 SaveAsText:
             Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
-            ' Convert UTF-16 to txt - fix for Access 2013
-            If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-                'If intAcObjType = 2 Then Pause (0.25)
-                KillProperly (strTheCurrentPathAndFile)
-                Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+            If mblnUTF16 Then
+                Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
+            Else
+                Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
+                ' Convert UTF-16 to txt - fix for Access 2013
+                If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
+                    'If intAcObjType = 2 Then Pause (0.25)
+                    KillProperly (strTheCurrentPathAndFile)
+                    Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+                End If
             End If
         End If
         '
@@ -2324,8 +2330,8 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    If Err = 2220 Then
-        If aeDEBUG_PRINT Then Debug.Print "Err=3220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
+    If Err = 2220 Then  ' Run-time error 2220 Microsoft Access can't open the file
+        If aeDEBUG_PRINT Then Debug.Print "Err=2220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
         Err.Clear
         Pause (0.25)
         Resume SaveAsText
@@ -2342,7 +2348,7 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "KillAllFiles"
     On Error GoTo PROC_ERR
 
@@ -2457,7 +2463,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim i As Integer
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "aeDocumentTheDatabase"
     On Error GoTo PROC_ERR
 
@@ -2655,7 +2661,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
     Dim obj As Variant
     
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "aeExists"
     On Error GoTo PROC_ERR
 
@@ -2766,7 +2772,7 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
 ' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "FieldLookupControlTypeList"
     On Error GoTo PROC_ERR
 
@@ -2886,7 +2892,7 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional 
     Dim lngFileNum As Long
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputListOfContainers"
     On Error GoTo PROC_ERR
 
@@ -2953,7 +2959,7 @@ End Function
 Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputAllContainerProperties"
     On Error GoTo PROC_ERR
 
@@ -3014,7 +3020,7 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
     
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "ListAllContainerProperties"
     On Error GoTo PROC_ERR
 
@@ -3075,7 +3081,7 @@ End Sub
 Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As Variant)
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "PrettyXML"
     On Error GoTo PROC_ERR
 
@@ -3163,7 +3169,7 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    If mblnHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "OutputTheTableDataAsXML"
 
     Const adOpenStatic As Integer = 3
@@ -3224,7 +3230,7 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/how-do-i-change-default-printers-in-vba/d046a937-6548-4d2b-9517-7f622e2cfed2
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputPrinterInfo"
     On Error GoTo PROC_ERR
 
@@ -3233,7 +3239,7 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
     Dim i As Integer
     Dim fle As Integer
 
-    If Not gblnOutputPrinterInfo Then Exit Sub
+    If Not mblnOutputPrinterInfo Then Exit Sub
     
     fle = FreeFile()
     Open aegitSourceFolder & "\" & aePrnterInfo For Output As #fle
@@ -3331,7 +3337,7 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputTableDataMacros"
 
     On Error GoTo PROC_ERR

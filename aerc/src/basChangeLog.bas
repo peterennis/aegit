@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE As String = "May 23, 2014"
-Public Const gstrVERSION As String = "0.9.9"
+Public Const gstrVERSION As String = "1.0.0"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -39,7 +39,6 @@ Public Const gblnTEST As Boolean = False
 ' #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
 ' #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
-' #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
 ' #017 - KPI chart test not working
 ' #014 - ReadDocDatabase debug output when custom test folder given - applies to aegit_impClass
 ' #013 - Import of class source code into a new database creates a module
@@ -54,6 +53,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140523 - v100 - FIXED #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
 '20140523 - v099 - #021 International encoding - Ref: http://stackoverflow.com/questions/8038729/github-using-utf-8-encoding-for-files
     ' s/gcfHandleErrors/mblnHandleErrors/g - It is only used in the class and is not global
     ' s/gblnOutputPrinterInfo/mblnOutputPrinterInfo/g - It is only used in the class and is not global

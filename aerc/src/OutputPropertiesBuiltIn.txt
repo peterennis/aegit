@@ -230,7 +230,7 @@ Inherited: False;
 ---
 Name: NavPane Sort By
 Type: dbLong
-Value: 1
+Value: 0
 Inherited: False;
 ---
 Name: Track Name AutoCorrect Info
@@ -245,7 +245,7 @@ Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 0.9.8
+Value: aegit 1.0.0
 Inherited: False;
 ---
 Name: AppIcon
