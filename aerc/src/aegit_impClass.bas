@@ -29,13 +29,13 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_impVERSION As String = "0.9.8"
+Private Const aegit_impVERSION As String = "0.9.9"
 Private Const aegit_impVERSION_DATE As String = "May 23, 2014"
 Private Const aeAPP_NAME As String = "aegit_imp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const THE_DRIVE As String = "C"
 
-Private Const gcfHandleErrors As Boolean = True
+Private Const mblnHandleErrors As Boolean = True
 
 Private Type mySetupType
     ImportFolder As String
@@ -272,7 +272,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
     Set vbaProj = Application.VBE.ActiveVBProject
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    If mblnHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeGetReferences"
 
     Debug.Print "aeGetReferences"
@@ -478,7 +478,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim strFile As String
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    If mblnHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeDocumentRelations"
 
     Debug.Print "aeDocumentRelations"
@@ -541,7 +541,7 @@ Private Sub KillProperly(ByVal Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "KillProperly"
 
     On Error GoTo PROC_ERR
@@ -573,7 +573,7 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
     'Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
 
     ' Use a call stack and global error handler
-    'If gcfHandleErrors Then On Error GoTo PROC_ERR
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "IsFileLocked"
 
     On Error GoTo PROC_ERR
@@ -643,7 +643,7 @@ Private Function BuildTheDirectory(ByVal fso As Object, _
     Dim objImportFolder As Object
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    If mblnHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "BuildTheDirectory"
 
     Debug.Print "BuildTheDirectory"
@@ -723,7 +723,7 @@ Private Function aeReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal va
     Dim bln As Boolean
 
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    If mblnHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeReadDocDatabase"
 
     If aeDEBUG_PRINT Then Debug.Print "aeReadDocDatabase"
@@ -874,7 +874,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
     Dim blnDebug As Boolean
     
     ' Use a call stack and global error handler
-    If gcfHandleErrors Then On Error GoTo PROC_ERR
+    If mblnHandleErrors Then On Error GoTo PROC_ERR
     PushCallStack "aeExists"
 
     Debug.Print "aeExists"

@@ -225,7 +225,7 @@ Inherited: False;
 ---
 Name: NavPane View By
 Type: dbLong
-Value: 2
+Value: 0
 Inherited: False;
 ---
 Name: NavPane Sort By

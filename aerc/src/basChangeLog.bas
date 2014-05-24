@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE As String = "May 23, 2014"
-Public Const gstrVERSION As String = "0.9.8"
+Public Const gstrVERSION As String = "0.9.9"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -29,13 +29,15 @@ Public Const gblnTEST As Boolean = False
 ' Tasks:
 ' %007 -
 ' %006 -
-' %005 -
-' %004 -
+' %005 - Ref: http://stackoverflow.com/questions/3313561/what-are-the-limitations-of-git-on-windows
+' %004 - Learning git on the command line - Ref: http://cheat.errtheblog.com/s/git
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #021 -
+' #023 -
+' #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
+' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
 ' #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
 ' #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
 ' #017 - KPI chart test not working
@@ -46,13 +48,19 @@ Public Const gblnTEST As Boolean = False
 ' #010 - Check if ViewAppProperties includes anything new
 ' #009 - Create Let property for setting aegitExportDataToXML
 ' #008 - Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
-' #006 - Rewrite UTF-16 files to standard text as optional
 ' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 ' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
 ' #001 - Property Let TablesExportToXML(ByRef avarTables() As Variant) - FIX THIS!!! - Check ByRef
 '=============================================================================================================================
 '
 '
+'20140523 - v099 - #021 International encoding - Ref: http://stackoverflow.com/questions/8038729/github-using-utf-8-encoding-for-files
+    ' s/gcfHandleErrors/mblnHandleErrors/g - It is only used in the class and is not global
+    ' s/gblnOutputPrinterInfo/mblnOutputPrinterInfo/g - It is only used in the class and is not global
+    ' Set mblnUTF16=True to force UTF16 output for testing i18n
+    ' Using TortoiseGit diff opens TortoiseGitMerge with the message "The text is identical, but the files do not match!
+    ' The following differences were found: Encoding (ASCII, UTF-16LE BOM)"
+    ' FIXED #006 - Rewrite UTF-16 files to standard text as optional
 '20140523 - v098 - #020 showed output like strQueryName=~sq_ffrmImages_35BF4C8896444268BB942DACE45FF252
     ' MSComctlLib (Microsoft Windows Common Controls 6.0 (SP6))causes error in aeGetReferences
     ' Work Around - Remove the reference
@@ -163,7 +171,7 @@ Public Const gblnTEST As Boolean = False
     ' Split class to aegit_expClass and aegit_impClass
     ' Testing updates to ExportToExcel by James Kauffman, using late binding
 '20140304 - v084 - Bump
-'20140303 - v083 - Use gblnOutputPrinterInfo to determine if printer output info will be exported
+'20140303 - v083 - Use mblnOutputPrinterInfo to determine if printer output info will be exported
     ' Write pretty xml
 '20140226 - v082 - OutputTableDataMacros included in aegitClass
     ' ExportTableDataAsFormattedText test
