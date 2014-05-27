@@ -23,13 +23,13 @@ Public Function RemoveTableDuplicates(ByVal strTableName As String) As Boolean
     Dim nTotalDeleted As Long
 
     Set rs = CurrentDb.OpenRecordset(strTableName)
-    nFieldCount = rs.Fields.count
+    nFieldCount = rs.Fields.Count
 
     strSQL = "SELECT * FROM " & strTableName & " ORDER BY "
 
-    For nCurrent = 0 To rs.Fields.count - 1
+    For nCurrent = 0 To rs.Fields.Count - 1
         strSQL = strSQL & rs.Fields(nCurrent).Name
-        If nCurrent < rs.Fields.count - 1 Then
+        If nCurrent < rs.Fields.Count - 1 Then
             strSQL = strSQL & ", "
         End If
     Next
@@ -49,7 +49,7 @@ Public Function RemoveTableDuplicates(ByVal strTableName As String) As Boolean
         End If
         
         strThisRecord = vbNullString
-        For nCurrent = 0 To rs.Fields.count - 1
+        For nCurrent = 0 To rs.Fields.Count - 1
             strThisRecord = strThisRecord & rs.Fields(nCurrent).Value
         Next
         If strThisRecord = strLastRecord Then
@@ -83,7 +83,7 @@ Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As 
     
     ' Check to see if strTableName is actually a query.  If so, use its SQL query.
     nCurrent = 0
-    Do While nCurrent < CurrentDb.QueryDefs.count
+    Do While nCurrent < CurrentDb.QueryDefs.Count
         If UCase$(CurrentDb.QueryDefs(nCurrent).Name) = UCase$(strTableName) Then
             strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
@@ -91,7 +91,7 @@ Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As 
     Loop
     
     Set rst = CurrentDb.OpenRecordset(strSQL)
-    nFieldCount = rst.Fields.count
+    nFieldCount = rst.Fields.Count
     
     If Not rst.EOF Then
         ' Now find the *actual* record count--returns a value of 1 record if we don't do these moves.
@@ -177,14 +177,14 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
 
     ' Check to see if strTableName is actually a query.  If so, use its SQL query.
     nCurrent = 0
-    Do While nCurrent < CurrentDb.QueryDefs.count
+    Do While nCurrent < CurrentDb.QueryDefs.Count
         If UCase$(CurrentDb.QueryDefs(nCurrent).Name) = UCase$(strTableName) Then
             strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
         nCurrent = nCurrent + 1
     Loop
     Set rst = CurrentDb.OpenRecordset(strSQL)
-    nFieldCount = rst.Fields.count
+    nFieldCount = rst.Fields.Count
 
     If Not rst.EOF Then
         ' Now find the *actual* record count--returns a value of 1 record if we don't do these moves.
@@ -288,7 +288,7 @@ Public Function ImportFromAccess(ByVal strSourceFile As String, ByVal strSourceT
         End If
         rs.AddNew
         nCurrent = 0
-        Do While nCurrent < rs1.Fields.count
+        Do While nCurrent < rs1.Fields.Count
             rs.Fields(nCurrent).Value = rs1.Fields(nCurrent).Value
             nCurrent = nCurrent + 1
             rs.Update
@@ -479,7 +479,7 @@ Public Function CreateTable(ByVal strTableName As String, ByRef strFields() As S
     On Error GoTo ErrorHandler
     ' Check for existence of TargetTable
     nCounter = 0
-    Do While nCounter < dbs.TableDefs.count
+    Do While nCounter < dbs.TableDefs.Count
         If dbs.TableDefs(nCounter).Name = strTableName Then
             ' Delete TargetTable--must start from scratch
             dbs.TableDefs.Delete (strTableName)
@@ -545,7 +545,7 @@ Public Function TableScrub(ByVal strTableName As String) As Long
             nCurSec = Second(Now())
         End If
         rs.Edit
-        For A = 0 To rs.Fields.count - 1
+        For A = 0 To rs.Fields.Count - 1
             nLength = 0
             If rs.Fields(A).Type = dbText And Len(rs.Fields(A).Value) > 0 Then
                 nLength = Len(rs.Fields(A).Value)

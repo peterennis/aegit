@@ -318,7 +318,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
         Print #1, , "<@_@>"
         Print #1, , "     " & "References:"
 
-    For i = 1 To vbaProj.References.count
+    For i = 1 To vbaProj.References.Count
 
         blnRefBroken = False
 
@@ -1017,11 +1017,11 @@ Private Sub ResetWorkspace()
     DoCmd.Echo True
 
     ' Clean up workspace by closing open forms and reports
-    For intCounter = 0 To Forms.count - 1
+    For intCounter = 0 To Forms.Count - 1
         DoCmd.Close acForm, Forms(intCounter).Name
     Next intCounter
 
-    For intCounter = 0 To Reports.count - 1
+    For intCounter = 0 To Reports.Count - 1
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
 End Sub

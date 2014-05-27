@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "1.0.0"
-Private Const aegit_expVERSION_DATE As String = "May 23, 2014"
+Private Const aegit_expVERSION As String = "1.0.1"
+Private Const aegit_expVERSION_DATE As String = "May 27, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True
@@ -401,12 +401,13 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
+    ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
     Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
                                 "FROM MSysObjects AS m " & vbCrLf & _
                                 "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
                                 "ORDER BY m.Name;"
-
     Debug.Print strSQL
+   
     ''' FIXME - #020 IsQryHidden - Required to be Public function outside of the class when used as below
     ''' and no queries exist in the database
 '
@@ -415,14 +416,16 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 '                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
 '                                "ORDER BY m.Name;"
 
-    ' RunSQL works for Action queries
     DoCmd.SetWarnings False
+    ' Use RunSQL for action queries - Insert list of db queries into a temp table
     DoCmd.RunSQL strSQL
+    '
+    
     If Not IsMissing(varDebug) Then
         Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
     End If
     DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
-    CurrentDb.Execute "DROP TABLE " & strTempTable
+'''>>>    CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
 PROC_EXIT:
@@ -806,7 +809,7 @@ Private Sub OutputListOfApplicationProperties()
     Dim varPropInherited As Variant
 
     With dbs
-        For i = 0 To (.Properties.count - 1)
+        For i = 0 To (.Properties.Count - 1)
             strPropName = .Properties(i).Name
             varPropValue = Null
             varPropValue = .Properties(i).Value
@@ -960,7 +963,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 380           Print #1, , "<@_@>"
 390           Print #1, , "     " & "References:"
 
-400       For i = 1 To vbaProj.References.count
+400       For i = 1 To vbaProj.References.Count
 
 410           blnRefBroken = False
 
@@ -2317,7 +2320,7 @@ SaveAsText:
 
     If Not IsMissing(varDebug) Then
         If aeDEBUG_PRINT Then Debug.Print , i & " EXPORTED!"
-        If aeDEBUG_PRINT Then Debug.Print , cnt.Documents.count & " EXISTING!"
+        If aeDEBUG_PRINT Then Debug.Print , cnt.Documents.Count & " EXISTING!"
     End If
 
     DocumentTheContainer = True
@@ -2587,10 +2590,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             If aeDEBUG_PRINT Then Debug.Print , i & " Queries EXPORTED!"
         End If
         
-        If CurrentDb.QueryDefs.count = 1 Then
+        If CurrentDb.QueryDefs.Count = 1 Then
             If aeDEBUG_PRINT Then Debug.Print , "1 Query EXISTING!"
         Else
-            If aeDEBUG_PRINT Then Debug.Print , CurrentDb.QueryDefs.count & " Queries EXISTING!"
+            If aeDEBUG_PRINT Then Debug.Print , CurrentDb.QueryDefs.Count & " Queries EXISTING!"
         End If
     End If
 
@@ -3246,7 +3249,7 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 
     If Not IsMissing(varDebug) Then Debug.Print "Default Printer=" & Application.Printer.DeviceName
     Print #fle, "Default Printer=" & Application.Printer.DeviceName
-    prtCount = Application.Printers.count
+    prtCount = Application.Printers.Count
     If Not IsMissing(varDebug) Then Debug.Print "Number of Printers=" & prtCount
     Print #fle, "Number of Printers=" & prtCount
     For Each prt In Printers
@@ -3521,11 +3524,11 @@ Private Sub ResetWorkspace()
     DoCmd.Echo True
 
     ' Clean up workspace by closing open forms and reports
-    For intCounter = 0 To Forms.count - 1
+    For intCounter = 0 To Forms.Count - 1
         DoCmd.Close acForm, Forms(intCounter).Name
     Next intCounter
 
-    For intCounter = 0 To Reports.count - 1
+    For intCounter = 0 To Reports.Count - 1
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
 End Sub

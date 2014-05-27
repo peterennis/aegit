@@ -23,7 +23,7 @@ Public Function ExportToExcel(ByVal strTableName As String, ByVal strFileName As
     isFound = False
     If Len(Dir$(strFileName, vbNormal)) > 0 Then 'File exists!
         Set wkb = objExcel.Workbooks.Open(strFileName, False, False)
-        nCurrent = wkb.Worksheets.count
+        nCurrent = wkb.Worksheets.Count
         Do While nCurrent > 0
             If wkb.Worksheets(nCurrent).Name = strTabName Then
                 objExcel.DisplayAlerts = False
@@ -59,7 +59,7 @@ Public Function ExportToExcel(ByVal strTableName As String, ByVal strFileName As
     Dim nSecondsLeft As Long
     Dim strTest As String
     
-    nFieldCount = rst.Fields.count
+    nFieldCount = rst.Fields.Count
     
     If Not rst.EOF Then
         rst.MoveLast
