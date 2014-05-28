@@ -481,37 +481,21 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
         End If
     End With
     'Stop
+    rst.Close
+    Set rst = Nothing
 
-    ''' FIXME - #020 IsQryHidden - Required to be Public function outside of the class when used as below
-    ''' and no queries exist in the database
-'
-'    "SELECT m.Name, IIf(IsQryHidden([Name]),1,0) AS Hidden INTO " & strTempTable & " " & vbCrLf & _
-'                                "FROM MSysObjects AS m " & vbCrLf & _
-'                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
-'                                "ORDER BY m.Name;"
-
-    '
-    
     If Not IsMissing(varDebug) Then
         Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
     End If
     DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
-'''>>>    CurrentDb.Execute "DROP TABLE " & strTempTable
+    CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
 PROC_EXIT:
-    rst.Close
-    Set rst = Nothing
     Exit Sub
 
 PROC_ERR:
-'    If Err = 2091 Then          ''...' is an invalid name.
-'        If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
-'    ElseIf Err = 3270 Then      'Property not found.
-'        Err.Clear
-'    Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
-'    End If
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
     Resume PROC_EXIT
 
 End Sub
