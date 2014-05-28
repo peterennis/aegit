@@ -454,6 +454,34 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     Debug.Print "IsQryHidden('qry_HiddenDummy')=" & IsQryHidden("qry_HiddenDummy")
     'Stop
 
+    DoCmd.SetWarnings False
+    ' Use RunSQL for action queries - Insert list of db queries into a temp table
+    DoCmd.RunSQL strSQL
+
+    Dim strTheSQL As String
+    Dim varResult As Variant
+    Dim rst As DAO.Recordset
+
+    strTheSQL = "SELECT Name FROM " & strTempTable & ";"
+    Set rst = CurrentDb.OpenRecordset(strTheSQL, dbOpenDynaset)
+
+    With rst
+        If (.RecordCount > 0) Then
+            rst.MoveFirst
+            Do While Not rst.EOF
+                varResult = !Name
+                Debug.Print !Name.Value, IsQryHidden(!Name)
+                If Not IsQryHidden(!Name) Then
+                    .Delete
+                End If
+                rst.MoveNext
+            Loop
+        Else
+            Debug.Print "No records!"
+        End If
+    End With
+    'Stop
+
     ''' FIXME - #020 IsQryHidden - Required to be Public function outside of the class when used as below
     ''' and no queries exist in the database
 '
@@ -462,9 +490,6 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 '                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
 '                                "ORDER BY m.Name;"
 
-    DoCmd.SetWarnings False
-    ' Use RunSQL for action queries - Insert list of db queries into a temp table
-    DoCmd.RunSQL strSQL
     '
     
     If Not IsMissing(varDebug) Then
@@ -475,6 +500,8 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     DoCmd.SetWarnings True
 
 PROC_EXIT:
+    rst.Close
+    Set rst = Nothing
     Exit Sub
 
 PROC_ERR:
@@ -485,6 +512,7 @@ PROC_ERR:
 '    Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
 '    End If
+    Resume PROC_EXIT
 
 End Sub
 
