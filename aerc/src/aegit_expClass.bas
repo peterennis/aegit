@@ -384,9 +384,52 @@ PROC_ERR:
 
 End Function
 
+Private Function RecordsetUpdatable(strSQL As String) As Boolean
+' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
+
+    Dim dbs As DAO.Database
+    Dim rst As DAO.Recordset
+    Dim intPosition As Integer
+
+    On Error GoTo PROC_ERR
+
+    ' Initialize the function's return value to True.
+    RecordsetUpdatable = True
+
+    Set dbs = CurrentDb
+    Set rst = dbs.OpenRecordset(strSQL, dbOpenDynaset)
+
+    ' If the entire dynaset isn't updatable, return False.
+    If rst.Updatable = False Then
+        RecordsetUpdatable = False
+    Else
+        ' If the dynaset is updatable, check if all fields in the
+        ' dynaset are updatable. If one of the fields isn't updatable,
+        ' return False.
+        For intPosition = 0 To rst.Fields.Count - 1
+            If rst.Fields(intPosition).DataUpdatable = False Then
+                RecordsetUpdatable = False
+                Exit For
+            End If
+        Next intPosition
+    End If
+
+PROC_EXIT:
+    rst.Close
+    dbs.Close
+    Set rst = Nothing
+    Set dbs = Nothing
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure RecordsetUpdatable of Class aegit_expClass"
+    Resume Next
+
+End Function
+
 Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     On Error GoTo 0
-    Debug.Print "strQueryName=" & strQueryName
+    'Debug.Print "strQueryName=" & strQueryName
     If IsNull(strQueryName) Or strQueryName = vbNullString Then
         IsQryHidden = False
     Else
@@ -407,7 +450,10 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
                                 "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
                                 "ORDER BY m.Name;"
     Debug.Print strSQL
-   
+    Debug.Print "IsQryHidden('qpt_Dummy')=" & IsQryHidden("qpt_Dummy")
+    Debug.Print "IsQryHidden('qry_HiddenDummy')=" & IsQryHidden("qry_HiddenDummy")
+    'Stop
+
     ''' FIXME - #020 IsQryHidden - Required to be Public function outside of the class when used as below
     ''' and no queries exist in the database
 '

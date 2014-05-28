@@ -273,16 +273,6 @@ Public Sub TestHideQueryDef()
 
 End Sub
 
-Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
-    On Error GoTo 0
-    Debug.Print "strQueryName=" & strQueryName
-    If IsNull(strQueryName) Or strQueryName = vbNullString Then
-        IsQryHidden = False
-    Else
-        IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
-    End If
-End Function
-
 Public Sub OutputListOfAllQueries()
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
@@ -338,30 +328,6 @@ Public Function ExportTheTableData(ByVal strTbl As String, ByVal strSpec As Stri
     DoCmd.TransferText acExportDelim, strSpec, strTbl, strPathFileName, blnHasHeaders
 
 End Function
-
-Public Sub MakeTableWithListOfAllHiddenQueries()
-
-    On Error GoTo 0
-    Const strTempTable As String = "zzzTmpTblQueries"
-    ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export
-    Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
-                                "FROM MSysObjects AS m " & vbCrLf & _
-                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
-                                "ORDER BY m.Name;"
-    
-'    "SELECT m.Name, IIf(IsQryHidden([Name]),1,0) AS Hidden INTO " & strTempTable & " " & vbCrLf & _
-'                                "FROM MSysObjects AS m " & vbCrLf & _
-'                                "WHERE (((m.Name) Not ALike ""~%"") AND ((IIf(IsQryHidden([Name]),1,0))=1) AND ((m.Type)=5)) " & vbCrLf & _
-'                                "ORDER BY m.Name;"
-
-    ' RunSQL works for Action queries
-    DoCmd.SetWarnings False
-    DoCmd.RunSQL strSQL
-    DoCmd.SetWarnings True
-    Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
-    ExportTheTableData strTempTable, vbNullString, "C:\Temp\OutputListOfHiddenQueries.txt", False
-
-End Sub
 
 ';Function:
 '; GetExtFileProperties()

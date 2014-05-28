@@ -32,15 +32,15 @@ Public Function RecordsetUpdatable(strSQL As String) As Boolean
         Next intPosition
     End If
 
+PROC_EXIT:
     rst.Close
     dbs.Close
     Set rst = Nothing
     Set dbs = Nothing
-
-Exit Function
+    Exit Function
 
 PROC_ERR:
-    MsgBox "Error #: " & Err.Number & vbCrLf & vbCrLf & Err.Description
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure RecordsetUpdatable of Class aegit_expClass"
     Resume Next
 
 End Function
