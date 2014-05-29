@@ -29,8 +29,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "1.0.1"
-Private Const aegit_expVERSION_DATE As String = "May 27, 2014"
+Private Const aegit_expVERSION As String = "1.0.2"
+Private Const aegit_expVERSION_DATE As String = "May 28, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True
@@ -384,7 +384,7 @@ PROC_ERR:
 
 End Function
 
-Private Function RecordsetUpdatable(strSQL As String) As Boolean
+Private Function RecordsetUpdatable(ByVal strSQL As String) As Boolean
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
 
     Dim dbs As DAO.Database
@@ -449,9 +449,12 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
                                 "FROM MSysObjects AS m " & vbCrLf & _
                                 "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
                                 "ORDER BY m.Name;"
-    Debug.Print strSQL
+    If Not IsMissing(varDebug) Then Debug.Print strSQL
+    If Not IsMissing(varDebug) And _
+        Application.VBE.ActiveVBProject.Name = "aegit" Then
     Debug.Print "IsQryHidden('qpt_Dummy')=" & IsQryHidden("qpt_Dummy")
     Debug.Print "IsQryHidden('qry_HiddenDummy')=" & IsQryHidden("qry_HiddenDummy")
+    End If
     'Stop
 
     DoCmd.SetWarnings False

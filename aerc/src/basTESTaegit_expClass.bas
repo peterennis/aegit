@@ -716,7 +716,7 @@ End Function
 ';297 Total bitrate               PDF Specification
 '
 
-Public Function GetFiles(ByVal strPath As String, _
+Private Function GetFiles(ByVal strPath As String, _
                 ByVal dctDict As Object, _
                 Optional ByVal blnRecursive As Boolean) As Boolean
 'Function GetFiles(strPath As String, _
@@ -728,10 +728,10 @@ Public Function GetFiles(ByVal strPath As String, _
 
     #If FSORef = 0 Then  ' Late binding
         ' Ref: http://msdn.microsoft.com/en-us/library/office/gg278516.aspx
-        Dim fsoSysObj    As Object
-        Dim oFolder      As Object
-        Dim oSubFolder   As Object
-        Dim oFile        As Object
+        Dim fsoSysObj As Object
+        Dim oFolder As Object
+        Dim oSubFolder As Object
+        Dim oFile As Object
         Set fsoSysObj = CreateObject("Scripting.FileSystemObject")
         ' <=======
         ' Remove the Object reference if it is present
@@ -744,14 +744,14 @@ Public Function GetFiles(ByVal strPath As String, _
             Exit Function
         End If
         ' Use your own error handling label here
-        On Error GoTo MyErrorHandler
+        On Error GoTo PROC_ERR
         '<=======
     #Else
         ' A reference to the Object Library must be specified
-        Dim fsoSysObj    As FileSystemObject
-        Dim oFolder      As Folder
-        Dim oSubFolder   As Folder
-        Dim oFile        As File
+        Dim fsoSysObj As FileSystemObject
+        Dim oFolder As Folder
+        Dim oSubFolder As Folder
+        Dim oFile As File
         ' Return new FileSystemObject.
         Set fsoSysObj = New FileSystemObject
     #End If
@@ -763,7 +763,7 @@ Public Function GetFiles(ByVal strPath As String, _
     If Err <> 0 Then
         ' Incorrect path.
         GetFiles = False
-        GoTo GetFiles_End
+        GoTo PROC_EXIT
     End If
     On Error GoTo 0
 
@@ -782,11 +782,11 @@ Public Function GetFiles(ByVal strPath As String, _
     ' Return True if no error occurred.
     GetFiles = True
 
-GetFiles_End:
+PROC_EXIT:
     Exit Function
 
-MyErrorHandler:
-    MsgBox "Erl=" & Erl & " Err=" & Err & " " & Err.Description, vbCritical, "Error here ... fix it!"
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Err=" & Err & " " & Err.Description, vbCritical, "GetFiles Error!"
     Exit Function
 
 End Function

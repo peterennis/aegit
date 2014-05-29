@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "May 27, 2014"
-Public Const gstrVERSION As String = "1.0.1"
+Public Const gstrDATE As String = "May 29, 2014"
+Public Const gstrVERSION As String = "1.0.2"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -38,10 +38,9 @@ Public Const gblnTEST As Boolean = False
 ' #023 -
 ' #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
-' #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
 ' #017 - KPI chart test not working
 ' #014 - ReadDocDatabase debug output when custom test folder given - applies to aegit_impClass
-' #013 - Import of class source code into a new database creates a module
+' #013 - Import of class source code into a new database creates a module - applies to aegit_impClass
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
@@ -53,6 +52,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140525 - v102 - FIXED #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
 '20140523 - v100 - FIXED #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
 '20140523 - v099 - #021 International encoding - Ref: http://stackoverflow.com/questions/8038729/github-using-utf-8-encoding-for-files
     ' s/gcfHandleErrors/mblnHandleErrors/g - It is only used in the class and is not global
