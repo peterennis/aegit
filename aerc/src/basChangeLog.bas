@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "May 29, 2014"
-Public Const gstrVERSION As String = "1.0.3"
+Public Const gstrDATE As String = "May 30, 2014"
+Public Const gstrVERSION As String = "1.0.4"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -58,6 +58,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140530 - v104 -
 '20140529 - v103 - Add to issues list
     ' Ref: http://blog.vishalon.net/index.php/change-ms-access-application-title-and-icon-using-vba/
 '20140525 - v102 - FIXED #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
