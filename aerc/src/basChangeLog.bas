@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE As String = "May 29, 2014"
-Public Const gstrVERSION As String = "1.0.2"
+Public Const gstrVERSION As String = "1.0.3"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -52,6 +52,8 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140529 - v103 -
+    ' Ref: http://blog.vishalon.net/index.php/change-ms-access-application-title-and-icon-using-vba/
 '20140525 - v102 - FIXED #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
 '20140523 - v100 - FIXED #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
 '20140523 - v099 - #021 International encoding - Ref: http://stackoverflow.com/questions/8038729/github-using-utf-8-encoding-for-files
