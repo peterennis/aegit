@@ -9,6 +9,8 @@ Public Const gblnTEST As Boolean = False
 ' Tools:
 ' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
+' RibbonX Visual Designer 2010 - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
+' IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
 '
 ' Research:
 ' Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
@@ -35,7 +37,11 @@ Public Const gblnTEST As Boolean = False
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #023 -
+' #027 -
+' #026 - Output list of hidden reports
+' #025 - Output list of hidden modules
+' #024 - Output list of hidden forms
+' #023 - Output list of hidden tables
 ' #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
 ' #017 - KPI chart test not working
@@ -52,7 +58,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
-'20140529 - v103 -
+'20140529 - v103 - Add to issues list
     ' Ref: http://blog.vishalon.net/index.php/change-ms-access-application-title-and-icon-using-vba/
 '20140525 - v102 - FIXED #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
 '20140523 - v100 - FIXED #019 - Testing GDIPlus module showed need to separate dev of aegit_exp and aegit_imp classes
