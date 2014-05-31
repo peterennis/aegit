@@ -296,6 +296,17 @@
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+>>>tblBinary
+              Name          tblBinary
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   5/30/2014 6:32:40 PM 
+              LastUpdated   5/30/2014 6:48:11 PM 
+              DatasheetFontName           Arial
+              DatasheetFontHeight          8 
 >>>USysRibbons
               Name          USysRibbons
               Owner         admin

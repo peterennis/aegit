@@ -51,5 +51,5 @@ Perform Name AutoCorrect: 0, 4, False
 AppTitle: aegit 1.0.4, 10, False
 AppIcon: .\adaept64.ico, 10, False
 aeRibbonID: adaept, 10, False
-CustomRibbonID: PngRibbon, 10, False
+CustomRibbonID: adaept, 10, False
 Property Sheet Label Width: 2310, 4, False

@@ -30,7 +30,7 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 ' Tasks:
 ' %007 -
-' %006 -
+' %006 - Add adaept ribbon
 ' %005 - Ref: http://stackoverflow.com/questions/3313561/what-are-the-limitations-of-git-on-windows
 ' %004 - Learning git on the command line - Ref: http://cheat.errtheblog.com/s/git
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
@@ -58,7 +58,10 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
-'20140530 - v104 -
+'20140530 - v104 - Import basGDIPlus
+    ' Add basaeRibbonCallbacks modules
+    ' Load simple ADAEPT ribbon using GDIPlus and example from Avenius IDBE RibbonCreator 2013
+    ' 32x32 PNG Logo stored in tblBinary
 '20140529 - v103 - Add to issues list
     ' Ref: http://blog.vishalon.net/index.php/change-ms-access-application-title-and-icon-using-vba/
 '20140525 - v102 - FIXED #020 - Run-time error 3011 at IsQryHidden when testing GDIPlus
@@ -87,7 +90,7 @@ Public Const gblnTEST As Boolean = False
     ' Ref: http://www.vbmigration.com/whitepapers/apicalls.aspx
     ' Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByVal destAddress As Long, ByVal destAddress As Long, ByVal numBytes As Long)
     ' The solution does not work  due to HOSTENT type, test with overloading is a possibility, too much work
-    ' Wontfix - #015 - Declare statement does not support parameters of type As Any - Ref: http://msdn.microsoft.com/en-us/library/wccc9bx3(v=vs.71).aspx
+    ' ? WONTFIX - #015 - Declare statement does not support parameters of type 'As Any' - Ref: http://msdn.microsoft.com/en-us/library/wccc9bx3(v=vs.71).aspx
     ' Table field types missing, Ref: http://allenbrowne.com/ser-49.html
     ' Update app title bar with version when export is run
     ' Fixed #016 - Unknown field type message 104 x1, 101 x3 for aetrak test in OutputTheSchemaFile

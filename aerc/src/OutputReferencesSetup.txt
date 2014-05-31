@@ -29,5 +29,8 @@
                             DAO           Microsoft DAO 3.6 Object Library
                                           C:\Program Files\Common Files\Microsoft Shared\DAO\dao360.dll
                                           {00025E01-0000-0000-C000-000000000046}
+                            Office        Microsoft Office 15.0 Object Library
+                                          C:\Program Files\Common Files\Microsoft Shared\OFFICE15\MSO.DLL
+                                          {2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}
               <*_*>
 <==<

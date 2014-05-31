@@ -73,6 +73,14 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [tblBinary] ([ID] Counter,[FileName] Text (255),[binary] OLE Object )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [ID] ON [tblBinary] ([binary])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [USysRibbons] ([ID] Counter,[RibbonName] Text (255),[RibbonXML] Memo )"
 Currentdb.Execute strSQL
 

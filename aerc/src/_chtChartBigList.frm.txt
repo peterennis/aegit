@@ -3373,7 +3373,7 @@ End Enum
 
 Private Sub SetLabelsCaption()
     On Error GoTo 0
-    Dim ctl As Control
+    Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error GoTo NextIteration

@@ -101,14 +101,18 @@ aetlkpStates
               StateCode      109          TextBox
               StateAbbreviation            109          TextBox
               StateName      109          TextBox
+tblBinary
+              ID             109          TextBox
+              FileName       109          TextBox
+              binary         109          TextBox
 USysRibbons
               ID             109          TextBox
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 95
+Count of Text box  = 98
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 99
-Count of All Fields = 99
+Count of Display Controls = 102
+Count of All Fields = 102

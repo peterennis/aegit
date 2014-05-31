@@ -28,20 +28,20 @@ End Type
 
 Private Declare Function GdiplusStartup Lib "GDIPlus" (token As Long, _
     inputbuf As GdiplusStartupInput, Optional ByVal outputbuf As Long = 0) As Long
-Private Declare Function GdipCreateBitmapFromFile Lib "GDIPlus" (ByVal filename As Long, bitmap As Long) As Long
-Private Declare Function GdipCreateHBITMAPFromBitmap Lib "GDIPlus" (ByVal bitmap As Long, _
+Private Declare Function GdipCreateBitmapFromFile Lib "GDIPlus" (ByVal FileName As Long, BITMAP As Long) As Long
+Private Declare Function GdipCreateHBITMAPFromBitmap Lib "GDIPlus" (ByVal BITMAP As Long, _
     hbmReturn As Long, ByVal background As Long) As Long
-Private Declare Function GdipDisposeImage Lib "GDIPlus" (ByVal image As Long) As Long
+Private Declare Function GdipDisposeImage Lib "GDIPlus" (ByVal Image As Long) As Long
 Private Declare Function GdiplusShutdown Lib "GDIPlus" (ByVal token As Long) As Long
 Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As PICTDESC, _
     RefIID As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
 '================================================================================
 
-Public Sub GetRibbonImage(ByVal ctl As Object, ByVal image As Variant)        'IRibbonControl)
+Public Sub GetRibbonImage(ByVal ctl As Object, ByVal Image As Variant)        'IRibbonControl)
     On Error GoTo 0
     Dim Path As String
     Path = Application.CurrentProject.Path & "\Icons\" & ctl.Tag
-    Set image = LoadImage(Path)
+    Set Image = LoadImage(Path)
 End Sub
 
 Private Function LoadImage(ByVal strFName As String) As IPicture

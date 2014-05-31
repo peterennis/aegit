@@ -951,124 +951,124 @@ PROC_ERR:
 End Sub
 
 Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
-      ' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
-      ' Ref: http://www.pcreview.co.uk/forums/type-property-reference-object-vbulletin-project-t3793816.html
-      ' Ref: http://www.cpearson.com/excel/missingreferences.aspx
-      ' Ref: http://allenbrowne.com/ser-38.html
-      ' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
-      ' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
-      '====================================================================
-      ' Author:   Peter F. Ennis
-      ' Date:     November 28, 2012
-      ' Comment:  Added and adapted from aeladdin (tm) code
-      ' Updated:  All notes moved to change log
-      ' History:  See comment details, basChangeLog, commit messages on github
-      '====================================================================
+' Ref: http://vbadud.blogspot.com/2008/04/get-references-of-vba-project.html
+' Ref: http://www.pcreview.co.uk/forums/Type-property-reference-object-vbulletin-project-t3793816.html
+' Ref: http://www.cpearson.com/excel/missingreferences.aspx
+' Ref: http://allenbrowne.com/ser-38.html
+' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
+' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
+'====================================================================
+' Author:   Peter F. Ennis
+' Date:     November 28, 2012
+' Comment:  Added and adapted from aeladdin (tm) code
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
+'====================================================================
 
-          Dim i As Integer
-          Dim RefName As String
-          Dim RefDesc As String
-          Dim blnRefBroken As Boolean
-          Dim strFile As String
+    Dim i As Integer
+    Dim RefName As String
+    Dim RefDesc As String
+    Dim blnRefBroken As Boolean
+    Dim strFile As String
 
-          Dim vbaProj As Object
-10        Set vbaProj = Application.VBE.ActiveVBProject
+    Dim vbaProj As Object
+    Set vbaProj = Application.VBE.ActiveVBProject
 
-          ' Use a call stack and global error handler
-          'If mblnHandleErrors Then On Error GoTo PROC_ERR
-          'PushCallStack "aeGetReferences"
-20        On Error GoTo PROC_ERR
+    ' Use a call stack and global error handler
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "aeGetReferences"
+    On Error GoTo PROC_ERR
 
-30        Debug.Print "aeGetReferences"
-40        If IsMissing(varDebug) Then
-50            If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-60            If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
-70        Else
-80            If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
-90            If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
-100       End If
+    Debug.Print "aeGetReferences"
+    If IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+    Else
+        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
+        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+    End If
 
-110       strFile = aestrSourceLocation & aeRefTxtFile
-          
-120       If Dir$(strFile) <> vbNullString Then
-              ' The file exists
-130           If Not FileLocked(strFile) Then KillProperly (strFile)
-140           Open strFile For Append As #1
-150       Else
-160           If Not FileLocked(strFile) Then Open strFile For Append As #1
-170       End If
+    strFile = aestrSourceLocation & aeRefTxtFile
+    
+    If Dir$(strFile) <> vbNullString Then
+        ' The file exists
+        If Not FileLocked(strFile) Then KillProperly (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
+    End If
 
-180       If Not IsMissing(varDebug) Then
-190           If aeDEBUG_PRINT Then Debug.Print ">==> aeGetReferences >==>"
-200           If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Name = " & vbaProj.Name
-210           If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
-              ' Display the versions of Access, ADO and DAO
-220           If aeDEBUG_PRINT Then Debug.Print , "Access version = " & Application.Version
-230           If aeDEBUG_PRINT Then Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
-240           If aeDEBUG_PRINT Then Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
-250           If aeDEBUG_PRINT Then Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
-260           If aeDEBUG_PRINT Then Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
-270           If aeDEBUG_PRINT Then Debug.Print , "<@_@>"
-280           If aeDEBUG_PRINT Then Debug.Print , "     " & "References:"
-290       End If
+    If Not IsMissing(varDebug) Then
+        If aeDEBUG_PRINT Then Debug.Print ">==> aeGetReferences >==>"
+        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Name = " & vbaProj.Name
+        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
+        ' Display the versions of Access, ADO and DAO
+        If aeDEBUG_PRINT Then Debug.Print , "Access version = " & Application.Version
+        If aeDEBUG_PRINT Then Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+        If aeDEBUG_PRINT Then Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+        If aeDEBUG_PRINT Then Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+        If aeDEBUG_PRINT Then Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
+        If aeDEBUG_PRINT Then Debug.Print , "<@_@>"
+        If aeDEBUG_PRINT Then Debug.Print , "     " & "References:"
+    End If
 
-300           Print #1, ">==> The Project References >==>"
-310           Print #1, , "vbaProj.Name = " & vbaProj.Name
-320           Print #1, , "vbaProj.Type = '" & vbaProj.Type & "'"
-              ' Display the versions of Access, ADO and DAO
-330           Print #1, , "Access version = " & Application.Version
-340           Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
-350           Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.Version
-360           Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.Version
-370           Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
-380           Print #1, , "<@_@>"
-390           Print #1, , "     " & "References:"
+        Print #1, ">==> The Project References >==>"
+        Print #1, , "vbaProj.Name = " & vbaProj.Name
+        Print #1, , "vbaProj.Type = '" & vbaProj.Type & "'"
+        ' Display the versions of Access, ADO and DAO
+        Print #1, , "Access version = " & Application.Version
+        Print #1, , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+        Print #1, , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+        Print #1, , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+        Print #1, , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
+        Print #1, , "<@_@>"
+        Print #1, , "     " & "References:"
 
-400       For i = 1 To vbaProj.References.Count
+    For i = 1 To vbaProj.References.Count
 
-410           blnRefBroken = False
+        blnRefBroken = False
 
-              ' Get the Name of the Reference
-420           RefName = vbaProj.References(i).Name
+        ' Get the Name of the Reference
+        RefName = vbaProj.References(i).Name
 
-              ' Get the Description of Reference
-430           RefDesc = vbaProj.References(i).Description
+        ' Get the Description of Reference
+        RefDesc = vbaProj.References(i).Description
 
-440           If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
-450           If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
-460           If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
+        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
 
-470           Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
-480           Print #1, , , , vbaProj.References(i).FullPath
-490           Print #1, , , , vbaProj.References(i).GUID
+        Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        Print #1, , , , vbaProj.References(i).FullPath
+        Print #1, , , , vbaProj.References(i).GUID
 
-              ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
-500           If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
-510                 blnRefBroken = True
-520                 If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
-530                 Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
-540           End If
-550       Next
-560       If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
-570       If Not IsMissing(varDebug) Then Debug.Print "<==<"
+        ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
+        If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
+              blnRefBroken = True
+              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+        End If
+    Next
+    If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
+    If Not IsMissing(varDebug) Then Debug.Print "<==<"
 
-580       Print #1, , "<*_*>"
-590       Print #1, "<==<"
+    Print #1, , "<*_*>"
+    Print #1, "<==<"
 
-600       aeGetReferences = True
+    aeGetReferences = True
 
 PROC_EXIT:
-610       Set vbaProj = Nothing
-620       Close 1
-          'PopCallStack "aeGetReferences"
-630       Exit Function
+    Set vbaProj = Nothing
+    Close 1
+    'PopCallStack "aeGetReferences"
+    Exit Function
 
 PROC_ERR:
-640       MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
-650       If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
-660       aeGetReferences = False
-          'GlobalErrHandler
-670       Resume PROC_EXIT
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
+    aeGetReferences = False
+    'GlobalErrHandler
+    Resume PROC_EXIT
 
 End Function
 
@@ -1531,7 +1531,7 @@ Private Function FieldTypeName(ByVal fld As DAO.Field) As String
         Case 109&
             strReturn = "Complex Text"                  ' dbComplexText
         Case Else
-            strReturn = "Field type " & fld.Type & " unknown"
+            strReturn = "Field Type " & fld.Type & " unknown"
     End Select
 
     FieldTypeName = strReturn
@@ -2904,15 +2904,18 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
             Next fld
         End If
     Next tbl
-    If Not IsMissing(varDebug) Then Debug.Print "Count of Check box = " & intChk
-    If Not IsMissing(varDebug) Then Debug.Print "Count of Text box  = " & intTxt
-    If Not IsMissing(varDebug) Then Debug.Print "Count of List box  = " & intLst
-    If Not IsMissing(varDebug) Then Debug.Print "Count of Combo box = " & intCbo
-    If Not IsMissing(varDebug) Then Debug.Print "Count of Else      = " & intElse
-    If Not IsMissing(varDebug) Then Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
-    If Not IsMissing(varDebug) Then Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
-    'Debug.Print "Table with check box is " & strChkTbl
-    'Debug.Print "Field with check box is " & strChkFld
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "Count of Check box = " & intChk
+        Debug.Print "Count of Text box  = " & intTxt
+        Debug.Print "Count of List box  = " & intLst
+        Debug.Print "Count of Combo box = " & intCbo
+        Debug.Print "Count of Else      = " & intElse
+        Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
+        Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
+        'Debug.Print "Table with check box is " & strChkTbl
+        'Debug.Print "Field with check box is " & strChkFld
+    End If
 
     Print #fle, "Count of Check box = " & intChk
     Print #fle, "Count of Text box  = " & intTxt

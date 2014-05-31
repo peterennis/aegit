@@ -260,7 +260,7 @@ Inherited: False;
 ---
 Name: CustomRibbonID
 Type: dbText
-Value: PngRibbon
+Value: adaept
 Inherited: False;
 ---
 Name: Property Sheet Label Width

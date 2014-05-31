@@ -1108,7 +1108,7 @@ End Function
 
 Private Sub SetMonthsCaption()
     On Error GoTo 0
-    Dim ctl As Control
+    Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error Resume Next
@@ -1121,7 +1121,7 @@ End Sub
 
 Private Sub SetYearsCaption()
     On Error GoTo 0
-    Dim ctl As Control
+    Dim ctl As control
     For Each ctl In Me.Controls
         'Debug.Print ctl.Name
         On Error Resume Next
