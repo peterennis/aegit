@@ -25,12 +25,13 @@ Option Explicit
 ' Comment:  Create class for revision control
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
+' Web:      https://github.com/peterennis/aegit
 '=======================================================================
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "1.0.4"
-Private Const aegit_expVERSION_DATE As String = "May 30, 2014"
+Private Const aegit_expVERSION As String = "1.0.5"
+Private Const aegit_expVERSION_DATE As String = "June 4, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True

@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "May 30, 2014"
-Public Const gstrVERSION As String = "1.0.4"
+Public Const gstrDATE As String = "June 4, 2014"
+Public Const gstrVERSION As String = "1.0.5"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -13,8 +13,6 @@ Public Const gblnTEST As Boolean = False
 ' IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
 '
 ' Research:
-' Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
-' Ref: http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated - This has useful information about using tdf.attributes
 '
 ' Guides:
 ' Office VBA Basic Debugging Techniques
@@ -60,6 +58,10 @@ Public Const gblnTEST As Boolean = False
 '
 '20140604 - v105 - DONE - %006 - Add adaept ribbon
     ' Remove module aeribpng - basGDIPlus will be used
+    ' Add web location to aegit_expClass - https://github.com/peterennis/aegit
+    ' Old Research: Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
+    ' Old Research: Ref: http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated
+    ' This has useful information about using tdf.attributes
 '20140530 - v104 - Import basGDIPlus
     ' Add basaeRibbonCallbacks modules
     ' Load simple ADAEPT ribbon using GDIPlus and example from Avenius IDBE RibbonCreator 2013
