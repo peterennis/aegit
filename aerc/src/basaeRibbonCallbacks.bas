@@ -11,6 +11,7 @@ End Sub
 
 Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled)
     ' Callbackname in XML File "getEnabled"
+    On Error GoTo 0
     Select Case control.Id
         Case Else
             enabled = True
@@ -36,7 +37,7 @@ Public Sub GetImages(ByVal control As IRibbonControl, ByRef Image)
 
 End Sub
 
-Private Function getTheValue(strTag As String, strValue As String) As String
+Private Function getTheValue(ByVal strTag As String, ByVal strValue As String) As String
     ' *************************************************************
     ' Created from     : Avenius
     ' Parameter        : Input String, SuchValue String
@@ -73,7 +74,7 @@ Private Function getTheValue(strTag As String, strValue As String) As String
       
 End Function
 
-Public Function getIconFromTable(strFileName As String) As Picture
+Public Function getIconFromTable(ByVal strFileName As String) As Picture
 
     Dim lSize As Long
     Dim arrBin() As Byte

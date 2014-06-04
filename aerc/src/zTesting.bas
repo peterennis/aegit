@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 'zzzTmpTblQueries
-Public Function RecordsetUpdatable(strSQL As String) As Boolean
+Public Function RecordsetUpdatable(ByVal strSQL As String) As Boolean
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
 
     Dim dbs As DAO.Database

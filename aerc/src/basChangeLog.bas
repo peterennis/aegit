@@ -29,8 +29,8 @@ Public Const gblnTEST As Boolean = False
 '
 '=============================================================================================================================
 ' Tasks:
+' %008 -
 ' %007 -
-' %006 - Add adaept ribbon
 ' %005 - Ref: http://stackoverflow.com/questions/3313561/what-are-the-limitations-of-git-on-windows
 ' %004 - Learning git on the command line - Ref: http://cheat.errtheblog.com/s/git
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
@@ -58,6 +58,8 @@ Public Const gblnTEST As Boolean = False
 '=============================================================================================================================
 '
 '
+'20140604 - v105 - DONE - %006 - Add adaept ribbon
+    ' Remove module aeribpng - basGDIPlus will be used
 '20140530 - v104 - Import basGDIPlus
     ' Add basaeRibbonCallbacks modules
     ' Load simple ADAEPT ribbon using GDIPlus and example from Avenius IDBE RibbonCreator 2013
