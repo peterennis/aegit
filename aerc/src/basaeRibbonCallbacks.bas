@@ -9,6 +9,14 @@ Public Sub OnRibbonLoad(ByVal ribbon As IRibbonUI)
     Set gobjaeRibbon = ribbon
 End Sub
 
+Public Sub OnActionButton(ByVal control As IRibbonControl)
+    ' Callbackname in XML File "onAction"
+    Select Case control.Id
+        Case Else
+            MsgBox "Button """ & control.Id & """ clicked!" & vbCrLf, vbInformation
+    End Select
+End Sub
+
 Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled)
     ' Callbackname in XML File "getEnabled"
     On Error GoTo 0
