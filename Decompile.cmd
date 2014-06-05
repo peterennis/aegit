@@ -1,28 +1,28 @@
 @ECHO OFF
-REM /************************************************************************************/
-REM /* FILENAME       :  DECOMPILE.CMD                                                  */
-REM /* TYPE           :  Windows NT Command Script                                      */
-REM /* DESCRIPTION    :  This module drives the Access DB Decompile process             */
-REM /*                                                                                  */
-REM /* AUTHOR         :  Michael D Lueck                                                */
-REM /*                   mlueck@lueckdatasystems.com                                    */
-REM /*                                                                                  */
-REM /* NEEDS          :                                                                 */
-REM /*                                                                                  */
-REM /* USAGE          :                                                                 */
-REM /*                                                                                  */
-REM /* REVISION HISTORY                                                                 */
-REM /*                                                                                  */
-REM /* DATE       REVISED BY DESCRIPTION OF CHANGE                                      */
-REM /* ---------- ---------- -------------------------------------------------------    */
-REM /* 10/28/2011 MDL        Initial Creation                                           */
-REM /* 11/02/2011 MDL        Updated to parameterize and also display the pre/post size */
-REM /* 12/27/2011 MDL        Updated to parse out the filesize and do the compare       */
-REM /* 07/03/2012 MDL        Update to make UserID independent                          */
-REM /* 01/21/2013 MDL        Pre request of April15Hater, updated to make safe for DB   */
-REM /*                       filenames containing space characters                      */
-REM /* 04/03/2014 PFE        Modified for aegit for testing #002                        */
-REM /************************************************************************************/
+REM /***************************************************************************************/
+REM /* FILENAME       :  DECOMPILE.CMD                                                     */
+REM /* TYPE           :  Windows NT Command Script                                         */
+REM /* DESCRIPTION    :  This module drives the Access DB Decompile process                */
+REM /*                                                                                     */
+REM /* AUTHOR         :  Michael D Lueck                                                   */
+REM /*                   mlueck@lueckdatasystems.com                                       */
+REM /*                                                                                     */
+REM /* NEEDS          :                                                                    */
+REM /*                                                                                     */
+REM /* USAGE          : http://www.access-programmers.co.uk/forums/showthread.php?t=219948 */
+REM /*                                                                                     */
+REM /* REVISION HISTORY                                                                    */
+REM /*                                                                                     */
+REM /* DATE       REVISED BY DESCRIPTION OF CHANGE                                         */
+REM /* ---------- ---------- ------------------------------------------------------------- */
+REM /* 10/28/2011 MDL        Initial Creation                                              */
+REM /* 11/02/2011 MDL        Updated to parameterize and also display the pre/post size    */
+REM /* 12/27/2011 MDL        Updated to parse out the filesize and do the compare          */
+REM /* 07/03/2012 MDL        Update to make UserID independent                             */
+REM /* 01/21/2013 MDL        Pre request of April15Hater, updated to make safe for DB      */
+REM /*                       filenames containing space characters                         */
+REM /* 04/03/2014 PFE        Modified for aegit for testing #002                           */
+REM /***************************************************************************************/
 
 REM Support for multiple database files within the one directory
 REM Simply unREM the correct LOC to decompile that database file
