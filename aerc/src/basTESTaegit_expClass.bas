@@ -23,8 +23,8 @@ Private ref As Reference
 '
 Public Function MYPROJECT_TEST() As Boolean
     On Error GoTo 0
-    aegitClassTest
-    'aegitClassTest varDebug:="Debugit"
+    'aegitClassTest
+    aegitClassTest varDebug:="Debugit"
 End Function
 
 Public Sub ALTERNATIVE_TEST()

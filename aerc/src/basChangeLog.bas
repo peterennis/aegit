@@ -35,7 +35,9 @@ Public Const gblnTEST As Boolean = False
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #027 -
+' #029 -
+' #028 - Err 55 file already open in WriteStringToFile
+' #027 - Cannot run the macro or callback function OnActionButton
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
@@ -62,6 +64,7 @@ Public Const gblnTEST As Boolean = False
     ' Old Research: Convert Access 2007 forms to 97 - Ref: http://www.esotechnica.co.uk/2011/02/convert-access-2007-forms-to-97/
     ' Old Research: Ref: http://stackoverflow.com/questions/2019605/why-does-msysnavpanegroupcategories-show-up-in-a-net-oledbprovider-initiated
     ' This has useful information about using tdf.attributes
+    ' Remove "If aeDEBUG_PRINT Then " globally
 '20140530 - v104 - Import basGDIPlus
     ' Add basaeRibbonCallbacks modules
     ' Load simple ADAEPT ribbon using GDIPlus and example from Avenius IDBE RibbonCreator 2013

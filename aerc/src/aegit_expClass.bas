@@ -33,7 +33,7 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Const aegit_expVERSION As String = "1.0.5"
 Private Const aegit_expVERSION_DATE As String = "June 4, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
-Private Const aeDEBUG_PRINT As Boolean = True
+'''x Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -120,14 +120,14 @@ Private Sub Class_Initialize()
     aeintFTLen = 4          ' Set a minimum default
     aeintFDLen = 4          ' Set a minimum default
 
-    If aeDEBUG_PRINT Then Debug.Print "Class_Initialize"
-    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
-    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    If aeDEBUG_PRINT Then Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
-    If aeDEBUG_PRINT Then Debug.Print , "aeintLTN = " & aeintLTN
-    If aeDEBUG_PRINT Then Debug.Print , "aeintFNLen = " & aeintFNLen
-    If aeDEBUG_PRINT Then Debug.Print , "aeintFTLen = " & aeintFTLen
-    If aeDEBUG_PRINT Then Debug.Print , "aeintFSize = " & aeintFSize
+    Debug.Print "Class_Initialize"
+    Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
+    Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
+    Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
+    Debug.Print , "aeintLTN = " & aeintLTN
+    Debug.Print , "aeintFNLen = " & aeintFNLen
+    Debug.Print , "aeintFTLen = " & aeintFTLen
+    Debug.Print , "aeintFSize = " & aeintFSize
 
 PROC_EXIT:
     Exit Sub
@@ -146,10 +146,10 @@ Private Sub Class_Terminate()
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
-    If aeDEBUG_PRINT Then Debug.Print
-    If aeDEBUG_PRINT Then Debug.Print "Class_Terminate"
-    If aeDEBUG_PRINT Then Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
-    If aeDEBUG_PRINT Then Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
+    Debug.Print
+    Debug.Print "Class_Terminate"
+    Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
+    Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
 End Sub
 
 Public Property Get SourceFolder() As String
@@ -185,14 +185,16 @@ End Property
 Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentTheDatabase"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "Get DocumentTheDatabase"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
         DocumentTheDatabase = aeDocumentTheDatabase()
     Else
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentTheDatabase"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "Get DocumentTheDatabase"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
+        'Debug.Print "varDebug=" & varDebug, "Get DocumentTheDatabase"
+        'Stop
         DocumentTheDatabase = aeDocumentTheDatabase(varDebug)
     End If
 End Property
@@ -202,14 +204,14 @@ Public Property Get Exists(ByVal strAccObjType As String, _
                         Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Get Exists"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "Get Exists"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING IS OFF"
         Exists = aeExists(strAccObjType, strAccObjName)
     Else
-        If aeDEBUG_PRINT Then Debug.Print "Get Exists"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "Get Exists"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING TURNED ON"
         Exists = aeExists(strAccObjType, strAccObjName, varDebug)
     End If
 End Property
@@ -217,14 +219,14 @@ End Property
 Public Property Get GetReferences(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Get GetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "Get GetReferences"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+        Debug.Print , "DEBUGGING IS OFF"
         GetReferences = aeGetReferences()
     Else
-        If aeDEBUG_PRINT Then Debug.Print "Get GetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "Get GetReferences"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
+        Debug.Print , "DEBUGGING TURNED ON"
         GetReferences = aeGetReferences(varDebug)
     End If
 End Property
@@ -232,14 +234,14 @@ End Property
 Public Property Get DocumentRelations(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentRelations"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "Get DocumentRelations"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING IS OFF"
         DocumentRelations = aeDocumentRelations()
     Else
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentRelations"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "Get DocumentRelations"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING TURNED ON"
         DocumentRelations = aeDocumentRelations(varDebug)
     End If
 End Property
@@ -247,14 +249,14 @@ End Property
 Public Property Get DocumentTables(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentTables"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "Get DocumentTables"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING IS OFF"
         DocumentTables = aeDocumentTables()
     Else
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentTables"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "Get DocumentTables"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING TURNED ON"
         DocumentTables = aeDocumentTables(varDebug)
     End If
 End Property
@@ -262,14 +264,14 @@ End Property
 Public Property Get DocumentTablesXML(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentTablesXML"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "Get DocumentTablesXML"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING IS OFF"
         DocumentTablesXML = aeDocumentTablesXML()
     Else
-        If aeDEBUG_PRINT Then Debug.Print "Get DocumentTablesXML"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "Get DocumentTablesXML"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING TURNED ON"
         DocumentTablesXML = aeDocumentTablesXML(varDebug)
     End If
 End Property
@@ -280,15 +282,15 @@ Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As 
     On Error GoTo 0
     Dim blnRun As Boolean
 
-    If aeDEBUG_PRINT Then Debug.Print "CompactAndRepair"
+    Debug.Print "CompactAndRepair"
     If Not IsMissing(varTrueFalse) Then
         blnRun = False
-        If aeDEBUG_PRINT Then Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
-        If aeDEBUG_PRINT Then Debug.Print , "RUN CompactAndRepair IS OFF"
+        Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
+        Debug.Print , "RUN CompactAndRepair IS OFF"
     Else
         blnRun = True
-        If aeDEBUG_PRINT Then Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
-        If aeDEBUG_PRINT Then Debug.Print , "RUN CompactAndRepair IS ON..."
+        Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
+        Debug.Print , "RUN CompactAndRepair IS ON..."
     End If
 
 ' TableDefs not refreshed after create
@@ -536,13 +538,13 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     Dim fle As Integer
 
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "OutputListOfAccessApplicationOptions"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print "OutputListOfAccessApplicationOptions"
+        Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print "OutputListOfAccessApplicationOptions"
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print "OutputListOfAccessApplicationOptions"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
@@ -890,7 +892,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3251 Then
-        If aeDEBUG_PRINT Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
+        Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
         Print #fle, "!" & Err.Description, strPropName
         Err.Clear
     Else
@@ -982,11 +984,11 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 
     Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     strFile = aestrSourceLocation & aeRefTxtFile
@@ -1000,17 +1002,17 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
     End If
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print ">==> aeGetReferences >==>"
-        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Name = " & vbaProj.Name
-        If aeDEBUG_PRINT Then Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
+        Debug.Print ">==> aeGetReferences >==>"
+        Debug.Print , "vbaProj.Name = " & vbaProj.Name
+        Debug.Print , "vbaProj.Type = '" & vbaProj.Type & "'"
         ' Display the versions of Access, ADO and DAO
-        If aeDEBUG_PRINT Then Debug.Print , "Access version = " & Application.Version
-        If aeDEBUG_PRINT Then Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
-        If aeDEBUG_PRINT Then Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
-        If aeDEBUG_PRINT Then Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
-        If aeDEBUG_PRINT Then Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
-        If aeDEBUG_PRINT Then Debug.Print , "<@_@>"
-        If aeDEBUG_PRINT Then Debug.Print , "     " & "References:"
+        Debug.Print , "Access version = " & Application.Version
+        Debug.Print , "ADO (ActiveX Data Object) version = " & CurrentProject.Connection.Version
+        Debug.Print , "DAO (DbEngine)  version = " & Application.DBEngine.Version
+        Debug.Print , "DAO (CodeDb)    version = " & Application.CodeDb.Version
+        Debug.Print , "DAO (CurrentDb) version = " & Application.CurrentDb.Version
+        Debug.Print , "<@_@>"
+        Debug.Print , "     " & "References:"
     End If
 
         Print #1, ">==> The Project References >==>"
@@ -1332,17 +1334,17 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     If aeintFDLen < Len("DESCRIPTION") Then aeintFDLen = Len("DESCRIPTION")
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print SizeString("-", sLen, TextLeft, "-")
-        If aeDEBUG_PRINT Then Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
-        If aeDEBUG_PRINT Then Debug.Print SizeString("-", sLen, TextLeft, "-")
+        Debug.Print SizeString("-", sLen, TextLeft, "-")
+        Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+        Debug.Print SizeString("-", sLen, TextLeft, "-")
         If strLinkedTablePath <> vbNullString Then
-            If aeDEBUG_PRINT Then Debug.Print strLinkedTablePath
+            Debug.Print strLinkedTablePath
         End If
-        If aeDEBUG_PRINT Then Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
+        Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
                         & aestr4 & SizeString("FIELD TYPE", aeintFTLen, TextLeft, " ") _
                         & aestr4 & SizeString("SIZE", aeintFSize, TextLeft, " ") _
                         & aestr4 & SizeString("DESCRIPTION", aeintFDLen, TextLeft, " ")
-        If aeDEBUG_PRINT Then Debug.Print SizeString("=", aeintFNLen, TextLeft, "=") _
+        Debug.Print SizeString("=", aeintFNLen, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
@@ -1580,11 +1582,11 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     strFile = aestrSourceLocation & aeTblTxtFile
@@ -1615,7 +1617,7 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     Next tdf
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "intFailCount = " & intFailCount
+        Debug.Print "intFailCount = " & intFailCount
         'Debug.Print "aeDocumentTables = " & aeDocumentTables
     End If
 
@@ -1671,11 +1673,11 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     intFailCount = 0
     Debug.Print "aeDocumentTablesXML"
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     If Not IsMissing(varDebug) Then Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
@@ -1702,8 +1704,8 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     End If
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "intFailCount = " & intFailCount
-        If aeDEBUG_PRINT Then Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
+        Debug.Print "intFailCount = " & intFailCount
+        Debug.Print "aeDocumentTablesXML = " & aeDocumentTablesXML
     End If
 
 PROC_EXIT:
@@ -1828,7 +1830,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                         strFlds = strFlds & "Binary"
                     Case Else
                         MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, aeAPP_NAME
-                        If aeDEBUG_PRINT Then Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
+                        Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
                                 "tdf.Name=" & tdf.Name & " strFlds=" & strFlds
                 End Select
 
@@ -1963,11 +1965,11 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
 
     Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     strFile = aestrSourceLocation & aeRelTxtFile
@@ -2168,7 +2170,7 @@ Private Function GetPropEnum(ByVal typeNum As Long) As String
             GetPropEnum = "dbComplexText"
         Case Else
             'MsgBox "Unknown typeNum:" & typeNum, vbInformation, aeAPP_NAME
-            If aeDEBUG_PRINT Then Debug.Print "Unknown typeNum:" & typeNum & " in procedure GetPropEnum of aegit_expClass"
+            Debug.Print "Unknown typeNum:" & typeNum & " in procedure GetPropEnum of aegit_expClass"
     End Select
 
 End Function
@@ -2315,11 +2317,11 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheContainer"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheContainer"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheContainer"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheContainer"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     i = 0
@@ -2381,8 +2383,8 @@ SaveAsText:
     Next doc
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , i & " EXPORTED!"
-        If aeDEBUG_PRINT Then Debug.Print , cnt.Documents.Count & " EXISTING!"
+        Debug.Print , i & " EXPORTED!"
+        Debug.Print , cnt.Documents.Count & " EXISTING!"
     End If
 
     DocumentTheContainer = True
@@ -2396,7 +2398,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2220 Then  ' Run-time error 2220 Microsoft Access can't open the file
-        If aeDEBUG_PRINT Then Debug.Print "Err=2220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
+        Debug.Print "Err=2220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
         Err.Clear
         Pause (0.25)
         Resume SaveAsText
@@ -2417,13 +2419,13 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
     'PushCallStack "KillAllFiles"
     On Error GoTo PROC_ERR
 
-    If aeDEBUG_PRINT Then Debug.Print "KillAllFiles"
+    Debug.Print "KillAllFiles"
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to KillAllFiles"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to KillAllFiles"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     If strLoc = "src" Then
@@ -2532,13 +2534,14 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     'PushCallStack "aeDocumentTheDatabase"
     On Error GoTo PROC_ERR
 
-    Debug.Print "aeDocumentTheDatabase"
+    'Debug.Print "varDebug=" & varDebug, "aeDocumentTheDatabase"
+    'Stop
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     If aegitSourceFolder = "default" Then
@@ -2553,16 +2556,18 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         aestrXMLLocation = aegitXMLFolder
     End If
 
-    If aeDEBUG_PRINT Then Debug.Print , "Value for aestrSourceLocation = " & aestrSourceLocation
-    If aeDEBUG_PRINT Then Debug.Print , "Value for aegitXMLFolder = " & aegitXMLFolder
-    If aeDEBUG_PRINT Then Debug.Print , "Value for aestrXMLLocation = " & aestrXMLLocation
+    If Not IsMissing(varDebug) Then
+        Debug.Print , "Value for aestrSourceLocation = " & aestrSourceLocation
+        Debug.Print , "Value for aegitXMLFolder = " & aegitXMLFolder
+        Debug.Print , "Value for aestrXMLLocation = " & aestrXMLLocation
+    End If
 
     ListOrCloseAllOpenQueries
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , ">==> aeDocumentTheDatabase >==>"
-        If aeDEBUG_PRINT Then Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
-        If aeDEBUG_PRINT Then Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
+        Debug.Print , ">==> aeDocumentTheDatabase >==>"
+        Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
+        Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
     End If
     If aestrSourceLocation = vbNullString Then
         MsgBox "aestrSourceLocation is not set!"
@@ -2597,6 +2602,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Stop
     End If
 
+    'Debug.Print "varDebug=" & varDebug
+    'Stop
     If Not IsMissing(varDebug) Then
         OutputListOfContainers aeAppListCnt, varDebug
     Else
@@ -2647,15 +2654,15 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 
     If Not IsMissing(varDebug) Then
         If i = 1 Then
-            If aeDEBUG_PRINT Then Debug.Print , "1 Query EXPORTED!"
+            Debug.Print , "1 Query EXPORTED!"
         Else
-            If aeDEBUG_PRINT Then Debug.Print , i & " Queries EXPORTED!"
+            Debug.Print , i & " Queries EXPORTED!"
         End If
         
         If CurrentDb.QueryDefs.Count = 1 Then
-            If aeDEBUG_PRINT Then Debug.Print , "1 Query EXISTING!"
+            Debug.Print , "1 Query EXISTING!"
         Else
-            If aeDEBUG_PRINT Then Debug.Print , CurrentDb.QueryDefs.Count & " Queries EXISTING!"
+            Debug.Print , CurrentDb.QueryDefs.Count & " Queries EXISTING!"
         End If
     End If
 
@@ -2730,13 +2737,13 @@ Private Function aeExists(ByVal strAccObjType As String, _
     'PushCallStack "aeExists"
     On Error GoTo PROC_ERR
 
-    If aeDEBUG_PRINT Then Debug.Print "aeExists"
+    Debug.Print "aeExists"
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     If Not IsMissing(varDebug) Then Debug.Print ">==> aeExists >==>"
@@ -2757,9 +2764,9 @@ Private Function aeExists(ByVal strAccObjType As String, _
         Case Else
             MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegit_expClass"
             If Not IsMissing(varDebug) Then
-                If aeDEBUG_PRINT Then Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
-                If aeDEBUG_PRINT Then Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
-                If aeDEBUG_PRINT Then Debug.Print "<==<"
+                Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
+                Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
+                Debug.Print "<==<"
             End If
             aeExists = False
             Set obj = Nothing
@@ -2773,8 +2780,8 @@ Private Function aeExists(ByVal strAccObjType As String, _
         If Not IsMissing(varDebug) Then Debug.Print , obj.Name, strAccObjName
         If obj.Name = strAccObjName Then
             If Not IsMissing(varDebug) Then
-                If aeDEBUG_PRINT Then Debug.Print , strAccObjName & " EXISTS!"
-                If aeDEBUG_PRINT Then Debug.Print "<==<"
+                Debug.Print , strAccObjName & " EXISTS!"
+                Debug.Print "<==<"
             End If
             aeExists = True
             Set obj = Nothing
@@ -2784,8 +2791,8 @@ Private Function aeExists(ByVal strAccObjType As String, _
         End If
     Next
     If Not IsMissing(varDebug) And aeExists = False Then
-        If aeDEBUG_PRINT Then Debug.Print , strAccObjName & " DOES NOT EXIST!"
-        If aeDEBUG_PRINT Then Debug.Print "<==<"
+        Debug.Print , strAccObjName & " DOES NOT EXIST!"
+        Debug.Print "<==<"
     End If
 
 PROC_EXIT:
@@ -2964,13 +2971,15 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional 
     'PushCallStack "OutputListOfContainers"
     On Error GoTo PROC_ERR
 
-    If aeDEBUG_PRINT Then Debug.Print "OutputListOfContainers"
+    Debug.Print "OutputListOfContainers"
+    'Debug.Print "varDebug=" & varDebug, "OutputListOfContainers"
+    'Stop
     If IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING IS OFF"
+        Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
+        Debug.Print , "DEBUGGING IS OFF"
     Else
-        If aeDEBUG_PRINT Then Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfContainers"
-        If aeDEBUG_PRINT Then Debug.Print , "DEBUGGING TURNED ON"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfContainers"
+        Debug.Print , "DEBUGGING TURNED ON"
     End If
 
     Set dbs = CurrentDb
@@ -2993,14 +3002,21 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional 
     With dbs
         ' Enumerate Containers collection.
         For Each conItem In .Containers
-            If Not IsMissing(varDebug) Then Debug.Print "Properties of " & conItem.Name _
-                & " container", lngFileNum, strFile
-            WriteStringToFile lngFileNum, "Properties of " & conItem.Name & " container", strFile
+            If Not IsMissing(varDebug) Then
+                Debug.Print "Properties of " & conItem.Name & " container", lngFileNum, strFile
+                WriteStringToFile lngFileNum, "Properties of " & conItem.Name & " container", strFile, varDebug
+            Else
+                WriteStringToFile lngFileNum, "Properties of " & conItem.Name & " container", strFile
+            End If
 
             ' Enumerate Properties collection of each Container object.
             For Each prpLoop In conItem.Properties
-                If Not IsMissing(varDebug) Then Debug.Print , lngFileNum, prpLoop.Name & " = " & prpLoop
-                WriteStringToFile lngFileNum, "  " & prpLoop.Name & " = " & prpLoop, strFile
+                If Not IsMissing(varDebug) Then
+                    Debug.Print , lngFileNum, prpLoop.Name & " = " & prpLoop
+                    WriteStringToFile lngFileNum, "  " & prpLoop.Name & " = " & prpLoop, strFile, varDebug
+                Else
+                    WriteStringToFile lngFileNum, "  " & prpLoop.Name & " = " & prpLoop, strFile
+                End If
             Next prpLoop
         Next conItem
         .Close
@@ -3009,10 +3025,10 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional 
     OutputListOfContainers = True
 
 PROC_EXIT:
+    Close lngFileNum
     Set prpLoop = Nothing
     Set conItem = Nothing
     Set dbs = Nothing
-    Close lngFileNum
     'PopCallStack "OutputListOfContainers"
     Exit Function
 
@@ -3032,11 +3048,11 @@ Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
     On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print "Container information for properties of saved Databases"
+        Debug.Print "Container information for properties of saved Databases"
         ListAllContainerProperties "Databases", varDebug
-        If aeDEBUG_PRINT Then Debug.Print "Container information for properties of saved Tables and Queries"
+        Debug.Print "Container information for properties of saved Tables and Queries"
         ListAllContainerProperties "Tables", varDebug
-        If aeDEBUG_PRINT Then Debug.Print "Container information for properties of saved Relationships"
+        Debug.Print "Container information for properties of saved Relationships"
         ListAllContainerProperties "Relationships", varDebug
     Else
         ListAllContainerProperties "Databases"
@@ -3184,7 +3200,7 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
 
     objXMLStyleSheet.LoadXML (strXMLStyleSheet)
     If objXMLStyleSheet.parseError.errorCode <> 0 Then
-        If aeDEBUG_PRINT Then Debug.Print "PrettyXML: Some Error..."
+        Debug.Print "PrettyXML: Some Error..."
         Exit Sub
     End If
 
@@ -3208,7 +3224,7 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     strXMLResDoc = strXMLResDoc.XML
     strXMLResDoc = Replace(strXMLResDoc, vbTab, Chr$(32) & Chr$(32), , , vbBinaryCompare)
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , "Pretty XML Sample Output"
+        Debug.Print , "Pretty XML Sample Output"
         Debug.Print strXMLResDoc
     End If
 
@@ -3324,28 +3340,28 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 
     If Not IsMissing(varDebug) Then
         For i = 0 To prtCount - 1
-            If aeDEBUG_PRINT Then Debug.Print "DeviceName=" & Application.Printers(i).DeviceName
-            If aeDEBUG_PRINT Then Debug.Print , "BottomMargin=" & Application.Printers(i).BottomMargin
-            If aeDEBUG_PRINT Then Debug.Print , "ColorMode=" & Application.Printers(i).ColorMode
-            If aeDEBUG_PRINT Then Debug.Print , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
-            If aeDEBUG_PRINT Then Debug.Print , "Copies=" & Application.Printers(i).Copies
-            If aeDEBUG_PRINT Then Debug.Print , "DataOnly=" & Application.Printers(i).DataOnly
-            If aeDEBUG_PRINT Then Debug.Print , "DefaultSize=" & Application.Printers(i).DefaultSize
-            If aeDEBUG_PRINT Then Debug.Print , "DriverName=" & Application.Printers(i).DriverName
-            If aeDEBUG_PRINT Then Debug.Print , "Duplex=" & Application.Printers(i).Duplex
-            If aeDEBUG_PRINT Then Debug.Print , "ItemLayout=" & Application.Printers(i).ItemLayout
-            If aeDEBUG_PRINT Then Debug.Print , "ItemsAcross=" & Application.Printers(i).ItemsAcross
-            If aeDEBUG_PRINT Then Debug.Print , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
-            If aeDEBUG_PRINT Then Debug.Print , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
-            If aeDEBUG_PRINT Then Debug.Print , "LeftMargin=" & Application.Printers(i).LeftMargin
-            If aeDEBUG_PRINT Then Debug.Print , "Orientation=" & Application.Printers(i).Orientation
-            If aeDEBUG_PRINT Then Debug.Print , "PaperBin=" & Application.Printers(i).PaperBin
-            If aeDEBUG_PRINT Then Debug.Print , "PaperSize=" & Application.Printers(i).PaperSize
-            If aeDEBUG_PRINT Then Debug.Print , "Port=" & Application.Printers(i).Port
-            If aeDEBUG_PRINT Then Debug.Print , "PrintQuality=" & Application.Printers(i).PrintQuality
-            If aeDEBUG_PRINT Then Debug.Print , "RightMargin=" & Application.Printers(i).RightMargin
-            If aeDEBUG_PRINT Then Debug.Print , "RowSpacing=" & Application.Printers(i).RowSpacing
-            If aeDEBUG_PRINT Then Debug.Print , "TopMargin=" & Application.Printers(i).TopMargin
+            Debug.Print "DeviceName=" & Application.Printers(i).DeviceName
+            Debug.Print , "BottomMargin=" & Application.Printers(i).BottomMargin
+            Debug.Print , "ColorMode=" & Application.Printers(i).ColorMode
+            Debug.Print , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
+            Debug.Print , "Copies=" & Application.Printers(i).Copies
+            Debug.Print , "DataOnly=" & Application.Printers(i).DataOnly
+            Debug.Print , "DefaultSize=" & Application.Printers(i).DefaultSize
+            Debug.Print , "DriverName=" & Application.Printers(i).DriverName
+            Debug.Print , "Duplex=" & Application.Printers(i).Duplex
+            Debug.Print , "ItemLayout=" & Application.Printers(i).ItemLayout
+            Debug.Print , "ItemsAcross=" & Application.Printers(i).ItemsAcross
+            Debug.Print , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
+            Debug.Print , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
+            Debug.Print , "LeftMargin=" & Application.Printers(i).LeftMargin
+            Debug.Print , "Orientation=" & Application.Printers(i).Orientation
+            Debug.Print , "PaperBin=" & Application.Printers(i).PaperBin
+            Debug.Print , "PaperSize=" & Application.Printers(i).PaperSize
+            Debug.Print , "Port=" & Application.Printers(i).Port
+            Debug.Print , "PrintQuality=" & Application.Printers(i).PrintQuality
+            Debug.Print , "RightMargin=" & Application.Printers(i).RightMargin
+            Debug.Print , "RowSpacing=" & Application.Printers(i).RowSpacing
+            Debug.Print , "TopMargin=" & Application.Printers(i).TopMargin
         Next
     End If
 
@@ -3417,7 +3433,7 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
                 Or Left$(tdf.Name, 3) = "zzz") Then
             strFile = aestrXMLLocation & "tables_" & tdf.Name & "_DataMacro.xml"
             If Not IsMissing(varDebug) Then
-                If aeDEBUG_PRINT Then Debug.Print "OutputTableDataMacros:", tdf.Name, aestrXMLLocation, strFile
+                Debug.Print "OutputTableDataMacros:", tdf.Name, aestrXMLLocation, strFile
             End If
             SaveAsText acTableDataMacro, tdf.Name, strFile
             If Not IsMissing(varDebug) Then
@@ -3452,7 +3468,7 @@ Private Sub OutputTableDataAsFormattedText(ByVal strTblName As String, Optional 
     Dim strPathFileName As String
     strPathFileName = aestrSourceLocation & strTblName & "_FormattedData.txt"
     If Not IsMissing(varDebug) Then
-        If aeDEBUG_PRINT Then Debug.Print , strPathFileName
+        Debug.Print , strPathFileName
     Else
     End If
     DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
@@ -3712,11 +3728,17 @@ End Sub
 
 Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, _
                                 ByVal strTheAbsoluteFileName As String, Optional ByVal varDebug As Variant)
-  
+
     On Error GoTo PROC_ERR
 
-    Open strTheAbsoluteFileName For Append Access Write Lock Write As lngFileNum
+    If Not IsMissing(varDebug) Then
+        Debug.Print "WriteStringToFile"
+        Debug.Print , lngFileNum, strTheString, strTheAbsoluteFileName, varDebug
+    End If
+
 ERR55:
+    Close lngFileNum
+    Open strTheAbsoluteFileName For Append Access Write Lock Write As lngFileNum
     Print #lngFileNum, strTheString
     Close lngFileNum
 
@@ -3725,6 +3747,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 55 Then            ' File already open
+        'Debug.Print "Here@Err=55", strTheString, lngFileNum, strTheAbsoluteFileName
         If Not IsMissing(varDebug) Then Debug.Print "Err=55", strTheString, lngFileNum, strTheAbsoluteFileName
         Err.Clear
         Resume ERR55
