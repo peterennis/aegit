@@ -1662,7 +1662,7 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     End If
 
     If Not FolderExists(aestrXMLLocation) Then
-        MsgBox aestrXMLLocation & " does not exist!", vbCritical, "Error"
+        MsgBox aestrXMLLocation & " does not exist!", vbCritical, aeAPP_NAME
         Stop
     End If
 
@@ -2337,7 +2337,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
         Case "Modules"
             intAcObjType = 5    ' acModule
         Case Else
-            MsgBox "Wrong Case Select in DocumentTheContainer"
+            MsgBox "Wrong Case Select in DocumentTheContainer", vbCritical, aeAPP_NAME
     End Select
 
     If Not IsMissing(varDebug) Then Debug.Print UCase$(strContainerType)
@@ -2453,7 +2453,7 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
             Loop
         End If
     Else
-        MsgBox "Bad strLoc", vbCritical, "STOP"
+        MsgBox "Bad strLoc", vbCritical, "STOP " & aeAPP_NAME
         Stop
     End If
 
@@ -2570,11 +2570,11 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
     End If
     If aestrSourceLocation = vbNullString Then
-        MsgBox "aestrSourceLocation is not set!"
+        MsgBox "aestrSourceLocation is not set!", vbCritical, aeAPP_NAME
         Stop
     End If
     If aestrXMLLocation = vbNullString Then
-        MsgBox "aestrXMLLocation is not set!"
+        MsgBox "aestrXMLLocation is not set!", vbCritical, aeAPP_NAME
         Stop
     End If
 
@@ -2598,7 +2598,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             DocumentTheContainer "Modules", "bas"
         End If
     Else
-        MsgBox aestrSourceLocation & " Does not exist!", vbCritical, "aegit"
+        MsgBox aestrSourceLocation & " Does not exist!", vbCritical, aeAPP_NAME
         Stop
     End If
 
@@ -3278,7 +3278,7 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     strFileName = aestrXMLLocation & avarTableNames(1) & ".xml"
 
     If aegitSetup Then
-        MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
+        MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation, vbCritical, aeAPP_NAME
         If Not rst.EOF Then
             rst.MoveFirst
             rst.Save strFileName, adPersistXML
