@@ -1,8 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Public gvarMyTablesForExportToXML() As Variant
-
 Private ref As Reference
 
 ' 0 if Late Binding

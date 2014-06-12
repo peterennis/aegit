@@ -1,10 +1,11 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 9, 2014"
-Public Const gstrVERSION As String = "1.0.7"
+Public Const gstrDATE As String = "June 11, 2014"
+Public Const gstrVERSION As String = "1.0.8"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
+Public gvarMyTablesForExportToXML() As Variant
 
 ' Tools:
 ' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
@@ -58,14 +59,15 @@ Public Const gblnTEST As Boolean = False
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
-' #009 - Create Let property for setting aegitExportDataToXML
 ' #008 - Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 ' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 ' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
-' #001 - Property Let TablesExportToXML(ByRef avarTables() As Variant) - FIX THIS!!! - Check ByRef
 '=============================================================================================================================
 '
 '
+'20140611 - v108 - Testing for #001
+    ' FIXED - #001 - Property Let TablesExportToXML(ByVal varTablesArray As Variant)
+    ' FIXED - #009 - Create Let property for setting aegitExportDataToXML
 '20140604 - v105 - DONE - %006 - Add adaept ribbon
     ' Remove module aeribpng - basGDIPlus will be used
     ' Add web location to aegit_expClass - https://github.com/peterennis/aegit

@@ -30,8 +30,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "1.0.7"
-Private Const aegit_expVERSION_DATE As String = "June 9, 2014"
+Private Const aegit_expVERSION As String = "1.0.8"
+Private Const aegit_expVERSION_DATE As String = "June 11, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 '''x Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True
@@ -110,7 +110,7 @@ Private Sub Class_Initialize()
     ' provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitXMLFolder = "default"
-    ReDim Preserve aegitDataXML(0 To 9)
+    ReDim Preserve aegitDataXML(0 To 0)
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         aegitDataXML(0) = "aetlkpStates"
     End If
@@ -177,7 +177,6 @@ Public Property Let XMLFolder(ByVal strXMLFolder As String)
 End Property
 
 Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
-' FIX THIS!!! - Check ByRef
 ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
     On Error GoTo PROC_ERR
 
@@ -482,7 +481,7 @@ Private Sub OutputSendKeysQATexport()
 '    End If
 '    DoEvents
 
-    Debug.Print Application.CurrentDb.Name
+'    Debug.Print Application.CurrentDb.Name
 '    MySendKeys "%FC", True                            ' Close VBA window
 '    MySendKeys "%FT", True                            ' File Options
 '    MySendKeys "CCC%P", True
@@ -3322,6 +3321,8 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     ' Use a call stack and global error handler
     'If mblnHandleErrors Then On Error GoTo PROC_ERR
     'PushCallStack "OutputTheTableDataAsXML"
+    Dim i As Integer
+
     On Error GoTo PROC_ERR
 
     Const adOpenStatic As Integer = 3
@@ -3335,38 +3336,44 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Dim rst As Object
     Set rst = CreateObject("ADODB.Recordset")
 
-'    If IsMissing(varDebug) Then
-'        KillAllFiles "xml"
-'    Else
-'        KillAllFiles "xml", varDebug
-'    End If
+'''x    If IsMissing(varDebug) Then
+'''x        KillAllFiles "xml"
+'''x    Else
+'''x        KillAllFiles "xml", varDebug
+'''x    End If
 
-    rst.Open "Select * from " & avarTableNames(0), cnn, adOpenStatic, adLockOptimistic
+    'Debug.Print "avarTableNames"
+    'Debug.Print "UBound(avarTableNames)=" & UBound(avarTableNames)
+    'Stop
 
-    strFileName = aestrXMLLocation & avarTableNames(0) & ".xml"
+    For i = 0 To UBound(avarTableNames)
+        rst.Open "Select * from " & avarTableNames(i), cnn, adOpenStatic, adLockOptimistic
 
-    'MsgBox "aegitSetup=" & aegitSetup, vbInformation, "OutputTheTableDataAsXML"
-    If aegitSetup Then
-        If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
-        If Not rst.EOF Then
-            rst.MoveFirst
-            rst.Save strFileName, adPersistXML
+        strFileName = aestrXMLLocation & avarTableNames(i) & ".xml"
+
+        'MsgBox "aegitSetup=" & aegitSetup, vbInformation, "OutputTheTableDataAsXML"
+        If aegitSetup Then
+            If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
+            If Not rst.EOF Then
+                rst.MoveFirst
+                rst.Save strFileName, adPersistXML
+            End If
+        Else
+            If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=False aestrXMLLocation=" & aestrXMLLocation
+            If Not rst.EOF Then
+                rst.MoveFirst
+                rst.Save strFileName, adPersistXML
+            End If
         End If
-    Else
-        If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=False aestrXMLLocation=" & aestrXMLLocation
-        If Not rst.EOF Then
-            rst.MoveFirst
-            rst.Save strFileName, adPersistXML
+
+        If Not IsMissing(varDebug) Then
+            PrettyXML strFileName, varDebug
+        Else
+            PrettyXML strFileName
         End If
-    End If
+        rst.Close
+    Next
 
-    If Not IsMissing(varDebug) Then
-        PrettyXML strFileName, varDebug
-    Else
-        PrettyXML strFileName
-    End If
-
-    rst.Close
     cnn.Close
     Set rst = Nothing
     Set cnn = Nothing
@@ -3527,7 +3534,6 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2950 Then ' Reserved Error
-        MsgBox "Err=2950 Reserved Error for " & tdf.Name, vbInformation, "OutputTableDataMacros"
         Resume NextTdf
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass"
