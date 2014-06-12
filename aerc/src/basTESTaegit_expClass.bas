@@ -1,6 +1,8 @@
 Option Compare Database
 Option Explicit
 
+Public gvarMyTablesForExportToXML() As Variant
+
 Private ref As Reference
 
 ' 0 if Late Binding
@@ -62,7 +64,8 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varXmlFldr As Variant, _
                                 Optional ByVal varXmlData As Variant) As Boolean
 
-    On Error GoTo 0
+    On Error GoTo PROC_ERR
+
     Dim oDbObjects As aegit_expClass
     Set oDbObjects = New aegit_expClass
 
@@ -80,9 +83,14 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     ' Define tables for xml data export
     If Not IsMissing(varXmlData) Then
-        Dim MyArray() As Variant
-        MyArray = Array("tblRace", "tblYear")
-        oDbObjects.TablesExportToXML = MyArray()
+            If Application.VBE.ActiveVBProject.Name = "aegit" Then
+                Dim MyArray() As Variant
+                MyArray = Array("tblRace", "tblYear")
+                oDbObjects.TablesExportToXML = MyArray()
+            Else
+                Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
+                oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+            End If
     End If
 
 Test1:
@@ -248,6 +256,16 @@ RESULTS:
     Debug.Print
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
     Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7), PassFail(bln8)
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassTest"
+            Stop
+    End Select
 
 End Function
 

@@ -1,5 +1,5 @@
 >>>Standard Options
-              2000          AppTitle                    aegit 1.0.5
+              2000          AppTitle                    aegit 1.0.7
               2000          AppIcon                     .\adaept64.ico
               2000          AllowFullMenus              True
               2000          AllowShortcutMenus          True
@@ -14,8 +14,8 @@
               XP, 2003      Show Status Bar                           -1 
               XP, 2003      Show Startup Dialog Box                   -1 
               XP, 2003      Show New Object Shortcuts                 -1 
-              XP, 2003      Show Hidden Objects                       -1 
-              XP, 2003      Show System Objects                       -1 
+              XP, 2003      Show Hidden Objects                        0 
+              XP, 2003      Show System Objects                        0 
               XP, 2003      ShowWindowsInTaskbar                      -1 
               XP, 2003      Show Macro Names Column                    0 
               XP, 2003      Show Conditions Column                     0 
@@ -31,12 +31,12 @@
               XP, 2003      Perform Name AutoCorrect                   0 
               XP, 2003      Log Name AutoCorrect Changes               0 
               XP, 2003      Enable MRU File List                      -1 
-              XP, 2003      Size of MRU File List                      9 
+              XP, 2003      Size of MRU File List                      6 
               XP, 2003      Provide Feedback with Sound                0 
               XP, 2003      Auto Compact                               0 
               XP, 2003      New Database Sort Order                    1033 
               XP, 2003      Remove Personal Information                0 
-              XP, 2003      Default Database Directory                C:\Users\peterennis\Documents\
+              XP, 2003      Default Database Directory                C:\TEMP
 >>>Edit/Find Tab
               XP, 2003      Default Find/Replace Behavior              0 
               XP, 2003      Confirm Record Changes                    -1 
@@ -55,7 +55,7 @@
               XP, 2003      Default Gridlines Horizontal              -1 
               XP, 2003      Default Gridlines Vertical                -1 
               XP, 2003      Default Column Width                      1"
-              XP, 2003      Default Font Name                         Consolas
+              XP, 2003      Default Font Name                         Calibri
               XP, 2003      Default Font Weight                        3 
               XP, 2003      Default Font Size                          11 
               XP, 2003      Default Font Underline                     0 
@@ -81,8 +81,8 @@
               XP, 2003      Run Permissions                            1 
               XP, 2003      ANSI Query Mode                            0 
               XP, 2003      ANSI Query Mode Default                    0 
-                  2003      Query Design Font Name                    Consolas
-                  2003      Query Design Font Size                     10 
+                  2003      Query Design Font Name                    Segoe UI
+                  2003      Query Design Font Size                     8 
                   2003      Show Property Update Options buttons      -1 
 >>>Forms/Reports Tab
               XP, 2003      Selection Behavior           0 
@@ -143,7 +143,7 @@
 >>>Popular Tab
    >>>Creating databases section
               2007, 2010, 2013            Default File Format          12 
-              2007, 2010, 2013            Default Database Directory  C:\Users\peterennis\Documents\
+              2007, 2010, 2013            Default Database Directory  C:\TEMP
               2007, 2010, 2013            New Database Sort Order      1033 
 >>>Current Database Tab
    >>>Application Options section
@@ -176,7 +176,7 @@
               2007, 2010, 2013            Default Cell Effect                        0 
               2007, 2010, 2013            Default Column Width                      1"
    >>>Default font section
-              2007, 2010, 2013            Default Font Name           Consolas
+              2007, 2010, 2013            Default Font Name           Calibri
               2007, 2010, 2013            Default Font Size            11 
               2007, 2010, 2013            Default Font Weight          3 
               2007, 2010, 2013            Default Font Underline       0 
@@ -194,8 +194,8 @@
               2007, 2010, 2013            Enable AutoJoin             -1 
               2007, 2010, 2013            ANSI Query Mode              0 
               2007, 2010, 2013            ANSI Query Mode Default      0 
-              2007, 2010, 2013            Query Design Font Name      Consolas
-              2007, 2010, 2013            Query Design Font Size       10 
+              2007, 2010, 2013            Query Design Font Name      Segoe UI
+              2007, 2010, 2013            Query Design Font Size       8 
    >>>Forms/Reports section
               2007, 2010, 2013            Selection Behavior           0 
               2007, 2010, 2013            Form Template               Normal
@@ -232,7 +232,7 @@
               2007, 2010, 2013            Datasheet Ime Control                      0 
               2007, 2010, 2013            Use Hijri Calendar                         0 
    >>>Display section
-              2007, 2010, 2013            Size of MRU File List                      9 
+              2007, 2010, 2013            Size of MRU File List                      6 
               2007, 2010, 2013            Show Status Bar                           -1 
               2007, 2010, 2013            Show Animations                           -1 
               2007, 2010, 2013            Show Smart Tags on Datasheets             -1 

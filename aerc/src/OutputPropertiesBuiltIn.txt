@@ -100,7 +100,7 @@ Inherited: False;
 ---
 Name: ProjVer
 Type: dbInteger
-Value: 140
+Value: 119
 Inherited: False;
 ---
 Name: HasOfflineLists
@@ -245,7 +245,7 @@ Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 1.0.5
+Value: aegit 1.0.7
 Inherited: False;
 ---
 Name: AppIcon
@@ -254,11 +254,6 @@ Value: .\adaept64.ico
 Inherited: False;
 ---
 Name: aeRibbonID
-Type: dbText
-Value: adaept
-Inherited: False;
----
-Name: CustomRibbonID
 Type: dbText
 Value: adaept
 Inherited: False;

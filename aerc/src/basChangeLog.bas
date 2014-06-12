@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 4, 2014"
-Public Const gstrVERSION As String = "1.0.5"
+Public Const gstrDATE As String = "June 9, 2014"
+Public Const gstrVERSION As String = "1.0.7"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 
@@ -13,6 +13,15 @@ Public Const gblnTEST As Boolean = False
 ' IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
 '
 ' Research:
+' Ref: http://www.msoutlook.info/question/482 - officeUI-files
+' The Ribbon and QAT settings - C:\Users\%username%\AppData\Local\Microsoft\Office
+' Ref: http://msdn.microsoft.com/en-us/library/ee704589(v=office.14).aspx
+' Sendkeys module Ref: http://www.codeguru.com/vb/gen/vb_system/keyboard/article.php/c14629/SendKeys.htm#page-1 => VB6, needs too many changes
+' Ref: http://www.codematic.net/excel-development/excel-xll/excel-xll.htm
+' SendInput Module Ref: http://vb.mvps.org/samples/SendInput/
+' *** Windows API help - replacing As Any declaration
+' Ref: http://allapi.mentalis.org/vbtutor/api1.shtml
+'
 '
 ' Guides:
 ' Office VBA Basic Debugging Techniques
@@ -34,7 +43,7 @@ Public Const gblnTEST As Boolean = False
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #030 -
+' #031 -
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #027 - Cannot run the macro or callback function OnActionButton
 ' #026 - Output list of hidden reports
@@ -66,6 +75,10 @@ Public Const gblnTEST As Boolean = False
     ' Remove "If aeDEBUG_PRINT Then " globally
     ' FIXED - #028 - Err 55 file already open in WriteStringToFile
     ' DONE - %004 - Learning git on the command line - Ref: http://cheat.errtheblog.com/s/git
+    ' FIXED - #030 - Testing GDIPlusDemo2013 - Error -2147319779 (Multiple-step OLE DB operation generated errors, Check
+    ' each OLE DB status value, if available. No work was done.) in procedure
+    ' aeGetReferences of Class aegit_expClass
+    ' => Add reference to MSCOMCTL.OCX, compile, remove reference - fixes ActiveX registration problem in GDIPlusDemo2013 forms.
 '20140530 - v104 - Import basGDIPlus
     ' Add basaeRibbonCallbacks modules
     ' Load simple ADAEPT ribbon using GDIPlus and example from Avenius IDBE RibbonCreator 2013

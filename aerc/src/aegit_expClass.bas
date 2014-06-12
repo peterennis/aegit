@@ -30,8 +30,8 @@ Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "1.0.5"
-Private Const aegit_expVERSION_DATE As String = "June 4, 2014"
+Private Const aegit_expVERSION As String = "1.0.7"
+Private Const aegit_expVERSION_DATE As String = "June 9, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 '''x Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True
@@ -110,9 +110,11 @@ Private Sub Class_Initialize()
     ' provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitXMLFolder = "default"
-    ReDim Preserve aegitDataXML(1 To 1)
-    aegitDataXML(1) = "aetlkpStates"
-    aegitExportDataToXML = False
+    ReDim Preserve aegitDataXML(0 To 9)
+    If Application.VBE.ActiveVBProject.Name = "aegit" Then
+        aegitDataXML(0) = "aetlkpStates"
+    End If
+    aegitExportDataToXML = True
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
     aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
     aeintLTN = 11           ' Set a minimum default
@@ -174,12 +176,33 @@ Public Property Let XMLFolder(ByVal strXMLFolder As String)
     aegitXMLFolder = strXMLFolder
 End Property
 
-Public Property Let TablesExportToXML(ByRef avarTables() As Variant)
+Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
 ' FIX THIS!!! - Check ByRef
-    On Error GoTo 0
-    MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
+' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
+    On Error GoTo PROC_ERR
+
+    'MsgBox "Let TablesExportToXML: LBound(varTablesArray)=" & LBound(varTablesArray) & _
+        vbCrLf & "UBound(varTablesArray)=" & UBound(varTablesArray), vbInformation, "CHECK"
+    Debug.Print "LBound(varTablesArray)=" & LBound(varTablesArray), "varTablesArray(0)=" & varTablesArray(0)
+    Debug.Print "UBound(varTablesArray)=" & UBound(varTablesArray), "varTablesArray(1)=" & varTablesArray(1)
+    'MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    aegitDataXML = avarTables
+    ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
+    aegitDataXML = varTablesArray
+    Debug.Print "aegitDataXML(0)=" & aegitDataXML(0)
+    Debug.Print "aegitDataXML(1)=" & aegitDataXML(1)
+    'Stop
+
+PROC_EXIT:
+    Exit Property
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML"
+            Stop
+    End Select
+
 End Property
 
 Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean
@@ -439,6 +462,41 @@ Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
         IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
     End If
 End Function
+
+Private Sub OutputSendKeysQATexport()
+
+    Debug.Print "FIX THIS !!!"
+    Exit Sub
+
+    ' Access 2010
+'''x    Const ExportPath = "C:\TEMP\"
+    Const ExportQATFile = "Access Customizations.exportedUI"
+
+    Dim theFile As String
+    theFile = aestrSourceLocation & ExportQATFile
+    Debug.Print "theFile=" & theFile
+
+'    ' Delete the file
+'    If Len(Dir$(theFile)) > 0 Then ' Make sure it actually got deleted
+'        Kill theFile
+'    End If
+'    DoEvents
+
+    Debug.Print Application.CurrentDb.Name
+'    MySendKeys "%FC", True                            ' Close VBA window
+'    MySendKeys "%FT", True                            ' File Options
+'    MySendKeys "CCC%P", True
+'    Stop
+'    MySendKeys "{DOWN}{ENTER}", True                  ' Export all customizations
+'    MySendKeys "{BKSP}", True                         ' Remove selection
+'    MySendKeys """" & theFile & """", True            ' File save dialog
+'    Stop
+'    MySendKeys "%S", True                             ' Save
+'    MySendKeys "{ESC}", True
+'    MySendKeys "%YV", True                            ' Re-open VBIDE
+'    Stop
+
+End Sub
 
 Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
@@ -1668,7 +1726,13 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 
     'MsgBox "aeDocumentTablesXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
         vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    If aegitExportDataToXML Then OutputTheTableDataAsXML aegitDataXML()
+    If aegitExportDataToXML Then
+        If Not IsMissing(varDebug) Then
+            OutputTheTableDataAsXML aegitDataXML(), varDebug
+        Else
+            OutputTheTableDataAsXML aegitDataXML()
+        End If
+    End If
 
     intFailCount = 0
     Debug.Print "aeDocumentTablesXML"
@@ -2621,6 +2685,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputListOfApplicationProperties
     'Stop
 
+    ' FIXME DEBUG HERE
+    OutputSendKeysQATexport
+
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
     '=============
@@ -3253,8 +3320,9 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
 
     ' Use a call stack and global error handler
-    If mblnHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "OutputTheTableDataAsXML"
+    'If mblnHandleErrors Then On Error GoTo PROC_ERR
+    'PushCallStack "OutputTheTableDataAsXML"
+    On Error GoTo PROC_ERR
 
     Const adOpenStatic As Integer = 3
     Const adLockOptimistic As Integer = 3
@@ -3267,23 +3335,29 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Dim rst As Object
     Set rst = CreateObject("ADODB.Recordset")
 
-    If IsMissing(varDebug) Then
-        KillAllFiles "xml"
-    Else
-        KillAllFiles "xml", varDebug
-    End If
+'    If IsMissing(varDebug) Then
+'        KillAllFiles "xml"
+'    Else
+'        KillAllFiles "xml", varDebug
+'    End If
 
-    rst.Open "Select * from " & avarTableNames(1), cnn, adOpenStatic, adLockOptimistic
+    rst.Open "Select * from " & avarTableNames(0), cnn, adOpenStatic, adLockOptimistic
 
-    strFileName = aestrXMLLocation & avarTableNames(1) & ".xml"
+    strFileName = aestrXMLLocation & avarTableNames(0) & ".xml"
 
+    'MsgBox "aegitSetup=" & aegitSetup, vbInformation, "OutputTheTableDataAsXML"
     If aegitSetup Then
-        MsgBox "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation, vbCritical, aeAPP_NAME
+        If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
         If Not rst.EOF Then
             rst.MoveFirst
             rst.Save strFileName, adPersistXML
         End If
     Else
+        If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=False aestrXMLLocation=" & aestrXMLLocation
+        If Not rst.EOF Then
+            rst.MoveFirst
+            rst.Save strFileName, adPersistXML
+        End If
     End If
 
     If Not IsMissing(varDebug) Then
@@ -3298,13 +3372,13 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Set cnn = Nothing
 
 PROC_EXIT:
-    PopCallStack "OutputTheTableDataAsXML"
+    'PopCallStack "OutputTheTableDataAsXML"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
-    GlobalErrHandler
+    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -3453,6 +3527,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2950 Then ' Reserved Error
+        MsgBox "Err=2950 Reserved Error for " & tdf.Name, vbInformation, "OutputTableDataMacros"
         Resume NextTdf
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass"
