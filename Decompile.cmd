@@ -27,6 +27,7 @@ REM /***************************************************************************
 REM Support for multiple database files within the one directory
 REM Simply unREM the correct LOC to decompile that database file
 SET DBfile=adaept revision control.accdb
+SET AccessPath="C:\Program Files (x86)\Microsoft Office\Office14\MSACCESS.EXE"
 
 ECHO.
 ECHO This script will Decompile the %DBfile% database.
@@ -38,6 +39,8 @@ ECHO.
 ECHO Please remember to hold down the shift key to prevent Access from running
 ECHO the autoexec macro if there is one in the database being decompiled.
 ECHO.
+ECHO DBfile=%DBfile%
+ECHO AccessPath=%AccessPath%
 PAUSE
 
 :RunDecompile
@@ -47,7 +50,7 @@ FOR /F "delims=" %%A IN (' dir  /a-d/b "%DBfile%" ') DO (
 )
 ECHO File Size pre-decompile:  %DBfilesizepre%
 
-"C:\Program Files\Microsoft Office\Office15\MSACCESS.EXE" /decompile "%DBfilefullyqualified%"
+%AccessPath% /decompile "%DBfilefullyqualified%"
 
 FOR /F "delims=" %%A IN (' dir  /a-d/b "%DBfile%" ') DO (
   SET DBfilesizepost=%%~zA
@@ -62,3 +65,5 @@ GOTO RunDecompile
 
 :End
 ECHO Decompile Completed!
+ECHO Press any key to finish ...
+PAUSE > nul
