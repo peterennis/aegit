@@ -19,21 +19,23 @@ Option Explicit
 'http://www.gnu.org/licenses/lgpl-3.0.txt
 '
 ' Ref: http://www.di-mgt.com.au/cl_Simple.html
-'=======================================================================
+' =======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 24, 2011
 ' Comment:  Create class for revision control
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
 ' Web:      https://github.com/peterennis/aegit
-'=======================================================================
+' =======================================================================
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Const aegit_expVERSION As String = "1.0.8"
-Private Const aegit_expVERSION_DATE As String = "June 11, 2014"
+Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
+Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+
+Private Const aegit_expVERSION As String = "1.1.0"
+Private Const aegit_expVERSION_DATE As String = "June 18, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
-'''x Private Const aeDEBUG_PRINT As Boolean = True
 Private Const mblnHandleErrors As Boolean = True
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -90,6 +92,8 @@ Private Const aePrnterInfo As String = "OutputPrinterInfo.txt"
 Private Const aeAppOptions As String = "OutputListOfAccessApplicationOptions.txt"
 Private Const aeAppListPrp As String = "OutputListOfApplicationProperties.txt"
 Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
+Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
+Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 '
 
 Private Sub Class_Initialize()
@@ -97,7 +101,6 @@ Private Sub Class_Initialize()
 ' Ref: http://www.bigresource.com/Tracker/Track-vb-cyJ1aJEyKj/
 ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
-    'On Error GoTo 0
     On Error GoTo PROC_ERR
     
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
@@ -107,7 +110,7 @@ Private Sub Class_Initialize()
         Application.RefreshTitleBar
         Set dbs = Nothing
     End If
-    ' provide a default value for the SourceFolder, ImportFolder and other properties
+    ' Provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitXMLFolder = "default"
     ReDim Preserve aegitDataXML(0 To 0)
@@ -180,17 +183,12 @@ Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
 ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
     On Error GoTo PROC_ERR
 
-    'MsgBox "Let TablesExportToXML: LBound(varTablesArray)=" & LBound(varTablesArray) & _
-        vbCrLf & "UBound(varTablesArray)=" & UBound(varTablesArray), vbInformation, "CHECK"
     Debug.Print "LBound(varTablesArray)=" & LBound(varTablesArray), "varTablesArray(0)=" & varTablesArray(0)
     Debug.Print "UBound(varTablesArray)=" & UBound(varTablesArray), "varTablesArray(1)=" & varTablesArray(1)
-    'MsgBox "Let TablesExportToXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
-        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
     ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
     aegitDataXML = varTablesArray
     Debug.Print "aegitDataXML(0)=" & aegitDataXML(0)
     Debug.Print "aegitDataXML(1)=" & aegitDataXML(1)
-    'Stop
 
 PROC_EXIT:
     Exit Property
@@ -215,8 +213,6 @@ Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As B
         Debug.Print "Get DocumentTheDatabase"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        'Debug.Print "varDebug=" & varDebug, "Get DocumentTheDatabase"
-        'Stop
         DocumentTheDatabase = aeDocumentTheDatabase(varDebug)
     End If
 End Property
@@ -338,18 +334,76 @@ Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As 
     
 End Property
 
-Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
+Private Function Delay(ByVal mSecs As Long) As Boolean
+        Sleep mSecs ' delay milli seconds
+End Function
 
-    'Debug.Print "aeReadWriteStream Entry strPathFileName=" & strPathFileName
-
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeReadWriteStream"
+Private Function FixHeaderXML(ByVal strPathFileName As String) As Boolean
 
     On Error GoTo PROC_ERR
 
     Dim fName As String
-    Dim fname2 As String
+    Dim fName2 As String
+    Dim fnr As Integer
+    Dim fnr2 As Integer
+    Dim tstring As String * 1
+    Dim blnDone As Boolean
+
+    FixHeaderXML = False
+    blnDone = False
+
+    fName = strPathFileName
+    fName2 = strPathFileName & ".fixed.xml"
+    Debug.Print fName, fName2
+
+    fnr = FreeFile()
+    Open fName For Binary Access Read As #fnr
+    Get #fnr, , tstring
+
+    fnr2 = FreeFile()
+    Open fName2 For Binary Lock Read Write As #fnr2
+
+    While Not EOF(fnr)
+        Get #fnr, , tstring
+        Debug.Print Asc(tstring)
+        If Not blnDone Then
+                If Asc(tstring) <> 62 Then          ' ">"
+                    Debug.Print Asc(tstring)
+                Else
+                    blnDone = True
+                End If
+        Else
+            If Asc(tstring) <> 0 Then Put #fnr2, , tstring
+        End If
+    Wend
+    'Stop
+
+PROC_EXIT:
+    Close #fnr
+    Close #fnr2
+    FixHeaderXML = True
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        Case 9
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass" & _
+                    vbCrLf & "FixHeaderXML Entry strPathFileName=" & strPathFileName, vbCritical, "FixHeaderXML ERROR=9"
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass"
+            Resume Next
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass"
+            Resume Next
+    End Select
+
+End Function
+
+Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
+
+    On Error GoTo PROC_ERR
+
+    Dim fName As String
+    Dim fName2 As String
     Dim fnr As Integer
     Dim fnr2 As Integer
     Dim tstring As String * 1
@@ -360,7 +414,7 @@ Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
     ' Ref: http://msdn.microsoft.com/en-us/library/windows/desktop/dd374101%28v=vs.85%29.aspx
     ' then do nothing
     fName = strPathFileName
-    fname2 = strPathFileName & ".clean.txt"
+    fName2 = strPathFileName & ".clean.txt"
 
     fnr = FreeFile()
     Open fName For Binary Access Read As #fnr
@@ -375,7 +429,7 @@ Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
     End If
 
     fnr2 = FreeFile()
-    Open fname2 For Binary Lock Read Write As #fnr2
+    Open fName2 For Binary Lock Read Write As #fnr2
 
     While Not EOF(fnr)
         Get #fnr, , tstring
@@ -390,7 +444,6 @@ PROC_EXIT:
     Close #fnr
     Close #fnr2
     aeReadWriteStream = True
-    'PopCallStack "aeReadWriteStream"
     Exit Function
 
 PROC_ERR:
@@ -399,11 +452,9 @@ PROC_ERR:
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass" & _
                     vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
-            'GlobalErrHandler
             Resume Next
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
-            'GlobalErrHandler
             Resume Next
     End Select
 
@@ -454,7 +505,6 @@ End Function
 
 Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     On Error GoTo 0
-    'Debug.Print "strQueryName=" & strQueryName
     If IsNull(strQueryName) Or strQueryName = vbNullString Then
         IsQryHidden = False
     Else
@@ -462,38 +512,54 @@ Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     End If
 End Function
 
-Private Sub OutputSendKeysQATexport()
+Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As Variant)
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=52635
+' Set focus to the Access window
 
-    Debug.Print "FIX THIS !!!"
-    Exit Sub
+    Dim strAppTitle As String
+    Dim lngHwnd As Long
+    Dim lngCwnd As Long
 
-    ' Access 2010
-'''x    Const ExportPath = "C:\TEMP\"
-    Const ExportQATFile = "Access Customizations.exportedUI"
+    DoCmd.RunCommand acCmdAppMaximize
+    Delay 500
+    strAppTitle = CurrentDb.Properties("AppTitle")
+    AppActivate strAppTitle
+    lngHwnd = FindWindow(vbNullString, strAppTitle)
+    If Not IsMissing(varDebug) Then Debug.Print "strAppTitle=" & strAppTitle
+    If Not IsMissing(varDebug) Then Debug.Print "lngHwnd=" & lngHwnd
 
-    Dim theFile As String
-    theFile = aestrSourceLocation & ExportQATFile
-    Debug.Print "theFile=" & theFile
+    ' NOTE: Flaky and unreliable SendKeys... needs some work
 
-'    ' Delete the file
-'    If Len(Dir$(theFile)) > 0 Then ' Make sure it actually got deleted
-'        Kill theFile
-'    End If
-'    DoEvents
+    apiSetActiveWindow lngHwnd
+    ' Ref: http://www.jpsoftwaretech.com/vba/shell-scripting-vba-windows-script-host-object-model/
+    ' Ref: http://www.computerperformance.co.uk/ezine/ezine26.htm
+    Dim wsc As Object
+    Set wsc = CreateObject("WScript.Shell")
+    wsc.SendKeys "{F10}FT"
+    wsc.SendKeys "{HOME}CCC"
+    Delay 250
+    wsc.SendKeys "%P{TAB}{ENTER}"
+    Delay 250
+    wsc.SendKeys "{BACKSPACE}"
+    Delay 500
+    wsc.SendKeys aegitSourceFolder & strTheFile
+    Delay 250
+    wsc.SendKeys "%S"
+    wsc.SendKeys "{ESC}"
+    Pause 1
 
-'    Debug.Print Application.CurrentDb.Name
-'    MySendKeys "%FC", True                            ' Close VBA window
-'    MySendKeys "%FT", True                            ' File Options
-'    MySendKeys "CCC%P", True
-'    Stop
-'    MySendKeys "{DOWN}{ENTER}", True                  ' Export all customizations
-'    MySendKeys "{BKSP}", True                         ' Remove selection
-'    MySendKeys """" & theFile & """", True            ' File save dialog
-'    Stop
-'    MySendKeys "%S", True                             ' Save
-'    MySendKeys "{ESC}", True
-'    MySendKeys "%YV", True                            ' Re-open VBIDE
-'    Stop
+    ' NOTE: the QAT Ribbon XML as <mso:cmd app="Access" dt="0" /> at the start
+    ' and it messes parsing as standard XML. Remove it, rename the file as .xml,
+    ' save to the xml folder and prettify for reading.
+
+    FixHeaderXML (aegitSourceFolder & strTheFile & ".exportedUI")
+    'Stop
+
+    If Not IsMissing(varDebug) Then
+        PrettyXML aegitSourceFolder & strTheFile & ".exportedUI.fixed.xml", varDebug
+    Else
+        PrettyXML aegitSourceFolder & strTheFile & ".exportedUI.fixed.xml"
+    End If
 
 End Sub
 
@@ -543,7 +609,7 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
             Debug.Print "No records!"
         End If
     End With
-    'Stop
+    
     rst.Close
     Set rst = Nothing
 
@@ -585,9 +651,6 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
 ' the debugger stops on the line calling the class rather than the offending line in the class.
 ' This makes finding and fixing the problem a real pain.
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputListOfAccessApplicationOptions"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -605,7 +668,6 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     End If
 
     If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
-    'Stop
 
     If aegitSourceFolder = "default" Then
         aegitSourceFolder = aegitType.SourceFolder
@@ -614,295 +676,292 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     fle = FreeFile()
     Open aegitSourceFolder & "\" & aeAppOptions For Output As #fle
 
-    'On Error Resume Next
     Print #fle, ">>>Standard Options"
-    '2000 The following options are equivalent to the standard startup options found in the Startup Options dialog box.
-    Print #fle, , "2000", "AppTitle              ", dbs.Properties!AppTitle                     'String  The title of an application, as displayed in the title bar.
-    Print #fle, , "2000", "AppIcon               ", dbs.Properties!AppIcon                      'String  The file name and path of an application's icon.
-    Print #fle, , "2000", "StartupMenuBar        ", dbs.Properties!StartUpMenuBar               'String  Sets the default menu bar for the application.
-    Print #fle, , "2000", "AllowFullMenus        ", dbs.Properties!AllowFullMenus               'True/False  Determines if the built-in Access menu bars are displayed.
-    Print #fle, , "2000", "AllowShortcutMenus    ", dbs.Properties!AllowShortcutMenus           'True/False  Determines if the built-in Access shortcut menus are displayed.
-    Print #fle, , "2000", "StartupForm           ", dbs.Properties!StartUpForm                  'String  Sets the form or data page to show when the application is first opened.
-    Print #fle, , "2000", "StartupShowDBWindow   ", dbs.Properties!StartUpShowDBWindow          'True/False  Determines if the database window is displayed when the application is first opened.
-    Print #fle, , "2000", "StartupShowStatusBar  ", dbs.Properties!StartUpShowStatusBar         'True/False  Determines if the status bar is displayed.
-    Print #fle, , "2000", "StartupShortcutMenuBar", dbs.Properties!StartUpShortcutMenuBar       'String  Sets the shortcut menu bar to be used in all forms and reports.
-    Print #fle, , "2000", "AllowBuiltInToolbars  ", dbs.Properties!AllowBuiltInToolbars         'True/False  Determines if the built-in Access toolbars are displayed.
-    Print #fle, , "2000", "AllowToolbarChanges   ", dbs.Properties!AllowToolbarChanges          'True/False  Determined if toolbar changes can be made.
+    ' 2000 The following options are equivalent to the standard startup options found in the Startup Options dialog box.
+    Print #fle, , "2000", "AppTitle              ", dbs.Properties!AppTitle                     ' String  The title of an application, as displayed in the title bar.
+    Print #fle, , "2000", "AppIcon               ", dbs.Properties!AppIcon                      ' String  The file name and path of an application's icon.
+    Print #fle, , "2000", "StartupMenuBar        ", dbs.Properties!StartUpMenuBar               ' String  Sets the default menu bar for the application.
+    Print #fle, , "2000", "AllowFullMenus        ", dbs.Properties!AllowFullMenus               ' True/False  Determines if the built-in Access menu bars are displayed.
+    Print #fle, , "2000", "AllowShortcutMenus    ", dbs.Properties!AllowShortcutMenus           ' True/False  Determines if the built-in Access shortcut menus are displayed.
+    Print #fle, , "2000", "StartupForm           ", dbs.Properties!StartUpForm                  ' String  Sets the form or data page to show when the application is first opened.
+    Print #fle, , "2000", "StartupShowDBWindow   ", dbs.Properties!StartUpShowDBWindow          ' True/False  Determines if the database window is displayed when the application is first opened.
+    Print #fle, , "2000", "StartupShowStatusBar  ", dbs.Properties!StartUpShowStatusBar         ' True/False  Determines if the status bar is displayed.
+    Print #fle, , "2000", "StartupShortcutMenuBar", dbs.Properties!StartUpShortcutMenuBar       ' String  Sets the shortcut menu bar to be used in all forms and reports.
+    Print #fle, , "2000", "AllowBuiltInToolbars  ", dbs.Properties!AllowBuiltInToolbars         ' True/False  Determines if the built-in Access toolbars are displayed.
+    Print #fle, , "2000", "AllowToolbarChanges   ", dbs.Properties!AllowToolbarChanges          ' True/False  Determined if toolbar changes can be made.
     Print #fle, ">>>Advanced Option"
-    Print #fle, , "2000", "AllowSpecialKeys      ", dbs.Properties!AllowSpecialKeys             'option (True/False value) determines if the use of special keys is permitted. It is equivalent to the advanced startup option found in the Startup Options dialog box.
+    Print #fle, , "2000", "AllowSpecialKeys      ", dbs.Properties!AllowSpecialKeys             ' Option (True/False value) determines if the use of special keys is permitted. It is equivalent to the advanced startup option found in the Startup Options dialog box.
     Print #fle, ">>>Extra Options"
-    'The following options are not available from the Startup Options dialog box or any other Access user interface component, they are only available in programming code.
-    Print #fle, , "2000", "AllowBypassKey        ", dbs.Properties!AllowBypassKey               'True/False  Determines if the SHIFT key can be used to bypass the application load process.
-    Print #fle, , "2000", "AllowBreakIntoCode    ", dbs.Properties!AllowBreakIntoCode           'True/False  Determines if the CTRL+BREAK key combination can be used to stop code from running.
-    Print #fle, , "2000", "HijriCalendar         ", dbs.Properties!HijriCalendar                'True/False  Applies only to Arabic countries; determines if the application uses Hijri or Gregorian dates.
+    ' The following options are not available from the Startup Options dialog box or any other Access user interface component, they are only available in programming code.
+    Print #fle, , "2000", "AllowBypassKey        ", dbs.Properties!AllowBypassKey               ' True/False  Determines if the SHIFT key can be used to bypass the application load process.
+    Print #fle, , "2000", "AllowBreakIntoCode    ", dbs.Properties!AllowBreakIntoCode           ' True/False  Determines if the CTRL+BREAK key combination can be used to stop code from running.
+    Print #fle, , "2000", "HijriCalendar         ", dbs.Properties!HijriCalendar                ' True/False  Applies only to Arabic countries; determines if the application uses Hijri or Gregorian dates.
     Print #fle, ">>>View Tab"
-    Print #fle, , "XP, 2003", "Show Status Bar                 ", Application.GetOption("Show Status Bar")                    'Show, Status bar
-    Print #fle, , "XP, 2003", "Show Startup Dialog Box         ", Application.GetOption("Show Startup Dialog Box")            'Show, Startup Task Pane
-    Print #fle, , "XP, 2003", "Show New Object Shortcuts       ", Application.GetOption("Show New Object Shortcuts")          'Show, New object shortcuts
-    Print #fle, , "XP, 2003", "Show Hidden Objects             ", Application.GetOption("Show Hidden Objects")                'Show, Hidden objects
-    Print #fle, , "XP, 2003", "Show System Objects             ", Application.GetOption("Show System Objects")                'Show, System objects
-    Print #fle, , "XP, 2003", "ShowWindowsInTaskbar            ", Application.GetOption("ShowWindowsInTaskbar")               'Show, Windows in Taskbar
-    Print #fle, , "XP, 2003", "Show Macro Names Column         ", Application.GetOption("Show Macro Names Column")            'Show in Macro Design, Names column
-    Print #fle, , "XP, 2003", "Show Conditions Column          ", Application.GetOption("Show Conditions Column")             'Show in Macro Design, Conditions column
-    Print #fle, , "XP, 2003", "Database Explorer Click Behavior", Application.GetOption("Database Explorer Click Behavior")   'Click options in database window
+    Print #fle, , "XP, 2003", "Show Status Bar                 ", Application.GetOption("Show Status Bar")                    ' Show, Status bar
+    Print #fle, , "XP, 2003", "Show Startup Dialog Box         ", Application.GetOption("Show Startup Dialog Box")            ' Show, Startup Task Pane
+    Print #fle, , "XP, 2003", "Show New Object Shortcuts       ", Application.GetOption("Show New Object Shortcuts")          ' Show, New object shortcuts
+    Print #fle, , "XP, 2003", "Show Hidden Objects             ", Application.GetOption("Show Hidden Objects")                ' Show, Hidden objects
+    Print #fle, , "XP, 2003", "Show System Objects             ", Application.GetOption("Show System Objects")                ' Show, System objects
+    Print #fle, , "XP, 2003", "ShowWindowsInTaskbar            ", Application.GetOption("ShowWindowsInTaskbar")               ' Show, Windows in Taskbar
+    Print #fle, , "XP, 2003", "Show Macro Names Column         ", Application.GetOption("Show Macro Names Column")            ' Show in Macro Design, Names column
+    Print #fle, , "XP, 2003", "Show Conditions Column          ", Application.GetOption("Show Conditions Column")             ' Show in Macro Design, Conditions column
+    Print #fle, , "XP, 2003", "Database Explorer Click Behavior", Application.GetOption("Database Explorer Click Behavior")   ' Click options in database window
     Print #fle, ">>>General Tab"
-    Print #fle, , "XP, 2003", "Left Margin                 ", Application.GetOption("Left Margin")                                            'Print margins, Left margin
-    Print #fle, , "XP, 2003", "Right Margin                ", Application.GetOption("Right Margin")                                           'Print margins, Right margin
-    Print #fle, , "XP, 2003", "Top Margin                  ", Application.GetOption("Top Margin")                                             'Print margins, Top margin
-    Print #fle, , "XP, 2003", "Bottom Margin               ", Application.GetOption("Bottom Margin")                                          'Print margins, Bottom margin
-    Print #fle, , "XP, 2003", "Four-Digit Year Formatting  ", Application.GetOption("Four-Digit Year Formatting")                             'Use four-year digit year formatting, This database
-    Print #fle, , "XP, 2003", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")   'Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
-    Print #fle, , "XP, 2003", "Track Name AutoCorrect Info ", Application.GetOption("Track Name AutoCorrect Info")                            'Name AutoCorrect, Track name AutoCorrect info
-    Print #fle, , "XP, 2003", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")                               'Name AutoCorrect, Perform name AutoCorrect
-    Print #fle, , "XP, 2003", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")                           'Name AutoCorrect, Log name AutoCorrect changes
-    Print #fle, , "XP, 2003", "Enable MRU File List        ", Application.GetOption("Enable MRU File List")                                   'Recently used file list
-    Print #fle, , "XP, 2003", "Size of MRU File List       ", Application.GetOption("Size of MRU File List")                                  'Recently used file list, (number of files)
-    Print #fle, , "XP, 2003", "Provide Feedback with Sound ", Application.GetOption("Provide Feedback with Sound")                            'Provide feedback with sound
-    Print #fle, , "XP, 2003", "Auto Compact                ", Application.GetOption("Auto Compact")                                           'Compact on Close
-    Print #fle, , "XP, 2003", "New Database Sort Order     ", Application.GetOption("New Database Sort Order")                                'New database sort order
-    Print #fle, , "XP, 2003", "Remove Personal Information ", Application.GetOption("Remove Personal Information")                            'Remove personal information from this file
-    Print #fle, , "XP, 2003", "Default Database Directory  ", Application.GetOption("Default Database Directory")                             'Default database folder
+    Print #fle, , "XP, 2003", "Left Margin                 ", Application.GetOption("Left Margin")                                            ' Print margins, Left margin
+    Print #fle, , "XP, 2003", "Right Margin                ", Application.GetOption("Right Margin")                                           ' Print margins, Right margin
+    Print #fle, , "XP, 2003", "Top Margin                  ", Application.GetOption("Top Margin")                                             ' Print margins, Top margin
+    Print #fle, , "XP, 2003", "Bottom Margin               ", Application.GetOption("Bottom Margin")                                          ' Print margins, Bottom margin
+    Print #fle, , "XP, 2003", "Four-Digit Year Formatting  ", Application.GetOption("Four-Digit Year Formatting")                             ' Use four-year digit year formatting, This database
+    Print #fle, , "XP, 2003", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")   ' Use four-year digit year formatting, All databases  Four-Digit Year Formatting All Databases
+    Print #fle, , "XP, 2003", "Track Name AutoCorrect Info ", Application.GetOption("Track Name AutoCorrect Info")                            ' Name AutoCorrect, Track name AutoCorrect info
+    Print #fle, , "XP, 2003", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")                               ' Name AutoCorrect, Perform name AutoCorrect
+    Print #fle, , "XP, 2003", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")                           ' Name AutoCorrect, Log name AutoCorrect changes
+    Print #fle, , "XP, 2003", "Enable MRU File List        ", Application.GetOption("Enable MRU File List")                                   ' Recently used file list
+    Print #fle, , "XP, 2003", "Size of MRU File List       ", Application.GetOption("Size of MRU File List")                                  ' Recently used file list, (number of files)
+    Print #fle, , "XP, 2003", "Provide Feedback with Sound ", Application.GetOption("Provide Feedback with Sound")                            ' Provide feedback with sound
+    Print #fle, , "XP, 2003", "Auto Compact                ", Application.GetOption("Auto Compact")                                           ' Compact on Close
+    Print #fle, , "XP, 2003", "New Database Sort Order     ", Application.GetOption("New Database Sort Order")                                ' New database sort order
+    Print #fle, , "XP, 2003", "Remove Personal Information ", Application.GetOption("Remove Personal Information")                            ' Remove personal information from this file
+    Print #fle, , "XP, 2003", "Default Database Directory  ", Application.GetOption("Default Database Directory")                             ' Default database folder
     Print #fle, ">>>Edit/Find Tab"
-    Print #fle, , "XP, 2003", "Default Find/Replace Behavior", Application.GetOption("Default Find/Replace Behavior")       'Default find/replace behavior
-    Print #fle, , "XP, 2003", "Confirm Record Changes       ", Application.GetOption("Confirm Record Changes")              'Confirm, Record changes
-    Print #fle, , "XP, 2003", "Confirm Document Deletions   ", Application.GetOption("Confirm Document Deletions")          'Confirm, Document deletions
-    Print #fle, , "XP, 2003", "Confirm Action Queries       ", Application.GetOption("Confirm Action Queries")              'Confirm, Action queries
-    Print #fle, , "XP, 2003", "Show Values in Indexed       ", Application.GetOption("Show Values in Indexed")              'Show list of values in, Local indexed fields
-    Print #fle, , "XP, 2003", "Show Values in Non-Indexed   ", Application.GetOption("Show Values in Non-Indexed")          'Show list of values in, Local nonindexed fields
-    Print #fle, , "XP, 2003", "Show Values in Remote        ", Application.GetOption("Show Values in Remote")               'Show list of values in, ODBC fields
-    Print #fle, , "XP, 2003", "Show Values in Snapshot      ", Application.GetOption("Show Values in Snapshot")             'Show list of values in, Records in local snapshot
-    Print #fle, , "XP, 2003", "Show Values in Server        ", Application.GetOption("Show Values in Server")               'Show list of values in, Records at server
-    Print #fle, , "XP, 2003", "Show Values Limit            ", Application.GetOption("Show Values Limit")                   'Don't display lists where more than this number of records read
+    Print #fle, , "XP, 2003", "Default Find/Replace Behavior", Application.GetOption("Default Find/Replace Behavior")       ' Default find/replace behavior
+    Print #fle, , "XP, 2003", "Confirm Record Changes       ", Application.GetOption("Confirm Record Changes")              ' Confirm, Record changes
+    Print #fle, , "XP, 2003", "Confirm Document Deletions   ", Application.GetOption("Confirm Document Deletions")          ' Confirm, Document deletions
+    Print #fle, , "XP, 2003", "Confirm Action Queries       ", Application.GetOption("Confirm Action Queries")              ' Confirm, Action queries
+    Print #fle, , "XP, 2003", "Show Values in Indexed       ", Application.GetOption("Show Values in Indexed")              ' Show list of values in, Local indexed fields
+    Print #fle, , "XP, 2003", "Show Values in Non-Indexed   ", Application.GetOption("Show Values in Non-Indexed")          ' Show list of values in, Local nonindexed fields
+    Print #fle, , "XP, 2003", "Show Values in Remote        ", Application.GetOption("Show Values in Remote")               ' Show list of values in, ODBC fields
+    Print #fle, , "XP, 2003", "Show Values in Snapshot      ", Application.GetOption("Show Values in Snapshot")             ' Show list of values in, Records in local snapshot
+    Print #fle, , "XP, 2003", "Show Values in Server        ", Application.GetOption("Show Values in Server")               ' Show list of values in, Records at server
+    Print #fle, , "XP, 2003", "Show Values Limit            ", Application.GetOption("Show Values Limit")                   ' Don't display lists where more than this number of records read
     Print #fle, ">>>Datasheet Tab"
-    Print #fle, , "XP, 2003", "Default Font Color           ", Application.GetOption("Default Font Color")                  'Default colors, Font
-    Print #fle, , "XP, 2003", "Default Background Color     ", Application.GetOption("Default Background Color")            'Default colors, Background
-    Print #fle, , "XP, 2003", "Default Gridlines Color      ", Application.GetOption("Default Gridlines Color")             'Default colors, Gridlines
-    Print #fle, , "XP, 2003", "Default Gridlines Horizontal ", Application.GetOption("Default Gridlines Horizontal")        'Default gridlines showing, Horizontal
-    Print #fle, , "XP, 2003", "Default Gridlines Vertical   ", Application.GetOption("Default Gridlines Vertical")          'Default gridlines showing, Vertical
-    Print #fle, , "XP, 2003", "Default Column Width         ", Application.GetOption("Default Column Width")                'Default column width
-    Print #fle, , "XP, 2003", "Default Font Name            ", Application.GetOption("Default Font Name")                   'Default font, Font
-    Print #fle, , "XP, 2003", "Default Font Weight          ", Application.GetOption("Default Font Weight")                 'Default font, Weight
-    Print #fle, , "XP, 2003", "Default Font Size            ", Application.GetOption("Default Font Size")                   'Default font, Size
-    Print #fle, , "XP, 2003", "Default Font Underline       ", Application.GetOption("Default Font Underline")              'Default font, Underline
-    Print #fle, , "XP, 2003", "Default Font Italic          ", Application.GetOption("Default Font Italic")                 'Default font, Italic
-    Print #fle, , "XP, 2003", "Default Cell Effect          ", Application.GetOption("Default Cell Effect")                 'Default cell effect
-    Print #fle, , "XP, 2003", "Show Animations              ", Application.GetOption("Show Animations")                     'Show animations
-    Print #fle, , "    2003", "Show Smart Tags on Datasheets", Application.GetOption("Show Smart Tags on Datasheets")       'Show Smart Tags on Datasheets
+    Print #fle, , "XP, 2003", "Default Font Color           ", Application.GetOption("Default Font Color")                  ' Default colors, Font
+    Print #fle, , "XP, 2003", "Default Background Color     ", Application.GetOption("Default Background Color")            ' Default colors, Background
+    Print #fle, , "XP, 2003", "Default Gridlines Color      ", Application.GetOption("Default Gridlines Color")             ' Default colors, Gridlines
+    Print #fle, , "XP, 2003", "Default Gridlines Horizontal ", Application.GetOption("Default Gridlines Horizontal")        ' Default gridlines showing, Horizontal
+    Print #fle, , "XP, 2003", "Default Gridlines Vertical   ", Application.GetOption("Default Gridlines Vertical")          ' Default gridlines showing, Vertical
+    Print #fle, , "XP, 2003", "Default Column Width         ", Application.GetOption("Default Column Width")                ' Default column width
+    Print #fle, , "XP, 2003", "Default Font Name            ", Application.GetOption("Default Font Name")                   ' Default font, Font
+    Print #fle, , "XP, 2003", "Default Font Weight          ", Application.GetOption("Default Font Weight")                 ' Default font, Weight
+    Print #fle, , "XP, 2003", "Default Font Size            ", Application.GetOption("Default Font Size")                   ' Default font, Size
+    Print #fle, , "XP, 2003", "Default Font Underline       ", Application.GetOption("Default Font Underline")              ' Default font, Underline
+    Print #fle, , "XP, 2003", "Default Font Italic          ", Application.GetOption("Default Font Italic")                 ' Default font, Italic
+    Print #fle, , "XP, 2003", "Default Cell Effect          ", Application.GetOption("Default Cell Effect")                 ' Default cell effect
+    Print #fle, , "XP, 2003", "Show Animations              ", Application.GetOption("Show Animations")                     ' Show animations
+    Print #fle, , "    2003", "Show Smart Tags on Datasheets", Application.GetOption("Show Smart Tags on Datasheets")       ' Show Smart Tags on Datasheets
     Print #fle, ">>>Keyboard Tab"
-    Print #fle, , "XP, 2003", "Move After Enter                ", Application.GetOption("Move After Enter")                   'Move after enter
-    Print #fle, , "XP, 2003", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")            'Behavior entering field
-    Print #fle, , "XP, 2003", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                 'Arrow key behavior
-    Print #fle, , "XP, 2003", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")   'Cursor stops at first/last field
-    Print #fle, , "XP, 2003", "Ime Autocommit                  ", Application.GetOption("Ime Autocommit")                     'Auto commit
-    Print #fle, , "XP, 2003", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")              'Datasheet IME control
+    Print #fle, , "XP, 2003", "Move After Enter                ", Application.GetOption("Move After Enter")                   ' Move after enter
+    Print #fle, , "XP, 2003", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")            ' Behavior entering field
+    Print #fle, , "XP, 2003", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                 ' Arrow key behavior
+    Print #fle, , "XP, 2003", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")   ' Cursor stops at first/last field
+    Print #fle, , "XP, 2003", "Ime Autocommit                  ", Application.GetOption("Ime Autocommit")                     ' Auto commit
+    Print #fle, , "XP, 2003", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")              ' Datasheet IME control
     Print #fle, ">>>Tables/Queries Tab"
-    Print #fle, , "XP, 2003", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              'Table design, Default field sizes - Text
-    Print #fle, , "XP, 2003", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            'Table design, Default field sizes - Number
-    Print #fle, , "XP, 2003", "Default Field Type                  ", Application.GetOption("Default Field Type")                   'Table design, Default field type
-    Print #fle, , "XP, 2003", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           'Table design, AutoIndex on Import/Create
-    Print #fle, , "XP, 2003", "Show Table Names                    ", Application.GetOption("Show Table Names")                     'Query design, Show table names
-    Print #fle, , "XP, 2003", "Output All Fields                   ", Application.GetOption("Output All Fields")                    'Query design, Output all fields
-    Print #fle, , "XP, 2003", "Enable AutoJoin                     ", Application.GetOption("Enable AutoJoin")                      'Query design, Enable AutoJoin
-    Print #fle, , "XP, 2003", "Run Permissions                     ", Application.GetOption("Run Permissions")                      'Query design, Run permissions
-    Print #fle, , "XP, 2003", "ANSI Query Mode                     ", Application.GetOption("ANSI Query Mode")                      'Query design, SQL Server Compatible Syntax (ANSI 92) - This database
-    Print #fle, , "XP, 2003", "ANSI Query Mode Default             ", Application.GetOption("ANSI Query Mode Default")              'Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases
-    Print #fle, , "    2003", "Query Design Font Name              ", Application.GetOption("Query Design Font Name")               'Query design, Query design font, Font
-    Print #fle, , "    2003", "Query Design Font Size              ", Application.GetOption("Query Design Font Size")               'Query design, Query design font, Size
-    Print #fle, , "    2003", "Show Property Update Options buttons", Application.GetOption("Show Property Update Options buttons") 'Show Property Update Options buttons
+    Print #fle, , "XP, 2003", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              ' Table design, Default field sizes - Text
+    Print #fle, , "XP, 2003", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            ' Table design, Default field sizes - Number
+    Print #fle, , "XP, 2003", "Default Field Type                  ", Application.GetOption("Default Field Type")                   ' Table design, Default field type
+    Print #fle, , "XP, 2003", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           ' Table design, AutoIndex on Import/Create
+    Print #fle, , "XP, 2003", "Show Table Names                    ", Application.GetOption("Show Table Names")                     ' Query design, Show table names
+    Print #fle, , "XP, 2003", "Output All Fields                   ", Application.GetOption("Output All Fields")                    ' Query design, Output all fields
+    Print #fle, , "XP, 2003", "Enable AutoJoin                     ", Application.GetOption("Enable AutoJoin")                      ' Query design, Enable AutoJoin
+    Print #fle, , "XP, 2003", "Run Permissions                     ", Application.GetOption("Run Permissions")                      ' Query design, Run permissions
+    Print #fle, , "XP, 2003", "ANSI Query Mode                     ", Application.GetOption("ANSI Query Mode")                      ' Query design, SQL Server Compatible Syntax (ANSI 92) - This database
+    Print #fle, , "XP, 2003", "ANSI Query Mode Default             ", Application.GetOption("ANSI Query Mode Default")              ' Query design, SQL Server Compatible Syntax (ANSI 92) - Default for new databases
+    Print #fle, , "    2003", "Query Design Font Name              ", Application.GetOption("Query Design Font Name")               ' Query design, Query design font, Font
+    Print #fle, , "    2003", "Query Design Font Size              ", Application.GetOption("Query Design Font Size")               ' Query design, Query design font, Size
+    Print #fle, , "    2003", "Show Property Update Options buttons", Application.GetOption("Show Property Update Options buttons") ' Show Property Update Options buttons
     Print #fle, ">>>Forms/Reports Tab"
-    Print #fle, , "XP, 2003", "Selection Behavior         ", Application.GetOption("Selection Behavior")              'Selection behavior
-    Print #fle, , "XP, 2003", "Form Template              ", Application.GetOption("Form Template")                   'Form template
-    Print #fle, , "XP, 2003", "Report Template            ", Application.GetOption("Report Template")                 'Report template
-    Print #fle, , "XP, 2003", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")     'Always use event procedures
-    Print #fle, , "    2003", "Show Smart Tags on Forms   ", Application.GetOption("Show Smart Tags on Forms")        'Show Smart Tags on Forms
-    Print #fle, , "    2003", "Themed Form Controls       ", Application.GetOption("Themed Form Controls")            'Show Windows Themed Controls on Forms
+    Print #fle, , "XP, 2003", "Selection Behavior         ", Application.GetOption("Selection Behavior")              ' Selection behavior
+    Print #fle, , "XP, 2003", "Form Template              ", Application.GetOption("Form Template")                   ' Form template
+    Print #fle, , "XP, 2003", "Report Template            ", Application.GetOption("Report Template")                 ' Report template
+    Print #fle, , "XP, 2003", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")     ' Always use event procedures
+    Print #fle, , "    2003", "Show Smart Tags on Forms   ", Application.GetOption("Show Smart Tags on Forms")        ' Show Smart Tags on Forms
+    Print #fle, , "    2003", "Themed Form Controls       ", Application.GetOption("Themed Form Controls")            ' Show Windows Themed Controls on Forms
     Print #fle, ">>>Advanced Tab"
-    Print #fle, , "XP, 2003", "Ignore DDE Requests            ", Application.GetOption("Ignore DDE Requests")             'DDE operations, Ignore DDE requests
-    Print #fle, , "XP, 2003", "Enable DDE Refresh             ", Application.GetOption("Enable DDE Refresh")              'DDE operations, Enable DDE refresh
-    Print #fle, , "XP, 2003", "Default File Format            ", Application.GetOption("Default File Format")             'Default File Format
-    Print #fle, , "XP      ", "Row Limit                      ", Application.GetOption("Row Limit")                       'Client-server settings, Default max records
-    Print #fle, , "XP, 2003", "Default Open Mode for Databases", Application.GetOption("Default Open Mode for Databases") 'Default open mode
-    Print #fle, , "XP, 2003", "Command-Line Arguments         ", Application.GetOption("Command-Line Arguments")          'Command-line arguments
-    Print #fle, , "XP, 2003", "OLE/DDE Timeout (sec)          ", Application.GetOption("OLE/DDE Timeout (sec)")           'OLE/DDE timeout
-    Print #fle, , "XP, 2003", "Default Record Locking         ", Application.GetOption("Default Record Locking")          'Default record locking
-    Print #fle, , "XP, 2003", "Refresh Interval (sec)         ", Application.GetOption("Refresh Interval (sec)")          'Refresh interval
-    Print #fle, , "XP, 2003", "Number of Update Retries       ", Application.GetOption("Number of Update Retries")        'Number of update retries
-    Print #fle, , "XP, 2003", "ODBC Refresh Interval (sec)    ", Application.GetOption("ODBC Refresh Interval (sec)")     'ODBC fresh interval
-    Print #fle, , "XP, 2003", "Update Retry Interval (msec)   ", Application.GetOption("Update Retry Interval (msec)")    'Update retry interval
-    Print #fle, , "XP, 2003", "Use Row Level Locking          ", Application.GetOption("Use Row Level Locking")           'Open databases using record-level locking
-    Print #fle, , "XP      ", "Save Login and Password        ", Application.GetOption("Save Login and Password")         'Save login and password
+    Print #fle, , "XP, 2003", "Ignore DDE Requests            ", Application.GetOption("Ignore DDE Requests")             ' DDE operations, Ignore DDE requests
+    Print #fle, , "XP, 2003", "Enable DDE Refresh             ", Application.GetOption("Enable DDE Refresh")              ' DDE operations, Enable DDE refresh
+    Print #fle, , "XP, 2003", "Default File Format            ", Application.GetOption("Default File Format")             ' Default File Format
+    Print #fle, , "XP      ", "Row Limit                      ", Application.GetOption("Row Limit")                       ' Client-server settings, Default max records
+    Print #fle, , "XP, 2003", "Default Open Mode for Databases", Application.GetOption("Default Open Mode for Databases") ' Default open mode
+    Print #fle, , "XP, 2003", "Command-Line Arguments         ", Application.GetOption("Command-Line Arguments")          ' Command-line arguments
+    Print #fle, , "XP, 2003", "OLE/DDE Timeout (sec)          ", Application.GetOption("OLE/DDE Timeout (sec)")           ' OLE/DDE timeout
+    Print #fle, , "XP, 2003", "Default Record Locking         ", Application.GetOption("Default Record Locking")          ' Default record locking
+    Print #fle, , "XP, 2003", "Refresh Interval (sec)         ", Application.GetOption("Refresh Interval (sec)")          ' Refresh interval
+    Print #fle, , "XP, 2003", "Number of Update Retries       ", Application.GetOption("Number of Update Retries")        ' Number of update retries
+    Print #fle, , "XP, 2003", "ODBC Refresh Interval (sec)    ", Application.GetOption("ODBC Refresh Interval (sec)")     ' ODBC fresh interval
+    Print #fle, , "XP, 2003", "Update Retry Interval (msec)   ", Application.GetOption("Update Retry Interval (msec)")    ' Update retry interval
+    Print #fle, , "XP, 2003", "Use Row Level Locking          ", Application.GetOption("Use Row Level Locking")           ' Open databases using record-level locking
+    Print #fle, , "XP      ", "Save Login and Password        ", Application.GetOption("Save Login and Password")         ' Save login and password
     Print #fle, ">>>Pages Tab"
-    Print #fle, , "XP, 2003", "Section Indent             ", Application.GetOption("Section Indent")                      'Default Designer Properties, Section Indent
-    Print #fle, , "XP, 2003", "Alternate Row Color        ", Application.GetOption("Alternate Row Color")                 'Default Designer Properties, Alternative Row Color
-    Print #fle, , "XP, 2003", "Caption Section Style      ", Application.GetOption("Caption Section Style")               'Default Designer Properties, Caption Section Style
-    Print #fle, , "XP, 2003", "Footer Section Style       ", Application.GetOption("Footer Section Style")                'Default Designer Properties, Footer Section Style
-    Print #fle, , "XP, 2003", "Use Default Page Folder    ", Application.GetOption("Use Default Page Folder")             'Default Database/Project Properties, Use Default Page Folder
-    Print #fle, , "XP, 2003", "Default Page Folder        ", Application.GetOption("Default Page Folder")                 'Default Database/Project Properties, Default Page Folder
-    Print #fle, , "XP, 2003", "Use Default Connection File", Application.GetOption("Use Default Connection File")         'Default Database/Project Properties, Use Default Connection File
-    Print #fle, , "XP, 2003", "Default Connection File    ", Application.GetOption("Default Connection File")             'Default Database/Project Properties, Default Connection File
+    Print #fle, , "XP, 2003", "Section Indent             ", Application.GetOption("Section Indent")                      ' Default Designer Properties, Section Indent
+    Print #fle, , "XP, 2003", "Alternate Row Color        ", Application.GetOption("Alternate Row Color")                 ' Default Designer Properties, Alternative Row Color
+    Print #fle, , "XP, 2003", "Caption Section Style      ", Application.GetOption("Caption Section Style")               ' Default Designer Properties, Caption Section Style
+    Print #fle, , "XP, 2003", "Footer Section Style       ", Application.GetOption("Footer Section Style")                ' Default Designer Properties, Footer Section Style
+    Print #fle, , "XP, 2003", "Use Default Page Folder    ", Application.GetOption("Use Default Page Folder")             ' Default Database/Project Properties, Use Default Page Folder
+    Print #fle, , "XP, 2003", "Default Page Folder        ", Application.GetOption("Default Page Folder")                 ' Default Database/Project Properties, Default Page Folder
+    Print #fle, , "XP, 2003", "Use Default Connection File", Application.GetOption("Use Default Connection File")         ' Default Database/Project Properties, Use Default Connection File
+    Print #fle, , "XP, 2003", "Default Connection File    ", Application.GetOption("Default Connection File")             ' Default Database/Project Properties, Default Connection File
     Print #fle, ">>>Spelling Tab"
-    Print #fle, , "XP, 2003", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                 'Dictionary Language
-    Print #fle, , "XP, 2003", "Spelling add words to                      ", Application.GetOption("Spelling add words to")                        'Add words to
-    Print #fle, , "XP, 2003", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")   'Suggest from main dictionary only
-    Print #fle, , "XP, 2003", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")           'Ignore words in UPPERCASE
-    Print #fle, , "XP, 2003", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")            'Ignore words with numbers
-    Print #fle, , "XP, 2003", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")  'Ignore Internet and file addresses
-    Print #fle, , "XP, 2003", "Spelling use German post-reform rules      ", Application.GetOption("Spelling use German post-reform rules")        'Language-specific, German: Use post-reform rules
-    Print #fle, , "XP, 2003", "Spelling combine aux verb/adj              ", Application.GetOption("Spelling combine aux verb/adj")                'Language-specific, Korean: Combine aux verb/adj.
-    Print #fle, , "XP, 2003", "Spelling use auto-change list              ", Application.GetOption("Spelling use auto-change list")                'Language-specific, Korean: Use auto-change list
-    Print #fle, , "XP, 2003", "Spelling process compound nouns            ", Application.GetOption("Spelling process compound nouns")              'Language-specific, Korean: Process compound nouns
-    Print #fle, , "XP, 2003", "Spelling Hebrew modes                      ", Application.GetOption("Spelling Hebrew modes")                        'Language-specific, Hebrew modes
-    Print #fle, , "XP, 2003", "Spelling Arabic modes                      ", Application.GetOption("Spelling Arabic modes")                        'Language-specific, Arabic modes
+    Print #fle, , "XP, 2003", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                 ' Dictionary Language
+    Print #fle, , "XP, 2003", "Spelling add words to                      ", Application.GetOption("Spelling add words to")                        ' Add words to
+    Print #fle, , "XP, 2003", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")   ' Suggest from main dictionary only
+    Print #fle, , "XP, 2003", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")           ' Ignore words in UPPERCASE
+    Print #fle, , "XP, 2003", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")            ' Ignore words with numbers
+    Print #fle, , "XP, 2003", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")  ' Ignore Internet and file addresses
+    Print #fle, , "XP, 2003", "Spelling use German post-reform rules      ", Application.GetOption("Spelling use German post-reform rules")        ' Language-specific, German: Use post-reform rules
+    Print #fle, , "XP, 2003", "Spelling combine aux verb/adj              ", Application.GetOption("Spelling combine aux verb/adj")                ' Language-specific, Korean: Combine aux verb/adj.
+    Print #fle, , "XP, 2003", "Spelling use auto-change list              ", Application.GetOption("Spelling use auto-change list")                ' Language-specific, Korean: Use auto-change list
+    Print #fle, , "XP, 2003", "Spelling process compound nouns            ", Application.GetOption("Spelling process compound nouns")              ' Language-specific, Korean: Process compound nouns
+    Print #fle, , "XP, 2003", "Spelling Hebrew modes                      ", Application.GetOption("Spelling Hebrew modes")                        ' Language-specific, Hebrew modes
+    Print #fle, , "XP, 2003", "Spelling Arabic modes                      ", Application.GetOption("Spelling Arabic modes")                        ' Language-specific, Arabic modes
     Print #fle, ">>>International Tab"
-    Print #fle, , "    2003", "Default direction ", Application.GetOption("Default direction")       'Right-to-Left, Default direction
-    Print #fle, , "    2003", "General alignment ", Application.GetOption("General alignment")       'Right-to-Left, General alignment
-    Print #fle, , "    2003", "Cursor movement   ", Application.GetOption("Cursor movement")         'Right-to-Left, Cursor movement
-    Print #fle, , "    2003", "Use Hijri Calendar", Application.GetOption("Use Hijri Calendar")      'Use Hijri Calendar
+    Print #fle, , "    2003", "Default direction ", Application.GetOption("Default direction")       ' Right-to-Left, Default direction
+    Print #fle, , "    2003", "General alignment ", Application.GetOption("General alignment")       ' Right-to-Left, General alignment
+    Print #fle, , "    2003", "Cursor movement   ", Application.GetOption("Cursor movement")         ' Right-to-Left, Cursor movement
+    Print #fle, , "    2003", "Use Hijri Calendar", Application.GetOption("Use Hijri Calendar")      ' Use Hijri Calendar
     Print #fle, ">>>Error Checking Tab"
-    Print #fle, , "    2003", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                          'Settings, Enable error checking
-    Print #fle, , "    2003", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                 'Settings, Error indicator color
-    Print #fle, , "    2003", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")  'Form/Report Design Rules, Unassociated label and control
-    Print #fle, , "    2003", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")        'Form/Report Design Rules, Keyboard shortcut errors
-    Print #fle, , "    2003", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")      'Form/Report Design Rules, Invalid control properties
-    Print #fle, , "    2003", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")            'Form/Report Design Rules, Common report errors
+    Print #fle, , "    2003", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                          ' Settings, Enable error checking
+    Print #fle, , "    2003", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                 ' Settings, Error indicator color
+    Print #fle, , "    2003", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")  ' Form/Report Design Rules, Unassociated label and control
+    Print #fle, , "    2003", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")        ' Form/Report Design Rules, Keyboard shortcut errors
+    Print #fle, , "    2003", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")      ' Form/Report Design Rules, Invalid control properties
+    Print #fle, , "    2003", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")            ' Form/Report Design Rules, Common report errors
     Print #fle, ">>>Popular Tab"
     Print #fle, "   >>>Creating databases section"
-    Print #fle, , "2007, 2010, 2013", "Default File Format       ", Application.GetOption("Default File Format")            'Default file format
-    Print #fle, , "2007, 2010, 2013", "Default Database Directory", Application.GetOption("Default Database Directory")     'Default database folder
-    Print #fle, , "2007, 2010, 2013", "New Database Sort Order   ", Application.GetOption("New Database Sort Order")        'New database sort order
+    Print #fle, , "2007, 2010, 2013", "Default File Format       ", Application.GetOption("Default File Format")            ' Default file format
+    Print #fle, , "2007, 2010, 2013", "Default Database Directory", Application.GetOption("Default Database Directory")     ' Default database folder
+    Print #fle, , "2007, 2010, 2013", "New Database Sort Order   ", Application.GetOption("New Database Sort Order")        ' New database sort order
     Print #fle, ">>>Current Database Tab"
     Print #fle, "   >>>Application Options section"
-    Print #fle, , "2007, 2010, 2013", "Auto Compact                   ", Application.GetOption("Auto Compact")                      'Compact on Close
-    Print #fle, , "2007, 2010, 2013", "Remove Personal Information    ", Application.GetOption("Remove Personal Information")       'Remove personal information from file properties on save
-    Print #fle, , "2007, 2010, 2013", "Themed Form Controls           ", Application.GetOption("Themed Form Controls")              'Use Windows-themed Controls on Forms
-    Print #fle, , "2007, 2010, 2013", "DesignWithData                 ", Application.GetOption("DesignWithData")                    'Enable Layout View for this database
-    Print #fle, , "2007, 2010, 2013", "CheckTruncatedNumFields        ", Application.GetOption("CheckTruncatedNumFields")           'Check for truncated number fields
-    Print #fle, , "2007, 2010, 2013", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")   'Picture Property Storage Format
+    Print #fle, , "2007, 2010, 2013", "Auto Compact                   ", Application.GetOption("Auto Compact")                      ' Compact on Close
+    Print #fle, , "2007, 2010, 2013", "Remove Personal Information    ", Application.GetOption("Remove Personal Information")       ' Remove personal information from file properties on save
+    Print #fle, , "2007, 2010, 2013", "Themed Form Controls           ", Application.GetOption("Themed Form Controls")              ' Use Windows-themed Controls on Forms
+    Print #fle, , "2007, 2010, 2013", "DesignWithData                 ", Application.GetOption("DesignWithData")                    ' Enable Layout View for this database
+    Print #fle, , "2007, 2010, 2013", "CheckTruncatedNumFields        ", Application.GetOption("CheckTruncatedNumFields")           ' Check for truncated number fields
+    Print #fle, , "2007, 2010, 2013", "Picture Property Storage Format", Application.GetOption("Picture Property Storage Format")   ' Picture Property Storage Format
     Print #fle, "   >>>Name AutoCorrect Options section"
-    Print #fle, , "2007, 2010, 2013", "Track Name AutoCorrect Info ", Application.GetOption("Track Name AutoCorrect Info")   'Track name AutoCorrect info
-    Print #fle, , "2007, 2010, 2013", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")      'Perform name AutoCorrect
-    Print #fle, , "2007, 2010, 2013", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")  'Log name AutoCorrect changes
+    Print #fle, , "2007, 2010, 2013", "Track Name AutoCorrect Info ", Application.GetOption("Track Name AutoCorrect Info")   ' Track name AutoCorrect info
+    Print #fle, , "2007, 2010, 2013", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")      ' Perform name AutoCorrect
+    Print #fle, , "2007, 2010, 2013", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")  ' Log name AutoCorrect changes
     Print #fle, "   >>>Filter Lookup options for <Database Name> Database section"
-    Print #fle, , "2007, 2010, 2013", "Show Values in Indexed    ", Application.GetOption("Show Values in Indexed")         'Show list of values in, Local indexed fields
-    Print #fle, , "2007, 2010, 2013", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")     'Show list of values in, Local nonindexed fields
-    Print #fle, , "2007, 2010, 2013", "Show Values in Remote     ", Application.GetOption("Show Values in Remote")          'Show list of values in, ODBC fields
-    Print #fle, , "2007, 2010, 2013", "Show Values in Snapshot   ", Application.GetOption("Show Values in Snapshot")        'Show list of values in, Records in local snapshot
-    Print #fle, , "2007, 2010, 2013", "Show Values in Server     ", Application.GetOption("Show Values in Server")          'Show list of values in, Records at server
-    Print #fle, , "2007, 2010, 2013", "Show Values Limit         ", Application.GetOption("Show Values Limit")              'Don't display lists where more than this number of records read
+    Print #fle, , "2007, 2010, 2013", "Show Values in Indexed    ", Application.GetOption("Show Values in Indexed")         ' Show list of values in, Local indexed fields
+    Print #fle, , "2007, 2010, 2013", "Show Values in Non-Indexed", Application.GetOption("Show Values in Non-Indexed")     ' Show list of values in, Local nonindexed fields
+    Print #fle, , "2007, 2010, 2013", "Show Values in Remote     ", Application.GetOption("Show Values in Remote")          ' Show list of values in, ODBC fields
+    Print #fle, , "2007, 2010, 2013", "Show Values in Snapshot   ", Application.GetOption("Show Values in Snapshot")        ' Show list of values in, Records in local snapshot
+    Print #fle, , "2007, 2010, 2013", "Show Values in Server     ", Application.GetOption("Show Values in Server")          ' Show list of values in, Records at server
+    Print #fle, , "2007, 2010, 2013", "Show Values Limit         ", Application.GetOption("Show Values Limit")              ' Don't display lists where more than this number of records read
     Print #fle, ">>>Datasheet Tab"
     Print #fle, "   >>>Default colors section"
-    Print #fle, , "2007, 2010, 2013", "Default Font Color      ", Application.GetOption("Default Font Color")               'Font color
-    Print #fle, , "2007, 2010, 2013", "Default Background Color", Application.GetOption("Default Background Color")         'Background color
-    Print #fle, , "2007, 2010, 2013", "_64                     ", Application.GetOption("_64")                              'Alternate background color
-    Print #fle, , "2007, 2010, 2013", "Default Gridlines Color ", Application.GetOption("Default Gridlines Color")          'Gridlines color
+    Print #fle, , "2007, 2010, 2013", "Default Font Color      ", Application.GetOption("Default Font Color")               ' Font color
+    Print #fle, , "2007, 2010, 2013", "Default Background Color", Application.GetOption("Default Background Color")         ' Background color
+    Print #fle, , "2007, 2010, 2013", "_64                     ", Application.GetOption("_64")                              ' Alternate background color
+    Print #fle, , "2007, 2010, 2013", "Default Gridlines Color ", Application.GetOption("Default Gridlines Color")          ' Gridlines color
     Print #fle, "   >>>Gridlines and cell effects section"
-    Print #fle, , "2007, 2010, 2013", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal") 'Default gridlines showing, Horizontal
-    Print #fle, , "2007, 2010, 2013", "Default Gridlines Vertical  ", Application.GetOption("Default Gridlines Vertical")   'Default gridlines showing, Vertical
-    Print #fle, , "2007, 2010, 2013", "Default Cell Effect         ", Application.GetOption("Default Cell Effect")          'Default cell effect
-    Print #fle, , "2007, 2010, 2013", "Default Column Width        ", Application.GetOption("Default Column Width")         'Default column width
+    Print #fle, , "2007, 2010, 2013", "Default Gridlines Horizontal", Application.GetOption("Default Gridlines Horizontal") ' Default gridlines showing, Horizontal
+    Print #fle, , "2007, 2010, 2013", "Default Gridlines Vertical  ", Application.GetOption("Default Gridlines Vertical")   ' Default gridlines showing, Vertical
+    Print #fle, , "2007, 2010, 2013", "Default Cell Effect         ", Application.GetOption("Default Cell Effect")          ' Default cell effect
+    Print #fle, , "2007, 2010, 2013", "Default Column Width        ", Application.GetOption("Default Column Width")         ' Default column width
     Print #fle, "   >>>Default font section"
-    Print #fle, , "2007, 2010, 2013", "Default Font Name     ", Application.GetOption("Default Font Name")                  'Font
-    Print #fle, , "2007, 2010, 2013", "Default Font Size     ", Application.GetOption("Default Font Size")                  'Size
-    Print #fle, , "2007, 2010, 2013", "Default Font Weight   ", Application.GetOption("Default Font Weight")                'Weight
-    Print #fle, , "2007, 2010, 2013", "Default Font Underline", Application.GetOption("Default Font Underline")             'Underline
-    Print #fle, , "2007, 2010, 2013", "Default Font Italic   ", Application.GetOption("Default Font Italic")                'Italic
+    Print #fle, , "2007, 2010, 2013", "Default Font Name     ", Application.GetOption("Default Font Name")                  ' Font
+    Print #fle, , "2007, 2010, 2013", "Default Font Size     ", Application.GetOption("Default Font Size")                  ' Size
+    Print #fle, , "2007, 2010, 2013", "Default Font Weight   ", Application.GetOption("Default Font Weight")                ' Weight
+    Print #fle, , "2007, 2010, 2013", "Default Font Underline", Application.GetOption("Default Font Underline")             ' Underline
+    Print #fle, , "2007, 2010, 2013", "Default Font Italic   ", Application.GetOption("Default Font Italic")                ' Italic
     Print #fle, ">>>Object Designers Tab"
     Print #fle, "   >>>Table design section"
-    Print #fle, , "2007, 2010, 2013", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              'Default text field size
-    Print #fle, , "2007, 2010, 2013", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            'Default number field size
-    Print #fle, , "2007, 2010, 2013", "Default Field Type                  ", Application.GetOption("Default Field Type")                   'Default field type
-    Print #fle, , "2007, 2010, 2013", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           'AutoIndex on Import/Create
-    Print #fle, , "2007, 2010, 2013", "Show Property Update Options Buttons", Application.GetOption("Show Property Update Options Buttons") 'Show Property Update Option Buttons
+    Print #fle, , "2007, 2010, 2013", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              ' Default text field size
+    Print #fle, , "2007, 2010, 2013", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            ' Default number field size
+    Print #fle, , "2007, 2010, 2013", "Default Field Type                  ", Application.GetOption("Default Field Type")                   ' Default field type
+    Print #fle, , "2007, 2010, 2013", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           ' AutoIndex on Import/Create
+    Print #fle, , "2007, 2010, 2013", "Show Property Update Options Buttons", Application.GetOption("Show Property Update Options Buttons") ' Show Property Update Option Buttons
     Print #fle, "   >>>Query design section"
-    Print #fle, , "2007, 2010, 2013", "Show Table Names       ", Application.GetOption("Show Table Names")                  'Show table names
-    Print #fle, , "2007, 2010, 2013", "Output All Fields      ", Application.GetOption("Output All Fields")                 'Output all fields
-    Print #fle, , "2007, 2010, 2013", "Enable AutoJoin        ", Application.GetOption("Enable AutoJoin")                   'Enable AutoJoin
-    Print #fle, , "2007, 2010, 2013", "ANSI Query Mode        ", Application.GetOption("ANSI Query Mode")                   'SQL Server Compatible Syntax (ANSI 92), This database
-    Print #fle, , "2007, 2010, 2013", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")           'SQL Server Compatible Syntax (ANSI 92), Default for new databases
-    Print #fle, , "2007, 2010, 2013", "Query Design Font Name ", Application.GetOption("Query Design Font Name")            'Query design font, Font
-    Print #fle, , "2007, 2010, 2013", "Query Design Font Size ", Application.GetOption("Query Design Font Size")            'Query design font, Size
+    Print #fle, , "2007, 2010, 2013", "Show Table Names       ", Application.GetOption("Show Table Names")                  ' Show table names
+    Print #fle, , "2007, 2010, 2013", "Output All Fields      ", Application.GetOption("Output All Fields")                 ' Output all fields
+    Print #fle, , "2007, 2010, 2013", "Enable AutoJoin        ", Application.GetOption("Enable AutoJoin")                   ' Enable AutoJoin
+    Print #fle, , "2007, 2010, 2013", "ANSI Query Mode        ", Application.GetOption("ANSI Query Mode")                   ' SQL Server Compatible Syntax (ANSI 92), This database
+    Print #fle, , "2007, 2010, 2013", "ANSI Query Mode Default", Application.GetOption("ANSI Query Mode Default")           ' SQL Server Compatible Syntax (ANSI 92), Default for new databases
+    Print #fle, , "2007, 2010, 2013", "Query Design Font Name ", Application.GetOption("Query Design Font Name")            ' Query design font, Font
+    Print #fle, , "2007, 2010, 2013", "Query Design Font Size ", Application.GetOption("Query Design Font Size")            ' Query design font, Size
     Print #fle, "   >>>Forms/Reports section"
-    Print #fle, , "2007, 2010, 2013", "Selection Behavior         ", Application.GetOption("Selection Behavior")            'Selection behavior
-    Print #fle, , "2007, 2010, 2013", "Form Template              ", Application.GetOption("Form Template")                 'Form template
-    Print #fle, , "2007, 2010, 2013", "Report Template            ", Application.GetOption("Report Template")               'Report template
-    Print #fle, , "2007, 2010, 2013", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")   'Always use event procedures
+    Print #fle, , "2007, 2010, 2013", "Selection Behavior         ", Application.GetOption("Selection Behavior")            ' Selection behavior
+    Print #fle, , "2007, 2010, 2013", "Form Template              ", Application.GetOption("Form Template")                 ' Form template
+    Print #fle, , "2007, 2010, 2013", "Report Template            ", Application.GetOption("Report Template")               ' Report template
+    Print #fle, , "2007, 2010, 2013", "Always Use Event Procedures", Application.GetOption("Always Use Event Procedures")   ' Always use event procedures
     Print #fle, "   >>>Error checking section"
-    Print #fle, , "2007, 2010, 2013", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                           'Enable error checking
-    Print #fle, , "2007, 2010, 2013", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                  'Error indicator color
-    Print #fle, , "2007, 2010, 2013", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")   'Check for unassociated label and control
-    Print #fle, , "2007, 2010, 2013", "New Unassociated Labels Error Checking       ", Application.GetOption("New Unassociated Labels Error Checking")          'Check for new unassociated labels
-    Print #fle, , "2007, 2010, 2013", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")         'Check for keyboard shortcut errors
-    Print #fle, , "2007, 2010, 2013", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")       'Check for invalid control properties
-    Print #fle, , "2007, 2010, 2013", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")             'Check for common report errors
+    Print #fle, , "2007, 2010, 2013", "Enable Error Checking                        ", Application.GetOption("Enable Error Checking")                           ' Enable error checking
+    Print #fle, , "2007, 2010, 2013", "Error Checking Indicator Color               ", Application.GetOption("Error Checking Indicator Color")                  ' Error indicator color
+    Print #fle, , "2007, 2010, 2013", "Unassociated Label and Control Error Checking", Application.GetOption("Unassociated Label and Control Error Checking")   ' Check for unassociated label and control
+    Print #fle, , "2007, 2010, 2013", "New Unassociated Labels Error Checking       ", Application.GetOption("New Unassociated Labels Error Checking")          ' Check for new unassociated labels
+    Print #fle, , "2007, 2010, 2013", "Keyboard Shortcut Errors Error Checking      ", Application.GetOption("Keyboard Shortcut Errors Error Checking")         ' Check for keyboard shortcut errors
+    Print #fle, , "2007, 2010, 2013", "Invalid Control Properties Error Checking    ", Application.GetOption("Invalid Control Properties Error Checking")       ' Check for invalid control properties
+    Print #fle, , "2007, 2010, 2013", "Common Report Errors Error Checking          ", Application.GetOption("Common Report Errors Error Checking")             ' Check for common report errors
     Print #fle, ">>>Proofing Tab"
     Print #fle, "   >>>When correcting spelling in Microsoft Office programs section"
-    Print #fle, , "2007, 2010, 2013", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")            'Ignore words in UPPERCASE
-    Print #fle, , "2007, 2010, 2013", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")             'Ignore words that contain numbers
-    Print #fle, , "2007, 2010, 2013", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")   'Ignore Internet and file addresses
-    Print #fle, , "2007, 2010, 2013", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")    'Suggest from main dictionary only
-    Print #fle, , "2007, 2010, 2013", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                  'Dictionary Language
+    Print #fle, , "2007, 2010, 2013", "Spelling ignore words in UPPERCASE         ", Application.GetOption("Spelling ignore words in UPPERCASE")            ' Ignore words in UPPERCASE
+    Print #fle, , "2007, 2010, 2013", "Spelling ignore words with number          ", Application.GetOption("Spelling ignore words with number")             ' Ignore words that contain numbers
+    Print #fle, , "2007, 2010, 2013", "Spelling ignore Internet and file addresses", Application.GetOption("Spelling ignore Internet and file addresses")   ' Ignore Internet and file addresses
+    Print #fle, , "2007, 2010, 2013", "Spelling suggest from main dictionary only ", Application.GetOption("Spelling suggest from main dictionary only")    ' Suggest from main dictionary only
+    Print #fle, , "2007, 2010, 2013", "Spelling dictionary language               ", Application.GetOption("Spelling dictionary language")                  ' Dictionary Language
     Print #fle, ">>>Advanced Tab"
     Print #fle, "   >>>Editing section"
-    Print #fle, , "2007, 2010, 2013", "Move After Enter                ", Application.GetOption("Move After Enter")                     'Move after enter
-    Print #fle, , "2007, 2010, 2013", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")              'Behavior entering field
-    Print #fle, , "2007, 2010, 2013", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                   'Arrow key behavior
-    Print #fle, , "2007, 2010, 2013", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")     'Cursor stops at first/last field
-    Print #fle, , "2007, 2010, 2013", "Default Find/Replace Behavior   ", Application.GetOption("Default Find/Replace Behavior")        'Default find/replace behavior
-    Print #fle, , "2007, 2010, 2013", "Confirm Record Changes          ", Application.GetOption("Confirm Record Changes")               'Confirm, Record changes
-    Print #fle, , "2007, 2010, 2013", "Confirm Document Deletions      ", Application.GetOption("Confirm Document Deletions")           'Confirm, Document deletions
-    Print #fle, , "2007, 2010, 2013", "Confirm Action Queries          ", Application.GetOption("Confirm Action Queries")               'Confirm, Action queries
-    Print #fle, , "2007, 2010, 2013", "Default Direction               ", Application.GetOption("Default Direction")                    'Default direction
-    Print #fle, , "2007, 2010, 2013", "General Alignment               ", Application.GetOption("General Alignment")                    'General alignment
-    Print #fle, , "2007, 2010, 2013", "Cursor Movement                 ", Application.GetOption("Cursor Movement")                      'Cursor movement
-    Print #fle, , "2007, 2010, 2013", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")                'Datasheet IME control
-    Print #fle, , "2007, 2010, 2013", "Use Hijri Calendar              ", Application.GetOption("Use Hijri Calendar")                   'Use Hijri Calendar
+    Print #fle, , "2007, 2010, 2013", "Move After Enter                ", Application.GetOption("Move After Enter")                     ' Move after enter
+    Print #fle, , "2007, 2010, 2013", "Behavior Entering Field         ", Application.GetOption("Behavior Entering Field")              ' Behavior entering field
+    Print #fle, , "2007, 2010, 2013", "Arrow Key Behavior              ", Application.GetOption("Arrow Key Behavior")                   ' Arrow key behavior
+    Print #fle, , "2007, 2010, 2013", "Cursor Stops at First/Last Field", Application.GetOption("Cursor Stops at First/Last Field")     ' Cursor stops at first/last field
+    Print #fle, , "2007, 2010, 2013", "Default Find/Replace Behavior   ", Application.GetOption("Default Find/Replace Behavior")        ' Default find/replace behavior
+    Print #fle, , "2007, 2010, 2013", "Confirm Record Changes          ", Application.GetOption("Confirm Record Changes")               ' Confirm, Record changes
+    Print #fle, , "2007, 2010, 2013", "Confirm Document Deletions      ", Application.GetOption("Confirm Document Deletions")           ' Confirm, Document deletions
+    Print #fle, , "2007, 2010, 2013", "Confirm Action Queries          ", Application.GetOption("Confirm Action Queries")               ' Confirm, Action queries
+    Print #fle, , "2007, 2010, 2013", "Default Direction               ", Application.GetOption("Default Direction")                    ' Default direction
+    Print #fle, , "2007, 2010, 2013", "General Alignment               ", Application.GetOption("General Alignment")                    ' General alignment
+    Print #fle, , "2007, 2010, 2013", "Cursor Movement                 ", Application.GetOption("Cursor Movement")                      ' Cursor movement
+    Print #fle, , "2007, 2010, 2013", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")                ' Datasheet IME control
+    Print #fle, , "2007, 2010, 2013", "Use Hijri Calendar              ", Application.GetOption("Use Hijri Calendar")                   ' Use Hijri Calendar
     Print #fle, "   >>>Display section"
-    Print #fle, , "2007, 2010, 2013", "Size of MRU File List               ", Application.GetOption("Size of MRU File List")                'Show this number of Recent Documents
-    Print #fle, , "2007, 2010, 2013", "Show Status Bar                     ", Application.GetOption("Show Status Bar")                      'Status bar
-    Print #fle, , "2007, 2010, 2013", "Show Animations                     ", Application.GetOption("Show Animations")                      'Show animations
-    Print #fle, , "2007, 2010, 2013", "Show Smart Tags on Datasheets       ", Application.GetOption("Show Smart Tags on Datasheets")        'Show Smart Tags on Datasheets
-    Print #fle, , "2007, 2010, 2013", "Show Smart Tags on Forms and Reports", Application.GetOption("Show Smart Tags on Forms and Reports") 'Show Smart Tags on Forms and Reports
-    Print #fle, , "2007, 2010, 2013", "Show Macro Names Column             ", Application.GetOption("Show Macro Names Column")              'Show in Macro Design, Names column
-    Print #fle, , "2007, 2010, 2013", "Show Conditions Column              ", Application.GetOption("Show Conditions Column")               'Show in Macro Design, Conditions column
+    Print #fle, , "2007, 2010, 2013", "Size of MRU File List               ", Application.GetOption("Size of MRU File List")                ' Show this number of Recent Documents
+    Print #fle, , "2007, 2010, 2013", "Show Status Bar                     ", Application.GetOption("Show Status Bar")                      ' Status bar
+    Print #fle, , "2007, 2010, 2013", "Show Animations                     ", Application.GetOption("Show Animations")                      ' Show animations
+    Print #fle, , "2007, 2010, 2013", "Show Smart Tags on Datasheets       ", Application.GetOption("Show Smart Tags on Datasheets")        ' Show Smart Tags on Datasheets
+    Print #fle, , "2007, 2010, 2013", "Show Smart Tags on Forms and Reports", Application.GetOption("Show Smart Tags on Forms and Reports") ' Show Smart Tags on Forms and Reports
+    Print #fle, , "2007, 2010, 2013", "Show Macro Names Column             ", Application.GetOption("Show Macro Names Column")              ' Show in Macro Design, Names column
+    Print #fle, , "2007, 2010, 2013", "Show Conditions Column              ", Application.GetOption("Show Conditions Column")               ' Show in Macro Design, Conditions column
     Print #fle, "   >>>Printing section"
-    Print #fle, , "2007, 2010, 2013", "Left Margin  ", Application.GetOption("Left Margin")         'Left margin
-    Print #fle, , "2007, 2010, 2013", "Right Margin ", Application.GetOption("Right Margin")        'Right margin
-    Print #fle, , "2007, 2010, 2013", "Top Margin   ", Application.GetOption("Top Margin")          'Top margin
-    Print #fle, , "2007, 2010, 2013", "Bottom Margin", Application.GetOption("Bottom Margin")       'Bottom margin
+    Print #fle, , "2007, 2010, 2013", "Left Margin  ", Application.GetOption("Left Margin")         ' Left margin
+    Print #fle, , "2007, 2010, 2013", "Right Margin ", Application.GetOption("Right Margin")        ' Right margin
+    Print #fle, , "2007, 2010, 2013", "Top Margin   ", Application.GetOption("Top Margin")          ' Top margin
+    Print #fle, , "2007, 2010, 2013", "Bottom Margin", Application.GetOption("Bottom Margin")       ' Bottom margin
     Print #fle, "   >>>General section"
-    Print #fle, , "2007, 2010, 2013", "Provide Feedback with Sound             ", Application.GetOption("Provide Feedback with Sound")                  'Provide feedback with sound
-    Print #fle, , "2007, 2010, 2013", "Four-Digit Year Formatting              ", Application.GetOption("Four-Digit Year Formatting")                   'Use four-year digit year formatting, This database
-    Print #fle, , "2007, 2010, 2013", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")     'Use four-year digit year formatting, All databases
+    Print #fle, , "2007, 2010, 2013", "Provide Feedback with Sound             ", Application.GetOption("Provide Feedback with Sound")                  ' Provide feedback with sound
+    Print #fle, , "2007, 2010, 2013", "Four-Digit Year Formatting              ", Application.GetOption("Four-Digit Year Formatting")                   ' Use four-year digit year formatting, This database
+    Print #fle, , "2007, 2010, 2013", "Four-Digit Year Formatting All Databases", Application.GetOption("Four-Digit Year Formatting All Databases")     ' Use four-year digit year formatting, All databases
     Print #fle, "   >>>Advanced section"
-    Print #fle, , "2007, 2010, 2013", "Open Last Used Database When Access Starts", Application.GetOption("Open Last Used Database When Access Starts")     'Open last used database when Access starts
-    Print #fle, , "2007, 2010, 2013", "Default Open Mode for Databases           ", Application.GetOption("Default Open Mode for Databases")                'Default open mode
-    Print #fle, , "2007, 2010, 2013", "Default Record Locking                    ", Application.GetOption("Default Record Locking")                         'Default record locking
-    Print #fle, , "2007, 2010, 2013", "Use Row Level Locking                     ", Application.GetOption("Use Row Level Locking")                          'Open databases by using record-level locking
-    Print #fle, , "2007, 2010, 2013", "OLE/DDE Timeout (sec)                     ", Application.GetOption("OLE/DDE Timeout (sec)")                          'OLE/DDE timeout (sec)
-    Print #fle, , "2007, 2010, 2013", "Refresh Interval (sec)                    ", Application.GetOption("Refresh Interval (sec)")                         'Refresh interval (sec)
-    Print #fle, , "2007, 2010, 2013", "Number of Update Retries                  ", Application.GetOption("Number of Update Retries")                       'Number of update retries
-    Print #fle, , "2007, 2010, 2013", "ODBC Refresh Interval (sec)               ", Application.GetOption("ODBC Refresh Interval (sec)")                    'ODBC refresh interval (sec)
-    Print #fle, , "2007, 2010, 2013", "Update Retry Interval (msec)              ", Application.GetOption("Update Retry Interval (msec)")                   'Update retry interval (msec)
-    Print #fle, , "2007, 2010, 2013", "Ignore DDE Requests                       ", Application.GetOption("Ignore DDE Requests")                            'DDE operations, Ignore DDE requests
-    Print #fle, , "2007, 2010, 2013", "Enable DDE Refresh                        ", Application.GetOption("Enable DDE Refresh")                             'DDE operations, Enable DDE refresh
-    Print #fle, , "2007, 2010, 2013", "Command-Line Arguments                    ", Application.GetOption("Command-Line Arguments")                         'Command-line arguments
+    Print #fle, , "2007, 2010, 2013", "Open Last Used Database When Access Starts", Application.GetOption("Open Last Used Database When Access Starts")     ' Open last used database when Access starts
+    Print #fle, , "2007, 2010, 2013", "Default Open Mode for Databases           ", Application.GetOption("Default Open Mode for Databases")                ' Default open mode
+    Print #fle, , "2007, 2010, 2013", "Default Record Locking                    ", Application.GetOption("Default Record Locking")                         ' Default record locking
+    Print #fle, , "2007, 2010, 2013", "Use Row Level Locking                     ", Application.GetOption("Use Row Level Locking")                          ' Open databases by using record-level locking
+    Print #fle, , "2007, 2010, 2013", "OLE/DDE Timeout (sec)                     ", Application.GetOption("OLE/DDE Timeout (sec)")                          ' OLE/DDE timeout (sec)
+    Print #fle, , "2007, 2010, 2013", "Refresh Interval (sec)                    ", Application.GetOption("Refresh Interval (sec)")                         ' Refresh interval (sec)
+    Print #fle, , "2007, 2010, 2013", "Number of Update Retries                  ", Application.GetOption("Number of Update Retries")                       ' Number of update retries
+    Print #fle, , "2007, 2010, 2013", "ODBC Refresh Interval (sec)               ", Application.GetOption("ODBC Refresh Interval (sec)")                    ' ODBC refresh interval (sec)
+    Print #fle, , "2007, 2010, 2013", "Update Retry Interval (msec)              ", Application.GetOption("Update Retry Interval (msec)")                   ' Update retry interval (msec)
+    Print #fle, , "2007, 2010, 2013", "Ignore DDE Requests                       ", Application.GetOption("Ignore DDE Requests")                            ' DDE operations, Ignore DDE requests
+    Print #fle, , "2007, 2010, 2013", "Enable DDE Refresh                        ", Application.GetOption("Enable DDE Refresh")                             ' DDE operations, Enable DDE refresh
+    Print #fle, , "2007, 2010, 2013", "Command-Line Arguments                    ", Application.GetOption("Command-Line Arguments")                         ' Command-line arguments
 
 PROC_EXIT:
     Set dbs = Nothing
     Close fle
-    'PopCallStack "OutputListOfAccessApplicationOptions"
     Exit Sub
 
 PROC_ERR:
-    If Err = 2091 Then          ''...' is an invalid name.
+    If Err = 2091 Then          ' '...' is an invalid name.
         If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass"
         Print #fle, "!" & Err.Description
         Err.Clear
-    ElseIf Err = 3270 Then      'Property not found.
+    ElseIf Err = 3270 Then      ' Property not found.
         Err.Clear
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass"
-        'GlobalErrHandler
     End If
     Resume Next
 
@@ -911,9 +970,6 @@ End Sub
 Private Sub OutputListOfApplicationProperties()
 ' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputListOfApplicationProperties"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -944,7 +1000,6 @@ Private Sub OutputListOfApplicationProperties()
 PROC_EXIT:
     Set dbs = Nothing
     Close fle
-    'PopCallStack "OutputListOfApplicationProperties"
     Exit Sub
 
 PROC_ERR:
@@ -954,7 +1009,6 @@ PROC_ERR:
         Err.Clear
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
-        'GlobalErrHandler
     End If
     Resume Next
 
@@ -1017,13 +1071,13 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/ser-38.html
 ' Ref: http://access.mvps.org/access/modules/mdl0022.htm (References Wizard)
 ' Ref: http://www.accessmvp.com/djsteele/AccessReferenceErrors.html
-'====================================================================
+' ====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     November 28, 2012
 ' Comment:  Added and adapted from aeladdin (tm) code
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+' ====================================================================
 
     Dim i As Integer
     Dim RefName As String
@@ -1034,9 +1088,6 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
     Dim vbaProj As Object
     Set vbaProj = Application.VBE.ActiveVBProject
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeGetReferences"
     On Error GoTo PROC_ERR
 
     Debug.Print "aeGetReferences"
@@ -1120,34 +1171,29 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 PROC_EXIT:
     Set vbaProj = Nothing
     Close 1
-    'PopCallStack "aeGetReferences"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
     aeGetReferences = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
 Private Function LongestTableName() As Integer
-'====================================================================
+' ====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     November 30, 2012
 ' Comment:  Return the length of the longest table name
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+' ====================================================================
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim intTNLen As Integer
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "LongestTableName"
     On Error GoTo PROC_ERR
 
     intTNLen = 0
@@ -1167,33 +1213,27 @@ Private Function LongestTableName() As Integer
 PROC_EXIT:
     Set tdf = Nothing
     Set dbs = Nothing
-    PopCallStack "LongestTableName"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass"
     LongestTableName = 0
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
 Private Function LongestFieldPropsName() As Boolean
-'=======================================================================
+' =======================================================================
 ' Author:   Peter F. Ennis
 ' Date:     December 5, 2012
 ' Comment:  Return length of field properties for text output alignment
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'=======================================================================
+' =======================================================================
 
     Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
-
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "LongestFieldPropsName"
 
     On Error GoTo PROC_ERR
 
@@ -1231,13 +1271,11 @@ PROC_EXIT:
     Set fld = Nothing
     Set tblDef = Nothing
     Set dbs = Nothing
-    'PopCallStack "LongestFieldPropsName"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegit_expClass"
     LongestFieldPropsName = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1246,7 +1284,7 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
     Optional ByVal TextSide As SizeStringSide = TextLeft, _
     Optional ByVal PadChar As String = " ") As String
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' =========================================================================
 ' SizeString
 ' This procedure creates a string of a specified length. Text is the original string
 ' to include, and Length is the length of the result string. TextSide indicates whether
@@ -1256,7 +1294,7 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
 ' a space is used. If PadChar is longer than one character, the left-most character of PadChar
 ' is used. If PadChar is an empty string, a space is used. If TextSide is neither
 ' TextLeft or TextRight, the procedure uses TextLeft.
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' =========================================================================
 
     On Error GoTo 0
     Dim sPadChar As String
@@ -1293,7 +1331,7 @@ End Function
 
 Private Function GetLinkedTableCurrentPath(ByVal MyLinkedTable As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
-'=========================================================================
+' =========================================================================
 ' Procedure : GetLinkedTableCurrentPath
 ' DateTime  : 08/23/2010
 ' Author    : Rx
@@ -1301,7 +1339,7 @@ Private Function GetLinkedTableCurrentPath(ByVal MyLinkedTable As String) As Str
 ' Updates   : Peter F. Ennis
 ' Updated   : All notes moved to change log
 ' History   : See comment details, basChangeLog, commit messages on github
-'=========================================================================
+' =========================================================================
     On Error GoTo PROC_ERR
     GetLinkedTableCurrentPath = Mid$(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
         ' Non-linked table returns blank - Instr removes the "Database="
@@ -1351,13 +1389,13 @@ End Function
 
 Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://allenbrowne.com/func-06.html
-'=============================================================================
+' =============================================================================
 ' Purpose:  Display the field names, types, sizes and descriptions for a table
 ' Argument: Name of a table in the current database
 ' Updates:  Peter F. Ennis
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'=============================================================================
+' =============================================================================
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
@@ -1365,9 +1403,6 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     Dim sLen As Long
     Dim strLinkedTablePath As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "TableInfo"
     On Error GoTo PROC_ERR
 
     strLinkedTablePath = vbNullString
@@ -1429,12 +1464,12 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
         'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
         End If
         Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
             & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-            & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+            & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
             & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
     Next
     If Not IsMissing(varDebug) Then Debug.Print
@@ -1447,14 +1482,12 @@ PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
     Set dbs = Nothing
-    'PopCallStack "TableInfo"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     TableInfo = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1474,9 +1507,6 @@ Private Function LongestTableDescription(ByVal strTblName As String) As Integer
     Dim fld As DAO.Field
     Dim strLFD As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "LongestTableDescription"
     On Error GoTo PROC_ERR
 
     Set dbs = CurrentDb()
@@ -1495,13 +1525,11 @@ PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
     Set dbs = Nothing
-    'PopCallStack "LongestTableDescription"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegit_expClass"
     LongestTableDescription = -1
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1605,16 +1633,12 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
 ' Relationships in the database with table, foreign table, primary keys, foreign keys
 ' Ref: http://allenbrowne.com/func-06.html
 
-    'Dim strDoc As String
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
     Dim blnResult As Boolean
     Dim intFailCount As Integer
     Dim strFile As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeDocumentTables"
     On Error GoTo PROC_ERR
 
     intFailCount = 0
@@ -1631,11 +1655,7 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     ' Reset values
     aestrLFN = vbNullString
     If aeintFNLen < 11 Then aeintFNLen = 11     ' Minimum required by design
-    'aestrLFNTN = vbNullString
-    'aestrLFD = vbNullString
     aeintFDLen = 0
-    'aestrLFT = vbNullString
-    'aeintFTLen = 0
 
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
@@ -1668,14 +1688,12 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
                 blnResult = TableInfo(tdf.Name)
                 If Not blnResult Then intFailCount = intFailCount + 1
             End If
-            'Debug.Print
             aeintFDLen = 0
         End If
     Next tdf
 
     If Not IsMissing(varDebug) Then
         Debug.Print "intFailCount = " & intFailCount
-        'Debug.Print "aeDocumentTables = " & aeDocumentTables
     End If
 
     aeDocumentTables = True
@@ -1684,14 +1702,12 @@ PROC_EXIT:
     Set fld = Nothing
     Set tdf = Nothing
     Close 1
-    'PopCallStack "aeDocumentTables"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
     aeDocumentTables = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -1699,9 +1715,6 @@ End Function
 Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://stackoverflow.com/questions/4867727/how-to-use-ms-access-saveastext-with-queries-specifically-stored-procedures
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeDocumentTablesXML"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -1723,13 +1736,14 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
         Stop
     End If
 
-    'MsgBox "aeDocumentTablesXML: LBound(aegitDataXML())=" & LBound(aegitDataXML()) & _
-        vbCrLf & "UBound(aegitDataXML())=" & UBound(aegitDataXML()), vbInformation, "CHECK"
-    If aegitExportDataToXML Then
-        If Not IsMissing(varDebug) Then
-            OutputTheTableDataAsXML aegitDataXML(), varDebug
-        Else
-            OutputTheTableDataAsXML aegitDataXML()
+    If Not IsNull(aegitDataXML(0)) And aegitDataXML(0) <> vbNullString Then
+        If aegitExportDataToXML Then
+            'MsgBox "aegitDataXML(0)=" & aegitDataXML(0), vbInformation, "aeDocumentTablesXML"
+            If Not IsMissing(varDebug) Then
+                OutputTheTableDataAsXML aegitDataXML(), varDebug
+            Else
+                OutputTheTableDataAsXML aegitDataXML()
+            End If
         End If
     End If
 
@@ -1748,8 +1762,6 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
         If tbl.Attributes = 0 Then      ' Ignore System Tables
             strObjName = tbl.Name
             If Not IsMissing(varDebug) Then Debug.Print , "- " & strObjName & ".xsd"
-            'Debug.Print "aestrXMLLocation=" & aestrXMLLocation
-            'Debug.Print "the XML file=" & aestrXMLLocation & strObjName
             Application.ExportXML acExportTable, strObjName, , _
                         aestrXMLLocation & "tables_" & strObjName & ".xsd"
             If Not IsMissing(varDebug) Then
@@ -1775,19 +1787,17 @@ PROC_EXIT:
     Set tbl = Nothing
     Set dbs = Nothing
     Close 1
-    'PopCallStack "aeDocumentTablesXML"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
     aeDocumentTablesXML = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
-Private Sub OutputTheSchemaFile()               ' CreateDbScript()
+Private Sub OutputTheSchemaFile() ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
     On Error GoTo 0
@@ -1832,14 +1842,14 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
 
                 strFlds = strFlds & ",[" & fld.Name & "] "
 
-'        'Constants for complex types don't work prior to Access 2007 and later.
+            ' Constants for complex types don't work prior to Access 2007 and later.
 
                 Select Case fld.Type
                     Case dbText
                         ' No look-up fields
-                        strFlds = strFlds & "Text (" & fld.Size & ")"
-                    Case 109&                                   'dbComplexText
-                        strFlds = strFlds & "Text (" & fld.Size & ")"
+                        strFlds = strFlds & "Text (" & fld.size & ")"
+                    Case 109&                                   ' dbComplexText
+                        strFlds = strFlds & "Text (" & fld.size & ")"
                     Case dbMemo
                         If (fld.Attributes And dbHyperlinkField) = 0& Then
                             strFlds = strFlds & "Memo"
@@ -1848,11 +1858,11 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                         End If
                     Case dbByte
                         strFlds = strFlds & "Byte"
-                    Case 102&                                   'dbComplexByte
+                    Case 102&                                   ' dbComplexByte
                         strFlds = strFlds & "Complex Byte"
                     Case dbInteger
                         strFlds = strFlds & "Integer"
-                    Case 103&                                   'dbComplexInteger
+                    Case 103&                                   ' dbComplexInteger
                         strFlds = strFlds & "Complex Integer"
                     Case dbLong
                         If (fld.Attributes And dbAutoIncrField) = 0& Then
@@ -1860,24 +1870,24 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                         Else
                             strFlds = strFlds & "Counter"
                         End If
-                    Case 104&                                   'dbComplexLong
+                    Case 104&                                   ' dbComplexLong
                         strFlds = strFlds & "Complex Long"
                     Case dbSingle
                         strFlds = strFlds & "Single"
-                    Case 105&                                   'dbComplexSingle
+                    Case 105&                                   ' dbComplexSingle
                         strFlds = strFlds & "Complex Single"
                     Case dbDouble
                         strFlds = strFlds & "Double"
-                    Case 106&                                   'dbComplexDouble
+                    Case 106&                                   ' dbComplexDouble
                         strFlds = strFlds & "Complex Double"
                     Case dbGUID
                         strFlds = strFlds & "GUID"
-                        '''x strFlds = strFlds & "Replica"
-                    Case 107&                                   'dbComplexGUID
+                        'strFlds = strFlds & "Replica"
+                    Case 107&                                   ' dbComplexGUID
                         strFlds = strFlds & "Complex GUID"
                     Case dbDecimal
                         strFlds = strFlds & "Decimal"
-                    Case 108&                                   'dbComplexDecimal
+                    Case 108&                                   ' dbComplexDecimal
                         strFlds = strFlds & "Complex Decimal"
                     Case dbDate
                         strFlds = strFlds & "DateTime"
@@ -1887,7 +1897,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
                         strFlds = strFlds & "YesNo"
                     Case dbLongBinary
                         strFlds = strFlds & "OLE Object"
-                    Case 101&                                   'dbAttachment
+                    Case 101&                                   ' dbAttachment
                         strFlds = strFlds & "Attachment"
                     Case dbBinary
                         strFlds = strFlds & "Binary"
@@ -1902,7 +1912,7 @@ Private Sub OutputTheSchemaFile()               ' CreateDbScript()
             strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
             f.WriteLine vbCrLf & strSQL
 
-            'Indexes
+            ' Indexes
             For Each ndx In tdf.Indexes
 
                 If ndx.Unique Then
@@ -2021,9 +2031,6 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim prop As DAO.Property
     Dim strFile As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeDocumentRelations"
     On Error GoTo PROC_ERR
 
     Debug.Print "aeDocumentRelations"
@@ -2069,35 +2076,30 @@ PROC_EXIT:
     Set fld = Nothing
     Set rel = Nothing
     Close 1
-    'PopCallStack "aeDocumentRelations"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
     aeDocumentRelations = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
 Private Function OutputQueriesSqlText() As Boolean
 ' Ref: http://www.pcreview.co.uk/forums/export-sql-saved-query-into-text-file-t2775525.html
-'====================================================================
+' ====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     December 3, 2012
 ' Comment:  Output the sql code of all queries to a text file
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'====================================================================
+' ====================================================================
 
     Dim dbs As DAO.Database
     Dim qdf As DAO.QueryDef
     Dim strFile As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputQueriesSqlText"
     On Error GoTo PROC_ERR
 
     strFile = aestrSourceLocation & aeSqlTxtFile
@@ -2125,23 +2127,17 @@ PROC_EXIT:
     Set qdf = Nothing
     Set dbs = Nothing
     Close 1
-    'PopCallStack "OutputQueriesSqlText"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegit_expClass"
     OutputQueriesSqlText = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
 Private Sub KillProperly(ByVal Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
-
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "KillProperly"
 
     On Error GoTo PROC_ERR
 
@@ -2152,7 +2148,6 @@ TryAgain:
     End If
 
 PROC_EXIT:
-    'PopCallStack "KillProperly"
     Exit Sub
 
 PROC_ERR:
@@ -2161,7 +2156,6 @@ PROC_ERR:
         Resume TryAgain
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -2254,9 +2248,6 @@ Private Function OutputBuiltInPropertiesText() As Boolean
     Dim strFile As String
     Dim strError As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputBuiltInPropertiesText"
     On Error GoTo PROC_ERR
 
     strFile = aestrSourceLocation & aePrpTxtFile
@@ -2292,7 +2283,6 @@ PROC_EXIT:
     Set prps = Nothing
     Set dbs = Nothing
     Close 1
-    'PopCallStack "OutputBuiltInPropertiesText"
     Exit Function
 
 PROC_ERR:
@@ -2305,7 +2295,6 @@ PROC_ERR:
             'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             OutputBuiltInPropertiesText = False
-            'GlobalErrHandler
             Resume PROC_EXIT
     End Select
 
@@ -2314,17 +2303,10 @@ End Function
 Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
 
-    'Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
-
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "IsFileLocked"
-
     On Error GoTo PROC_ERR
 
     Dim i As Integer
 
-    'Debug.Print , Len(Dir$(PathFileName))
     If Len(Dir$(PathFileName)) Then
         i = FreeFile()
         Open PathFileName For Random Access Read Write Lock Read Write As #i
@@ -2337,12 +2319,11 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 
 PROC_EXIT:
     On Error GoTo 0
-    'PopCallStack "IsFileLocked"
     Exit Function
 
 PROC_ERR:
     Select Case Err.Number
-        Case 70 'Unable to acquire exclusive lock
+        Case 70 ' Unable to acquire exclusive lock
             MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             IsFileLocked = True
         Case 9
@@ -2350,12 +2331,10 @@ PROC_ERR:
                     vbCrLf & "IsFileLocked Entry PathFileName=" & PathFileName, vbCritical, "ERROR=9"
             IsFileLocked = False
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
-            'GlobalErrHandler
             Resume PROC_EXIT
         Case Else
             MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
-            'GlobalErrHandler
             Resume PROC_EXIT
     End Select
     Resume
@@ -2365,9 +2344,6 @@ End Function
 Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal strExt As String, Optional ByVal varDebug As Variant) As Boolean
 ' strContainerType: Forms, Reports, Scripts (Macros), Modules
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "DocumentTheContainer"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -2410,14 +2386,10 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
         If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
             i = i + 1
             strTheCurrentPathAndFile = aestrSourceLocation & doc.Name & "." & strExt
-            'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">A:Here", doc.Name, strTheCurrentPathAndFile
             If IsFileLocked(strTheCurrentPathAndFile) Then
                 MsgBox strTheCurrentPathAndFile & " is locked!", vbCritical, "STOP in DocumentTheContainer"
-                'Stop
             End If
-            'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">B:Here", doc.Name, strTheCurrentPathAndFile
             KillProperly (strTheCurrentPathAndFile)
-            'If strTheCurrentPathAndFile = "C:\ae\aezdb\src\basTranslate.bas" Then Debug.Print ">C:Here", doc.Name, strTheCurrentPathAndFile
 SaveAsText:
             Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             If mblnUTF16 Then
@@ -2456,7 +2428,6 @@ PROC_EXIT:
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
-    'PopCallStack "DocumentTheContainer"
     Exit Function
 
 PROC_ERR:
@@ -2468,7 +2439,6 @@ PROC_ERR:
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegit_expClass"
     DocumentTheContainer = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2477,9 +2447,6 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
 
     Dim strFile As String
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "KillAllFiles"
     On Error GoTo PROC_ERR
 
     Debug.Print "KillAllFiles"
@@ -2521,7 +2488,6 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
     End If
 
 PROC_EXIT:
-    'PopCallStack "KillAllFiles"
     Exit Sub
 
 PROC_ERR:
@@ -2533,7 +2499,6 @@ PROC_ERR:
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -2592,13 +2557,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim qdf As DAO.QueryDef
     Dim i As Integer
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeDocumentTheDatabase"
     On Error GoTo PROC_ERR
 
-    'Debug.Print "varDebug=" & varDebug, "aeDocumentTheDatabase"
-    'Stop
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
@@ -2665,8 +2625,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Stop
     End If
 
-    'Debug.Print "varDebug=" & varDebug
-    'Stop
     If Not IsMissing(varDebug) Then
         OutputListOfContainers aeAppListCnt, varDebug
     Else
@@ -2682,16 +2640,25 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     End If
 
     OutputListOfApplicationProperties
-    'Stop
+
+    If Not IsMissing(varDebug) Then
+        OutputListOfCommandIDs aeAppCmbrIds, varDebug
+    Else
+        OutputListOfCommandIDs aeAppCmbrIds
+    End If
 
     ' FIXME DEBUG HERE
-    OutputSendKeysQATexport
+    If Not IsMissing(varDebug) Then
+        OutputTheQAT aeAppListQAT, varDebug
+    Else
+        OutputTheQAT aeAppListQAT
+    End If
 
-    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
 
-    '=============
-    ' QUERIES
-    '=============
+    ' =============
+    '    QUERIES
+    ' =============
     i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
@@ -2767,14 +2734,12 @@ PROC_EXIT:
     Set doc = Nothing
     Set cnt = Nothing
     Set dbs = Nothing
-    'PopCallStack "aeDocumentTheDatabase"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     aeDocumentTheDatabase = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2783,7 +2748,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
                         ByVal strAccObjName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://vbabuff.blogspot.com/2010/03/does-access-object-exists.html
 '
-'=======================================================================
+' =======================================================================
 ' Author:     Peter F. Ennis
 ' Date:       February 18, 2011
 ' Comment:    Return True if the object exists
@@ -2793,14 +2758,11 @@ Private Function aeExists(ByVal strAccObjType As String, _
 '             strAccObjName: The name of the object
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
-'=======================================================================
+' =======================================================================
 
     Dim objType As Object
     Dim obj As Variant
     
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "aeExists"
     On Error GoTo PROC_ERR
 
     Debug.Print "aeExists"
@@ -2863,7 +2825,6 @@ Private Function aeExists(ByVal strAccObjType As String, _
 
 PROC_EXIT:
     Set obj = Nothing
-    'PopCallStack "aeExists"
     Exit Function
 
 PROC_ERR:
@@ -2875,7 +2836,6 @@ PROC_ERR:
         If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass"
         aeExists = False
     End If
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -2909,9 +2869,6 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
 ' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "FieldLookupControlTypeList"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -2949,31 +2906,24 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
     For Each tbl In tdf
         If Left$(tbl.Name, 4) <> "MSys" And Left$(tbl.Name, 3) <> "zzz" _
             And Left$(tbl.Name, 1) <> "~" Then
-            'Debug.Print tbl.Name
             Print #fle, tbl.Name
             For Each fld In tbl.Fields
                 intAllFieldsCount = intAllFieldsCount + 1
                 lng = fld.Properties("DisplayControl").Value
-                'Debug.Print , fld.Name, lng, GetType(lng)
                 Print #fle, , fld.Name, lng, GetType(lng)
                 Select Case lng
                     Case acCheckBox
                         intChk = intChk + 1
-                        'Debug.Print intChk, ">Here"
                         strChkTbl = tbl.Name
                         strChkFld = fld.Name
                     Case acTextBox
                         intTxt = intTxt + 1
-                        'Debug.Print intTxt, ">Here"
                     Case acListBox
                         intLst = intLst + 1
-                        'Debug.Print intLst, ">Here"
                     Case acComboBox
                         intCbo = intCbo + 1
-                        'Debug.Print intCbo, ">Here"
                     Case Else
                         intElse = intElse + 1
-                        'MsgBox "lng=" & lng
                 End Select
             Next fld
         End If
@@ -3012,15 +2962,38 @@ PROC_EXIT:
     Close fle
     Set tdf = Nothing
     Set dbs = Nothing
-    'PopCallStack "FieldLookupControlTypeList"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegit_expClass", vbCritical, "Error"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
+
+Private Sub OutputListOfCommandIDs(ByVal strOutputFile As String, Optional ByVal varDebug As Variant)
+' Programming Office Commandbars - get the ID of a CommandBarControl
+' Ref: http://blogs.msdn.com/b/guowu/archive/2004/09/06/225963.aspx
+' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
+
+    Dim CBTN As CommandBarButton
+    Dim CBR As CommandBar
+    Dim fle As Integer
+
+    fle = FreeFile()
+    Open aegitSourceFolder & "\" & strOutputFile For Output As #fle
+
+    On Error Resume Next
+
+    For Each CBR In Application.CommandBars
+        For Each CBTN In CBR.Controls
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+        Next
+    Next
+
+    Close fle
+
+End Sub
 
 Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
@@ -3032,14 +3005,9 @@ Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional 
     Dim strFile As String
     Dim lngFileNum As Long
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputListOfContainers"
     On Error GoTo PROC_ERR
 
     Debug.Print "OutputListOfContainers"
-    'Debug.Print "varDebug=" & varDebug, "OutputListOfContainers"
-    'Stop
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
         Debug.Print , "DEBUGGING IS OFF"
@@ -3095,22 +3063,17 @@ PROC_EXIT:
     Set prpLoop = Nothing
     Set conItem = Nothing
     Set dbs = Nothing
-    'PopCallStack "OutputListOfContainers"
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass", vbCritical, "Error"
     OutputListOfContainers = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
 
 Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputAllContainerProperties"
     On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
@@ -3127,13 +3090,11 @@ Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
     End If
 
 PROC_EXIT:
-    'PopCallStack "OutputAllContainerProperties"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -3169,9 +3130,6 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
 ' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
     
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "ListAllContainerProperties"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -3217,22 +3175,17 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
     Close fle
 
 PROC_EXIT:
-    'PopCallStack "ListAllContainerProperties"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
 
 Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As Variant)
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "PrettyXML"
     On Error GoTo PROC_ERR
 
     ' Beautify XML in VBA with MSXML6 only
@@ -3303,13 +3256,11 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     Set objXMLStyleSheet = Nothing
 
 PROC_EXIT:
-    'PopCallStack "PrettyXML"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -3318,9 +3269,6 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputTheTableDataAsXML"
     Dim i As Integer
 
     On Error GoTo PROC_ERR
@@ -3330,28 +3278,20 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Const adPersistXML As Integer = 1
 
     Dim strFileName As String
+    Dim strSQL As String
 
     Dim cnn As Object
     Set cnn = CurrentProject.Connection
     Dim rst As Object
     Set rst = CreateObject("ADODB.Recordset")
 
-'''x    If IsMissing(varDebug) Then
-'''x        KillAllFiles "xml"
-'''x    Else
-'''x        KillAllFiles "xml", varDebug
-'''x    End If
-
-    'Debug.Print "avarTableNames"
-    'Debug.Print "UBound(avarTableNames)=" & UBound(avarTableNames)
-    'Stop
-
     For i = 0 To UBound(avarTableNames)
-        rst.Open "Select * from " & avarTableNames(i), cnn, adOpenStatic, adLockOptimistic
+        strSQL = "Select * from " & avarTableNames(i)
+        MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
+        rst.Open strSQL, cnn, adOpenStatic, adLockOptimistic
 
         strFileName = aestrXMLLocation & avarTableNames(i) & ".xml"
 
-        'MsgBox "aegitSetup=" & aegitSetup, vbInformation, "OutputTheTableDataAsXML"
         If aegitSetup Then
             If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
             If Not rst.EOF Then
@@ -3379,13 +3319,11 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Set cnn = Nothing
 
 PROC_EXIT:
-    'PopCallStack "OutputTheTableDataAsXML"
     Exit Sub
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -3394,9 +3332,6 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139946(v=office.10).aspx
 ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/how-do-i-change-default-printers-in-vba/d046a937-6548-4d2b-9517-7f622e2cfed2
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputPrinterInfo"
     On Error GoTo PROC_ERR
 
     Dim prt As Printer
@@ -3473,18 +3408,15 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 
 PROC_EXIT:
     Close fle
-    'PopCallStack "OutputPrinterInfo"
     Exit Sub
 
 PROC_ERR:
     Select Case Err.Number
         Case 9
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
-            'GlobalErrHandler
             Resume Next
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
-            'GlobalErrHandler
             Resume Next
     End Select
 
@@ -3492,18 +3424,14 @@ End Sub
 
 Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
 ' Ref: http://stackoverflow.com/questions/9206153/how-to-export-access-2010-data-macros
-'====================================================================
+' ====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     February 16, 2014
-'====================================================================
+' ====================================================================
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim strFile As String
-
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "OutputTableDataMacros"
 
     On Error GoTo PROC_ERR
 
@@ -3529,7 +3457,6 @@ NextTdf:
 PROC_EXIT:
     Set tdf = Nothing
     Set dbs = Nothing
-    'PopCallStack "OutputTableDataMacros"
     Exit Sub
 
 PROC_ERR:
@@ -3537,7 +3464,6 @@ PROC_ERR:
         Resume NextTdf
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass"
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -3614,11 +3540,9 @@ NextIteration:
                     'Stop
                     GoTo NextIteration
                 End If
-                'Stop
 SearchForEnd:
             Loop
         Else
-            'Stop
             Print #fleOut, strIn
             If Not IsMissing(varDebug) Then Debug.Print i, strIn
         End If
@@ -3670,10 +3594,10 @@ Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varE
 
 End Function
 
-'==================================================
+' ==================================================
 ' Global Error Handler Routines
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
-'==================================================
+' ==================================================
 
 Private Sub ResetWorkspace()
     Dim intCounter As Integer
@@ -3693,118 +3617,6 @@ Private Sub ResetWorkspace()
     For intCounter = 0 To Reports.Count - 1
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
-End Sub
-
-Private Sub GlobalErrHandler()
-' Main procedure to handle errors that occur.
-
-    On Error GoTo 0
-    Dim strError As String
-    Dim lngError As Long
-    Dim intErl As Integer
-    Dim strMsg As String
-
-    ' Variables to preserve error information
-    strError = Err.Description
-    lngError = Err.Number
-    intErl = Erl
-
-    ' Reset workspace, close open objects
-    ResetWorkspace
-
-    ' Prompt the user with information on the error:
-    strMsg = "Procedure: " & CurrentProcName() & vbCrLf & _
-             "Line: " & Erl & vbCrLf & _
-             "Error: (" & lngError & ")" & strError & vbCrLf & _
-             "Application Quit is turned OFF !!!"
-    MsgBox strMsg, vbCritical, "GlobalErrHandler"
-
-    ' Write error to file:
-    WriteErrorToFile intErl, lngError, CurrentProcName(), strError
-
-    ' Exit Access without saving any changes
-    ' (you might want to change this to save all changes)
-
-    'Application.Quit acExit
-End Sub
-
-Private Function CurrentProcName() As String
-    On Error GoTo 0
-    CurrentProcName = mastrCallStack(mintStackPointer - 1)
-End Function
-
-Private Sub PushCallStack(ByVal strProcName As String)
-' Add the current procedure name to the Call Stack
-' Should be called whenever a procedure is called
-
-    Debug.Print "strProcName=" & strProcName
-    On Error GoTo PROC_ERR
-    'If Err.Number = 9 Then ErrorHandlerInit
-
-    ' Verify the stack array can handle the current array element
-    If mintStackPointer > UBound(mastrCallStack) Then
-    ' If array has not been defined, initialize the error handler
-        If Err.Number = 9 Then
-            ErrorHandlerInit
-        Else
-            ' Increase the size of the array to not go out of bounds
-            ReDim Preserve mastrCallStack(UBound(mastrCallStack) + _
-            mcintIncrementStackSize)
-        End If
-    End If
-
-    On Error GoTo 0
-
-    mastrCallStack(mintStackPointer) = strProcName
-
-    ' Increment pointer to next element
-    mintStackPointer = mintStackPointer + 1
-
-PROC_EXIT:
-    Exit Sub
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PushCallStack of Class aegit_expClass"
-    Resume Next
-
-End Sub
-
-Private Sub ErrorHandlerInit()
-    On Error GoTo 0
-    mfInErrorHandler = False
-    mintStackPointer = 1
-    ReDim mastrCallStack(1 To mcintIncrementStackSize)
-End Sub
-
-Private Sub PopCallStack(ByVal strProc As String)
-' Remove a procedure name from the call stack
-
-    On Error GoTo 0
-    Debug.Print strProc
-    If mintStackPointer <= UBound(mastrCallStack) Then
-        mastrCallStack(mintStackPointer) = vbNullString
-    End If
-
-    ' Reset pointer to previous element
-    mintStackPointer = mintStackPointer - 1
-End Sub
-
-Private Sub WriteErrorToFile(ByVal intTheErl As Integer, ByVal lngTheErrorNum As Long, _
-                ByVal strCurrentProcName As String, ByVal strErrorDescription As String)
-    
-    Dim strFilePath As String
-    Dim lngFileNum As Long
-    
-    On Error Resume Next
-
-    ' Write to a text file called aegitErrorLog in the MyDocuments folder
-    strFilePath = CreateObject("WScript.Shell").SpecialFolders("MYDOCUMENTS") & "\aegitErrorLog.txt"
-
-    lngFileNum = FreeFile
-    Open strFilePath For Append Access Write Lock Write As lngFileNum
-        Print #lngFileNum, Now(), intTheErl, lngTheErrorNum, strCurrentProcName, strErrorDescription
-    Close lngFileNum
-
 End Sub
 
 Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, _
@@ -3827,7 +3639,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    If Err = 55 Then            ' File already open
+    If Err = 55 Then ' File already open
         'Debug.Print "Here@Err=55", strTheString, lngFileNum, strTheAbsoluteFileName
         If Not IsMissing(varDebug) Then Debug.Print "Err=55", strTheString, lngFileNum, strTheAbsoluteFileName
         Err.Clear

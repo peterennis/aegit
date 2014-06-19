@@ -82,9 +82,9 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     ' Define tables for xml data export
     If Not IsMissing(varXmlData) Then
             If Application.VBE.ActiveVBProject.Name = "aegit" Then
-                Dim MyArray() As Variant
-                MyArray = Array("tblRace", "tblYear")
-                oDbObjects.TablesExportToXML = MyArray()
+                Dim myArray() As Variant
+                myArray = Array("tblRace", "tblYear")
+                oDbObjects.TablesExportToXML = myArray()
             Else
                 Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
                 oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
@@ -95,7 +95,6 @@ Test1:
     '=============
     ' TEST 1
     '=============
-    'MsgBox "oDbObjects.XMLFolder=" & oDbObjects.XMLFolder
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"
@@ -266,6 +265,15 @@ PROC_ERR:
     End Select
 
 End Function
+
+Public Sub ExportIt(ByVal strTableName As String)
+' Exports the table to the default folder
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=65762
+
+    Application.ExportXML ObjectType:=acExportTable, DataSource:=strTableName, _
+                    DataTarget:=strTableName & ".xml"
+
+End Sub
 
 Public Sub TestHideQueryDef()
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/25d9dafd-b446-40ba-8dbd-a0efa983f2ff/how-to-programatically-hide-a-querydef

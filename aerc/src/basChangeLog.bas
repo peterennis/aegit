@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 11, 2014"
-Public Const gstrVERSION As String = "1.0.8"
+Public Const gstrDATE As String = "June 18, 2014"
+Public Const gstrVERSION As String = "1.1.0"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -22,6 +22,7 @@ Public gvarMyTablesForExportToXML() As Variant
 ' SendInput Module Ref: http://vb.mvps.org/samples/SendInput/
 ' *** Windows API help - replacing As Any declaration
 ' Ref: http://allapi.mentalis.org/vbtutor/api1.shtml
+' Ref: http://programmersheaven.com/discussion/237489/passing-an-array-as-an-optional-parameter
 '
 '
 ' Guides:
@@ -46,7 +47,6 @@ Public gvarMyTablesForExportToXML() As Variant
 ' Issues:
 ' #031 -
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
-' #027 - Cannot run the macro or callback function OnActionButton
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
@@ -65,6 +65,14 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140618 - v110 - Make all comments of the form '<space> so that ' followed by no space is code
+    ' that has been commented out.
+    ' FIXED - #027 - Cannot run the macro or callback function OnActionButton
+'20140612 - v109 - Remove old code related to Global Error Handler
+    ' OutputListOfCommandIDs
+    ' Access Basics by Crystal - Good intro for beginners
+    ' Ref: http://allenbrowne.com/casu-22.html
+    ' Ref: Conrad Systems Development - http://www.accessmvp.com/JConrad/index.html
 '20140611 - v108 - Testing for #001
     ' FIXED - #001 - Property Let TablesExportToXML(ByVal varTablesArray As Variant)
     ' FIXED - #009 - Create Let property for setting aegitExportDataToXML
