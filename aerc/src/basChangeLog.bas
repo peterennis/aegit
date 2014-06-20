@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 19, 2014"
-Public Const gstrVERSION As String = "1.1.1"
+Public Const gstrDATE As String = "June 20, 2014"
+Public Const gstrVERSION As String = "1.1.2"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -18,7 +18,6 @@ Public gvarMyTablesForExportToXML() As Variant
 ' The Ribbon and QAT settings - C:\Users\%username%\AppData\Local\Microsoft\Office
 ' Ref: http://msdn.microsoft.com/en-us/library/ee704589(v=office.14).aspx
 ' Sendkeys module Ref: http://www.codeguru.com/vb/gen/vb_system/keyboard/article.php/c14629/SendKeys.htm#page-1 => VB6, needs too many changes
-' Ref: http://www.codematic.net/excel-development/excel-xll/excel-xll.htm
 ' SendInput Module Ref: http://vb.mvps.org/samples/SendInput/
 ' *** Windows API help - replacing As Any declaration
 ' Ref: http://allapi.mentalis.org/vbtutor/api1.shtml
@@ -47,10 +46,8 @@ Public gvarMyTablesForExportToXML() As Variant
 ' %005 - Ref: http://stackoverflow.com/questions/3313561/what-are-the-limitations-of-git-on-windows
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
-' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #032 -
-' #031 - Sort OutputListOfCommandBarIDs.txt
+' #033 -
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
@@ -59,8 +56,6 @@ Public gvarMyTablesForExportToXML() As Variant
 ' #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
 ' #017 - KPI chart test not working
-' #014 - ReadDocDatabase debug output when custom test folder given - applies to aegit_impClass
-' #013 - Import of class source code into a new database creates a module - applies to aegit_impClass
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
@@ -70,10 +65,18 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140620 - v112 - OutputTheQAT message for Err 3270 when no AppTitle is set
+    ' Ref: http://bytes.com/topic/access/answers/205495-late-binding
+    ' FIXED - #032 - Late Binding for OutputListOfCommandBarIDs
+    ' FIXED - ONGOING - %001 - Fix hints from TM VBA-Inspector and track progress
+    ' WONTFIX - Reopen if development on import continues - #014 - ReadDocDatabase debug output when custom test folder given - applies to aegit_impClass
+    ' WONTFIX - Reopen if development on import continues - #013 - Import of class source code into a new database creates a module - applies to aegit_impClass
+    ' OLD - Ref: http://www.codematic.net/excel-development/excel-xll/excel-xll.htm => Look at XLW Ref: http://xlw.sourceforge.net/
 '20140618 - v110 - Make all comments of the form '<space> so that ' followed by no space is code
     ' that has been commented out.
     ' FIXED - #027 - Cannot run the macro or callback function OnActionButton
     ' Change MsgBox for avarTableNames to debug statement
+    ' FIXED - #031 - Sort OutputListOfCommandBarIDs.txt
 '20140612 - v109 - Remove old code related to Global Error Handler
     ' OutputListOfCommandIDs
     ' Access Basics by Crystal - Good intro for beginners
