@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 18, 2014"
-Public Const gstrVERSION As String = "1.1.0"
+Public Const gstrDATE As String = "June 19, 2014"
+Public Const gstrVERSION As String = "1.1.1"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -23,6 +23,10 @@ Public gvarMyTablesForExportToXML() As Variant
 ' *** Windows API help - replacing As Any declaration
 ' Ref: http://allapi.mentalis.org/vbtutor/api1.shtml
 ' Ref: http://programmersheaven.com/discussion/237489/passing-an-array-as-an-optional-parameter
+' *** Example of SQL INSERT / UPDATE using ADODB.Command and ADODB.Parameters objects
+' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219149
+' *** CreateObject("System.Collections.ArrayList")
+' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
 '
 '
 ' Guides:
@@ -45,7 +49,8 @@ Public gvarMyTablesForExportToXML() As Variant
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' %001 - Fix hints from TM VBA-Inspector and track progress
 ' Issues:
-' #031 -
+' #032 -
+' #031 - Sort OutputListOfCommandBarIDs.txt
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
@@ -68,6 +73,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '20140618 - v110 - Make all comments of the form '<space> so that ' followed by no space is code
     ' that has been commented out.
     ' FIXED - #027 - Cannot run the macro or callback function OnActionButton
+    ' Change MsgBox for avarTableNames to debug statement
 '20140612 - v109 - Remove old code related to Global Error Handler
     ' OutputListOfCommandIDs
     ' Access Basics by Crystal - Good intro for beginners

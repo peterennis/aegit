@@ -33,8 +33,8 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
-Private Const aegit_expVERSION As String = "1.1.0"
-Private Const aegit_expVERSION_DATE As String = "June 18, 2014"
+Private Const aegit_expVERSION As String = "1.1.1"
+Private Const aegit_expVERSION_DATE As String = "June 19, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnHandleErrors As Boolean = True
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -2642,9 +2642,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputListOfApplicationProperties
 
     If Not IsMissing(varDebug) Then
-        OutputListOfCommandIDs aeAppCmbrIds, varDebug
+        OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
     Else
-        OutputListOfCommandIDs aeAppCmbrIds
+        OutputListOfCommandBarIDs aeAppCmbrIds
     End If
 
     ' FIXME DEBUG HERE
@@ -2970,7 +2970,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub OutputListOfCommandIDs(ByVal strOutputFile As String, Optional ByVal varDebug As Variant)
+Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional ByVal varDebug As Variant)
 ' Programming Office Commandbars - get the ID of a CommandBarControl
 ' Ref: http://blogs.msdn.com/b/guowu/archive/2004/09/06/225963.aspx
 ' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
@@ -2978,9 +2978,15 @@ Private Sub OutputListOfCommandIDs(ByVal strOutputFile As String, Optional ByVal
     Dim CBTN As CommandBarButton
     Dim CBR As CommandBar
     Dim fle As Integer
+    Dim lng As Long
+    Dim strPathFileName As String
+    Dim strExtension As String
+
+    strPathFileName = aegitSourceFolder & "\" & strOutputFile
+    strExtension = ".sorted"
 
     fle = FreeFile()
-    Open aegitSourceFolder & "\" & strOutputFile For Output As #fle
+    Open strPathFileName For Output As #fle
 
     On Error Resume Next
 
@@ -2990,12 +2996,60 @@ Private Sub OutputListOfCommandIDs(ByVal strOutputFile As String, Optional ByVal
             Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
         Next
     Next
-
     Close fle
+
+    ' Sort the file
+    If Not IsMissing(varDebug) Then
+        Debug.Print "strPathFileName=" & strPathFileName
+        Debug.Print "strExtension=" & strExtension
+    End If
+    lng = MySortIt(strPathFileName, strExtension)
+    'Stop
 
 End Sub
 
-Public Function OutputListOfContainers(ByVal strTheFileName As String, Optional ByVal varDebug As Variant) As Boolean
+Private Function MySortIt(ByVal strFPName As String, ByVal strExtension As String) As Long
+' Ref: http://support.microsoft.com/kb/150700
+' Ref: http://www.xtremevbtalk.com/showthread.php?t=291063
+' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
+
+    Dim str As String
+    Dim lngLine As Long
+    Dim theCount As Long
+
+    Dim arrayIn As Object
+    Set arrayIn = CreateObject("System.Collections.ArrayList")
+    Dim arrayOut() As Variant
+
+    Close #1
+    Close #2
+    Open strFPName For Input As #1
+    Open strFPName & strExtension For Output As #2
+
+    With arrayIn
+        Do Until EOF(1)
+            Line Input #1, str
+            .Add Trim$(CStr(str))
+        Loop
+        .Sort
+        theCount = .Count
+        'Debug.Print .Count
+        arrayOut = arrayIn.ToArray
+        For lngLine = LBound(arrayOut) To UBound(arrayOut)
+            Print #2, arrayIn(lngLine)
+        Next
+    End With
+    
+    MySortIt = theCount
+
+    Close #1
+    Close #2
+    Set arrayIn = Nothing
+    'Debug.Print "Done!"
+
+End Function
+
+Private Function OutputListOfContainers(ByVal strTheFileName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://www.susandoreydesigns.com/software/AccessVBATechniques.pdf
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb177484(v=office.12).aspx
 
@@ -3287,7 +3341,8 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 
     For i = 0 To UBound(avarTableNames)
         strSQL = "Select * from " & avarTableNames(i)
-        MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
+        'MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
+        If Not IsMissing(varDebug) Then Debug.Print i, "avarTableNames", avarTableNames(i)
         rst.Open strSQL, cnn, adOpenStatic, adLockOptimistic
 
         strFileName = aestrXMLLocation & avarTableNames(i) & ".xml"
