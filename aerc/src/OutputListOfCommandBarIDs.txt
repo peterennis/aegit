@@ -236,19 +236,19 @@ Form View Subform: 31220 - S&ubform
 Form View Subform: 210 - Sort &Ascending
 Form View Subform: 211 - Sort &Descending
 Form View Subform: 11108 - Sort &Descending
-Form View Subform: 31581 - Sort &?1??
-Form View Subform: 10068 - Sort &?1??
-Form View Subform: 10071 - Sort &?1??
-Form View Subform: 10090 - Sort &?1??
-Form View Subform: 12265 - Sort &?1??
-Form View Subform: 10076 - Sort &?1??
-Form View Subform: 10089 - Sort &?1??
-Form View Subform: 10091 - Sort &?1??
-Form View Subform: 12266 - Sort &?1??
-Form View Subform: 10092 - Sort &?1??
-Form View Subform: 10093 - Sort &?1??
-Form View Subform: 10095 - Sort &?1??
-Form View Subform: 10094 - Sort &?1??
+Form View Subform: 31581 - Sort &Descending
+Form View Subform: 10068 - Sort &Descending
+Form View Subform: 10071 - Sort &Descending
+Form View Subform: 10090 - Sort &Descending
+Form View Subform: 12265 - Sort &Descending
+Form View Subform: 10076 - Sort &Descending
+Form View Subform: 10089 - Sort &Descending
+Form View Subform: 10091 - Sort &Descending
+Form View Subform: 12266 - Sort &Descending
+Form View Subform: 10092 - Sort &Descending
+Form View Subform: 10093 - Sort &Descending
+Form View Subform: 10095 - Sort &Descending
+Form View Subform: 10094 - Sort &Descending
 Form View Subform: 15195 - Is S&elected
 Form View Subform: 15196 - Is &Not Selected
 Form View Subform: 22284 - &Form Properties
@@ -274,20 +274,20 @@ Form View Control: 12076 - &Group On
 Form View Control: 31398 - &Total
 Form View Control: 210 - Sort &Ascending
 Form View Control: 211 - Sort &Descending
-Form View Control: 11108 - Sort &Descendi
-Form View Control: 31581 - Sort &?1??
-Form View Control: 10068 - Sort &?1??
-Form View Control: 10071 - Sort &?1??
-Form View Control: 10090 - Sort &?1??
-Form View Control: 12265 - Sort &?1??
-Form View Control: 10076 - Sort &?1??
-Form View Control: 10089 - Sort &?1??
-Form View Control: 10091 - Sort &?1??
-Form View Control: 12266 - Sort &?1??
-Form View Control: 10092 - Sort &?1??
-Form View Control: 10093 - Sort &?1??
-Form View Control: 10095 - Sort &?1??
-Form View Control: 10094 - Sort &?1??
+Form View Control: 11108 - Sort &Descending
+Form View Control: 31581 - Sort &Descending
+Form View Control: 10068 - Sort &Descending
+Form View Control: 10071 - Sort &Descending
+Form View Control: 10090 - Sort &Descending
+Form View Control: 12265 - Sort &Descending
+Form View Control: 10076 - Sort &Descending
+Form View Control: 10089 - Sort &Descending
+Form View Control: 10091 - Sort &Descending
+Form View Control: 12266 - Sort &Descending
+Form View Control: 10092 - Sort &Descending
+Form View Control: 10093 - Sort &Descending
+Form View Control: 10095 - Sort &Descending
+Form View Control: 10094 - Sort &Descending
 Form View Control: 15195 - Is S&elected
 Form View Control: 15196 - Is &Not Selected
 Form View Control: 22226 - &Build Hyperlink
@@ -345,52 +345,16 @@ Export Pop-up: 11731 - &HTML Document
 Export Pop-up: 11732 - d&BASE File
 Export Pop-up: 626 - &Word Merge
 Navigation Pane Groups in current Category: 11265 - &New Group...
-Font/Fore Color: 3079 - &Font/Fore Color
-Font/Fore Color: 1457 - &Recently Used Colors
-Fill/Back Color: 2084 - &Transparent
-Fill/Back Color: 3081 - &Fill/Back Color
-Fill/Back Color: 1457 - &Recently Used Colors
-Line/Border Style: 613 - &Line/Border Style
-Line/Border Style: 614 - &Line/Border Style
-Line/Border Style: 615 - &Line/Border Style
-Line/Border Style: 616 - &Line/Border Style
-Line/Border Style: 617 - &Line/Border Style
-Line/Border Style: 618 - &Line/Border Style
-Line/Border Style: 619 - &Line/Border Style
-Line/Border Width: 496 - &Line/Border Width
-Line/Border Width: 490 - &Line/Border Width
-Line/Border Width: 491 - &Line/Border Width
-Line/Border Width: 492 - &Line/Border Width
-Line/Border Width: 493 - &Line/Border Width
-Line/Border Width: 494 - &Line/Border Width
-Line/Border Width: 495 - &Line/Border Width
-Line/Border Color: 2085 - &Transparent
-Line/Border Color: 3083 - &Line/Border Color
-Line/Border Color: 1457 - &Recently Used Colors
-Special Effect: 580 - &Special Effect: Flat
-Special Effect: 561 - &Special Effect: Raised
-Special Effect: 562 - &Special Effect: Sunken
-Special Effect: 1817 - &Special Effect: Etched
-Special Effect: 1818 - &Special Effect: Shadowed
-Special Effect: 1819 - &Special Effect: Chiseled
-Fill/Back Color: 3082 - &Fill/Back Color
-Fill/Back Color: 1457 - &Recently Used Colors
-Font/Fore Color: 3080 - &Font/Fore Color
-Font/Fore Color: 1457 - &Recently Used Colors
-Line/Border Color: 3084 - &Line/Border Color
-Line/Border Color: 1457 - &Recently Used Colors
-Datasheet Special Effect: 580 - &Special Effect: Flat
-Datasheet Special Effect: 561 - &Special Effect: Raised
-Datasheet Special Effect: 562 - &Special Effect: Sunken
-Gridlines: 635 - Gridlines: &Both
-Gridlines: 637 - Gridlines: &Horizontal
-Gridlines: 636 - Gridlines: &Vertical
-Gridlines: 638 - Gridlines: &None
-Alternate Color: 15113 - &None
-Alternate Color: 14186 - &Alternate Row Colors
-Alternate Color: 1457 - &Recently Used Colors
-Alternate Color: 14187 - Alternate Fill/Back Color
-Alternate Color: 1457 - &Recently Used Colors
+View Table View Mode Submenu: 3872 - &Column Properties
+View Table View Mode Submenu: 3873 - Colu&mn Names
+View Table View Mode Submenu: 3873 - Colu&mn Names
+View Table View Mode Submenu: 3874 - &Keys
+View Table View Mode Submenu: 3875 - &Name Only
+View Table View Mode Submenu: 3875 - &Name Only
+View Table View Mode Submenu: 3876 - Custom &View
+View Show Panes Submenu: 4012 - &Diagram
+View Show Panes Submenu: 4013 - &Grid
+View Show Panes Submenu: 4014 - &SQL
 Database: 2936 - &New...
 Database: 2937 - &Open...
 Database: 3 - &Save
@@ -831,6 +795,52 @@ Toolbox: 500 - Sub&form/Subreport
 Toolbox: 130 - &Line
 Toolbox: 131 - R&ectangle
 Toolbox: 642 - &More Controls...
+Font/Fore Color: 3079 - &Font/Fore Color
+Font/Fore Color: 1457 - &Recently Used Colors
+Fill/Back Color: 2084 - &Transparent
+Fill/Back Color: 3081 - &Fill/Back Color
+Fill/Back Color: 1457 - &Recently Used Colors
+Line/Border Style: 613 - &Line/Border Style
+Line/Border Style: 614 - &Line/Border Style
+Line/Border Style: 615 - &Line/Border Style
+Line/Border Style: 616 - &Line/Border Style
+Line/Border Style: 617 - &Line/Border Style
+Line/Border Style: 618 - &Line/Border Style
+Line/Border Style: 619 - &Line/Border Style
+Line/Border Width: 496 - &Line/Border Width
+Line/Border Width: 490 - &Line/Border Width
+Line/Border Width: 491 - &Line/Border Width
+Line/Border Width: 492 - &Line/Border Width
+Line/Border Width: 493 - &Line/Border Width
+Line/Border Width: 494 - &Line/Border Width
+Line/Border Width: 495 - &Line/Border Width
+Line/Border Color: 2085 - &Transparent
+Line/Border Color: 3083 - &Line/Border Color
+Line/Border Color: 1457 - &Recently Used Colors
+Special Effect: 580 - &Special Effect: Flat
+Special Effect: 561 - &Special Effect: Raised
+Special Effect: 562 - &Special Effect: Sunken
+Special Effect: 1817 - &Special Effect: Etched
+Special Effect: 1818 - &Special Effect: Shadowed
+Special Effect: 1819 - &Special Effect: Chiseled
+Fill/Back Color: 3082 - &Fill/Back Color
+Fill/Back Color: 1457 - &Recently Used Colors
+Font/Fore Color: 3080 - &Font/Fore Color
+Font/Fore Color: 1457 - &Recently Used Colors
+Line/Border Color: 3084 - &Line/Border Color
+Line/Border Color: 1457 - &Recently Used Colors
+Datasheet Special Effect: 580 - &Special Effect: Flat
+Datasheet Special Effect: 561 - &Special Effect: Raised
+Datasheet Special Effect: 562 - &Special Effect: Sunken
+Gridlines: 635 - Gridlines: &Both
+Gridlines: 637 - Gridlines: &Horizontal
+Gridlines: 636 - Gridlines: &Vertical
+Gridlines: 638 - Gridlines: &None
+Alternate Color: 15113 - &None
+Alternate Color: 14186 - &Alternate Row Colors
+Alternate Color: 1457 - &Recently Used Colors
+Alternate Color: 14187 - Alternate Fill/Back Color
+Alternate Color: 1457 - &Recently Used Colors
 Object Dependencies: 5746 - Object Dependencies
 Action Catalog: 5746 - Action Catalog
 Menu Bar: 30002 - &File
@@ -962,19 +972,19 @@ Table Design Datasheet Cell: 22 - &Paste
 Table Design Datasheet Cell: 210 - Sort &Ascending
 Table Design Datasheet Cell: 211 - Sort &Descending
 Table Design Datasheet Cell: 11108 - Sort &Descending
-Table Design Datasheet Cell: 31581 - Sort &?1??
-Table Design Datasheet Cell: 10068 - Sort &?1??
-Table Design Datasheet Cell: 10071 - Sort &?1??
-Table Design Datasheet Cell: 10090 - Sort &?1??
-Table Design Datasheet Cell: 12265 - Sort &?1??
-Table Design Datasheet Cell: 10076 - Sort &?1??
-Table Design Datasheet Cell: 10089 - Sort &?1??
-Table Design Datasheet Cell: 10091 - Sort &?1??
-Table Design Datasheet Cell: 12266 - Sort &?1??
-Table Design Datasheet Cell: 10092 - Sort &?1??
-Table Design Datasheet Cell: 10093 - Sort &?1??
-Table Design Datasheet Cell: 10095 - Sort &?1??
-Table Design Datasheet Cell: 10094 - Sort &?1??
+Table Design Datasheet Cell: 31581 - Sort &Descending
+Table Design Datasheet Cell: 10068 - Sort &Descending
+Table Design Datasheet Cell: 10071 - Sort &Descending
+Table Design Datasheet Cell: 10090 - Sort &Descending
+Table Design Datasheet Cell: 12265 - Sort &Descending
+Table Design Datasheet Cell: 10076 - Sort &Descending
+Table Design Datasheet Cell: 10089 - Sort &Descending
+Table Design Datasheet Cell: 10091 - Sort &Descending
+Table Design Datasheet Cell: 12266 - Sort &Descending
+Table Design Datasheet Cell: 10092 - Sort &Descending
+Table Design Datasheet Cell: 10093 - Sort &Descending
+Table Design Datasheet Cell: 10095 - Sort &Descending
+Table Design Datasheet Cell: 10094 - Sort &Descending
 Table Design Datasheet Cell: 15195 - Is S&elected
 Table Design Datasheet Cell: 15196 - Is &Not Selected
 Table Design Datasheet Cell: 3720 - Recon&vert
@@ -1066,19 +1076,19 @@ Query Design Datasheet Cell: 22 - &Paste
 Query Design Datasheet Cell: 210 - Sort &Ascending
 Query Design Datasheet Cell: 211 - Sort &Descending
 Query Design Datasheet Cell: 11108 - Sort &Descending
-Query Design Datasheet Cell: 31581 - Sort &?1??
-Query Design Datasheet Cell: 10068 - Sort &?1??
-Query Design Datasheet Cell: 10071 - Sort &?1??
-Query Design Datasheet Cell: 10090 - Sort &?1??
-Query Design Datasheet Cell: 12265 - Sort &?1??
-Query Design Datasheet Cell: 10076 - Sort &?1??
-Query Design Datasheet Cell: 10089 - Sort &?1??
-Query Design Datasheet Cell: 10091 - Sort &?1??
-Query Design Datasheet Cell: 12266 - Sort &?1??
-Query Design Datasheet Cell: 10092 - Sort &?1??
-Query Design Datasheet Cell: 10093 - Sort &?1??
-Query Design Datasheet Cell: 10095 - Sort &?1??
-Query Design Datasheet Cell: 10094 - Sort &?1??
+Query Design Datasheet Cell: 31581 - Sort &Descending
+Query Design Datasheet Cell: 10068 - Sort &Descending
+Query Design Datasheet Cell: 10071 - Sort &Descending
+Query Design Datasheet Cell: 10090 - Sort &Descending
+Query Design Datasheet Cell: 12265 - Sort &Descending
+Query Design Datasheet Cell: 10076 - Sort &Descending
+Query Design Datasheet Cell: 10089 - Sort &Descending
+Query Design Datasheet Cell: 10091 - Sort &Descending
+Query Design Datasheet Cell: 12266 - Sort &Descending
+Query Design Datasheet Cell: 10092 - Sort &Descending
+Query Design Datasheet Cell: 10093 - Sort &Descending
+Query Design Datasheet Cell: 10095 - Sort &Descending
+Query Design Datasheet Cell: 10094 - Sort &Descending
 Query Design Datasheet Cell: 15195 - Is S&elected
 Query Design Datasheet Cell: 15196 - Is &Not Selected
 Query Design Datasheet Cell: 3720 - Recon&vert
@@ -1287,20 +1297,20 @@ Form View Subform Control: 12076 - &Group On
 Form View Subform Control: 31398 - &Total
 Form View Subform Control: 210 - Sort &Ascending
 Form View Subform Control: 211 - Sort &Descending
-Form View Subform Control: 11108 - Sort &Descendi
-Form View Subform Control: 31581 - Sort &?1??
-Form View Subform Control: 10068 - Sort &?1??
-Form View Subform Control: 10071 - Sort &?1??
-Form View Subform Control: 10090 - Sort &?1??
-Form View Subform Control: 12265 - Sort &?1??
-Form View Subform Control: 10076 - Sort &?1??
-Form View Subform Control: 10089 - Sort &?1??
-Form View Subform Control: 10091 - Sort &?1??
-Form View Subform Control: 12266 - Sort &?1??
-Form View Subform Control: 10092 - Sort &?1??
-Form View Subform Control: 10093 - Sort &?1??
-Form View Subform Control: 10095 - Sort &?1??
-Form View Subform Control: 10094 - Sort &?1??
+Form View Subform Control: 11108 - Sort &Descending
+Form View Subform Control: 31581 - Sort &Descending
+Form View Subform Control: 10068 - Sort &Descending
+Form View Subform Control: 10071 - Sort &Descending
+Form View Subform Control: 10090 - Sort &Descending
+Form View Subform Control: 12265 - Sort &Descending
+Form View Subform Control: 10076 - Sort &Descending
+Form View Subform Control: 10089 - Sort &Descending
+Form View Subform Control: 10091 - Sort &Descending
+Form View Subform Control: 12266 - Sort &Descending
+Form View Subform Control: 10092 - Sort &Descending
+Form View Subform Control: 10093 - Sort &Descending
+Form View Subform Control: 10095 - Sort &Descending
+Form View Subform Control: 10094 - Sort &Descending
 Form View Subform Control: 15195 - Is S&elected
 Form View Subform Control: 15196 - Is &Not Selected
 Form View Subform Control: 478 - &Delete
@@ -1379,19 +1389,19 @@ Form Datasheet Cell: 22 - &Paste
 Form Datasheet Cell: 210 - Sort &Ascending
 Form Datasheet Cell: 211 - Sort &Descending
 Form Datasheet Cell: 11108 - Sort &Descending
-Form Datasheet Cell: 31581 - Sort &?1??
-Form Datasheet Cell: 10068 - Sort &?1??
-Form Datasheet Cell: 10071 - Sort &?1??
-Form Datasheet Cell: 10090 - Sort &?1??
-Form Datasheet Cell: 12265 - Sort &?1??
-Form Datasheet Cell: 10076 - Sort &?1??
-Form Datasheet Cell: 10089 - Sort &?1??
-Form Datasheet Cell: 10091 - Sort &?1??
-Form Datasheet Cell: 12266 - Sort &?1??
-Form Datasheet Cell: 10092 - Sort &?1??
-Form Datasheet Cell: 10093 - Sort &?1??
-Form Datasheet Cell: 10095 - Sort &?1??
-Form Datasheet Cell: 10094 - Sort &?1??
+Form Datasheet Cell: 31581 - Sort &Descending
+Form Datasheet Cell: 10068 - Sort &Descending
+Form Datasheet Cell: 10071 - Sort &Descending
+Form Datasheet Cell: 10090 - Sort &Descending
+Form Datasheet Cell: 12265 - Sort &Descending
+Form Datasheet Cell: 10076 - Sort &Descending
+Form Datasheet Cell: 10089 - Sort &Descending
+Form Datasheet Cell: 10091 - Sort &Descending
+Form Datasheet Cell: 12266 - Sort &Descending
+Form Datasheet Cell: 10092 - Sort &Descending
+Form Datasheet Cell: 10093 - Sort &Descending
+Form Datasheet Cell: 10095 - Sort &Descending
+Form Datasheet Cell: 10094 - Sort &Descending
 Form Datasheet Cell: 15195 - Is S&elected
 Form Datasheet Cell: 15196 - Is &Not Selected
 Form Datasheet Cell: 3720 - Recon&vert
@@ -1652,16 +1662,6 @@ View Design Join Line Popup: 4009 - Remo&ve
 View Design Join Line Popup: 4007 - &Select All Rows from <tableA>
 View Design Join Line Popup: 4008 - S&elect All Rows from <tableB>
 View Design Join Line Popup: 222 - &Properties
-View Table View Mode Submenu: 3872 - &Column Properties
-View Table View Mode Submenu: 3873 - Colu&mn Names
-View Table View Mode Submenu: 3873 - Colu&mn Names
-View Table View Mode Submenu: 3874 - &Keys
-View Table View Mode Submenu: 3875 - &Name Only
-View Table View Mode Submenu: 3875 - &Name Only
-View Table View Mode Submenu: 3876 - Custom &View
-View Show Panes Submenu: 4012 - &Diagram
-View Show Panes Submenu: 4013 - &Grid
-View Show Panes Submenu: 4014 - &SQL
 Join Line Popup: 3884 - Dele&te Relationship from Database
 Join Line Popup: 222 - &Properties
 Stored Procedure Design Datasheet: 3985 - Stored Procedure &Design
@@ -1821,7 +1821,7 @@ Function Pivot Chart Popup: 222 - &Properties
 Column Filter: 210 - Sort &Ascending
 Column Filter: 211 - Sort &Descending
 Column Filter: 11108 - Sort &Descending
-Column Filter: 31581 - Sort &?1??
+Column Filter: 31581 - Sort &Descending
 Navigation Pane Pop-up: 31584 - &Category
 Navigation Pane Pop-up: 31585 - &Sort By
 Navigation Pane Pop-up: 31586 - &View By

@@ -202,13 +202,13 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
 
     For nCurrent = 0 To nFieldCount - 1
         If Right$(rst.Fields(nCurrent).Name, 1) = "_" Then
-            UnicodeStream.writetext Left$(rst.Fields(nCurrent).Name, Len(rst.Fields(nCurrent).Name) - 1) & strDelim
+            UnicodeStream.WriteText Left$(rst.Fields(nCurrent).Name, Len(rst.Fields(nCurrent).Name) - 1) & strDelim
         Else
-            UnicodeStream.writetext rst.Fields(nCurrent).Name & strDelim
+            UnicodeStream.WriteText rst.Fields(nCurrent).Name & strDelim
         End If
     Next
 
-    UnicodeStream.writetext vbCrLf
+    UnicodeStream.WriteText vbCrLf
     nCurSec = Second(Now())
 
     Do While Not rst.EOF
@@ -229,12 +229,12 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
         If Len(Trim$(strTest)) > 0 Then  ' Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
                 If Not IsNull(rst.Fields(nCurrent).Value) Then
-                    UnicodeStream.writetext Trim$(rst.Fields(nCurrent).Value)
+                    UnicodeStream.WriteText Trim$(rst.Fields(nCurrent).Value)
                 End If
                 If nCurrent = (nFieldCount - 1) Then
-                    UnicodeStream.writetext vbCrLf 'new line.
+                    UnicodeStream.WriteText vbCrLf 'new line.
                 Else
-                    UnicodeStream.writetext strDelim
+                    UnicodeStream.WriteText strDelim
                 End If
             Next
         End If

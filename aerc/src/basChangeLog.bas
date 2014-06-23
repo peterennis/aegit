@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 20, 2014"
-Public Const gstrVERSION As String = "1.1.2"
+Public Const gstrDATE As String = "June 23, 2014"
+Public Const gstrVERSION As String = "1.1.3"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -26,6 +26,10 @@ Public gvarMyTablesForExportToXML() As Variant
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219149
 ' *** CreateObject("System.Collections.ArrayList")
 ' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
+' Internationalization - Potential source issue #033
+' Ref: http://www.vb-helper.com/tip_internationalization.html
+' *** Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
+' *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 '
 '
 ' Guides:
@@ -47,7 +51,8 @@ Public gvarMyTablesForExportToXML() As Variant
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
-' #033 -
+' #034 -
+' #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
@@ -65,6 +70,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140623 - v113 - Clean up unused error handler variables
 '20140620 - v112 - OutputTheQAT message for Err 3270 when no AppTitle is set
     ' Ref: http://bytes.com/topic/access/answers/205495-late-binding
     ' FIXED - #032 - Late Binding for OutputListOfCommandBarIDs
