@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 23, 2014"
-Public Const gstrVERSION As String = "1.1.3"
+Public Const gstrDATE As String = "June 24, 2014"
+Public Const gstrVERSION As String = "1.1.4"
 Public Const gstrPROJECT As String = "TheProject"
 Public Const gblnTEST As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant

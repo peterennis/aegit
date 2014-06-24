@@ -33,8 +33,8 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
-Private Const aegit_expVERSION As String = "1.1.3"
-Private Const aegit_expVERSION_DATE As String = "June 23, 2014"
+Private Const aegit_expVERSION As String = "1.1.4"
+Private Const aegit_expVERSION_DATE As String = "June 24, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
