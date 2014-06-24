@@ -52,7 +52,6 @@ Public gvarMyTablesForExportToXML() As Variant
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
 ' #035 -
-' #034 - QAT not exported for aegit
 ' #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
@@ -71,6 +70,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140624 - v114 - FIXED - #034 - QAT not exported for aegit
 '20140623 - v113 - Clean up unused error handler variables
 '20140620 - v112 - OutputTheQAT message for Err 3270 when no AppTitle is set
     ' Ref: http://bytes.com/topic/access/answers/205495-late-binding
