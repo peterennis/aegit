@@ -518,16 +518,21 @@ Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As 
     strAppTitle = CurrentDb.Properties("AppTitle")
     AppActivate strAppTitle
     lngHwnd = FindWindow(vbNullString, strAppTitle)
-    If Not IsMissing(varDebug) Then Debug.Print "strAppTitle=" & strAppTitle
-    If Not IsMissing(varDebug) Then Debug.Print "lngHwnd=" & lngHwnd
+    If Not IsMissing(varDebug) Then
+        Debug.Print "strAppTitle=" & strAppTitle
+        Debug.Print "lngHwnd=" & lngHwnd
+    End If
 
-    ' NOTE: Flaky and unreliable SendKeys... needs some work
+    ' FIXME - NOTE: Flaky and unreliable SendKeys... needs some work
 
     apiSetActiveWindow lngHwnd
     ' Ref: http://www.jpsoftwaretech.com/vba/shell-scripting-vba-windows-script-host-object-model/
     ' Ref: http://www.computerperformance.co.uk/ezine/ezine26.htm
+    'Pause 5
+    'Stop
     Dim wsc As Object
     Set wsc = CreateObject("WScript.Shell")
+    Delay 500
     wsc.SendKeys "{F10}FT"
     wsc.SendKeys "{HOME}CCC"
     Delay 250
