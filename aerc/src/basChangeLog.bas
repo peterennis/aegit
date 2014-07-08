@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE_aegit As String = "July 8, 2014"
-Public Const gstrVERSION_aegit As String = "1.1.8"
+Public Const gstrVERSION_aegit As String = "1.1.9"
 Public Const gstrPROJECT_aegit As String = "TheProject"
 Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -50,8 +50,8 @@ Public gvarMyTablesForExportToXML() As Variant
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
+' #038 -
 ' #037 -
-' #036 - Error with Debug.Print UBound(gvarMyTablesForExportToXML) when debug is on. Variable not initialized.
 ' #035 - Configure git with diff for UTF16 files
 ' #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
@@ -59,20 +59,22 @@ Public gvarMyTablesForExportToXML() As Variant
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
 ' #023 - Output list of hidden tables
-' #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
 ' #017 - KPI chart test not working
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
-' #008 - Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 ' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 ' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
 '=============================================================================================================================
 '
 '
+'20140708 - v119 - Reorganize code for optional export settings
 '20140708 - v118 - FIXED - %008 - Implement varDebug in export procedure
     ' Add test for ExportQAT. Implement Let property for ExportQAT
+    ' FIXED - #036 - Error with Debug.Print UBound(gvarMyTablesForExportToXML) when debug is on. Variable not initialized.
+    ' CLOSED - #022 - Ref: http://www.hanselman.com/blog/YoureJustAnotherCarriageReturnLineFeedInTheWall.aspx
+    ' FIXED - #008 - Export QAT - Ref: http://winaero.com/blog/how-to-make-a-backup-of-your-quick-access-toolbar-settings-in-windows-8-1/
 '20140707 - v117 - Bump
     ' Array not initialized error Ref: http://www.vbforums.com/showthread.php?654880-How-do-I-tell-if-an-array-is-quot-empty-quot&highlight=array+initialised
 '20140701 - v116 - Code tidy

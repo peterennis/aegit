@@ -33,7 +33,7 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
-Private Const aegit_expVERSION As String = "1.1.8"
+Private Const aegit_expVERSION As String = "1.1.9"
 Private Const aegit_expVERSION_DATE As String = "July 8, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -2646,6 +2646,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         KillAllFiles "src", varDebug
     End If
 
+    ' ===================================
+    '    FORMS REPORTS SCRIPTS MODULES
+    ' ===================================
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
     If FolderExists(aestrSourceLocation) Then
         If Not IsMissing(varDebug) Then
@@ -2664,42 +2667,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Stop
     End If
 
-    If Not IsMissing(varDebug) Then
-        OutputListOfContainers aeAppListCnt, varDebug
-    Else
-        OutputListOfContainers aeAppListCnt
-    End If
-
-    OutputListOfAllHiddenQueries
-
-    If Not IsMissing(varDebug) Then
-        OutputListOfAccessApplicationOptions varDebug
-    Else
-        OutputListOfAccessApplicationOptions
-    End If
-
-    OutputListOfApplicationProperties
-
-    If Not IsMissing(varDebug) Then
-        OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
-    Else
-        OutputListOfCommandBarIDs aeAppCmbrIds
-    End If
-
-    ' FIXME DEBUG HERE
-    If aegitExport.ExportQAT Then
-        If Not IsMissing(varDebug) Then
-            OutputTheQAT aeAppListQAT, varDebug
-        Else
-            OutputTheQAT aeAppListQAT
-        End If
-    End If
-
-    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
-
     ' =============
     '    QUERIES
     ' =============
+    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
     i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
@@ -2740,32 +2711,43 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         End If
     End If
 
+    ' =============
+    '    OUTPUTS
+    ' =============
+    If Not IsMissing(varDebug) Then
+        OutputListOfContainers aeAppListCnt, varDebug
+        OutputListOfAccessApplicationOptions varDebug
+        OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
+        OutputTableDataMacros varDebug
+        OutputPrinterInfo "Debug"
+        If aeExists("Tables", "aetlkpStates", varDebug) Then
+            OutputTableDataAsFormattedText "aetlkpStates", varDebug
+        End If
+    Else
+        OutputListOfContainers aeAppListCnt
+        OutputListOfAccessApplicationOptions
+        OutputListOfCommandBarIDs aeAppCmbrIds
+        OutputTableDataMacros
+        OutputPrinterInfo
+        If aeExists("Tables", "aetlkpStates") Then
+            OutputTableDataAsFormattedText "aetlkpStates"
+        End If
+    End If
+
+    OutputListOfAllHiddenQueries
+    OutputListOfApplicationProperties
     OutputQueriesSqlText
     OutputBuiltInPropertiesText
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
     OutputAllContainerProperties
 
-    If Not IsMissing(varDebug) Then
-        OutputTableDataMacros varDebug
-    Else
-        OutputTableDataMacros
-    End If
-
-    If Not IsMissing(varDebug) Then
-        If aeExists("Tables", "aetlkpStates", varDebug) Then
-            OutputTableDataAsFormattedText "aetlkpStates", varDebug
+    If aegitExport.ExportQAT Then
+        If Not IsMissing(varDebug) Then
+            OutputTheQAT aeAppListQAT, varDebug
+        Else
+            OutputTheQAT aeAppListQAT
         End If
-    Else
-        If aeExists("Tables", "aetlkpStates") Then
-            OutputTableDataAsFormattedText "aetlkpStates"
-        End If
-    End If
-
-    If Not IsMissing(varDebug) Then
-        OutputPrinterInfo "Debug"
-    Else
-        OutputPrinterInfo
     End If
 
     aeDocumentTheDatabase = True
