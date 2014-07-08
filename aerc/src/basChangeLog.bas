@@ -1,10 +1,10 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE As String = "June 24, 2014"
-Public Const gstrVERSION As String = "1.1.4"
-Public Const gstrPROJECT As String = "TheProject"
-Public Const gblnTEST As Boolean = False
+Public Const gstrDATE_aegit As String = "July 7, 2014"
+Public Const gstrVERSION_aegit As String = "1.1.7"
+Public Const gstrPROJECT_aegit As String = "TheProject"
+Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
 
 ' Tools:
@@ -45,13 +45,15 @@ Public gvarMyTablesForExportToXML() As Variant
 '
 '=============================================================================================================================
 ' Tasks:
-' %008 -
-' %007 -
-' %005 - Ref: http://stackoverflow.com/questions/3313561/what-are-the-limitations-of-git-on-windows
+' %009 -
+' %008 - Implement varDebug in export procedure
+' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
-' #035 -
+' #037 -
+' #036 - Error with Debug.Print UBound(gvarMyTablesForExportToXML) when debug is on. Variable not initialized.
+' #035 - Configure git with diff for UTF16 files
 ' #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
@@ -70,6 +72,14 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140707 - v117 - Bump
+    ' Array not initialized error Ref: http://www.vbforums.com/showthread.php?654880-How-do-I-tell-if-an-array-is-quot-empty-quot&highlight=array+initialised
+    '
+'20140701 - v116 - Code tidy
+    ' Create aegitExport of type myExportType to configure optional outputs
+'20140627 - v115
+    ' CLOSED - %005 - Ref: http://stackoverflow.com/questions/3313561/what-are-the-limitations-of-git-on-windows
+    ' Research for Let property with optional parameter - Ref: ' Ref: http://www.ozgrid.com/forum/showthread.php?t=82338
 '20140624 - v114 - FIXED - #034 - QAT not exported for aegit
 '20140623 - v113 - Clean up unused error handler variables
 '20140620 - v112 - OutputTheQAT message for Err 3270 when no AppTitle is set

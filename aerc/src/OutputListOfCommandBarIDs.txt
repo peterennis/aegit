@@ -333,6 +333,131 @@ Fax Service: 5746 - Tas&k Pane
 Meeting Workspace: 5746 - Tas&k Pane
 Attachment Options: 5746 - Tas&k Pane
 Accessibility Checker: 5746 - Tas&k Pane
+Export Pop-up: 11723 - E&xcel
+Export Pop-up: 11724 - SharePoint Li&st
+Export Pop-up: 11725 - &Word RTF File
+Export Pop-up: 12951 - &PDF or XPS
+Export Pop-up: 11726 - &Access
+Export Pop-up: 11727 - &Text File
+Export Pop-up: 11728 - XM&L File
+Export Pop-up: 11729 - ODB&C Database
+Export Pop-up: 11731 - &HTML Document
+Export Pop-up: 11732 - d&BASE File
+Export Pop-up: 626 - &Word Merge
+Navigation Pane Groups in current Category: 11265 - &New Group...
+Font/Fore Color: 3079 - &Font/Fore Color
+Font/Fore Color: 1457 - &Recently Used Colors
+Fill/Back Color: 2084 - &Transparent
+Fill/Back Color: 3081 - &Fill/Back Color
+Fill/Back Color: 1457 - &Recently Used Colors
+Line/Border Style: 613 - &Line/Border Style
+Line/Border Style: 614 - &Line/Border Style
+Line/Border Style: 615 - &Line/Border Style
+Line/Border Style: 616 - &Line/Border Style
+Line/Border Style: 617 - &Line/Border Style
+Line/Border Style: 618 - &Line/Border Style
+Line/Border Style: 619 - &Line/Border Style
+Line/Border Width: 496 - &Line/Border Width
+Line/Border Width: 490 - &Line/Border Width
+Line/Border Width: 491 - &Line/Border Width
+Line/Border Width: 492 - &Line/Border Width
+Line/Border Width: 493 - &Line/Border Width
+Line/Border Width: 494 - &Line/Border Width
+Line/Border Width: 495 - &Line/Border Width
+Line/Border Color: 2085 - &Transparent
+Line/Border Color: 3083 - &Line/Border Color
+Line/Border Color: 1457 - &Recently Used Colors
+Special Effect: 580 - &Special Effect: Flat
+Special Effect: 561 - &Special Effect: Raised
+Special Effect: 562 - &Special Effect: Sunken
+Special Effect: 1817 - &Special Effect: Etched
+Special Effect: 1818 - &Special Effect: Shadowed
+Special Effect: 1819 - &Special Effect: Chiseled
+Alternate Color: 15113 - &None
+Alternate Color: 14186 - &Alternate Row Colors
+Alternate Color: 1457 - &Recently Used Colors
+Form Design: 212 - View
+Form Design: 3 - &Save
+Form Design: 5905 - File Searc&h...
+Form Design: 4 - &Print...
+Form Design: 109 - Print Pre&view
+Form Design: 2 - &Spelling...
+Form Design: 21 - Cu&t
+Form Design: 19 - &Copy
+Form Design: 22 - &Paste
+Form Design: 108 - &Format Painter
+Form Design: 128 - &Undo
+Form Design: 129 - &Redo
+Form Design: 1576 - Hyperl&ink...
+Form Design: 501 - Add Existing Fie&lds
+Form Design: 630 - Auto&Format...
+Form Design: 3170 - &Code
+Form Design: 222 - Propert&ies
+Form Design: 645 - &Build...
+Form Design: 577 - &Navigation Pane
+Form Design: 2599 - &New Object
+Form Design: 984 - Microsoft Access &Help
+Formatting (Form/Report): 1734 - &Object:
+Formatting (Form/Report): 1728 - &Font:
+Formatting (Form/Report): 1731 - &Font Size:
+Formatting (Form/Report): 113 - &Bold
+Formatting (Form/Report): 114 - &Italic
+Formatting (Form/Report): 115 - &Underline
+Formatting (Form/Report): 120 - Align &Left
+Formatting (Form/Report): 122 - &Center
+Formatting (Form/Report): 121 - Align &Right
+Formatting (Form/Report): 3077 - Fi&ll/Back Color
+Formatting (Form/Report): 14205 - Al&ternate Fill/Back Color
+Formatting (Form/Report): 3076 - Fo&nt/Fore Color
+Formatting (Form/Report): 3078 - &Line/Border Color
+Formatting (Form/Report): 1767 - &Line/Border Width
+Formatting (Form/Report): 1769 - Sp&ecial Effect
+Source Code Control: 2646 - &Add Objects to SourceSafe...
+Source Code Control: 2647 - &Get Latest Version...
+Source Code Control: 2648 - Check &Out...
+Source Code Control: 2649 - Check &In...
+Source Code Control: 2650 - &Undo Check Out...
+Source Code Control: 2651 - &Share Objects...
+Source Code Control: 2653 - Show &History...
+Source Code Control: 2652 - Show &Differences...
+Source Code Control: 2654 - &Run SourceSafe...
+Toolbox: 182 - &Select
+Toolbox: 625 - Control &Wizards
+Toolbox: 476 - &Label
+Toolbox: 219 - &Text Box
+Toolbox: 467 - &Option Group
+Toolbox: 520 - To&ggle Button
+Toolbox: 446 - Option B&utton
+Toolbox: 220 - Chec&k Box
+Toolbox: 221 - &Combo Box
+Toolbox: 448 - L&ist Box
+Toolbox: 282 - &Button
+Toolbox: 965 - I&mage
+Toolbox: 508 - Unbound Ob&ject Frame
+Toolbox: 507 - Boun&d Object Frame
+Toolbox: 509 - Page &Break
+Toolbox: 2585 - Tab Cont&rol
+Toolbox: 500 - Sub&form/Subreport
+Toolbox: 130 - &Line
+Toolbox: 131 - R&ectangle
+Toolbox: 642 - &More Controls...
+Object Dependencies: 5746 - Object Dependencies
+Menu Bar: 30002 - &File
+Menu Bar: 30003 - &Edit
+Menu Bar: 30004 - &View
+Menu Bar: 30018 - &Relationships
+Menu Bar: 30005 - &Insert
+Menu Bar: 30016 - &Query
+Menu Bar: 30454 - &Diagram
+Menu Bar: 30006 - F&ormat
+Menu Bar: 30014 - &Records
+Menu Bar: 30253 - &PivotTable
+Menu Bar: 30469 - &PivotChart
+Menu Bar: 30031 - Filte&r
+Menu Bar: 30012 - &Run
+Menu Bar: 30007 - &Tools
+Menu Bar: 30009 - &Window
+Menu Bar: 30010 - &Help
 View Table View Mode Submenu: 3872 - &Column Properties
 View Table View Mode Submenu: 3873 - Colu&mn Names
 View Table View Mode Submenu: 3873 - Colu&mn Names
@@ -373,7 +498,7 @@ Relationship: 21 - Cu&t
 Relationship: 19 - &Copy
 Relationship: 22 - &Paste
 Relationship: 108 - &Format Painter
-Relationship: 128 - Can't &Undo
+Relationship: 128 - &Undo Rename
 Relationship: 530 - S&how Table...
 Relationship: 622 - Show Dire&ct
 Relationship: 623 - Show A&ll
@@ -411,7 +536,7 @@ Table Datasheet: 21 - Cu&t
 Table Datasheet: 19 - &Copy
 Table Datasheet: 22 - &Paste
 Table Datasheet: 108 - &Format Painter
-Table Datasheet: 128 - Can't &Undo
+Table Datasheet: 128 - &Undo Rename
 Table Datasheet: 1576 - Hyperl&ink...
 Table Datasheet: 210 - Sort &Ascending
 Table Datasheet: 211 - Sort &Descending
@@ -453,7 +578,7 @@ Query Datasheet: 21 - Cu&t
 Query Datasheet: 19 - &Copy
 Query Datasheet: 22 - &Paste
 Query Datasheet: 108 - &Format Painter
-Query Datasheet: 128 - Can't &Undo
+Query Datasheet: 128 - &Undo Rename
 Query Datasheet: 1576 - Hyperl&ink...
 Query Datasheet: 210 - Sort &Ascending
 Query Datasheet: 211 - Sort &Descending
@@ -463,27 +588,6 @@ Query Datasheet: 644 - Delete &Record
 Query Datasheet: 577 - &Navigation Pane
 Query Datasheet: 2599 - &New Object
 Query Datasheet: 984 - Microsoft Access &Help
-Form Design: 212 - View
-Form Design: 3 - &Save
-Form Design: 5905 - File Searc&h...
-Form Design: 4 - &Print...
-Form Design: 109 - Print Pre&view
-Form Design: 2 - &Spelling...
-Form Design: 21 - Cu&t
-Form Design: 19 - &Copy
-Form Design: 22 - &Paste
-Form Design: 108 - &Format Painter
-Form Design: 128 - &Undo
-Form Design: 129 - &Redo
-Form Design: 1576 - Hyperl&ink...
-Form Design: 501 - Add Existing Fie&lds
-Form Design: 630 - Auto&Format...
-Form Design: 3170 - &Code
-Form Design: 222 - Propert&ies
-Form Design: 645 - &Build...
-Form Design: 577 - &Navigation Pane
-Form Design: 2599 - &New Object
-Form Design: 984 - Microsoft Access &Help
 Form View: 212 - View
 Form View: 3 - &Save
 Form View: 5905 - File Searc&h...
@@ -515,7 +619,7 @@ Filter/Sort: 21 - Cu&t
 Filter/Sort: 19 - &Copy
 Filter/Sort: 22 - &Paste
 Filter/Sort: 108 - &Format Painter
-Filter/Sort: 128 - Can't &Undo
+Filter/Sort: 128 - &Undo Rename
 Filter/Sort: 1567 - &Close
 Filter/Sort: 2087 - Clear &Grid
 Filter/Sort: 601 - &Toggle Filter
@@ -558,21 +662,6 @@ Print Preview: 2598 - Office &Links
 Print Preview: 577 - &Navigation Pane
 Print Preview: 2599 - &New Object
 Print Preview: 984 - Microsoft Access &Help
-Formatting (Form/Report): 1734 - &Object:
-Formatting (Form/Report): 1728 - &Font:
-Formatting (Form/Report): 1731 - &Font Size:
-Formatting (Form/Report): 113 - &Bold
-Formatting (Form/Report): 114 - &Italic
-Formatting (Form/Report): 115 - &Underline
-Formatting (Form/Report): 120 - Align &Left
-Formatting (Form/Report): 122 - &Center
-Formatting (Form/Report): 121 - Align &Right
-Formatting (Form/Report): 3077 - Fi&ll/Back Color
-Formatting (Form/Report): 14205 - Al&ternate Fill/Back Color
-Formatting (Form/Report): 3076 - Fo&nt/Fore Color
-Formatting (Form/Report): 3078 - &Line/Border Color
-Formatting (Form/Report): 1767 - &Line/Border Width
-Formatting (Form/Report): 1769 - Sp&ecial Effect
 Formatting (Datasheet): 1736 - Go To &Field:
 Formatting (Datasheet): 1728 - &Font:
 Formatting (Datasheet): 1731 - &Font Size:
@@ -604,15 +693,6 @@ Macro Design: 645 - &Build...
 Macro Design: 577 - &Navigation Pane
 Macro Design: 2599 - &New Object
 Macro Design: 984 - Microsoft Access &Help
-Source Code Control: 2646 - &Add Objects to SourceSafe...
-Source Code Control: 2647 - &Get Latest Version...
-Source Code Control: 2648 - Check &Out...
-Source Code Control: 2649 - Check &In...
-Source Code Control: 2650 - &Undo Check Out...
-Source Code Control: 2651 - &Share Objects...
-Source Code Control: 2653 - Show &History...
-Source Code Control: 2652 - Show &Differences...
-Source Code Control: 2654 - &Run SourceSafe...
 View Design: 212 - View
 View Design: 3 - &Save
 View Design: 5905 - File Searc&h...
@@ -637,7 +717,7 @@ Diagram Design: 4 - &Print...
 Diagram Design: 21 - Cu&t
 Diagram Design: 19 - &Copy
 Diagram Design: 22 - &Paste
-Diagram Design: 128 - Can't &Undo
+Diagram Design: 128 - &Undo Rename
 Diagram Design: 5964 - Add Ta&ble...
 Diagram Design: 3881 - &Hide Table
 Diagram Design: 505 - Primary &Key
@@ -763,54 +843,6 @@ Function Design: 222 - Propert&ies
 Function Design: 577 - &Navigation Pane
 Function Design: 2599 - &New Object
 Function Design: 984 - Microsoft Access &Help
-Toolbox: 182 - &Select
-Toolbox: 625 - Control &Wizards
-Toolbox: 476 - &Label
-Toolbox: 219 - &Text Box
-Toolbox: 467 - &Option Group
-Toolbox: 520 - To&ggle Button
-Toolbox: 446 - Option B&utton
-Toolbox: 220 - Chec&k Box
-Toolbox: 221 - &Combo Box
-Toolbox: 448 - L&ist Box
-Toolbox: 282 - &Button
-Toolbox: 965 - I&mage
-Toolbox: 508 - Unbound Ob&ject Frame
-Toolbox: 507 - Boun&d Object Frame
-Toolbox: 509 - Page &Break
-Toolbox: 2585 - Tab Cont&rol
-Toolbox: 500 - Sub&form/Subreport
-Toolbox: 130 - &Line
-Toolbox: 131 - R&ectangle
-Toolbox: 642 - &More Controls...
-Font/Fore Color: 3079 - &Font/Fore Color
-Font/Fore Color: 1457 - &Recently Used Colors
-Fill/Back Color: 2084 - &Transparent
-Fill/Back Color: 3081 - &Fill/Back Color
-Fill/Back Color: 1457 - &Recently Used Colors
-Line/Border Style: 613 - &Line/Border Style
-Line/Border Style: 614 - &Line/Border Style
-Line/Border Style: 615 - &Line/Border Style
-Line/Border Style: 616 - &Line/Border Style
-Line/Border Style: 617 - &Line/Border Style
-Line/Border Style: 618 - &Line/Border Style
-Line/Border Style: 619 - &Line/Border Style
-Line/Border Width: 496 - &Line/Border Width
-Line/Border Width: 490 - &Line/Border Width
-Line/Border Width: 491 - &Line/Border Width
-Line/Border Width: 492 - &Line/Border Width
-Line/Border Width: 493 - &Line/Border Width
-Line/Border Width: 494 - &Line/Border Width
-Line/Border Width: 495 - &Line/Border Width
-Line/Border Color: 2085 - &Transparent
-Line/Border Color: 3083 - &Line/Border Color
-Line/Border Color: 1457 - &Recently Used Colors
-Special Effect: 580 - &Special Effect: Flat
-Special Effect: 561 - &Special Effect: Raised
-Special Effect: 562 - &Special Effect: Sunken
-Special Effect: 1817 - &Special Effect: Etched
-Special Effect: 1818 - &Special Effect: Shadowed
-Special Effect: 1819 - &Special Effect: Chiseled
 Fill/Back Color: 3082 - &Fill/Back Color
 Fill/Back Color: 1457 - &Recently Used Colors
 Font/Fore Color: 3080 - &Font/Fore Color
@@ -824,29 +856,9 @@ Gridlines: 635 - Gridlines: &Both
 Gridlines: 637 - Gridlines: &Horizontal
 Gridlines: 636 - Gridlines: &Vertical
 Gridlines: 638 - Gridlines: &None
-Alternate Color: 15113 - &None
-Alternate Color: 14186 - &Alternate Row Colors
-Alternate Color: 1457 - &Recently Used Colors
 Alternate Color: 14187 - Alternate Fill/Back Color
 Alternate Color: 1457 - &Recently Used Colors
-Object Dependencies: 5746 - Object Dependencies
 Action Catalog: 5746 - Action Catalog
-Menu Bar: 30002 - &File
-Menu Bar: 30003 - &Edit
-Menu Bar: 30004 - &View
-Menu Bar: 30018 - &Relationships
-Menu Bar: 30005 - &Insert
-Menu Bar: 30016 - &Query
-Menu Bar: 30454 - &Diagram
-Menu Bar: 30006 - F&ormat
-Menu Bar: 30014 - &Records
-Menu Bar: 30253 - &PivotTable
-Menu Bar: 30469 - &PivotChart
-Menu Bar: 30031 - Filte&r
-Menu Bar: 30012 - &Run
-Menu Bar: 30007 - &Tools
-Menu Bar: 30009 - &Window
-Menu Bar: 30010 - &Help
 Database TitleBar: 2937 - &Open...
 Database TitleBar: 524 - &Import...
 Database TitleBar: 1795 - &Link Tables...
@@ -1853,7 +1865,6 @@ Navigation Pane ViewBy Pop-up: 11126 - &List
  : 5814 - Piv&otTable View
  : 5815 - Pi&votChart View
  : 109 - Print Pre&view
-Navigation Pane Groups in current Category: 11265 - &New Group...
 SharePoint List Options Popup: 13624 - Open Default &View...
 SharePoint List Options Popup: 12687 - &Modify Columns and Settings...
 SharePoint List Options Popup: 12688 - &Alert Me...
@@ -1869,17 +1880,6 @@ Workflow: 13381 - Start New Workflow ...
 Workflow: 13382 - Workflow Tasks ...
 Workflow: 13383 - Show All Workflow Status Columns
 Workflow: 13384 - Hide All Workflow Status Columns
-Export Pop-up: 11723 - E&xcel
-Export Pop-up: 11724 - SharePoint Li&st
-Export Pop-up: 11725 - &Word RTF File
-Export Pop-up: 12951 - &PDF or XPS
-Export Pop-up: 11726 - &Access
-Export Pop-up: 11727 - &Text File
-Export Pop-up: 11728 - XM&L File
-Export Pop-up: 11729 - ODB&C Database
-Export Pop-up: 11731 - &HTML Document
-Export Pop-up: 11732 - d&BASE File
-Export Pop-up: 626 - &Word Merge
 Import/Link Pop-up: 11711 - &Access Database
 Import/Link Pop-up: 11712 - E&xcel
 Import/Link Pop-up: 11714 - SharePoint Li&st
