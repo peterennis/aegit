@@ -99,7 +99,7 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                     Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
                     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
                 Else
-                    Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables for export."
+                    Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for export."
                 End If
             End If
     End If
@@ -108,6 +108,7 @@ Test1:
     '=============
     ' TEST 1
     '=============
+    oDbObjects.ExportQAT = False
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"

@@ -33,8 +33,8 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
-Private Const aegit_expVERSION As String = "1.1.7"
-Private Const aegit_expVERSION_DATE As String = "July 7, 2014"
+Private Const aegit_expVERSION As String = "1.1.8"
+Private Const aegit_expVERSION_DATE As String = "July 8, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -53,8 +53,8 @@ End Type
 
 Private Type myExportType               ' Initialize defaults as:
     ExportAll As Boolean                ' True
-    ExportCodeAndObjects As Boolean     ' False
-    ExportCodeOnly As Boolean           ' False
+    ExportCodeAndObjects As Boolean     ' True
+    ExportCodeOnly As Boolean           ' True
     ExportQAT As Boolean                ' True
 End Type
 
@@ -123,8 +123,8 @@ Private Sub Class_Initialize()
 
     With aegitExport
         .ExportAll = True
-        .ExportCodeAndObjects = False
-        .ExportCodeOnly = False
+        .ExportCodeAndObjects = True
+        .ExportCodeOnly = True
         .ExportQAT = True
     End With
 
@@ -186,6 +186,14 @@ End Property
 Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
     aegitXMLFolder = strXMLFolder
+End Property
+
+Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
+    If blnExportQAT Then
+        aegitExport.ExportQAT = True
+    Else
+        aegitExport.ExportQAT = False
+    End If
 End Property
 
 Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
@@ -2679,10 +2687,12 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     End If
 
     ' FIXME DEBUG HERE
-    If Not IsMissing(varDebug) Then
-        OutputTheQAT aeAppListQAT, varDebug
-    Else
-        OutputTheQAT aeAppListQAT
+    If aegitExport.ExportQAT Then
+        If Not IsMissing(varDebug) Then
+            OutputTheQAT aeAppListQAT, varDebug
+        Else
+            OutputTheQAT aeAppListQAT
+        End If
     End If
 
     Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections

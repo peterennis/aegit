@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE_aegit As String = "July 7, 2014"
-Public Const gstrVERSION_aegit As String = "1.1.7"
+Public Const gstrDATE_aegit As String = "July 8, 2014"
+Public Const gstrVERSION_aegit As String = "1.1.8"
 Public Const gstrPROJECT_aegit As String = "TheProject"
 Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -46,7 +46,6 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 ' Tasks:
 ' %009 -
-' %008 - Implement varDebug in export procedure
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
@@ -72,9 +71,10 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140708 - v118 - FIXED - %008 - Implement varDebug in export procedure
+    ' Add test for ExportQAT. Implement Let property for ExportQAT
 '20140707 - v117 - Bump
     ' Array not initialized error Ref: http://www.vbforums.com/showthread.php?654880-How-do-I-tell-if-an-array-is-quot-empty-quot&highlight=array+initialised
-    '
 '20140701 - v116 - Code tidy
     ' Create aegitExport of type myExportType to configure optional outputs
 '20140627 - v115
