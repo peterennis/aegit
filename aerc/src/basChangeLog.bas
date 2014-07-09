@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE_aegit As String = "July 8, 2014"
-Public Const gstrVERSION_aegit As String = "1.2.0"
+Public Const gstrDATE_aegit As String = "July 9, 2014"
+Public Const gstrVERSION_aegit As String = "1.2.1"
 Public Const gstrPROJECT_aegit As String = "TheProject"
 Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -45,7 +45,9 @@ Public gvarMyTablesForExportToXML() As Variant
 '
 '=============================================================================================================================
 ' Tasks:
-' %009 -
+' %011 -
+' %010 -
+' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
@@ -61,7 +63,7 @@ Public gvarMyTablesForExportToXML() As Variant
 ' #023 - Output list of hidden tables
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
 ' #017 - KPI chart test not working
-' #012 - Document custom tabs - adaept sample tab displayed, but no output indication
+' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
 ' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
@@ -69,6 +71,9 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140709 - v121 - Remove test 8, not used
+    ' Remove test 3, not used
+    ' Move unused procedures from the export test module to zTesting2
 '20140708 - v120 - Bump
 '20140708 - v119 - Reorganize code for optional export settings
 '20140708 - v118 - FIXED - %008 - Implement varDebug in export procedure
