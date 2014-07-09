@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE_aegit As String = "July 9, 2014"
-Public Const gstrVERSION_aegit As String = "1.2.1"
+Public Const gstrVERSION_aegit As String = "1.2.2"
 Public Const gstrPROJECT_aegit As String = "TheProject"
 Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -71,6 +71,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140709 - v122 - Bump
 '20140709 - v121 - Remove test 8, not used
     ' Remove test 3, not used
     ' Move unused procedures from the export test module to zTesting2
