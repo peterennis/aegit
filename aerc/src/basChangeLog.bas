@@ -75,6 +75,7 @@ Public gvarMyTablesForExportToXML() As Variant
     ' Remove test 3, not used
     ' Move unused procedures from the export test module to zTesting2
     ' Update description for running the export
+    ' Fix results for Not Used tests
 '20140708 - v120 - Bump
 '20140708 - v119 - Reorganize code for optional export settings
 '20140708 - v118 - FIXED - %008 - Implement varDebug in export procedure

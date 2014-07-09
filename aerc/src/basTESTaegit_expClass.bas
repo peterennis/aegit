@@ -261,7 +261,7 @@ RESULTS:
     Debug.Print "Test 8: NOT USED"
     Debug.Print
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
-    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7), PassFail(bln8)
+    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3, "X"), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7), PassFail(bln8, "X")
 
 PROC_EXIT:
     Exit Function
