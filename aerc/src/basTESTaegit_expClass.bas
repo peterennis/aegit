@@ -4,17 +4,20 @@ Option Explicit
 ' Default Usage:
 ' The following folders are used if no custom configuration is provided:
 ' aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-' aegitType.ImportFolder = "C:\ae\aegit\aerc\imp\"
-' Run in immediate window:                  aegitClassTest
-' Show debug output in immediate window:    aegitClassTest varDebug:="Debugit"
+' aegitType.aegitXMLFolder = "C:\ae\aegit\aerc\src\xml\"
+' Run in immediate window:                  aegit_EXPORT
+' Show debug output in immediate window:    aegit_EXPORT varDebug:="Debugit" OR aegit_EXPORT 1
 '
 ' Custom Usage:
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
+' Public Const THE_XML_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\xml\"
 ' For custom configuration of the output source folder in aegitClassTest use:
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
 ' oDbObjects.XMLFolder = THE_XML_FOLDER
-' Run in immediate window: MYPROJECT_TEST
+' Run in immediate window:                  ALTERNATIVE_EXPORT
+' Show debug output in immediate window:    ALTERNATIVE_EXPORT varDebug:="varDebug" OR ALTERNATIVE_EXPORT 1
 '
+
 Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If Not IsMissing(varDebug) Then
@@ -24,23 +27,26 @@ Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
     End If
 End Function
 
-Public Sub ALTERNATIVE_EXPORT()
+Public Sub ALTERNATIVE_EXPORT(Optional ByVal varDebug As Variant)
 
-    On Error GoTo 0
     Dim THE_SOURCE_FOLDER As String
     THE_SOURCE_FOLDER = "C:\TEMP\aealt\src\"
     Dim THE_XML_FOLDER As String
     THE_XML_FOLDER = "C:\TEMP\aealt\src\xml\"
 
     On Error GoTo PROC_ERR
-    'aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
-    aegitClassTest varDebug:="Debugit", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+
+    If Not IsMissing(varDebug) Then
+        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+    Else
+        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+    End If
 
 PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ALTERNATIVE_TEST"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ALTERNATIVE_EXPORT"
     Resume Next
 
 End Sub
