@@ -1,11 +1,14 @@
  : 11305 - &Design Tasks Pane
+Navigation Pane Category Pop-up: 11119 - &Tables and Related Views
+Navigation Pane Category Pop-up: 11118 - &Object Type
+Navigation Pane Category Pop-up: 11120 - &Created Date
+Navigation Pane Category Pop-up: 11121 - &Modified Date
+Navigation Pane Category Pop-up: 15135 - &ADP Custom Groups
 Form View Popup: 502 - &Form View
 Form View Popup: 11253 - &Report View
 Form View Popup: 13157 - La&yout View
 Form View Popup: 2952 - &Design View
 Form View Popup: 12329 - Datas&heet View
-Form View Popup: 5814 - Piv&otTable View
-Form View Popup: 5815 - Pi&votChart View
 Form View Popup: 109 - Print Pre&view
 Form View Popup: 3971 - Ser&ver Filter by Form
 Form View Popup: 3938 - A&pply Server Filter
@@ -16,239 +19,23 @@ Form View Popup: 22284 - &Form Properties
 Form View Popup: 22285 - &Report Properties
 Form View Popup: 222 - &Properties
 Form View Popup: 14782 - &Close
-Navigation Pane Category Pop-up: 11119 - &Tables and Related Views
-Navigation Pane Category Pop-up: 11118 - &Object Type
-Navigation Pane Category Pop-up: 11120 - &Created Date
-Navigation Pane Category Pop-up: 11121 - &Modified Date
-Navigation Pane Category Pop-up: 15135 - &ADP Custom Groups
-Database Report: 11253 - &Report View
-Database Report: 109 - Print Pre&view
-Database Report: 4 - &Print...
-Database Report: 2652 - Show &Differences...
-Database Report: 2669 - &Get Latest Version
-Database Report: 2670 - Check &Out
-Database Report: 2649 - Check &In...
-Database Report: 2671 - Undo C&heck Out
-Database Report: 21 - Cu&t
-Database Report: 19 - &Copy
-Database Report: 748 - Save &As...
-Database Report: 31458 - &Export
-Database Report: 30095 - Sen&d To
-Database Report: 30476 - &Add to Group
-Database Report: 1788 - Create &Shortcut...
-Database Report: 478 - &Delete
-Database Report: 1787 - Rena&me
-Database Report: 222 - &Properties
-Database Report: 7490 - Object Depe&ndencies...
-Database Macro: 2652 - Show &Differences...
-Database Macro: 2669 - &Get Latest Version
-Database Macro: 2670 - Check &Out
-Database Macro: 2649 - Check &In...
-Database Macro: 2671 - Undo C&heck Out
-Database Macro: 21 - Cu&t
-Database Macro: 19 - &Copy
-Database Macro: 748 - Save &As...
-Database Macro: 31458 - &Export
-Database Macro: 30476 - &Add to Group
-Database Macro: 1788 - Create &Shortcut...
-Database Macro: 478 - &Delete
-Database Macro: 1787 - Rena&me
-Database Macro: 222 - &Properties
-Database Module: 4 - &Print...
-Database Module: 2652 - Show &Differences...
-Database Module: 2669 - &Get Latest Version
-Database Module: 2670 - Check &Out
-Database Module: 2649 - Check &In...
-Database Module: 2671 - Undo C&heck Out
-Database Module: 21 - Cu&t
-Database Module: 19 - &Copy
-Database Module: 748 - Save &As...
-Database Module: 31458 - &Export
-Database Module: 30095 - Sen&d To
-Database Module: 30476 - &Add to Group
-Database Module: 1788 - Create &Shortcut...
-Database Module: 478 - &Delete
-Database Module: 1787 - Rena&me
-Database Module: 222 - &Properties
-Database Page Popup: 3655 - We&b Page Preview
-Database Page Popup: 222 - &Properties
-Database View: 4 - &Print...
-Database View: 109 - Print Pre&view
-Database View: 21 - Cu&t
-Database View: 19 - &Copy
-Database View: 748 - Save &As...
-Database View: 31458 - &Export
-Database View: 30095 - Sen&d To
-Database View: 30476 - &Add to Group
-Database View: 1788 - Create &Shortcut...
-Database View: 478 - &Delete
-Database View: 1787 - Rena&me
-Database View: 222 - &Properties
-Database Stored Procedure: 4 - &Print...
-Database Stored Procedure: 109 - Print Pre&view
-Database Stored Procedure: 21 - Cu&t
-Database Stored Procedure: 19 - &Copy
-Database Stored Procedure: 748 - Save &As...
-Database Stored Procedure: 31458 - &Export
-Database Stored Procedure: 30095 - Sen&d To
-Database Stored Procedure: 30476 - &Add to Group
-Database Stored Procedure: 1788 - Create &Shortcut...
-Database Stored Procedure: 478 - &Delete
-Database Stored Procedure: 1787 - Rena&me
-Database Stored Procedure: 222 - &Properties
-Database Diagram: 4 - &Print...
-Database Diagram: 109 - Print Pre&view
-Database Diagram: 21 - Cu&t
-Database Diagram: 19 - &Copy
-Database Diagram: 748 - Save &As...
-Database Diagram: 31458 - &Export
-Database Diagram: 30095 - Sen&d To
-Database Diagram: 30476 - &Add to Group
-Database Diagram: 1788 - Create &Shortcut...
-Database Diagram: 478 - &Delete
-Database Diagram: 1787 - Rena&me
-Database Diagram: 222 - &Properties
-Navigation Pane List Pop-up: 3832 - &Open
-Navigation Pane List Pop-up: 1081 - &Design View
-Navigation Pane List Pop-up: 4033 - &Triggers...
-Navigation Pane List Pop-up: 31318 - I&mport
-Navigation Pane List Pop-up: 31458 - &Export
-Navigation Pane List Pop-up: 16203 - Co&llect and Update Data via E-mail
-Navigation Pane List Pop-up: 1787 - Rena&me
-Navigation Pane List Pop-up: 11266 - &Rename Shortcut
-Navigation Pane List Pop-up: 11116 - &Hide in this Group
-Navigation Pane List Pop-up: 11117 - &Unhide in this Group
-Navigation Pane List Pop-up: 15169 - De&lete
-Navigation Pane List Pop-up: 11267 - Re&move
-Navigation Pane List Pop-up: 21 - Cu&t
-Navigation Pane List Pop-up: 19 - &Copy
-Navigation Pane List Pop-up: 22 - &Paste
-Navigation Pane List Pop-up: 31593 - &Add to group...
-Navigation Pane List Pop-up: 31427 - M&ore options
-Navigation Pane List Pop-up: 3996 - Lin&ked Table Manager
-Navigation Pane List Pop-up: 19954 - Con&vert to Local Table
-Navigation Pane List Pop-up: 222 - Ta&ble Properties
-Navigation Pane List Pop-up: 19644 - Check &Web Compatibility
-Navigation Pane List Pop-up: 2652 - Show &Differences...
-Navigation Pane List Pop-up: 2669 - &Get Latest Version
-Navigation Pane List Pop-up: 2670 - Check &Out
-Navigation Pane List Pop-up: 2649 - Check &In...
-Navigation Pane List Pop-up: 2671 - Undo C&heck Out
-Navigation Pane View Pop-up: 3832 - &Open
-Navigation Pane View Pop-up: 13157 - La&yout View
-Navigation Pane View Pop-up: 1081 - &Design View
-Navigation Pane View Pop-up: 31458 - &Export
-Navigation Pane View Pop-up: 1787 - Rena&me
-Navigation Pane View Pop-up: 11266 - &Rename Shortcut
-Navigation Pane View Pop-up: 11116 - &Hide in this Group
-Navigation Pane View Pop-up: 11117 - &Unhide in this Group
-Navigation Pane View Pop-up: 15169 - De&lete
-Navigation Pane View Pop-up: 11267 - Re&move
-Navigation Pane View Pop-up: 21 - Cu&t
-Navigation Pane View Pop-up: 19 - &Copy
-Navigation Pane View Pop-up: 22 - &Paste
-Navigation Pane View Pop-up: 31593 - &Add to group...
-Navigation Pane View Pop-up: 4 - &Print...
-Navigation Pane View Pop-up: 109 - Print Pre&view
-Navigation Pane View Pop-up: 222 - V&iew Properties
-Navigation Pane View Pop-up: 19644 - Check &Web Compatibility
-Navigation Pane View Pop-up: 2652 - Show &Differences...
-Navigation Pane View Pop-up: 2669 - &Get Latest Version
-Navigation Pane View Pop-up: 2670 - Check &Out
-Navigation Pane View Pop-up: 2649 - Check &In...
-Navigation Pane View Pop-up: 2671 - Undo C&heck Out
-Navigation Pane object Pop-up: 3832 - &Open
-Navigation Pane object Pop-up: 964 - &Run
-Navigation Pane object Pop-up: 1081 - &Design View
-Navigation Pane object Pop-up: 31458 - &Export
-Navigation Pane object Pop-up: 16203 - Co&llect and Update Data via E-mail
-Navigation Pane object Pop-up: 1787 - Rena&me
-Navigation Pane object Pop-up: 11266 - &Rename Shortcut
-Navigation Pane object Pop-up: 11116 - &Hide in this Group
-Navigation Pane object Pop-up: 11117 - &Unhide in this Group
-Navigation Pane object Pop-up: 15169 - De&lete
-Navigation Pane object Pop-up: 11267 - Re&move
-Navigation Pane object Pop-up: 21 - Cu&t
-Navigation Pane object Pop-up: 19 - &Copy
-Navigation Pane object Pop-up: 22 - &Paste
-Navigation Pane object Pop-up: 31593 - &Add to group...
-Navigation Pane object Pop-up: 222 - O&bject Properties
-Navigation Pane object Pop-up: 2652 - Show &Differences...
-Navigation Pane object Pop-up: 2669 - &Get Latest Version
-Navigation Pane object Pop-up: 2670 - Check &Out
-Navigation Pane object Pop-up: 2649 - Check &In...
-Navigation Pane object Pop-up: 2671 - Undo C&heck Out
-Navigation Pane data page Pop-up: 3832 - &Open
-Navigation Pane data page Pop-up: 11266 - &Rename Shortcut
-Navigation Pane data page Pop-up: 11116 - &Hide in this Group
-Navigation Pane data page Pop-up: 11117 - &Unhide in this Group
-Navigation Pane data page Pop-up: 15169 - De&lete
-Navigation Pane data page Pop-up: 11267 - Re&move
-Navigation Pane data page Pop-up: 21 - Cu&t
-Navigation Pane data page Pop-up: 19 - &Copy
-Navigation Pane data page Pop-up: 22 - &Paste
-Navigation Pane data page Pop-up: 31593 - &Add to group...
-Navigation Pane data page Pop-up: 222 - O&bject Properties
-Navigation Pane data page Pop-up: 2652 - Show &Differences...
-Navigation Pane data page Pop-up: 2669 - &Get Latest Version
-Navigation Pane data page Pop-up: 2670 - Check &Out
-Navigation Pane data page Pop-up: 2649 - Check &In...
-Navigation Pane data page Pop-up: 2671 - Undo C&heck Out
-Navigation Pane query or macro Pop-up: 3832 - &Open
-Navigation Pane query or macro Pop-up: 964 - &Run
-Navigation Pane query or macro Pop-up: 1081 - &Design View
-Navigation Pane query or macro Pop-up: 31458 - &Export
-Navigation Pane query or macro Pop-up: 16203 - Co&llect and Update Data via E-mail
-Navigation Pane query or macro Pop-up: 1787 - Rena&me
-Navigation Pane query or macro Pop-up: 11266 - &Rename Shortcut
-Navigation Pane query or macro Pop-up: 11116 - &Hide in this Group
-Navigation Pane query or macro Pop-up: 11117 - &Unhide in this Group
-Navigation Pane query or macro Pop-up: 15169 - De&lete
-Navigation Pane query or macro Pop-up: 11267 - Re&move
-Navigation Pane query or macro Pop-up: 21 - Cu&t
-Navigation Pane query or macro Pop-up: 19 - &Copy
-Navigation Pane query or macro Pop-up: 22 - &Paste
-Navigation Pane query or macro Pop-up: 31593 - &Add to group...
-Navigation Pane query or macro Pop-up: 222 - O&bject Properties
-Navigation Pane query or macro Pop-up: 19644 - Check &Web Compatibility
-Navigation Pane query or macro Pop-up: 2652 - Show &Differences...
-Navigation Pane query or macro Pop-up: 2669 - &Get Latest Version
-Navigation Pane query or macro Pop-up: 2670 - Check &Out
-Navigation Pane query or macro Pop-up: 2649 - Check &In...
-Navigation Pane query or macro Pop-up: 2671 - Undo C&heck Out
-Web: 1017 - &Back
-Web: 1018 - &Forward
-Web: 1019 - &Stop
-Web: 1020 - &Refresh
-Web: 1016 - &Start Page
-Web: 1922 - Search the &Web
-Web: 30176 - Favorite&s
-Web: 30328 - &Go
-Web: 1023 - &Show Only Web Toolbar
-Web: 1740 - &Address:
-&Legacy Keyboard Support: 30003 - &Edit
-&Legacy Keyboard Support: 30004 - &View
-&Legacy Keyboard Support: 30016 - &Query
-&Legacy Keyboard Support: 30006 - F&ormat
-&Legacy Keyboard Support: 30014 - &Records
-&Legacy Keyboard Support: 30007 - &Tools
 Form View Subform: 31220 - S&ubform
 Form View Subform: 210 - Sort &Ascending
 Form View Subform: 211 - Sort &Descending
 Form View Subform: 11108 - Sort &Descending
-Form View Subform: 31581 - Sort &Descending
+Form View Subform: 31581 - ng
 Form View Subform: 10068 - Sort &Descending
-Form View Subform: 10071 - Sort &Descending
-Form View Subform: 10090 - Sort &Descending
-Form View Subform: 12265 - Sort &Descending
-Form View Subform: 10076 - Sort &Descending
-Form View Subform: 10089 - Sort &Descending
-Form View Subform: 10091 - Sort &Descending
-Form View Subform: 12266 - Sort &Descending
-Form View Subform: 10092 - Sort &Descending
-Form View Subform: 10093 - Sort &Descending
-Form View Subform: 10095 - Sort &Descending
-Form View Subform: 10094 - Sort &Descending
+Form View Subform: 10071 - ?????a???
+Form View Subform: 10090 - ?????a???
+Form View Subform: 12265 - ?????a???
+Form View Subform: 10076 - ?????a???
+Form View Subform: 10089 - ?????a???
+Form View Subform: 10091 - ?????a???
+Form View Subform: 12266 - ?????a???
+Form View Subform: 10092 - ?????a???
+Form View Subform: 10093 - ?????a???
+Form View Subform: 10095 - ?????a???
+Form View Subform: 10094 - ?????a???
 Form View Subform: 15195 - Is S&elected
 Form View Subform: 15196 - Is &Not Selected
 Form View Subform: 22284 - &Form Properties
@@ -256,68 +43,6 @@ Form View Subform: 22285 - &Report Properties
 Form View Subform: 222 - &Properties
 Form View Subform: 12952 - S&how column history...
 Form View Subform: 12900 - &Manage Attachments...
-Form View Control: 2086 - Build &Event...
-Form View Control: 18904 - &Insert Navigation Button
-Form View Control: 2591 - Insert Pa&ge
-Form View Control: 2592 - &Delete Page
-Form View Control: 2763 - Page &Order...
-Form View Control: 21 - Cu&t
-Form View Control: 19 - &Copy
-Form View Control: 22 - &Paste
-Form View Control: 12616 - &Paste Formatting
-Form View Control: 31626 - &Insert
-Form View Control: 31627 - &Merge/Split
-Form View Control: 31381 - &Layout
-Form View Control: 11669 - Select Entire Ro&w
-Form View Control: 11670 - Select Entire &Column
-Form View Control: 12076 - &Group On
-Form View Control: 31398 - &Total
-Form View Control: 210 - Sort &Ascending
-Form View Control: 211 - Sort &Descending
-Form View Control: 11108 - Sort &Descending
-Form View Control: 31581 - Sort &Descending
-Form View Control: 10068 - Sort &Descending
-Form View Control: 10071 - Sort &Descending
-Form View Control: 10090 - Sort &Descending
-Form View Control: 12265 - Sort &Descending
-Form View Control: 10076 - Sort &Descending
-Form View Control: 10089 - Sort &Descending
-Form View Control: 10091 - Sort &Descending
-Form View Control: 12266 - Sort &Descending
-Form View Control: 10092 - Sort &Descending
-Form View Control: 10093 - Sort &Descending
-Form View Control: 10095 - Sort &Descending
-Form View Control: 10094 - Sort &Descending
-Form View Control: 15195 - Is S&elected
-Form View Control: 15196 - Is &Not Selected
-Form View Control: 22226 - &Build Hyperlink
-Form View Control: 478 - &Delete
-Form View Control: 17136 - &Delete Row
-Form View Control: 22366 - Delete &Column
-Form View Control: 30102 - C&hange To
-Form View Control: 31574 - P&osition
-Form View Control: 31382 - &Gridlines
-Form View Control: 13276 - Anchoring
-Form View Control: 12898 - &Forward
-Form View Control: 12899 - &Back
-Form View Control: 12900 - &Manage Attachments...
-Form View Control: 3720 - Recon&vert
-Form View Control: 3492 - Han&gul Hanja Conversion...
-Form View Control: 2995 - Insert Ob&ject...
-Form View Control: 30019 - &Object
-Form View Control: 30094 - &Hyperlink
-Form View Control: 12952 - S&how column history...
-Form View Control: 12950 - Edit List &Items...
-Form View Control: 15056 - &Set Caption
-Form View Control: 22284 - &Form Properties
-Form View Control: 22285 - &Report Properties
-Form View Control: 222 - &Properties
-Form View Record: 21 - Cu&t
-Form View Record: 19 - &Copy
-Form View Record: 22 - &Paste
-Form View Record: 22284 - &Form Properties
-Form View Record: 22285 - &Report Properties
-Form View Record: 222 - &Properties
 Task Pane: 5746 - Tas&k Pane
 Office Clipboard: 5746 - Office Clipboard
 XML Source: 5746 - Tas&k Pane
@@ -326,6 +51,7 @@ XML Document: 5746 - Tas&k Pane
 Signatures: 5746 - Tas&k Pane
 Document Actions: 5746 - Tas&k Pane
 Clip Art: 5746 - Tas&k Pane
+Format Object: 5746 - Tas&k Pane
 Document Management: 5746 - Tas&k Pane
 Document Updates: 5746 - Tas&k Pane
 Mail Merge Panes: 5746 - Tas&k Pane
@@ -333,16 +59,55 @@ Fax Service: 5746 - Tas&k Pane
 Meeting Workspace: 5746 - Tas&k Pane
 Attachment Options: 5746 - Tas&k Pane
 Accessibility Checker: 5746 - Tas&k Pane
-View Table View Mode Submenu: 3872 - &Column Properties
-View Table View Mode Submenu: 3873 - Colu&mn Names
-View Table View Mode Submenu: 3873 - Colu&mn Names
-View Table View Mode Submenu: 3874 - &Keys
-View Table View Mode Submenu: 3875 - &Name Only
-View Table View Mode Submenu: 3875 - &Name Only
-View Table View Mode Submenu: 3876 - Custom &View
-View Show Panes Submenu: 4012 - &Diagram
-View Show Panes Submenu: 4013 - &Grid
-View Show Panes Submenu: 4014 - &SQL
+Proofing: 5746 - Tas&k Pane
+Dictionaries: 5746 - Tas&k Pane
+Thesaurus: 5746 - Tas&k Pane
+Font/Fore Color: 3079 - &Font/Fore Color
+Font/Fore Color: 1457 - &Recently Used Colors
+Fill/Back Color: 2084 - &Transparent
+Fill/Back Color: 3081 - &Fill/Back Color
+Fill/Back Color: 1457 - &Recently Used Colors
+Line/Border Style: 613 - &Line/Border Style
+Line/Border Style: 614 - &Line/Border Style
+Line/Border Style: 615 - &Line/Border Style
+Line/Border Style: 616 - &Line/Border Style
+Line/Border Style: 617 - &Line/Border Style
+Line/Border Style: 618 - &Line/Border Style
+Line/Border Style: 619 - &Line/Border Style
+Line/Border Width: 496 - &Line/Border Width
+Line/Border Width: 490 - &Line/Border Width
+Line/Border Width: 491 - &Line/Border Width
+Line/Border Width: 492 - &Line/Border Width
+Line/Border Width: 493 - &Line/Border Width
+Line/Border Width: 494 - &Line/Border Width
+Line/Border Width: 495 - &Line/Border Width
+Line/Border Color: 2085 - &Transparent
+Line/Border Color: 3083 - &Line/Border Color
+Line/Border Color: 1457 - &Recently Used Colors
+Special Effect: 580 - &Special Effect: Flat
+Special Effect: 561 - &Special Effect: Raised
+Special Effect: 562 - &Special Effect: Sunken
+Special Effect: 1817 - &Special Effect: Etched
+Special Effect: 1818 - &Special Effect: Shadowed
+Special Effect: 1819 - &Special Effect: Chiseled
+Fill/Back Color: 3082 - &Fill/Back Color
+Fill/Back Color: 1457 - &Recently Used Colors
+Font/Fore Color: 3080 - &Font/Fore Color
+Font/Fore Color: 1457 - &Recently Used Colors
+Line/Border Color: 3084 - &Line/Border Color
+Line/Border Color: 1457 - &Recently Used Colors
+Datasheet Special Effect: 580 - &Special Effect: Flat
+Datasheet Special Effect: 561 - &Special Effect: Raised
+Datasheet Special Effect: 562 - &Special Effect: Sunken
+Gridlines: 635 - Gridlines: &Both
+Gridlines: 637 - Gridlines: &Horizontal
+Gridlines: 636 - Gridlines: &Vertical
+Gridlines: 638 - Gridlines: &None
+Alternate Color: 15113 - &None
+Alternate Color: 14186 - &Alternate Row Colors
+Alternate Color: 1457 - &Recently Used Colors
+Alternate Color: 14187 - Alternate Fill/Back Color
+Alternate Color: 1457 - &Recently Used Colors
 Database: 2936 - &New...
 Database: 2937 - &Open...
 Database: 3 - &Save
@@ -604,6 +369,16 @@ Macro Design: 645 - &Build...
 Macro Design: 577 - &Navigation Pane
 Macro Design: 2599 - &New Object
 Macro Design: 984 - Microsoft Access &Help
+Web: 1017 - &Back
+Web: 1018 - &Forward
+Web: 1019 - &Stop
+Web: 1020 - &Refresh
+Web: 1016 - &Start Page
+Web: 1922 - Search the &Web
+Web: 30176 - Favorite&s
+Web: 30328 - &Go
+Web: 1023 - &Show Only Web Toolbar
+Web: 1740 - &Address:
 Source Code Control: 2646 - &Add Objects to SourceSafe...
 Source Code Control: 2647 - &Get Latest Version...
 Source Code Control: 2648 - Check &Out...
@@ -658,7 +433,7 @@ Stored Procedure Design: 22 - &Paste
 Stored Procedure Design: 128 - &Undo
 Stored Procedure Design: 129 - &Redo
 Stored Procedure Design: 1766 - Q&uery Type
-Stored Procedure Design: 5865 - &Insert SQL
+Stored Procedure Design: 5865 - Edit S&QL
 Stored Procedure Design: 964 - &Run
 Stored Procedure Design: 5964 - Add Ta&ble...
 Stored Procedure Design: 4012 - &Diagram
@@ -751,7 +526,7 @@ Function Design: 19 - &Copy
 Function Design: 22 - &Paste
 Function Design: 128 - &Undo
 Function Design: 129 - &Redo
-Function Design: 5865 - &Insert SQL
+Function Design: 5865 - Edit S&QL
 Function Design: 964 - &Run
 Function Design: 5964 - Add Ta&ble...
 Function Design: 4012 - &Diagram
@@ -783,52 +558,6 @@ Toolbox: 500 - Sub&form/Subreport
 Toolbox: 130 - &Line
 Toolbox: 131 - R&ectangle
 Toolbox: 642 - &More Controls...
-Font/Fore Color: 3079 - &Font/Fore Color
-Font/Fore Color: 1457 - &Recently Used Colors
-Fill/Back Color: 2084 - &Transparent
-Fill/Back Color: 3081 - &Fill/Back Color
-Fill/Back Color: 1457 - &Recently Used Colors
-Line/Border Style: 613 - &Line/Border Style
-Line/Border Style: 614 - &Line/Border Style
-Line/Border Style: 615 - &Line/Border Style
-Line/Border Style: 616 - &Line/Border Style
-Line/Border Style: 617 - &Line/Border Style
-Line/Border Style: 618 - &Line/Border Style
-Line/Border Style: 619 - &Line/Border Style
-Line/Border Width: 496 - &Line/Border Width
-Line/Border Width: 490 - &Line/Border Width
-Line/Border Width: 491 - &Line/Border Width
-Line/Border Width: 492 - &Line/Border Width
-Line/Border Width: 493 - &Line/Border Width
-Line/Border Width: 494 - &Line/Border Width
-Line/Border Width: 495 - &Line/Border Width
-Line/Border Color: 2085 - &Transparent
-Line/Border Color: 3083 - &Line/Border Color
-Line/Border Color: 1457 - &Recently Used Colors
-Special Effect: 580 - &Special Effect: Flat
-Special Effect: 561 - &Special Effect: Raised
-Special Effect: 562 - &Special Effect: Sunken
-Special Effect: 1817 - &Special Effect: Etched
-Special Effect: 1818 - &Special Effect: Shadowed
-Special Effect: 1819 - &Special Effect: Chiseled
-Fill/Back Color: 3082 - &Fill/Back Color
-Fill/Back Color: 1457 - &Recently Used Colors
-Font/Fore Color: 3080 - &Font/Fore Color
-Font/Fore Color: 1457 - &Recently Used Colors
-Line/Border Color: 3084 - &Line/Border Color
-Line/Border Color: 1457 - &Recently Used Colors
-Datasheet Special Effect: 580 - &Special Effect: Flat
-Datasheet Special Effect: 561 - &Special Effect: Raised
-Datasheet Special Effect: 562 - &Special Effect: Sunken
-Gridlines: 635 - Gridlines: &Both
-Gridlines: 637 - Gridlines: &Horizontal
-Gridlines: 636 - Gridlines: &Vertical
-Gridlines: 638 - Gridlines: &None
-Alternate Color: 15113 - &None
-Alternate Color: 14186 - &Alternate Row Colors
-Alternate Color: 1457 - &Recently Used Colors
-Alternate Color: 14187 - Alternate Fill/Back Color
-Alternate Color: 1457 - &Recently Used Colors
 Object Dependencies: 5746 - Object Dependencies
 Action Catalog: 5746 - Action Catalog
 Menu Bar: 30002 - &File
@@ -847,6 +576,12 @@ Menu Bar: 30012 - &Run
 Menu Bar: 30007 - &Tools
 Menu Bar: 30009 - &Window
 Menu Bar: 30010 - &Help
+&Legacy Keyboard Support: 30003 - &Edit
+&Legacy Keyboard Support: 30004 - &View
+&Legacy Keyboard Support: 30016 - &Query
+&Legacy Keyboard Support: 30006 - F&ormat
+&Legacy Keyboard Support: 30014 - &Records
+&Legacy Keyboard Support: 30007 - &Tools
 Database TitleBar: 2937 - &Open...
 Database TitleBar: 524 - &Import...
 Database TitleBar: 1795 - &Link Tables...
@@ -859,8 +594,6 @@ Database TitleBar: 523 - &Relationships...
 Database TitleBar: 1695 - &Visual Basic Editor
 Database TitleBar: 2939 - Da&tabase Properties
 Table DesignTitleBar: 12329 - Datas&heet View
-Table DesignTitleBar: 5814 - Piv&otTable View
-Table DesignTitleBar: 5815 - Pi&votChart View
 Table DesignTitleBar: 523 - &Relationships...
 Table DesignTitleBar: 21 - Cu&t
 Table DesignTitleBar: 19 - &Copy
@@ -920,8 +653,6 @@ Relationship QueryFieldList: 1806 - &Hide Table
 Relationship Join: 1805 - Edit &Relationship...
 Relationship Join: 478 - &Delete
 Table Design Datasheet: 212 - Table &Design
-Table Design Datasheet: 5814 - Piv&otTable View
-Table Design Datasheet: 5815 - Pi&votChart View
 Table Design Datasheet: 21 - Cu&t
 Table Design Datasheet: 19 - &Copy
 Table Design Datasheet: 22 - &Paste
@@ -960,7 +691,7 @@ Table Design Datasheet Cell: 22 - &Paste
 Table Design Datasheet Cell: 210 - Sort &Ascending
 Table Design Datasheet Cell: 211 - Sort &Descending
 Table Design Datasheet Cell: 11108 - Sort &Descending
-Table Design Datasheet Cell: 31581 - Sort &Descending
+Table Design Datasheet Cell: 31581 - ng
 Table Design Datasheet Cell: 10068 - Sort &Descending
 Table Design Datasheet Cell: 10071 - Sort &Descending
 Table Design Datasheet Cell: 10090 - Sort &Descending
@@ -981,13 +712,10 @@ Table Design Datasheet Cell: 2995 - Insert Ob&ject...
 Table Design Datasheet Cell: 12950 - Edit List &Items...
 Table Design Datasheet Cell: 30019 - &Object
 Table Design Datasheet Cell: 30094 - &Hyperlink
-Table Design Datasheet Cell: 31454 - Workflow
 Table Design Datasheet Cell: 12952 - S&how column history...
 Table Design Datasheet Cell: 12900 - &Manage Attachments...
 Query: 528 - S&QL View
 Query: 12329 - Datas&heet View
-Query: 5814 - Piv&otTable View
-Query: 5815 - Pi&votChart View
 Query: 530 - Show &Table...
 Query: 537 - Para&meters...
 Query: 1766 - Q&uery Type
@@ -1011,8 +739,6 @@ Query DesignGrid: 925 - &Zoom...
 Query DesignGrid: 2037 - &Properties...
 Query SQLTitleBar: 2043 - Query &Design
 Query SQLTitleBar: 12329 - Datas&heet View
-Query SQLTitleBar: 5814 - Piv&otTable View
-Query SQLTitleBar: 5815 - Pi&votChart View
 Query SQLTitleBar: 2037 - &Properties...
 Query SQLText: 21 - Cu&t
 Query SQLText: 19 - &Copy
@@ -1028,8 +754,6 @@ Query Design Properties: 3720 - Recon&vert
 Query Design Properties: 3492 - Han&gul Hanja Conversion...
 Query Design Datasheet: 2043 - Query &Design
 Query Design Datasheet: 528 - S&QL View
-Query Design Datasheet: 5814 - Piv&otTable View
-Query Design Datasheet: 5815 - Pi&votChart View
 Query Design Datasheet: 21 - Cu&t
 Query Design Datasheet: 19 - &Copy
 Query Design Datasheet: 22 - &Paste
@@ -1064,7 +788,7 @@ Query Design Datasheet Cell: 22 - &Paste
 Query Design Datasheet Cell: 210 - Sort &Ascending
 Query Design Datasheet Cell: 211 - Sort &Descending
 Query Design Datasheet Cell: 11108 - Sort &Descending
-Query Design Datasheet Cell: 31581 - Sort &Descending
+Query Design Datasheet Cell: 31581 - ng
 Query Design Datasheet Cell: 10068 - Sort &Descending
 Query Design Datasheet Cell: 10071 - Sort &Descending
 Query Design Datasheet Cell: 10090 - Sort &Descending
@@ -1109,8 +833,6 @@ Form DesignTitleBar: 502 - &Form View
 Form DesignTitleBar: 13157 - La&yout View
 Form DesignTitleBar: 2952 - &Design View
 Form DesignTitleBar: 12329 - Datas&heet View
-Form DesignTitleBar: 5814 - Piv&otTable View
-Form DesignTitleBar: 5815 - Pi&votChart View
 Form DesignTitleBar: 2086 - Build &Event...
 Form DesignTitleBar: 469 - Ta&b Order...
 Form DesignTitleBar: 556 - P&age Header/Footer
@@ -1123,8 +845,6 @@ Form Design Form: 502 - &Form View
 Form Design Form: 13157 - La&yout View
 Form Design Form: 2952 - &Design View
 Form Design Form: 12329 - Datas&heet View
-Form Design Form: 5814 - Piv&otTable View
-Form Design Form: 5815 - Pi&votChart View
 Form Design Form: 2086 - Build &Event...
 Form Design Form: 469 - Ta&b Order...
 Form Design Form: 22284 - &Form Properties
@@ -1266,6 +986,62 @@ Form/Report Properties: 19 - &Copy
 Form/Report Properties: 22 - &Paste
 Form/Report Properties: 3720 - Recon&vert
 Form/Report Properties: 3492 - Han&gul Hanja Conversion...
+Form View Control: 2086 - Build &Event...
+Form View Control: 18904 - &Insert Navigation Button
+Form View Control: 2591 - Insert Pa&ge
+Form View Control: 2592 - &Delete Page
+Form View Control: 2763 - Page &Order...
+Form View Control: 21 - Cu&t
+Form View Control: 19 - &Copy
+Form View Control: 22 - &Paste
+Form View Control: 12616 - &Paste Formatting
+Form View Control: 31626 - &Insert
+Form View Control: 31627 - &Merge/Split
+Form View Control: 31381 - &Layout
+Form View Control: 11669 - Select Entire Ro&w
+Form View Control: 11670 - Select Entire &Column
+Form View Control: 12076 - &Group On
+Form View Control: 31398 - &Total
+Form View Control: 210 - Sort &Ascending
+Form View Control: 211 - Sort &Descending
+Form View Control: 11108 - Sort &Descending
+Form View Control: 31581 - ng
+Form View Control: 10068 - Sort &Descending
+Form View Control: 10071 - Sort &Descending
+Form View Control: 10090 - Sort &Descending
+Form View Control: 12265 - Sort &Descending
+Form View Control: 10076 - Sort &Descending
+Form View Control: 10089 - Sort &Descending
+Form View Control: 10091 - Sort &Descending
+Form View Control: 12266 - Sort &Descending
+Form View Control: 10092 - Sort &Descending
+Form View Control: 10093 - Sort &Descending
+Form View Control: 10095 - Sort &Descending
+Form View Control: 10094 - Sort &Descending
+Form View Control: 15195 - Is S&elected
+Form View Control: 15196 - Is &Not Selected
+Form View Control: 22226 - &Build Hyperlink
+Form View Control: 478 - &Delete
+Form View Control: 17136 - &Delete Row
+Form View Control: 22366 - Delete &Column
+Form View Control: 30102 - C&hange To
+Form View Control: 31574 - P&osition
+Form View Control: 31382 - &Gridlines
+Form View Control: 13276 - Anchoring
+Form View Control: 12898 - &Forward
+Form View Control: 12899 - &Back
+Form View Control: 12900 - &Manage Attachments...
+Form View Control: 3720 - Recon&vert
+Form View Control: 3492 - Han&gul Hanja Conversion...
+Form View Control: 2995 - Insert Ob&ject...
+Form View Control: 30019 - &Object
+Form View Control: 30094 - &Hyperlink
+Form View Control: 12952 - S&how column history...
+Form View Control: 12950 - Edit List &Items...
+Form View Control: 15056 - &Set Caption
+Form View Control: 22284 - &Form Properties
+Form View Control: 22285 - &Report Properties
+Form View Control: 222 - &Properties
 Form View Subform Control: 31220 - S&ubform
 Form View Subform Control: 2086 - Build &Event...
 Form View Subform Control: 18904 - &Insert Navigation Button
@@ -1286,7 +1062,7 @@ Form View Subform Control: 31398 - &Total
 Form View Subform Control: 210 - Sort &Ascending
 Form View Subform Control: 211 - Sort &Descending
 Form View Subform Control: 11108 - Sort &Descending
-Form View Subform Control: 31581 - Sort &Descending
+Form View Subform Control: 31581 - ng
 Form View Subform Control: 10068 - Sort &Descending
 Form View Subform Control: 10071 - Sort &Descending
 Form View Subform Control: 10090 - Sort &Descending
@@ -1321,11 +1097,15 @@ Form View Subform Control: 15056 - &Set Caption
 Form View Subform Control: 22284 - &Form Properties
 Form View Subform Control: 22285 - &Report Properties
 Form View Subform Control: 222 - &Properties
+Form View Record: 21 - Cu&t
+Form View Record: 19 - &Copy
+Form View Record: 22 - &Paste
+Form View Record: 22284 - &Form Properties
+Form View Record: 22285 - &Report Properties
+Form View Record: 222 - &Properties
 Form Datasheet: 502 - &Form View
 Form Datasheet: 13157 - La&yout View
 Form Datasheet: 2952 - &Design View
-Form Datasheet: 5814 - Piv&otTable View
-Form Datasheet: 5815 - Pi&votChart View
 Form Datasheet: 21 - Cu&t
 Form Datasheet: 19 - &Copy
 Form Datasheet: 22 - &Paste
@@ -1377,7 +1157,7 @@ Form Datasheet Cell: 22 - &Paste
 Form Datasheet Cell: 210 - Sort &Ascending
 Form Datasheet Cell: 211 - Sort &Descending
 Form Datasheet Cell: 11108 - Sort &Descending
-Form Datasheet Cell: 31581 - Sort &Descending
+Form Datasheet Cell: 31581 - ng
 Form Datasheet Cell: 10068 - Sort &Descending
 Form Datasheet Cell: 10071 - Sort &Descending
 Form Datasheet Cell: 10090 - Sort &Descending
@@ -1519,6 +1299,57 @@ Database Form: 478 - &Delete
 Database Form: 1787 - Rena&me
 Database Form: 222 - &Properties
 Database Form: 7490 - Object Depe&ndencies...
+Database Report: 11253 - &Report View
+Database Report: 109 - Print Pre&view
+Database Report: 4 - &Print...
+Database Report: 2652 - Show &Differences...
+Database Report: 2669 - &Get Latest Version
+Database Report: 2670 - Check &Out
+Database Report: 2649 - Check &In...
+Database Report: 2671 - Undo C&heck Out
+Database Report: 21 - Cu&t
+Database Report: 19 - &Copy
+Database Report: 748 - Save &As...
+Database Report: 31458 - &Export
+Database Report: 30095 - Sen&d To
+Database Report: 30476 - &Add to Group
+Database Report: 1788 - Create &Shortcut...
+Database Report: 478 - &Delete
+Database Report: 1787 - Rena&me
+Database Report: 222 - &Properties
+Database Report: 7490 - Object Depe&ndencies...
+Database Macro: 2652 - Show &Differences...
+Database Macro: 2669 - &Get Latest Version
+Database Macro: 2670 - Check &Out
+Database Macro: 2649 - Check &In...
+Database Macro: 2671 - Undo C&heck Out
+Database Macro: 21 - Cu&t
+Database Macro: 19 - &Copy
+Database Macro: 748 - Save &As...
+Database Macro: 31458 - &Export
+Database Macro: 30476 - &Add to Group
+Database Macro: 1788 - Create &Shortcut...
+Database Macro: 478 - &Delete
+Database Macro: 1787 - Rena&me
+Database Macro: 222 - &Properties
+Database Module: 4 - &Print...
+Database Module: 2652 - Show &Differences...
+Database Module: 2669 - &Get Latest Version
+Database Module: 2670 - Check &Out
+Database Module: 2649 - Check &In...
+Database Module: 2671 - Undo C&heck Out
+Database Module: 21 - Cu&t
+Database Module: 19 - &Copy
+Database Module: 748 - Save &As...
+Database Module: 31458 - &Export
+Database Module: 30095 - Sen&d To
+Database Module: 30476 - &Add to Group
+Database Module: 1788 - Create &Shortcut...
+Database Module: 478 - &Delete
+Database Module: 1787 - Rena&me
+Database Module: 222 - &Properties
+Database Page Popup: 3655 - We&b Page Preview
+Database Page Popup: 222 - &Properties
 Database Background: 30004 - &View
 Database Background: 30110 - &Arrange Icons
 Database Background: 1825 - Line &Up Icons
@@ -1650,11 +1481,19 @@ View Design Join Line Popup: 4009 - Remo&ve
 View Design Join Line Popup: 4007 - &Select All Rows from <tableA>
 View Design Join Line Popup: 4008 - S&elect All Rows from <tableB>
 View Design Join Line Popup: 222 - &Properties
+View Table View Mode Submenu: 3872 - &Column Properties
+View Table View Mode Submenu: 3873 - Colu&mn Names
+View Table View Mode Submenu: 3873 - Colu&mn Names
+View Table View Mode Submenu: 3874 - &Keys
+View Table View Mode Submenu: 3875 - &Name Only
+View Table View Mode Submenu: 3875 - &Name Only
+View Table View Mode Submenu: 3876 - Custom &View
+View Show Panes Submenu: 4012 - &Diagram
+View Show Panes Submenu: 4013 - &Grid
+View Show Panes Submenu: 4014 - &SQL
 Join Line Popup: 3884 - Dele&te Relationship from Database
 Join Line Popup: 222 - &Properties
 Stored Procedure Design Datasheet: 3985 - Stored Procedure &Design
-Stored Procedure Design Datasheet: 5814 - Piv&otTable View
-Stored Procedure Design Datasheet: 5815 - Pi&votChart View
 Stored Procedure Design Datasheet: 21 - Cu&t
 Stored Procedure Design Datasheet: 19 - &Copy
 Stored Procedure Design Datasheet: 22 - &Paste
@@ -1663,8 +1502,6 @@ Stored Procedure Design Datasheet: 855 - Datash&eet...
 Stored Procedure Design Datasheet: 2764 - &Unhide Fields
 Stored Procedure Design Datasheet: 14782 - &Close
 View Design Datasheet: 3984 - View &Design
-View Design Datasheet: 5814 - Piv&otTable View
-View Design Datasheet: 5815 - Pi&votChart View
 View Design Datasheet: 21 - Cu&t
 View Design Datasheet: 19 - &Copy
 View Design Datasheet: 22 - &Paste
@@ -1681,13 +1518,49 @@ Diagram Design Label Popup: 253 - Set Label &Font...
 Stored Procedure Design Popup: 21 - Cu&t
 Stored Procedure Design Popup: 19 - &Copy
 Stored Procedure Design Popup: 22 - &Paste
-Stored Procedure Design Popup: 5865 - &Insert SQL
+Stored Procedure Design Popup: 5865 - Edit S&QL
 Trigger Design Popup: 21 - Cu&t
 Trigger Design Popup: 19 - &Copy
 Trigger Design Popup: 22 - &Paste
-Trigger Design Popup: 5865 - &Insert SQL
+Trigger Design Popup: 5865 - Edit S&QL
 Database Shortcut Popup: 106 - &Close
 Database Custom Group Popup: 106 - &Close
+Database View: 4 - &Print...
+Database View: 109 - Print Pre&view
+Database View: 21 - Cu&t
+Database View: 19 - &Copy
+Database View: 748 - Save &As...
+Database View: 31458 - &Export
+Database View: 30095 - Sen&d To
+Database View: 30476 - &Add to Group
+Database View: 1788 - Create &Shortcut...
+Database View: 478 - &Delete
+Database View: 1787 - Rena&me
+Database View: 222 - &Properties
+Database Stored Procedure: 4 - &Print...
+Database Stored Procedure: 109 - Print Pre&view
+Database Stored Procedure: 21 - Cu&t
+Database Stored Procedure: 19 - &Copy
+Database Stored Procedure: 748 - Save &As...
+Database Stored Procedure: 31458 - &Export
+Database Stored Procedure: 30095 - Sen&d To
+Database Stored Procedure: 30476 - &Add to Group
+Database Stored Procedure: 1788 - Create &Shortcut...
+Database Stored Procedure: 478 - &Delete
+Database Stored Procedure: 1787 - Rena&me
+Database Stored Procedure: 222 - &Properties
+Database Diagram: 4 - &Print...
+Database Diagram: 109 - Print Pre&view
+Database Diagram: 21 - Cu&t
+Database Diagram: 19 - &Copy
+Database Diagram: 748 - Save &As...
+Database Diagram: 31458 - &Export
+Database Diagram: 30095 - Sen&d To
+Database Diagram: 30476 - &Add to Group
+Database Diagram: 1788 - Create &Shortcut...
+Database Diagram: 478 - &Delete
+Database Diagram: 1787 - Rena&me
+Database Diagram: 222 - &Properties
 Table PivotTable Popup: 212 - Table &Design
 Table PivotTable Popup: 12329 - Datas&heet View
 Table PivotTable Popup: 5815 - Pi&votChart View
@@ -1755,7 +1628,7 @@ View PivotChart Popup: 222 - &Properties
 Function Design: 21 - Cu&t
 Function Design: 19 - &Copy
 Function Design: 22 - &Paste
-Function Design: 5865 - &Insert SQL
+Function Design: 5865 - Edit S&QL
 PivotTable Popup: 19 - &Copy
 PivotTable Popup: 30103 - &Sort
 PivotTable Popup: 7043 - Clear C&ustom Ordering
@@ -1785,8 +1658,6 @@ PivotChart Popup: 7048 - &Drill Out
 PivotChart Popup: 14442 - Field &List
 PivotChart Popup: 222 - &Properties
 Function Datasheet Popup: 2952 - Function &Design
-Function Datasheet Popup: 5814 - Piv&otTable View
-Function Datasheet Popup: 5815 - Pi&votChart View
 Function Datasheet Popup: 21 - Cu&t
 Function Datasheet Popup: 19 - &Copy
 Function Datasheet Popup: 22 - &Paste
@@ -1809,7 +1680,7 @@ Function Pivot Chart Popup: 222 - &Properties
 Column Filter: 210 - Sort &Ascending
 Column Filter: 211 - Sort &Descending
 Column Filter: 11108 - Sort &Descending
-Column Filter: 31581 - Sort &Descending
+Column Filter: 31581 - ng
 Navigation Pane Pop-up: 31584 - &Category
 Navigation Pane Pop-up: 31585 - &Sort By
 Navigation Pane Pop-up: 31586 - &View By
@@ -1817,6 +1688,89 @@ Navigation Pane Pop-up: 11111 - Show &all groups
 Navigation Pane Pop-up: 22 - &Paste
 Navigation Pane Pop-up: 11112 - &Navigation Options...
 Navigation Pane Pop-up: 14427 - Search &Bar
+Navigation Pane List Pop-up: 3832 - &Open
+Navigation Pane List Pop-up: 1081 - &Design View
+Navigation Pane List Pop-up: 4033 - &Triggers...
+Navigation Pane List Pop-up: 31318 - I&mport
+Navigation Pane List Pop-up: 31458 - &Export
+Navigation Pane List Pop-up: 1787 - Rena&me
+Navigation Pane List Pop-up: 11266 - &Rename Shortcut
+Navigation Pane List Pop-up: 11116 - &Hide in this Group
+Navigation Pane List Pop-up: 11117 - &Unhide in this Group
+Navigation Pane List Pop-up: 15169 - De&lete
+Navigation Pane List Pop-up: 11267 - Re&move
+Navigation Pane List Pop-up: 21 - Cu&t
+Navigation Pane List Pop-up: 19 - &Copy
+Navigation Pane List Pop-up: 22 - &Paste
+Navigation Pane List Pop-up: 31593 - &Add to group...
+Navigation Pane List Pop-up: 31427 - M&ore options
+Navigation Pane List Pop-up: 3996 - Lin&ked Table Manager
+Navigation Pane List Pop-up: 19954 - Con&vert to Local Table
+Navigation Pane List Pop-up: 222 - Ta&ble Properties
+Navigation Pane List Pop-up: 2652 - Show &Differences...
+Navigation Pane List Pop-up: 2669 - &Get Latest Version
+Navigation Pane List Pop-up: 2670 - Check &Out
+Navigation Pane List Pop-up: 2649 - Check &In...
+Navigation Pane List Pop-up: 2671 - Undo C&heck Out
+Navigation Pane View Pop-up: 3832 - &Open
+Navigation Pane View Pop-up: 13157 - La&yout View
+Navigation Pane View Pop-up: 1081 - &Design View
+Navigation Pane View Pop-up: 31458 - &Export
+Navigation Pane View Pop-up: 1787 - Rena&me
+Navigation Pane View Pop-up: 11266 - &Rename Shortcut
+Navigation Pane View Pop-up: 11116 - &Hide in this Group
+Navigation Pane View Pop-up: 11117 - &Unhide in this Group
+Navigation Pane View Pop-up: 15169 - De&lete
+Navigation Pane View Pop-up: 25274 - &Duplicate
+Navigation Pane View Pop-up: 11267 - Re&move
+Navigation Pane View Pop-up: 21 - Cu&t
+Navigation Pane View Pop-up: 19 - &Copy
+Navigation Pane View Pop-up: 22 - &Paste
+Navigation Pane View Pop-up: 31593 - &Add to group...
+Navigation Pane View Pop-up: 4 - &Print...
+Navigation Pane View Pop-up: 109 - Print Pre&view
+Navigation Pane View Pop-up: 222 - V&iew Properties
+Navigation Pane View Pop-up: 2652 - Show &Differences...
+Navigation Pane View Pop-up: 2669 - &Get Latest Version
+Navigation Pane View Pop-up: 2670 - Check &Out
+Navigation Pane View Pop-up: 2649 - Check &In...
+Navigation Pane View Pop-up: 2671 - Undo C&heck Out
+Navigation Pane object Pop-up: 3832 - &Open
+Navigation Pane object Pop-up: 964 - &Run
+Navigation Pane object Pop-up: 1081 - &Design View
+Navigation Pane object Pop-up: 31458 - &Export
+Navigation Pane object Pop-up: 1787 - Rena&me
+Navigation Pane object Pop-up: 11266 - &Rename Shortcut
+Navigation Pane object Pop-up: 11116 - &Hide in this Group
+Navigation Pane object Pop-up: 11117 - &Unhide in this Group
+Navigation Pane object Pop-up: 15169 - De&lete
+Navigation Pane object Pop-up: 11267 - Re&move
+Navigation Pane object Pop-up: 21 - Cu&t
+Navigation Pane object Pop-up: 19 - &Copy
+Navigation Pane object Pop-up: 22 - &Paste
+Navigation Pane object Pop-up: 31593 - &Add to group...
+Navigation Pane object Pop-up: 222 - O&bject Properties
+Navigation Pane object Pop-up: 2652 - Show &Differences...
+Navigation Pane object Pop-up: 2669 - &Get Latest Version
+Navigation Pane object Pop-up: 2670 - Check &Out
+Navigation Pane object Pop-up: 2649 - Check &In...
+Navigation Pane object Pop-up: 2671 - Undo C&heck Out
+Navigation Pane data page Pop-up: 3832 - &Open
+Navigation Pane data page Pop-up: 11266 - &Rename Shortcut
+Navigation Pane data page Pop-up: 11116 - &Hide in this Group
+Navigation Pane data page Pop-up: 11117 - &Unhide in this Group
+Navigation Pane data page Pop-up: 15169 - De&lete
+Navigation Pane data page Pop-up: 11267 - Re&move
+Navigation Pane data page Pop-up: 21 - Cu&t
+Navigation Pane data page Pop-up: 19 - &Copy
+Navigation Pane data page Pop-up: 22 - &Paste
+Navigation Pane data page Pop-up: 31593 - &Add to group...
+Navigation Pane data page Pop-up: 222 - O&bject Properties
+Navigation Pane data page Pop-up: 2652 - Show &Differences...
+Navigation Pane data page Pop-up: 2669 - &Get Latest Version
+Navigation Pane data page Pop-up: 2670 - Check &Out
+Navigation Pane data page Pop-up: 2649 - Check &In...
+Navigation Pane data page Pop-up: 2671 - Undo C&heck Out
 Navigation Pane Group Header Pop-up: 31585 - &Sort By
 Navigation Pane Group Header Pop-up: 31586 - &View By
 Navigation Pane Group Header Pop-up: 11111 - Show &all groups
@@ -1850,8 +1804,6 @@ Navigation Pane ViewBy Pop-up: 11126 - &List
  : 528 - S&QL View
  : 528 - S&QL View
  : 12329 - Datas&heet View
- : 5814 - Piv&otTable View
- : 5815 - Pi&votChart View
  : 109 - Print Pre&view
 Navigation Pane Groups in current Category: 11265 - &New Group...
 SharePoint List Options Popup: 13624 - Open Default &View...
@@ -1863,12 +1815,8 @@ SharePoint List Options Popup: 15971 - SharePoint Site Recycle &Bin...
 SharePoint List Options Popup: 15973 - Relink &Lists...
 SharePoint List Options Popup: 12691 - &Refresh List
 SharePoint List Options Popup: 13623 - &Delete List
- : 32768 - Add Field to View
- : 32768 - Edit Record Source
-Workflow: 13381 - Start New Workflow ...
-Workflow: 13382 - Workflow Tasks ...
-Workflow: 13383 - Show All Workflow Status Columns
-Workflow: 13384 - Hide All Workflow Status Columns
+ : 50000 - Add Field to View
+ : 50000 - Edit Record Source
 Export Pop-up: 11723 - E&xcel
 Export Pop-up: 11724 - SharePoint Li&st
 Export Pop-up: 11725 - &Word RTF File
@@ -1878,7 +1826,6 @@ Export Pop-up: 11727 - &Text File
 Export Pop-up: 11728 - XM&L File
 Export Pop-up: 11729 - ODB&C Database
 Export Pop-up: 11731 - &HTML Document
-Export Pop-up: 11732 - d&BASE File
 Export Pop-up: 626 - &Word Merge
 Import/Link Pop-up: 11711 - &Access Database
 Import/Link Pop-up: 11712 - E&xcel
@@ -1888,8 +1835,8 @@ Import/Link Pop-up: 11715 - X&ML File
 Import/Link Pop-up: 11716 - ODB&C Database
 Import/Link Pop-up: 11717 - &HTML Document
 Import/Link Pop-up: 11718 - &Outlook Folder
- : 32768 - Open Table in Datasheet View
- : 32768 - Edit Record Source
+ : 50000 - Open Table in Datasheet View
+ : 50000 - Edit Record Source
 Subform Datasheet: 253 - &Font...
 Subform Datasheet: 855 - Datash&eet...
 Subform Datasheet: 2764 - &Unhide Fields
@@ -1919,6 +1866,26 @@ Logic Designer context menu: 16677 - Make &Submacro Block
 Logic Designer context menu: 16680 - Make If Bloc&k
 Logic Designer context menu: 16678 - Add Else &If
 Logic Designer context menu: 16679 - Add &Else
+Navigation Pane query or macro Pop-up: 3832 - &Open
+Navigation Pane query or macro Pop-up: 964 - &Run
+Navigation Pane query or macro Pop-up: 1081 - &Design View
+Navigation Pane query or macro Pop-up: 31458 - &Export
+Navigation Pane query or macro Pop-up: 1787 - Rena&me
+Navigation Pane query or macro Pop-up: 11266 - &Rename Shortcut
+Navigation Pane query or macro Pop-up: 11116 - &Hide in this Group
+Navigation Pane query or macro Pop-up: 11117 - &Unhide in this Group
+Navigation Pane query or macro Pop-up: 15169 - De&lete
+Navigation Pane query or macro Pop-up: 11267 - Re&move
+Navigation Pane query or macro Pop-up: 21 - Cu&t
+Navigation Pane query or macro Pop-up: 19 - &Copy
+Navigation Pane query or macro Pop-up: 22 - &Paste
+Navigation Pane query or macro Pop-up: 31593 - &Add to group...
+Navigation Pane query or macro Pop-up: 222 - O&bject Properties
+Navigation Pane query or macro Pop-up: 2652 - Show &Differences...
+Navigation Pane query or macro Pop-up: 2669 - &Get Latest Version
+Navigation Pane query or macro Pop-up: 2670 - Check &Out
+Navigation Pane query or macro Pop-up: 2649 - Check &In...
+Navigation Pane query or macro Pop-up: 2671 - Undo C&heck Out
 Insert: 16759 - Insert &Left
 Insert: 16760 - Insert &Right
 Insert: 16757 - Insert &Above
@@ -1926,14 +1893,14 @@ Insert: 16758 - Insert &Below
 Merge/Split: 16761 - &Merge
 Merge/Split: 16762 - S&plit Vertically
 Merge/Split: 16763 - Split &Horizontally
-Add New Field: 18515 - &Text
+Add New Field: 18515 - Short &Text
 Add New Field: 18518 - &Number
 Add New Field: 18520 - C&urrency
 Add New Field: 18519 - &Date && Time
 Add New Field: 18521 - &Yes/No
 Add New Field: 18541 - &Lookup && Relationship
 Add New Field: 18517 - Rich Te&xt
-Add New Field: 18516 - &Memo
+Add New Field: 18516 - L&ong Text
 Add New Field: 18523 - Attachm&ent
 Add New Field: 18522 - &Hyperlink
 Add New Field: 31629 - &Calculated Field
@@ -1950,13 +1917,6 @@ System: 842 - &Size
 System: 838 - Mi&nimize
 System: 843 - Ma&ximize
 System: 840 - &Close
-Online Meeting: 3729 - &Participant List
-Online Meeting: 3732 - &Call Participant
-Online Meeting: 3734 - &Remove Participants
-Online Meeting: 3733 - &Allow Others to Edit
-Online Meeting: 3735 - &Display Chat Window
-Online Meeting: 3736 - Display &Whiteboard
-Online Meeting: 3737 - &End Meeting
  : 5746 -  
 Status Bar: 5746 - Status Bar
 Ribbon: 5746 - Ribbon

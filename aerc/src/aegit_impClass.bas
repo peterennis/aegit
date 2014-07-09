@@ -423,48 +423,48 @@ End Function
 
 Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        If idx.Primary Then
-            For Each fld In idx.Fields
+    For Each Idx In tdf.Indexes
+        If Idx.Primary Then
+            For Each fld In Idx.Fields
                 If strField = fld.Name Then
                     isPK = True
                     Exit Function
                 End If
             Next fld
         End If
-    Next idx
+    Next Idx
 End Function
 
 Private Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        For Each fld In idx.Fields
+    For Each Idx In tdf.Indexes
+        For Each fld In Idx.Fields
             If strField = fld.Name Then
                 isIndex = True
                 Exit Function
             End If
         Next fld
-    Next idx
+    Next Idx
 End Function
 
 Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        If idx.Foreign Then
-            For Each fld In idx.Fields
+    For Each Idx In tdf.Indexes
+        If Idx.Foreign Then
+            For Each fld In Idx.Fields
                 If strField = fld.Name Then
                     isFK = True
                     Exit Function
                 End If
             Next fld
         End If
-    Next idx
+    Next Idx
 End Function
 
 Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
@@ -473,7 +473,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim strDocument As String
     Dim rel As DAO.Relation
     Dim fld As DAO.Field
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim prop As DAO.Property
     Dim strFile As String
 
@@ -521,7 +521,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
 
 PROC_EXIT:
     Set prop = Nothing
-    Set idx = Nothing
+    Set Idx = Nothing
     Set fld = Nothing
     Set rel = Nothing
     Close 1

@@ -1,36 +1,36 @@
 >==> The Project References >==>
               vbaProj.Name = aegit
               vbaProj.Type = '100'
-              Access version = 14.0
-              ADO (ActiveX Data Object) version = 6.1
-              DAO (DbEngine)  version = 14.0
+              Access version = 15.0
+              ADO (ActiveX Data Object) version = 6.3
+              DAO (DbEngine)  version = 15.0
               DAO (CodeDb)    version = 14.0
               DAO (CurrentDb) version = 14.0
               <@_@>
                    References:
                             VBA           Visual Basic For Applications
-                                          C:\PROGRA~2\COMMON~1\MICROS~1\VBA\VBA7\VBE7.DLL
+                                          C:\PROGRA~1\COMMON~1\MICROS~1\VBA\VBA7.1\VBE7.DLL
                                           {000204EF-0000-0000-C000-000000000046}
-                            Access        Microsoft Access 14.0 Object Library
-                                          C:\Program Files (x86)\Microsoft Office\Office14\MSACC.OLB
+                            Access        Microsoft Access 15.0 Object Library
+                                          C:\Program Files\Microsoft Office\Office15\MSACC.OLB
                                           {4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}
                             stdole        OLE Automation
-                                          C:\Windows\SysWOW64\stdole2.tlb
+                                          C:\Windows\System32\stdole2.tlb
                                           {00020430-0000-0000-C000-000000000046}
                             Scripting     Microsoft Scripting Runtime
-                                          C:\Windows\SysWOW64\scrrun.dll
+                                          C:\Windows\System32\scrrun.dll
                                           {420B2830-E718-11CF-893D-00A0C9054228}
                             ADODB         Microsoft ActiveX Data Objects 6.1 Library
-                                          C:\Program Files (x86)\Common Files\System\ado\msado15.dll
+                                          C:\Program Files\Common Files\System\ado\msado15.dll
                                           {B691E011-1797-432E-907A-4D8C69339129}
                             ADOX          Microsoft ADO Ext. 6.0 for DDL and Security
-                                          C:\Program Files (x86)\Common Files\System\ado\msadox.dll
+                                          C:\Program Files\Common Files\System\ado\msadox.dll
                                           {00000600-0000-0010-8000-00AA006D2EA4}
                             DAO           Microsoft DAO 3.6 Object Library
-                                          C:\Program Files (x86)\Common Files\Microsoft Shared\DAO\dao360.dll
+                                          C:\Program Files\Common Files\Microsoft Shared\DAO\dao360.dll
                                           {00025E01-0000-0000-C000-000000000046}
-                            Office        Microsoft Office 14.0 Object Library
-                                          C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE14\MSO.DLL
+                            Office        Microsoft Office 15.0 Object Library
+                                          C:\Program Files\Common Files\Microsoft Shared\OFFICE15\MSO.DLL
                                           {2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}
               <*_*>
 <==<

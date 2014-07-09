@@ -1,7 +1,7 @@
 Option Compare Database
 Option Explicit
 
-Private ref As Reference
+Private Ref As Reference
 
 ' 0 if Late Binding
 ' 1 if Reference to FSO set.
@@ -21,13 +21,16 @@ Private ref As Reference
 ' oDbObjects.XMLFolder = THE_XML_FOLDER
 ' Run in immediate window: MYPROJECT_TEST
 '
-Public Function MYPROJECT_TEST() As Boolean
+Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
-    'aegitClassTest
-    aegitClassTest varDebug:="Debugit"
+    If Not IsMissing(varDebug) Then
+        aegitClassTest varDebug:="varDebug"
+    Else
+        aegitClassTest
+    End If
 End Function
 
-Public Sub ALTERNATIVE_TEST()
+Public Sub ALTERNATIVE_EXPORT()
 
     On Error GoTo 0
     Dim THE_SOURCE_FOLDER As String
@@ -55,6 +58,12 @@ Private Function PassFail(ByVal bln As Boolean) As String
     Else
         PassFail = "Fail"
     End If
+End Function
+
+Private Function IsArrayInitialized(arr As Variant) As Boolean
+    If Not IsArray(arr) Then Err.Raise 13
+    On Error Resume Next
+    IsArrayInitialized = (LBound(arr) <= UBound(arr))
 End Function
 
 Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
@@ -86,8 +95,12 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                 myArray = Array("tblRace", "tblYear")
                 oDbObjects.TablesExportToXML = myArray()
             Else
-                Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
-                oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+                If IsArrayInitialized(gvarMyTablesForExportToXML) Then
+                    Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
+                    oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+                Else
+                    Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for export."
+                End If
             End If
     End If
 
@@ -95,6 +108,7 @@ Test1:
     '=============
     ' TEST 1
     '=============
+    oDbObjects.ExportQAT = False
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"
@@ -270,6 +284,7 @@ Public Sub ExportIt(ByVal strTableName As String)
 ' Exports the table to the default folder
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=65762
 
+    On Error GoTo 0
     Application.ExportXML ObjectType:=acExportTable, DataSource:=strTableName, _
                     DataTarget:=strTableName & ".xml"
 
@@ -760,9 +775,9 @@ Private Function GetFiles(ByVal strPath As String, _
         ' <=======
         ' Remove the Object reference if it is present
         On Error Resume Next
-        Set ref = References!Scripting
+        Set Ref = References!Scripting
         If Err.Number = 0 Then
-            References.Remove ref
+            References.Remove Ref
         ElseIf Err.Number <> 9 Then 'Subscript out of range meaning not reference not found
             MsgBox Err.Description
             Exit Function

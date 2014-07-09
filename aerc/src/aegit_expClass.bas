@@ -33,15 +33,12 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
-Private Const aegit_expVERSION As String = "1.1.4"
-Private Const aegit_expVERSION_DATE As String = "June 24, 2014"
+Private Const aegit_expVERSION As String = "1.2.0"
+Private Const aegit_expVERSION_DATE As String = "July 8, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
 
-' Ref: http://www.cpearson.com/excel/sizestring.htm
-' This enum is used by SizeString to indicate whether the supplied text
-' appears on the left or right side of result string.
 Private Enum SizeStringSide
     TextLeft = 1
     TextRight = 2
@@ -54,8 +51,16 @@ Private Type mySetupType
     XMLFolder As String
 End Type
 
+Private Type myExportType               ' Initialize defaults as:
+    ExportAll As Boolean                ' True
+    ExportCodeAndObjects As Boolean     ' True
+    ExportCodeOnly As Boolean           ' True
+    ExportQAT As Boolean                ' True
+End Type
+
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
+Private aegitExport As myExportType
 Private aegitSourceFolder As String
 Private aegitXMLFolder As String
 Private aegitDataXML() As Variant
@@ -116,6 +121,13 @@ Private Sub Class_Initialize()
     aeintFTLen = 4          ' Set a minimum default
     aeintFDLen = 4          ' Set a minimum default
 
+    With aegitExport
+        .ExportAll = True
+        .ExportCodeAndObjects = True
+        .ExportCodeOnly = True
+        .ExportQAT = True
+    End With
+
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
@@ -124,6 +136,12 @@ Private Sub Class_Initialize()
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
     Debug.Print , "aeintFSize = " & aeintFSize
+    '
+    Debug.Print , "aegitExport.ExportAll = " & aegitExport.ExportAll
+    Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
+    Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportCodeOnly
+    Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
+    'Stop
 
 PROC_EXIT:
     Exit Sub
@@ -168,6 +186,14 @@ End Property
 Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
     aegitXMLFolder = strXMLFolder
+End Property
+
+Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
+    If blnExportQAT Then
+        aegitExport.ExportQAT = True
+    Else
+        aegitExport.ExportQAT = False
+    End If
 End Property
 
 Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
@@ -326,7 +352,8 @@ Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As 
 End Property
 
 Private Function Delay(ByVal mSecs As Long) As Boolean
-        Sleep mSecs ' delay milli seconds
+    On Error GoTo 0
+    Sleep mSecs ' delay milli seconds
 End Function
 
 Private Function FixHeaderXML(ByVal strPathFileName As String) As Boolean
@@ -511,7 +538,6 @@ Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As 
 
     Dim strAppTitle As String
     Dim lngHwnd As Long
-    Dim lngCwnd As Long
 
     DoCmd.RunCommand acCmdAppMaximize
     Delay 500
@@ -1295,6 +1321,8 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
     Optional ByVal TextSide As SizeStringSide = TextLeft, _
     Optional ByVal PadChar As String = " ") As String
 ' Ref: http://www.cpearson.com/excel/sizestring.htm
+' Enum SizeStringSide is used by SizeString to indicate whether the
+' supplied text appears on the left or right side of result string.
 ' =========================================================================
 ' SizeString
 ' This procedure creates a string of a specified length. Text is the original string
@@ -1988,48 +2016,48 @@ End Sub
 
 Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        If idx.Primary Then
-            For Each fld In idx.Fields
+    For Each Idx In tdf.Indexes
+        If Idx.Primary Then
+            For Each fld In Idx.Fields
                 If strField = fld.Name Then
                     isPK = True
                     Exit Function
                 End If
             Next fld
         End If
-    Next idx
+    Next Idx
 End Function
 
 Private Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        For Each fld In idx.Fields
+    For Each Idx In tdf.Indexes
+        For Each fld In Idx.Fields
             If strField = fld.Name Then
                 isIndex = True
                 Exit Function
             End If
         Next fld
-    Next idx
+    Next Idx
 End Function
 
 Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        If idx.Foreign Then
-            For Each fld In idx.Fields
+    For Each Idx In tdf.Indexes
+        If Idx.Foreign Then
+            For Each fld In Idx.Fields
                 If strField = fld.Name Then
                     isFK = True
                     Exit Function
                 End If
             Next fld
         End If
-    Next idx
+    Next Idx
 End Function
 
 Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
@@ -2038,7 +2066,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim strDocument As String
     Dim rel As DAO.Relation
     Dim fld As DAO.Field
-    Dim idx As DAO.Index
+    Dim Idx As DAO.Index
     Dim prop As DAO.Property
     Dim strFile As String
 
@@ -2083,7 +2111,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
 
 PROC_EXIT:
     Set prop = Nothing
-    Set idx = Nothing
+    Set Idx = Nothing
     Set fld = Nothing
     Set rel = Nothing
     Close 1
@@ -2618,6 +2646,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         KillAllFiles "src", varDebug
     End If
 
+    ' ===================================
+    '    FORMS REPORTS SCRIPTS MODULES
+    ' ===================================
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
     If FolderExists(aestrSourceLocation) Then
         If Not IsMissing(varDebug) Then
@@ -2636,40 +2667,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Stop
     End If
 
-    If Not IsMissing(varDebug) Then
-        OutputListOfContainers aeAppListCnt, varDebug
-    Else
-        OutputListOfContainers aeAppListCnt
-    End If
-
-    OutputListOfAllHiddenQueries
-
-    If Not IsMissing(varDebug) Then
-        OutputListOfAccessApplicationOptions varDebug
-    Else
-        OutputListOfAccessApplicationOptions
-    End If
-
-    OutputListOfApplicationProperties
-
-    If Not IsMissing(varDebug) Then
-        OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
-    Else
-        OutputListOfCommandBarIDs aeAppCmbrIds
-    End If
-
-    ' FIXME DEBUG HERE
-    If Not IsMissing(varDebug) Then
-        OutputTheQAT aeAppListQAT, varDebug
-    Else
-        OutputTheQAT aeAppListQAT
-    End If
-
-    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
-
     ' =============
     '    QUERIES
     ' =============
+    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
     i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
@@ -2710,32 +2711,43 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         End If
     End If
 
+    ' =============
+    '    OUTPUTS
+    ' =============
+    If Not IsMissing(varDebug) Then
+        OutputListOfContainers aeAppListCnt, varDebug
+        OutputListOfAccessApplicationOptions varDebug
+        OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
+        OutputTableDataMacros varDebug
+        OutputPrinterInfo "Debug"
+        If aeExists("Tables", "aetlkpStates", varDebug) Then
+            OutputTableDataAsFormattedText "aetlkpStates", varDebug
+        End If
+    Else
+        OutputListOfContainers aeAppListCnt
+        OutputListOfAccessApplicationOptions
+        OutputListOfCommandBarIDs aeAppCmbrIds
+        OutputTableDataMacros
+        OutputPrinterInfo
+        If aeExists("Tables", "aetlkpStates") Then
+            OutputTableDataAsFormattedText "aetlkpStates"
+        End If
+    End If
+
+    OutputListOfAllHiddenQueries
+    OutputListOfApplicationProperties
     OutputQueriesSqlText
     OutputBuiltInPropertiesText
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
     OutputAllContainerProperties
 
-    If Not IsMissing(varDebug) Then
-        OutputTableDataMacros varDebug
-    Else
-        OutputTableDataMacros
-    End If
-
-    If Not IsMissing(varDebug) Then
-        If aeExists("Tables", "aetlkpStates", varDebug) Then
-            OutputTableDataAsFormattedText "aetlkpStates", varDebug
+    If aegitExport.ExportQAT Then
+        If Not IsMissing(varDebug) Then
+            OutputTheQAT aeAppListQAT, varDebug
+        Else
+            OutputTheQAT aeAppListQAT
         End If
-    Else
-        If aeExists("Tables", "aetlkpStates") Then
-            OutputTableDataAsFormattedText "aetlkpStates"
-        End If
-    End If
-
-    If Not IsMissing(varDebug) Then
-        OutputPrinterInfo "Debug"
-    Else
-        OutputPrinterInfo
     End If
 
     aeDocumentTheDatabase = True
@@ -3107,7 +3119,7 @@ Public Sub OutputMyUnicode(ByRef strPathFileName As String, _
     Debug.Print "strPathFileName=" & strPathFileName
     Debug.Print "arrUnicode(0)=" & arrUnicode(0)
     Debug.Print "arrUnicode(1)=" & arrUnicode(1)
-    arrUnicode(2) = "«" & Chr(160) & "C'est l'été à Genève" & Chr(160) & "»," _
+    arrUnicode(2) = "«" & Chr$(160) & "C'est l'été à Genève" & Chr$(160) & "»," _
                   & " said " & ChrW(20446) & ChrW(-32225) & "."
     Debug.Print "arrUnicode(2)=" & arrUnicode(2)
     Dim mystrPathFileName As String
