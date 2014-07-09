@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 
 Public Const gstrDATE_aegit As String = "July 8, 2014"
-Public Const gstrVERSION_aegit As String = "1.1.9"
+Public Const gstrVERSION_aegit As String = "1.2.0"
 Public Const gstrPROJECT_aegit As String = "TheProject"
 Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -69,6 +69,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140708 - v120 - Bump
 '20140708 - v119 - Reorganize code for optional export settings
 '20140708 - v118 - FIXED - %008 - Implement varDebug in export procedure
     ' Add test for ExportQAT. Implement Let property for ExportQAT
