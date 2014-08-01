@@ -111,3 +111,20 @@ ErrorHandler:
     RegKeyExists = False
 
 End Function
+
+Public Function WuaVersion()
+' Get current WUA version
+    Dim oAgentInfo As Object
+    Dim ProductVersion As String
+    Dim ErrNum As Long
+    On Error Resume Next
+    Err.Clear
+    Set oAgentInfo = CreateObject("Microsoft.Update.AgentInfo")
+    If ErrNum = 0 Then
+        WuaVersion = oAgentInfo.GetInfo("ProductVersionString")
+    Else
+        MsgBox "Error getting WUA version.", vbCritical, "WUA Version"
+        WuaVersion = 0 ' Calling code can interpret 0 as an error
+    End If
+    On Error GoTo 0
+End Function
