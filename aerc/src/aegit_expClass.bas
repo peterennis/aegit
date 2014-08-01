@@ -48,7 +48,7 @@ Private Type mySetupType
     SourceFolder As String
     ImportFolder As String
     UseImportFolder As Boolean
-    XMLFolder As String
+    XMLfolder As String
 End Type
 
 Private Type myExportType               ' Initialize defaults as:
@@ -62,7 +62,7 @@ Private aegitSetup As Boolean
 Private aegitType As mySetupType
 Private aegitExport As myExportType
 Private aegitSourceFolder As String
-Private aegitXMLFolder As String
+Private aegitXMLfolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
 Private aestrSourceLocation As String
@@ -108,14 +108,14 @@ Private Sub Class_Initialize()
     End If
     ' Provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
-    aegitXMLFolder = "default"
+    aegitXMLfolder = "default"
     ReDim Preserve aegitDataXML(0 To 0)
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         aegitDataXML(0) = "aetlkpStates"
     End If
     aegitExportDataToXML = True
     aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-    aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
+    aegitType.XMLfolder = "C:\ae\aegit\aerc\src\xml\"
     aeintLTN = 11           ' Set a minimum default
     aeintFNLen = 4          ' Set a minimum default
     aeintFTLen = 4          ' Set a minimum default
@@ -131,7 +131,7 @@ Private Sub Class_Initialize()
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
+    Debug.Print , "Default for aegitType.XMLfolder = " & aegitType.XMLfolder
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -178,14 +178,14 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
     aegitSourceFolder = strSourceFolder
 End Property
 
-Public Property Get XMLFolder() As String
+Public Property Get XMLfolder() As String
     On Error GoTo 0
-    XMLFolder = aegitXMLFolder
+    XMLfolder = aegitXMLfolder
 End Property
 
-Public Property Let XMLFolder(ByVal strXMLFolder As String)
+Public Property Let XMLfolder(ByVal strXMLfolder As String)
     On Error GoTo 0
-    aegitXMLFolder = strXMLFolder
+    aegitXMLfolder = strXMLfolder
 End Property
 
 Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
@@ -1764,10 +1764,10 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 
     Dim intFailCount As Integer
 
-    If aegitXMLFolder = "default" Then
-        aestrXMLLocation = aegitType.XMLFolder
+    If aegitXMLfolder = "default" Then
+        aestrXMLLocation = aegitType.XMLfolder
     Else
-        aestrXMLLocation = aegitXMLFolder
+        aestrXMLLocation = aegitXMLfolder
     End If
 
     If Not FolderExists(aestrXMLLocation) Then
@@ -2612,15 +2612,15 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Else
         aestrSourceLocation = aegitSourceFolder
     End If
-    If aegitXMLFolder = "default" Then
-        aestrXMLLocation = aegitType.XMLFolder
+    If aegitXMLfolder = "default" Then
+        aestrXMLLocation = aegitType.XMLfolder
     Else
-        aestrXMLLocation = aegitXMLFolder
+        aestrXMLLocation = aegitXMLfolder
     End If
 
     If Not IsMissing(varDebug) Then
         Debug.Print , "Value for aestrSourceLocation = " & aestrSourceLocation
-        Debug.Print , "Value for aegitXMLFolder = " & aegitXMLFolder
+        Debug.Print , "Value for aegitXMLfolder = " & aegitXMLfolder
         Debug.Print , "Value for aestrXMLLocation = " & aestrXMLLocation
     End If
 
@@ -2629,7 +2629,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     If Not IsMissing(varDebug) Then
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
-        Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
+        Debug.Print , "Property Get XMLfolder = " & aestrXMLLocation
     End If
     If aestrSourceLocation = vbNullString Then
         MsgBox "aestrSourceLocation is not set!", vbCritical, aeAPP_NAME

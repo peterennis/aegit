@@ -4,18 +4,20 @@ Option Explicit
 ' Default Usage:
 ' The following folders are used if no custom configuration is provided:
 ' aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-' aegitType.aegitXMLFolder = "C:\ae\aegit\aerc\src\xml\"
+' aegitType.aegitXMLfolder = "C:\ae\aegit\aerc\src\xml\"
 ' Run in immediate window:                  aegit_EXPORT
-' Show debug output in immediate window:    aegit_EXPORT varDebug:="Debugit" OR aegit_EXPORT 1
+' Show debug output in immediate window:    aegit_EXPORT varDebug:="varDebug"
+'                                           aegit_EXPORT 1
 '
 ' Custom Usage:
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
 ' Public Const THE_XML_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\xml\"
 ' For custom configuration of the output source folder in aegitClassTest use:
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
-' oDbObjects.XMLFolder = THE_XML_FOLDER
+' oDbObjects.XMLfolder = THE_XML_FOLDER
 ' Run in immediate window:                  ALTERNATIVE_EXPORT
-' Show debug output in immediate window:    ALTERNATIVE_EXPORT varDebug:="varDebug" OR ALTERNATIVE_EXPORT 1
+' Show debug output in immediate window:    ALTERNATIVE_EXPORT varDebug:="varDebug"
+'                                           ALTERNATIVE_EXPORT 1
 '
 
 Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
@@ -90,7 +92,7 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     Dim bln8 As Boolean
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr         ' THE_XML_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
 
     ' Define tables for xml data export
     If Not IsMissing(varXmlData) Then

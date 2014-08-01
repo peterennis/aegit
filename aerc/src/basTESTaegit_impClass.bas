@@ -12,7 +12,7 @@ Option Explicit
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
 ' For custom configuration of the output source folder in aegitClassTest use:
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
-' oDbObjects.XMLFolder = THE_XML_FOLDER
+' oDbObjects.XMLfolder = THE_XML_FOLDER
 ' Run in immediate window: MYPROJECT_TEST
 '
 
