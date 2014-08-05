@@ -46,7 +46,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 ' Tasks:
 ' %011 -
-' %010 -
+' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully with warning
 ' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
@@ -71,6 +71,8 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140805 - v122
+    ' Raymond reported lockup when backend is on network. Added task %010 - workaround is dev/link with local tables.
 '20140709 - v122 - Bump
 '20140709 - v121 - Remove test 8, not used
     ' Remove test 3, not used
