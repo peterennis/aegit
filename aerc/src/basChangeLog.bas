@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE_aegit As String = "July 9, 2014"
-Public Const gstrVERSION_aegit As String = "1.2.2"
+Public Const gstrDATE_aegit As String = "September 30, 2014"
+Public Const gstrVERSION_aegit As String = "1.2.3"
 Public Const gstrPROJECT_aegit As String = "TheProject"
 Public Const gblnTEST_aegit As Boolean = False
 Public gvarMyTablesForExportToXML() As Variant
@@ -46,7 +46,7 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 ' Tasks:
 ' %011 -
-' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully with warning
+' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully and/or give warning
 ' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
@@ -55,7 +55,6 @@ Public gvarMyTablesForExportToXML() As Variant
 ' #038 -
 ' #037 -
 ' #035 - Configure git with diff for UTF16 files
-' #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
@@ -71,6 +70,9 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
+'20140930 - v123
+    ' WONTFIX - #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
+    ' The code related to #033 is flakey so set option to turn off this output by default
 '20140805 - v122
     ' Raymond reported lockup when backend is on network. Added task %010 - workaround is dev/link with local tables.
 '20140709 - v122 - Bump

@@ -33,8 +33,8 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 Private Declare Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
-Private Const aegit_expVERSION As String = "1.2.2"
-Private Const aegit_expVERSION_DATE As String = "July 9, 2014"
+Private Const aegit_expVERSION As String = "1.2.3"
+Private Const aegit_expVERSION_DATE As String = "September 30, 2014"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -56,6 +56,7 @@ Private Type myExportType               ' Initialize defaults as:
     ExportCodeAndObjects As Boolean     ' True
     ExportModuleCodeOnly As Boolean     ' True
     ExportQAT As Boolean                ' True
+    ExportCBID As Boolean               ' False
 End Type
 
 Private aegitSetup As Boolean
@@ -126,6 +127,7 @@ Private Sub Class_Initialize()
         .ExportCodeAndObjects = True
         .ExportModuleCodeOnly = True
         .ExportQAT = True
+        .ExportCBID = False
     End With
 
     Debug.Print "Class_Initialize"
@@ -141,6 +143,7 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
     Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
     Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
+    Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
     'Stop
 
 PROC_EXIT:
@@ -193,6 +196,14 @@ Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
         aegitExport.ExportQAT = True
     Else
         aegitExport.ExportQAT = False
+    End If
+End Property
+
+Public Property Let ExportCBID(ByVal blnExportCBID As Boolean)
+    If blnExportCBID Then
+        aegitExport.ExportCBID = True
+    Else
+        aegitExport.ExportCBID = False
     End If
 End Property
 
@@ -2717,6 +2728,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     If Not IsMissing(varDebug) Then
         OutputListOfContainers aeAppListCnt, varDebug
         OutputListOfAccessApplicationOptions varDebug
+        If aegitExport.ExportCBID Then
+            OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
+        End If
         OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
         OutputTableDataMacros varDebug
         OutputPrinterInfo "Debug"
@@ -2726,7 +2740,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
-        OutputListOfCommandBarIDs aeAppCmbrIds
+        If aegitExport.ExportCBID Then
+            OutputListOfCommandBarIDs aeAppCmbrIds
+        End If
         OutputTableDataMacros
         OutputPrinterInfo
         If aeExists("Tables", "aetlkpStates") Then
