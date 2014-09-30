@@ -2731,7 +2731,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aegitExport.ExportCBID Then
             OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
         End If
-        OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
         OutputTableDataMacros varDebug
         OutputPrinterInfo "Debug"
         If aeExists("Tables", "aetlkpStates", varDebug) Then
