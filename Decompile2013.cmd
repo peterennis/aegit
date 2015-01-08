@@ -24,6 +24,19 @@ REM /*                       filenames containing space characters              
 REM /* 04/03/2014 PFE        Modified for aegit for testing #002                           */
 REM /***************************************************************************************/
 
+REM Suggested Decompile Steps:
+REM 1) The database should be in the same directory on the C: drive as the decompile.cmd script attached. Update the script as necessary to make correct for your working environment.
+REM 2) Run the decompile.cmd script which will start Access, the database, and Access will decompile it.
+REM 3) Next close the database – not all of Access.
+REM 4) Then reopen the database. (Remember the shift key if you have an autoexec macro!)
+REM 5) Compact the database at this point (MS Office icon \ Manage \ Compact and Repair) (Remember the shift key if you have an autoexec macro!)
+REM 6) Press Ctrl+G to open the VBA window
+REM 7) Click the Debug menu \ Clear All Breakpoints
+REM 8) Click the Debug menu \ Compile - ONLY do this step the FIRST time!
+REM 9) Then Compact again as in Step 6 (Remember the shift key if you have an autoexec macro!)
+REM 10) Completely exit Access (Remember the shift key if you have an autoexec macro!)
+REM When the before / after file size are finally the same, the decompile.cmd script will end.
+
 REM Support for multiple database files within the one directory
 REM Simply unREM the correct LOC to decompile that database file
 SET DBfile=adaept revision control.accdb
