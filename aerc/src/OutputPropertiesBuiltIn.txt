@@ -51,7 +51,7 @@ Inherited: False;
 Name: Connection
 Type: 
 Value: 
-Inherited: False;3251,Operation is not supported for this type of object.
+Inherited: False; 3251, 'Operation is not supported for this type of object.'
 ---
 Name: ANSI Query Mode
 Type: dbLong
@@ -245,7 +245,7 @@ Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 1.2.3
+Value: aegit 1.2.4
 Inherited: False;
 ---
 Name: AppIcon
