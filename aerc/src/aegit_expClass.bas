@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.2.4"
-Private Const aegit_expVERSION_DATE As String = "January 8, 2015"
+Private Const aegit_expVERSION As String = "1.2.5"
+Private Const aegit_expVERSION_DATE As String = "January 13, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -144,8 +144,6 @@ Private Sub Class_Initialize()
         .ExportCBID = False
     End With
 
-'''    pExclude = True
-
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
@@ -161,6 +159,7 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
     Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
     defineMyExclusions
+    Debug.Print , "Application.VBE.ActiveVBProject.Name = " & Application.VBE.ActiveVBProject.Name
     Debug.Print , "pExclude = " & pExclude
     'Stop
 
@@ -2504,7 +2503,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             KillProperly (strTheCurrentPathAndFile)
 SaveAsText:
             If intAcObjType = 5 Then
-                'Debug.Print "5:", doc.Name, fExclude(doc.Name)
+                'Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "pExclude=" & pExclude
                 If fExclude(doc.Name) And pExclude Then
                     Debug.Print , "=> Excluded: " & doc.Name
                     GoTo NextDoc

@@ -20,9 +20,6 @@ Option Explicit
 '                                           ALTERNATIVE_EXPORT 1
 '
 
-Private Const DO_NOT_EXCLUDE As Boolean = True
-'
-
 Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If Not IsMissing(varDebug) Then
@@ -82,6 +79,8 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     On Error GoTo PROC_ERR
 
+    Const AEGIT_FILES_NOT_EXCLUDED As Boolean = True
+
     Dim oDbObjects As aegit_expClass
     Set oDbObjects = New aegit_expClass
 
@@ -96,8 +95,9 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
-    If DO_NOT_EXCLUDE Then
-        oDbObjects.ExcludeFiles = DO_NOT_EXCLUDE
+    If Application.VBE.ActiveVBProject.Name = "aegit" Then
+        oDbObjects.ExcludeFiles = AEGIT_FILES_NOT_EXCLUDED
+        Debug.Print "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
     End If
 
     ' Define tables for xml data export
