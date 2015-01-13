@@ -95,10 +95,6 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
-'''    If Application.VBE.ActiveVBProject.Name = "aegit" Then
-'''        oDbObjects.ExcludeFiles = AEGIT_FILES_NOT_EXCLUDED
-'''        Debug.Print "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
-'''    End If
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         oDbObjects.ExportClassFiles = True
     End If

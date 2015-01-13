@@ -72,7 +72,7 @@ End Type
 
 Private myExclude As myExclusions
     ' Default setting is not to export associated aegit_exp files
-'''Private pExclude As Boolean             ' VBA default is False
+    ' VBA default for boolean is False
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
@@ -1099,7 +1099,6 @@ Private Sub OutputListOfApplicationProperties()
         For i = 0 To (.Properties.Count - 1)
             strError = vbNullString
             strPropName = .Properties(i).Name
-'''            varPropValue = Null
             ' Fixed for error 3251
             varPropValue = .Properties(i).Value
             varPropType = .Properties(i).Type
@@ -1119,9 +1118,6 @@ PROC_ERR:
         strError = " " & Err.Number & ", '" & Err.Description & "'"
         varPropValue = Null
         Resume Next
-        'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
-        'Print #fle, "!" & Err.Description, strPropName
-        'Err.Clear
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
     End If
@@ -2463,8 +2459,6 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
 
     On Error GoTo PROC_ERR
 
-'''    Debug.Print DocumentTheContainer, "pExclude = " & pExclude
-
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
@@ -2512,8 +2506,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             KillProperly (strTheCurrentPathAndFile)
 SaveAsText:
             If intAcObjType = 5 Then
-'''                Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "pExclude=" & pExclude
-                Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "aegitExport.ExportClassFiles = " & aegitExport.ExportClassFiles
+                'Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "aegitExport.ExportClassFiles = " & aegitExport.ExportClassFiles
                 If fExclude(doc.Name) And Not aegitExport.ExportClassFiles Then
                     Debug.Print , "=> Excluded: " & doc.Name
                     GoTo NextDoc
