@@ -2504,7 +2504,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             KillProperly (strTheCurrentPathAndFile)
 SaveAsText:
             If intAcObjType = 5 Then
-                Debug.Print "5:", doc.Name, fExclude(doc.Name)
+                'Debug.Print "5:", doc.Name, fExclude(doc.Name)
                 If fExclude(doc.Name) And pExclude Then
                     Debug.Print , "=> Excluded: " & doc.Name
                     GoTo NextDoc
@@ -2528,9 +2528,8 @@ SaveAsText:
         End If
         '
         ' Ouput frm as txt
-        Debug.Print ">>>", doc.Name, fExclude(doc.Name)
-        If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") _
-                Then    '''Or fExclude(doc.Name) Then
+        'Debug.Print ">>>", doc.Name, fExclude(doc.Name)
+        If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
             If strContainerType = "Forms" Then
                 If Not IsMissing(varDebug) Then
                     CreateFormReportTextFile strTheCurrentPathAndFile, strTheCurrentPathAndFile & ".txt", varDebug
