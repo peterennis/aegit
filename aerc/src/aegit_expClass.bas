@@ -67,11 +67,12 @@ Private Type myExportType               ' Initialize defaults as:
     ExportModuleCodeOnly As Boolean     ' True
     ExportQAT As Boolean                ' True
     ExportCBID As Boolean               ' False
+    ExportClassFiles As Boolean         ' False
 End Type
 
 Private myExclude As myExclusions
     ' Default setting is not to export associated aegit_exp files
-Private pExclude As Boolean             ' VBA default is False
+'''Private pExclude As Boolean             ' VBA default is False
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
@@ -142,6 +143,7 @@ Private Sub Class_Initialize()
         .ExportModuleCodeOnly = True
         .ExportQAT = True
         .ExportCBID = False
+        .ExportClassFiles = False
     End With
 
     Debug.Print "Class_Initialize"
@@ -158,9 +160,13 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
     Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
     Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
+    Debug.Print , "aegitExport.ExportClassFiles = " & aegitExport.ExportClassFiles
     defineMyExclusions
-    Debug.Print , "Application.VBE.ActiveVBProject.Name = " & Application.VBE.ActiveVBProject.Name
-    Debug.Print , "pExclude = " & pExclude
+''    Debug.Print , "Application.VBE.ActiveVBProject.Name = " & Application.VBE.ActiveVBProject.Name
+''    If Application.VBE.ActiveVBProject.Name <> "aegit" Then
+''        pExclude = True
+''    End If
+''    Debug.Print , "pExclude = " & pExclude
     'Stop
 
 PROC_EXIT:
@@ -209,6 +215,7 @@ Public Property Let XMLfolder(ByVal strXMLfolder As String)
 End Property
 
 Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
+    On Error GoTo 0
     If blnExportQAT Then
         aegitExport.ExportQAT = True
     Else
@@ -217,10 +224,20 @@ Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
 End Property
 
 Public Property Let ExportCBID(ByVal blnExportCBID As Boolean)
+    On Error GoTo 0
     If blnExportCBID Then
         aegitExport.ExportCBID = True
     Else
         aegitExport.ExportCBID = False
+    End If
+End Property
+
+Public Property Let ExportClassFiles(blnExportClassFiles As Boolean)
+    On Error GoTo 0
+    If blnExportClassFiles Then
+        aegitExport.ExportClassFiles = True
+    Else
+        aegitExport.ExportClassFiles = False
     End If
 End Property
 
@@ -377,16 +394,6 @@ Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As 
         CompactAndRepair = False
     End If
     
-End Property
-
-Public Property Get ExcludeFiles() As Boolean
-    On Error GoTo 0
-    ExcludeFiles = pExclude
-End Property
-
-Public Property Let ExcludeFiles(bln As Boolean)
-    On Error GoTo 0
-    pExclude = bln
 End Property
 
 Private Function Delay(ByVal mSecs As Long) As Boolean
@@ -2456,6 +2463,8 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
 
     On Error GoTo PROC_ERR
 
+'''    Debug.Print DocumentTheContainer, "pExclude = " & pExclude
+
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
@@ -2503,8 +2512,9 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             KillProperly (strTheCurrentPathAndFile)
 SaveAsText:
             If intAcObjType = 5 Then
-                'Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "pExclude=" & pExclude
-                If fExclude(doc.Name) And pExclude Then
+'''                Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "pExclude=" & pExclude
+                Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "aegitExport.ExportClassFiles = " & aegitExport.ExportClassFiles
+                If fExclude(doc.Name) And Not aegitExport.ExportClassFiles Then
                     Debug.Print , "=> Excluded: " & doc.Name
                     GoTo NextDoc
                 Else

@@ -95,9 +95,12 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
+'''    If Application.VBE.ActiveVBProject.Name = "aegit" Then
+'''        oDbObjects.ExcludeFiles = AEGIT_FILES_NOT_EXCLUDED
+'''        Debug.Print "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
+'''    End If
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
-        oDbObjects.ExcludeFiles = AEGIT_FILES_NOT_EXCLUDED
-        Debug.Print "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
+        oDbObjects.ExportClassFiles = True
     End If
 
     ' Define tables for xml data export
@@ -120,7 +123,7 @@ Test1:
     '=============
     ' TEST 1
     '=============
-    oDbObjects.ExcludeFiles = False
+'''    oDbObjects.ExcludeFiles = False
     oDbObjects.ExportQAT = False
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
