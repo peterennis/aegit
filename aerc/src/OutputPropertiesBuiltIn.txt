@@ -263,3 +263,8 @@ Type: dbLong
 Value: 2310
 Inherited: False;
 ---
+Name: CustomRibbonID
+Type: dbText
+Value: adaept
+Inherited: False;
+---

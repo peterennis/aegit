@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<xml xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema">
+  <s:Schema id="RowsetSchema">
+    <s:ElementType name="row" content="eltOnly" rs:updatable="true">
+      <s:AttributeType name="CBO" rs:number="6" rs:nullable="true" rs:maydefer="true" rs:write="true" rs:basetable="aeItems" rs:basecolumn="CBO">
+        <s:datatype dt:type="string" dt:maxLength="255"></s:datatype>
+      </s:AttributeType>
+      <s:AttributeType name="CHK" rs:number="5" rs:maydefer="true" rs:write="true" rs:basetable="aeItems" rs:basecolumn="CHK">
+        <s:datatype dt:type="boolean" dt:maxLength="2" rs:fixedlength="true"></s:datatype>
+      </s:AttributeType>
+      <s:AttributeType name="Item" rs:number="1" rs:nullable="true" rs:maydefer="true" rs:write="true" rs:basetable="aeItems" rs:basecolumn="Item">
+        <s:datatype dt:type="string" dt:maxLength="255"></s:datatype>
+      </s:AttributeType>
+      <s:AttributeType name="Quantity" rs:number="2" rs:nullable="true" rs:maydefer="true" rs:write="true" rs:basetable="aeItems" rs:basecolumn="Quantity">
+        <s:datatype dt:type="int" dt:maxLength="4" rs:precision="10" rs:fixedlength="true"></s:datatype>
+      </s:AttributeType>
+      <s:AttributeType name="Status" rs:number="3" rs:nullable="true" rs:maydefer="true" rs:write="true" rs:basetable="aeItems" rs:basecolumn="Status">
+        <s:datatype dt:type="string" dt:maxLength="255"></s:datatype>
+      </s:AttributeType>
+      <s:AttributeType name="YNO" rs:number="4" rs:nullable="true" rs:maydefer="true" rs:write="true" rs:basetable="aeItems" rs:basecolumn="YNO">
+        <s:datatype dt:type="string" dt:maxLength="255"></s:datatype>
+      </s:AttributeType>
+      <s:extends type="rs:rowbase"></s:extends>
+    </s:ElementType>
+  </s:Schema>
+  <rs:data>
+    <z:row CHK="False" Item="Cofee" Quantity="100" Status="Levels Low"></z:row>
+    <z:row CHK="False" Item="Soda" Quantity="49" Status="Order Now!"></z:row>
+    <z:row CHK="False" Item="Tea" Quantity="101"></z:row>
+    <z:row CHK="False" Item="Water" Quantity="0"></z:row>
+  </rs:data>
+</xml>
+
