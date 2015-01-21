@@ -38,7 +38,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.2.5"
-Private Const aegit_expVERSION_DATE As String = "January 13, 2015"
+Private Const aegit_expVERSION_DATE As String = "January 21, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -67,12 +67,10 @@ Private Type myExportType               ' Initialize defaults as:
     ExportModuleCodeOnly As Boolean     ' True
     ExportQAT As Boolean                ' True
     ExportCBID As Boolean               ' False
-    ExportClassFiles As Boolean         ' False
 End Type
 
 Private myExclude As myExclusions
-    ' Default setting is not to export associated aegit_exp files
-    ' VBA default for boolean is False
+Private pExclude As Boolean
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
@@ -143,8 +141,9 @@ Private Sub Class_Initialize()
         .ExportModuleCodeOnly = True
         .ExportQAT = True
         .ExportCBID = False
-        .ExportClassFiles = False
     End With
+
+    pExclude = True     ' Default setting is not to export associated aegit_exp files
 
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
@@ -160,13 +159,8 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
     Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
     Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
-    Debug.Print , "aegitExport.ExportClassFiles = " & aegitExport.ExportClassFiles
     defineMyExclusions
-''    Debug.Print , "Application.VBE.ActiveVBProject.Name = " & Application.VBE.ActiveVBProject.Name
-''    If Application.VBE.ActiveVBProject.Name <> "aegit" Then
-''        pExclude = True
-''    End If
-''    Debug.Print , "pExclude = " & pExclude
+    Debug.Print , "pExclude = " & pExclude
     'Stop
 
 PROC_EXIT:
@@ -215,7 +209,6 @@ Public Property Let XMLfolder(ByVal strXMLfolder As String)
 End Property
 
 Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
-    On Error GoTo 0
     If blnExportQAT Then
         aegitExport.ExportQAT = True
     Else
@@ -224,7 +217,6 @@ Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
 End Property
 
 Public Property Let ExportCBID(ByVal blnExportCBID As Boolean)
-    On Error GoTo 0
     If blnExportCBID Then
         aegitExport.ExportCBID = True
     Else
@@ -232,25 +224,21 @@ Public Property Let ExportCBID(ByVal blnExportCBID As Boolean)
     End If
 End Property
 
-Public Property Let ExportClassFiles(blnExportClassFiles As Boolean)
-    On Error GoTo 0
-    If blnExportClassFiles Then
-        aegitExport.ExportClassFiles = True
-    Else
-        aegitExport.ExportClassFiles = False
-    End If
-End Property
-
 Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
 ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
     On Error GoTo PROC_ERR
 
-    Debug.Print "LBound(varTablesArray)=" & LBound(varTablesArray), "varTablesArray(0)=" & varTablesArray(0)
-    Debug.Print "UBound(varTablesArray)=" & UBound(varTablesArray), "varTablesArray(1)=" & varTablesArray(1)
+    Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0)=" & varTablesArray(0)
+    Debug.Print , "UBound(varTablesArray) = " & UBound(varTablesArray)
+    If UBound(varTablesArray) > 0 Then
+        Debug.Print , "varTablesArray(1) = " & varTablesArray(1)
+    End If
     ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
     aegitDataXML = varTablesArray
-    Debug.Print "aegitDataXML(0)=" & aegitDataXML(0)
-    Debug.Print "aegitDataXML(1)=" & aegitDataXML(1)
+    Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
+    If UBound(varTablesArray) > 0 Then
+        Debug.Print , "aegitDataXML(1) = " & aegitDataXML(1)
+    End If
 
 PROC_EXIT:
     Exit Property
@@ -394,6 +382,27 @@ Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As 
         CompactAndRepair = False
     End If
     
+End Property
+
+Public Property Get ExcludeFiles(Optional ByVal varDebug As Variant) As Boolean
+    On Error GoTo 0
+    ExcludeFiles = pExclude
+    Debug.Print , "ExcludeFiles = " & pExclude
+    If IsMissing(varDebug) Then
+        Debug.Print "Get ExcludeFiles"
+        Debug.Print , "varDebug IS missing so no parameter is passed to ExcludeFiles"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        Debug.Print "Get ExcludeFiles"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to ExcludeFiles"
+        Debug.Print , "DEBUGGING TURNED ON"
+    End If
+End Property
+
+Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnExclude As Boolean)
+    On Error GoTo 0
+    pExclude = blnExclude
+    Debug.Print , "Let ExcludeFiles = " & pExclude
 End Property
 
 Private Function Delay(ByVal mSecs As Long) As Boolean
@@ -1099,6 +1108,7 @@ Private Sub OutputListOfApplicationProperties()
         For i = 0 To (.Properties.Count - 1)
             strError = vbNullString
             strPropName = .Properties(i).Name
+'''            varPropValue = Null
             ' Fixed for error 3251
             varPropValue = .Properties(i).Value
             varPropType = .Properties(i).Type
@@ -1118,6 +1128,9 @@ PROC_ERR:
         strError = " " & Err.Number & ", '" & Err.Description & "'"
         varPropValue = Null
         Resume Next
+        'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " strPropName=" & strPropName & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
+        'Print #fle, "!" & Err.Description, strPropName
+        'Err.Clear
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
     End If
@@ -2506,8 +2519,8 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             KillProperly (strTheCurrentPathAndFile)
 SaveAsText:
             If intAcObjType = 5 Then
-                'Debug.Print "5:", doc.Name, "fExclude(doc.Name)=" & fExclude(doc.Name), "aegitExport.ExportClassFiles = " & aegitExport.ExportClassFiles
-                If fExclude(doc.Name) And Not aegitExport.ExportClassFiles Then
+                'Debug.Print "5:", doc.Name, fExclude(doc.Name)
+                If fExclude(doc.Name) And pExclude Then
                     Debug.Print , "=> Excluded: " & doc.Name
                     GoTo NextDoc
                 Else
@@ -2530,8 +2543,8 @@ SaveAsText:
         End If
         '
         ' Ouput frm as txt
-        'Debug.Print ">>>", doc.Name, fExclude(doc.Name)
-        If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
+        If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") _
+                Or Not fExclude(doc.Name) Then
             If strContainerType = "Forms" Then
                 If Not IsMissing(varDebug) Then
                     CreateFormReportTextFile strTheCurrentPathAndFile, strTheCurrentPathAndFile & ".txt", varDebug

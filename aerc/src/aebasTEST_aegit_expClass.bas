@@ -19,13 +19,28 @@ Option Explicit
 ' Show debug output in immediate window:    ALTERNATIVE_EXPORT varDebug:="varDebug"
 '                                           ALTERNATIVE_EXPORT 1
 '
+' Sample constants for settings of "TheProjectName"
+Public Const gstrDATE_TheProjectName As String = "January 1, 2000"
+Public Const gstrVERSION_TheProjectName As String = "0.0.0"
+Public Const gstrPROJECT_TheProjectName As String = "TheProjectName"
+Public Const gblnTEST_TheProjectName As Boolean = False
+
+Public Const gstrPROJECT_aegit As String = "aegit export project"
+Public Const gstrVERSION_aegit As String = "0.0.0"
+Public gvarMyTablesForExportToXML() As Variant
+'
 
 Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
+
     On Error GoTo 0
+
+    Dim THE_XML_DATA_FOLDER As String
+    THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xml"
+
     If Not IsMissing(varDebug) Then
-        aegitClassTest varDebug:="varDebug"
+        aegitClassTest varDebug:="varDebug", varXmlData:=THE_XML_DATA_FOLDER
     Else
-        aegitClassTest
+        aegitClassTest varXmlData:=THE_XML_DATA_FOLDER
     End If
 End Function
 
@@ -79,8 +94,6 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     On Error GoTo PROC_ERR
 
-    Const AEGIT_FILES_NOT_EXCLUDED As Boolean = True
-
     Dim oDbObjects As aegit_expClass
     Set oDbObjects = New aegit_expClass
 
@@ -95,16 +108,18 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
-    If Application.VBE.ActiveVBProject.Name = "aegit" Then
-        oDbObjects.ExportClassFiles = True
-    End If
 
     ' Define tables for xml data export
+    gvarMyTablesForExportToXML = Array("USysRibbons")
+    oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML()
+
     If Not IsMissing(varXmlData) Then
             If Application.VBE.ActiveVBProject.Name = "aegit" Then
                 Dim myArray() As Variant
-                myArray = Array("tblRace", "tblYear")
+                myArray = Array("aeItems", "aetlkpStates", "USysRibbons")
                 oDbObjects.TablesExportToXML = myArray()
+                oDbObjects.ExcludeFiles = False
+                Debug.Print , "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
             Else
                 If IsArrayInitialized(gvarMyTablesForExportToXML) Then
                     Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
@@ -119,7 +134,6 @@ Test1:
     '=============
     ' TEST 1
     '=============
-'''    oDbObjects.ExcludeFiles = False
     oDbObjects.ExportQAT = False
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"

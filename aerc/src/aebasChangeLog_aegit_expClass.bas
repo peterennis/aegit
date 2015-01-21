@@ -1,12 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Public Const gstrDATE_aegit As String = "January 13, 2015"
-Public Const gstrVERSION_aegit As String = "1.2.5"
-Public Const gstrPROJECT_aegit As String = "TheProject"
-Public Const gblnTEST_aegit As Boolean = False
-Public gvarMyTablesForExportToXML() As Variant
-
 ' Tools:
 ' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
@@ -71,7 +65,8 @@ Public gvarMyTablesForExportToXML() As Variant
 '=============================================================================================================================
 '
 '
-'20150113 - v125 - Testing export using pExclude so rename of aegit files to zzz* not needed
+'20150121 - v125 - USysRibbons.xml export
+'20150113 - v125 - Testing with excluding rename of aegit files to zzz* not needed
 '20140930 - v123
     ' WONTFIX - #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
     ' The code related to #033 is flakey so set option to turn off this output by default
