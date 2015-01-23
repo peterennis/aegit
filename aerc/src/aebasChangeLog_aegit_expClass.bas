@@ -52,7 +52,7 @@ Option Explicit
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
 ' #038 -
-' #037 -
+' #037 - Adding USysRibbons form and adjusting xml causes the ribbon bar logo to disappear
 ' #035 - Configure git with diff for UTF16 files
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
