@@ -51,9 +51,7 @@ Option Explicit
 ' Issues:
 ' #038 -
 ' #037 -
-' #036 - USysRibbons content export
 ' #035 - Configure git with diff for UTF16 files
-' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
@@ -68,6 +66,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150123 - v126 - CLOSED #036 - USysRibbons content export
+    ' Expanded row height of USysRibbons shows the formatted data text contents
+    ' CLOSED - #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 '20150121 - v125 - USysRibbons.xml export
     ' OutputTableDataAsFormattedText "USysRibbons"
     ' Ref: http://www.dbforums.com/showthread.php?1043254-Is-there-a-way-to-export-a-access-table-to-a-text-file-with-VBA
