@@ -1,0 +1,69 @@
+Operation =1
+Option =0
+Begin InputTables
+    Name ="USysRibbons"
+End
+Begin OutputColumns
+    Expression ="USysRibbons.ID"
+    Expression ="USysRibbons.RibbonName"
+    Expression ="USysRibbons.RibbonXML"
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbByte "RecordsetType" ="0"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBinary "GUID" = Begin
+    0xe767c1d405243b4da7cfe1c08b3c0e89
+End
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbBoolean "TotalsRow" ="0"
+dbByte "PublishToWeb" ="1"
+dbText "DatasheetFontName" ="Calibri"
+dbInteger "DatasheetFontHeight" ="11"
+dbInteger "DatasheetFontWeight" ="400"
+dbBoolean "DatasheetFontItalic" ="0"
+dbBoolean "DatasheetFontUnderline" ="0"
+dbByte "TabularCharSet" ="0"
+dbByte "TabularFamily" ="34"
+dbLong "DatasheetForeColor" ="0"
+dbLong "DatasheetForeColor12" ="0"
+Begin
+    Begin
+        dbText "Name" ="USysRibbons.RibbonXML"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="USysRibbons.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="USysRibbons.RibbonName"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =40
+    Right =1619
+    Bottom =871
+    Left =-1
+    Top =-1
+    Right =1587
+    Bottom =486
+    Left =0
+    Top =0
+    ColumnsShown =539
+    Begin
+        Left =48
+        Top =12
+        Right =192
+        Bottom =156
+        Top =0
+        Name ="USysRibbons"
+        Name =""
+    End
+End

@@ -1,3 +1,31 @@
+>>>_aeQryUSysRibbons
+              Name          _aeQryUSysRibbons
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   1/23/2015 12:22:32 PM 
+              LastUpdated   1/23/2015 2:39:31 PM 
+              RecordLocks    0 
+              ODBCTimeout    60 
+              RecordsetType  0 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              TotalsRow     False
+              PublishToWeb   1 
+              DatasheetFontName           Calibri
+              DatasheetFontHeight          11 
+              DatasheetFontWeight          400 
+              DatasheetFontItalic         False
+              DatasheetFontUnderline      False
+              TabularCharSet               0 
+              TabularFamily  34 
+              DatasheetForeColor           0 
+              DatasheetForeColor12         0 
 >>>_qryChart
               Name          _qryChart
               Owner         admin
