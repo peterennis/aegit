@@ -2825,6 +2825,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aeExists("Tables", "aetlkpStates", varDebug) Then
             OutputTableDataAsFormattedText "aetlkpStates", varDebug
         End If
+        If aeExists("Tables", "USysRibbons", varDebug) Then
+            OutputTableDataAsFormattedText "USysRibbons", varDebug
+        End If
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -2835,6 +2838,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputPrinterInfo
         If aeExists("Tables", "aetlkpStates") Then
             OutputTableDataAsFormattedText "aetlkpStates"
+        End If
+        If aeExists("Tables", "USysRibbons") Then
+            OutputTableDataAsFormattedText "USysRibbons"
         End If
     End If
 
@@ -3738,7 +3744,17 @@ Private Sub OutputTableDataAsFormattedText(ByVal strTblName As String, Optional 
         Debug.Print , strPathFileName
     Else
     End If
+'    AcFormat can be one of these AcFormat constants.
+'    acFormatASP
+'    acFormatDAP
+'    acFormatHTML
+'    acFormatIIS
+'    acFormatRTF
+'    acFormatSNP
+'    acFormatTXT
+'    acFormatXLS
     DoCmd.OutputTo acOutputTable, strTblName, acFormatTXT, aestrSourceLocation & strTblName & "_FormattedData.txt"
+    DoCmd.TransferText acExportDelim, , strTblName, aestrSourceLocation & strTblName & "_TransferText.txt", True
 
 End Sub
 

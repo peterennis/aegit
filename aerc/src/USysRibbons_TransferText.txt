@@ -1,0 +1,46 @@
+"ID","RibbonName","RibbonXML"
+1,"HideRibbon","<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+<customUI xmlns=""http://schemas.microsoft.com/office/2009/07/customui"">
+  <ribbon startFromScratch=""true"" /> 
+</customUI>"
+2,"PngRibbon","<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+<customUI  xmlns=""http://schemas.microsoft.com/office/2009/07/customui"">
+  <ribbon >
+    <tabs >
+      <tab id=""aeTab1"" label=""ae Sample Tab"">
+        <group id=""ae1"" label=""adaept"">
+          <button id=""Button1"" label=""Button1"" imageMso=""Chart3DColumnChart"" size=""large""/>
+          <button id=""Button2"" label=""Button2"" imageMso=""Chart3DBarChart"" size=""large""/>
+          <button id=""Button3"" label=""Button3"" imageMso=""CreateFormPivotChart"" size=""large""/>
+          <button id=""Button4"" label=""Button4"" imageMso=""ChartAreaChart"" size=""large""/>
+          <button id=""Button5"" label=""Button5"" imageMso=""Chart3DPieChart"" size=""large""/>
+          <button id=""Button6"" label=""Button6"" imageMso=""ChartTypeOtherInsertGallery"" size=""large""/>
+          <button id=""Button7"" label=""Button7"" imageMso=""ChartTrendline"" size=""large""/>
+          <button id=""Button8"" label=""Button8"" imageMso=""ChartStylesGallery"" size=""large""/>
+          <button id=""Button9"" label=""Button9"" imageMso=""ChartSaveTemplates"" size=""large""/>
+        </group >
+      </tab >
+    </tabs >
+  </ribbon >
+</customUI >"
+3,"HideExport","<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+<customUI xmlns=""http://schemas.microsoft.com/office/2009/07/customui"">
+  <ribbon>
+    <tabs>
+      <tab idMso=""TabExternalData"">
+        <group idMso=""GroupExport"" visible=""false""/>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>"
+4,"adaept","<customUI xmlns=""http://schemas.microsoft.com/office/2009/07/customui"" onLoad=""OnRibbonLoad"" loadImage=""LoadRibbonImages"">
+  <ribbon startFromScratch=""true"">
+    <tabs>
+      <tab id=""tab1"" label=""ADAEPT"" getVisible =""GetVisible"" tag = ""RibbonName:=IDBERibbonCreator2013;CustomTagValue1:=;CustomTagValue2:=;CustomTagValue3:="" > 
+        <group id=""grp1"" autoScale=""false"" centerVertically=""false"" label=""About"" getVisible =""GetVisible"" tag = ""RibbonName:=;inMenu:=;CustomTagValue1:=;CustomTagValue2:=;CustomTagValue3:=;CustomPicture:=;CustomPicturePath:="" >
+          <button id=""btn1"" size=""large"" label=""adaept"" supertip=""adaept information management"" getImage=""GetImages"" tag=""RibbonName:=IDBERibbonCreator2013;inMenu:=;CustomTagValue1:=;CustomTagValue2:=;CustomTagValue3:=;CustomPicture:=adaept_logo_rg_32x32_transparent.png"" onAction=""OnActionButton"" getVisible=""GetVisible"" getEnabled=""GetEnabled"" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>"

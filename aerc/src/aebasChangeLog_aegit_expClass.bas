@@ -39,7 +39,9 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %012 -
+' %014 -
+' #013 - Ref: http://architects.dzone.com/articles/20-database-design-best
+' #012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
 ' %011 - Add an exclusion list of objects other than zzz marker, useful so that aegit objects do not need renaming
 ' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully and/or give warning
 ' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
@@ -49,6 +51,7 @@ Option Explicit
 ' Issues:
 ' #038 -
 ' #037 -
+' #036 - USysRibbons content export
 ' #035 - Configure git with diff for UTF16 files
 ' #029 - Error 3270 Property not found - in OutputListOfAccessApplicationOptions - occurs if "Break on All Errors" is set
 ' #026 - Output list of hidden reports
@@ -66,6 +69,9 @@ Option Explicit
 '
 '
 '20150121 - v125 - USysRibbons.xml export
+    ' OutputTableDataAsFormattedText "USysRibbons"
+    ' Ref: http://www.dbforums.com/showthread.php?1043254-Is-there-a-way-to-export-a-access-table-to-a-text-file-with-VBA
+    ' Add TransferText command to OutputTableDataAsFormattedText to bypass text cutoff problem
 '20150113 - v125 - Testing with excluding rename of aegit files to zzz* not needed
 '20140930 - v123
     ' WONTFIX - #033 - OutputListOfCommandBarIDs showing FS in Notepad++ followed by ???? in descriptions - Access 2010
