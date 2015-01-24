@@ -40,7 +40,7 @@ Public Sub GetImages(ByVal control As IRibbonControl, ByRef Image)
     On Error GoTo 0
     Dim strPicture As String
 
-    strPicture = getTheValue(control.Tag, "CustomPicture")
+    strPicture = getTheValue(control.Tag, "Pic")
     Set Image = getIconFromTable(strPicture)
 
 End Sub
