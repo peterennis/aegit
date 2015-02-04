@@ -67,6 +67,7 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150204 - v127 - Fix error on export when USysRibbons does not exist
 '20150123 - v126 - CLOSED #036 - USysRibbons content export
     ' Expanded row height of USysRibbons shows the formatted data text contents
     ' FIXED - #037 - Adding USysRibbons form and adjusting xml causes the ribbon bar logo to disappear

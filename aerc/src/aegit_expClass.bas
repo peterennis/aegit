@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.2.6"
-Private Const aegit_expVERSION_DATE As String = "January 23, 2015"
+Private Const aegit_expVERSION As String = "1.2.7"
+Private Const aegit_expVERSION_DATE As String = "February 4, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -3551,33 +3551,35 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Set rst = CreateObject("ADODB.Recordset")
 
     For i = 0 To UBound(avarTableNames)
-        strSQL = "Select * from " & avarTableNames(i)
-        'MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
-        If Not IsMissing(varDebug) Then Debug.Print i, "avarTableNames", avarTableNames(i)
-        rst.Open strSQL, cnn, adOpenStatic, adLockOptimistic
+        If aeExists("Tables", avarTableNames(i)) Then
+            strSQL = "Select * from " & avarTableNames(i)
+            'MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
+            If Not IsMissing(varDebug) Then Debug.Print i, "avarTableNames", avarTableNames(i)
+            rst.Open strSQL, cnn, adOpenStatic, adLockOptimistic
 
-        strFileName = aestrXMLLocation & avarTableNames(i) & ".xml"
+            strFileName = aestrXMLLocation & avarTableNames(i) & ".xml"
 
-        If aegitSetup Then
-            If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
-            If Not rst.EOF Then
-                rst.MoveFirst
-                rst.Save strFileName, adPersistXML
+            If aegitSetup Then
+                If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
+                If Not rst.EOF Then
+                    rst.MoveFirst
+                    rst.Save strFileName, adPersistXML
+                End If
+            Else
+                If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=False aestrXMLLocation=" & aestrXMLLocation
+                If Not rst.EOF Then
+                    rst.MoveFirst
+                    rst.Save strFileName, adPersistXML
+                End If
             End If
-        Else
-            If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=False aestrXMLLocation=" & aestrXMLLocation
-            If Not rst.EOF Then
-                rst.MoveFirst
-                rst.Save strFileName, adPersistXML
-            End If
-        End If
 
-        If Not IsMissing(varDebug) Then
-            PrettyXML strFileName, varDebug
-        Else
-            PrettyXML strFileName
+            If Not IsMissing(varDebug) Then
+                PrettyXML strFileName, varDebug
+            Else
+                PrettyXML strFileName
+            End If
+            rst.Close
         End If
-        rst.Close
     Next
 
     cnn.Close

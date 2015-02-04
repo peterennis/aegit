@@ -1,5 +1,5 @@
 >>>Standard Options
-              2000          AppTitle                    aegit 1.2.6
+              2000          AppTitle                    aegit 1.2.7
               2000          AppIcon                     .\adaept64.ico
               2000          AllowFullMenus              True
               2000          AllowShortcutMenus          True
@@ -31,12 +31,12 @@
               XP, 2003      Perform Name AutoCorrect                   0 
               XP, 2003      Log Name AutoCorrect Changes               0 
               XP, 2003      Enable MRU File List                      -1 
-              XP, 2003      Size of MRU File List                      5 
+              XP, 2003      Size of MRU File List                      2 
               XP, 2003      Provide Feedback with Sound                0 
               XP, 2003      Auto Compact                               0 
               XP, 2003      New Database Sort Order                    1033 
               XP, 2003      Remove Personal Information                0 
-              XP, 2003      Default Database Directory                C:\Users\peterennis\Documents\
+              XP, 2003      Default Database Directory                C:\ae\aegdiplusdemo
 >>>Edit/Find Tab
               XP, 2003      Default Find/Replace Behavior              0 
               XP, 2003      Confirm Record Changes                    -1 
@@ -143,7 +143,7 @@
 >>>Popular Tab
    >>>Creating databases section
               2007, 2010, 2013            Default File Format          12 
-              2007, 2010, 2013            Default Database Directory  C:\Users\peterennis\Documents\
+              2007, 2010, 2013            Default Database Directory  C:\ae\aegdiplusdemo
               2007, 2010, 2013            New Database Sort Order      1033 
 >>>Current Database Tab
    >>>Application Options section
@@ -232,7 +232,7 @@
               2007, 2010, 2013            Datasheet Ime Control                      0 
               2007, 2010, 2013            Use Hijri Calendar                         0 
    >>>Display section
-              2007, 2010, 2013            Size of MRU File List                      5 
+              2007, 2010, 2013            Size of MRU File List                      2 
               2007, 2010, 2013            Show Status Bar                           -1 
               2007, 2010, 2013            Show Animations                           -1 
               2007, 2010, 2013            Show Smart Tags on Datasheets             -1 
