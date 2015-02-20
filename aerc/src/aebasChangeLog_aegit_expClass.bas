@@ -44,20 +44,21 @@ Option Explicit
 ' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
 ' #013 - Ref: http://architects.dzone.com/articles/20-database-design-best
 ' #012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
-' %011 - Add an exclusion list of objects other than zzz marker, useful so that aegit objects do not need renaming
 ' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully and/or give warning
 ' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
-' #038 -
+' #040 -
+' #039 -
+' #038 - Office 2013 export takes 5 minutes for ITILRDA at OutputListOfContainers
 ' #035 - Configure git with diff for UTF16 files
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
 ' #023 - Output list of hidden tables
-' #021 - Caption ="Gr??e" - Language display problem on output - GDIPLusDemo
+' #021 - Caption ="Gr??e" - Language display problem on output - GDIPlusDemo
 ' #017 - KPI chart test not working
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
@@ -68,6 +69,7 @@ Option Explicit
 '
 '
 '20150204 - v127 - Fix error on export when USysRibbons does not exist
+    ' FIXED - %011 - Add an exclusion list of objects other than zzz marker, useful so that aegit objects do not need renaming
 '20150123 - v126 - CLOSED #036 - USysRibbons content export
     ' Expanded row height of USysRibbons shows the formatted data text contents
     ' FIXED - #037 - Adding USysRibbons form and adjusting xml causes the ribbon bar logo to disappear

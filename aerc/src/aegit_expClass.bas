@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.2.7"
-Private Const aegit_expVERSION_DATE As String = "February 4, 2015"
+Private Const aegit_expVERSION As String = "1.2.8"
+Private Const aegit_expVERSION_DATE As String = "February 13, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -2695,6 +2695,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
     Dim i As Integer
+    Dim strqdfName As String
 
     On Error GoTo PROC_ERR
 
@@ -2776,23 +2777,26 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 
     ' Delete all TEMP queries ...
     For Each qdf In CurrentDb.QueryDefs
-        If Left$(qdf.Name, 1) = "~" Then
-            CurrentDb.QueryDefs.Delete qdf.Name
+        strqdfName = qdf.Name
+        If Left$(strqdfName, 1) = "~" Then
+            CurrentDb.QueryDefs.Delete strqdfName
             CurrentDb.QueryDefs.Refresh
         End If
     Next qdf
+    If Not IsMissing(varDebug) Then Debug.Print , "Temp queries deleted"
 
     For Each qdf In CurrentDb.QueryDefs
-        If Not IsMissing(varDebug) Then Debug.Print , qdf.Name
-        If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
-                        Or Left$(qdf.Name, 4) = "~TMP" _
-                        Or Left$(qdf.Name, 3) = "zzz") Then
+        strqdfName = qdf.Name
+        If Not IsMissing(varDebug) Then Debug.Print , strqdfName
+        If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
+                        Or Left$(strqdfName, 4) = "~TMP" _
+                        Or Left$(strqdfName, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acQuery, qdf.Name, aestrSourceLocation & qdf.Name & ".qry"
+            Application.SaveAsText acQuery, strqdfName, aestrSourceLocation & strqdfName & ".qry"
             ' Convert UTF-16 to txt - fix for Access 2013
-            If aeReadWriteStream(aestrSourceLocation & qdf.Name & ".qry") = True Then
-                KillProperly (aestrSourceLocation & qdf.Name & ".qry")
-                Name aestrSourceLocation & qdf.Name & ".qry" & ".clean.txt" As aestrSourceLocation & qdf.Name & ".qry"
+            If aeReadWriteStream(aestrSourceLocation & strqdfName & ".qry") = True Then
+                KillProperly (aestrSourceLocation & strqdfName & ".qry")
+                Name aestrSourceLocation & strqdfName & ".qry" & ".clean.txt" As aestrSourceLocation & strqdfName & ".qry"
             End If
         End If
     Next qdf
@@ -3129,8 +3133,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
         Next
     Next
     Close fle
