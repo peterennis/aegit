@@ -52,7 +52,6 @@ Option Explicit
 ' Issues:
 ' #040 -
 ' #039 -
-' #038 - Office 2013 export takes 5 minutes for ITILRDA at OutputListOfContainers
 ' #035 - Configure git with diff for UTF16 files
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
@@ -68,6 +67,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150303 - v129
+    ' FIXED - #038 - Office 2013 export takes 5 minutes for ITILRDA at OutputListOfContainers
+    ' CLOSED - Ref: https://github.com/peterennis/aegit/issues/1 - Thanks Jason Zhu!
+    ' Change Test2: to look for aegit_expClass so that it will pass (class was renamed and test not updated)
 '20150204 - v127 - Fix error on export when USysRibbons does not exist
     ' FIXED - %011 - Add an exclusion list of objects other than zzz marker, useful so that aegit objects do not need renaming
 '20150123 - v126 - CLOSED #036 - USysRibbons content export

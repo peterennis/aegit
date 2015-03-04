@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.2.8"
-Private Const aegit_expVERSION_DATE As String = "February 13, 2015"
+Private Const aegit_expVERSION As String = "1.2.9"
+Private Const aegit_expVERSION_DATE As String = "March 3, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -1885,7 +1885,9 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 
     If Not IsMissing(varDebug) Then Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
     For Each tbl In dbs.TableDefs
-        If tbl.Attributes = 0 Then      ' Ignore System Tables
+        'If tbl.Attributes = 0 Then             ' Ignore System Tables, commented out by jason 201503021225, as it ALSO ignore linked tables!
+        If Not (tbl.Name Like "MSys*") Then     ' jason 201503031225
+                                                ' jason: there is another solution, using ADOX.Catalog, detail: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
             strObjName = tbl.Name
             If Not IsMissing(varDebug) Then Debug.Print , "- " & strObjName & ".xsd"
             Application.ExportXML acExportTable, strObjName, , _

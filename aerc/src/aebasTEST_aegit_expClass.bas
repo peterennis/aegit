@@ -161,11 +161,11 @@ Test2:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to Exists"
         Debug.Print , "DEBUGGING IS OFF"
-        bln2 = oDbObjects.Exists("Modules", "zzzaegitClass")
+        bln2 = oDbObjects.Exists("Modules", "aegit_expClass")
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to Exists"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln2 = oDbObjects.Exists("Modules", "zzzaegitClass", "WithDebugging")
+        bln2 = oDbObjects.Exists("Modules", "aegit_expClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
