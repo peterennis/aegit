@@ -2,11 +2,11 @@ Option Compare Database
 Option Explicit
 ' Ref: http://www.vbforums.com/showthread.php?279162-Using-Winsock-to-Connect-with-another-computer
 
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef hpvDest As Any, ByVal hpvSource As Long, ByVal cbCopy As Long)
-Private Declare Function gethostbyname Lib "WSOCK32.DLL" (ByVal szHost As String) As Long
-Private Declare Function WSAStartup Lib "WSOCK32.DLL" (ByVal wVersionRequired As Long, lpWSADATA As WSADATA) As Long
-Private Declare Function WSACleanup Lib "WSOCK32.DLL" () As Long
-Private Declare Function GetComputerName Lib "kernel32" Alias "GetComputerNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+Private Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef hpvDest As Any, ByVal hpvSource As Long, ByVal cbCopy As Long)
+Private Declare PtrSafe Function gethostbyname Lib "WSOCK32.DLL" (ByVal szHost As String) As Long
+Private Declare PtrSafe Function WSAStartup Lib "WSOCK32.DLL" (ByVal wVersionRequired As Long, lpWSADATA As WSADATA) As Long
+Private Declare PtrSafe Function WSACleanup Lib "WSOCK32.DLL" () As Long
+Private Declare PtrSafe Function GetComputerName Lib "kernel32" Alias "GetComputerNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 
 Private Const MAX_WSADescription        As Long = 256
 Private Const MAX_WSASYSStatus          As Long = 128

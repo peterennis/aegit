@@ -6,6 +6,7 @@ Option Explicit
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
 ' RibbonX Visual Designer 2010 - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
 ' IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
+' TLD (adaept.tk? - toolkits): Ref: http://www.cnn.com/2012/06/13/tech/web/tokelau-domain-name-holder/
 '
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
@@ -42,16 +43,21 @@ Option Explicit
 ' %016 -
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
-' %013 - Ref: http://architects.dzone.com/articles/20-database-design-best
-' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
+' #013 - Ref: http://architects.dzone.com/articles/20-database-design-best
+' #012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
 ' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully and/or give warning
 ' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
+' #045 -
+' #044 -
+' #043 -
+' #042 -
+' #041 -
 ' #040 -
-' #039 -
+' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 ' #035 - Configure git with diff for UTF16 files
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules

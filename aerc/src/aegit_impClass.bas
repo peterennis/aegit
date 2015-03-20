@@ -27,7 +27,7 @@ Option Explicit
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
+Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
 Private Const aegit_impVERSION As String = "1.0.0"
 Private Const aegit_impVERSION_DATE As String = "May 23, 2014"
