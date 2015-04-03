@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.3.0"
-Private Const aegit_expVERSION_DATE As String = "March 20, 2015"
+Private Const aegit_expVERSION As String = "1.3.1"
+Private Const aegit_expVERSION_DATE As String = "February 2, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -104,6 +104,7 @@ Private Const aeAppListPrp As String = "OutputListOfApplicationProperties.txt"
 Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
+Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
 '
 
 Private Sub Class_Initialize()
@@ -2245,7 +2246,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
                         Or Left$(qdf.Name, 4) = "~TMP" _
                         Or Left$(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.sql
+            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
         End If
     Next
 
@@ -2834,6 +2835,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aeExists("Tables", "USysRibbons", varDebug) Then
             OutputTableDataAsFormattedText "USysRibbons", varDebug
         End If
+        OutputCatalogUserCreatedObjects varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -2848,6 +2850,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aeExists("Tables", "USysRibbons") Then
             OutputTableDataAsFormattedText "USysRibbons"
         End If
+        OutputCatalogUserCreatedObjects
     End If
 
     OutputListOfAllHiddenQueries
@@ -3135,8 +3138,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
         Next
     Next
     Close fle
@@ -3877,6 +3880,48 @@ Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varE
     End If
 
 End Function
+
+Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
+' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc
+' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
+
+    On Error GoTo 0
+    
+    Dim strSQL As String
+    Const MY_QUERY_NAME = "zzzqryCatalogUserCreatedObjects"
+    
+    Dim strPathFileName As String
+    strPathFileName = aestrSourceLocation & aeCatalogObj
+    If Not IsMissing(varDebug) Then
+        Debug.Print , strPathFileName
+    Else
+    End If
+
+    strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
+    strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "
+    strSQL = strSQL & vbCrLf & "IIf(type = -32764,""Report"", IIf(type=-32766,""Module"", "
+    strSQL = strSQL & vbCrLf & "IIf(type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
+    strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate, MSysObjects.DateUpdate "
+    strSQL = strSQL & vbCrLf & "FROM MSysObjects "
+    strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
+    strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "
+    strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
+
+    'Debug.Print strSQL
+    
+    ' Using a query name and sql string, if the query does not exist, ...
+    If IsNull(DLookup("Name", "MsysObjects", "Name='" & MY_QUERY_NAME & "'")) Then
+        ' create it ...
+        CurrentDb.CreateQueryDef MY_QUERY_NAME, strSQL
+    Else
+        ' other wise, update the sql
+        CurrentDb.QueryDefs(MY_QUERY_NAME).SQL = strSQL
+    End If
+
+    'DoCmd.OpenQuery MY_QUERY_NAME
+    DoCmd.TransferText acExportDelim, , MY_QUERY_NAME, strPathFileName
+
+End Sub
 
 ' ==================================================
 ' Global Error Handler Routines

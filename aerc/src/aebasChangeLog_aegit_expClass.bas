@@ -40,7 +40,11 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %016 -
+' %020 -
+' %019 -
+' %018 -
+' %017 -
+' %016 - Create OutputCatalogUserCreatedObjects as a text file list with all objects
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
 ' #013 - Ref: http://architects.dzone.com/articles/20-database-design-best
