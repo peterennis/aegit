@@ -33,7 +33,8 @@ Section "" ;No components page, name is not important
 
   # create a shortcut named "adaept revision control" in the desktop
   # point the new shortcut at the app
-  CreateShortCut "$DESKTOP\adaept revision control.lnk" "$INSTDIR\adaept revision control.accdb"
+  # Ref: http://stackoverflow.com/questions/9317007/how-to-create-an-icon-shortcut-with-nsis
+  CreateShortCut "$DESKTOP\adaept revision control.lnk" "$INSTDIR\adaept revision control.accdb" "" "$INSTDIR\adaept64.ico" 0
 
   
 SectionEnd ; end the section
