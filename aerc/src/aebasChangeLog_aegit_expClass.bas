@@ -60,7 +60,7 @@ Option Explicit
 ' #043 -
 ' #042 -
 ' #041 -
-' #040 -
+' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 ' #035 - Configure git with diff for UTF16 files
 ' #026 - Output list of hidden reports
