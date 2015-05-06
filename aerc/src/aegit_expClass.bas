@@ -163,7 +163,7 @@ Private Sub Class_Initialize()
     defineMyExclusions
     Debug.Print , "pExclude = " & pExclude
     'Stop
-    OpenAllDatabases True
+    If Application.VBE.ActiveVBProject.Name <> "aegit" Then OpenAllDatabases True
 
 PROC_EXIT:
     Exit Sub
@@ -187,7 +187,7 @@ Private Sub Class_Terminate()
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
     '
-    OpenAllDatabases False
+    If Application.VBE.ActiveVBProject.Name <> "aegit" Then OpenAllDatabases False
 
 End Sub
 
@@ -1663,7 +1663,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     sLen = Len("TABLE: ") + Len(strTableName)
 
     strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
-    MsgBox strLinkedTablePath & " " & Left$(strLinkedTablePath, 13), vbInformation, "TableInfo"
+    'MsgBox strLinkedTablePath & " " & Left$(strLinkedTablePath, 13), vbInformation, "TableInfo"
 
     aeintFDLen = LongestTableDescription(tdf.Name)
 
@@ -1701,7 +1701,6 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
                         & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
-'''    strLinkedTablePath = vbNullString
 
     For Each fld In tdf.Fields
         If Not IsMissing(varDebug) Then
