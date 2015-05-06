@@ -2072,7 +2072,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 Or Left$(tdf.Name, 3) = "zzz") Then
 
             strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
-            If strLinkedTablePath <> vbNullString Then
+            If Left(strLinkedTablePath, 13) <> "Local Table=>" Then
                 f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
             Else
                 f.WriteLine vbCrLf & "'Local Table"
