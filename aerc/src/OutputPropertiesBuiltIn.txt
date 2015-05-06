@@ -49,7 +49,7 @@ Value:
 Inherited: False;
 ---
 Name: Connection
-Type: 
+Type: Unknown typeNum
 Value: 
 Inherited: False; 3251, 'Operation is not supported for this type of object.'
 ---
@@ -245,7 +245,7 @@ Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 1.3.2
+Value: aegit 1.3.3
 Inherited: False;
 ---
 Name: AppIcon

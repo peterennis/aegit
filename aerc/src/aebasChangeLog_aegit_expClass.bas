@@ -40,10 +40,15 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %020 -
-' %019 -
-' %018 -
-' %017 -
+' %025 -
+' %024 -
+' %023 -
+' %022 -
+' %021 -
+' %020 - Create mblnStandAloneDb switch in code for bypass of OpenAllDatabases routine
+' %018 - With split db add export tool to back end and save to srcbe
+' %017 - Linked tables still hang on output, use test and only export linked tables as tblName.Linked.txt
+'           Ref: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
 ' %016 - Create OutputCatalogUserCreatedObjects as a text file list with all objects
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
@@ -63,6 +68,7 @@ Option Explicit
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 ' #035 - Configure git with diff for UTF16 files
+'           Consider conversion to UTF8, Ref: https://github.com/timabell/msaccess-vcs-integration/commit/82e56a4df23b74cc57b7c4fd353babadd96c0ed4
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
@@ -77,6 +83,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150505 - v133 -
+    ' FIXED - %019 - Fix GetLinkedTableCurrentPath to not include password in link result on export
 '20150303 - v129
     ' FIXED - #038 - Office 2013 export takes 5 minutes for ITILRDA at OutputListOfContainers
     ' CLOSED - Ref: https://github.com/peterennis/aegit/issues/1 - Thanks Jason Zhu!

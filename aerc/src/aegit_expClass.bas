@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.3.2"
-Private Const aegit_expVERSION_DATE As String = "April 24, 2015"
+Private Const aegit_expVERSION As String = "1.3.3"
+Private Const aegit_expVERSION_DATE As String = "May 4, 2015"   ' Google: May the Fourth be with you!
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -163,6 +163,7 @@ Private Sub Class_Initialize()
     defineMyExclusions
     Debug.Print , "pExclude = " & pExclude
     'Stop
+    OpenAllDatabases True
 
 PROC_EXIT:
     Exit Sub
@@ -185,6 +186,9 @@ Private Sub Class_Terminate()
     Debug.Print "Class_Terminate"
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
+    '
+    OpenAllDatabases False
+
 End Sub
 
 Public Property Get SourceFolder() As String
@@ -405,6 +409,92 @@ Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnEx
     pExclude = blnExclude
     Debug.Print , "Let ExcludeFiles = " & pExclude
 End Property
+
+Private Function LinkedTable(strTblName) As Boolean
+
+    On Error GoTo PROC_ERR
+
+    ' Linked table connection string is > 0
+    If Len(CurrentDb.TableDefs(strTblName).Connect) > 0 Then
+        ' Linked table exists, but is the link valid?
+        ' The next line of code will generate Errors 3011 or 3024 if it isn't
+        CurrentDb.TableDefs(strTblName).RefreshLink
+        'If you get to this point, you have a valid, Linked Table
+        LinkedTable = True
+        'Debug.Print "LinkedTable = True"
+    Else
+        ' Local table connect string length = 0
+        ' MsgBox "[" & strTblName & "] is a Non-Linked Table", vbInformation, "Internal Table"
+        LinkedTable = False
+        'Debug.Print "LinkedTable = False"
+    End If
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        Case 3265
+            MsgBox "[" & strTblName & "] does not exist as either an Internal or Linked Table", _
+                vbCritical, "Table Missing"
+        Case 3011, 3024     'Linked Table does not exist or DB Path not valid
+            MsgBox "[" & strTblName & "] is not a valid, Linked Table", vbCritical, "Link Not Valid"
+        Case Else
+            MsgBox Err.Description & Err.Number, vbExclamation, "LinkedTable Error"
+    End Select
+    Resume PROC_EXIT
+End Function
+
+Private Sub OpenAllDatabases(blnInit As Boolean)
+' Open a handle to all databases and keep it open during the entire time the application runs.
+' Params : blnInit   TRUE to initialize (call when application starts)
+'                    FALSE to close (call when application ends)
+' Ref    : http://stackoverflow.com/questions/29838317/issue-when-using-a-dao-handle-when-the-database-closes-unexpectedly
+
+    Dim X As Integer
+    Dim strName As String
+    Dim strMsg As String
+ 
+    ' Maximum number of back end databases to link
+    Const cintMaxDatabases As Integer = 1
+
+    ' List of databases kept in a static array so we can close them later
+    Static dbsOpen() As DAO.Database
+ 
+    If blnInit Then
+        ReDim dbsOpen(1 To cintMaxDatabases)
+        For X = 1 To cintMaxDatabases
+            ' Specify your back end databases
+            Select Case X
+                Case 1:
+                    strName = "C:\SFSVIP\SVIPDB\SVIPDB_DATA.accdb"
+                Case 2:
+                    strName = "H:\folder\Backend2.mdb"
+            End Select
+        strMsg = ""
+
+        On Error Resume Next
+        Set dbsOpen(X) = OpenDatabase(strName, ReadOnly:=True)
+        If Err.Number > 0 Then
+            strMsg = "Trouble opening database: " & strName & vbCrLf & _
+                    "Make sure the drive is available." & vbCrLf & _
+                    "Error: " & Err.Description & " (" & Err.Number & ")"
+        End If
+
+        On Error GoTo 0
+        If strMsg <> "" Then
+            MsgBox strMsg
+            Exit For
+        End If
+        Next X
+    Else
+        On Error Resume Next
+        For X = 1 To cintMaxDatabases
+            dbsOpen(X).Close
+        Next X
+    End If
+
+End Sub
 
 Private Function Delay(ByVal mSecs As Long) As Boolean
     On Error GoTo 0
@@ -1456,30 +1546,56 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
 
 End Function
 
-Private Function GetLinkedTableCurrentPath(ByVal MyLinkedTable As String) As String
+Private Function GetLinkedTableCurrentPath(ByVal strTblName As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
 ' =========================================================================
 ' Procedure : GetLinkedTableCurrentPath
-' DateTime  : 08/23/2010
-' Author    : Rx
-' Purpose   : Returns Current Path of a Linked Table in Access
-' Updates   : Peter F. Ennis
+' Purpose   : Return Current Path of a Linked Table in Access and do not show password
+' Author    : Peter F. Ennis
 ' Updated   : All notes moved to change log
 ' History   : See comment details, basChangeLog, commit messages on github
 ' =========================================================================
+
     On Error GoTo PROC_ERR
-    GetLinkedTableCurrentPath = Mid$(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
-        ' Non-linked table returns blank - Instr removes the "Database="
+
+    Dim strConnect As String
+    Dim intStrConnectLen As Integer
+    Dim intEqualPos As Integer
+    Dim intDatabasePos As Integer
+    Dim strMidLink As String
+
+    If Len(CurrentDb.TableDefs(strTblName).Connect) > 0 Then
+        ' Linked table exists, but is the link valid?
+        ' The next line of code will generate Errors 3011 or 3024 if it isn't
+        CurrentDb.TableDefs(strTblName).RefreshLink
+        ' If you get to this point, you have a valid, Linked Table
+        strConnect = CurrentDb.TableDefs(strTblName).Connect
+        intStrConnectLen = Len(strConnect)
+        intDatabasePos = InStr(1, strConnect, "Database=") + 8
+        strMidLink = Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos)
+        'MsgBox "strTblName = " & strTblName & vbCrLf & _
+            "strConnect = " & strConnect & vbCrLf & _
+            "intStrConnectLen = " & intStrConnectLen & vbCrLf & _
+            "intDatabasePos = " & intDatabasePos & " : " & Left$(strConnect, intDatabasePos) & vbCrLf & _
+            "strMidLink = " & Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos) & vbCrLf _
+            , vbInformation, "GetLinkedTableCurrentPath"
+        GetLinkedTableCurrentPath = strMidLink
+    Else
+        GetLinkedTableCurrentPath = "Local Table=>" & strTblName
+    End If
 
 PROC_EXIT:
-    On Error Resume Next
     Exit Function
 
 PROC_ERR:
     Select Case Err.Number
-        ' Case ###         ' Add your own error management or log error to logging table
+        Case 3265
+            MsgBox "(" & strTblName & ") does not exist as either an Internal or Linked Table", _
+                vbCritical, "Table Missing"
+        Case 3011, 3024                 ' Linked Table does not exist or DB Path not valid
+            MsgBox "(" & strTblName & ") is not a valid, Linked Table", vbCritical, "Link Not Valid"
         Case Else
-            ' Add your own custom log usage function
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass"
     End Select
     Resume PROC_EXIT
 End Function
@@ -1547,6 +1663,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     sLen = Len("TABLE: ") + Len(strTableName)
 
     strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
+    MsgBox strLinkedTablePath & " " & Left$(strLinkedTablePath, 13), vbInformation, "TableInfo"
 
     aeintFDLen = LongestTableDescription(tdf.Name)
 
@@ -1556,7 +1673,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
-        If strLinkedTablePath <> vbNullString Then
+        If Left(strLinkedTablePath, 13) <> "Local Table=>" Then
             Debug.Print strLinkedTablePath
         End If
         Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -1573,7 +1690,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
-    If strLinkedTablePath <> vbNullString Then
+    If Left(strLinkedTablePath, 13) <> "Local Table=>" Then
         Print #1, "Linked=>" & strLinkedTablePath
     End If
     Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -1584,7 +1701,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
                         & aestr4 & SizeString("=", aeintFTLen, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
                         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
-    strLinkedTablePath = vbNullString
+'''    strLinkedTablePath = vbNullString
 
     For Each fld In tdf.Fields
         If Not IsMissing(varDebug) Then
@@ -1886,14 +2003,12 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 
     If Not IsMissing(varDebug) Then Debug.Print ">List of tables exported as XML to " & aestrXMLLocation
     For Each tbl In dbs.TableDefs
-        'If tbl.Attributes = 0 Then             ' Ignore System Tables, commented out by jason 201503021225, as it ALSO ignore linked tables!
-        If Not (tbl.Name Like "MSys*") Then     ' jason 201503031225
-                                                ' jason: there is another solution, using ADOX.Catalog, detail: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
+        If Not LinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") Then
             strObjName = tbl.Name
-            If Not IsMissing(varDebug) Then Debug.Print , "- " & strObjName & ".xsd"
             Application.ExportXML acExportTable, strObjName, , _
                         aestrXMLLocation & "tables_" & strObjName & ".xsd"
             If Not IsMissing(varDebug) Then
+                Debug.Print , "- " & strObjName & ".xsd"
                 PrettyXML aestrXMLLocation & "tables_" & strObjName & ".xsd", varDebug
             Else
                 PrettyXML aestrXMLLocation & "tables_" & strObjName & ".xsd"
@@ -2289,10 +2404,11 @@ PROC_ERR:
 
 End Sub
 
-Private Function GetPropEnum(ByVal typeNum As Long) As String
+Private Function GetPropEnum(ByVal typeNum As Long, Optional ByVal varDebug As Variant) As String
 ' Ref: http://msdn.microsoft.com/en-us/library/bb242635.aspx
- 
-    On Error GoTo 0
+
+    On Error GoTo PROC_ERR
+
     Select Case typeNum
         Case 1
             GetPropEnum = "dbBoolean"
@@ -2356,7 +2472,24 @@ Private Function GetPropEnum(ByVal typeNum As Long) As String
             GetPropEnum = "dbComplexText"
         Case Else
             'MsgBox "Unknown typeNum:" & typeNum, vbInformation, aeAPP_NAME
+            GetPropEnum = "Unknown typeNum"
             Debug.Print "Unknown typeNum:" & typeNum & " in procedure GetPropEnum of aegit_expClass"
+    End Select
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+     Select Case Err.Number
+'        Case 3251
+'            strError = " " & Err.Number & ", '" & Err.Description & "'"
+'            varPropValue = Null
+'            Resume Next
+        Case Else
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetPropEnum of Class aegit_expClass"
+            If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetPropEnum of Class aegit_expClass"
+            GetPropEnum = CStr(typeNum)
+            Resume PROC_EXIT
     End Select
 
 End Function
@@ -2367,7 +2500,7 @@ Private Function GetPrpValue(ByVal obj As Object) As String
     GetPrpValue = obj.Properties("Value")
 End Function
  
-Private Function OutputBuiltInPropertiesText() As Boolean
+Private Function OutputBuiltInPropertiesText(Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://www.jpsoftwaretech.com/listing-built-in-access-database-properties/
 
     Dim dbs As DAO.Database
@@ -2397,7 +2530,11 @@ Private Function OutputBuiltInPropertiesText() As Boolean
     For Each prp In prps
         strError = vbNullString
         Print #1, "Name: " & prp.Name
-        Print #1, "Type: " & GetPropEnum(prp.Type)
+        If Not IsMissing(varDebug) Then
+            Print #1, "Type: " & GetPropEnum(prp.Type, varDebug)
+        Else
+            Print #1, "Type: " & GetPropEnum(prp.Type)
+        End If
         ' Fixed for error 3251
         varPropValue = GetPrpValue(prp)
         Print #1, "Value: " & varPropValue
@@ -2422,7 +2559,7 @@ PROC_ERR:
             Resume Next
         Case Else
             'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
-            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
+            If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             OutputBuiltInPropertiesText = False
             Resume PROC_EXIT
     End Select
@@ -2856,7 +2993,12 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputListOfAllHiddenQueries
     OutputListOfApplicationProperties
     OutputQueriesSqlText
-    OutputBuiltInPropertiesText
+'    OutputBuiltInPropertiesText
+        If Not IsMissing(varDebug) Then
+            OutputBuiltInPropertiesText varDebug
+        Else
+            OutputBuiltInPropertiesText
+        End If
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
     OutputAllContainerProperties
@@ -3714,15 +3856,14 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
 
     Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
-        If Not (Left$(tdf.Name, 4) = "MSys" _
+        If Not LinkedTable(tdf.Name) Or _
+                Not (Left$(tdf.Name, 4) = "MSys" _
                 Or Left$(tdf.Name, 4) = "~TMP" _
                 Or Left$(tdf.Name, 3) = "zzz") Then
             strFile = aestrXMLLocation & "tables_" & tdf.Name & "_DataMacro.xml"
-            If Not IsMissing(varDebug) Then
-                Debug.Print "OutputTableDataMacros:", tdf.Name, aestrXMLLocation, strFile
-            End If
             SaveAsText acTableDataMacro, tdf.Name, strFile
             If Not IsMissing(varDebug) Then
+                Debug.Print "OutputTableDataMacros:", tdf.Name, aestrXMLLocation, strFile
                 PrettyXML strFile, varDebug
             Else
                 PrettyXML strFile
