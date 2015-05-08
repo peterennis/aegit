@@ -12,9 +12,11 @@ Option Explicit
 ' Custom Usage:
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
 ' Public Const THE_XML_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\xml\"
-' For custom configuration of the output source folder in aegitClassTest use:
+' Public Const THE_BACK_END_DB1 = "Z:\THE\BACK\END\DATA.accdb"
+' Custom configuration examples in aegitClassTest:
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
 ' oDbObjects.XMLfolder = THE_XML_FOLDER
+' oDbObjects.BackEndDb1 = THE_BACK_END_DB1
 ' Run in immediate window:                  ALTERNATIVE_EXPORT
 ' Show debug output in immediate window:    ALTERNATIVE_EXPORT varDebug:="varDebug"
 '                                           ALTERNATIVE_EXPORT 1
@@ -90,7 +92,8 @@ End Function
 Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varSrcFldr As Variant, _
                                 Optional ByVal varXmlFldr As Variant, _
-                                Optional ByVal varXmlData As Variant) As Boolean
+                                Optional ByVal varXmlData As Variant, _
+                                Optional ByVal varBackEndDb1) As Boolean
 
     On Error GoTo PROC_ERR
 
@@ -108,6 +111,8 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
+    If Not IsMissing(varBackEndDb1) Then oDbObjects.BackEndDb1 = varBackEndDb1  ' THE_BACK_END_DB1
+    'MsgBox "varBackEndDb1 = " & varBackEndDb1, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export
     gvarMyTablesForExportToXML = Array("USysRibbons")
@@ -122,7 +127,7 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                 Debug.Print , "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
             Else
                 If IsArrayInitialized(gvarMyTablesForExportToXML) Then
-                    Debug.Print "UBound(gvarMyTablesForExportToXML)=" & UBound(gvarMyTablesForExportToXML)
+                    Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
                     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
                 Else
                     Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for export."

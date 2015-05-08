@@ -1,5 +1,5 @@
 >>>Standard Options
-              2000          AppTitle                    aegit 1.3.4
+              2000          AppTitle                    aegit 1.3.5
               2000          AppIcon                     .\adaept64.ico
               2000          AllowFullMenus              True
               2000          AllowShortcutMenus          True
@@ -31,7 +31,7 @@
               XP, 2003      Perform Name AutoCorrect                   0 
               XP, 2003      Log Name AutoCorrect Changes               0 
               XP, 2003      Enable MRU File List                      -1 
-              XP, 2003      Size of MRU File List                      2 
+              XP, 2003      Size of MRU File List                     Not Tracked
               XP, 2003      Provide Feedback with Sound                0 
               XP, 2003      Auto Compact                               0 
               XP, 2003      New Database Sort Order                    1033 

@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.3.4"
-Private Const aegit_expVERSION_DATE As String = "May 6, 2015"
+Private Const aegit_expVERSION As String = "1.3.5"
+Private Const aegit_expVERSION_DATE As String = "May 7, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -90,6 +90,8 @@ Private aeintFTLen As Long                      ' Field Type Length
 Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
+Private aestrBackEndDb1 As String
+Private aestrPassword As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile As String = "OutputTblSetupForTables.txt"
@@ -163,7 +165,6 @@ Private Sub Class_Initialize()
     defineMyExclusions
     Debug.Print , "pExclude = " & pExclude
     'Stop
-    If Application.VBE.ActiveVBProject.Name <> "aegit" Then OpenAllDatabases True
 
 PROC_EXIT:
     Exit Sub
@@ -203,6 +204,11 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
     aegitSourceFolder = strSourceFolder
 End Property
 
+Public Property Let BackEndDb1(ByVal strBackEndDbFullPath As String)
+    On Error GoTo 0
+    aestrBackEndDb1 = strBackEndDbFullPath
+End Property
+
 Public Property Get XMLfolder() As String
     On Error GoTo 0
     XMLfolder = aegitXMLfolder
@@ -233,7 +239,7 @@ Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
 ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
     On Error GoTo PROC_ERR
 
-    Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0)=" & varTablesArray(0)
+    Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0) = " & varTablesArray(0)
     Debug.Print , "UBound(varTablesArray) = " & UBound(varTablesArray)
     If UBound(varTablesArray) > 0 Then
         Debug.Print , "varTablesArray(1) = " & varTablesArray(1)
@@ -451,7 +457,7 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
 '                    FALSE to close (call when application ends)
 ' Ref    : http://stackoverflow.com/questions/29838317/issue-when-using-a-dao-handle-when-the-database-closes-unexpectedly
 
-    Dim X As Integer
+    Dim intX As Integer
     Dim strName As String
     Dim strMsg As String
  
@@ -463,18 +469,23 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
  
     If blnInit Then
         ReDim dbsOpen(1 To cintMaxDatabases)
-        For X = 1 To cintMaxDatabases
+        For intX = 1 To cintMaxDatabases
             ' Specify your back end databases
-            Select Case X
+            Select Case intX
                 Case 1:
-                    strName = "C:\SFSVIP\SVIPDB\SVIPDB_DATA.accdb"
+                    strName = aestrBackEndDb1
                 Case 2:
                     strName = "H:\folder\Backend2.mdb"
             End Select
         strMsg = ""
 
         On Error Resume Next
-        Set dbsOpen(X) = OpenDatabase(strName, ReadOnly:=True)
+        ' Ref: https://support.microsoft.com/en-us/kb/209953
+        ' If you use a Connect argument and you do not provide the Options and Read-Only arguments, you receive run-time error 3031: Not a valid password.
+        ' Ref: https://msdn.microsoft.com/en-us/library/office/ff835343.aspx
+        Set dbsOpen(intX) = OpenDatabase(strName) ' Shared, Read Only
+        ' Example for password protected back end requires use of Let property for aestrPassword
+        'Set dbsOpen(intX) = OpenDatabase(strName, False, True, "MS Access;pwd=" & aestrPassword) ' Shared, Read Only
         If Err.Number > 0 Then
             strMsg = "Trouble opening database: " & strName & vbCrLf & _
                     "Make sure the drive is available." & vbCrLf & _
@@ -483,15 +494,15 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
 
         On Error GoTo 0
         If strMsg <> "" Then
-            MsgBox strMsg
+            MsgBox strMsg & vbCrLf & "strName = " & strName
             Exit For
         End If
-        Next X
+        Next intX
     Else
         On Error Resume Next
-        For X = 1 To cintMaxDatabases
-            dbsOpen(X).Close
-        Next X
+        For intX = 1 To cintMaxDatabases
+            dbsOpen(intX).Close
+        Next intX
     End If
 
 End Sub
@@ -695,8 +706,10 @@ Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     On Error GoTo 0
     If IsNull(strQueryName) Or strQueryName = vbNullString Then
         IsQryHidden = False
+        Debug.Print "IsQryHidden Null Test", strQueryName, IsQryHidden
     Else
         IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
+        Debug.Print "IsQryHidden Attribute Test", strQueryName, IsQryHidden
     End If
 End Function
 
@@ -773,6 +786,15 @@ End Sub
 Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
+    Dim strTheSQL As String
+    Dim varResult As Variant
+    Dim intHidden As Integer
+    Dim dbs As DAO.Database
+    Dim rst As DAO.Recordset
+
+    Set dbs = CurrentDb()
+    intHidden = 0
+
     On Error GoTo PROC_ERR
 
     Const strTempTable As String = "zzzTmpTblQueries"
@@ -785,8 +807,8 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     If Not IsMissing(varDebug) Then Debug.Print strSQL
     If Not IsMissing(varDebug) And _
                 Application.VBE.ActiveVBProject.Name = "aegit" Then
-        Debug.Print "IsQryHidden('qpt_Dummy')=" & IsQryHidden("qpt_Dummy")
-        Debug.Print "IsQryHidden('qry_HiddenDummy')=" & IsQryHidden("qry_HiddenDummy")
+        Debug.Print "IsQryHidden('qpt_Dummy') = " & IsQryHidden("qpt_Dummy")
+        Debug.Print "IsQryHidden('qry_HiddenDummy') = " & IsQryHidden("qry_HiddenDummy")
     End If
     'Stop
 
@@ -794,38 +816,45 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     ' Use RunSQL for action queries - Insert list of db queries into a temp table
     DoCmd.RunSQL strSQL
 
-    Dim strTheSQL As String
-    Dim varResult As Variant
-    Dim rst As DAO.Recordset
-
-    strTheSQL = "SELECT Name FROM " & strTempTable & ";"
-    Set rst = CurrentDb.OpenRecordset(strTheSQL, dbOpenDynaset)
+e3167e3011e3078:
+    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
 
     With rst
         If (.RecordCount > 0) Then
-            rst.MoveFirst
+            .MoveFirst
             Do While Not rst.EOF
                 varResult = !Name
                 If Not IsMissing(varDebug) Then
-                    Debug.Print !Name.Value, IsQryHidden(!Name)
+                    Debug.Print ">", !Name.Value, IsQryHidden(!Name)
                 End If
-                If Not IsQryHidden(!Name) Then
+                If IsQryHidden(!Name) Then
+                    intHidden = intHidden + 1
+                    .MoveNext
+                Else
                     .Delete
+                    ' Ref: https://msdn.microsoft.com/en-us/library/bb243799%28v=office.12%29.aspx
+                    ' When you use the Delete method, the Microsoft Access database engine immediately deletes the current record
+                    ' without any warning or prompting. Deleting a record does not automatically cause the next record to become the current record;
+                    ' to move to the next record you must use the MoveNext method. However, keep in mind that after you have moved off the deleted record, you cannot move back to it.
+                    .MoveNext
                 End If
-                rst.MoveNext
             Loop
         Else
             Debug.Print "No records!"
         End If
     End With
-    
-    rst.Close
-    Set rst = Nothing
 
     If Not IsMissing(varDebug) Then
-        Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+        Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount     ', "DCount(""Name"", strTempTable) = " & DCount("Name", strTempTable)
     End If
+
+    rst.Close
+    Set rst = Nothing
+    dbs.Close
+    Set dbs = Nothing
+
     DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
+'Stop
     CurrentDb.Execute "DROP TABLE " & strTempTable
     DoCmd.SetWarnings True
 
@@ -833,7 +862,18 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+    If Err = 3167 Then          ' Record is deleted
+        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+        Resume e3167e3011e3078
+    ElseIf Err = 3011 Then
+        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+        Resume e3167e3011e3078
+    ElseIf Err = 3078 Then
+        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+        Resume e3167e3011e3078
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+    End If
     Resume PROC_EXIT
 
 End Sub
@@ -926,7 +966,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     Print #fle, , "XP, 2003", "Perform Name AutoCorrect    ", Application.GetOption("Perform Name AutoCorrect")                               ' Name AutoCorrect, Perform name AutoCorrect
     Print #fle, , "XP, 2003", "Log Name AutoCorrect Changes", Application.GetOption("Log Name AutoCorrect Changes")                           ' Name AutoCorrect, Log name AutoCorrect changes
     Print #fle, , "XP, 2003", "Enable MRU File List        ", Application.GetOption("Enable MRU File List")                                   ' Recently used file list
-    Print #fle, , "XP, 2003", "Size of MRU File List       ", Application.GetOption("Size of MRU File List")                                  ' Recently used file list, (number of files)
+    Print #fle, , "XP, 2003", "Size of MRU File List       ", "Not Tracked"     'Application.GetOption("Size of MRU File List")                                  ' Recently used file list, (number of files)
     Print #fle, , "XP, 2003", "Provide Feedback with Sound ", Application.GetOption("Provide Feedback with Sound")                            ' Provide feedback with sound
     Print #fle, , "XP, 2003", "Auto Compact                ", Application.GetOption("Auto Compact")                                           ' Compact on Close
     Print #fle, , "XP, 2003", "New Database Sort Order     ", Application.GetOption("New Database Sort Order")                                ' New database sort order
@@ -2846,6 +2886,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
+    If Application.VBE.ActiveVBProject.Name <> "aegit" Then OpenAllDatabases True
+
     If aegitSourceFolder = "default" Then
         aestrSourceLocation = aegitType.SourceFolder
         aegitSetup = True
@@ -2972,6 +3014,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             OutputTableDataAsFormattedText "USysRibbons", varDebug
         End If
         OutputCatalogUserCreatedObjects varDebug
+        OutputListOfAllHiddenQueries varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -2987,9 +3030,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             OutputTableDataAsFormattedText "USysRibbons"
         End If
         OutputCatalogUserCreatedObjects
+        OutputListOfAllHiddenQueries
     End If
 
-    OutputListOfAllHiddenQueries
     OutputListOfApplicationProperties
     OutputQueriesSqlText
 '    OutputBuiltInPropertiesText
@@ -3422,6 +3465,8 @@ Private Function OutputListOfContainers(ByVal strTheFileName As String, Optional
 
     On Error GoTo PROC_ERR
 
+    OutputListOfContainers = True
+
     Debug.Print "OutputListOfContainers"
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
@@ -3471,19 +3516,25 @@ Private Function OutputListOfContainers(ByVal strTheFileName As String, Optional
         .Close
     End With
 
-    OutputListOfContainers = True
-
 PROC_EXIT:
     Close lngFileNum
     Set prpLoop = Nothing
     Set conItem = Nothing
     Set dbs = Nothing
+'Stop
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass", vbCritical, "Error"
+    Select Case Err.Number
+        Case 3358   ' Cannot open the Microsoft Access database workgroup information file
+            'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass"
+            Resume Next
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass"
+            Resume Next
+    End Select
     OutputListOfContainers = False
-    Resume PROC_EXIT
+    Resume Next
 
 End Function
 
