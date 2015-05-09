@@ -41,25 +41,17 @@ Option Explicit
 '=============================================================================================================================
 ' Tasks:
 ' %030 -
-' %029 -
-' %028 -
-' %027 - Hidden queries output is listing all queries for split db. Possible error in IsQryHidden function
-' %026 - Remove Last Updated ouput from table properties, it is just noise
-' %025 - Relates to %024, Error 3011, Could not find object 'zzzTmpTblQueries' => it is in the front end and not the back end
-' %024 - Error 3167, Record is deleted. OutputListOfAllHiddenQueries
+' %029 - Split db export use causes exclusive lock, faster export but requires access restart
+'           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
+' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
-' %022 - Set size of MRU list to 'Not Tracked' for export, it is noise
-' %021 - Create Let property to transfer password for code export when back end is encrypted
-' %020 - Add code for bypass of OpenAllDatabases routine when using standalone (not split) database
-' %018 - With split db add export tool to back end. e.g. save to srcbe, test
+' %018 - With split db add export tool to back end, e.g. save to srcbe, test
 ' %017 - Linked tables still hang on output, use test and only export linked tables as tblName.Linked.txt
 '           Ref: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
 ' %016 - Create OutputCatalogUserCreatedObjects as a text file list with all objects
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
-' %013 - Ref: http://architects.dzone.com/articles/20-database-design-best
 ' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
-' %010 - Export locks up easily when linked tables are on a network drive - need to fail gracefully and/or give warning
 ' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
@@ -88,6 +80,17 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150508 - v136 -
+    ' FIXED - %027 - Hidden queries output is listing all queries for split db. Possible error in IsQryHidden function
+    ' FIXED - %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
+    ' FIXED - %025 - Relates to %024, Error 3011, Could not find object 'zzzTmpTblQueries' => it is in the front end and not the back end
+    ' FIXED - %024 - Error 3167, Record is deleted. OutputListOfAllHiddenQueries
+    ' FIXED - %022 - Set size of MRU list to 'Not Tracked' for export, it is noise
+    ' WONTFIX - %021 - Create Let property to transfer password for code export when back end is encrypted
+    '           Develop without password then add it at deployment when possible, reopen if special case needs it
+    ' FIXED - %020 - Relates to %010, Add code for bypass of OpenAllDatabases routine when using standalone (not split) database
+    ' RESOLVED - %013 - Ref: http://architects.dzone.com/articles/20-database-design-best
+    ' FIXED - %010 - Relates to %020, Export locks up easily when linked tables are on a network drive - need to fail gracefully and/or give warning
 '20150505 - v133 -
     ' FIXED - %019 - Fix GetLinkedTableCurrentPath to not include password in link result on export
 '20150303 - v129

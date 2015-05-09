@@ -11,7 +11,9 @@ Option Explicit
 '
 ' Custom Usage:
 ' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
+' Public Const THE_BACK_END_SOURCE_FOLDER = "Z:\The\Source\Folder\srcbe.MYPROJECT\"
 ' Public Const THE_XML_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\xml\"
+' Public Const THE_BACK_END_XML_FOLDER = "Z:\The\Source\Folder\srcbe.MYPROJECT\xml\"
 ' Public Const THE_BACK_END_DB1 = "Z:\THE\BACK\END\DATA.accdb"
 ' Custom configuration examples in aegitClassTest:
 ' oDbObjects.SourceFolder = THE_SOURCE_FOLDER

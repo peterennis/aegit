@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.3.5"
-Private Const aegit_expVERSION_DATE As String = "May 7, 2015"
+Private Const aegit_expVERSION As String = "1.3.6"
+Private Const aegit_expVERSION_DATE As String = "May 8, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -164,6 +164,7 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
     defineMyExclusions
     Debug.Print , "pExclude = " & pExclude
+    Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
     'Stop
 
 PROC_EXIT:
@@ -183,6 +184,8 @@ Private Sub Class_Terminate()
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
+    Debug.Print
+    Debug.Print "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
     Debug.Print
     Debug.Print "Class_Terminate"
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
@@ -415,6 +418,20 @@ Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnEx
     pExclude = blnExclude
     Debug.Print , "Let ExcludeFiles = " & pExclude
 End Property
+
+Private Function IsLoaded(ByVal strFormName As String) As Boolean
+ ' Returns True if the specified form is open in Form view or Datasheet view.
+    
+    Const conObjStateClosed = 0
+    Const conDesignView = 0
+    
+    If SysCmd(acSysCmdGetObjectState, acForm, strFormName) <> conObjStateClosed Then
+        If Forms(strFormName).CurrentView <> conDesignView Then
+            IsLoaded = True
+        End If
+    End If
+    
+End Function
 
 Private Function LinkedTable(strTblName) As Boolean
 
@@ -706,10 +723,10 @@ Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     On Error GoTo 0
     If IsNull(strQueryName) Or strQueryName = vbNullString Then
         IsQryHidden = False
-        Debug.Print "IsQryHidden Null Test", strQueryName, IsQryHidden
+        'Debug.Print "IsQryHidden Null Test", strQueryName, IsQryHidden
     Else
         IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
-        Debug.Print "IsQryHidden Attribute Test", strQueryName, IsQryHidden
+        'Debug.Print "IsQryHidden Attribute Test", strQueryName, IsQryHidden
     End If
 End Function
 
@@ -3015,6 +3032,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         End If
         OutputCatalogUserCreatedObjects varDebug
         OutputListOfAllHiddenQueries varDebug
+        OutputBuiltInPropertiesText varDebug
+        OutputAllContainerProperties varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -3031,19 +3050,14 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         End If
         OutputCatalogUserCreatedObjects
         OutputListOfAllHiddenQueries
+        OutputBuiltInPropertiesText
+        OutputAllContainerProperties
     End If
 
     OutputListOfApplicationProperties
     OutputQueriesSqlText
-'    OutputBuiltInPropertiesText
-        If Not IsMissing(varDebug) Then
-            OutputBuiltInPropertiesText varDebug
-        Else
-            OutputBuiltInPropertiesText
-        End If
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
-    OutputAllContainerProperties
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then
@@ -3547,6 +3561,7 @@ Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
         ListAllContainerProperties "Databases", varDebug
         Debug.Print "Container information for properties of saved Tables and Queries"
         ListAllContainerProperties "Tables", varDebug
+        'Stop
         Debug.Print "Container information for properties of saved Relationships"
         ListAllContainerProperties "Relationships", varDebug
     Else
@@ -3601,7 +3616,7 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
     Dim dbs As DAO.Database
     Dim obj As Object
     Dim prp As DAO.Property
-    Dim doc As Document
+    Dim doc As DAO.Document
     Dim fle As Integer
 
     Set dbs = Application.CurrentDb
@@ -3619,18 +3634,27 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
             For Each prp In doc.Properties
                 On Error Resume Next
                 If prp.Name = "GUID" And strContainer = "tables" Then
+                    Print #fle, , prp.Name, fListGUID(doc.Name)
                     If Not IsMissing(varDebug) Then Debug.Print , prp.Name, fListGUID(doc.Name)
-                        Print #fle, , prp.Name, fListGUID(doc.Name)
-                    ElseIf prp.Name = "DOL" Then
-                        If Not IsMissing(varDebug) Then Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
-                        Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
-                    ElseIf prp.Name = "NameMap" Then
-                        If Not IsMissing(varDebug) Then Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
-                        Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
+                ElseIf prp.Name = "DOL" Then
+                    Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
+                    If Not IsMissing(varDebug) Then Debug.Print prp.Name, "Track name AutoCorrect info is ON!"
+                ElseIf prp.Name = "NameMap" Then
+                    Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
+                    If Not IsMissing(varDebug) Then Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
+                Else
+                    If prp.Name = "LastUpdated" Then
+                        Print #fle, , prp.Name, FormatDateTime(prp.Value, vbShortDate)
                     Else
-                        If Not IsMissing(varDebug) Then Debug.Print , prp.Name, prp.Value
                         Print #fle, , prp.Name, prp.Value
                     End If
+                    If Not IsMissing(varDebug) Then
+                        Debug.Print , prp.Name, prp.Value
+                        If prp.Name = "LastUpdated" Then
+                            Debug.Print , "=>", prp.Name, FormatDateTime(prp.Value, vbShortDate)
+                        End If
+                    End If
+                End If
                 On Error GoTo 0
             Next
         End If
@@ -4076,7 +4100,7 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
 ' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc
 ' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
 
-    On Error GoTo 0
+    On Error GoTo PROC_ERR
     
     Dim strSQL As String
     Const MY_QUERY_NAME = "zzzqryCatalogUserCreatedObjects"
@@ -4088,18 +4112,37 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     Else
     End If
 
+    'strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate, MSysObjects.DateUpdate "
+    
+'    strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
+'    strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "
+'    strSQL = strSQL & vbCrLf & "IIf(type = -32764,""Report"", IIf(type=-32766,""Module"", "
+'    strSQL = strSQL & vbCrLf & "IIf(type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
+'    strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate "
+'    strSQL = strSQL & vbCrLf & "FROM MSysObjects "
+'    strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
+'    strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "
+'    strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
+
+    ' Ref: https://support.office.com/en-za/article/FormatDateTime-Function-aef62949-f957-4ba4-94ff-ace14be4f1ca
+    ' Format DateCreate as short date, vbShortDate = 2
+    'SELECT IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))) AS [Object Type], MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated
+    'FROM MSysObjects
+    'WHERE (((MSysObjects.[Type]) In (1,5,6,-32768,-32764,-32766,-32761)) AND ((Left([Name],4))<>"MSys") AND ((Left([Name],1))<>"~"))
+    'ORDER BY IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))), MSysObjects.Name;
+
     strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
     strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "
     strSQL = strSQL & vbCrLf & "IIf(type = -32764,""Report"", IIf(type=-32766,""Module"", "
     strSQL = strSQL & vbCrLf & "IIf(type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
-    strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate, MSysObjects.DateUpdate "
+    strSQL = strSQL & vbCrLf & "MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated "
     strSQL = strSQL & vbCrLf & "FROM MSysObjects "
     strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
     strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "
     strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
 
     'Debug.Print strSQL
-    
+
     ' Using a query name and sql string, if the query does not exist, ...
     If IsNull(DLookup("Name", "MsysObjects", "Name='" & MY_QUERY_NAME & "'")) Then
         ' create it ...
@@ -4110,7 +4153,21 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     End If
 
     'DoCmd.OpenQuery MY_QUERY_NAME
+e3167:
     DoCmd.TransferText acExportDelim, , MY_QUERY_NAME, strPathFileName
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3167 Then          ' Record is deleted
+        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass"
+        Resume e3167
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass"
+    End If
+    'Stop
+    Resume PROC_EXIT
 
 End Sub
 
