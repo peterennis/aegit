@@ -1,0 +1,114 @@
+|--- Name ==> aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+|--- Updatable ==> True
+|--- Connect ==> 
+|--- Attributes ==> 0
+|--- SourceTableName ==> 
+|--- RecordCount ==> 0
+|--- ValidationRule ==> 
+|--- ValidationText ==> 
+|--- ConflictTable ==> 
+|--- ReplicaFilter ==> 
+|--- GUID ==> ????????
+|--- Orientation ==> 0
+|--- OrderByOn ==> False
+|--- DefaultView ==> 2
+|--- DisplayViewsOnSharePointSite ==> 1
+|--- TotalsRow ==> False
+|--- FilterOnLoad ==> False
+|--- OrderByOnLoad ==> True
+|--- HideNewField ==> False
+|--- BackTint ==> 100
+|--- BackShade ==> 100
+|--- ThemeFontIndex ==> 1
+|--- AlternateBackThemeColorIndex ==> 1
+|--- AlternateBackTint ==> 100
+|--- AlternateBackShade ==> 95
+|--- ReadOnlyWhenDisconnected ==> False
+|--- DatasheetGridlinesThemeColorIndex ==> 3
+|--- DatasheetForeThemeColorIndex ==> 0
+|--- PublishToWeb ==> 1
+---------------------------------------------------------
+|--- id (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
+|------ Attributes ==> 17
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> id
+|------ OrdinalPosition ==> 0
+|------ Size ==> 4
+|------ SourceField ==> id
+|------ SourceTable ==> aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ GUID ==> ????????
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- Desc (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> Desc
+|------ OrdinalPosition ==> 1
+|------ Size ==> 255
+|------ SourceField ==> Desc
+|------ SourceTable ==> aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ GUID ==> ????¦???
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- Description (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> Description
+|------ OrdinalPosition ==> 2
+|------ Size ==> 255
+|------ SourceField ==> Description
+|------ SourceTable ==> aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ GUID ==> ????????
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ Description ==> This is a description of the field
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0

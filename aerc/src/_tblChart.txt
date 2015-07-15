@@ -1,0 +1,1960 @@
+|--- Name ==> _tblChart
+|--- Updatable ==> True
+|--- Connect ==> 
+|--- Attributes ==> 0
+|--- SourceTableName ==> 
+|--- RecordCount ==> 27
+|--- ValidationRule ==> 
+|--- ValidationText ==> 
+|--- ConflictTable ==> 
+|--- ReplicaFilter ==> 
+|--- PublishToWeb ==> 1
+|--- Orientation ==> 0
+|--- OrderByOn ==> False
+|--- DefaultView ==> 2
+|--- DisplayViewsOnSharePointSite ==> 1
+|--- TotalsRow ==> False
+|--- FilterOnLoad ==> False
+|--- OrderByOnLoad ==> True
+|--- HideNewField ==> False
+|--- BackTint ==> 100
+|--- BackShade ==> 100
+|--- ThemeFontIndex ==> 1
+|--- AlternateBackThemeColorIndex ==> 1
+|--- AlternateBackTint ==> 100
+|--- AlternateBackShade ==> 95
+|--- DatasheetGridlinesThemeColorIndex ==> 3
+|--- DatasheetForeThemeColorIndex ==> 0
+|--- ReadOnlyWhenDisconnected ==> False
+|--- GUID ==> ????????
+---------------------------------------------------------
+|--- ID (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> ID
+|------ OrdinalPosition ==> 0
+|------ Size ==> 4
+|------ SourceField ==> ID
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> True
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 1
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- VersionApp (Field in _tblChart)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> VersionApp
+|------ OrdinalPosition ==> 1
+|------ Size ==> 255
+|------ SourceField ==> VersionApp
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 1515
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- VersionData (Field in _tblChart)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> VersionData
+|------ OrdinalPosition ==> 2
+|------ Size ==> 255
+|------ SourceField ==> VersionData
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 1560
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> False
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- EnterDate (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 8
+|------ Name ==> EnterDate
+|------ OrdinalPosition ==> 3
+|------ Size ==> 8
+|------ SourceField ==> EnterDate
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ShowDatePicker ==> 1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|------ Format ==> mm/yyyy
+|--- FLD01 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD01
+|------ OrdinalPosition ==> 4
+|------ Size ==> 4
+|------ SourceField ==> FLD01
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD02 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD02
+|------ OrdinalPosition ==> 5
+|------ Size ==> 4
+|------ SourceField ==> FLD02
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD03 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD03
+|------ OrdinalPosition ==> 6
+|------ Size ==> 4
+|------ SourceField ==> FLD03
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD04 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD04
+|------ OrdinalPosition ==> 7
+|------ Size ==> 4
+|------ SourceField ==> FLD04
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD05 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD05
+|------ OrdinalPosition ==> 8
+|------ Size ==> 4
+|------ SourceField ==> FLD05
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD06 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD06
+|------ OrdinalPosition ==> 9
+|------ Size ==> 4
+|------ SourceField ==> FLD06
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD07 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD07
+|------ OrdinalPosition ==> 10
+|------ Size ==> 4
+|------ SourceField ==> FLD07
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD08 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD08
+|------ OrdinalPosition ==> 11
+|------ Size ==> 4
+|------ SourceField ==> FLD08
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD09 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD09
+|------ OrdinalPosition ==> 12
+|------ Size ==> 4
+|------ SourceField ==> FLD09
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD10 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD10
+|------ OrdinalPosition ==> 13
+|------ Size ==> 4
+|------ SourceField ==> FLD10
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD11 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD11
+|------ OrdinalPosition ==> 14
+|------ Size ==> 4
+|------ SourceField ==> FLD11
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD12 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD12
+|------ OrdinalPosition ==> 15
+|------ Size ==> 4
+|------ SourceField ==> FLD12
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD13 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD13
+|------ OrdinalPosition ==> 16
+|------ Size ==> 4
+|------ SourceField ==> FLD13
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD14 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD14
+|------ OrdinalPosition ==> 17
+|------ Size ==> 4
+|------ SourceField ==> FLD14
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD15 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD15
+|------ OrdinalPosition ==> 18
+|------ Size ==> 4
+|------ SourceField ==> FLD15
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD16 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD16
+|------ OrdinalPosition ==> 19
+|------ Size ==> 4
+|------ SourceField ==> FLD16
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD17 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD17
+|------ OrdinalPosition ==> 20
+|------ Size ==> 4
+|------ SourceField ==> FLD17
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD18 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD18
+|------ OrdinalPosition ==> 21
+|------ Size ==> 4
+|------ SourceField ==> FLD18
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD19 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD19
+|------ OrdinalPosition ==> 22
+|------ Size ==> 4
+|------ SourceField ==> FLD19
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> 960
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD20 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD20
+|------ OrdinalPosition ==> 23
+|------ Size ==> 4
+|------ SourceField ==> FLD20
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD21 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD21
+|------ OrdinalPosition ==> 24
+|------ Size ==> 4
+|------ SourceField ==> FLD21
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD22 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD22
+|------ OrdinalPosition ==> 25
+|------ Size ==> 4
+|------ SourceField ==> FLD22
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD23 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD23
+|------ OrdinalPosition ==> 26
+|------ Size ==> 4
+|------ SourceField ==> FLD23
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD24 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD24
+|------ OrdinalPosition ==> 27
+|------ Size ==> 4
+|------ SourceField ==> FLD24
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD25 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD25
+|------ OrdinalPosition ==> 28
+|------ Size ==> 4
+|------ SourceField ==> FLD25
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD26 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD26
+|------ OrdinalPosition ==> 29
+|------ Size ==> 4
+|------ SourceField ==> FLD26
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD27 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD27
+|------ OrdinalPosition ==> 30
+|------ Size ==> 4
+|------ SourceField ==> FLD27
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD28 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD28
+|------ OrdinalPosition ==> 31
+|------ Size ==> 4
+|------ SourceField ==> FLD28
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD29 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD29
+|------ OrdinalPosition ==> 32
+|------ Size ==> 4
+|------ SourceField ==> FLD29
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD30 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD30
+|------ OrdinalPosition ==> 33
+|------ Size ==> 4
+|------ SourceField ==> FLD30
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD31 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD31
+|------ OrdinalPosition ==> 34
+|------ Size ==> 4
+|------ SourceField ==> FLD31
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD32 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD32
+|------ OrdinalPosition ==> 35
+|------ Size ==> 4
+|------ SourceField ==> FLD32
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD33 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD33
+|------ OrdinalPosition ==> 36
+|------ Size ==> 4
+|------ SourceField ==> FLD33
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD34 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD34
+|------ OrdinalPosition ==> 37
+|------ Size ==> 4
+|------ SourceField ==> FLD34
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD35 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD35
+|------ OrdinalPosition ==> 38
+|------ Size ==> 4
+|------ SourceField ==> FLD35
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD36 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD36
+|------ OrdinalPosition ==> 39
+|------ Size ==> 4
+|------ SourceField ==> FLD36
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD37 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD37
+|------ OrdinalPosition ==> 40
+|------ Size ==> 4
+|------ SourceField ==> FLD37
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD38 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD38
+|------ OrdinalPosition ==> 41
+|------ Size ==> 4
+|------ SourceField ==> FLD38
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD39 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD39
+|------ OrdinalPosition ==> 42
+|------ Size ==> 4
+|------ SourceField ==> FLD39
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD40 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD40
+|------ OrdinalPosition ==> 43
+|------ Size ==> 4
+|------ SourceField ==> FLD40
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD41 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD41
+|------ OrdinalPosition ==> 44
+|------ Size ==> 4
+|------ SourceField ==> FLD41
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD42 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD42
+|------ OrdinalPosition ==> 45
+|------ Size ==> 4
+|------ SourceField ==> FLD42
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD43 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD43
+|------ OrdinalPosition ==> 46
+|------ Size ==> 4
+|------ SourceField ==> FLD43
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD44 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD44
+|------ OrdinalPosition ==> 47
+|------ Size ==> 4
+|------ SourceField ==> FLD44
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD45 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD45
+|------ OrdinalPosition ==> 48
+|------ Size ==> 4
+|------ SourceField ==> FLD45
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD46 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD46
+|------ OrdinalPosition ==> 49
+|------ Size ==> 4
+|------ SourceField ==> FLD46
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD47 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD47
+|------ OrdinalPosition ==> 50
+|------ Size ==> 4
+|------ SourceField ==> FLD47
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD48 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD48
+|------ OrdinalPosition ==> 51
+|------ Size ==> 4
+|------ SourceField ==> FLD48
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD49 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD49
+|------ OrdinalPosition ==> 52
+|------ Size ==> 4
+|------ SourceField ==> FLD49
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD50 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD50
+|------ OrdinalPosition ==> 53
+|------ Size ==> 4
+|------ SourceField ==> FLD50
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD51 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD51
+|------ OrdinalPosition ==> 54
+|------ Size ==> 4
+|------ SourceField ==> FLD51
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD52 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD52
+|------ OrdinalPosition ==> 55
+|------ Size ==> 4
+|------ SourceField ==> FLD52
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD53 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD53
+|------ OrdinalPosition ==> 56
+|------ Size ==> 4
+|------ SourceField ==> FLD53
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD54 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD54
+|------ OrdinalPosition ==> 57
+|------ Size ==> 4
+|------ SourceField ==> FLD54
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD55 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD55
+|------ OrdinalPosition ==> 58
+|------ Size ==> 4
+|------ SourceField ==> FLD55
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD56 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD56
+|------ OrdinalPosition ==> 59
+|------ Size ==> 4
+|------ SourceField ==> FLD56
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD57 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD57
+|------ OrdinalPosition ==> 60
+|------ Size ==> 4
+|------ SourceField ==> FLD57
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD58 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD58
+|------ OrdinalPosition ==> 61
+|------ Size ==> 4
+|------ SourceField ==> FLD58
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD59 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD59
+|------ OrdinalPosition ==> 62
+|------ Size ==> 4
+|------ SourceField ==> FLD59
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD60 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD60
+|------ OrdinalPosition ==> 63
+|------ Size ==> 4
+|------ SourceField ==> FLD60
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD61 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD61
+|------ OrdinalPosition ==> 64
+|------ Size ==> 4
+|------ SourceField ==> FLD61
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD62 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD62
+|------ OrdinalPosition ==> 65
+|------ Size ==> 4
+|------ SourceField ==> FLD62
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD63 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD63
+|------ OrdinalPosition ==> 66
+|------ Size ==> 4
+|------ SourceField ==> FLD63
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD64 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD64
+|------ OrdinalPosition ==> 67
+|------ Size ==> 4
+|------ SourceField ==> FLD64
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD65 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD65
+|------ OrdinalPosition ==> 68
+|------ Size ==> 4
+|------ SourceField ==> FLD65
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD66 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD66
+|------ OrdinalPosition ==> 69
+|------ Size ==> 4
+|------ SourceField ==> FLD66
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD67 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD67
+|------ OrdinalPosition ==> 70
+|------ Size ==> 4
+|------ SourceField ==> FLD67
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD68 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD68
+|------ OrdinalPosition ==> 71
+|------ Size ==> 4
+|------ SourceField ==> FLD68
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD69 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD69
+|------ OrdinalPosition ==> 72
+|------ Size ==> 4
+|------ SourceField ==> FLD69
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- FLD70 (Field in _tblChart)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> FLD70
+|------ OrdinalPosition ==> 73
+|------ Size ==> 4
+|------ SourceField ==> FLD70
+|------ SourceTable ==> _tblChart
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0

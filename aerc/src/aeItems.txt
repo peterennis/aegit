@@ -1,0 +1,215 @@
+|--- Name ==> aeItems
+|--- Updatable ==> True
+|--- Connect ==> 
+|--- Attributes ==> 0
+|--- SourceTableName ==> 
+|--- RecordCount ==> 4
+|--- ValidationRule ==> 
+|--- ValidationText ==> 
+|--- ConflictTable ==> 
+|--- ReplicaFilter ==> 
+|--- Orientation ==> 0
+|--- OrderByOn ==> False
+|--- DefaultView ==> 2
+|--- GUID ==> ????????
+|--- DisplayViewsOnSharePointSite ==> 1
+|--- TotalsRow ==> False
+|--- FilterOnLoad ==> False
+|--- OrderByOnLoad ==> True
+|--- HideNewField ==> False
+|--- BackTint ==> 100
+|--- BackShade ==> 100
+|--- ThemeFontIndex ==> 1
+|--- AlternateBackThemeColorIndex ==> 1
+|--- AlternateBackTint ==> 100
+|--- AlternateBackShade ==> 95
+|--- ReadOnlyWhenDisconnected ==> False
+|--- DatasheetGridlinesThemeColorIndex ==> 3
+|--- DatasheetForeThemeColorIndex ==> 0
+|--- PublishToWeb ==> 1
+|--- FCMinWriteVer ==> 14.0.0000.0000
+|--- FCMinDesignVer ==> 14.0.0000.0000
+---------------------------------------------------------
+|--- Item (Field in aeItems)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> Item
+|------ OrdinalPosition ==> 0
+|------ Size ==> 255
+|------ SourceField ==> Item
+|------ SourceTable ==> aeItems
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- Quantity (Field in aeItems)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> Quantity
+|------ OrdinalPosition ==> 1
+|------ Size ==> 4
+|------ SourceField ==> Quantity
+|------ SourceTable ==> aeItems
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 0
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DecimalPlaces ==> 255
+|------ DisplayControl ==> 109
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- Status (Field in aeItems)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> Status
+|------ OrdinalPosition ==> 2
+|------ Size ==> 255
+|------ SourceField ==> Status
+|------ SourceTable ==> aeItems
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|------ Description ==> A short description
+|--- YNO (Field in aeItems)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> YNO
+|------ OrdinalPosition ==> 3
+|------ Size ==> 255
+|------ SourceField ==> YNO
+|------ SourceTable ==> aeItems
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 110
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|------ RowSourceType ==> Value List
+|------ RowSource ==> "Yes";"No";"Other"
+|------ BoundColumn ==> 1
+|------ ColumnCount ==> 1
+|------ ColumnHeads ==> False
+|------ AllowMultipleValues ==> False
+|------ AllowValueListEdits ==> False
+|------ ShowOnlyRowSourceValues ==> False
+|--- CHK (Field in aeItems)
+|------ Attributes ==> 1
+|------ CollatingOrder ==> 1033
+|------ Type ==> 1
+|------ Name ==> CHK
+|------ OrdinalPosition ==> 4
+|------ Size ==> 1
+|------ SourceField ==> CHK
+|------ SourceTable ==> aeItems
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> No
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ Format ==> Yes/No
+|------ DisplayControl ==> 106
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- CBO (Field in aeItems)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> CBO
+|------ OrdinalPosition ==> 5
+|------ Size ==> 255
+|------ SourceField ==> CBO
+|------ SourceTable ==> aeItems
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 111
+|------ RowSourceType ==> Table/Query
+|------ BoundColumn ==> 1
+|------ ColumnCount ==> 1
+|------ ColumnHeads ==> False
+|------ ListRows ==> 16
+|------ ListWidth ==> 0twip
+|------ LimitToList ==> False
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ AllowMultipleValues ==> False
+|------ TextAlign ==> 0
+|------ AllowValueListEdits ==> True
+|------ AggregateType ==> -1
+|------ ShowOnlyRowSourceValues ==> False
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0

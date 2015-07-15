@@ -1,0 +1,137 @@
+|--- Name ==> _tlkpMonth
+|--- Updatable ==> True
+|--- Connect ==> 
+|--- Attributes ==> 0
+|--- SourceTableName ==> 
+|--- RecordCount ==> 12
+|--- ValidationRule ==> 
+|--- ValidationText ==> 
+|--- ConflictTable ==> 
+|--- ReplicaFilter ==> 
+|--- PublishToWeb ==> 1
+|--- Orientation ==> 0
+|--- OrderByOn ==> False
+|--- DefaultView ==> 2
+|--- DisplayViewsOnSharePointSite ==> 1
+|--- TotalsRow ==> False
+|--- FilterOnLoad ==> False
+|--- OrderByOnLoad ==> True
+|--- HideNewField ==> False
+|--- BackTint ==> 100
+|--- BackShade ==> 100
+|--- ThemeFontIndex ==> 1
+|--- AlternateBackThemeColorIndex ==> 1
+|--- AlternateBackTint ==> 100
+|--- AlternateBackShade ==> 95
+|--- ReadOnlyWhenDisconnected ==> False
+|--- DatasheetGridlinesThemeColorIndex ==> 3
+|--- DatasheetForeThemeColorIndex ==> 0
+---------------------------------------------------------
+|--- ID (Field in _tlkpMonth)
+|------ Attributes ==> 17
+|------ CollatingOrder ==> 1033
+|------ Type ==> 4
+|------ Name ==> ID
+|------ OrdinalPosition ==> 0
+|------ Size ==> 4
+|------ SourceField ==> ID
+|------ SourceTable ==> _tlkpMonth
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> False
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- TheMonthShort (Field in _tlkpMonth)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> TheMonthShort
+|------ OrdinalPosition ==> 1
+|------ Size ==> 3
+|------ SourceField ==> TheMonthShort
+|------ SourceTable ==> _tlkpMonth
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- TheMonthLong (Field in _tlkpMonth)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> TheMonthLong
+|------ OrdinalPosition ==> 2
+|------ Size ==> 9
+|------ SourceField ==> TheMonthLong
+|------ SourceTable ==> _tlkpMonth
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0
+|--- TheMonthCode (Field in _tlkpMonth)
+|------ Attributes ==> 2
+|------ CollatingOrder ==> 1033
+|------ Type ==> 10
+|------ Name ==> TheMonthCode
+|------ OrdinalPosition ==> 3
+|------ Size ==> 2
+|------ SourceField ==> TheMonthCode
+|------ SourceTable ==> _tlkpMonth
+|------ DataUpdatable ==> False
+|------ DefaultValue ==> 
+|------ ValidationRule ==> 
+|------ ValidationText ==> 
+|------ Required ==> False
+|------ AllowZeroLength ==> True
+|------ AppendOnly ==> False
+|------ Expression ==> 
+|------ ColumnWidth ==> -1
+|------ ColumnOrder ==> 0
+|------ ColumnHidden ==> False
+|------ DisplayControl ==> 109
+|------ IMEMode ==> 0
+|------ IMESentenceMode ==> 3
+|------ UnicodeCompression ==> True
+|------ TextAlign ==> 0
+|------ AggregateType ==> -1
+|------ ResultType ==> 0
+|------ CurrencyLCID ==> 0

@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.3.6"
-Private Const aegit_expVERSION_DATE As String = "May 8, 2015"
+Private Const aegit_expVERSION As String = "1.3.9"
+Private Const aegit_expVERSION_DATE As String = "July 14, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -177,6 +177,7 @@ PROC_ERR:
 End Sub
 
 Private Sub Class_Terminate()
+
     On Error GoTo 0
     Dim strFile As String
     strFile = aegitSourceFolder & "export.ini"
@@ -184,10 +185,10 @@ Private Sub Class_Terminate()
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
-    Debug.Print
-    Debug.Print "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
+    If IsLoaded("_frmPersist") Then DoCmd.Close acForm, "_frmPersist", acSaveNo
     Debug.Print
     Debug.Print "Class_Terminate"
+    Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
     '
@@ -223,6 +224,7 @@ Public Property Let XMLfolder(ByVal strXMLfolder As String)
 End Property
 
 Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
+    On Error GoTo 0
     If blnExportQAT Then
         aegitExport.ExportQAT = True
     Else
@@ -231,6 +233,7 @@ Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
 End Property
 
 Public Property Let ExportCBID(ByVal blnExportCBID As Boolean)
+    On Error GoTo 0
     If blnExportCBID Then
         aegitExport.ExportCBID = True
     Else
@@ -432,6 +435,59 @@ Private Function IsLoaded(ByVal strFormName As String) As Boolean
     End If
     
 End Function
+
+Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
+' Ref: http://bytes.com/topic/access/answers/709190-how-export-table-structure-including-description
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim prp As DAO.Property
+    Dim fldprp As DAO.Property
+    Dim fld As DAO.Field
+
+    If IsMissing(varDebug) Then
+        Debug.Print "OutputTableProperties"
+        Debug.Print , "varDebug IS missing so no parameter is passed to OutputTableProperties"
+        Debug.Print , "DEBUGGING IS OFF"
+    Else
+        Debug.Print "OutputTableProperties"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputTableProperties"
+        Debug.Print , "DEBUGGING TURNED ON"
+    End If
+
+    If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
+
+    If aegitSourceFolder = "default" Then
+        aegitSourceFolder = aegitType.SourceFolder
+    End If
+
+    Set dbs = CurrentDb()
+    For Each tdf In CurrentDb.TableDefs
+
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
+
+            Open aegitSourceFolder & tdf.Name & ".txt" For Output As #1
+
+            On Error Resume Next
+            For Each prp In tdf.Properties
+                If prp.Name <> "DateCreated" And prp.Name <> "LastUpdated" Then
+                    Print #1, "|--- " & prp.Name & " ==> " & prp.Value
+                End If
+            Next prp
+            Print #1, "---------------------------------------------------------"
+            For Each fld In tdf.Fields
+                Print #1, "|--- " & fld.Name & " (Field in " & tdf.Name & ")"
+                For Each fldprp In fld.Properties
+                    Print #1, "|------ " & fldprp.Name & " ==> " & fldprp.Value
+                Next
+            Next
+            Close #1
+        End If
+NextTdf:
+    Next tdf
+End Sub
 
 Private Function LinkedTable(strTblName) As Boolean
 
@@ -866,9 +922,7 @@ e3167e3011e3078:
     End If
 
     rst.Close
-    Set rst = Nothing
     dbs.Close
-    Set dbs = Nothing
 
     DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
 'Stop
@@ -876,6 +930,8 @@ e3167e3011e3078:
     DoCmd.SetWarnings True
 
 PROC_EXIT:
+    Set rst = Nothing
+    Set dbs = Nothing
     Exit Sub
 
 PROC_ERR:
@@ -1184,7 +1240,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     Print #fle, , "2007, 2010, 2013", "Datasheet Ime Control           ", Application.GetOption("Datasheet Ime Control")                ' Datasheet IME control
     Print #fle, , "2007, 2010, 2013", "Use Hijri Calendar              ", Application.GetOption("Use Hijri Calendar")                   ' Use Hijri Calendar
     Print #fle, "   >>>Display section"
-    Print #fle, , "2007, 2010, 2013", "Size of MRU File List               ", Application.GetOption("Size of MRU File List")                ' Show this number of Recent Documents
+    Print #fle, , "2007, 2010, 2013", "Size of MRU File List               ", "Not Tracked"     'Application.GetOption("Size of MRU File List")                ' Show this number of Recent Documents
     Print #fle, , "2007, 2010, 2013", "Show Status Bar                     ", Application.GetOption("Show Status Bar")                      ' Status bar
     Print #fle, , "2007, 2010, 2013", "Show Animations                     ", Application.GetOption("Show Animations")                      ' Show animations
     Print #fle, , "2007, 2010, 2013", "Show Smart Tags on Datasheets       ", Application.GetOption("Show Smart Tags on Datasheets")        ' Show Smart Tags on Datasheets
@@ -3034,6 +3090,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfAllHiddenQueries varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
+        OutputTableProperties varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -3052,6 +3109,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfAllHiddenQueries
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
+        OutputTableProperties
     End If
 
     OutputListOfApplicationProperties
@@ -3643,14 +3701,14 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
                     Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
                     If Not IsMissing(varDebug) Then Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
                 Else
-                    If prp.Name = "LastUpdated" Then
+                    If prp.Name = "DateCreated" Or prp.Name = "LastUpdated" Then
                         Print #fle, , prp.Name, FormatDateTime(prp.Value, vbShortDate)
                     Else
                         Print #fle, , prp.Name, prp.Value
                     End If
                     If Not IsMissing(varDebug) Then
                         Debug.Print , prp.Name, prp.Value
-                        If prp.Name = "LastUpdated" Then
+                        If prp.Name = "LastUpdated" Or prp.Name = "LastUpdated" Then
                             Debug.Print , "=>", prp.Name, FormatDateTime(prp.Value, vbShortDate)
                         End If
                     End If

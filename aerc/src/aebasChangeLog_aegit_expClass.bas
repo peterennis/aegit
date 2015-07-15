@@ -40,10 +40,14 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %030 -
+' %035 -
+' %034 -
+' %033 -
+' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %029 - Split db export use causes exclusive lock, faster export but requires access restart
 '           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
+' %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
 ' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
 ' %018 - With split db add export tool to back end, e.g. save to srcbe, test
 ' %017 - Linked tables still hang on output, use test and only export linked tables as tblName.Linked.txt
@@ -80,9 +84,11 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150714 - v139 -
+    ' FIXED - %032 - Do not output DateCreated or LastUpdated when exporting table properties
+    ' FIXED - %031 - Output the tables properties
 '20150508 - v136 -
     ' FIXED - %027 - Hidden queries output is listing all queries for split db. Possible error in IsQryHidden function
-    ' FIXED - %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
     ' FIXED - %025 - Relates to %024, Error 3011, Could not find object 'zzzTmpTblQueries' => it is in the front end and not the back end
     ' FIXED - %024 - Error 3167, Record is deleted. OutputListOfAllHiddenQueries
     ' FIXED - %022 - Set size of MRU list to 'Not Tracked' for export, it is noise

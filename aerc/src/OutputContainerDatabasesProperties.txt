@@ -5,7 +5,7 @@
               Permissions    1048575 
               AllPermissions               1048575 
               Container     Databases
-              DateCreated   7/31/2009 2:04:43 PM 
+              DateCreated   7/31/2009
               LastUpdated   2/24/2014
               Title         aegit
 >>>UserDefined
@@ -15,6 +15,6 @@
               Permissions    1048575 
               AllPermissions               1048575 
               Container     Databases
-              DateCreated   7/31/2009 2:04:43 PM 
+              DateCreated   7/31/2009
               LastUpdated   7/31/2009
               ReplicateProject            True
