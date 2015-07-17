@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.3.9"
-Private Const aegit_expVERSION_DATE As String = "July 14, 2015"
+Private Const aegit_expVERSION As String = "1.4.0"
+Private Const aegit_expVERSION_DATE As String = "July 17, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = True
@@ -468,7 +468,7 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
                 Or Left$(tdf.Name, 4) = "~TMP" _
                 Or Left$(tdf.Name, 3) = "zzz") Then
 
-            Open aegitSourceFolder & tdf.Name & ".txt" For Output As #1
+            Open aegitSourceFolder & "Properties_" & tdf.Name & ".txt" For Output As #1
 
             On Error Resume Next
             For Each prp In tdf.Properties

@@ -42,7 +42,6 @@ Option Explicit
 ' Tasks:
 ' %035 -
 ' %034 -
-' %033 -
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %029 - Split db export use causes exclusive lock, faster export but requires access restart
 '           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
@@ -84,6 +83,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150717 - v140 -
+    ' FIXED - %033 - Add Properties_ to the table names when exporting properties
 '20150714 - v139 -
     ' FIXED - %032 - Do not output DateCreated or LastUpdated when exporting table properties
     ' FIXED - %031 - Output the tables properties
