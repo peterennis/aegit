@@ -40,18 +40,17 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %040 -
+' %039 -
+' %038 -
+' %037 -
+' %036 -
 ' %035 -
-' %034 -
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %029 - Split db export use causes exclusive lock, faster export but requires access restart
 '           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
-' %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
 ' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
-' %018 - With split db add export tool to back end, e.g. save to srcbe, test
-' %017 - Linked tables still hang on output, use test and only export linked tables as tblName.Linked.txt
-'           Ref: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
-' %016 - Create OutputCatalogUserCreatedObjects as a text file list with all objects
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
 ' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
@@ -83,6 +82,13 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150717 - v141 -
+    ' FIXED - %034 - Set value of backend to "NONE" to allow single user db other than aegit
+    ' FIXED - %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
+    ' FIXED - %018 - With split db add export tool to back end, e.g. save to srcbe, test
+    ' OBSOLETE - %017 - Linked tables still hang on output, use test and only export linked tables as tblName.Linked.txt
+    '           Ref: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
+    ' FIXED - %016 - Create OutputCatalogUserCreatedObjects as a text file list with all objects
 '20150717 - v140 -
     ' FIXED - %033 - Add Properties_ to the table names when exporting properties
 '20150714 - v139 -

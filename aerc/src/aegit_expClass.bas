@@ -37,7 +37,7 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.4.0"
+Private Const aegit_expVERSION As String = "1.4.1"
 Private Const aegit_expVERSION_DATE As String = "July 17, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -192,7 +192,8 @@ Private Sub Class_Terminate()
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
     '
-    If Application.VBE.ActiveVBProject.Name <> "aegit" Then OpenAllDatabases False
+    If Application.VBE.ActiveVBProject.Name <> "aegit" Or _
+            aestrBackEndDb1 = "NONE" Then OpenAllDatabases True
 
 End Sub
 
@@ -533,13 +534,16 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
     Dim intX As Integer
     Dim strName As String
     Dim strMsg As String
- 
+
+    If aestrBackEndDb1 = "NONE" Then Exit Sub
+
     ' Maximum number of back end databases to link
     Const cintMaxDatabases As Integer = 1
 
     ' List of databases kept in a static array so we can close them later
     Static dbsOpen() As DAO.Database
  
+    'MsgBox "aestrBackEndDb1 = " & aestrBackEndDb1, vbInformation, "OpenAllDatabases"
     If blnInit Then
         ReDim dbsOpen(1 To cintMaxDatabases)
         For intX = 1 To cintMaxDatabases
@@ -567,7 +571,7 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
 
         On Error GoTo 0
         If strMsg <> "" Then
-            MsgBox strMsg & vbCrLf & "strName = " & strName
+            MsgBox strMsg & vbCrLf & "strName = " & strName, vbExclamation, "OpenAllDatabases"
             Exit For
         End If
         Next intX
@@ -2959,7 +2963,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-    If Application.VBE.ActiveVBProject.Name <> "aegit" Then OpenAllDatabases True
+    If Application.VBE.ActiveVBProject.Name <> "aegit" Or _
+            aestrBackEndDb1 = "NONE" Then OpenAllDatabases True
 
     If aegitSourceFolder = "default" Then
         aestrSourceLocation = aegitType.SourceFolder
@@ -3394,8 +3399,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
         Next
     Next
     Close fle
