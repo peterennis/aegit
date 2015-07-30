@@ -2085,6 +2085,16 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 
     Dim intFailCount As Integer
 
+    ' Test for relative path
+    Dim strTestPath As String
+    strTestPath = aestrXMLLocation
+    If Left(aestrXMLLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
+        aestrXMLLocation = strTestPath
+        Debug.Print "aestrXMLLocation = " & aestrXMLLocation
+        Stop
+    End If
+
     If aegitXMLfolder = "default" Then
         aestrXMLLocation = aegitType.XMLfolder
     Else
@@ -3010,6 +3020,17 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     '    FORMS REPORTS SCRIPTS MODULES
     ' ===================================
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
+
+    ' Test for relative path
+    Dim strTestPath As String
+    strTestPath = aestrSourceLocation
+    If Left(aestrSourceLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
+        aestrSourceLocation = strTestPath
+        Debug.Print "aestrSourceLocation = " & aestrSourceLocation
+        'Stop
+    End If
+
     If FolderExists(aestrSourceLocation) Then
         If Not IsMissing(varDebug) Then
             DocumentTheContainer "Forms", "frm", varDebug

@@ -43,9 +43,8 @@ Option Explicit
 ' %040 -
 ' %039 -
 ' %038 -
-' %037 -
-' %036 - Create help page with GitHub MarkDown
-' %035 - Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
+' %037 - Relates to %009, Allow relative path
+' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
@@ -53,7 +52,6 @@ Option Explicit
 ' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
 ' %009 - Move "Default Usage" and "Custom Usage" from test module
 ' %007 - Make varDebug work as optional parameter to Let property
-' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
 ' #045 -
@@ -74,10 +72,15 @@ Option Explicit
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
-' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
 '=============================================================================================================================
 '
 '
+'20150730 - v143 -
+    ' FIXED - %036 - Create help page with GitHub MarkDown
+    '           Ref: https://github.com/peterennis/aegit_Template
+    ' WONTFIX - #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
+    '           Work with bemb/baemb for JS charts integration
+    ' WONTFIX - %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION? - Reopen if it ever becomes a problem
 '20150717 - v141 -
     ' FIXED - %034 - Set value of backend to "NONE" to allow single user db other than aegit
     ' WONTFIX - Leave control with the developer - %029 - Split db export use causes exclusive lock, faster export but requires access restart
