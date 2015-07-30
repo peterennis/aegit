@@ -40,17 +40,19 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %045 -
+' %044 -
+' %043 -
+' %042 -
+' %041 -
 ' %040 -
 ' %039 -
-' %038 -
-' %037 - Relates to %009, Allow relative path
 ' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
-' %009 - Move "Default Usage" and "Custom Usage" from test module
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
@@ -76,8 +78,10 @@ Option Explicit
 '
 '
 '20150730 - v143 -
-    ' FIXED - %036 - Create help page with GitHub MarkDown
-    '           Ref: https://github.com/peterennis/aegit_Template
+    ' FIXED - %038 - Load to aegit_Template and test %037
+    ' FIXED - %037 - Relates to %009, Allow relative path
+    ' FIXED - %036 - Create help page with GitHub MarkDown - Ref: https://github.com/peterennis/aegit_Template
+    ' FIXED - %009 - Move "Default Usage" and "Custom Usage" from test module - done in aegit_Template
     ' WONTFIX - #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
     '           Work with bemb/baemb for JS charts integration
     ' WONTFIX - %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION? - Reopen if it ever becomes a problem

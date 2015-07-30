@@ -2091,8 +2091,8 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     If Left(aestrXMLLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
-        Debug.Print "aestrXMLLocation = " & aestrXMLLocation
-        Stop
+        'Debug.Print "aestrXMLLocation = " & aestrXMLLocation
+        'Stop
     End If
 
     If aegitXMLfolder = "default" Then
