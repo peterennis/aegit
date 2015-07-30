@@ -61,13 +61,6 @@ Begin
         End
     End
     Begin
-        dbText "Name" ="EnterDate"
-        dbLong "AggregateType" ="-1"
-        dbBinary "GUID" = Begin
-            0x1627fbd4ed1cca4fa34b0b9b281b204f
-        End
-    End
-    Begin
         dbText "Name" ="[_tblChart].FLD01"
         dbLong "AggregateType" ="-1"
     End

@@ -44,17 +44,14 @@ Option Explicit
 ' %039 -
 ' %038 -
 ' %037 -
-' %036 -
-' %035 -
+' %036 - Create help page with GitHub MarkDown
+' %035 - Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
-' %029 - Split db export use causes exclusive lock, faster export but requires access restart
-'           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
-' %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
 ' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
-' %009 - Move "Default Usage" and "Custom Usage" from test module, create help page with GitHub MarkDown
+' %009 - Move "Default Usage" and "Custom Usage" from test module
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION?
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
@@ -77,18 +74,21 @@ Option Explicit
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
 ' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
-' #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 ' #004 - Change the color of each interior (histogram) chart vba access - Ref: http://stackoverflow.com/questions/16819859/change-the-color-of-each-interior-histogram-chart-vba-access
 '=============================================================================================================================
 '
 '
 '20150717 - v141 -
     ' FIXED - %034 - Set value of backend to "NONE" to allow single user db other than aegit
+    ' WONTFIX - Leave control with the developer - %029 - Split db export use causes exclusive lock, faster export but requires access restart
+    '           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
     ' FIXED - %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
     ' FIXED - %018 - With split db add export tool to back end, e.g. save to srcbe, test
     ' OBSOLETE - %017 - Linked tables still hang on output, use test and only export linked tables as tblName.Linked.txt
     '           Ref: http://p2p.wrox.com/access-vba/37117-finding-linked-tables.html
     ' FIXED - %016 - Create OutputCatalogUserCreatedObjects as a text file list with all objects
+    ' WONTFIX - This project focus is access export for source control - %014 - Set default forms, report, database Ref: http://allenbrowne.com/ser-43.html
+    ' WONTFIX - Relates to %035, #005 - How to Format Your Graphs Using Visual Basic for Microsoft Access - Ref: http://www.brighthub.com/computing/windows-platform/articles/116946.aspx#imgn_1
 '20150717 - v140 -
     ' FIXED - %033 - Add Properties_ to the table names when exporting properties
 '20150714 - v139 -
