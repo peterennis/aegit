@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.4.3"
-Private Const aegit_expVERSION_DATE As String = "July 30, 2015"
+Private Const aegit_expVERSION As String = "1.4.4"
+Private Const aegit_expVERSION_DATE As String = "July 31, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -128,6 +128,7 @@ Private Sub Class_Initialize()
     ' Provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
     aegitXMLfolder = "default"
+    aestrBackEndDb1 = "default"             ' default for aegit is no back end database
     ReDim Preserve aegitDataXML(0 To 0)
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         aegitDataXML(0) = "aetlkpStates"
@@ -154,6 +155,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.XMLfolder = " & aegitType.XMLfolder
+    Debug.Print , "Default for aestrBackEndDb1 = " & aestrBackEndDb1
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -166,11 +168,11 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
     defineMyExclusions
     Debug.Print , "pExclude = " & pExclude
-    Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
-    'Stop
     If Not IsLoaded("_frmPersist") Then
         DoCmd.OpenForm "_frmPersist", acNormal, , , acFormReadOnly, acHidden
     End If
+    Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
+    'Stop
 
 PROC_EXIT:
     Exit Sub
@@ -197,8 +199,10 @@ Private Sub Class_Terminate()
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
     '
-    If Application.VBE.ActiveVBProject.Name <> "aegit" Or _
-            aestrBackEndDb1 = "NONE" Then OpenAllDatabases True
+'?    If Application.VBE.ActiveVBProject.Name <> "aegit" And _
+'?            aestrBackEndDb1 <> "NONE" Then
+'?        OpenAllDatabases True
+'?    End If
 
 End Sub
 
@@ -214,8 +218,14 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
     aegitSourceFolder = strSourceFolder
 End Property
 
+Public Property Get BackEndDb1() As String
+    On Error GoTo 0
+    BackEndDb1 = aestrBackEndDb1
+End Property
+
 Public Property Let BackEndDb1(ByVal strBackEndDbFullPath As String)
     On Error GoTo 0
+    Debug.Print , "strBackEndDbFullPath = " & strBackEndDbFullPath, "Property Let BackEndDb1"
     aestrBackEndDb1 = strBackEndDbFullPath
 End Property
 
@@ -540,7 +550,11 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
     Dim strName As String
     Dim strMsg As String
 
-    If aestrBackEndDb1 = "NONE" Then Exit Sub
+    If aestrBackEndDb1 = "NONE" Then
+        Exit Sub
+    Else
+        Debug.Print , "aestrBackEndDb1 = " & aestrBackEndDb1, "OpenAllDatabases"
+    End If
 
     ' Maximum number of back end databases to link
     Const cintMaxDatabases As Integer = 1
@@ -560,6 +574,7 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
                     strName = "H:\folder\Backend2.mdb"
             End Select
         strMsg = ""
+        'Debug.Print , "strName = " & strName, "OpenAllDatabases"
 
         On Error Resume Next
         ' Ref: https://support.microsoft.com/en-us/kb/209953
@@ -996,6 +1011,16 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
         Debug.Print "OutputListOfAccessApplicationOptions"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
         Debug.Print , "DEBUGGING TURNED ON"
+    End If
+
+    ' Test for relative path
+    Dim strTestPath As String
+    strTestPath = aegitSourceFolder
+    If Left(aegitSourceFolder, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid(aegitSourceFolder, 2, Len(aegitSourceFolder) - 1)
+        aegitSourceFolder = strTestPath
+        'Debug.Print , "aegitSourceFolder = " & aegitSourceFolder, "OutputListOfApplicationOptions"
+        'Stop
     End If
 
     If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
@@ -2096,15 +2121,24 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     If Left(aestrXMLLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
-        'Debug.Print "aestrXMLLocation = " & aestrXMLLocation
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation, "aeDocumentTablesXML"
+        'Stop
+    End If
+    strTestPath = aegitXMLfolder
+    If Left(aegitXMLfolder, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid(aegitXMLfolder, 2, Len(aegitXMLfolder) - 1)
+        aegitXMLfolder = strTestPath
+        'Debug.Print , "aegitXMLfolder = " & aegitXMLfolder, "aeDocumentTablesXML"
         'Stop
     End If
 
+    'Debug.Print , "aegitXMLfolder = " & aegitXMLfolder, "aeDocumentTablesXML"
     If aegitXMLfolder = "default" Then
         aestrXMLLocation = aegitType.XMLfolder
     Else
         aestrXMLLocation = aegitXMLfolder
     End If
+    'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation, "aeDocumentTablesXML"
 
     If Not FolderExists(aestrXMLLocation) Then
         MsgBox aestrXMLLocation & " does not exist!", vbCritical, aeAPP_NAME
@@ -2868,7 +2902,7 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-    If strLoc = "src" Then
+    If strLoc = "src" Or strLoc = "srcbe" Then
         ' Delete all the exported src files
         strFile = Dir$(aestrSourceLocation & "*.*")
         Do While strFile <> vbNullString
@@ -2978,8 +3012,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-    If Application.VBE.ActiveVBProject.Name <> "aegit" Or _
-            aestrBackEndDb1 = "NONE" Then OpenAllDatabases True
+    If aestrBackEndDb1 <> "default" Then
+        OpenAllDatabases True
+    End If
 
     If aegitSourceFolder = "default" Then
         aestrSourceLocation = aegitType.SourceFolder
@@ -2987,6 +3022,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Else
         aestrSourceLocation = aegitSourceFolder
     End If
+
     If aegitXMLfolder = "default" Then
         aestrXMLLocation = aegitType.XMLfolder
     Else
@@ -3005,20 +3041,30 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         Debug.Print , ">==> aeDocumentTheDatabase >==>"
         Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
         Debug.Print , "Property Get XMLfolder = " & aestrXMLLocation
+        Debug.Print , "Property Get BackEndDb1 = " & aestrBackEndDb1
     End If
+
     If aestrSourceLocation = vbNullString Then
         MsgBox "aestrSourceLocation is not set!", vbCritical, aeAPP_NAME
         Stop
     End If
+
     If aestrXMLLocation = vbNullString Then
         MsgBox "aestrXMLLocation is not set!", vbCritical, aeAPP_NAME
         Stop
     End If
 
+    If aestrBackEndDb1 = vbNullString Then
+        MsgBox "aestrBackEndDb1 is not set!", vbCritical, aeAPP_NAME
+        Stop
+    End If
+
     If IsMissing(varDebug) Then
         KillAllFiles "src"
+        If aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe"
     Else
         KillAllFiles "src", varDebug
+        If aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
     End If
 
     ' ===================================
@@ -3026,13 +3072,16 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     ' ===================================
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
 
+    'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation, "aeDocumentTheDatabase"
+    'Stop
+    '
     ' Test for relative path
     Dim strTestPath As String
     strTestPath = aestrSourceLocation
     If Left(aestrSourceLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
         aestrSourceLocation = strTestPath
-        Debug.Print "aestrSourceLocation = " & aestrSourceLocation
+        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation, "aeDocumentTheDatabase"
         'Stop
     End If
 
@@ -3425,8 +3474,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
         Next
     Next
     Close fle
@@ -3904,7 +3953,8 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ")" & vbCrLf & _
+      "strFileName = " & strFileName & vbCrLf & "in procedure OutputTheTableDataAsXML of Class aegit_expClass", vbExclamation
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
     Resume PROC_EXIT
 

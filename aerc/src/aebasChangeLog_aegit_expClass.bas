@@ -40,8 +40,15 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %045 -
-' %044 -
+' %050 -
+' %049 -
+' %048 -
+' %047 -
+' %046 -
+' %045 - Erl=170, Err=76, Path not found, OutputListOfApplicationOptions
+' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
+' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
+'           ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
 ' %042 - NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %039 - BOM, UTF-8, UTF-16, Access Export - Ref: http://axlr8r.blogspot.nl/2011/05/how-to-export-data-into-utf-8-without.html

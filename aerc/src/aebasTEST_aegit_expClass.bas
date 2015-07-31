@@ -38,6 +38,11 @@ Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
 
     On Error GoTo 0
 
+    If Application.VBE.ActiveVBProject.Name <> "aegit" Then
+        MsgBox "The is not the aegit project!", vbCritical, "aegit_EXPORT"
+        Exit Function
+    End If
+
     Dim THE_XML_DATA_FOLDER As String
     THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xml"
 
@@ -252,17 +257,11 @@ Test7:
     ' TEST 7
     '=============
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
-    Debug.Print "aegitClassTestXML"
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
-        bln7 = oDbObjects.DocumentTablesXML()
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
-        Debug.Print , "DEBUGGING TURNED ON"
-        bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
-    End If
+    Debug.Print "7. NOT USED"
+    Debug.Print "aegitClassTest"
+
+    bln7 = False
+
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
@@ -286,7 +285,7 @@ RESULTS:
     Debug.Print "Test 4: GetReferences"
     Debug.Print "Test 5: DocumentTables"
     Debug.Print "Test 6: DocumentRelations"
-    Debug.Print "Test 7: DocumentTablesXML"
+    Debug.Print "Test 7: NOT USED"
     Debug.Print "Test 8: NOT USED"
     Debug.Print
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
