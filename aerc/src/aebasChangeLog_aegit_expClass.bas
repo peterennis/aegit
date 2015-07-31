@@ -42,8 +42,7 @@ Option Explicit
 ' Tasks:
 ' %045 -
 ' %044 -
-' %043 -
-' %042 - NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream; keep connection(?) open with frmPersist method may be a solution
+' %042 - NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %039 - BOM, UTF-8, UTF-16, Access Export - Ref: http://axlr8r.blogspot.nl/2011/05/how-to-export-data-into-utf-8-without.html
 '           Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
@@ -79,6 +78,9 @@ Option Explicit
 '
 '
 '20150730 - v143 -
+    ' FIXED - %043 - Relates to %042, Keep connection(?) open with frmPersist method may be a solution
+    '           No performance improvement for single dbs export
+    '           NOTE: GitHub seems to intelligently run diff when UTF-16 files are committed and recognize ansi, so leaving mblnUTF16 as True could be a workaround, allowing international files - TBD
     ' FIXED - %040 - Reinstate removal of BOM (FF FE) from exported *.txt form files - consider Ref: http://www.experts-exchange.com/Programming/Languages/Visual_Basic/VB_Script/Q_25105941.html
     ' FIXED - %038 - Load to aegit_Template and test %037
     ' FIXED - %037 - Relates to %009, Allow relative path
@@ -88,7 +90,7 @@ Option Explicit
     '           Work with bemb/baemb for JS charts integration
     ' WONTFIX - %003 - Ref: http://www.trigeminal.com/usenet/usenet026.asp - Fix DISAMBIGUATION? - Reopen if it ever becomes a problem
 '20150717 - v141 -
-    ' FIXED - %034 - Set value of backend to "NONE" to allow single user db other than aegit
+    ' FIXED - %034 - Set value of backend to "NONE" to allow single user dbs other than aegit
     ' WONTFIX - Leave control with the developer - %029 - Split db export use causes exclusive lock, faster export but requires access restart
     '           Consider automated restart here - Ref: http://blog.nkadesign.com/2008/ms-access-restarting-the-database-programmatically/
     ' FIXED - %026 - Remove Last Updated ouput from table properties, it is just noise - OutputCatalogUserCreatedObjects.txt
