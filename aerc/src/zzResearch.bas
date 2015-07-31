@@ -1,6 +1,46 @@
 Option Compare Database
 Option Explicit
 
+Public Sub NoBOM(ByVal strFileName As String)
+' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
+' Use the same file name for input and output
+
+    ' Define needed constants
+    Const ForReading = 1
+    Const ForWriting = 2
+    Const TriStateUseDefault = -2
+    Const adTypeText = 2
+    Dim strContent As String
+
+    ' Convert UTF-8 file to ANSI file
+    Dim objStreamFile As Object
+    Set objStreamFile = CreateObject("Adodb.Stream")
+    With objStreamFile
+        .Charset = "UTF-8"
+        .Type = adTypeText
+        .Open
+        .LoadFromFile strFileName
+        strContent = .ReadText
+        .Close
+    End With
+    Set objStreamFile = Nothing
+    Kill strFileName
+    'Stop
+
+    DoEvents
+
+    ' Write out after "conversion"
+    Dim objFSO As Object
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    Dim objFile As Object
+    Set objFile = objFSO.OpenTextFile(strFileName, ForWriting, True)
+    objFile.Write Right$(strContent, Len(strContent) - 2)
+    objFile.Close
+
+    Set objFile = Nothing
+
+End Sub
+
 '?strTran("Dev" & vbCrLf & "ashish", vbCrLf, " ")
 'Dev ashish
 '
