@@ -43,10 +43,11 @@ Option Explicit
 ' %045 -
 ' %044 -
 ' %043 -
-' %042 -
-' %041 -
-' %040 -
-' %039 -
+' %042 - NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream; keep connection(?) open with frmPersist method may be a solution
+' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
+' %039 - BOM, UTF-8, UTF-16, Access Export - Ref: http://axlr8r.blogspot.nl/2011/05/how-to-export-data-into-utf-8-without.html
+'           Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
+'           Mojibake - Ref: https://en.wikipedia.org/wiki/Mojibake
 ' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
@@ -78,6 +79,7 @@ Option Explicit
 '
 '
 '20150730 - v143 -
+    ' FIXED - %040 - Reinstate removal of BOM (FF FE) from exported *.txt form files - consider Ref: http://www.experts-exchange.com/Programming/Languages/Visual_Basic/VB_Script/Q_25105941.html
     ' FIXED - %038 - Load to aegit_Template and test %037
     ' FIXED - %037 - Relates to %009, Allow relative path
     ' FIXED - %036 - Create help page with GitHub MarkDown - Ref: https://github.com/peterennis/aegit_Template

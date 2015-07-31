@@ -41,7 +41,9 @@ Private Const aegit_expVERSION As String = "1.4.3"
 Private Const aegit_expVERSION_DATE As String = "July 30, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
-Private Const mblnUTF16 As Boolean = True
+' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
+' If mblnUTF16 is False the BOM marker will be stripped and files will be ANSI
+Private Const mblnUTF16 As Boolean = False
 
 Private Enum SizeStringSide
     TextLeft = 1
