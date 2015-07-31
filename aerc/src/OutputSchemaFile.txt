@@ -13,6 +13,17 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [_tblPersist] ([id] Counter,[persist] Text (255) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [id] ON [_tblPersist] ([persist]) "
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblPersist] ([persist])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [_tlkpChart] ([ID] Counter,[ChartNum] Text (255),[ChartDesc] Text (255),[ChartTitle] Text (255) )"
 Currentdb.Execute strSQL
 

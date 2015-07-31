@@ -168,6 +168,9 @@ Private Sub Class_Initialize()
     Debug.Print , "pExclude = " & pExclude
     Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
     'Stop
+    If Not IsLoaded("_frmPersist") Then
+        DoCmd.OpenForm "_frmPersist", acNormal, , , acFormReadOnly, acHidden
+    End If
 
 PROC_EXIT:
     Exit Sub

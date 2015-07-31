@@ -73,6 +73,9 @@ _tblChart
               FLD68          109          TextBox
               FLD69          109          TextBox
               FLD70          109          TextBox
+_tblPersist
+              id             109          TextBox
+              persist        109          TextBox
 _tlkpChart
               ID             109          TextBox
               ChartNum       109          TextBox
@@ -110,9 +113,9 @@ USysRibbons
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1
-Count of Text box  = 98
+Count of Text box  = 100
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 102
-Count of All Fields = 102
+Count of Display Controls = 104
+Count of All Fields = 104

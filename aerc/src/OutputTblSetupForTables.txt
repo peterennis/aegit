@@ -79,6 +79,15 @@ FLD69                Long Integer          4
 FLD70                Long Integer          4                  
 
 
+------------------
+TABLE: _tblPersist
+------------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+id                   AutoNumber            4                  
+persist              Text                  255                
+
+
 -----------------
 TABLE: _tlkpChart
 -----------------
