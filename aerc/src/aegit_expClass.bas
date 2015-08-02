@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.4.4"
-Private Const aegit_expVERSION_DATE As String = "July 31, 2015"
+Private Const aegit_expVERSION As String = "1.4.5"
+Private Const aegit_expVERSION_DATE As String = "August 1, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -689,6 +689,67 @@ PROC_ERR:
             Resume Next
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass"
+            Resume Next
+    End Select
+
+End Function
+
+Private Function NoBOM(ByVal strFileName As String) As Boolean
+' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
+' Use the same file name for input and output
+
+    On Error GoTo PROC_ERR
+
+    ' Define needed constants
+    Const ForReading = 1
+    Const ForWriting = 2
+    Const TriStateUseDefault = -2
+    Const adTypeText = 2
+    Dim strContent As String
+
+    NoBOM = False
+    ' Convert UTF-16 file to ANSI file
+    Dim objStreamFile As Object
+    Set objStreamFile = CreateObject("Adodb.Stream")
+    With objStreamFile
+        .Charset = "UTF-8"
+        .Type = adTypeText
+        .Open
+        .LoadFromFile strFileName
+        strContent = .ReadText
+        .Close
+    End With
+    Set objStreamFile = Nothing
+    Kill strFileName
+    'Stop
+
+    DoEvents
+
+    ' Write out after "conversion"
+    Dim objFSO As Object
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    Dim objFile As Object
+    'Debug.Print , "strFileName = " & strFileName
+    Set objFile = objFSO.OpenTextFile(strFileName, ForWriting, True)
+    strContent = Right$(strContent, Len(strContent) - 2)
+    objFile.Write strContent
+    objFile.Close
+
+    Set objFile = Nothing
+    NoBOM = True
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        'Case 9
+        '    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass" & _
+        '            vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
+        '    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
+        '    Resume Next
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure NoBOM of Class aegit_expClass"
             Resume Next
     End Select
 
@@ -2838,11 +2899,18 @@ SaveAsText:
                 Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             Else
                 Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
-                ' Convert UTF-16 to txt - fix for Access 2013
-                If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-                    'If intAcObjType = 2 Then Pause (0.25)
-                    KillProperly (strTheCurrentPathAndFile)
-                    Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+                If intAcObjType = 2 Then
+                    ' Convert UTF-16 to txt - fix for Access 2013
+                    If NoBOM(strTheCurrentPathAndFile) Then
+                        ' Conversion done
+                    Else
+                        ' Fallback to old method
+                        If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
+                            'If intAcObjType = 2 Then Pause (0.25)
+                            KillProperly (strTheCurrentPathAndFile)
+                            Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
+                        End If
+                    End If
                 End If
             End If
         End If

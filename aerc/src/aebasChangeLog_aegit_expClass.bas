@@ -44,7 +44,7 @@ Option Explicit
 ' %049 -
 ' %048 -
 ' %047 -
-' %046 -
+' %046 - FIX THIS - Update details about NoBOM stream writing
 ' %045 - Erl=170, Err=76, Path not found, OutputListOfApplicationOptions
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
@@ -84,6 +84,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150801 - v145 -
+    ' NoBOM seems to be much faster
+'20150730 - v144 -
+' FIX THIS
 '20150730 - v143 -
     ' FIXED - %043 - Relates to %042, Keep connection(?) open with frmPersist method may be a solution
     '           No performance improvement for single dbs export
