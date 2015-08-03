@@ -44,16 +44,13 @@ Option Explicit
 ' %049 -
 ' %048 -
 ' %047 -
-' %046 - FIX THIS - Update details about NoBOM stream writing
+' %046 - Test NoBOM stream writing
 ' %045 - Erl=170, Err=76, Path not found, OutputListOfApplicationOptions
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
 '           ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
 ' %042 - NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
-' %039 - BOM, UTF-8, UTF-16, Access Export - Ref: http://axlr8r.blogspot.nl/2011/05/how-to-export-data-into-utf-8-without.html
-'           Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
-'           Mojibake - Ref: https://en.wikipedia.org/wiki/Mojibake
 ' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
@@ -84,10 +81,11 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20150801 - v145 -
+'20150803 - v145 -
     ' NoBOM seems to be much faster
-'20150730 - v144 -
-' FIX THIS
+    ' FIXED - %039 - BOM, UTF-8, UTF-16, Access Export - Ref: http://axlr8r.blogspot.nl/2011/05/how-to-export-data-into-utf-8-without.html
+    '           Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
+    '           Mojibake - Ref: https://en.wikipedia.org/wiki/Mojibake
 '20150730 - v143 -
     ' FIXED - %043 - Relates to %042, Keep connection(?) open with frmPersist method may be a solution
     '           No performance improvement for single dbs export

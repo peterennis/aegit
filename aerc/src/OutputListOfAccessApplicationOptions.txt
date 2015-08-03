@@ -14,7 +14,7 @@
               XP, 2003      Show Status Bar                           -1 
               XP, 2003      Show Startup Dialog Box                   -1 
               XP, 2003      Show New Object Shortcuts                 -1 
-              XP, 2003      Show Hidden Objects                        0 
+              XP, 2003      Show Hidden Objects                       -1 
               XP, 2003      Show System Objects                        0 
               XP, 2003      ShowWindowsInTaskbar                      -1 
               XP, 2003      Show Macro Names Column                    0 
