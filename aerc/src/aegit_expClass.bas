@@ -3943,6 +3943,16 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
         Debug.Print strXMLResDoc
     End If
 
+    ' Test for relative path
+    Dim strTestPath As String
+    strTestPath = strPathFileName
+    If Left(strPathFileName, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid(strPathFileName, 2, Len(strPathFileName) - 1)
+        strPathFileName = strTestPath
+        'Debug.Print , "strPathFileName = " & strPathFileName, "PrettyXML"
+        'Stop
+    End If
+
     ' Rewrite the file as pretty xml
     Debug.Print "PrettyXML strPathFileName = " & strPathFileName
     Open strPathFileName For Output As #fle
