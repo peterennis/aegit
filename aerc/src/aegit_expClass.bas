@@ -37,8 +37,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.4.6"
-Private Const aegit_expVERSION_DATE As String = "August 3, 2015"
+Private Const aegit_expVERSION As String = "1.4.7"
+Private Const aegit_expVERSION_DATE As String = "August 4, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -168,10 +168,12 @@ Private Sub Class_Initialize()
     Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
     defineMyExclusions
     Debug.Print , "pExclude = " & pExclude
-    If Not IsLoaded("_frmPersist") Then
-        DoCmd.OpenForm "_frmPersist", acNormal, , , acFormReadOnly, acHidden
+    If aeExists("Forms", "_frmPersist") Then
+        If Not IsLoaded("_frmPersist") Then
+            DoCmd.OpenForm "_frmPersist", acNormal, , , acFormReadOnly, acHidden
+        End If
+        Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
     End If
-    Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
     'Stop
 
 PROC_EXIT:
@@ -192,10 +194,14 @@ Private Sub Class_Terminate()
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
     End If
-    If IsLoaded("_frmPersist") Then DoCmd.Close acForm, "_frmPersist", acSaveNo
     Debug.Print
     Debug.Print "Class_Terminate"
-    Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
+    If aeExists("Forms", "_frmPersist") Then
+        If IsLoaded("_frmPersist") Then
+            DoCmd.Close acForm, "_frmPersist", acSaveNo
+        End If
+        Debug.Print , "IsLoaded _frmPersist = " & IsLoaded("_frmPersist")
+    End If
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
     '
@@ -488,20 +494,26 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
 
             On Error Resume Next
             For Each prp In tdf.Properties
-                ' Ignore DateCreated, LastUpdated and GUID output
+                ' Ignore DateCreated, LastUpdated, GUID and NameMap output
                 If prp.Name <> "DateCreated" And prp.Name <> "LastUpdated" Then
                     If prp.Name = "GUID" Then
-                        Print #1, "|--- " & prp.Name & " ==> " & "GUID"
+                        Print #1, "|-- " & prp.Name & " >> " & "GUID"
+                    ElseIf prp.Name = "NameMap" Then
+                        Print #1, "|-- " & prp.Name & " >> " & "NameMap"
                     Else
-                        Print #1, "|--- " & prp.Name & " ==> " & prp.Value
+                        Print #1, "|-- " & prp.Name & " >> " & prp.Value
                     End If
                 End If
             Next prp
             Print #1, "---------------------------------------------------------"
             For Each fld In tdf.Fields
-                Print #1, "|--- " & fld.Name & " (Field in " & tdf.Name & ")"
+                Print #1, "|-- " & fld.Name & " (Field in " & tdf.Name & ")"
                 For Each fldprp In fld.Properties
-                    Print #1, "|------ " & fldprp.Name & " ==> " & fldprp.Value
+                    If fldprp.Name = "GUID" Then
+                        Print #1, "|------ " & fldprp.Name & " >> " & "GUID"
+                    Else
+                        Print #1, "|------ " & fldprp.Name & " >> " & fldprp.Value
+                    End If
                 Next
             Next
             Close #1
@@ -2118,7 +2130,9 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     End If
 
     strFile = aestrSourceLocation & aeTblTxtFile
-    
+    'Debug.Print "aeDocumentTables", "strFile = " & strFile
+    'Stop
+
     If Dir$(strFile) <> vbNullString Then
         ' The file exists
         If Not FileLocked(strFile) Then KillProperly (strFile)
@@ -3954,7 +3968,7 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     End If
 
     ' Rewrite the file as pretty xml
-    Debug.Print "PrettyXML strPathFileName = " & strPathFileName
+    'Debug.Print "PrettyXML strPathFileName = " & strPathFileName
     Open strPathFileName For Output As #fle
     Print #fle, strXMLResDoc
     Close #fle

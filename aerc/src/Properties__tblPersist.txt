@@ -1,81 +1,81 @@
-|--- Name ==> _tblPersist
-|--- Updatable ==> True
-|--- Connect ==> 
-|--- Attributes ==> 0
-|--- SourceTableName ==> 
-|--- RecordCount ==> 3
-|--- ValidationRule ==> 
-|--- ValidationText ==> 
-|--- ConflictTable ==> 
-|--- ReplicaFilter ==> 
-|--- Orientation ==> 0
-|--- OrderByOn ==> False
-|--- DefaultView ==> 2
-|--- DisplayViewsOnSharePointSite ==> 1
-|--- TotalsRow ==> False
-|--- FilterOnLoad ==> False
-|--- OrderByOnLoad ==> True
-|--- HideNewField ==> False
-|--- BackTint ==> 100
-|--- BackShade ==> 100
-|--- ThemeFontIndex ==> 1
-|--- AlternateBackThemeColorIndex ==> 1
-|--- AlternateBackTint ==> 100
-|--- AlternateBackShade ==> 95
-|--- ReadOnlyWhenDisconnected ==> False
-|--- DatasheetGridlinesThemeColorIndex ==> 3
-|--- DatasheetForeThemeColorIndex ==> 0
-|--- PublishToWeb ==> 1
+|-- Name >> _tblPersist
+|-- Updatable >> True
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 3
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- DefaultView >> 2
+|-- DisplayViewsOnSharePointSite >> 1
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> True
+|-- HideNewField >> False
+|-- BackTint >> 100
+|-- BackShade >> 100
+|-- ThemeFontIndex >> 1
+|-- AlternateBackThemeColorIndex >> 1
+|-- AlternateBackTint >> 100
+|-- AlternateBackShade >> 95
+|-- ReadOnlyWhenDisconnected >> False
+|-- DatasheetGridlinesThemeColorIndex >> 3
+|-- DatasheetForeThemeColorIndex >> 0
+|-- PublishToWeb >> 1
 ---------------------------------------------------------
-|--- id (Field in _tblPersist)
-|------ Attributes ==> 17
-|------ CollatingOrder ==> 1033
-|------ Type ==> 4
-|------ Name ==> id
-|------ OrdinalPosition ==> 0
-|------ Size ==> 4
-|------ SourceField ==> id
-|------ SourceTable ==> _tblPersist
-|------ DataUpdatable ==> False
-|------ DefaultValue ==> 
-|------ ValidationRule ==> 
-|------ ValidationText ==> 
-|------ Required ==> False
-|------ AllowZeroLength ==> False
-|------ AppendOnly ==> False
-|------ Expression ==> 
-|------ ColumnWidth ==> -1
-|------ ColumnOrder ==> 0
-|------ ColumnHidden ==> False
-|------ TextAlign ==> 0
-|------ AggregateType ==> -1
-|------ ResultType ==> 0
-|------ CurrencyLCID ==> 0
-|--- persist (Field in _tblPersist)
-|------ Attributes ==> 2
-|------ CollatingOrder ==> 1033
-|------ Type ==> 10
-|------ Name ==> persist
-|------ OrdinalPosition ==> 1
-|------ Size ==> 255
-|------ SourceField ==> persist
-|------ SourceTable ==> _tblPersist
-|------ DataUpdatable ==> False
-|------ DefaultValue ==> 
-|------ ValidationRule ==> 
-|------ ValidationText ==> 
-|------ Required ==> False
-|------ AllowZeroLength ==> True
-|------ AppendOnly ==> False
-|------ Expression ==> 
-|------ ColumnWidth ==> -1
-|------ ColumnOrder ==> 0
-|------ ColumnHidden ==> False
-|------ DisplayControl ==> 109
-|------ IMEMode ==> 0
-|------ IMESentenceMode ==> 3
-|------ UnicodeCompression ==> True
-|------ TextAlign ==> 0
-|------ AggregateType ==> -1
-|------ ResultType ==> 0
-|------ CurrencyLCID ==> 0
+|-- id (Field in _tblPersist)
+|------ Attributes >> 17
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> id
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> id
+|------ SourceTable >> _tblPersist
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- persist (Field in _tblPersist)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> persist
+|------ OrdinalPosition >> 1
+|------ Size >> 255
+|------ SourceField >> persist
+|------ SourceTable >> _tblPersist
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0

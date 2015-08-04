@@ -1,81 +1,81 @@
-|--- Name ==> _tlkpYear
-|--- Updatable ==> True
-|--- Connect ==> 
-|--- Attributes ==> 0
-|--- SourceTableName ==> 
-|--- RecordCount ==> 6
-|--- ValidationRule ==> 
-|--- ValidationText ==> 
-|--- ConflictTable ==> 
-|--- ReplicaFilter ==> 
-|--- PublishToWeb ==> 1
-|--- Orientation ==> 0
-|--- OrderByOn ==> False
-|--- DefaultView ==> 2
-|--- DisplayViewsOnSharePointSite ==> 1
-|--- TotalsRow ==> False
-|--- FilterOnLoad ==> False
-|--- OrderByOnLoad ==> True
-|--- HideNewField ==> False
-|--- BackTint ==> 100
-|--- BackShade ==> 100
-|--- ThemeFontIndex ==> 1
-|--- AlternateBackThemeColorIndex ==> 1
-|--- AlternateBackTint ==> 100
-|--- AlternateBackShade ==> 95
-|--- ReadOnlyWhenDisconnected ==> False
-|--- DatasheetGridlinesThemeColorIndex ==> 3
-|--- DatasheetForeThemeColorIndex ==> 0
+|-- Name >> _tlkpYear
+|-- Updatable >> True
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 6
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
+|-- PublishToWeb >> 1
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- DefaultView >> 2
+|-- DisplayViewsOnSharePointSite >> 1
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> True
+|-- HideNewField >> False
+|-- BackTint >> 100
+|-- BackShade >> 100
+|-- ThemeFontIndex >> 1
+|-- AlternateBackThemeColorIndex >> 1
+|-- AlternateBackTint >> 100
+|-- AlternateBackShade >> 95
+|-- ReadOnlyWhenDisconnected >> False
+|-- DatasheetGridlinesThemeColorIndex >> 3
+|-- DatasheetForeThemeColorIndex >> 0
 ---------------------------------------------------------
-|--- ID (Field in _tlkpYear)
-|------ Attributes ==> 17
-|------ CollatingOrder ==> 1033
-|------ Type ==> 4
-|------ Name ==> ID
-|------ OrdinalPosition ==> 0
-|------ Size ==> 4
-|------ SourceField ==> ID
-|------ SourceTable ==> _tlkpYear
-|------ DataUpdatable ==> False
-|------ DefaultValue ==> 
-|------ ValidationRule ==> 
-|------ ValidationText ==> 
-|------ Required ==> False
-|------ AllowZeroLength ==> False
-|------ AppendOnly ==> False
-|------ Expression ==> 
-|------ ColumnWidth ==> -1
-|------ ColumnOrder ==> 0
-|------ ColumnHidden ==> False
-|------ TextAlign ==> 0
-|------ AggregateType ==> -1
-|------ ResultType ==> 0
-|------ CurrencyLCID ==> 0
-|--- TheYear (Field in _tlkpYear)
-|------ Attributes ==> 2
-|------ CollatingOrder ==> 1033
-|------ Type ==> 10
-|------ Name ==> TheYear
-|------ OrdinalPosition ==> 1
-|------ Size ==> 4
-|------ SourceField ==> TheYear
-|------ SourceTable ==> _tlkpYear
-|------ DataUpdatable ==> False
-|------ DefaultValue ==> 
-|------ ValidationRule ==> 
-|------ ValidationText ==> 
-|------ Required ==> False
-|------ AllowZeroLength ==> True
-|------ AppendOnly ==> False
-|------ Expression ==> 
-|------ ColumnWidth ==> -1
-|------ ColumnOrder ==> 0
-|------ ColumnHidden ==> False
-|------ DisplayControl ==> 109
-|------ IMEMode ==> 0
-|------ IMESentenceMode ==> 3
-|------ UnicodeCompression ==> True
-|------ TextAlign ==> 0
-|------ AggregateType ==> -1
-|------ ResultType ==> 0
-|------ CurrencyLCID ==> 0
+|-- ID (Field in _tlkpYear)
+|------ Attributes >> 17
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> ID
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> ID
+|------ SourceTable >> _tlkpYear
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- TheYear (Field in _tlkpYear)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> TheYear
+|------ OrdinalPosition >> 1
+|------ Size >> 4
+|------ SourceField >> TheYear
+|------ SourceTable >> _tlkpYear
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0

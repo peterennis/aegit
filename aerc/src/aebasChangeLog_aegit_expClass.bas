@@ -40,10 +40,12 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %055 -
+' %054 -
+' %053 -
+' %052 -
+' %051 -
 ' %050 -
-' %049 -
-' %048 -
-' %047 - XML table info not exported for aegit in v145 since relative path introduced
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
 '           ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
@@ -53,7 +55,6 @@ Option Explicit
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %007 - Make varDebug work as optional parameter to Let property
-' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
 ' #045 -
 ' #044 -
@@ -62,20 +63,29 @@ Option Explicit
 ' #041 -
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
-' #035 - Configure git with diff for UTF16 files
-'           Consider conversion to UTF8, Ref: https://github.com/timabell/msaccess-vcs-integration/commit/82e56a4df23b74cc57b7c4fd353babadd96c0ed4
 ' #026 - Output list of hidden reports
 ' #025 - Output list of hidden modules
 ' #024 - Output list of hidden forms
 ' #023 - Output list of hidden tables
 ' #021 - Caption ="Gr??e" - Language display problem on output - GDIPlusDemo
-' #017 - KPI chart test not working
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
-' #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 ' #010 - Check if ViewAppProperties includes anything new
 '=============================================================================================================================
 '
 '
+'20150804 - v147 -
+    ' FIXED - %049 - NameMap for azure linked tables shows strange characters - treat like GUID
+    ' FIXED - %048 - Test for existence of _frmPersist
+    ' FIXED - %047 - XML table info not exported for aegit in v145 since relative path introduced - Reinstate Test 7 fixes it
+    ' WONTFIX - %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
+    ' WONTFIX - #035 - Configure git with diff for UTF16 files - GitHub diff now seems capable to deal with it
+    '           e.g. http://blog.xk72.com/post/31456986659/diff-strings-files-in-git
+    '           but... Ref: http://gigliwood.com/blog/to-hell-with-utf-16-strings.html
+    '           and... Ref: https://coderwall.com/p/yka9da/better-diffs-with-sql-files
+    '           Reopen if internationalization becomes an issue
+    '           Consider conversion to UTF8, Ref: https://github.com/timabell/msaccess-vcs-integration/commit/82e56a4df23b74cc57b7c4fd353babadd96c0ed4
+    ' WONTFIX - #017 - Relates to %035, %043, KPI chart test not working
+    ' OBSOLETE - #011 - Modify ObjectCounts to provide more details and export results for development tracking, charting
 '20150803 - v146 -
     ' FIXED - Error 76 for relative path on xml export
     ' FIXED - Error 2220 on xml export
@@ -86,7 +96,7 @@ Option Explicit
     '           Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
     '           Mojibake - Ref: https://en.wikipedia.org/wiki/Mojibake
     ' CLOSED - %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
-    ' CLSOED - %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
+    ' CLOSED - %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
 '20150730 - v143 -
     ' FIXED - %043 - Relates to %042, Keep connection(?) open with frmPersist method may be a solution
     '           No performance improvement for single dbs export
