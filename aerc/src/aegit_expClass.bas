@@ -488,8 +488,13 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
 
             On Error Resume Next
             For Each prp In tdf.Properties
+                ' Ignore DateCreated, LastUpdated and GUID output
                 If prp.Name <> "DateCreated" And prp.Name <> "LastUpdated" Then
-                    Print #1, "|--- " & prp.Name & " ==> " & prp.Value
+                    If prp.Name = "GUID" Then
+                        Print #1, "|--- " & prp.Name & " ==> " & "GUID"
+                    Else
+                        Print #1, "|--- " & prp.Name & " ==> " & prp.Value
+                    End If
                 End If
             Next prp
             Print #1, "---------------------------------------------------------"
@@ -743,11 +748,6 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
-        'Case 9
-        '    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass" & _
-        '            vbCrLf & "aeReadWriteStream Entry strPathFileName=" & strPathFileName, vbCritical, "aeReadWriteStream ERROR=9"
-        '    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
-        '    Resume Next
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure NoBOM of Class aegit_expClass"
             Resume Next

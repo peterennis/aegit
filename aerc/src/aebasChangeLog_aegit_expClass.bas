@@ -43,20 +43,15 @@ Option Explicit
 ' %050 -
 ' %049 -
 ' %048 -
-' %047 -
-' %046 - Test NoBOM stream writing
-' %045 - Erl=170, Err=76, Path not found, OutputListOfApplicationOptions
+' %047 - XML table info not exported for aegit in v145 since relative path introduced
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
 '           ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
-' %042 - NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
-' %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
 ' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
-' %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
 ' %007 - Make varDebug work as optional parameter to Let property
 ' %002 - Ref: http://access.mvps.org/access/modules/mdl0022.htm - test the References Wizard?
 ' Issues:
@@ -82,10 +77,14 @@ Option Explicit
 '
 '
 '20150803 - v145 -
-    ' NoBOM seems to be much faster
+    ' FIXED - %046 - Test NoBOM stream writing - NoBOM seems to be much faster
+    ' FIXED - %045 - Erl=170, Err=76, Path not found, OutputListOfApplicationOptions
+    ' FIXED - %042 - Relates to %046, NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream
     ' FIXED - %039 - BOM, UTF-8, UTF-16, Access Export - Ref: http://axlr8r.blogspot.nl/2011/05/how-to-export-data-into-utf-8-without.html
     '           Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
     '           Mojibake - Ref: https://en.wikipedia.org/wiki/Mojibake
+    ' CLOSED - %023 - Access source control options Ref: http://stackoverflow.com/questions/187506/how-do-you-use-version-control-with-access-development
+    ' CLSOED - %012 - https://support.office.com/en-za/article/Discontinued-features-and-modified-functionality-in-Access-2013-bc006fc3-5b48-499e-8c7d-9a2dfef68e2f
 '20150730 - v143 -
     ' FIXED - %043 - Relates to %042, Keep connection(?) open with frmPersist method may be a solution
     '           No performance improvement for single dbs export

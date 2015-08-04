@@ -8,7 +8,7 @@
 |--- ValidationText ==> 
 |--- ConflictTable ==> 
 |--- ReplicaFilter ==> 
-|--- GUID ==> ????????
+|--- GUID ==> GUID
 |--- Orientation ==> 0
 |--- OrderByOn ==> False
 |--- DefaultView ==> 2
