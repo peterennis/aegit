@@ -3944,9 +3944,10 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     End If
 
     ' Rewrite the file as pretty xml
+    Debug.Print "PrettyXML strPathFileName = " & strPathFileName
     Open strPathFileName For Output As #fle
     Print #fle, strXMLResDoc
-    Close fle
+    Close #fle
 
     Set objXMLDOMDoc = Nothing
     Set objXMLStyleSheet = Nothing
@@ -3955,8 +3956,14 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
-    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+    Select Case Err.Number
+        Case 9999
+            'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+            Resume Next
+        Case Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+        'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+    End Select
     Resume PROC_EXIT
 
 End Sub
@@ -4142,7 +4149,10 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
                 Or Left$(tdf.Name, 4) = "~TMP" _
                 Or Left$(tdf.Name, 3) = "zzz") Then
             strFile = aestrXMLLocation & "tables_" & tdf.Name & "_DataMacro.xml"
+            'Debug.Print "OutputTableDataMacros: aestrXMLLocation = " & aestrXMLLocation
+            'Debug.Print "OutputTableDataMacros: strFile = " & strFile
             SaveAsText acTableDataMacro, tdf.Name, strFile
+2220:
             If Not IsMissing(varDebug) Then
                 Debug.Print "OutputTableDataMacros:", tdf.Name, aestrXMLLocation, strFile
                 PrettyXML strFile, varDebug
@@ -4161,6 +4171,8 @@ PROC_EXIT:
 PROC_ERR:
     If Err = 2950 Then ' Reserved Error
         Resume NextTdf
+    ElseIf Err = 2220 Then
+        Resume 2220
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass"
     Resume PROC_EXIT

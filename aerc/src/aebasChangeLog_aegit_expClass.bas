@@ -76,7 +76,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20150803 - v145 -
+'20150803 - v146 -
+    ' FIXED - Error 2220 on xml export
     ' FIXED - %046 - Test NoBOM stream writing - NoBOM seems to be much faster
     ' FIXED - %045 - Erl=170, Err=76, Path not found, OutputListOfApplicationOptions
     ' FIXED - %042 - Relates to %046, NOTE: Use of mblnUTF16 really slows down export - investigate faster option than read/write stream
