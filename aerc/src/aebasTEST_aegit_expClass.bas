@@ -100,6 +100,7 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varSrcFldr As Variant, _
                                 Optional ByVal varXmlFldr As Variant, _
                                 Optional ByVal varXmlData As Variant, _
+                                Optional ByVal varSrcFldrBe As Variant, _
                                 Optional ByVal varBackEndDb1) As Boolean
 
     On Error GoTo PROC_ERR
@@ -116,9 +117,10 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     Dim bln7 As Boolean
     Dim bln8 As Boolean
 
-    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr      ' THE_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr         ' THE_XML_FOLDER
-    If Not IsMissing(varBackEndDb1) Then oDbObjects.BackEndDb1 = varBackEndDb1  ' THE_BACK_END_DB1
+    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr          ' THE_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr             ' THE_XML_FOLDER
+    If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe    ' THE_BACK_END_SOURCE_FOLDER
+    If Not IsMissing(varBackEndDb1) Then oDbObjects.BackEndDb1 = varBackEndDb1      ' THE_BACK_END_DB1
     'MsgBox "varBackEndDb1 = " & varBackEndDb1, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export

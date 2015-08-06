@@ -6,14 +6,11 @@ Option Explicit
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
 ' RibbonX Visual Designer 2010 - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
 ' IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
-' TLD (adaept.tk? - toolkits): Ref: http://www.cnn.com/2012/06/13/tech/web/tokelau-domain-name-holder/
 '
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
 ' The Ribbon and QAT settings - C:\Users\%username%\AppData\Local\Microsoft\Office
 ' Ref: http://msdn.microsoft.com/en-us/library/ee704589(v=office.14).aspx
-' Sendkeys module Ref: http://www.codeguru.com/vb/gen/vb_system/keyboard/article.php/c14629/SendKeys.htm#page-1 => VB6, needs too many changes
-' SendInput Module Ref: http://vb.mvps.org/samples/SendInput/
 ' *** Windows API help - replacing As Any declaration
 ' Ref: http://allapi.mentalis.org/vbtutor/api1.shtml
 ' Ref: http://programmersheaven.com/discussion/237489/passing-an-array-as-an-optional-parameter
@@ -21,10 +18,6 @@ Option Explicit
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219149
 ' *** CreateObject("System.Collections.ArrayList")
 ' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
-' Internationalization - Potential source issue #033
-' Ref: http://www.vb-helper.com/tip_internationalization.html
-' *** Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
-' *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 '
 '
 ' Guides:
@@ -32,28 +25,26 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 ' *** Ref: http://www.vb123.com/toolshed/02_accvb/remotequeries.htm - Remote Queries In Microsoft Access
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
-' *** Ref: http://blogs.office.com/2013/01/22/visualize-your-access-2013-web-app-data-in-excel/ - Visualize your Access 2013 web app data in Excel
-' Ref: http://blogs.office.com/2013/07/02/the-access-2013-runtime-now-available-for-download/
-' Easy test for db app with Access runtime without having to install the runtime - start Access with the runtime switch or better yet,
-' just rename your ACCDB file to an ACCDR. When you double click on the ACCDR file it will start the Access client in the runtime mode.
 '
 '
 '=============================================================================================================================
 ' Tasks:
 ' %055 -
 ' %054 -
-' %053 -
-' %052 -
-' %051 -
-' %050 -
+' %053 - Files stored in srcbe are deleted, fix config so that KillAllFiles is intelligent about src vs. srcbe
+' %052 - Create property to define text encoding output
+' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
+'           Internationalization - Potential source issue #033
+'           Ref: http://www.vb-helper.com/tip_internationalization.html
+'           *** Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
+'           *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
-'           ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
+'           Ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
-' %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:
 ' #045 -
@@ -73,6 +64,15 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150804 - v148 -
+    ' FIXED - %050 - Error 58 (File already exists) USysRibbons.xml in OutputTheTableDataAsXML - xml folder contents has not been deleted
+    ' FIXED - %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
+    ' OBSOLETE - Sendkeys module Ref: http://www.codeguru.com/vb/gen/vb_system/keyboard/article.php/c14629/SendKeys.htm#page-1 => VB6, needs too many changes
+    ' OBSOLETE - SendInput Module Ref: http://vb.mvps.org/samples/SendInput/
+    ' OBSOLETE - Relates to %043, *** Ref: http://blogs.office.com/2013/01/22/visualize-your-access-2013-web-app-data-in-excel/ - Visualize your Access 2013 web app data in Excel
+    ' FIXED - Ref: http://blogs.office.com/2013/07/02/the-access-2013-runtime-now-available-for-download/
+    '           Easy test for db app with Access runtime without having to install the runtime - start Access with the runtime switch or better yet,
+    '           just rename your ACCDB file to an ACCDR. When you double click on the ACCDR file it will start the Access client in the runtime mode.
 '20150804 - v147 -
     ' FIXED - %049 - NameMap for azure linked tables shows strange characters - treat like GUID
     ' FIXED - %048 - Test for existence of _frmPersist

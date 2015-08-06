@@ -26,6 +26,8 @@ Option Explicit
 ' Updated:  All notes moved to change log
 ' History:  See comment details, basChangeLog, commit messages on github
 ' Web:      https://github.com/peterennis/aegit
+' Newspeak: http://www.collinsdictionary.com/dictionary/english/eejit
+' Webspeak: https://disqus.com/home/discussion/fabiensanglardswebsite/git_source_code_review/
 ' =======================================================================
 
 Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
@@ -37,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.4.7"
-Private Const aegit_expVERSION_DATE As String = "August 4, 2015"
+Private Const aegit_expVERSION As String = "1.4.8"
+Private Const aegit_expVERSION_DATE As String = "August 5, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -78,6 +80,8 @@ Private aegitSetup As Boolean
 Private aegitType As mySetupType
 Private aegitExport As myExportType
 Private aegitSourceFolder As String
+Private aegitSourceFolderBe As String
+Private aegitTextEncoding As String
 Private aegitXMLfolder As String
 Private aegitDataXML() As Variant
 Private aegitExportDataToXML As Boolean
@@ -127,6 +131,7 @@ Private Sub Class_Initialize()
     End If
     ' Provide a default value for the SourceFolder, ImportFolder and other properties
     aegitSourceFolder = "default"
+    aegitSourceFolderBe = "default"
     aegitXMLfolder = "default"
     aestrBackEndDb1 = "default"             ' default for aegit is no back end database
     ReDim Preserve aegitDataXML(0 To 0)
@@ -155,6 +160,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
     Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
     Debug.Print , "Default for aegitType.XMLfolder = " & aegitType.XMLfolder
+    Debug.Print , "Default for aegitSourceFolderBe = " & aegitSourceFolderBe
     Debug.Print , "Default for aestrBackEndDb1 = " & aestrBackEndDb1
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
@@ -222,6 +228,26 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
     ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
     On Error GoTo 0
     aegitSourceFolder = strSourceFolder
+End Property
+
+Public Property Get TextEncoding() As String
+    On Error GoTo 0
+    TextEncoding = aegitTextEncoding
+End Property
+
+Public Property Let TextEncoding(ByVal strTextEncoding As String)
+    On Error GoTo 0
+    aegitTextEncoding = strTextEncoding
+End Property
+
+Public Property Get SourceFolderBe() As String
+    On Error GoTo 0
+    SourceFolder = aegitSourceFolderBe
+End Property
+
+Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
+    On Error GoTo 0
+    aegitSourceFolderBe = strSourceFolderBe
 End Property
 
 Public Property Get BackEndDb1() As String
@@ -760,10 +786,13 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
+        Case 9999
+            Resume PROC_EXIT
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure NoBOM of Class aegit_expClass"
-            Resume Next
+            Resume PROC_EXIT
     End Select
+    Resume PROC_EXIT
 
 End Function
 
@@ -2975,7 +3004,8 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
 
     On Error GoTo PROC_ERR
 
-    Debug.Print "KillAllFiles"
+    'Debug.Print "KillAllFiles", "strLoc = " & strLoc
+    'Stop
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
         Debug.Print , "DEBUGGING IS OFF"
@@ -2984,7 +3014,17 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-    If strLoc = "src" Or strLoc = "srcbe" Then
+    ' Test for relative path
+    Dim strTestPath As String
+    strTestPath = aestrSourceLocation
+    If Left(aestrSourceLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
+        aestrSourceLocation = strTestPath
+        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation, "aeDocumentTheDatabase"
+        'Stop
+    End If
+
+    If strLoc = "src" Then
         ' Delete all the exported src files
         strFile = Dir$(aestrSourceLocation & "*.*")
         Do While strFile <> vbNullString
@@ -2998,19 +3038,45 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
             ' Need to specify full path again because a file was deleted
             strFile = Dir$(aestrSourceLocation & "xml\" & "*.*")
         Loop
-    ElseIf strLoc = "xml" Then
-        ' Delete files in xml location
-        If aegitSetup Then
-            strFile = Dir$(aestrXMLLocation & "*.*")
-            Do While strFile <> vbNullString
-                KillProperly (aestrXMLLocation & strFile)
-                ' Need to specify full path again because a file was deleted
-                strFile = Dir$(aestrXMLLocation & "*.*")
-            Loop
+    ElseIf strLoc = "srcbe" Then
+        ' Test for relative path
+        'Dim strTestPath As String
+        strTestPath = aegitSourceFolderBe
+        If Left(aegitSourceFolderBe, 1) = "." Then
+            strTestPath = CurrentProject.Path & Mid(aegitSourceFolderBe, 2, Len(aegitSourceFolderBe) - 1)
+            aegitSourceFolderBe = strTestPath
         End If
+        ' Delete all the exported srcbe files
+        Debug.Print "KillAllFiles"
+        Debug.Print , "aestrBackEndDb1 = " & aestrBackEndDb1
+        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+        Debug.Print , "aegitSourceFolderBe = " & aegitSourceFolderBe
+        '
+        strFile = Dir$(aegitSourceFolderBe & "*.*")
+        Do While strFile <> vbNullString
+            KillProperly (aegitSourceFolderBe & strFile)
+            ' Need to specify full path again because a file was deleted
+            strFile = Dir$(aegitSourceFolderBe & "*.*")
+        Loop
+        strFile = Dir$(aegitSourceFolderBe & "xml\" & "*.*")
+        Do While strFile <> vbNullString
+            KillProperly (aegitSourceFolderBe & "xml\" & strFile)
+            ' Need to specify full path again because a file was deleted
+            strFile = Dir$(aegitSourceFolderBe & "xml\" & "*.*")
+        Loop
+        'Stop
     Else
         MsgBox "Bad strLoc", vbCritical, "STOP " & aeAPP_NAME
         Stop
+    End If
+
+    If aegitSetup Then
+        strFile = Dir$(aestrXMLLocation & "*.*")
+        Do While strFile <> vbNullString
+            KillProperly (aestrXMLLocation & strFile)
+            ' Need to specify full path again because a file was deleted
+            strFile = Dir$(aestrXMLLocation & "*.*")
+        Loop
     End If
 
 PROC_EXIT:
@@ -3148,6 +3214,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         KillAllFiles "src", varDebug
         If aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
     End If
+    'Stop
 
     ' ===================================
     '    FORMS REPORTS SCRIPTS MODULES
@@ -3325,7 +3392,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
     
     On Error GoTo PROC_ERR
 
-    Debug.Print "aeExists"
+    Debug.Print "aeExists", strAccObjType, strAccObjName
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
         Debug.Print , "DEBUGGING IS OFF"
@@ -4023,16 +4090,13 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 
             If aegitSetup Then
                 If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True aestrXMLLocation=" & aestrXMLLocation
-                If Not rst.EOF Then
-                    rst.MoveFirst
-                    rst.Save strFileName, adPersistXML
-                End If
             Else
                 If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=False aestrXMLLocation=" & aestrXMLLocation
-                If Not rst.EOF Then
-                    rst.MoveFirst
-                    rst.Save strFileName, adPersistXML
-                End If
+            End If
+
+            If Not rst.EOF Then
+                rst.MoveFirst
+                rst.Save strFileName, adPersistXML
             End If
 
             If Not IsMissing(varDebug) Then
@@ -4052,9 +4116,15 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ")" & vbCrLf & _
-      "strFileName = " & strFileName & vbCrLf & "in procedure OutputTheTableDataAsXML of Class aegit_expClass", vbExclamation
-    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
+    Select Case Err.Number
+        Case 58     ' File already exists
+            'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+            Resume PROC_EXIT
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ")" & vbCrLf & _
+            "strFileName = " & strFileName & vbCrLf & "in procedure OutputTheTableDataAsXML of Class aegit_expClass", vbExclamation
+            'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
+    End Select
     Resume PROC_EXIT
 
 End Sub
