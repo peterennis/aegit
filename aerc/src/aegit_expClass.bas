@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.4.8"
-Private Const aegit_expVERSION_DATE As String = "August 5, 2015"
+Private Const aegit_expVERSION As String = "1.4.9"
+Private Const aegit_expVERSION_DATE As String = "August 6, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -81,6 +81,7 @@ Private aegitType As mySetupType
 Private aegitExport As myExportType
 Private aegitSourceFolder As String
 Private aegitSourceFolderBe As String
+Private aegitFrontEndApp As Boolean
 Private aegitTextEncoding As String
 Private aegitXMLfolder As String
 Private aegitDataXML() As Variant
@@ -154,7 +155,8 @@ Private Sub Class_Initialize()
         .ExportCBID = False
     End With
 
-    pExclude = True     ' Default setting is not to export associated aegit_exp files
+    pExclude = True             ' Default setting is not to export associated aegit_exp files
+    aegitFrontEndApp = True     ' Default if a front end app
 
     Debug.Print "Class_Initialize"
     Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
@@ -162,6 +164,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aegitType.XMLfolder = " & aegitType.XMLfolder
     Debug.Print , "Default for aegitSourceFolderBe = " & aegitSourceFolderBe
     Debug.Print , "Default for aestrBackEndDb1 = " & aestrBackEndDb1
+    Debug.Print , "Default for aegitFrontEndApp = " & aegitFrontEndApp
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -521,14 +524,16 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
             On Error Resume Next
             For Each prp In tdf.Properties
                 ' Ignore DateCreated, LastUpdated, GUID and NameMap output
-                If prp.Name <> "DateCreated" And prp.Name <> "LastUpdated" Then
-                    If prp.Name = "GUID" Then
-                        Print #1, "|-- " & prp.Name & " >> " & "GUID"
-                    ElseIf prp.Name = "NameMap" Then
-                        Print #1, "|-- " & prp.Name & " >> " & "NameMap"
-                    Else
-                        Print #1, "|-- " & prp.Name & " >> " & prp.Value
-                    End If
+                If prp.Name = "DateCreated" Then
+                    Print #1, "|-- " & prp.Name & " >> " & "DateCreated"
+                ElseIf prp.Name = "LastUpdated" Then
+                    Print #1, "|-- " & prp.Name & " >> " & "LastUpdated"
+                ElseIf prp.Name = "GUID" Then
+                    Print #1, "|-- " & prp.Name & " >> " & "GUID"
+                ElseIf prp.Name = "NameMap" Then
+                    Print #1, "|-- " & prp.Name & " >> " & "NameMap"
+                Else
+                    Print #1, "|-- " & prp.Name & " >> " & prp.Value
                 End If
             Next prp
             Print #1, "---------------------------------------------------------"
@@ -3024,7 +3029,7 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
         'Stop
     End If
 
-    If strLoc = "src" Then
+    If aegitFrontEndApp And strLoc = "src" Then
         ' Delete all the exported src files
         strFile = Dir$(aestrSourceLocation & "*.*")
         Do While strFile <> vbNullString
@@ -3038,7 +3043,7 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
             ' Need to specify full path again because a file was deleted
             strFile = Dir$(aestrSourceLocation & "xml\" & "*.*")
         Loop
-    ElseIf strLoc = "srcbe" Then
+    ElseIf Not aegitFrontEndApp And strLoc = "srcbe" Then
         ' Test for relative path
         'Dim strTestPath As String
         strTestPath = aegitSourceFolderBe
@@ -3208,11 +3213,11 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     End If
 
     If IsMissing(varDebug) Then
-        KillAllFiles "src"
-        If aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe"
+        If aegitFrontEndApp Then KillAllFiles "src"
+        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe"
     Else
-        KillAllFiles "src", varDebug
-        If aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
+        If aegitFrontEndApp Then KillAllFiles "src", varDebug
+        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
     End If
     'Stop
 
@@ -3930,15 +3935,19 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
                     Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"
                     If Not IsMissing(varDebug) Then Debug.Print , prp.Name, "Track name AutoCorrect info is ON!"
                 Else
-                    If prp.Name = "DateCreated" Or prp.Name = "LastUpdated" Then
-                        Print #fle, , prp.Name, FormatDateTime(prp.Value, vbShortDate)
+                    If prp.Name = "DateCreated" Then
+                        Print #fle, , prp.Name, "DateCreated"
+                    ElseIf prp.Name = "LastUpdated" Then
+                        Print #fle, , prp.Name, "LastUpdated"
                     Else
                         Print #fle, , prp.Name, prp.Value
                     End If
                     If Not IsMissing(varDebug) Then
                         Debug.Print , prp.Name, prp.Value
-                        If prp.Name = "LastUpdated" Or prp.Name = "LastUpdated" Then
-                            Debug.Print , "=>", prp.Name, FormatDateTime(prp.Value, vbShortDate)
+                        If prp.Name = "DateCreated" Then
+                            Debug.Print , "=>", prp.Name, "DateCreated"
+                        ElseIf prp.Name = "LastUpdated" Then
+                            Debug.Print , "=>", prp.Name, "LastUpdated"
                         End If
                     End If
                 End If
@@ -4448,7 +4457,8 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "
     strSQL = strSQL & vbCrLf & "IIf(type = -32764,""Report"", IIf(type=-32766,""Module"", "
     strSQL = strSQL & vbCrLf & "IIf(type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
-    strSQL = strSQL & vbCrLf & "MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated "
+    strSQL = strSQL & vbCrLf & "MSysObjects.Name, ""DateCreated"" AS DateCreated "
+    'strSQL = strSQL & vbCrLf & "MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated "
     strSQL = strSQL & vbCrLf & "FROM MSysObjects "
     strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
     strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "

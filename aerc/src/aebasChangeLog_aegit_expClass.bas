@@ -29,9 +29,12 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %060 -
+' %059 -
+' %058 -
+' %057 -
+' %056 -
 ' %055 -
-' %054 -
-' %053 - Files stored in srcbe are deleted, fix config so that KillAllFiles is intelligent about src vs. srcbe
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
 '           Internationalization - Potential source issue #033
@@ -64,6 +67,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150806 - v149 -
+    ' FIXED - %054 - Ignore internal date changes for export
+    ' FIXED - %053 - Files stored in srcbe are deleted, fix config so that KillAllFiles is intelligent about src vs. srcbe
 '20150804 - v148 -
     ' FIXED - %050 - Error 58 (File already exists) USysRibbons.xml in OutputTheTableDataAsXML - xml folder contents has not been deleted
     ' FIXED - %015 - Set default table font Ref: http://superuser.com/questions/416860/how-can-i-change-the-default-datasheet-font-in-ms-access-2010
