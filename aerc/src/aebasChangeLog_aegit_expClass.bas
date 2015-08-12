@@ -34,7 +34,6 @@ Option Explicit
 ' %058 -
 ' %057 -
 ' %056 -
-' %055 -
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
 '           Internationalization - Potential source issue #033
@@ -67,6 +66,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150807 - v150 -
+    ' FIXED - %055 - Take care of Err 53 File not found in KillProperly
 '20150806 - v149 -
     ' FIXED - %054 - Ignore internal date changes for export
     ' FIXED - %053 - Files stored in srcbe are deleted, fix config so that KillAllFiles is intelligent about src vs. srcbe
