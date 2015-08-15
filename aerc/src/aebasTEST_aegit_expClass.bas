@@ -54,8 +54,8 @@ Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
         Exit Function
     End If
 
-    Dim THE_XML_DATA_FOLDER As String
-    THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xmldata"
+'    Dim THE_XML_DATA_FOLDER As String
+'    THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xmldata"
 
     If Not IsMissing(varDebug) Then
         aegitClassTest varDebug:="varDebug", varFrontEndApp:=True

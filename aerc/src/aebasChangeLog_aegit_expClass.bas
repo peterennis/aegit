@@ -45,7 +45,6 @@ Option Explicit
 '           Ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
-' %030 - Some Output* files need to send results to srcbe when back end is exported
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:
@@ -68,6 +67,7 @@ Option Explicit
 '
 '20150807 - v150 -
     ' FIXED - %055 - Take care of Err 53 File not found in KillProperly
+    ' FIXED - %030 - Some Output* files need to send results to srcbe when back end is exported
 '20150806 - v149 -
     ' FIXED - %054 - Ignore internal date changes for export
     ' FIXED - %053 - Files stored in srcbe are deleted, fix config so that KillAllFiles is intelligent about src vs. srcbe
