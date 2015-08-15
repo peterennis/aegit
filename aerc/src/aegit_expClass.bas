@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.5.0"
-Private Const aegit_expVERSION_DATE As String = "August 7, 2015"
+Private Const aegit_expVERSION As String = "1.5.1"
+Private Const aegit_expVERSION_DATE As String = "August 14, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -1317,16 +1317,6 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
-'    ' Test for relative path
-'    Dim strTestPath As String
-'    strTestPath = aegitSourceFolder
-'    If Left(aegitSourceFolder, 1) = "." Then
-'        strTestPath = CurrentProject.Path & Mid(aegitSourceFolder, 2, Len(aegitSourceFolder) - 1)
-'        aegitSourceFolder = strTestPath
-'        'Debug.Print , "aegitSourceFolder = " & aegitSourceFolder, "OutputListOfApplicationOptions"
-'        'Stop
-'    End If
-
     If Not IsMissing(varDebug) Then Debug.Print "aegitSourceFolder=" & aegitSourceFolder
 
     Dim strTheSourceLocation As String
@@ -2437,24 +2427,6 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
 
     Dim intFailCount As Integer
 
-'    ' Test for relative path
-'    Dim strTestPath As String
-'    strTestPath = aestrXMLLocation
-'    If Left(aestrXMLLocation, 1) = "." Then
-'        strTestPath = CurrentProject.Path & Mid(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
-'        aestrXMLLocation = strTestPath
-'        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation, "aeDocumentTablesXML"
-'        'Stop
-'    End If
-'    Dim strTestPath As String
-'    strTestPath = aegitXMLfolder
-'    If Left(aegitXMLfolder, 1) = "." Then
-'        strTestPath = CurrentProject.Path & Mid(aegitXMLfolder, 2, Len(aegitXMLfolder) - 1)
-'        aegitXMLfolder = strTestPath
-'        'Debug.Print , "aegitXMLfolder = " & aegitXMLfolder, "aeDocumentTablesXML"
-'        'Stop
-'    End If
-
     Dim strTheSourceLocation As String
     If aegitSourceFolder = "default" Then
         strTheSourceLocation = aegitType.SourceFolder
@@ -3456,16 +3428,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     '    FORMS REPORTS SCRIPTS MODULES
     ' ===================================
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
-
-'    ' Test for relative path
-'    Dim strTestPath As String
-'    strTestPath = aestrSourceLocation
-'    If Left(aestrSourceLocation, 1) = "." Then
-'        strTestPath = CurrentProject.Path & Mid(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
-'        aestrSourceLocation = strTestPath
-'        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation, "aeDocumentTheDatabase"
-'        'Stop
-'    End If
 
     Dim strTheSourceLocation As String
     If aegitFrontEndApp Then

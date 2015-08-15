@@ -54,9 +54,6 @@ Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
         Exit Function
     End If
 
-'    Dim THE_XML_DATA_FOLDER As String
-'    THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xmldata"
-
     If Not IsMissing(varDebug) Then
         aegitClassTest varDebug:="varDebug", varFrontEndApp:=True
     Else
@@ -70,13 +67,15 @@ Public Sub ALTERNATIVE_EXPORT(Optional ByVal varDebug As Variant)
     THE_SOURCE_FOLDER = "C:\TEMP\aealt\src\"
     Dim THE_XML_FOLDER As String
     THE_XML_FOLDER = "C:\TEMP\aealt\src\xml\"
+    Dim THE_XML_DATA_FOLDER As String
+    THE_XML_DATA_FOLDER = "C:\TEMP\aealt\src\xmldata\"
 
     On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
-        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER, varFrontEndApp:=True
+        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER, varXmlDataFldr:=THE_XML_DATA_FOLDER, varFrontEndApp:=True
     Else
-        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER, varFrontEndApp:=True
+        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER, varXmlDataFldr:=THE_XML_DATA_FOLDER, varFrontEndApp:=True
     End If
 
 PROC_EXIT:
