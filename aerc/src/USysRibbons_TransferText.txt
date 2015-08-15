@@ -1,4 +1,3 @@
-"ID","RibbonName","RibbonXML"
 1,"HideRibbon","<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
 <customUI xmlns=""http://schemas.microsoft.com/office/2009/07/customui"">
   <ribbon startFromScratch=""true"" /> 

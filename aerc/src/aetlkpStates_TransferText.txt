@@ -1,4 +1,3 @@
-"StateCode","StateAbbreviation","StateName"
 "01","AL","Alabama"
 "02","AK","Alaska"
 "04","AZ","Arizona"

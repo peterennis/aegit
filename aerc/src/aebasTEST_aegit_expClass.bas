@@ -10,15 +10,26 @@ Option Explicit
 '                                           aegit_EXPORT 1
 '
 ' Custom Usage:
-' Public Const THE_SOURCE_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\"
-' Public Const THE_BACK_END_SOURCE_FOLDER = "Z:\The\Source\Folder\srcbe.MYPROJECT\"
-' Public Const THE_XML_FOLDER = "Z:\The\Source\Folder\src.MYPROJECT\xml\"
-' Public Const THE_BACK_END_XML_FOLDER = "Z:\The\Source\Folder\srcbe.MYPROJECT\xml\"
-' Public Const THE_BACK_END_DB1 = "Z:\THE\BACK\END\DATA.accdb"
-' Custom configuration examples in aegitClassTest:
-' oDbObjects.SourceFolder = THE_SOURCE_FOLDER
-' oDbObjects.XMLfolder = THE_XML_FOLDER
-' oDbObjects.BackEndDb1 = THE_BACK_END_DB1
+' FRONT END SETUP
+'Public Const THE_FRONT_END_APP = True
+'Public Const THE_SOURCE_FOLDER = ".\src\"                  ' "C:\THE\DATABASE\PATH\src\"
+'Public Const THE_XML_FOLDER = ".\src\xml\"                 ' "C:\THE\DATABASE\PATH\src\xml\"
+'Public Const THE_XML_DATA_FOLDER = ".\src\xmldata\"        ' "C:\THE\DATABASE\PATH\src\xmldata\"
+'Public Const THE_BACK_END_DB1 = "C:\MY\BACKEND\DATA.accdb"
+'Public Const THE_BACK_END_SOURCE_FOLDER = "NONE"           ' ".\srcbe\"
+'Public Const THE_BACK_END_XML_FOLDER = "NONE"              ' ".\srcbe\xml\"
+'Public Const THE_BACK_END_XML_DATA_FOLDER = "NONE"         ' ".\srcbe\xmldata\"
+
+' BACK END SETUP
+'Public Const THE_FRONT_END_APP = False
+'Public Const THE_SOURCE_FOLDER = "NONE"                     ' ".\src\"
+'Public Const THE_XML_FOLDER = "NONE"                        ' ".\src\xml\"
+'Public Const THE_XML_DATA_FOLDER = "NONE"                   ' ".\src\xmldata\"
+'Public Const THE_BACK_END_DB1 = "NONE"
+'Public Const THE_BACK_END_SOURCE_FOLDER = "C:\THE\DATABASE\PATH\srcbe\"             ' ".\srcbe\"
+'Public Const THE_BACK_END_XML_FOLDER = "C:\THE\DATABASE\PATH\srcbe\xml\"            ' ".\srcbe\xml\"
+'Public Const THE_BACK_END_XML_DATA_FOLDER = "C:\THE\DATABASE\PATH\srcbe\xmldata\"   ' ".\srcbe\xmldata\"
+'
 ' Run in immediate window:                  ALTERNATIVE_EXPORT
 ' Show debug output in immediate window:    ALTERNATIVE_EXPORT varDebug:="varDebug"
 '                                           ALTERNATIVE_EXPORT 1
@@ -44,12 +55,12 @@ Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
     End If
 
     Dim THE_XML_DATA_FOLDER As String
-    THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xml"
+    THE_XML_DATA_FOLDER = "C:\ae\aegit\aerc\src\xmldata"
 
     If Not IsMissing(varDebug) Then
-        aegitClassTest varDebug:="varDebug", varXmlData:=THE_XML_DATA_FOLDER
+        aegitClassTest varDebug:="varDebug", varFrontEndApp:=True
     Else
-        aegitClassTest varXmlData:=THE_XML_DATA_FOLDER
+        aegitClassTest varFrontEndApp:=True
     End If
 End Function
 
@@ -63,9 +74,9 @@ Public Sub ALTERNATIVE_EXPORT(Optional ByVal varDebug As Variant)
     On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
-        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER, varFrontEndApp:=True
     Else
-        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER
+        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varXmlFldr:=THE_XML_FOLDER, varFrontEndApp:=True
     End If
 
 PROC_EXIT:
@@ -99,9 +110,12 @@ End Function
 Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varSrcFldr As Variant, _
                                 Optional ByVal varXmlFldr As Variant, _
-                                Optional ByVal varXmlData As Variant, _
+                                Optional ByVal varXmlDataFldr As Variant, _
                                 Optional ByVal varSrcFldrBe As Variant, _
-                                Optional ByVal varBackEndDb1) As Boolean
+                                Optional ByVal varXmlFldrBe As Variant, _
+                                Optional ByVal varXmlDataFldrBe As Variant, _
+                                Optional ByVal varBackEndDb1 As Variant, _
+                                Optional ByVal varFrontEndApp As Variant) As Boolean
 
     On Error GoTo PROC_ERR
 
@@ -117,32 +131,45 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     Dim bln7 As Boolean
     Dim bln8 As Boolean
 
-    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr          ' THE_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLfolder = varXmlFldr             ' THE_XML_FOLDER
-    If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe    ' THE_BACK_END_SOURCE_FOLDER
-    If Not IsMissing(varBackEndDb1) Then oDbObjects.BackEndDb1 = varBackEndDb1      ' THE_BACK_END_DB1
+    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr                  ' THE_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr                     ' THE_XML_FOLDER
+    If Not IsMissing(varXmlDataFldr) Then oDbObjects.XMLDataFolder = varXmlDataFldr         ' THE_XML_DATA_FOLDER
+    If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe            ' THE_BACK_END_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldrBe) Then oDbObjects.XMLFolderBe = varXmlFldrBe               ' THE_BACK_END_XML_FOLDER
+    If Not IsMissing(varXmlDataFldrBe) Then oDbObjects.XMLDataFolderBe = varXmlDataFldrBe   ' THE_XML_DATA_FOLDER
+    If Not IsMissing(varBackEndDb1) Then oDbObjects.BackEndDb1 = varBackEndDb1              ' THE_BACK_END_DB1
+    If Not IsMissing(varFrontEndApp) Then oDbObjects.FrontEndApp = varFrontEndApp           ' THE_FRONT_END_APP
     'MsgBox "varBackEndDb1 = " & varBackEndDb1, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export
     gvarMyTablesForExportToXML = Array("USysRibbons")
     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML()
 
-    If Not IsMissing(varXmlData) Then
-            If Application.VBE.ActiveVBProject.Name = "aegit" Then
-                Dim myArray() As Variant
-                myArray = Array("aeItems", "aetlkpStates", "USysRibbons")
-                oDbObjects.TablesExportToXML = myArray()
-                oDbObjects.ExcludeFiles = False
-                Debug.Print , "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
-            Else
-                If IsArrayInitialized(gvarMyTablesForExportToXML) Then
-                    Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
-                    oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
-                Else
-                    Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for export."
-                End If
-            End If
+'    Dim strTheXMLDataLocation As String
+'    If varFrontEndApp Then
+'        strTheXMLDataLocation = varXmlDataFldr
+'    Else
+'        strTheXMLDataLocation = varXmlDataFldrBe
+'    End If
+
+'''    If Not IsMissing(strTheXMLDataLocation) Then
+
+    ' !!! FIX RELATIVE PATH ???
+    If Application.VBE.ActiveVBProject.Name = "aegit" Then
+        Dim myArray() As Variant
+        myArray = Array("aeItems", "aetlkpStates", "USysRibbons")
+        oDbObjects.TablesExportToXML = myArray()
+        oDbObjects.ExcludeFiles = False
+        Debug.Print , "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
+    Else
+        If IsArrayInitialized(gvarMyTablesForExportToXML) Then
+            Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
+            oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+        Else
+            Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for export."
+        End If
     End If
+'''    End If
 
 Test1:
     '=============
