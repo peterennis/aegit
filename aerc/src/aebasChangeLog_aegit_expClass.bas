@@ -33,7 +33,6 @@ Option Explicit
 ' %059 -
 ' %058 -
 ' %057 -
-' %056 -
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
 '           Internationalization - Potential source issue #033
@@ -65,6 +64,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20150816 - v153 -
+    ' FIXED - %056 - Control can't be edited; it's bound to a replication system column - OutputListOfAllHiddenQueries
+    '           Ref: https://groups.google.com/forum/#!topic/microsoft.public.access.replication/-78b5ZRqPCQ
+    '           Creating the target table first and then runing the query as an append query seems to have solved the problem
 '20150807 - v150 -
     ' FIXED - %055 - Take care of Err 53 File not found in KillProperly
     ' FIXED - %030 - Some Output* files need to send results to srcbe when back end is exported

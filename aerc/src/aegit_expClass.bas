@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.5.2"
-Private Const aegit_expVERSION_DATE As String = "August 15, 2015"
+Private Const aegit_expVERSION As String = "1.5.3"
+Private Const aegit_expVERSION_DATE As String = "August 16, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -222,11 +222,6 @@ Private Sub Class_Terminate()
     End If
     Debug.Print , "aegit_exp VERSION: " & aegit_expVERSION
     Debug.Print , "aegit_exp VERSION_DATE: " & aegit_expVERSION_DATE
-    '
-'?    If Application.VBE.ActiveVBProject.Name <> "aegit" And _
-'?            aestrBackEndDb1 <> "NONE" Then
-'?        OpenAllDatabases True
-'?    End If
 
 End Sub
 
@@ -1202,7 +1197,6 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' 120 Pass Through Query (hidden)
 ' 128 Union Query(visible)
 ' 136 Union Query(Hidden)
-' 2097152 ?
 
     Dim strTheSQL As String
     Dim varResult As Variant
@@ -1219,18 +1213,24 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
 
-    Const strSQL As String = "SELECT m.Name, m.Flags INTO " & strTempTable & " " & _
+    ' Create temp table
+    Const strMakeTbl As String = "SELECT ""Name"" AS Name, ""Flags"" As Flags, ""Description"" As Description INTO " & strTempTable & ";"
+    'Debug.Print "OutputListOfAllHiddenQueries"
+    'Debug.Print , strMakeTbl
+    ' Run the SQL Query
+    If aeExists("Tables", strTempTable) Then CurrentDb.Execute "DROP TABLE " & strTempTable
+    dbs.Execute strMakeTbl
+    'Stop
+
+    ' Append the data
+    Const strSQL As String = "INSERT INTO " & strTempTable & " ( Name, Flags, Description ) " & _
+                                "SELECT m.Name, m.Flags, """" AS Description " & _
                                 "FROM MSysObjects AS m " & _
                                 "WHERE (((m.Name) Not Like ""~%"" And (m.Name) Not Like ""zzz*"") AND " & _
                                 "((m.Type)=5) AND ((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 " & _
                                 "Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136))" & _
                                 "ORDER BY m.Name;"
-
-
-'    Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
-'                                "FROM MSysObjects AS m " & vbCrLf & _
-'                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
-'                                "ORDER BY m.Name;"
+    'Debug.Print "strSQL = " & strSQL
 
     If Not IsMissing(varDebug) Then Debug.Print strSQL
     If Not IsMissing(varDebug) And _
@@ -1241,8 +1241,29 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     'Stop
 
     DoCmd.SetWarnings False
-    ' Use RunSQL for action queries - Insert list of db queries into a temp table
+    ' Use RunSQL for action queries - Insert list of hidden queries into the temp table
     DoCmd.RunSQL strSQL
+
+    Dim strUpdate As String
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Select Query (hidden)"" WHERE " & strTempTable & ".Flags=""8"";"
+    'Debug.Print strUpdate
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Crosstab Query(Hidden)"" WHERE " & strTempTable & ".Flags=""24"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Delete Query(Hidden)"" WHERE " & strTempTable & ".Flags=""40"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Update Query(Hidden)"" WHERE " & strTempTable & ".Flags=""56"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Append Query(Hidden)"" WHERE " & strTempTable & ".Flags=""72"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Make Query(Hidden)"" WHERE " & strTempTable & ".Flags=""88"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Data Definition Query(Hidden)"" WHERE " & strTempTable & ".Flags=""104"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Pass Through Query(Hidden)"" WHERE " & strTempTable & ".Flags=""120"";"
+    DoCmd.RunSQL strUpdate
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Union Query(Hidden)"" WHERE " & strTempTable & ".Flags=""136"";"
+    DoCmd.RunSQL strUpdate
 
 e3167e3011e3078:
 '    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
@@ -1273,7 +1294,7 @@ e3167e3011e3078:
 '    End With
 
     If Not IsMissing(varDebug) Then
-'        Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount     ', "DCount(""Name"", strTempTable) = " & DCount("Name", strTempTable)
+        'Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount
          Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
     End If
 

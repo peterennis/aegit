@@ -1,7 +1,8 @@
-"_aeQryUSysRibbons",8
-"qapp_HiddenDummy",72
-"qmak_HiddenDummy",88
-"qpt_HiddenDummy",120
-"qry_HiddenDummy",8
-"quni_HiddenDummy",136
-"qupd_HiddenDummy",56
+"Name","Flags","Description"
+"_aeQryUSysRibbons","8","Select Query (hidden)"
+"qapp_HiddenDummy","72","Append Query(Hidden)"
+"qmak_HiddenDummy","88","Make Query(Hidden)"
+"qpt_HiddenDummy","120","Pass Through Query(Hidden)"
+"qry_HiddenDummy","8","Select Query (hidden)"
+"quni_HiddenDummy","136","Union Query(Hidden)"
+"qupd_HiddenDummy","56","Update Query(Hidden)"

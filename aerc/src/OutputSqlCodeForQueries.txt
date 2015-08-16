@@ -19,6 +19,13 @@ SELECT;
 INSERT INTO zzztblDummy
 SELECT;
 
+<<<qappMSysObjectsQueryHidden>>>
+INSERT INTO zzzTmpTblQueries ( Name, Flags, Description )
+SELECT m.Name, m.Flags, "" AS Description
+FROM MSysObjects AS m
+WHERE (((m.Name) Not Like "~%" And (m.Name) Not Like "zzz*") AND ((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136) AND ((m.Type)=5))
+ORDER BY m.Name;
+
 <<<qmak_Dummy>>>
 SELECT  INTO zzztblDummy;
 
@@ -48,12 +55,6 @@ SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate, MSysObjects.Name, MSysObj
 FROM MSysObjects
 ORDER BY MSysObjects.DateUpdate DESC;
 
-<<<qryMSysObjectsQueryHidden>>>
-SELECT m.Name, m.Flags
-FROM MSysObjects AS m
-WHERE (((m.Name) Not Like "~%" And (m.Name) Not Like "zzz*") AND ((m.Type)=5) AND ((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136))
-ORDER BY m.Name;
-
 <<<quni_Dummy>>>
 SELECT Num FROM [tblDummy0]
 UNION
@@ -71,4 +72,8 @@ UPDATE  SET;
 
 <<<qupd_HiddenDummy>>>
 UPDATE  SET;
+
+<<<qupdHiddenQueryFlagDescription>>>
+UPDATE zzzTmpTblQueries SET zzzTmpTblQueries.Description = "Select Query (hidden)"
+WHERE zzzTmpTblQueries.Flags="8";
 

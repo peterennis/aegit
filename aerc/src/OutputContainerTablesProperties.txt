@@ -315,6 +315,25 @@
               UseTransaction              True
               Orientation    0 
               PublishToWeb   1 
+>>>qappMSysObjectsQueryHidden
+              Name          qappMSysObjectsQueryHidden
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+              RecordsetType  0 
+              TotalsRow     False
 >>>qmak_Dummy
               Name          qmak_Dummy
               Owner         admin
@@ -459,25 +478,6 @@
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
->>>qryMSysObjectsQueryHidden
-              Name          qryMSysObjectsQueryHidden
-              Owner         admin
-              UserName      admin
-              Permissions    1048575 
-              AllPermissions               1048575 
-              Container     Tables
-              DateCreated   DateCreated
-              LastUpdated   LastUpdated
-              RecordLocks    0 
-              ODBCTimeout    60 
-              OrderByOn     False
-              Orientation    0 
-              DefaultView    2 
-              FilterOnLoad  False
-              OrderByOnLoad True
-              PublishToWeb   1 
-              RecordsetType  0 
-              TotalsRow     False
 >>>quni_Dummy
               Name          quni_Dummy
               Owner         admin
@@ -542,6 +542,25 @@
               FailOnError   False
               Orientation    0 
               PublishToWeb   1 
+>>>qupdHiddenQueryFlagDescription
+              Name          qupdHiddenQueryFlagDescription
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              FailOnError   False
+              Orientation    0 
+              PublishToWeb   1 
+              OrderByOn     False
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
 >>>tblBinary
               Name          tblBinary
               Owner         admin

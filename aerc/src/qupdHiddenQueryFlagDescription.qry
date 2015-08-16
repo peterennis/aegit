@@ -1,0 +1,26 @@
+dbMemo "SQL" ="UPDATE zzzTmpTblQueries SET zzzTmpTblQueries.Description = \"Select Query (hidde"
+    "n)\"\015\012WHERE zzzTmpTblQueries.Flags=\"8\";\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "UseTransaction" ="-1"
+dbBoolean "FailOnError" ="0"
+dbByte "Orientation" ="0"
+dbBinary "GUID" = Begin
+    0xac4c50907fb5a648bc4a5da4820cfabd
+End
+dbByte "PublishToWeb" ="1"
+dbBoolean "OrderByOn" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+Begin
+    Begin
+        dbText "Name" ="zzzTmpTblQueries.Flags"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="zzzTmpTblQueries.Description"
+        dbLong "AggregateType" ="-1"
+    End
+End
