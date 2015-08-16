@@ -351,6 +351,25 @@
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+>>>qryMSysObjectsQueryHidden
+              Name          qryMSysObjectsQueryHidden
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+              RecordsetType  0 
+              TotalsRow     False
 >>>tblBinary
               Name          tblBinary
               Owner         admin

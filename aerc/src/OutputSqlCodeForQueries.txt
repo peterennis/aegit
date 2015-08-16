@@ -19,10 +19,16 @@ WHERE ((([_tblChart].EnterDate)=[Forms]![_chtKPI01].[Controls]![txtMonth] & "/" 
 SELECT SCHEMA_NAME(schema_id)+'.'+name AS SchemaTable FROM sys.tables order by SchemaTable asc; 
 <<<qry_HiddenDummy>>>
 SELECT *
-FROM tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;
+FROM aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;
 
 <<<qryLastUpdated>>>
 SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate, MSysObjects.Name, MSysObjects.Type
 FROM MSysObjects
 ORDER BY MSysObjects.DateUpdate DESC;
+
+<<<qryMSysObjectsQueryHidden>>>
+SELECT m.Name, m.Flags
+FROM MSysObjects AS m
+WHERE (((m.Name) Not Like "~%" And (m.Name) Not Like "zzz*") AND ((m.Type)=5) AND ((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136))
+ORDER BY m.Name;
 

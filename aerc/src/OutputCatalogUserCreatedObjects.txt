@@ -30,6 +30,7 @@
 "Query","qpt_SqlSchemaTablesList","DateCreated"
 "Query","qry_HiddenDummy","DateCreated"
 "Query","qryLastUpdated","DateCreated"
+"Query","qryMSysObjectsQueryHidden","DateCreated"
 "Query","zzz___MyTempQuery___","DateCreated"
 "Query","zzzqryCatalogUserCreatedObjects","DateCreated"
 "Report","rpt_Dummy","DateCreated"
@@ -44,3 +45,4 @@
 "Table","f_9E8203D96A754B0890DAF9414007C362_Data","DateCreated"
 "Table","tblBinary","DateCreated"
 "Table","USysRibbons","DateCreated"
+"Table","zzzTmpTblQueries","DateCreated"

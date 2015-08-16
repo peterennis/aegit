@@ -1,0 +1,68 @@
+Operation =1
+Option =0
+Where ="(((m.Name) Not Like \"~%\" And (m.Name) Not Like \"zzz*\") AND ((m.Type)=5) AND "
+    "((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 Or (m.Flags)=72 Or "
+    "(m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136))"
+Begin InputTables
+    Name ="MSysObjects"
+    Alias ="m"
+End
+Begin OutputColumns
+    Expression ="m.Name"
+    Expression ="m.Flags"
+End
+Begin OrderBy
+    Expression ="m.Name"
+    Flag =0
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBinary "GUID" = Begin
+    0x551d97718dcad240aea981b8f1b693b4
+End
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbByte "PublishToWeb" ="1"
+dbByte "RecordsetType" ="0"
+dbBoolean "TotalsRow" ="0"
+Begin
+    Begin
+        dbText "Name" ="m.Name"
+        dbInteger "ColumnWidth" ="3225"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x6970ed8f62edb54da7ed824097d88e82
+        End
+    End
+    Begin
+        dbText "Name" ="m.Flags"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =40
+    Right =1619
+    Bottom =996
+    Left =-1
+    Top =-1
+    Right =1587
+    Bottom =655
+    Left =0
+    Top =0
+    ColumnsShown =539
+    Begin
+        Left =48
+        Top =12
+        Right =324
+        Bottom =364
+        Top =0
+        Name ="m"
+        Name =""
+    End
+End

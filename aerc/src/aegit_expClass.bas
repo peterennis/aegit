@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.5.1"
-Private Const aegit_expVERSION_DATE As String = "August 14, 2015"
+Private Const aegit_expVERSION As String = "1.5.2"
+Private Const aegit_expVERSION_DATE As String = "August 15, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -1182,6 +1182,27 @@ End Sub
 
 Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
+' Ref: http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
+' Query Flag Description
+'   0 Select Query (visible)
+'   8 Select Query (hidden)
+'  16 Crosstab Query(visible)
+'  24 Crosstab Query(Hidden)
+'  32 Delete Query(visible)
+'  40 Delete Query(Hidden)
+'  48 Update Query(visible)
+'  56 Update Query(Hidden)
+'  64 Append Query(visible)
+'  72 Append Query(Hidden)
+'  80 Make Table Query (visible)
+'  88 Make Table Query (hidden)
+'  96 Data Definition Query (visible)
+' 104 Data Definition Query (hidden)
+' 112 Pass Through Query (visible)
+' 120 Pass Through Query (hidden)
+' 128 Union Query(visible)
+' 136 Union Query(Hidden)
+' 2097152 ?
 
     Dim strTheSQL As String
     Dim varResult As Variant
@@ -1197,10 +1218,20 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
-    Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
-                                "FROM MSysObjects AS m " & vbCrLf & _
-                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
+
+    Const strSQL As String = "SELECT m.Name, m.Flags INTO " & strTempTable & " " & _
+                                "FROM MSysObjects AS m " & _
+                                "WHERE (((m.Name) Not Like ""~%"" And (m.Name) Not Like ""zzz*"") AND " & _
+                                "((m.Type)=5) AND ((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 " & _
+                                "Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136))" & _
                                 "ORDER BY m.Name;"
+
+
+'    Const strSQL As String = "SELECT m.Name INTO " & strTempTable & " " & vbCrLf & _
+'                                "FROM MSysObjects AS m " & vbCrLf & _
+'                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
+'                                "ORDER BY m.Name;"
+
     If Not IsMissing(varDebug) Then Debug.Print strSQL
     If Not IsMissing(varDebug) And _
                 Application.VBE.ActiveVBProject.Name = "aegit" Then
@@ -1214,39 +1245,40 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     DoCmd.RunSQL strSQL
 
 e3167e3011e3078:
-    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
-
-    With rst
-        If (.RecordCount > 0) Then
-            .MoveFirst
-            Do While Not rst.EOF
-                varResult = !Name
-                If Not IsMissing(varDebug) Then
-                    Debug.Print ">", !Name.Value, IsQryHidden(!Name)
-                End If
-                If IsQryHidden(!Name) Then
-                    intHidden = intHidden + 1
-                    .MoveNext
-                Else
-                    .Delete
-                    ' Ref: https://msdn.microsoft.com/en-us/library/bb243799%28v=office.12%29.aspx
-                    ' When you use the Delete method, the Microsoft Access database engine immediately deletes the current record
-                    ' without any warning or prompting. Deleting a record does not automatically cause the next record to become the current record;
-                    ' to move to the next record you must use the MoveNext method. However, keep in mind that after you have moved off the deleted record, you cannot move back to it.
-                    .MoveNext
-                End If
-            Loop
-        Else
-            Debug.Print "No records!"
-        End If
-    End With
+'    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
+'
+'    With rst
+'        If (.RecordCount > 0) Then
+'            .MoveFirst
+'            Do While Not rst.EOF
+'                varResult = !Name
+'                If Not IsMissing(varDebug) Then
+'                    Debug.Print ">", !Name.Value, IsQryHidden(!Name)
+'                End If
+'                If IsQryHidden(!Name) Then
+'                    intHidden = intHidden + 1
+'                    .MoveNext
+'                Else
+'                    .Delete
+'                    ' Ref: https://msdn.microsoft.com/en-us/library/bb243799%28v=office.12%29.aspx
+'                    ' When you use the Delete method, the Microsoft Access database engine immediately deletes the current record
+'                    ' without any warning or prompting. Deleting a record does not automatically cause the next record to become the current record;
+'                    ' to move to the next record you must use the MoveNext method. However, keep in mind that after you have moved off the deleted record, you cannot move back to it.
+'                    .MoveNext
+'                End If
+'            Loop
+'        Else
+'            Debug.Print "No records!"
+'        End If
+'    End With
 
     If Not IsMissing(varDebug) Then
-        Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount     ', "DCount(""Name"", strTempTable) = " & DCount("Name", strTempTable)
+'        Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount     ', "DCount(""Name"", strTempTable) = " & DCount("Name", strTempTable)
+         Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
     End If
 
-    rst.Close
-    dbs.Close
+'    rst.Close
+'    dbs.Close
 
     If aegitFrontEndApp Then
         DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False

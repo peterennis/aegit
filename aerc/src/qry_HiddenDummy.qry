@@ -1,4 +1,4 @@
-dbMemo "SQL" ="SELECT *\015\012FROM tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;\015"
+dbMemo "SQL" ="SELECT *\015\012FROM aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;\015"
     "\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
@@ -14,16 +14,4 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
 dbText "Description" ="This is hidden dummy"
 Begin
-    Begin
-        dbText "Name" ="tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger.id"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger.Desc"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger.Description"
-        dbLong "AggregateType" ="-1"
-    End
 End
