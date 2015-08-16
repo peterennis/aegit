@@ -1212,6 +1212,12 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
+    ' Object Type
+    ' Table 1
+    ' Query 5
+    ' Linked Table 4, 6, or 8
+    ' Form -32768
+    ' Report -32764
 
     ' Create temp table
     Const strMakeTbl As String = "SELECT ""Name"" AS Name, ""Flags"" As Flags, ""Description"" As Description INTO " & strTempTable & ";"
