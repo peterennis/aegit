@@ -1,0 +1,10 @@
+dbMemo "SQL" ="-- Select * from Nothing"
+dbMemo "Connect" ="ODBC;"
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "LogMessages" ="0"
+dbByte "Orientation" ="0"
+dbByte "PublishToWeb" ="1"
+dbText "Description" ="Don't be a dummy!"
+Begin
+End

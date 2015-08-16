@@ -1,0 +1,35 @@
+Operation =3
+Name ="zzztblDummy"
+Option =0
+Begin InputTables
+End
+Begin OutputColumns
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "UseTransaction" ="-1"
+dbByte "Orientation" ="0"
+dbBinary "GUID" = Begin
+    0xd5db862b91a6d34182bc77505d6a91f9
+End
+dbByte "PublishToWeb" ="1"
+Begin
+    Begin
+        dbText "Name" ="Dummy"
+        dbLong "AggregateType" ="-1"
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =40
+    Right =1619
+    Bottom =996
+    Left =-1
+    Top =-1
+    Right =1587
+    Bottom =672
+    Left =0
+    Top =0
+    ColumnsShown =651
+End

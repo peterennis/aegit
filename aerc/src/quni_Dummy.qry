@@ -1,0 +1,16 @@
+dbMemo "SQL" ="SELECT Num FROM [tblDummy0]\015\012UNION\015\012SELECT Num FROM [tblDummy1]\015\012"
+    "UNION SELECT Num FROM [tblDummy2];\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBinary "GUID" = Begin
+    0x13a8463d43b6294ca9e53cde3f06d869
+End
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbByte "PublishToWeb" ="1"
+Begin
+End

@@ -1,0 +1,44 @@
+Operation =1
+Option =0
+Begin InputTables
+End
+Begin OutputColumns
+    Alias ="Num"
+    Expression ="2"
+End
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbByte "PublishToWeb" ="1"
+dbBinary "GUID" = Begin
+    0x3b73c743a3a1bc489263cf637cdd0474
+End
+dbByte "RecordsetType" ="0"
+dbBoolean "TotalsRow" ="0"
+Begin
+    Begin
+        dbText "Name" ="Num"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x80616f161c890f0108890f0138f0160f
+        End
+    End
+End
+Begin
+    State =0
+    Left =0
+    Top =40
+    Right =1619
+    Bottom =996
+    Left =-1
+    Top =-1
+    Right =1587
+    Bottom =638
+    Left =0
+    Top =0
+    ColumnsShown =539
+End

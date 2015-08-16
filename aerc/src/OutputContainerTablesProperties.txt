@@ -287,8 +287,78 @@
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
+>>>qapp_Dummy
+              Name          qapp_Dummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              Orientation    0 
+              PublishToWeb   1 
+>>>qapp_HiddenDummy
+              Name          qapp_HiddenDummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              Orientation    0 
+              PublishToWeb   1 
+>>>qmak_Dummy
+              Name          qmak_Dummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              Orientation    0 
+              PublishToWeb   1 
+>>>qmak_HiddenDummy
+              Name          qmak_HiddenDummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              Orientation    0 
+              PublishToWeb   1 
 >>>qpt_Dummy
               Name          qpt_Dummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              ODBCTimeout    60 
+              LogMessages   False
+              Orientation    0 
+              PublishToWeb   1 
+              Description   Don't be a dummy!
+>>>qpt_HiddenDummy
+              Name          qpt_HiddenDummy
               Owner         admin
               UserName      admin
               Permissions    1048575 
@@ -332,6 +402,44 @@
               OrderByOnLoad True
               PublishToWeb   1 
               Description   This is hidden dummy
+>>>qry_Select1
+              Name          qry_Select1
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+              RecordsetType  0 
+              TotalsRow     False
+>>>qry_Select2
+              Name          qry_Select2
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+              RecordsetType  0 
+              TotalsRow     False
 >>>qryLastUpdated
               Name          qryLastUpdated
               Owner         admin
@@ -370,6 +478,70 @@
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+>>>quni_Dummy
+              Name          quni_Dummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+>>>quni_HiddenDummy
+              Name          quni_HiddenDummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    0 
+              ODBCTimeout    60 
+              OrderByOn     False
+              Orientation    0 
+              DefaultView    2 
+              FilterOnLoad  False
+              OrderByOnLoad True
+              PublishToWeb   1 
+>>>qupd_Dummy
+              Name          qupd_Dummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              FailOnError   False
+              Orientation    0 
+              PublishToWeb   1 
+>>>qupd_HiddenDummy
+              Name          qupd_HiddenDummy
+              Owner         admin
+              UserName      admin
+              Permissions    1048575 
+              AllPermissions               1048575 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              RecordLocks    2 
+              ODBCTimeout    60 
+              UseTransaction              True
+              FailOnError   False
+              Orientation    0 
+              PublishToWeb   1 
 >>>tblBinary
               Name          tblBinary
               Owner         admin
@@ -407,6 +579,88 @@
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
+>>>tblDummy0
+              Name          tblDummy0
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              PublishToWeb   1 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              GUID          EE-4B-03-94-5E-48-4A-BB
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+>>>tblDummy1
+              Name          tblDummy1
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              PublishToWeb   1 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+>>>tblDummy2
+              Name          tblDummy2
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              PublishToWeb   1 
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
 >>>USysRibbons
               Name          USysRibbons
               Owner         admin

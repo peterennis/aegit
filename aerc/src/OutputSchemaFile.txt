@@ -92,6 +92,30 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [tblDummy0] ([Num] Long )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy0] ([Num])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
+strSQL="CREATE TABLE [tblDummy1] ([Num] Long )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy1] ([Num])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
+strSQL="CREATE TABLE [tblDummy2] ([Num] Long )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy2] ([Num])  WITH PRIMARY DISALLOW NULL "
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [USysRibbons] ([ID] Counter,[RibbonName] Text (255),[RibbonXML] Memo )"
 Currentdb.Execute strSQL
 

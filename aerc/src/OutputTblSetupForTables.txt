@@ -162,6 +162,30 @@ FileName             Text (fixed width)    255
 binary               OLE Object            0                  
 
 
+----------------
+TABLE: tblDummy0
+----------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+Num                  Long Integer          4                  
+
+
+----------------
+TABLE: tblDummy1
+----------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+Num                  Long Integer          4                  
+
+
+----------------
+TABLE: tblDummy2
+----------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+Num                  Long Integer          4                  
+
+
 ------------------
 TABLE: USysRibbons
 ------------------

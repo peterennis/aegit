@@ -11,7 +11,23 @@ SELECT [_tblChart].ID AS id, [_tblChart].VersionApp AS appVer, [_tblChart].Versi
 FROM _tblChart
 WHERE ((([_tblChart].EnterDate)=[Forms]![_chtKPI01].[Controls]![txtMonth] & "/" & [Forms]![_chtKPI01].[Controls]![txtYear]));
 
+<<<qapp_Dummy>>>
+INSERT INTO zzztblDummy
+SELECT;
+
+<<<qapp_HiddenDummy>>>
+INSERT INTO zzztblDummy
+SELECT;
+
+<<<qmak_Dummy>>>
+SELECT  INTO zzztblDummy;
+
+<<<qmak_HiddenDummy>>>
+SELECT  INTO zzztblDummy;
+
 <<<qpt_Dummy>>>
+-- Select * from Nothing
+<<<qpt_HiddenDummy>>>
 -- Select * from Nothing
 <<<qpt_SqlSchemaTablesList>>>
 -- select * from sys.tables order by name asc;
@@ -20,6 +36,12 @@ SELECT SCHEMA_NAME(schema_id)+'.'+name AS SchemaTable FROM sys.tables order by S
 <<<qry_HiddenDummy>>>
 SELECT *
 FROM aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger;
+
+<<<qry_Select1>>>
+SELECT 1 AS Num;
+
+<<<qry_Select2>>>
+SELECT 2 AS Num;
 
 <<<qryLastUpdated>>>
 SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate, MSysObjects.Name, MSysObjects.Type
@@ -31,4 +53,22 @@ SELECT m.Name, m.Flags
 FROM MSysObjects AS m
 WHERE (((m.Name) Not Like "~%" And (m.Name) Not Like "zzz*") AND ((m.Type)=5) AND ((m.Flags)=8 Or (m.Flags)=24 Or (m.Flags)=40 Or (m.Flags)=56 Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)=104 Or (m.Flags)=120 Or (m.Flags)=136))
 ORDER BY m.Name;
+
+<<<quni_Dummy>>>
+SELECT Num FROM [tblDummy0]
+UNION
+SELECT Num FROM [tblDummy1]
+UNION SELECT Num FROM [tblDummy2];
+
+<<<quni_HiddenDummy>>>
+SELECT Num FROM [tblDummy0]
+UNION
+SELECT Num FROM [tblDummy1]
+UNION SELECT Num FROM [tblDummy2];
+
+<<<qupd_Dummy>>>
+UPDATE  SET;
+
+<<<qupd_HiddenDummy>>>
+UPDATE  SET;
 
