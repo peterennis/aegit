@@ -1,6 +1,17 @@
 Option Compare Database
 Option Explicit
 
+Public Function IsMacHidden(ByVal strMacroName As String) As Boolean
+    On Error GoTo 0
+    If IsNull(strMacroName) Or strMacroName = vbNullString Then
+        IsMacHidden = False
+        'Debug.Print "IsMacHidden Null Test", strMacroName, IsMacHidden
+    Else
+        IsMacHidden = GetHiddenAttribute(acMacro, strMacroName)
+        'Debug.Print "IsMacHidden Attribute Test", strMacroName, IsMacHidden
+    End If
+End Function
+
 Public Sub NoBOM(ByVal strFileName As String)
 ' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
 ' Use the same file name for input and output

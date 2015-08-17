@@ -1,0 +1,36 @@
+dbMemo "SQL" ="INSERT INTO zzzTmpTblQueries ( Name, Flags, Description )\015\012SELECT m.Name, "
+    "m.Flags, \"\" AS Description\015\012FROM MSysObjects AS m\015\012WHERE (((m.Name"
+    ") Not Like \"~%\" And (m.Name) Not Like \"zzz*\") AND ((m.Flags)=8 Or (m.Flags)="
+    "24 Or (m.Flags)=40 Or (m.Flags)=56 Or (m.Flags)=72 Or (m.Flags)=88 Or (m.Flags)="
+    "104 Or (m.Flags)=120 Or (m.Flags)=136) AND ((m.Type)=5))\015\012ORDER BY m.Name;"
+    "\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbByte "PublishToWeb" ="1"
+dbByte "RecordsetType" ="0"
+dbBoolean "TotalsRow" ="0"
+Begin
+    Begin
+        dbText "Name" ="m.Name"
+        dbInteger "ColumnWidth" ="3225"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x6970ed8f62edb54da7ed824097d88e82
+        End
+    End
+    Begin
+        dbText "Name" ="m.Flags"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Description"
+        dbLong "AggregateType" ="-1"
+    End
+End

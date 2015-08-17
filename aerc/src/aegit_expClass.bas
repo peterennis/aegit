@@ -119,6 +119,8 @@ Private Const aeAppOptions As String = "OutputListOfAccessApplicationOptions.txt
 Private Const aeAppListPrp As String = "OutputListOfApplicationProperties.txt"
 Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
+Private Const aeAppHiddQry As String = "OutputListOfAllHiddenQueries.txt"
+Private Const aeAppListFrm As String = "OutputListOfForms.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
 '
@@ -1095,6 +1097,39 @@ Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     End If
 End Function
 
+Private Function IsFrmHidden(ByVal strFormName As String) As Boolean
+    On Error GoTo 0
+    If IsNull(strFormName) Or strFormName = vbNullString Then
+        IsFrmHidden = False
+        'Debug.Print "IsFrmHidden Null Test", strFormName, IsFrmHidden
+    Else
+        IsFrmHidden = GetHiddenAttribute(acForm, strFormName)
+        'Debug.Print "IsFrmHidden Attribute Test", strFormName, IsFrmHidden
+    End If
+End Function
+
+Private Function IsRptHidden(ByVal strReportName As String) As Boolean
+    On Error GoTo 0
+    If IsNull(strReportName) Or strReportName = vbNullString Then
+        IsRptHidden = False
+        'Debug.Print "IsRptHidden Null Test", strReportName, IsRptHidden
+    Else
+        IsRptHidden = GetHiddenAttribute(acReport, strReportName)
+        'Debug.Print "IsRptHidden Attribute Test", strReportName, IsRptHidden
+    End If
+End Function
+
+Private Function IsMacHidden(ByVal strMacroName As String) As Boolean
+    On Error GoTo 0
+    If IsNull(strMacroName) Or strMacroName = vbNullString Then
+        IsMacHidden = False
+        'Debug.Print "IsMacHidden Null Test", strMacroName, IsMacHidden
+    Else
+        IsMacHidden = GetHiddenAttribute(acMacro, strMacroName)
+        'Debug.Print "IsMacHidden Attribute Test", strMacroName, IsMacHidden
+    End If
+End Function
+
 Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As Variant)
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=52635
 ' Set focus to the Access window
@@ -1301,16 +1336,16 @@ e3167e3011e3078:
 
     If Not IsMissing(varDebug) Then
         'Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount
-         Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable)
+         Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable) - 1
     End If
 
 '    rst.Close
 '    dbs.Close
 
     If aegitFrontEndApp Then
-        DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & "OutputListOfAllHiddenQueries.txt", False
+        DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & aeAppHiddQry, False
     Else
-        DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocationBe & "OutputListOfAllHiddenQueries.txt", False
+        DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocationBe & aeAppHiddQry, False
     End If
 'Stop
     CurrentDb.Execute "DROP TABLE " & strTempTable
@@ -1334,6 +1369,87 @@ PROC_ERR:
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
     End If
+    Resume PROC_EXIT
+
+End Sub
+
+Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
+' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
+' Ref: http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
+
+    Dim strTheSQL As String
+    Dim varResult As Variant
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb()
+
+    On Error GoTo PROC_ERR
+
+    Const strTempTable As String = "zzzTmpTblQueries"
+    ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
+    ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
+    ' http://stackoverflow.com/questions/3994956/meaning-of-msysobjects-values-32758-32757-and-3-microsoft-access
+    ' Type TypeDesc
+    ' -32768  Form
+    ' -32766  Macro
+    ' -32764  Reports
+    ' -32761  Module
+    ' -32758  Users
+    ' -32757  Database Document
+    ' -32756  Data Access Pages
+    ' 1   Table - Local Access Tables
+    ' 2   Access Object - Database
+    ' 3   Access Object - Containers
+    ' 4   Table - Linked ODBC Tables
+    ' 5   Queries
+    ' 6   Table - Linked Access Tables
+    ' 8   SubDataSheets
+
+    ' Create temp table
+    Const strMakeTbl As String = "SELECT ""Name"" AS Name, ""Description"" As Description INTO " & strTempTable & ";"
+    ' Run the SQL Query
+    If aeExists("Tables", strTempTable) Then CurrentDb.Execute "DROP TABLE " & strTempTable
+    dbs.Execute strMakeTbl
+    'Stop
+
+    ' Append the data
+    Const strSQL As String = "INSERT INTO " & strTempTable & " ( Name, Description ) " & _
+                                "SELECT m.Name, """" AS Description " & _
+                                "FROM MSysObjects AS m " & _
+                                "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+                                "m.Type=-32768 " & _
+                                "ORDER BY m.Name;"
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "OutputListOfForms"
+        Debug.Print , strMakeTbl
+        Debug.Print strSQL
+    End If
+
+    DoCmd.SetWarnings False
+    ' Use RunSQL for action queries
+    DoCmd.RunSQL strSQL
+
+'    Dim strUpdate As String
+'    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Select Query (hidden)"" WHERE " & strTempTable & ".Flags=""8"";"
+'    'Debug.Print strUpdate
+'    DoCmd.RunSQL strUpdate
+'    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Crosstab Query(Hidden)"" WHERE " & strTempTable & ".Flags=""24"";"
+'    DoCmd.RunSQL strUpdate
+
+    If aegitFrontEndApp Then
+        DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & aeAppListFrm, False
+    Else
+        DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocationBe & aeAppListFrm, False
+    End If
+'Stop
+    CurrentDb.Execute "DROP TABLE " & strTempTable
+    DoCmd.SetWarnings True
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass"
     Resume PROC_EXIT
 
 End Sub
@@ -3578,6 +3694,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         End If
         OutputCatalogUserCreatedObjects varDebug
         OutputListOfAllHiddenQueries varDebug
+        OutputListOfForms varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
         OutputTableProperties varDebug
@@ -3597,6 +3714,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         End If
         OutputCatalogUserCreatedObjects
         OutputListOfAllHiddenQueries
+        OutputListOfForms
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
         OutputTableProperties
