@@ -67,4 +67,3 @@
 "Table","tblDummy1","DateCreated"
 "Table","tblDummy2","DateCreated"
 "Table","USysRibbons","DateCreated"
-"Table","zzzTmpTblQueries","DateCreated"

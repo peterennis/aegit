@@ -51,7 +51,7 @@ Option Explicit
 ' #044 -
 ' #043 -
 ' #042 -
-' #041 -
+' #041 - Output list of hidden macros
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 ' #026 - Output list of hidden reports
