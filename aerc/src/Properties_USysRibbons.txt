@@ -30,7 +30,7 @@
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
 |-- RowHeight >> 5640
----------------------------------------------------------
+--------------------------------------------------
 |-- ID (Field in USysRibbons)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033

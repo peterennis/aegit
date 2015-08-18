@@ -29,7 +29,7 @@
 |-- DatasheetForeThemeColorIndex >> 0
 |-- ReadOnlyWhenDisconnected >> False
 |-- GUID >> GUID
----------------------------------------------------------
+--------------------------------------------------
 |-- ID (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033

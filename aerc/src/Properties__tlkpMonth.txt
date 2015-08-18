@@ -28,7 +28,7 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
----------------------------------------------------------
+--------------------------------------------------
 |-- ID (Field in _tlkpMonth)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033

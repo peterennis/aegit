@@ -29,7 +29,7 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
----------------------------------------------------------
+--------------------------------------------------
 |-- id (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033

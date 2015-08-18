@@ -29,7 +29,7 @@
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
 |-- PublishToWeb >> 1
----------------------------------------------------------
+--------------------------------------------------
 |-- StateCode (Field in aetlkpStates)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033

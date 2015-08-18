@@ -141,34 +141,26 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     'MsgBox "varBackEndDb1 = " & varBackEndDb1, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export
-    gvarMyTablesForExportToXML = Array("USysRibbons")
+'    gvarMyTablesForExportToXML = Array("USysRibbons")
+    gvarMyTablesForExportToXML = Array("Code_Calendar")
     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML()
 
-'    Dim strTheXMLDataLocation As String
-'    If varFrontEndApp Then
-'        strTheXMLDataLocation = varXmlDataFldr
-'    Else
-'        strTheXMLDataLocation = varXmlDataFldrBe
-'    End If
+    Debug.Print "aegitClassTest"
+    If IsArrayInitialized(gvarMyTablesForExportToXML) Then
+        Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
+        oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+    Else
+        Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for data export."
+    End If
 
-'''    If Not IsMissing(strTheXMLDataLocation) Then
-
-    ' !!! FIX RELATIVE PATH ???
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         Dim myArray() As Variant
         myArray = Array("aeItems", "aetlkpStates", "USysRibbons")
         oDbObjects.TablesExportToXML = myArray()
         oDbObjects.ExcludeFiles = False
         Debug.Print , "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
-    Else
-        If IsArrayInitialized(gvarMyTablesForExportToXML) Then
-            Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
-            oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
-        Else
-            Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for export."
-        End If
     End If
-'''    End If
+    'Stop
 
 Test1:
     '=============

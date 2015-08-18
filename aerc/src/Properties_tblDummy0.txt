@@ -29,7 +29,7 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
----------------------------------------------------------
+--------------------------------------------------
 |-- Num (Field in tblDummy0)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
