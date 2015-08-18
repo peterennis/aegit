@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.5.5"
-Private Const aegit_expVERSION_DATE As String = "August 17, 2015"
+Private Const aegit_expVERSION As String = "1.5.6"
+Private Const aegit_expVERSION_DATE As String = "August 18, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -608,6 +608,9 @@ Private Sub VerifySetup(Optional ByVal varDebug As Variant)
         Debug.Print , "aegitSourceFolder = ""default"""
         Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
         Debug.Print , "--------------------------------------------------"
+
+        TestForRelativePath
+
         ' Check folders exist
         If Not FolderExists(aestrSourceLocation) Then
             MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
@@ -623,7 +626,6 @@ Private Sub VerifySetup(Optional ByVal varDebug As Variant)
             MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
-        Exit Sub
     ElseIf aegitFrontEndApp Then
         aestrSourceLocation = aegitSourceFolder
         aestrSourceLocationBe = aegitSourceFolderBe
@@ -638,6 +640,9 @@ Private Sub VerifySetup(Optional ByVal varDebug As Variant)
         Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
         Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
         Debug.Print , "--------------------------------------------------"
+
+        TestForRelativePath
+
         ' Check folders exist
         If Not FolderExists(aestrSourceLocation) Then
             MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
@@ -661,6 +666,9 @@ Private Sub VerifySetup(Optional ByVal varDebug As Variant)
         Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
         Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
         Debug.Print , "--------------------------------------------------"
+
+        TestForRelativePath
+
         ' Check folders exist
         If Not FolderExists(aestrSourceLocationBe) Then
             MsgBox "aestrSourceLocationBe does not exist!", vbCritical, "VerifySetup"
@@ -676,27 +684,16 @@ Private Sub VerifySetup(Optional ByVal varDebug As Variant)
         End If
     End If
 
-    TestForRelativePath
-
-'    ' Stop if required parameters are not configured
-'    If aegitFrontEndApp And aestrSourceLocation = "default" Then
-'        MsgBox "aestrSourceLocation is not set!", vbCritical, "VerifySetup"
-'        Stop
-'    ElseIf Not aegitFrontEndApp And aestrSourceLocationBe = "default" Then
-'        MsgBox "aestrSourceLocationBe is not set!", vbCritical, "VerifySetup"
-'        Stop
-'    ElseIf aegitFrontEndApp And aestrXMLLocation = "default" Then
-'        MsgBox "aestrXMLLocation is not set!", vbCritical, "VerifySetup"
-'        Stop
-'    ElseIf Not aegitFrontEndApp And aestrXMLLocationBe = "default" Then
-'        MsgBox "aestrXMLLocationBe is not set!", vbCritical, "VerifySetup"
-'        Stop
-'    ElseIf aegitFrontEndApp And aestrXMLDataLocation = "default" Then
-'        MsgBox "aestrXMLDataLocation is not set!", vbCritical, "VerifySetup"
-'        Stop
-'    ElseIf Not aegitFrontEndApp And aestrXMLDataLocationBe = "default" Then
-'        MsgBox "aestrXMLDataLocationBe is not set!", vbCritical, "VerifySetup"
-'        Stop
+    ' Final paths are absolute
+    Debug.Print "VerifySetup"
+    Debug.Print , ">==> Final Paths >==>"
+    Debug.Print , "Property Get SourceFolder:       aestrSourceLocation = " & aestrSourceLocation
+    Debug.Print , "Property Get SourceFolderBe:     aestrSourceLocationBe = " & aestrSourceLocationBe
+    Debug.Print , "Property Get XMLFolder:          aestrXMLLocation = " & aestrXMLLocation
+    Debug.Print , "Property Get XMLFolderBe:        aestrXMLLocationBe = " & aestrXMLLocationBe
+    Debug.Print , "Property Get XMLDataFolder:      aestrXMLDataLocation = " & aestrXMLDataLocation
+    Debug.Print , "Property Get XMLDataFolderBe:    aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+    Debug.Print , "--------------------------------------------------"
 
     '???
     If aestrBackEndDb1 = vbNullString Then
@@ -704,23 +701,12 @@ Private Sub VerifySetup(Optional ByVal varDebug As Variant)
         Stop
     End If
 
-
     Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
 
     If aestrBackEndDb1 <> "default" Then
         OpenAllDatabases True
     End If
-
-    If Not IsMissing(varDebug) Then
-        Debug.Print , ">==> VerifySetup >==>"
-        Debug.Print , "Property Get SourceFolder = " & aestrSourceLocation
-        Debug.Print , "Property Get SourceFolderBe = " & aestrSourceLocationBe
-        Debug.Print , "Property Get XMLFolder = " & aestrXMLLocation
-        Debug.Print , "Property Get XMLFolderBe = " & aestrXMLLocationBe
-        Debug.Print , "Property Get XMLDataFolder = " & aestrXMLDataLocation
-        Debug.Print , "Property Get XMLDataFolderBe = " & aestrXMLDataLocationBe
-        Debug.Print , "Property Get BackEndDb1 = " & aestrBackEndDb1
-    End If
+    Debug.Print , "Property Get BackEndDb1 = " & aestrBackEndDb1
     'Stop
 
 End Sub

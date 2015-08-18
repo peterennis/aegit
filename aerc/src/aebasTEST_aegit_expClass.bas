@@ -141,8 +141,7 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     'MsgBox "varBackEndDb1 = " & varBackEndDb1, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export
-'    gvarMyTablesForExportToXML = Array("USysRibbons")
-    gvarMyTablesForExportToXML = Array("Code_Calendar")
+    gvarMyTablesForExportToXML = Array("USysRibbons")
     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML()
 
     Debug.Print "aegitClassTest"
