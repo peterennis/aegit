@@ -32,7 +32,7 @@ Option Explicit
 ' %060 -
 ' %059 -
 ' %058 -
-' %057 -
+' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
 '           Internationalization - Potential source issue #033
@@ -51,16 +51,14 @@ Option Explicit
 ' #044 -
 ' #043 -
 ' #042 -
-' #041 - Output list of hidden macros
+' #041 - Output list of visible/hidden macros
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
-' #026 - Output list of hidden reports
-' #025 - Output list of hidden modules
-' #024 - Output list of hidden forms
-' #023 - Output list of hidden tables
-' #021 - Caption ="Gr??e" - Language display problem on output - GDIPlusDemo
+' #026 - Output list of visible/hidden reports
+' #025 - Output list of visible/hidden modules
+' #024 - Output list of visible/hidden forms
+' #023 - Output list of visible/hidden tables
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
-' #010 - Check if ViewAppProperties includes anything new
 '=============================================================================================================================
 '
 '
@@ -68,6 +66,8 @@ Option Explicit
     ' FIXED - %056 - Control can't be edited; it's bound to a replication system column - OutputListOfAllHiddenQueries
     '           Ref: https://groups.google.com/forum/#!topic/microsoft.public.access.replication/-78b5ZRqPCQ
     '           Creating the target table first and then runing the query as an append query seems to have solved the problem
+    ' OBSOLETE - #021 - Relates to %051, %052 - Caption ="Gr??e" - Language display problem on output - GDIPlusDemo | possibly locale/UTF-16 related - TBD
+    ' OBSOLETE - #010 - Check if ViewAppProperties includes anything new - not sure what this is referring to anymore
 '20150807 - v150 -
     ' FIXED - %055 - Take care of Err 53 File not found in KillProperly
     ' FIXED - %030 - Some Output* files need to send results to srcbe when back end is exported

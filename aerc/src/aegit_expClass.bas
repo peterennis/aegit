@@ -39,7 +39,7 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.5.6"
+Private Const aegit_expVERSION As String = "1.5.7"
 Private Const aegit_expVERSION_DATE As String = "August 18, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -1271,33 +1271,30 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 ' Ref: http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
 ' Query Flag Description
-'   0 Select Query (visible)
-'   8 Select Query (hidden)
-'  16 Crosstab Query(visible)
-'  24 Crosstab Query(Hidden)
-'  32 Delete Query(visible)
-'  40 Delete Query(Hidden)
-'  48 Update Query(visible)
-'  56 Update Query(Hidden)
-'  64 Append Query(visible)
-'  72 Append Query(Hidden)
-'  80 Make Table Query (visible)
-'  88 Make Table Query (hidden)
-'  96 Data Definition Query (visible)
-' 104 Data Definition Query (hidden)
-' 112 Pass Through Query (visible)
-' 120 Pass Through Query (hidden)
-' 128 Union Query(visible)
-' 136 Union Query(Hidden)
+'   0 Select Query (Visible)
+'   8 Select Query (Hidden)
+'  16 Crosstab Query (Visible)
+'  24 Crosstab Query (Hidden)
+'  32 Delete Query (Visible)
+'  40 Delete Query (Hidden)
+'  48 Update Query (Visible)
+'  56 Update Query (Hidden)
+'  64 Append Query (Visible)
+'  72 Append Query (Hidden)
+'  80 Make Table Query (Visible)
+'  88 Make Table Query (Hidden)
+'  96 Data Definition Query (Visible)
+' 104 Data Definition Query (Hidden)
+' 112 Pass Through Query (Visible)
+' 120 Pass Through Query (Hidden)
+' 128 Union Query (Visible)
+' 136 Union Query (Hidden)
 
     Dim strTheSQL As String
     Dim varResult As Variant
-    Dim intHidden As Integer
     Dim dbs As DAO.Database
     Dim rst As DAO.Recordset
-
     Set dbs = CurrentDb()
-    intHidden = 0
 
     On Error GoTo PROC_ERR
 
@@ -1343,61 +1340,31 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     DoCmd.RunSQL strSQL
 
     Dim strUpdate As String
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Select Query (hidden)"" WHERE " & strTempTable & ".Flags=""8"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Select Query (Hidden)"" WHERE " & strTempTable & ".Flags=""8"";"
     'Debug.Print strUpdate
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Crosstab Query(Hidden)"" WHERE " & strTempTable & ".Flags=""24"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Crosstab Query (Hidden)"" WHERE " & strTempTable & ".Flags=""24"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Delete Query(Hidden)"" WHERE " & strTempTable & ".Flags=""40"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Delete Query (Hidden)"" WHERE " & strTempTable & ".Flags=""40"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Update Query(Hidden)"" WHERE " & strTempTable & ".Flags=""56"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Update Query (Hidden)"" WHERE " & strTempTable & ".Flags=""56"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Append Query(Hidden)"" WHERE " & strTempTable & ".Flags=""72"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Append Query (Hidden)"" WHERE " & strTempTable & ".Flags=""72"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Make Query(Hidden)"" WHERE " & strTempTable & ".Flags=""88"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Make Query (Hidden)"" WHERE " & strTempTable & ".Flags=""88"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Data Definition Query(Hidden)"" WHERE " & strTempTable & ".Flags=""104"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Data Definition Query (Hidden)"" WHERE " & strTempTable & ".Flags=""104"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Pass Through Query(Hidden)"" WHERE " & strTempTable & ".Flags=""120"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Pass Through Query (Hidden)"" WHERE " & strTempTable & ".Flags=""120"";"
     DoCmd.RunSQL strUpdate
-    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Union Query(Hidden)"" WHERE " & strTempTable & ".Flags=""136"";"
+    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Union Query (Hidden)"" WHERE " & strTempTable & ".Flags=""136"";"
     DoCmd.RunSQL strUpdate
 
 e3167e3011e3078:
-'    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
-'
-'    With rst
-'        If (.RecordCount > 0) Then
-'            .MoveFirst
-'            Do While Not rst.EOF
-'                varResult = !Name
-'                If Not IsMissing(varDebug) Then
-'                    Debug.Print ">", !Name.Value, IsQryHidden(!Name)
-'                End If
-'                If IsQryHidden(!Name) Then
-'                    intHidden = intHidden + 1
-'                    .MoveNext
-'                Else
-'                    .Delete
-'                    ' Ref: https://msdn.microsoft.com/en-us/library/bb243799%28v=office.12%29.aspx
-'                    ' When you use the Delete method, the Microsoft Access database engine immediately deletes the current record
-'                    ' without any warning or prompting. Deleting a record does not automatically cause the next record to become the current record;
-'                    ' to move to the next record you must use the MoveNext method. However, keep in mind that after you have moved off the deleted record, you cannot move back to it.
-'                    .MoveNext
-'                End If
-'            Loop
-'        Else
-'            Debug.Print "No records!"
-'        End If
-'    End With
 
     If Not IsMissing(varDebug) Then
-        'Debug.Print "The number of hidden queries in the database is: " & intHidden, "rst.RecordCount = " & rst.RecordCount
          Debug.Print "The number of hidden queries in the database is: " & DCount("Name", strTempTable) - 1
     End If
-
-'    rst.Close
-'    dbs.Close
 
     If aegitFrontEndApp Then
         DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & aeAppHiddQry, False
@@ -1409,7 +1376,7 @@ e3167e3011e3078:
     DoCmd.SetWarnings True
 
 PROC_EXIT:
-    Set rst = Nothing
+    dbs.Close
     Set dbs = Nothing
     Exit Sub
 
@@ -1435,13 +1402,15 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
 
     Dim strTheSQL As String
-    Dim varResult As Variant
+    Dim varForm As Variant
     Dim dbs As DAO.Database
+    Dim rst As DAO.Recordset
+
     Set dbs = CurrentDb()
 
     On Error GoTo PROC_ERR
 
-    Const strTempTable As String = "zzzTmpTblQueries"
+    Const strTempTable As String = "zzzTmpTblForms"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export if it exists
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
     ' http://stackoverflow.com/questions/3994956/meaning-of-msysobjects-values-32758-32757-and-3-microsoft-access
@@ -1462,15 +1431,15 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
     ' 8   SubDataSheets
 
     ' Create temp table
-    Const strMakeTbl As String = "SELECT ""Name"" AS Name, ""Description"" As Description INTO " & strTempTable & ";"
+    Const strMakeTbl As String = "SELECT ""Name"" AS Name, ""Attribute"" As Attribute INTO " & strTempTable & ";"
     ' Run the SQL Query
     If aeExists("Tables", strTempTable) Then CurrentDb.Execute "DROP TABLE " & strTempTable
     dbs.Execute strMakeTbl
     'Stop
 
     ' Append the data
-    Const strSQL As String = "INSERT INTO " & strTempTable & " ( Name, Description ) " & _
-                                "SELECT m.Name, """" AS Description " & _
+    Const strSQL As String = "INSERT INTO " & strTempTable & " ( Name, Attribute ) " & _
+                                "SELECT m.Name, """" AS Attribute " & _
                                 "FROM MSysObjects AS m " & _
                                 "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
                                 "m.Type=-32768 " & _
@@ -1486,12 +1455,39 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
     ' Use RunSQL for action queries
     DoCmd.RunSQL strSQL
 
-'    Dim strUpdate As String
-'    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Select Query (hidden)"" WHERE " & strTempTable & ".Flags=""8"";"
-'    'Debug.Print strUpdate
-'    DoCmd.RunSQL strUpdate
-'    strUpdate = "UPDATE " & strTempTable & " SET " & strTempTable & ".Description = ""Crosstab Query(Hidden)"" WHERE " & strTempTable & ".Flags=""24"";"
-'    DoCmd.RunSQL strUpdate
+    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
+
+    With rst
+        If (.RecordCount > 0) Then
+            .MoveFirst
+            .MoveNext   ' Ignore the first record
+            Do While Not rst.EOF
+                varForm = !Name.Value
+                'Debug.Print "varForm = " & varForm
+                If IsFrmHidden(varForm) Then
+                    rst.Edit
+                    rst!Attribute = "Hidden"
+                    rst.Update
+                    .MoveNext
+                Else
+                    '.Delete
+                    ' Ref: https://msdn.microsoft.com/en-us/library/bb243799%28v=office.12%29.aspx
+                    ' When you use the Delete method, the Microsoft Access database engine immediately deletes the current record
+                    ' without any warning or prompting. Deleting a record does not automatically cause the next record to become the current record;
+                    ' to move to the next record you must use the MoveNext method. However, keep in mind that after you have moved off the deleted record, you cannot move back to it.
+                    rst.Edit
+                    rst!Attribute = "Visible"
+                    rst.Update
+                    .MoveNext
+                End If
+            Loop
+        Else
+            Debug.Print "No records!"
+        End If
+    End With
+
+    rst.Close
+    dbs.Close
 
     If aegitFrontEndApp Then
         DoCmd.TransferText acExportDelim, vbNullString, strTempTable, aestrSourceLocation & aeAppListFrm, False
@@ -1503,6 +1499,8 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
     DoCmd.SetWarnings True
 
 PROC_EXIT:
+    Set rst = Nothing
+    Set dbs = Nothing
     Exit Sub
 
 PROC_ERR:
