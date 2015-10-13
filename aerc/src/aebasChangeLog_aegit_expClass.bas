@@ -62,6 +62,7 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20151013 - v158 - Bump
 '20150816 - v153 -
     ' FIXED - %056 - Control can't be edited; it's bound to a replication system column - OutputListOfAllHiddenQueries
     '           Ref: https://groups.google.com/forum/#!topic/microsoft.public.access.replication/-78b5ZRqPCQ
