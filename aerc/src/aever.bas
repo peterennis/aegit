@@ -1,8 +1,6 @@
 Option Compare Database
 Option Explicit
 
-' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
-
 Public Sub Version_Test()
     On Error GoTo 0
     Debug.Print GetEdition(Application.Version, Application.ProductCode)
@@ -12,43 +10,47 @@ Public Function GetEdition( _
                     ByRef strAppVersion As String, _
                     ByRef strGuid As String _
                             ) As String
+' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
 ' Ref: http://p2p.wrox.com/excel-vba/82653-what-best-way-get-excel-version.html
 ' Ref: http://colinlegg.wordpress.com/2013/02/02/office-edition-in-vba/
+'
+' Ref: https://community.spiceworks.com/topic/150065-how-to-remove-ms-office-2010-standard-registry-keys
+' This one is for Office Home and Student 2010): {90140000-003D-0000-0000-0000000FF1CE}
 
-    On Error GoTo 0
+    On Error GoTo PROC_ERR
+
     Const strERR_MSG As String = "Unable to determine edition"
 
     Dim strSku As String
 
-    On Error GoTo ErrorHandler
-
     Debug.Print "strAppVersion=" & strAppVersion
     Debug.Print "Val(strAppVersion)=" & Val(strAppVersion)
+    Debug.Print "strGuid = " & strGuid
     Select Case Val(strAppVersion)
         Case Is < 9
             GetEdition = "Pre Office 2000: " & strERR_MSG
 
-        Case Is < 10                            'Office 2000
+        Case Is < 10                            ' Office 2000
             strSku = Mid$(strGuid, 4, 2)
             GetEdition = GetEdition2000(strSku)
 
-        Case Is < 11                            'Office 2002
+        Case Is < 11                            ' Office 2002
             strSku = Mid$(strGuid, 4, 2)
             GetEdition = GetEdition2002(strSku)
 
-        Case Is < 12                            'Office 2003
+        Case Is < 12                            ' Office 2003
             strSku = Mid$(strGuid, 4, 2)
             GetEdition = GetEdition2003(strSku)
 
-        Case Is < 13                            'Office 2007
+        Case Is < 13                            ' Office 2007
             strSku = Mid$(strGuid, 11, 4)
             GetEdition = GetEdition2007(strSku)
 
-        Case Is < 15                            'Office 2010
+        Case Is < 15                            ' Office 2010
             strSku = Mid$(strGuid, 11, 4)
             GetEdition = GetEdition2010(strSku)
 
-        Case Is < 16                            'Office 2013
+        Case Is < 16                            ' Office 2013
             strSku = Mid$(strGuid, 11, 4)
             Debug.Print "strSku=" & strSku
             GetEdition = GetEdition2013(strSku)
@@ -58,9 +60,11 @@ Public Function GetEdition( _
 
     End Select
 
+PROC_EXIT:
     Exit Function
 
-ErrorHandler:
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetEdition of Class aegit_expClass"
     GetEdition = strERR_MSG & vbNewLine & _
                     "Error Number: " & CStr(Err.Number) & _
                     vbNewLine & "Error Desc: " & Err.Description
@@ -488,6 +492,7 @@ Private Function GetEdition2010(ByRef strSku As String) As String
             GetEdition2010 = "Microsoft Project Server 2010"
         Case Else
             MsgBox "Error: GetEdition2010"
+            Debug.Print "strSku = " & strSku
     End Select
 End Function
  

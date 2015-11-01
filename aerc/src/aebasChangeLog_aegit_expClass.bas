@@ -31,7 +31,7 @@ Option Explicit
 ' Tasks:
 ' %060 -
 ' %059 -
-' %058 -
+' %058 - Windows 10, GetEdition in aeVer reports Office Home and Student Guid and but Office 2010 Pro is installed
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
