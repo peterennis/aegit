@@ -34,13 +34,13 @@ End Type
 Public Sub Startup()
 
     Dim strMsg      As String
-    Dim strName     As String
+    Dim strname     As String
 
     On Error GoTo ErrHandler:
 
-    strName = ComputerName
-    strMsg = "Computer Name:" & vbTab & strName & vbCrLf
-    strMsg = strMsg & "IP Address:" & vbTab & GetIPAddress(strName)
+    strname = ComputerName
+    strMsg = "Computer Name:" & vbTab & strname & vbCrLf
+    strMsg = strMsg & "IP Address:" & vbTab & GetIPAddress(strname)
     MsgBox strMsg
     Exit Sub
 

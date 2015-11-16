@@ -32,15 +32,15 @@ Option Explicit
 
 Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Declare PtrSafe Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
+Private Declare PtrSafe Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hwnd As Long) As Long
 Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
 Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.5.9"
-Private Const aegit_expVERSION_DATE As String = "November 1, 2015"
+Private Const aegit_expVERSION As String = "1.6.0"
+Private Const aegit_expVERSION_DATE As String = "November 13, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -838,7 +838,7 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
 ' Ref    : http://stackoverflow.com/questions/29838317/issue-when-using-a-dao-handle-when-the-database-closes-unexpectedly
 
     Dim intX As Integer
-    Dim strName As String
+    Dim strname As String
     Dim strMsg As String
 
     If aestrBackEndDb1 = "NONE" Then
@@ -860,9 +860,9 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
             ' Specify your back end databases
             Select Case intX
                 Case 1:
-                    strName = aestrBackEndDb1
+                    strname = aestrBackEndDb1
                 Case 2:
-                    strName = "H:\folder\Backend2.mdb"
+                    strname = "H:\folder\Backend2.mdb"
             End Select
         strMsg = ""
         'Debug.Print , "strName = " & strName, "OpenAllDatabases"
@@ -871,18 +871,18 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
         ' Ref: https://support.microsoft.com/en-us/kb/209953
         ' If you use a Connect argument and you do not provide the Options and Read-Only arguments, you receive run-time error 3031: Not a valid password.
         ' Ref: https://msdn.microsoft.com/en-us/library/office/ff835343.aspx
-        Set dbsOpen(intX) = OpenDatabase(strName) ' Shared, Read Only
+        Set dbsOpen(intX) = OpenDatabase(strname) ' Shared, Read Only
         ' Example for password protected back end requires use of Let property for aestrPassword
         'Set dbsOpen(intX) = OpenDatabase(strName, False, True, "MS Access;pwd=" & aestrPassword) ' Shared, Read Only
         If Err.Number > 0 Then
-            strMsg = "Trouble opening database: " & strName & vbCrLf & _
+            strMsg = "Trouble opening database: " & strname & vbCrLf & _
                     "Make sure the drive is available." & vbCrLf & _
                     "Error: " & Err.Description & " (" & Err.Number & ")"
         End If
 
         On Error GoTo 0
         If strMsg <> "" Then
-            MsgBox strMsg & vbCrLf & "strName = " & strName, vbExclamation, "OpenAllDatabases"
+            MsgBox strMsg & vbCrLf & "strName = " & strname, vbExclamation, "OpenAllDatabases"
             Exit For
         End If
         Next intX
@@ -907,19 +907,19 @@ Private Function defineMyExclusions() As myExclusions
     myExclude.exclude3 = EXCLUDE_3
 End Function
 
-Private Function fExclude(strName As String) As Boolean
+Private Function fExclude(strname As String) As Boolean
     On Error GoTo 0
     fExclude = False
     'Debug.Print "1: fExclude", strName, "myExclude.exclude1 = " & myExclude.exclude1
-    If strName = myExclude.exclude1 Then
+    If strname = myExclude.exclude1 Then
         fExclude = True
         Exit Function
     End If
-    If strName = myExclude.exclude2 Then
+    If strname = myExclude.exclude2 Then
         fExclude = True
         Exit Function
     End If
-    If strName = myExclude.exclude3 Then
+    If strname = myExclude.exclude3 Then
         fExclude = True
         Exit Function
     End If
@@ -1390,6 +1390,10 @@ PROC_ERR:
     ElseIf Err = 3078 Then
         'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
         Resume e3167e3011e3078
+    ElseIf Err = 3192 Then
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass" & vbCrLf & vbCrLf & _
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again."
+        Resume PROC_EXIT
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
     End If
@@ -1504,8 +1508,14 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass"
-    Resume PROC_EXIT
+    If Err = 3192 Then
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass" & vbCrLf & vbCrLf & _
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again."
+        Resume PROC_EXIT
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass"
+        Resume PROC_EXIT
+    End If
 
 End Sub
 
@@ -1874,24 +1884,24 @@ Private Sub OutputListOfApplicationProperties()
     fle = FreeFile()
     Open strTheSourceLocation & "\" & aeAppListPrp For Output As #fle
 
-    Dim i As Integer
+    Dim I As Integer
     Dim strPropName As String
     Dim varPropValue As Variant
     Dim varPropType As Variant
     Dim varPropInherited As Variant
 
     With dbs
-        For i = 0 To (.Properties.Count - 1)
+        For I = 0 To (.Properties.Count - 1)
             strError = vbNullString
-            strPropName = .Properties(i).Name
+            strPropName = .Properties(I).Name
 '''            varPropValue = Null
             ' Fixed for error 3251
-            varPropValue = .Properties(i).Value
-            varPropType = .Properties(i).Type
-            varPropInherited = .Properties(i).Inherited
+            varPropValue = .Properties(I).Value
+            varPropType = .Properties(I).Type
+            varPropInherited = .Properties(I).Inherited
             Print #fle, strPropName & ": " & varPropValue & ", " & _
                 varPropType & ", " & varPropInherited & ";" & strError
-        Next i
+        Next I
     End With
 
 PROC_EXIT:
@@ -1979,7 +1989,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 ' History:  See comment details, basChangeLog, commit messages on github
 ' ====================================================================
 
-    Dim i As Integer
+    Dim I As Integer
     Dim RefName As String
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
@@ -2039,29 +2049,29 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
         Print #1, , "<@_@>"
         Print #1, , "     " & "References:"
 
-    For i = 1 To vbaProj.References.Count
+    For I = 1 To vbaProj.References.Count
 
         blnRefBroken = False
 
         ' Get the Name of the Reference
-        RefName = vbaProj.References(i).Name
+        RefName = vbaProj.References(I).Name
 
         ' Get the Description of Reference
-        RefDesc = vbaProj.References(i).Description
+        RefDesc = vbaProj.References(I).Description
 
-        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
-        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
-        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
+        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(I).Name, vbaProj.References(I).Description
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(I).FullPath
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(I).GUID
 
-        Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
-        Print #1, , , , vbaProj.References(i).FullPath
-        Print #1, , , , vbaProj.References(i).GUID
+        Print #1, , , vbaProj.References(I).Name, vbaProj.References(I).Description
+        Print #1, , , , vbaProj.References(I).FullPath
+        Print #1, , , , vbaProj.References(I).GUID
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
-        If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
+        If Application.VBE.ActiveVBProject.References(I).IsBroken = True Then
               blnRefBroken = True
-              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
-              Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(I).Name, "blnRefBroken=" & blnRefBroken
+              Print #1, , , vbaProj.References(I).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
     If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
@@ -3297,14 +3307,14 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 
     On Error GoTo PROC_ERR
 
-    Dim i As Integer
+    Dim I As Integer
 
     If Len(Dir$(PathFileName)) Then
-        i = FreeFile()
-        Open PathFileName For Random Access Read Write Lock Read Write As #i
-        Lock i      ' Redundant but let's be 100% sure
-        Unlock i
-        Close i
+        I = FreeFile()
+        Open PathFileName For Random Access Read Write Lock Read Write As #I
+        Lock I      ' Redundant but let's be 100% sure
+        Unlock I
+        Close I
     Else
         ' Err.Raise 53
     End If
@@ -3341,7 +3351,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
-    Dim i As Integer
+    Dim I As Integer
     Dim intAcObjType As Integer
     Dim strTheCurrentPathAndFile As String
 
@@ -3362,7 +3372,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
         strTheSourceLocation = aestrSourceLocationBe
     End If
 
-    i = 0
+    I = 0
     Set cnt = dbs.Containers(strContainerType)
 
     Select Case strContainerType
@@ -3384,7 +3394,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
         'Debug.Print "A", doc.Name, strContainerType
         If Not IsMissing(varDebug) Then Debug.Print , doc.Name
         If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
-            i = i + 1
+            I = I + 1
             strTheCurrentPathAndFile = strTheSourceLocation & doc.Name & "." & strExt
             'Debug.Print "DocumentTheContainer", "strTheCurrentPathAndFile = " & strTheCurrentPathAndFile
             'Stop
@@ -3439,7 +3449,7 @@ NextDoc:
     Next doc
 
     If Not IsMissing(varDebug) Then
-        Debug.Print , i & " EXPORTED!"
+        Debug.Print , I & " EXPORTED!"
         Debug.Print , cnt.Documents.Count & " EXISTING!"
     End If
 
@@ -3632,7 +3642,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
-    Dim i As Integer
+    Dim I As Integer
     Dim strqdfName As String
 
     On Error GoTo PROC_ERR
@@ -3693,7 +3703,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     '    QUERIES
     ' =============
     Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
-    i = 0
+    I = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
     ' Delete all TEMP queries ...
@@ -3712,7 +3722,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
                         Or Left$(strqdfName, 4) = "~TMP" _
                         Or Left$(strqdfName, 3) = "zzz") Then
-            i = i + 1
+            I = I + 1
             Application.SaveAsText acQuery, strqdfName, strTheSourceLocation & strqdfName & ".qry"
             ' Convert UTF-16 to txt - fix for Access 2013
             If aeReadWriteStream(strTheSourceLocation & strqdfName & ".qry") = True Then
@@ -3723,10 +3733,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Next qdf
 
     If Not IsMissing(varDebug) Then
-        If i = 1 Then
+        If I = 1 Then
             Debug.Print , "1 Query EXPORTED!"
         Else
-            Debug.Print , i & " Queries EXPORTED!"
+            Debug.Print , I & " Queries EXPORTED!"
         End If
         
         If CurrentDb.QueryDefs.Count = 1 Then
@@ -4161,7 +4171,7 @@ Public Sub OutputMyUnicode(ByRef strPathFileName As String, _
 
     On Error GoTo PROC_ERR
 
-    Dim i As Integer
+    Dim I As Integer
     Dim MyStream As Object
     Set MyStream = CreateObject("ADODB.Stream")
     ' `It is summer in Geneva`, said Yu Zhou.
@@ -4180,10 +4190,10 @@ Public Sub OutputMyUnicode(ByRef strPathFileName As String, _
         .Type = 2    ' adTypeText
         .Charset = "Unicode"
         .Open
-        For i = LBound(arrUnicode) To UBound(arrUnicode)
-            .WriteText arrUnicode(i) ' The foreign unicode text
+        For I = LBound(arrUnicode) To UBound(arrUnicode)
+            .WriteText arrUnicode(I) ' The foreign unicode text
             'Debug.Print , i, "arrUnicode(i)=" & arrUnicode(i)
-        Next i
+        Next I
         Debug.Print "aestrSourceLocation=" & aestrSourceLocation
         mystrPathFileName = aestrSourceLocation & "TEST_OutputListOfCommandBarIDs.txt"
         .SaveToFile mystrPathFileName, 2            ' adSaveCreateOverWrite
@@ -4325,23 +4335,23 @@ Private Function fListGUID(ByVal strTableName As String) As String
 ' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
     On Error GoTo 0
-    Dim i As Integer
+    Dim I As Integer
     Dim arrGUID8() As Byte
     Dim strArrGUID8(8) As String
     Dim strGuid As String
 
     strGuid = vbNullString
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
-    For i = 1 To 8
-        If Len(Hex$(arrGUID8(i))) = 1 Then
-            strArrGUID8(i) = "0" & Hex$(arrGUID8(i))
+    For I = 1 To 8
+        If Len(Hex$(arrGUID8(I))) = 1 Then
+            strArrGUID8(I) = "0" & Hex$(arrGUID8(I))
         Else
-            strArrGUID8(i) = Hex$(arrGUID8(i))
+            strArrGUID8(I) = Hex$(arrGUID8(I))
         End If
     Next
 
-    For i = 1 To 8
-        strGuid = strGuid & strArrGUID8(i) & "-"
+    For I = 1 To 8
+        strGuid = strGuid & strArrGUID8(I) & "-"
     Next
     fListGUID = Left$(strGuid, 23)
 
@@ -4529,7 +4539,7 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
 
-    Dim i As Integer
+    Dim I As Integer
 
     On Error GoTo PROC_ERR
 
@@ -4554,14 +4564,14 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Dim rst As Object
     Set rst = CreateObject("ADODB.Recordset")
 
-    For i = 0 To UBound(avarTableNames)
-        If aeExists("Tables", avarTableNames(i)) Then
-            strSQL = "Select * from " & avarTableNames(i)
+    For I = 0 To UBound(avarTableNames)
+        If aeExists("Tables", avarTableNames(I)) Then
+            strSQL = "Select * from " & avarTableNames(I)
             'MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
-            If Not IsMissing(varDebug) Then Debug.Print i, "avarTableNames", avarTableNames(i)
+            If Not IsMissing(varDebug) Then Debug.Print I, "avarTableNames", avarTableNames(I)
             rst.Open strSQL, cnn, adOpenStatic, adLockOptimistic
 
-            strFileName = strTheXMLDataLocation & avarTableNames(i) & ".xml"
+            strFileName = strTheXMLDataLocation & avarTableNames(I) & ".xml"
 
             If aegitSetup Then
                 If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True XML Data Location=" & strTheXMLDataLocation
@@ -4612,7 +4622,7 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 
     Dim prt As Printer
     Dim prtCount As Integer
-    Dim i As Integer
+    Dim I As Integer
     Dim fle As Integer
 
     If Not mblnOutputPrinterInfo Then Exit Sub
@@ -4640,55 +4650,55 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
     Next prt
 
     If Not IsMissing(varDebug) Then
-        For i = 0 To prtCount - 1
-            Debug.Print "DeviceName=" & Application.Printers(i).DeviceName
-            Debug.Print , "BottomMargin=" & Application.Printers(i).BottomMargin
-            Debug.Print , "ColorMode=" & Application.Printers(i).ColorMode
-            Debug.Print , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
-            Debug.Print , "Copies=" & Application.Printers(i).Copies
-            Debug.Print , "DataOnly=" & Application.Printers(i).DataOnly
-            Debug.Print , "DefaultSize=" & Application.Printers(i).DefaultSize
-            Debug.Print , "DriverName=" & Application.Printers(i).DriverName
-            Debug.Print , "Duplex=" & Application.Printers(i).Duplex
-            Debug.Print , "ItemLayout=" & Application.Printers(i).ItemLayout
-            Debug.Print , "ItemsAcross=" & Application.Printers(i).ItemsAcross
-            Debug.Print , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
-            Debug.Print , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
-            Debug.Print , "LeftMargin=" & Application.Printers(i).LeftMargin
-            Debug.Print , "Orientation=" & Application.Printers(i).Orientation
-            Debug.Print , "PaperBin=" & Application.Printers(i).PaperBin
-            Debug.Print , "PaperSize=" & Application.Printers(i).PaperSize
-            Debug.Print , "Port=" & Application.Printers(i).Port
-            Debug.Print , "PrintQuality=" & Application.Printers(i).PrintQuality
-            Debug.Print , "RightMargin=" & Application.Printers(i).RightMargin
-            Debug.Print , "RowSpacing=" & Application.Printers(i).RowSpacing
-            Debug.Print , "TopMargin=" & Application.Printers(i).TopMargin
+        For I = 0 To prtCount - 1
+            Debug.Print "DeviceName=" & Application.Printers(I).DeviceName
+            Debug.Print , "BottomMargin=" & Application.Printers(I).BottomMargin
+            Debug.Print , "ColorMode=" & Application.Printers(I).ColorMode
+            Debug.Print , "ColumnSpacing=" & Application.Printers(I).ColumnSpacing
+            Debug.Print , "Copies=" & Application.Printers(I).Copies
+            Debug.Print , "DataOnly=" & Application.Printers(I).DataOnly
+            Debug.Print , "DefaultSize=" & Application.Printers(I).DefaultSize
+            Debug.Print , "DriverName=" & Application.Printers(I).DriverName
+            Debug.Print , "Duplex=" & Application.Printers(I).Duplex
+            Debug.Print , "ItemLayout=" & Application.Printers(I).ItemLayout
+            Debug.Print , "ItemsAcross=" & Application.Printers(I).ItemsAcross
+            Debug.Print , "ItemSizeHeight=" & Application.Printers(I).ItemSizeHeight
+            Debug.Print , "ItemSizeWidth=" & Application.Printers(I).ItemSizeWidth
+            Debug.Print , "LeftMargin=" & Application.Printers(I).LeftMargin
+            Debug.Print , "Orientation=" & Application.Printers(I).Orientation
+            Debug.Print , "PaperBin=" & Application.Printers(I).PaperBin
+            Debug.Print , "PaperSize=" & Application.Printers(I).PaperSize
+            Debug.Print , "Port=" & Application.Printers(I).Port
+            Debug.Print , "PrintQuality=" & Application.Printers(I).PrintQuality
+            Debug.Print , "RightMargin=" & Application.Printers(I).RightMargin
+            Debug.Print , "RowSpacing=" & Application.Printers(I).RowSpacing
+            Debug.Print , "TopMargin=" & Application.Printers(I).TopMargin
         Next
     End If
 
-    For i = 0 To prtCount - 1
-        Print #fle, "DeviceName=" & Application.Printers(i).DeviceName
-        Print #fle, , "BottomMargin=" & Application.Printers(i).BottomMargin
-        Print #fle, , "ColorMode=" & Application.Printers(i).ColorMode
-        Print #fle, , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
-        Print #fle, , "Copies=" & Application.Printers(i).Copies
-        Print #fle, , "DataOnly=" & Application.Printers(i).DataOnly
-        Print #fle, , "DefaultSize=" & Application.Printers(i).DefaultSize
-        Print #fle, , "DriverName=" & Application.Printers(i).DriverName
-        Print #fle, , "Duplex=" & Application.Printers(i).Duplex
-        Print #fle, , "ItemLayout=" & Application.Printers(i).ItemLayout
-        Print #fle, , "ItemsAcross=" & Application.Printers(i).ItemsAcross
-        Print #fle, , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
-        Print #fle, , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
-        Print #fle, , "LeftMargin=" & Application.Printers(i).LeftMargin
-        Print #fle, , "Orientation=" & Application.Printers(i).Orientation
-        Print #fle, , "PaperBin=" & Application.Printers(i).PaperBin
-        Print #fle, , "PaperSize=" & Application.Printers(i).PaperSize
-        Print #fle, , "Port=" & Application.Printers(i).Port
-        Print #fle, , "PrintQuality=" & Application.Printers(i).PrintQuality
-        Print #fle, , "RightMargin=" & Application.Printers(i).RightMargin
-        Print #fle, , "RowSpacing=" & Application.Printers(i).RowSpacing
-        Print #fle, , "TopMargin=" & Application.Printers(i).TopMargin
+    For I = 0 To prtCount - 1
+        Print #fle, "DeviceName=" & Application.Printers(I).DeviceName
+        Print #fle, , "BottomMargin=" & Application.Printers(I).BottomMargin
+        Print #fle, , "ColorMode=" & Application.Printers(I).ColorMode
+        Print #fle, , "ColumnSpacing=" & Application.Printers(I).ColumnSpacing
+        Print #fle, , "Copies=" & Application.Printers(I).Copies
+        Print #fle, , "DataOnly=" & Application.Printers(I).DataOnly
+        Print #fle, , "DefaultSize=" & Application.Printers(I).DefaultSize
+        Print #fle, , "DriverName=" & Application.Printers(I).DriverName
+        Print #fle, , "Duplex=" & Application.Printers(I).Duplex
+        Print #fle, , "ItemLayout=" & Application.Printers(I).ItemLayout
+        Print #fle, , "ItemsAcross=" & Application.Printers(I).ItemsAcross
+        Print #fle, , "ItemSizeHeight=" & Application.Printers(I).ItemSizeHeight
+        Print #fle, , "ItemSizeWidth=" & Application.Printers(I).ItemSizeWidth
+        Print #fle, , "LeftMargin=" & Application.Printers(I).LeftMargin
+        Print #fle, , "Orientation=" & Application.Printers(I).Orientation
+        Print #fle, , "PaperBin=" & Application.Printers(I).PaperBin
+        Print #fle, , "PaperSize=" & Application.Printers(I).PaperSize
+        Print #fle, , "Port=" & Application.Printers(I).Port
+        Print #fle, , "PrintQuality=" & Application.Printers(I).PrintQuality
+        Print #fle, , "RightMargin=" & Application.Printers(I).RightMargin
+        Print #fle, , "RowSpacing=" & Application.Printers(I).RowSpacing
+        Print #fle, , "TopMargin=" & Application.Printers(I).TopMargin
     Next
 
 PROC_EXIT:
@@ -4813,7 +4823,7 @@ Private Sub CreateFormReportTextFile(ByVal strFileIn As String, ByVal strFileOut
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
-    Dim i As Integer
+    Dim I As Integer
 
     fleIn = FreeFile()
     Open strFileIn For Input As #fleIn
@@ -4823,36 +4833,36 @@ Private Sub CreateFormReportTextFile(ByVal strFileIn As String, ByVal strFileOut
 
     If Not IsMissing(varDebug) Then Debug.Print "fleIn=" & fleIn, "fleOut=" & fleOut
 
-    i = 0
+    I = 0
     Do While Not EOF(fleIn)
-        i = i + 1
+        I = I + 1
         Line Input #fleIn, strIn
         If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Exit Do
         Else
-            If Not IsMissing(varDebug) Then Debug.Print i, strIn
+            If Not IsMissing(varDebug) Then Debug.Print I, strIn
             Print #fleOut, strIn
         End If
     Loop
     Do While Not EOF(fleIn)
-        i = i + 1
+        I = I + 1
         Line Input #fleIn, strIn
 NextIteration:
         If FoundKeywordInLine(strIn) Then
-            If Not IsMissing(varDebug) Then Debug.Print i & ">", strIn
+            If Not IsMissing(varDebug) Then Debug.Print I & ">", strIn
             Print #fleOut, strIn
             Do While Not EOF(fleIn)
-                i = i + 1
+                I = I + 1
                 Line Input #fleIn, strIn
                 If Not FoundKeywordInLine(strIn, "End") Then
                     'Debug.Print "Not Found!!!", i
                     GoTo SearchForEnd
                 Else
-                    If Not IsMissing(varDebug) Then Debug.Print i & ">", "Found End!!!"
+                    If Not IsMissing(varDebug) Then Debug.Print I & ">", "Found End!!!"
                     Print #fleOut, strIn
-                    i = i + 1
+                    I = I + 1
                     Line Input #fleIn, strIn
-                    If Not IsMissing(varDebug) Then Debug.Print i & ":", strIn
+                    If Not IsMissing(varDebug) Then Debug.Print I & ":", strIn
                     'Stop
                     GoTo NextIteration
                 End If
@@ -4860,7 +4870,7 @@ SearchForEnd:
             Loop
         Else
             Print #fleOut, strIn
-            If Not IsMissing(varDebug) Then Debug.Print i, strIn
+            If Not IsMissing(varDebug) Then Debug.Print I, strIn
         End If
     Loop
 

@@ -41,10 +41,10 @@ End Sub
 
 Public Function fLevelArrow(ByVal intNum As Integer) As String
     On Error GoTo 0
-    Dim i As Integer
+    Dim I As Integer
     Dim str As String
     str = LEVEL_ARROW
-    For i = 1 To intNum
+    For I = 1 To intNum
         str = str & LEVEL_ARROW
     Next
     fLevelArrow = str
