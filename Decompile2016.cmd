@@ -19,7 +19,7 @@ REM /* 10/28/2011 MDL        Initial Creation                                   
 REM /* 11/02/2011 MDL        Updated to parameterize and also display the pre/post size    */
 REM /* 12/27/2011 MDL        Updated to parse out the filesize and do the compare          */
 REM /* 07/03/2012 MDL        Update to make UserID independent                             */
-REM /* 01/21/2013 MDL        Pre request of April15Hater, updated to make safe for DB      */
+REM /* 01/21/2013 MDL        Per request of April15Hater, updated to make safe for DB      */
 REM /*                       filenames containing space characters                         */
 REM /* 04/03/2014 PFE        Modified for aegit for testing #002                           */
 REM /***************************************************************************************/
