@@ -1363,9 +1363,6 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 ' Ref: http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
 
-    'Dim strTheSQL As String
-    Dim varForm As Variant
-
     On Error GoTo PROC_ERR
 
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
@@ -1385,14 +1382,6 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
     ' 5   Queries
     ' 6   Table - Linked Access Tables
     ' 8   SubDataSheets
-
-'    ' Create temp table
-'    Const strMakeTbl As String = "SELECT ""Name"" AS Name, ""Attribute"" As Attribute INTO " & strTempTable & ";"
-'    ' Run the SQL Query
-'    If aeExists("Tables", strTempTable) Then CurrentDb.Execute "DROP TABLE " & strTempTable
-'    DoEvents
-'    dbs.Execute strMakeTbl
-'    'Stop
 
     Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
                                 "FROM MSysObjects AS m " & _
@@ -1429,45 +1418,6 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
         Debug.Print "OutputListOfForms"
         Debug.Print strSQL
     End If
-
-'    DoCmd.SetWarnings False
-'    ' Use RunSQL for action queries
-'    DoCmd.RunSQL strSQL
-'
-'    Set rst = dbs.OpenRecordset(strTempTable, dbOpenTable)
-
-'    With rst
-'        If (.RecordCount > 0) Then
-'            .MoveFirst
-'            .MoveNext   ' Ignore the first record
-'            Do While Not rst.EOF
-'                varForm = !Name.Value
-'                'Debug.Print "varForm = " & varForm
-'                If IsFrmHidden(varForm) Then
-'                    rst.Edit
-'                    rst!Attribute = "Hidden"
-'                    rst.Update
-'                    .MoveNext
-'                Else
-'                    '.Delete
-'                    ' Ref: https://msdn.microsoft.com/en-us/library/bb243799%28v=office.12%29.aspx
-'                    ' When you use the Delete method, the Microsoft Access database engine immediately deletes the current record
-'                    ' without any warning or prompting. Deleting a record does not automatically cause the next record to become the current record;
-'                    ' to move to the next record you must use the MoveNext method. However, keep in mind that after you have moved off the deleted record, you cannot move back to it.
-'                    rst.Edit
-'                    rst!Attribute = "Visible"
-'                    rst.Update
-'                    .MoveNext
-'                End If
-'            Loop
-'        Else
-'            Debug.Print "No records!"
-'        End If
-'    End With
-
-''Stop
-'    CurrentDb.Execute "DROP TABLE " & strTempTable
-'    DoCmd.SetWarnings True
 
 PROC_EXIT:
     rst.Close
