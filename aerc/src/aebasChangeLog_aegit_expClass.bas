@@ -29,8 +29,11 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %060 -
-' %059 -
+' %065 -
+' %064 -
+' %063 -
+' %062 -
+' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %058 - Windows 10, GetEdition in aeVer reports Office Home and Student Guid and but Office 2010 Pro is installed
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
@@ -62,6 +65,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20151222 - v161 -
+    ' FIXED - %060 - Fix output list of forms so that it does not need to use a temp table
+    ' FIXED - %059 - Database opened exclusive error when exporting hidden queries, Ref: http://stackoverflow.com/questions/18121099/trying-to-read-data-out-of-msysobjects-with-odbc-in-c-but-getting-no-permissio
 '20151013 - v158 - Bump
 '20150816 - v153 -
     ' FIXED - %056 - Control can't be edited; it's bound to a replication system column - OutputListOfAllHiddenQueries

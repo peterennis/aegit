@@ -1,9 +1,8 @@
-"Name","Attribute"
-"_aeFrmUSysRibbons","Visible"
-"_chtChart","Visible"
-"_chtChartBig","Visible"
-"_chtChartBigList","Visible"
-"_chtKPI01","Visible"
-"_frmPersist","Hidden"
-"frm_Dummy","Visible"
-"frm_HiddenDummy","Hidden"
+_aeFrmUSysRibbons           False
+_chtChart     False
+_chtChartBig  False
+_chtChartBigList            False
+_chtKPI01     False
+_frmPersist   True
+frm_Dummy     False
+frm_HiddenDummy             True
