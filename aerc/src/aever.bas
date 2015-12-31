@@ -6,14 +6,10 @@ Public Sub Version_Test()
     Debug.Print GetEdition(Application.Version, Application.ProductCode)
 End Sub
 
-Public Function GetEdition( _
-                    ByRef strAppVersion As String, _
-                    ByRef strGuid As String _
-                            ) As String
+Public Function GetEdition(ByRef strAppVersion As String, ByRef strGuid As String) As String
 ' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
 ' Ref: http://p2p.wrox.com/excel-vba/82653-what-best-way-get-excel-version.html
 ' Ref: http://colinlegg.wordpress.com/2013/02/02/office-edition-in-vba/
-'
 ' Ref: https://community.spiceworks.com/topic/150065-how-to-remove-ms-office-2010-standard-registry-keys
 ' This one is for Office Home and Student 2010): {90140000-003D-0000-0000-0000000FF1CE}
 
@@ -515,7 +511,7 @@ Private Function GetEdition2013(ByRef strSku As String) As String
             GetEdition2013 = "Microsoft Office Home and Business 2013"
         Case "0014"
             GetEdition2013 = "Microsoft Office Professional 2013"
-        Case "000F"
+        Case "0015"
             GetEdition2013 = "Microsoft Access 2013"
         Case "0016"
             GetEdition2013 = "Microsoft Excel 2013"
@@ -561,59 +557,45 @@ Private Function GetEdition2013(ByRef strSku As String) As String
 End Function
 
 Private Function GetEdition2016(ByRef strSku As String) As String
-' Ref: http://support.microsoft.com/kb/2786054
+' Ref: https://support.microsoft.com/en-us/kb/3120274
  
     On Error GoTo 0
     Debug.Print "GetEdition2016 strSku=" & strSku
     Select Case strSku
         Case "0011"
-            GetEdition2016 = "Microsoft Office Professional Plus FIXME"
+            GetEdition2016 = "Microsoft Office Professional Plus 2016"
         Case "0012"
-            GetEdition2016 = "Microsoft Office Standard FIXME"
-        Case "0013"
-            GetEdition2016 = "Microsoft Office Home and Business FIXME"
-        Case "0014"
-            GetEdition2016 = "Microsoft Office Professional FIXME"
-        Case "000F"
-            GetEdition2016 = "Microsoft Access FIXME"
+            GetEdition2016 = "Microsoft Office Standard 2016"
+        Case "0015"
+            GetEdition2016 = "Microsoft Access 2016"
         Case "0016"
-            GetEdition2016 = "Microsoft Excel FIXME"
-        Case "0017"
-            GetEdition2016 = "Microsoft SharePoint Designer FIXME"
+            GetEdition2016 = "Microsoft Excel 2016"
         Case "0018"
-            GetEdition2016 = "Microsoft PowerPoint FIXME"
+            GetEdition2016 = "Microsoft PowerPoint 2016"
         Case "0019"
-            GetEdition2016 = "Microsoft Publisher FIXME"
+            GetEdition2016 = "Microsoft Publisher 2016"
         Case "001A"
-            GetEdition2016 = "Microsoft Outlook FIXME"
+            GetEdition2016 = "Microsoft Outlook 2016"
         Case "001B"
-            GetEdition2016 = "Microsoft Word FIXME"
-        Case "001C"
-            GetEdition2016 = "Microsoft Access Runtime FIXME"
+            GetEdition2016 = "Microsoft Word 2016"
         Case "001F"
-            GetEdition2016 = "Microsoft Office Proofing Tools Kit Compilation FIXME"
-        Case "002F"
-            GetEdition2016 = "Microsoft Office Home and Student FIXME"
+            GetEdition2016 = "Microsoft Office Proofing Tools Kit Compilation 2016"
         Case "003A"
-            GetEdition2016 = "Microsoft Project Standard FIXME"
+            GetEdition2016 = "Microsoft Project Standard 2016"
         Case "003B"
-            GetEdition2016 = "Microsoft Project Professional FIXME"
-        Case "0044"
-            GetEdition2016 = "Microsoft InfoPath FIXME"
+            GetEdition2016 = "Microsoft Project Professional 2016"
         Case "0051"
-            GetEdition2016 = "Microsoft Visio Professional FIXME"
+            GetEdition2016 = "Microsoft Visio Professional 2016"
         Case "0053"
-            GetEdition2016 = "Microsoft Visio Standard FIXME"
+            GetEdition2016 = "Microsoft Visio Standard 2016"
         Case "00A1"
-            GetEdition2016 = "Microsoft OneNote FIXME"
+            GetEdition2016 = "Microsoft OneNote 2016"
         Case "00BA"
-            GetEdition2016 = "Microsoft Office SharePoint Workspace FIXME"
+            GetEdition2016 = "Microsoft Office OneDrive for Business 2016"
         Case "110D"
-            GetEdition2016 = "Microsoft Office SharePoint Server FIXME"
-        Case "110F"
-            GetEdition2016 = "Microsoft Project Server FIXME"
+            GetEdition2016 = "Microsoft Office SharePoint Server 2016"
         Case "012B"
-            GetEdition2016 = "Microsoft Lync FIXME"
+            GetEdition2016 = "Microsoft Skype for Business 2016"
         Case Else
             MsgBox "Error: GetEdition2016", vbCritical, "ERROR"
     End Select
