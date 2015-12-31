@@ -262,7 +262,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 ' History:  See comment details, basChangeLog, commit messages on github
 '====================================================================
 
-    Dim I As Integer
+    Dim i As Integer
     Dim RefName As String
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
@@ -318,31 +318,31 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
         Print #1, , "<@_@>"
         Print #1, , "     " & "References:"
 
-    For I = 1 To vbaProj.References.Count
+    For i = 1 To vbaProj.References.Count
 
         blnRefBroken = False
 
         ' Get the Name of the Reference
-        RefName = vbaProj.References(I).Name
+        RefName = vbaProj.References(i).Name
 
         ' Get the Description of Reference
-        RefDesc = vbaProj.References(I).Description
+        RefDesc = vbaProj.References(i).Description
 
         If Not IsMissing(varDebug) Then
-            Debug.Print , , vbaProj.References(I).Name, vbaProj.References(I).Description
-            Debug.Print , , , vbaProj.References(I).FullPath
-            Debug.Print , , , vbaProj.References(I).GUID
+            Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+            Debug.Print , , , vbaProj.References(i).FullPath
+            Debug.Print , , , vbaProj.References(i).GUID
         End If
 
-        Print #1, , , vbaProj.References(I).Name, vbaProj.References(I).Description
-        Print #1, , , , vbaProj.References(I).FullPath
-        Print #1, , , , vbaProj.References(I).GUID
+        Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        Print #1, , , , vbaProj.References(i).FullPath
+        Print #1, , , , vbaProj.References(i).GUID
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
-        If Application.VBE.ActiveVBProject.References(I).IsBroken = True Then
+        If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
               blnRefBroken = True
-              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(I).Name, "blnRefBroken=" & blnRefBroken
-              Print #1, , , vbaProj.References(I).Name, "blnRefBroken=" & blnRefBroken
+              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
 
@@ -578,15 +578,15 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 
     On Error GoTo PROC_ERR
 
-    Dim I As Integer
+    Dim i As Integer
 
     'Debug.Print , Len(Dir$(PathFileName))
     If Len(Dir$(PathFileName)) Then
-        I = FreeFile()
-        Open PathFileName For Random Access Read Write Lock Read Write As #I
-        Lock I 'Redundant but let's be 100% sure
-        Unlock I
-        Close I
+        i = FreeFile()
+        Open PathFileName For Random Access Read Write Lock Read Write As #i
+        Lock i 'Redundant but let's be 100% sure
+        Unlock i
+        Close i
     Else
         'Err.Raise 53
     End If
@@ -979,23 +979,23 @@ Private Function fListGUID(ByVal strTableName As String) As String
 ' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
     On Error GoTo 0
-    Dim I As Integer
+    Dim i As Integer
     Dim arrGUID8() As Byte
     Dim strArrGUID8(8) As String
     Dim strGuid As String
 
     strGuid = vbNullString
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
-    For I = 1 To 8
-        If Len(Hex$(arrGUID8(I))) = 1 Then
-            strArrGUID8(I) = "0" & Hex$(arrGUID8(I))
+    For i = 1 To 8
+        If Len(Hex$(arrGUID8(i))) = 1 Then
+            strArrGUID8(i) = "0" & Hex$(arrGUID8(i))
         Else
-            strArrGUID8(I) = Hex$(arrGUID8(I))
+            strArrGUID8(i) = Hex$(arrGUID8(i))
         End If
     Next
 
-    For I = 1 To 8
-        strGuid = strGuid & strArrGUID8(I) & "-"
+    For i = 1 To 8
+        strGuid = strGuid & strArrGUID8(i) & "-"
     Next
     fListGUID = Left$(strGuid, 23)
 

@@ -221,7 +221,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Sub
@@ -254,8 +254,8 @@ Public Property Get SourceFolder() As String
 End Property
 
 Public Property Let SourceFolder(ByVal strSourceFolder As String)
-    ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
-    ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
+' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
+' Ref: http://www.utteraccess.com/wiki/index.php/Classes
     On Error GoTo 0
     aegitSourceFolder = strSourceFolder
 End Property
@@ -386,7 +386,7 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML", vbCritical, "ERROR"
             Stop
     End Select
 
@@ -714,6 +714,7 @@ End Sub
 Private Function IsLoaded(ByVal strFormName As String) As Boolean
  ' Returns True if the specified form is open in Form view or Datasheet view.
     
+    Debug.Print "IsLoaded"
     Const conObjStateClosed = 0
     Const conDesignView = 0
     
@@ -798,6 +799,7 @@ End Sub
 
 Private Function LinkedTable(strTblName) As Boolean
 
+    'Debug.Print "LinkedTable"
     On Error GoTo PROC_ERR
 
     ' Linked table connection string is > 0
@@ -835,6 +837,8 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
 ' Open a handle to all databases and keep it open during the entire time the application runs.
 ' Parameter: blnInit - TRUE to initialize (call when application starts), FALSE to close (call when application ends)
 ' Ref: http://stackoverflow.com/questions/29838317/issue-when-using-a-dao-handle-when-the-database-closes-unexpectedly
+
+    Debug.Print "OpenAllDatabases"
 
     Dim intX As Integer
     Dim strname As String
@@ -900,6 +904,7 @@ Private Function Delay(ByVal mSecs As Long) As Boolean
 End Function
 
 Private Function defineMyExclusions() As myExclusions
+    Debug.Print "defineMyExclusions"
     On Error GoTo 0
     myExclude.exclude1 = EXCLUDE_1
     myExclude.exclude2 = EXCLUDE_2
@@ -907,6 +912,7 @@ Private Function defineMyExclusions() As myExclusions
 End Function
 
 Private Function fExclude(strname As String) As Boolean
+    'Debug.Print "fExclude"
     On Error GoTo 0
     fExclude = False
     'Debug.Print "1: fExclude", strName, "myExclude.exclude1 = " & myExclude.exclude1
@@ -926,6 +932,7 @@ End Function
 
 Private Function FixHeaderXML(ByVal strPathFileName As String) As Boolean
 
+    Debug.Print "FixHeaderXML"
     On Error GoTo PROC_ERR
 
     Dim fName As String
@@ -978,7 +985,7 @@ PROC_ERR:
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass"
             Resume Next
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FixHeaderXML of Class aegit_expClass", vbCritical, "ERROR"
             Resume Next
     End Select
 
@@ -988,6 +995,7 @@ Private Function NoBOM(ByVal strFileName As String) As Boolean
 ' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
 ' Use the same file name for input and output
 
+    'Debug.Print "NoBOM"
     On Error GoTo PROC_ERR
 
     ' Define needed constants
@@ -1036,7 +1044,7 @@ PROC_ERR:
         Case 9999
             Resume PROC_EXIT
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure NoBOM of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure NoBOM of Class aegit_expClass", vbCritical, "ERROR"
             Resume PROC_EXIT
     End Select
     Resume PROC_EXIT
@@ -1045,6 +1053,7 @@ End Function
 
 Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
 
+    'Debug.Print "aeReadWriteStream"
     On Error GoTo PROC_ERR
 
     Dim fName As String
@@ -1099,7 +1108,7 @@ PROC_ERR:
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
             Resume Next
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadWriteStream of Class aegit_expClass", vbCritical, "ERROR"
             Resume Next
     End Select
 
@@ -1107,6 +1116,8 @@ End Function
 
 Private Function RecordsetUpdatable(ByVal strSQL As String) As Boolean
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
+
+    Debug.Print "RecordsetUpdatable"
 
     Dim dbs As DAO.Database
     Dim rst As DAO.Recordset
@@ -1143,12 +1154,13 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure RecordsetUpdatable of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure RecordsetUpdatable of Class aegit_expClass", vbCritical, "ERROR"
     Resume Next
 
 End Function
 
 Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
+    Debug.Print "IsQryHidden"
     On Error GoTo 0
     If IsNull(strQueryName) Or strQueryName = vbNullString Then
         IsQryHidden = False
@@ -1160,6 +1172,7 @@ Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
 End Function
 
 Private Function IsFrmHidden(ByVal strFormName As String) As Boolean
+    'Debug.Print "IsFrmHidden"
     On Error GoTo 0
     If IsNull(strFormName) Or strFormName = vbNullString Then
         IsFrmHidden = False
@@ -1169,6 +1182,7 @@ Private Function IsFrmHidden(ByVal strFormName As String) As Boolean
 End Function
 
 Private Function IsRptHidden(ByVal strReportName As String) As Boolean
+    Debug.Print "IsRptHidden"
     On Error GoTo 0
     If IsNull(strReportName) Or strReportName = vbNullString Then
         IsRptHidden = False
@@ -1178,6 +1192,7 @@ Private Function IsRptHidden(ByVal strReportName As String) As Boolean
 End Function
 
 Private Function IsMacHidden(ByVal strMacroName As String) As Boolean
+    Debug.Print "IsMacHidden"
     On Error GoTo 0
     If IsNull(strMacroName) Or strMacroName = vbNullString Then
         IsMacHidden = False
@@ -1190,6 +1205,7 @@ Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As 
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=52635
 ' Set focus to the Access window
 
+    Debug.Print "OutputTheQAT"
     On Error GoTo PROC_ERR
 
     Dim strAppTitle As String
@@ -1260,7 +1276,7 @@ PROC_ERR:
             "No AppTitle found so QAT is not being exported!", vbInformation, "OutputTheQAT"
             Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheQAT of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheQAT of Class aegit_expClass", vbCritical, "ERROR"
         Resume Next
     End If
 
@@ -1289,6 +1305,7 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 ' 128 Union Query (Visible)
 ' 136 Union Query (Hidden)
 
+    Debug.Print "OutputListOfAllHiddenQueries"
     On Error GoTo PROC_ERR
 
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
@@ -1349,10 +1366,10 @@ PROC_EXIT:
 PROC_ERR:
     If Err = 3192 Then
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass" & vbCrLf & vbCrLf & _
-                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again."
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
         Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass", vbCritical, "ERROR"
     End If
     Resume PROC_EXIT
 
@@ -1429,17 +1446,16 @@ PROC_EXIT:
 PROC_ERR:
     If Err = 3192 Then
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass" & vbCrLf & vbCrLf & _
-                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again."
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
         Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass", vbCritical, "ERROR"
         Resume PROC_EXIT
     End If
 
 End Sub
 
 Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Variant)
-
 ' Note: If you are developing a database application, add-in, library database, or referenced database, make sure that the
 ' Error Trapping option is set to 2 (Break On Unhandled Errors) when you have finished debugging your code.
 '
@@ -1775,7 +1791,7 @@ PROC_ERR:
     ElseIf Err = 3270 Then      ' Property not found.
         Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAccessApplicationOptions of Class aegit_expClass", vbCritical, "ERROR"
     End If
     Resume Next
 
@@ -1784,6 +1800,7 @@ End Sub
 Private Sub OutputListOfApplicationProperties()
 ' Ref: http://www.granite.ab.ca/access/settingstartupoptions.htm
 
+    Debug.Print "OutputListOfApplicationProperties"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -1803,24 +1820,23 @@ Private Sub OutputListOfApplicationProperties()
     fle = FreeFile()
     Open strTheSourceLocation & "\" & aeAppListPrp For Output As #fle
 
-    Dim I As Integer
+    Dim i As Integer
     Dim strPropName As String
     Dim varPropValue As Variant
     Dim varPropType As Variant
     Dim varPropInherited As Variant
 
     With dbs
-        For I = 0 To (.Properties.Count - 1)
+        For i = 0 To (.Properties.Count - 1)
             strError = vbNullString
-            strPropName = .Properties(I).Name
-'''            varPropValue = Null
+            strPropName = .Properties(i).Name
             ' Fixed for error 3251
-            varPropValue = .Properties(I).Value
-            varPropType = .Properties(I).Type
-            varPropInherited = .Properties(I).Inherited
+            varPropValue = .Properties(i).Value
+            varPropType = .Properties(i).Type
+            varPropInherited = .Properties(i).Inherited
             Print #fle, strPropName & ": " & varPropValue & ", " & _
                 varPropType & ", " & varPropInherited & ";" & strError
-        Next I
+        Next i
     End With
 
 PROC_EXIT:
@@ -1837,7 +1853,7 @@ PROC_ERR:
         'Print #fle, "!" & Err.Description, strPropName
         'Err.Clear
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfApplicationProperties of Class aegit_expClass", vbCritical, "ERROR"
     End If
     Resume Next
 
@@ -1862,17 +1878,20 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Pause of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Function
 
 Private Sub WaitSeconds(ByVal intSeconds As Integer)
-' Comments: Waits for a specified number of seconds
-' Params  : intSeconds      Number of seconds to wait
-' Source  : Total Visual SourceBook
-' Ref     : http://www.fmsinc.com/MicrosoftAccess/modules/examples/AvoidDoEvents.asp
+' Ref: http://www.fmsinc.com/MicrosoftAccess/modules/examples/AvoidDoEvents.asp
+' ====================================================================
+' Comments:  Waits for a specified number of seconds
+' Parameter: intSeconds, Number of seconds to wait
+' Source:    Total Visual SourceBook
+' ====================================================================
 
+    Debug.Print "WaitSeconds"
     On Error GoTo PROC_ERR
 
     Dim datTime As Date
@@ -1889,7 +1908,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WaitSeconds of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 End Sub
 
@@ -1908,7 +1927,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 ' History:  See comment details, basChangeLog, commit messages on github
 ' ====================================================================
 
-    Dim I As Integer
+    Dim i As Integer
     Dim RefName As String
     Dim RefDesc As String
     Dim blnRefBroken As Boolean
@@ -1917,9 +1936,9 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
     Dim vbaProj As Object
     Set vbaProj = Application.VBE.ActiveVBProject
 
+    Debug.Print "aeGetReferences"
     On Error GoTo PROC_ERR
 
-    Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING IS OFF"
@@ -1968,29 +1987,29 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
         Print #1, , "<@_@>"
         Print #1, , "     " & "References:"
 
-    For I = 1 To vbaProj.References.Count
+    For i = 1 To vbaProj.References.Count
 
         blnRefBroken = False
 
         ' Get the Name of the Reference
-        RefName = vbaProj.References(I).Name
+        RefName = vbaProj.References(i).Name
 
         ' Get the Description of Reference
-        RefDesc = vbaProj.References(I).Description
+        RefDesc = vbaProj.References(i).Description
 
-        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(I).Name, vbaProj.References(I).Description
-        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(I).FullPath
-        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(I).GUID
+        If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).FullPath
+        If Not IsMissing(varDebug) Then Debug.Print , , , vbaProj.References(i).GUID
 
-        Print #1, , , vbaProj.References(I).Name, vbaProj.References(I).Description
-        Print #1, , , , vbaProj.References(I).FullPath
-        Print #1, , , , vbaProj.References(I).GUID
+        Print #1, , , vbaProj.References(i).Name, vbaProj.References(i).Description
+        Print #1, , , , vbaProj.References(i).FullPath
+        Print #1, , , , vbaProj.References(i).GUID
 
         ' Returns a Boolean value indicating whether or not the Reference object points to a valid reference in the registry. Read-only.
-        If Application.VBE.ActiveVBProject.References(I).IsBroken = True Then
+        If Application.VBE.ActiveVBProject.References(i).IsBroken = True Then
               blnRefBroken = True
-              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(I).Name, "blnRefBroken=" & blnRefBroken
-              Print #1, , , vbaProj.References(I).Name, "blnRefBroken=" & blnRefBroken
+              If Not IsMissing(varDebug) Then Debug.Print , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
+              Print #1, , , vbaProj.References(i).Name, "blnRefBroken=" & blnRefBroken
         End If
     Next
     If Not IsMissing(varDebug) Then Debug.Print , "<*_*>"
@@ -2007,7 +2026,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_expClass"
     aeGetReferences = False
     Resume PROC_EXIT
@@ -2027,6 +2046,7 @@ Private Function LongestTableName() As Integer
     Dim tdf As DAO.TableDef
     Dim intTNLen As Integer
 
+    Debug.Print "LongestTableName"
     On Error GoTo PROC_ERR
 
     intTNLen = 0
@@ -2049,7 +2069,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass", vbCritical, "ERROR"
     LongestTableName = 0
     Resume PROC_EXIT
 
@@ -2068,6 +2088,7 @@ Private Function LongestFieldPropsName() As Boolean
     Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
 
+    Debug.Print "LongestFieldPropsName"
     On Error GoTo PROC_ERR
 
     aeintFNLen = 0
@@ -2090,9 +2111,9 @@ Private Function LongestFieldPropsName() As Boolean
                     aestrLFT = FieldTypeName(fld)
                     aeintFTLen = Len(FieldTypeName(fld))
                 End If
-                If Len(GetDescrip(fld)) > aeintFDLen Then
-                    aestrLFD = GetDescrip(fld)
-                    aeintFDLen = Len(GetDescrip(fld))
+                If Len(GetDescription(fld)) > aeintFDLen Then
+                    aestrLFD = GetDescription(fld)
+                    aeintFDLen = Len(GetDescription(fld))
                 End If
             Next
         End If
@@ -2107,7 +2128,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestFieldPropsName of Class aegit_expClass", vbCritical, "ERROR"
     LongestFieldPropsName = False
     Resume PROC_EXIT
 
@@ -2131,7 +2152,9 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
 ' TextLeft or TextRight, the procedure uses TextLeft.
 ' =========================================================================
 
+    'Debug.Print "SizeString"
     On Error GoTo 0
+
     Dim sPadChar As String
 
     If Len(Text) >= Length Then
@@ -2167,13 +2190,14 @@ End Function
 Private Function GetLinkedTableCurrentPath(ByVal strTblName As String) As String
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
 ' =========================================================================
-' Procedure : GetLinkedTableCurrentPath
-' Purpose   : Return Current Path of a Linked Table in Access and do not show password
-' Author    : Peter F. Ennis
-' Updated   : All notes moved to change log
-' History   : See comment details, basChangeLog, commit messages on github
+' Procedure: GetLinkedTableCurrentPath
+' Purpose:   Return Current Path of a Linked Table in Access and do not show password
+' Author:    Peter F. Ennis
+' Updated:   All notes moved to change log
+' History:   See comment details, basChangeLog, commit messages on github
 ' =========================================================================
 
+    'Debug.Print "GetLinkedTableCurrentPath"
     On Error GoTo PROC_ERR
 
     Dim strConnect As String
@@ -2213,7 +2237,7 @@ PROC_ERR:
         Case 3011, 3024                 ' Linked Table does not exist or DB Path not valid
             MsgBox "(" & strTblName & ") is not a valid, Linked Table", vbCritical, "Link Not Valid"
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "ERROR"
     End Select
     Resume PROC_EXIT
 End Function
@@ -2221,6 +2245,7 @@ End Function
 Private Function FileLocked(ByVal strFileName As String) As Boolean
 ' Ref: http://support.microsoft.com/kb/209189
 
+    Debug.Print "FileLocked"
     On Error GoTo PROC_ERR
 
     Dim fle As Long
@@ -2234,7 +2259,7 @@ Private Function FileLocked(ByVal strFileName As String) As Boolean
     ' If an error occurs, the document is currently open.
     If Err.Number <> 0 Then
         ' Display the error number and description.
-        MsgBox ">>> Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass"
+        MsgBox ">>> Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass", vbCritical, "ERROR"
         FileLocked = True
         Err.Clear
     End If
@@ -2243,7 +2268,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FileLocked of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Function
@@ -2264,6 +2289,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     Dim sLen As Long
     Dim strLinkedTablePath As String
 
+    'Debug.Print "TableInfo"
     On Error GoTo PROC_ERR
 
     strLinkedTablePath = vbNullString
@@ -2326,12 +2352,12 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
                 & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
-                & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
+                & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
         End If
         Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
             & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
             & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
-            & aestr4 & SizeString(GetDescrip(fld), aeintFDLen, TextLeft, " ")
+            & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
     Next
     If Not IsMissing(varDebug) Then Debug.Print
     'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then Debug.Print
@@ -2346,21 +2372,23 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     TableInfo = False
     Resume PROC_EXIT
 
 End Function
 
-Private Function GetDescrip(ByVal obj As Object) As String
+Private Function GetDescription(ByVal obj As Object) As String
+    'Debug.Print "GetDescription"
     On Error Resume Next
-    GetDescrip = obj.Properties("Description")
+    GetDescription = obj.Properties("Description")
 End Function
 
 Private Function LongestTableDescription(ByVal strTblName As String) As Integer
 ' ?LongestTableDescription("tblCaseManager")
 
+    'Debug.Print "LongestTableDescription"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -2374,9 +2402,9 @@ Private Function LongestTableDescription(ByVal strTblName As String) As Integer
     Set tdf = dbs.TableDefs(strTblName)
 
     For Each fld In tdf.Fields
-        If Len(GetDescrip(fld)) > aeintFDLen Then
-            strLFD = GetDescrip(fld)
-            aeintFDLen = Len(GetDescrip(fld))
+        If Len(GetDescription(fld)) > aeintFDLen Then
+            strLFD = GetDescription(fld)
+            aeintFDLen = Len(GetDescription(fld))
         End If
     Next
 
@@ -2389,7 +2417,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableDescription of Class aegit_expClass", vbCritical, "ERROR"
     LongestTableDescription = -1
     Resume PROC_EXIT
 
@@ -2398,7 +2426,10 @@ End Function
 Private Function FieldTypeName(ByVal fld As DAO.Field) As String
 ' Ref: http://allenbrowne.com/func-06.html
 ' Purpose: Converts the numeric results of DAO Field.Type to text
+    
+    'Debug.Print "FieldTypeName"
     On Error GoTo 0
+
     Dim strReturn As String    ' Name to return
 
     Select Case CLng(fld.Type) ' fld.Type is Integer, but constants are Long.
@@ -2489,10 +2520,10 @@ End Function
 
 Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
+' Ref: http://allenbrowne.com/func-06.html
 ' Document the tables, fields, and relationships
 ' Tables, field type, primary keys, foreign keys, indexes
 ' Relationships in the database with table, foreign table, primary keys, foreign keys
-' Ref: http://allenbrowne.com/func-06.html
 
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
@@ -2570,7 +2601,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
     aeDocumentTables = False
     Resume PROC_EXIT
@@ -2667,7 +2698,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
     aeDocumentTablesXML = False
     Resume PROC_EXIT
@@ -2677,7 +2708,9 @@ End Function
 Private Sub OutputTheSchemaFile() ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
+    Debug.Print "OutputTheSchemaFile"
     On Error GoTo 0
+
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
@@ -2786,7 +2819,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                     Case dbBinary
                         strFlds = strFlds & "Binary"
                     Case Else
-                        MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, aeAPP_NAME
+                        MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, "ERROR"
                         Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
                                 "tdf.Name=" & tdf.Name & " strFlds=" & strFlds
                 End Select
@@ -2860,7 +2893,9 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
 End Sub
 
 Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+    Debug.Print "isPK"
     On Error GoTo 0
+
     Dim Idx As DAO.Index
     Dim fld As DAO.Field
     For Each Idx In tdf.Indexes
@@ -2876,7 +2911,9 @@ Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
 End Function
 
 Private Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+    Debug.Print "isIndex"
     On Error GoTo 0
+
     Dim Idx As DAO.Index
     Dim fld As DAO.Field
     For Each Idx In tdf.Indexes
@@ -2890,7 +2927,9 @@ Private Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As
 End Function
 
 Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+    Debug.Print "isFK"
     On Error GoTo 0
+    
     Dim Idx As DAO.Index
     Dim fld As DAO.Field
     For Each Idx In tdf.Indexes
@@ -2967,7 +3006,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
     aeDocumentRelations = False
     Resume PROC_EXIT
@@ -2988,6 +3027,7 @@ Private Function OutputQueriesSqlText() As Boolean
     Dim qdf As DAO.QueryDef
     Dim strFile As String
 
+    Debug.Print "OutputQueriesSqlText"
     On Error GoTo PROC_ERR
 
     Dim strTheSchemaFile As String
@@ -3023,7 +3063,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputQueriesSqlText of Class aegit_expClass", vbCritical, "ERROR"
     OutputQueriesSqlText = False
     Resume PROC_EXIT
 
@@ -3032,6 +3072,7 @@ End Function
 Private Sub KillProperly(ByVal Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
+    'Debug.Print "KillProperly"
     On Error GoTo PROC_ERR
 
 TryAgain:
@@ -3050,7 +3091,7 @@ PROC_ERR:
     ElseIf Err = 53 Then     ' File not found
         Resume PROC_EXIT
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Sub
@@ -3058,6 +3099,7 @@ End Sub
 Private Function GetPropEnum(ByVal typeNum As Long, Optional ByVal varDebug As Variant) As String
 ' Ref: http://msdn.microsoft.com/en-us/library/bb242635.aspx
 
+    'Debug.Print "GetPropEnum"
     On Error GoTo PROC_ERR
 
     Select Case typeNum
@@ -3137,7 +3179,7 @@ PROC_ERR:
 '            varPropValue = Null
 '            Resume Next
         Case Else
-            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetPropEnum of Class aegit_expClass"
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetPropEnum of Class aegit_expClass", vbCritical, "ERROR"
             If Not IsMissing(varDebug) Then Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetPropEnum of Class aegit_expClass"
             GetPropEnum = CStr(typeNum)
             Resume PROC_EXIT
@@ -3146,6 +3188,7 @@ PROC_ERR:
 End Function
 
 Private Function GetPrpValue(ByVal obj As Object) As String
+    'Debug.Print "GetPrpValue"
     'On Error Resume Next
     On Error GoTo 0
     GetPrpValue = obj.Properties("Value")
@@ -3161,6 +3204,7 @@ Private Function OutputBuiltInPropertiesText(Optional ByVal varDebug As Variant)
     Dim strFile As String
     Dim strError As String
 
+    Debug.Print "OutputBuiltInPropertiesText"
     On Error GoTo PROC_ERR
 
     If aegitFrontEndApp Then
@@ -3213,7 +3257,7 @@ PROC_ERR:
             varPropValue = Null
             Resume Next
         Case Else
-            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass", vbCritical, "ERROR"
             If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputBuiltInPropertiesText of Class aegit_expClass"
             OutputBuiltInPropertiesText = False
             Resume PROC_EXIT
@@ -3226,14 +3270,14 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 
     On Error GoTo PROC_ERR
 
-    Dim I As Integer
+    Dim i As Integer
 
     If Len(Dir$(PathFileName)) Then
-        I = FreeFile()
-        Open PathFileName For Random Access Read Write Lock Read Write As #I
-        Lock I      ' Redundant but let's be 100% sure
-        Unlock I
-        Close I
+        i = FreeFile()
+        Open PathFileName For Random Access Read Write Lock Read Write As #i
+        Lock i      ' Redundant but let's be 100% sure
+        Unlock i
+        Close i
     Else
         ' Err.Raise 53
     End If
@@ -3245,7 +3289,7 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 70 ' Unable to acquire exclusive lock
-            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
+            MsgBox "A:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass", vbCritical, "ERROR"
             IsFileLocked = True
         Case 9
             MsgBox "B:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass" & _
@@ -3254,7 +3298,7 @@ PROC_ERR:
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             Resume PROC_EXIT
         Case Else
-            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
+            MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass", vbCritical, "ERROR"
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_expClass"
             Resume PROC_EXIT
     End Select
@@ -3270,7 +3314,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
     Dim dbs As DAO.Database
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
-    Dim I As Integer
+    Dim i As Integer
     Dim intAcObjType As Integer
     Dim strTheCurrentPathAndFile As String
 
@@ -3291,7 +3335,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
         strTheSourceLocation = aestrSourceLocationBe
     End If
 
-    I = 0
+    i = 0
     Set cnt = dbs.Containers(strContainerType)
 
     Select Case strContainerType
@@ -3313,7 +3357,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
         'Debug.Print "A", doc.Name, strContainerType
         If Not IsMissing(varDebug) Then Debug.Print , doc.Name
         If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") Then
-            I = I + 1
+            i = i + 1
             strTheCurrentPathAndFile = strTheSourceLocation & doc.Name & "." & strExt
             'Debug.Print "DocumentTheContainer", "strTheCurrentPathAndFile = " & strTheCurrentPathAndFile
             'Stop
@@ -3368,7 +3412,7 @@ NextDoc:
     Next doc
 
     If Not IsMissing(varDebug) Then
-        Debug.Print , I & " EXPORTED!"
+        Debug.Print , i & " EXPORTED!"
         Debug.Print , cnt.Documents.Count & " EXISTING!"
     End If
 
@@ -3387,7 +3431,7 @@ PROC_ERR:
         Pause (0.25)
         Resume SaveAsText
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure DocumentTheContainer of Class aegit_expClass", vbCritical, "ERROR"
     DocumentTheContainer = False
     Resume PROC_EXIT
 
@@ -3397,9 +3441,9 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
 
     Dim strFile As String
 
+    Debug.Print "KillAllFiles"
     On Error GoTo PROC_ERR
 
-    Debug.Print "KillAllFiles"
     Debug.Print , "strLoc = " & strLoc
     ' Test for relative path - it should already have been converted to an absolute location
     If Left(strLoc, 1) = "." Then Stop
@@ -3503,7 +3547,7 @@ PROC_ERR:
             "Manually delete the exported files, compact and repair the database, then try again!", vbCritical, "STOP"
         Stop
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
     Resume PROC_EXIT
 
@@ -3518,7 +3562,9 @@ End Function
 Private Sub ListOrCloseAllOpenQueries(Optional ByVal strCloseAll As Variant)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa210652(v=office.11).aspx
 
+    Debug.Print "ListOrCloseAllOpenQueries"
     On Error GoTo 0
+
     Dim obj As AccessObject
     Dim dbs As Object
     Set dbs = Application.CurrentData
@@ -3561,7 +3607,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
-    Dim I As Integer
+    Dim i As Integer
     Dim strqdfName As String
 
     On Error GoTo PROC_ERR
@@ -3622,7 +3668,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     '    QUERIES
     ' =============
     Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
-    I = 0
+    i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
     ' Delete all TEMP queries ...
@@ -3641,7 +3687,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
                         Or Left$(strqdfName, 4) = "~TMP" _
                         Or Left$(strqdfName, 3) = "zzz") Then
-            I = I + 1
+            i = i + 1
             Application.SaveAsText acQuery, strqdfName, strTheSourceLocation & strqdfName & ".qry"
             ' Convert UTF-16 to txt - fix for Access 2013
             If aeReadWriteStream(strTheSourceLocation & strqdfName & ".qry") = True Then
@@ -3652,10 +3698,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Next qdf
 
     If Not IsMissing(varDebug) Then
-        If I = 1 Then
+        If i = 1 Then
             Debug.Print , "1 Query EXPORTED!"
         Else
-            Debug.Print , I & " Queries EXPORTED!"
+            Debug.Print , i & " Queries EXPORTED!"
         End If
         
         If CurrentDb.QueryDefs.Count = 1 Then
@@ -3733,7 +3779,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     aeDocumentTheDatabase = False
     Resume PROC_EXIT
@@ -3743,25 +3789,23 @@ End Function
 Private Function aeExists(ByVal strAccObjType As String, _
                         ByVal strAccObjName As String, Optional ByVal varDebug As Variant) As Boolean
 ' Ref: http://vbabuff.blogspot.com/2010/03/does-access-object-exists.html
-'
 ' =======================================================================
 ' Author:     Peter F. Ennis
 ' Date:       February 18, 2011
 ' Comment:    Return True if the object exists
-' Parameters:
-'             strAccObjType: "Tables", "Queries", "Forms",
+' Parameters: strAccObjType: "Tables", "Queries", "Forms",
 '                            "Reports", "Macros", "Modules"
 '             strAccObjName: The name of the object
-' Updated:  All notes moved to change log
-' History:  See comment details, basChangeLog, commit messages on github
+' Updated:    All notes moved to change log
+' History:    See comment details, basChangeLog, commit messages on github
 ' =======================================================================
 
     Dim objType As Object
     Dim obj As Variant
     
+    Debug.Print "aeExists", strAccObjType, strAccObjName
     On Error GoTo PROC_ERR
 
-    Debug.Print "aeExists", strAccObjType, strAccObjName
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
         Debug.Print , "DEBUGGING IS OFF"
@@ -3786,7 +3830,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
         Case "Modules"
             Set objType = CurrentProject.AllModules
         Case Else
-            MsgBox "Wrong option!", vbCritical, "in procedure aeExists of Class aegit_expClass"
+            MsgBox "Wrong option! in procedure aeExists of Class aegit_expClass", vbCritical, "ERROR"
             If Not IsMissing(varDebug) Then
                 Debug.Print , "strAccObjType = >" & strAccObjType & "< is  a false value"
                 Debug.Print , "Option allowed is one of 'Tables', 'Queries', 'Forms', 'Reports', 'Macros', 'Modules'"
@@ -3828,7 +3872,7 @@ PROC_ERR:
         aeExists = False
         Resume PROC_EXIT
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass", vbCritical, "ERROR"
         If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_expClass"
         aeExists = False
     End If
@@ -3839,7 +3883,9 @@ End Function
 Private Function GetType(ByVal Value As Long) As String
 ' Ref: http://bytes.com/topic/access/answers/557780-getting-string-name-enum
 
+    'Debug.Print "GetType"
     On Error GoTo 0
+
     Select Case Value
         Case acCheckBox
             GetType = "CheckBox"
@@ -3855,6 +3901,7 @@ Private Function GetType(ByVal Value As Long) As String
 End Function
 
 Private Sub OutputFieldLookupControlTypeList()
+    Debug.Print "OutputFieldLookupControlTypeList"
     On Error GoTo 0
     Dim bln As Boolean
     bln = FieldLookupControlTypeList
@@ -3865,6 +3912,7 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
 ' Ref: http://msdn.microsoft.com/en-us/library/office/bb225848(v=office.12).aspx
 ' 106 - acCheckBox, 109 - acTextBox, 110 - acListBox, 111 - acComboBox
 
+    Debug.Print "FieldLookupControlTypeList"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -3970,7 +4018,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegit_expClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure FieldLookupControlTypeList of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Function
@@ -3980,6 +4028,7 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 ' Ref: http://blogs.msdn.com/b/guowu/archive/2004/09/06/225963.aspx
 ' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
 
+    Debug.Print "OutputListOfCommandBarIDs"
     On Error GoTo PROC_ERR
 
     Dim CBR As Object       ' CommandBar
@@ -4020,7 +4069,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfCommandBarIDs of Class aegit_expClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfCommandBarIDs of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Sub
@@ -4031,6 +4080,7 @@ Private Function MySortIt(ByVal strFPName As String, ByVal strExtension As Strin
 ' Ref: http://www.xtremevbtalk.com/showthread.php?t=291063
 ' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
 
+    Debug.Print "MySortIt"
     On Error GoTo PROC_ERR
 
     Dim strVar As Variant
@@ -4078,7 +4128,7 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure MySortIt of Class aegit_expClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure MySortIt of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Function
@@ -4088,9 +4138,10 @@ Public Sub OutputMyUnicode(ByRef strPathFileName As String, _
 ' Ref: http://www.experts-exchange.com/Database/MS_Access/Q_26282187.html
 ' Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 
+    Debug.Print "OutputMyUnicode"
     On Error GoTo PROC_ERR
 
-    Dim I As Integer
+    Dim i As Integer
     Dim MyStream As Object
     Set MyStream = CreateObject("ADODB.Stream")
     ' `It is summer in Geneva`, said Yu Zhou.
@@ -4109,10 +4160,10 @@ Public Sub OutputMyUnicode(ByRef strPathFileName As String, _
         .Type = 2    ' adTypeText
         .Charset = "Unicode"
         .Open
-        For I = LBound(arrUnicode) To UBound(arrUnicode)
-            .WriteText arrUnicode(I) ' The foreign unicode text
+        For i = LBound(arrUnicode) To UBound(arrUnicode)
+            .WriteText arrUnicode(i) ' The foreign unicode text
             'Debug.Print , i, "arrUnicode(i)=" & arrUnicode(i)
-        Next I
+        Next i
         Debug.Print "aestrSourceLocation=" & aestrSourceLocation
         mystrPathFileName = aestrSourceLocation & "TEST_OutputListOfCommandBarIDs.txt"
         .SaveToFile mystrPathFileName, 2            ' adSaveCreateOverWrite
@@ -4127,7 +4178,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputMyUnicode of Class aegit_expClass", vbCritical, "Error"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputMyUnicode of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Sub
@@ -4213,7 +4264,7 @@ PROC_ERR:
             'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass"
             Resume Next
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfContainers of Class aegit_expClass", vbCritical, "ERROR"
             Resume Next
     End Select
     OutputListOfContainers = False
@@ -4223,6 +4274,7 @@ End Function
 
 Public Sub OutputAllContainerProperties(Optional ByVal varDebug As Variant)
 
+    Debug.Print "OutputAllContainerProperties"
     On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
@@ -4243,7 +4295,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass", vbCritical, "ERROR"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputAllContainerProperties of Class aegit_expClass"
     Resume PROC_EXIT
 
@@ -4253,24 +4305,26 @@ Private Function fListGUID(ByVal strTableName As String) As String
 ' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
 ' e.g. ?fListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
+    'Debug.Print "fListGUID"
     On Error GoTo 0
-    Dim I As Integer
+
+    Dim i As Integer
     Dim arrGUID8() As Byte
     Dim strArrGUID8(8) As String
     Dim strGuid As String
 
     strGuid = vbNullString
     arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
-    For I = 1 To 8
-        If Len(Hex$(arrGUID8(I))) = 1 Then
-            strArrGUID8(I) = "0" & Hex$(arrGUID8(I))
+    For i = 1 To 8
+        If Len(Hex$(arrGUID8(i))) = 1 Then
+            strArrGUID8(i) = "0" & Hex$(arrGUID8(i))
         Else
-            strArrGUID8(I) = Hex$(arrGUID8(I))
+            strArrGUID8(i) = Hex$(arrGUID8(i))
         End If
     Next
 
-    For I = 1 To 8
-        strGuid = strGuid & strArrGUID8(I) & "-"
+    For i = 1 To 8
+        strGuid = strGuid & strArrGUID8(i) & "-"
     Next
     fListGUID = Left$(strGuid, 23)
 
@@ -4280,6 +4334,7 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
 ' Ref: http://www.dbforums.com/microsoft-access/1620765-read-ms-access-table-properties-using-vba.html
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139941(v=office.10).aspx
     
+    Debug.Print "ListAllContainerProperties"
     On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
@@ -4350,7 +4405,7 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass", vbCritical, "ERROR"
     'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ListAllContainerProperties of Class aegit_expClass"
     Resume PROC_EXIT
 
@@ -4358,6 +4413,7 @@ End Sub
 
 Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As Variant)
 
+    'Debug.Print "PrettyXML"
     On Error GoTo PROC_ERR
 
     ' Beautify XML in VBA with MSXML6 only
@@ -4447,7 +4503,7 @@ PROC_ERR:
             'Debug.Print "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
             Resume Next
         Case Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass", vbCritical, "ERROR"
         'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure PrettyXML of Class aegit_expClass"
     End Select
     Resume PROC_EXIT
@@ -4458,14 +4514,14 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
 ' Ref: http://wiki.lessthandot.com/index.php/Output_Access_/_Jet_to_XML
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164887(v=office.10).aspx
 
-    Dim I As Integer
-
+    Debug.Print "OutputTheTableDataAsXML"
     On Error GoTo PROC_ERR
 
     Const adOpenStatic As Integer = 3
     Const adLockOptimistic As Integer = 3
     Const adPersistXML As Integer = 1
 
+    Dim i As Integer
     Dim strFileName As String
     Dim strSQL As String
     Dim strTheXMLDataLocation As String
@@ -4483,14 +4539,14 @@ Private Sub OutputTheTableDataAsXML(ByRef avarTableNames() As Variant, Optional 
     Dim rst As Object
     Set rst = CreateObject("ADODB.Recordset")
 
-    For I = 0 To UBound(avarTableNames)
-        If aeExists("Tables", avarTableNames(I)) Then
-            strSQL = "Select * from " & avarTableNames(I)
+    For i = 0 To UBound(avarTableNames)
+        If aeExists("Tables", avarTableNames(i)) Then
+            strSQL = "Select * from " & avarTableNames(i)
             'MsgBox strSQL, vbInformation, "OutputTheTableDataAsXML"
-            If Not IsMissing(varDebug) Then Debug.Print I, "avarTableNames", avarTableNames(I)
+            If Not IsMissing(varDebug) Then Debug.Print i, "avarTableNames", avarTableNames(i)
             rst.Open strSQL, cnn, adOpenStatic, adLockOptimistic
 
-            strFileName = strTheXMLDataLocation & avarTableNames(I) & ".xml"
+            strFileName = strTheXMLDataLocation & avarTableNames(i) & ".xml"
 
             If aegitSetup Then
                 If Not IsMissing(varDebug) Then Debug.Print "aegitSetup=True XML Data Location=" & strTheXMLDataLocation
@@ -4526,7 +4582,7 @@ PROC_ERR:
             Resume PROC_EXIT
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ")" & vbCrLf & _
-            "strFileName = " & strFileName & vbCrLf & "in procedure OutputTheTableDataAsXML of Class aegit_expClass", vbExclamation
+            "strFileName = " & strFileName & vbCrLf & "in procedure OutputTheTableDataAsXML of Class aegit_expClass", vbCritical, "ERROR"
             'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTheTableDataAsXML of Class aegit_expClass"
     End Select
     Resume PROC_EXIT
@@ -4537,11 +4593,12 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa139946(v=office.10).aspx
 ' Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/how-do-i-change-default-printers-in-vba/d046a937-6548-4d2b-9517-7f622e2cfed2
 
+    Debug.Print "OutputPrinterInfo"
     On Error GoTo PROC_ERR
 
     Dim prt As Printer
     Dim prtCount As Integer
-    Dim I As Integer
+    Dim i As Integer
     Dim fle As Integer
 
     If Not mblnOutputPrinterInfo Then Exit Sub
@@ -4569,55 +4626,55 @@ Public Sub OutputPrinterInfo(Optional ByVal varDebug As Variant)
     Next prt
 
     If Not IsMissing(varDebug) Then
-        For I = 0 To prtCount - 1
-            Debug.Print "DeviceName=" & Application.Printers(I).DeviceName
-            Debug.Print , "BottomMargin=" & Application.Printers(I).BottomMargin
-            Debug.Print , "ColorMode=" & Application.Printers(I).ColorMode
-            Debug.Print , "ColumnSpacing=" & Application.Printers(I).ColumnSpacing
-            Debug.Print , "Copies=" & Application.Printers(I).Copies
-            Debug.Print , "DataOnly=" & Application.Printers(I).DataOnly
-            Debug.Print , "DefaultSize=" & Application.Printers(I).DefaultSize
-            Debug.Print , "DriverName=" & Application.Printers(I).DriverName
-            Debug.Print , "Duplex=" & Application.Printers(I).Duplex
-            Debug.Print , "ItemLayout=" & Application.Printers(I).ItemLayout
-            Debug.Print , "ItemsAcross=" & Application.Printers(I).ItemsAcross
-            Debug.Print , "ItemSizeHeight=" & Application.Printers(I).ItemSizeHeight
-            Debug.Print , "ItemSizeWidth=" & Application.Printers(I).ItemSizeWidth
-            Debug.Print , "LeftMargin=" & Application.Printers(I).LeftMargin
-            Debug.Print , "Orientation=" & Application.Printers(I).Orientation
-            Debug.Print , "PaperBin=" & Application.Printers(I).PaperBin
-            Debug.Print , "PaperSize=" & Application.Printers(I).PaperSize
-            Debug.Print , "Port=" & Application.Printers(I).Port
-            Debug.Print , "PrintQuality=" & Application.Printers(I).PrintQuality
-            Debug.Print , "RightMargin=" & Application.Printers(I).RightMargin
-            Debug.Print , "RowSpacing=" & Application.Printers(I).RowSpacing
-            Debug.Print , "TopMargin=" & Application.Printers(I).TopMargin
+        For i = 0 To prtCount - 1
+            Debug.Print "DeviceName=" & Application.Printers(i).DeviceName
+            Debug.Print , "BottomMargin=" & Application.Printers(i).BottomMargin
+            Debug.Print , "ColorMode=" & Application.Printers(i).ColorMode
+            Debug.Print , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
+            Debug.Print , "Copies=" & Application.Printers(i).Copies
+            Debug.Print , "DataOnly=" & Application.Printers(i).DataOnly
+            Debug.Print , "DefaultSize=" & Application.Printers(i).DefaultSize
+            Debug.Print , "DriverName=" & Application.Printers(i).DriverName
+            Debug.Print , "Duplex=" & Application.Printers(i).Duplex
+            Debug.Print , "ItemLayout=" & Application.Printers(i).ItemLayout
+            Debug.Print , "ItemsAcross=" & Application.Printers(i).ItemsAcross
+            Debug.Print , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
+            Debug.Print , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
+            Debug.Print , "LeftMargin=" & Application.Printers(i).LeftMargin
+            Debug.Print , "Orientation=" & Application.Printers(i).Orientation
+            Debug.Print , "PaperBin=" & Application.Printers(i).PaperBin
+            Debug.Print , "PaperSize=" & Application.Printers(i).PaperSize
+            Debug.Print , "Port=" & Application.Printers(i).Port
+            Debug.Print , "PrintQuality=" & Application.Printers(i).PrintQuality
+            Debug.Print , "RightMargin=" & Application.Printers(i).RightMargin
+            Debug.Print , "RowSpacing=" & Application.Printers(i).RowSpacing
+            Debug.Print , "TopMargin=" & Application.Printers(i).TopMargin
         Next
     End If
 
-    For I = 0 To prtCount - 1
-        Print #fle, "DeviceName=" & Application.Printers(I).DeviceName
-        Print #fle, , "BottomMargin=" & Application.Printers(I).BottomMargin
-        Print #fle, , "ColorMode=" & Application.Printers(I).ColorMode
-        Print #fle, , "ColumnSpacing=" & Application.Printers(I).ColumnSpacing
-        Print #fle, , "Copies=" & Application.Printers(I).Copies
-        Print #fle, , "DataOnly=" & Application.Printers(I).DataOnly
-        Print #fle, , "DefaultSize=" & Application.Printers(I).DefaultSize
-        Print #fle, , "DriverName=" & Application.Printers(I).DriverName
-        Print #fle, , "Duplex=" & Application.Printers(I).Duplex
-        Print #fle, , "ItemLayout=" & Application.Printers(I).ItemLayout
-        Print #fle, , "ItemsAcross=" & Application.Printers(I).ItemsAcross
-        Print #fle, , "ItemSizeHeight=" & Application.Printers(I).ItemSizeHeight
-        Print #fle, , "ItemSizeWidth=" & Application.Printers(I).ItemSizeWidth
-        Print #fle, , "LeftMargin=" & Application.Printers(I).LeftMargin
-        Print #fle, , "Orientation=" & Application.Printers(I).Orientation
-        Print #fle, , "PaperBin=" & Application.Printers(I).PaperBin
-        Print #fle, , "PaperSize=" & Application.Printers(I).PaperSize
-        Print #fle, , "Port=" & Application.Printers(I).Port
-        Print #fle, , "PrintQuality=" & Application.Printers(I).PrintQuality
-        Print #fle, , "RightMargin=" & Application.Printers(I).RightMargin
-        Print #fle, , "RowSpacing=" & Application.Printers(I).RowSpacing
-        Print #fle, , "TopMargin=" & Application.Printers(I).TopMargin
+    For i = 0 To prtCount - 1
+        Print #fle, "DeviceName=" & Application.Printers(i).DeviceName
+        Print #fle, , "BottomMargin=" & Application.Printers(i).BottomMargin
+        Print #fle, , "ColorMode=" & Application.Printers(i).ColorMode
+        Print #fle, , "ColumnSpacing=" & Application.Printers(i).ColumnSpacing
+        Print #fle, , "Copies=" & Application.Printers(i).Copies
+        Print #fle, , "DataOnly=" & Application.Printers(i).DataOnly
+        Print #fle, , "DefaultSize=" & Application.Printers(i).DefaultSize
+        Print #fle, , "DriverName=" & Application.Printers(i).DriverName
+        Print #fle, , "Duplex=" & Application.Printers(i).Duplex
+        Print #fle, , "ItemLayout=" & Application.Printers(i).ItemLayout
+        Print #fle, , "ItemsAcross=" & Application.Printers(i).ItemsAcross
+        Print #fle, , "ItemSizeHeight=" & Application.Printers(i).ItemSizeHeight
+        Print #fle, , "ItemSizeWidth=" & Application.Printers(i).ItemSizeWidth
+        Print #fle, , "LeftMargin=" & Application.Printers(i).LeftMargin
+        Print #fle, , "Orientation=" & Application.Printers(i).Orientation
+        Print #fle, , "PaperBin=" & Application.Printers(i).PaperBin
+        Print #fle, , "PaperSize=" & Application.Printers(i).PaperSize
+        Print #fle, , "Port=" & Application.Printers(i).Port
+        Print #fle, , "PrintQuality=" & Application.Printers(i).PrintQuality
+        Print #fle, , "RightMargin=" & Application.Printers(i).RightMargin
+        Print #fle, , "RowSpacing=" & Application.Printers(i).RowSpacing
+        Print #fle, , "TopMargin=" & Application.Printers(i).TopMargin
     Next
 
 PROC_EXIT:
@@ -4627,10 +4684,10 @@ PROC_EXIT:
 PROC_ERR:
     Select Case Err.Number
         Case 9
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass", vbCritical, "ERROR"
             Resume Next
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass"
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputPrinterInfo of Class aegit_expClass", vbCritical, "ERROR"
             Resume Next
     End Select
 
@@ -4638,10 +4695,9 @@ End Sub
 
 Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
 ' Ref: http://stackoverflow.com/questions/9206153/how-to-export-access-2010-data-macros
-' ====================================================================
-' Author:   Peter F. Ennis
-' Date:     February 16, 2014
-' ====================================================================
+
+    Debug.Print "OutputTableDataMacros"
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
@@ -4653,8 +4709,6 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
     Else
         strTheXMLDataLocation = aestrXMLDataLocationBe
     End If
-
-    On Error GoTo PROC_ERR
 
     Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
@@ -4688,7 +4742,7 @@ PROC_ERR:
     ElseIf Err = 2220 Then
         Resume 2220
     End If
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass"
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT
 
 End Sub
@@ -4697,6 +4751,7 @@ Private Sub OutputTableDataAsFormattedText(ByVal strTblName As String, Optional 
 ' Ref: http://bytes.com/topic/access/answers/856136-access-2007-vba-select-external-data-ribbon
 
     On Error GoTo 0
+
     Dim strPathFileNameFD As String
     Dim strPathFileNameTT As String
     If aegitFrontEndApp Then
@@ -4733,16 +4788,17 @@ Private Sub CreateFormReportTextFile(ByVal strFileIn As String, ByVal strFileOut
 ' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
 ' Ref: http://www.techonthenet.com/excel/formulas/instr.php
 ' Ref: http://stackoverflow.com/questions/8680640/vba-how-to-conditionally-skip-a-for-loop-iteration
-'
 ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
 ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
 ' "OleData = Begin"
 
+    'Debug.Print "CreateFormReportTextFile"
     On Error GoTo 0
+
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
-    Dim I As Integer
+    Dim i As Integer
 
     fleIn = FreeFile()
     Open strFileIn For Input As #fleIn
@@ -4752,36 +4808,36 @@ Private Sub CreateFormReportTextFile(ByVal strFileIn As String, ByVal strFileOut
 
     If Not IsMissing(varDebug) Then Debug.Print "fleIn=" & fleIn, "fleOut=" & fleOut
 
-    I = 0
+    i = 0
     Do While Not EOF(fleIn)
-        I = I + 1
+        i = i + 1
         Line Input #fleIn, strIn
         If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Exit Do
         Else
-            If Not IsMissing(varDebug) Then Debug.Print I, strIn
+            If Not IsMissing(varDebug) Then Debug.Print i, strIn
             Print #fleOut, strIn
         End If
     Loop
     Do While Not EOF(fleIn)
-        I = I + 1
+        i = i + 1
         Line Input #fleIn, strIn
 NextIteration:
         If FoundKeywordInLine(strIn) Then
-            If Not IsMissing(varDebug) Then Debug.Print I & ">", strIn
+            If Not IsMissing(varDebug) Then Debug.Print i & ">", strIn
             Print #fleOut, strIn
             Do While Not EOF(fleIn)
-                I = I + 1
+                i = i + 1
                 Line Input #fleIn, strIn
                 If Not FoundKeywordInLine(strIn, "End") Then
                     'Debug.Print "Not Found!!!", i
                     GoTo SearchForEnd
                 Else
-                    If Not IsMissing(varDebug) Then Debug.Print I & ">", "Found End!!!"
+                    If Not IsMissing(varDebug) Then Debug.Print i & ">", "Found End!!!"
                     Print #fleOut, strIn
-                    I = I + 1
+                    i = i + 1
                     Line Input #fleIn, strIn
-                    If Not IsMissing(varDebug) Then Debug.Print I & ":", strIn
+                    If Not IsMissing(varDebug) Then Debug.Print i & ":", strIn
                     'Stop
                     GoTo NextIteration
                 End If
@@ -4789,7 +4845,7 @@ SearchForEnd:
             Loop
         Else
             Print #fleOut, strIn
-            If Not IsMissing(varDebug) Then Debug.Print I, strIn
+            If Not IsMissing(varDebug) Then Debug.Print i, strIn
         End If
     Loop
 
@@ -4800,7 +4856,9 @@ End Sub
 
 Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
 
+    'Debug.Print "FoundKeywordInLine"
     On Error GoTo 0
+
     FoundKeywordInLine = False
     If Not IsMissing(varEnd) Then
         If InStr(1, strLine, "End", vbTextCompare) > 0 Then
@@ -4843,6 +4901,7 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
 ' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc
 ' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
 
+    Debug.Print "OutputCatalogUserCreatedObjects"
     On Error GoTo PROC_ERR
     
     Dim strSQL As String
@@ -4911,10 +4970,10 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3167 Then          ' Record is deleted
-        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass"
+        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
         Resume e3167
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
     End If
     'Stop
     Resume PROC_EXIT
@@ -4927,8 +4986,7 @@ End Sub
 ' ==================================================
 
 Private Sub ResetWorkspace()
-    Dim intCounter As Integer
-
+    Debug.Print "ResetWorkspace"
     On Error Resume Next
 
     Application.MenuBar = vbNullString
@@ -4936,6 +4994,7 @@ Private Sub ResetWorkspace()
     DoCmd.Hourglass False
     DoCmd.Echo True
 
+    Dim intCounter As Integer
     ' Clean up workspace by closing open forms and reports
     For intCounter = 0 To Forms.Count - 1
         DoCmd.Close acForm, Forms(intCounter).Name
@@ -4949,6 +5008,7 @@ End Sub
 Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, _
                                 ByVal strTheAbsoluteFileName As String, Optional ByVal varDebug As Variant)
 
+    'Debug.Print "WriteStringToFile"
     On Error GoTo PROC_ERR
 
     If Not IsMissing(varDebug) Then
@@ -4972,7 +5032,7 @@ PROC_ERR:
         Err.Clear
         Resume ERR55
     Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WriteStringToFile of Class aegit_expClass"
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure WriteStringToFile of Class aegit_expClass", vbCritical, "ERROR"
         Resume Next
     End If
 

@@ -61,22 +61,22 @@ Private Function getTheValue(ByVal strTag As String, ByVal strValue As String) A
    Dim workTb()     As String
    Dim Ele()        As String
    Dim myVariabs()  As String
-   Dim I            As Integer
+   Dim i            As Integer
 
       workTb = Split(strTag, ";")
       
       ReDim myVariabs(LBound(workTb) To UBound(workTb), 0 To 1)
-      For I = LBound(workTb) To UBound(workTb)
-         Ele = Split(workTb(I), ":=")
-         myVariabs(I, 0) = Ele(0)
+      For i = LBound(workTb) To UBound(workTb)
+         Ele = Split(workTb(i), ":=")
+         myVariabs(i, 0) = Ele(0)
          If UBound(Ele) = 1 Then
-            myVariabs(I, 1) = Ele(1)
+            myVariabs(i, 1) = Ele(1)
          End If
       Next
       
-      For I = LBound(myVariabs) To UBound(myVariabs)
-         If strValue = myVariabs(I, 0) Then
-            getTheValue = myVariabs(I, 1)
+      For i = LBound(myVariabs) To UBound(myVariabs)
+         If strValue = myVariabs(i, 0) Then
+            getTheValue = myVariabs(i, 1)
          End If
       Next
       

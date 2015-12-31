@@ -55,8 +55,13 @@ Public Function GetEdition( _
             Debug.Print "strSku=" & strSku
             GetEdition = GetEdition2013(strSku)
 
+        Case Is < 17                            ' Office 2016
+            strSku = Mid$(strGuid, 11, 4)
+            Debug.Print "strSku=" & strSku
+            GetEdition = GetEdition2016(strSku)
+
         Case Else
-            GetEdition = "Post Office 2013: " & strERR_MSG
+            GetEdition = "Post Office 2016: " & strERR_MSG
 
     End Select
 
@@ -145,7 +150,7 @@ Private Function GetEdition2000(ByRef strSku As String) As String
         Case "4F"
             GetEdition2000 = "Access 2000 SR-1 Run-Time Minimum"
         Case Else
-            MsgBox "Error: GetEdition2000"
+            MsgBox "Error: GetEdition2000", vbCritical, "ERROR"
     End Select
 End Function
  
@@ -229,7 +234,7 @@ Private Function GetEdition2002(ByRef strSku As String) As String
         Case "54"
             GetEdition2002 = "Microsoft Office Visio Standard 2003"
         Case Else
-            MsgBox "Error: GetEdition2002"
+            MsgBox "Error: GetEdition2002", vbCritical, "ERROR"
     End Select
 End Function
  
@@ -331,7 +336,7 @@ Private Function GetEdition2003(ByRef strSku As String) As String
         Case "5E"
             GetEdition2003 = "Microsoft Office Visio 2003 Multilingual User Interface Pack"
         Case Else
-            MsgBox "Error: GetEdition2003"
+            MsgBox "Error: GetEdition2003", vbCritical, "ERROR"
     End Select
 End Function
  
@@ -429,7 +434,7 @@ Private Function GetEdition2007(ByRef strSku As String) As String
         Case "0010"
             GetEdition2007 = "SKU - Microsoft Software Update for Web Folders (English) 12"
         Case Else
-            MsgBox "Error: GetEdition2007"
+            MsgBox "Error: GetEdition2007", vbCritical, "ERROR"
     End Select
 End Function
  
@@ -491,7 +496,7 @@ Private Function GetEdition2010(ByRef strSku As String) As String
         Case "110F"
             GetEdition2010 = "Microsoft Project Server 2010"
         Case Else
-            MsgBox "Error: GetEdition2010"
+            MsgBox "Error: GetEdition2010", vbCritical, "ERROR"
             Debug.Print "strSku = " & strSku
     End Select
 End Function
@@ -551,6 +556,65 @@ Private Function GetEdition2013(ByRef strSku As String) As String
         Case "012B"
             GetEdition2013 = "Microsoft Lync 2013"
         Case Else
-            MsgBox "Error: GetEdition2013"
+            MsgBox "Error: GetEdition2013", vbCritical, "ERROR"
+    End Select
+End Function
+
+Private Function GetEdition2016(ByRef strSku As String) As String
+' Ref: http://support.microsoft.com/kb/2786054
+ 
+    On Error GoTo 0
+    Debug.Print "GetEdition2016 strSku=" & strSku
+    Select Case strSku
+        Case "0011"
+            GetEdition2016 = "Microsoft Office Professional Plus FIXME"
+        Case "0012"
+            GetEdition2016 = "Microsoft Office Standard FIXME"
+        Case "0013"
+            GetEdition2016 = "Microsoft Office Home and Business FIXME"
+        Case "0014"
+            GetEdition2016 = "Microsoft Office Professional FIXME"
+        Case "000F"
+            GetEdition2016 = "Microsoft Access FIXME"
+        Case "0016"
+            GetEdition2016 = "Microsoft Excel FIXME"
+        Case "0017"
+            GetEdition2016 = "Microsoft SharePoint Designer FIXME"
+        Case "0018"
+            GetEdition2016 = "Microsoft PowerPoint FIXME"
+        Case "0019"
+            GetEdition2016 = "Microsoft Publisher FIXME"
+        Case "001A"
+            GetEdition2016 = "Microsoft Outlook FIXME"
+        Case "001B"
+            GetEdition2016 = "Microsoft Word FIXME"
+        Case "001C"
+            GetEdition2016 = "Microsoft Access Runtime FIXME"
+        Case "001F"
+            GetEdition2016 = "Microsoft Office Proofing Tools Kit Compilation FIXME"
+        Case "002F"
+            GetEdition2016 = "Microsoft Office Home and Student FIXME"
+        Case "003A"
+            GetEdition2016 = "Microsoft Project Standard FIXME"
+        Case "003B"
+            GetEdition2016 = "Microsoft Project Professional FIXME"
+        Case "0044"
+            GetEdition2016 = "Microsoft InfoPath FIXME"
+        Case "0051"
+            GetEdition2016 = "Microsoft Visio Professional FIXME"
+        Case "0053"
+            GetEdition2016 = "Microsoft Visio Standard FIXME"
+        Case "00A1"
+            GetEdition2016 = "Microsoft OneNote FIXME"
+        Case "00BA"
+            GetEdition2016 = "Microsoft Office SharePoint Workspace FIXME"
+        Case "110D"
+            GetEdition2016 = "Microsoft Office SharePoint Server FIXME"
+        Case "110F"
+            GetEdition2016 = "Microsoft Project Server FIXME"
+        Case "012B"
+            GetEdition2016 = "Microsoft Lync FIXME"
+        Case Else
+            MsgBox "Error: GetEdition2016", vbCritical, "ERROR"
     End Select
 End Function

@@ -41,7 +41,7 @@ Public Sub ExportAllModulesToFile()
     Dim fil As Object
     Dim strMod As String
     Dim mdl As Object
-    Dim I As Integer
+    Dim i As Integer
     Dim strTxtFile As String
 
 
@@ -57,10 +57,10 @@ Public Sub ExportAllModulesToFile()
         ' using the count of lines ...
         If Left$(mdl.Name, 3) <> "zzz" Then
             Debug.Print mdl.Name
-            I = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
+            i = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.CountOfLines
             ' put the code in a string ...
-            If I > 0 Then
-                strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, I)
+            If i > 0 Then
+                strMod = VBE.ActiveVBProject.VBComponents(mdl.Name).CodeModule.Lines(1, i)
             End If
             ' and then write it to a file, first marking the start with
             ' some equal signs and the component name.
@@ -347,9 +347,9 @@ Public Sub TestForCreateFormReportTextFile()
     Dim strFileOut As String
     Dim strIn As String
     Dim strOut As String
-    Dim I As Integer
+    Dim i As Integer
 
-    I = 0
+    i = 0
     fleIn = FreeFile()
     strFileIn = "C:\TEMP\_chtQAQC.frm"
     Open strFileIn For Input As #fleIn
@@ -361,32 +361,32 @@ Public Sub TestForCreateFormReportTextFile()
     Debug.Print "fleIn=" & fleIn, "fleOut=" & fleOut
 
     Do While Not EOF(fleIn)
-        I = I + 1
+        i = i + 1
         Line Input #fleIn, strIn
         If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "NameMap = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "PrtMip = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "PrtDevMode = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "PrtDevNames = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         ElseIf InStr(1, strIn, "OleData = Begin", vbTextCompare) > 0 Then
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         End If
     Loop
 
@@ -412,7 +412,7 @@ Public Sub CreateFormReportTextFile()
     Dim strFileOut As String
     Dim strIn As String
     Dim strOut As String
-    Dim I As Integer
+    Dim i As Integer
 
     fleIn = FreeFile()
     strFileIn = "C:\TEMP\_chtQAQC.frm"
@@ -424,36 +424,36 @@ Public Sub CreateFormReportTextFile()
 
     Debug.Print "fleIn=" & fleIn, "fleOut=" & fleOut
 
-    I = 0
+    i = 0
     Do While Not EOF(fleIn)
-        I = I + 1
+        i = i + 1
         Line Input #fleIn, strIn
         If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
             Exit Do
         Else
-            Debug.Print I, strIn
+            Debug.Print i, strIn
             Print #fleOut, strIn
         End If
     Loop
     Do While Not EOF(fleIn)
-        I = I + 1
+        i = i + 1
         Line Input #fleIn, strIn
 NextIteration:
         If FoundKeywordInLine(strIn) Then
-            Debug.Print I & ">", strIn
+            Debug.Print i & ">", strIn
             Print #fleOut, strIn
             Do While Not EOF(fleIn)
-                I = I + 1
+                i = i + 1
                 Line Input #fleIn, strIn
                 If Not FoundKeywordInLine(strIn, "End") Then
                     'Debug.Print "Not Found!!!", i
                     GoTo SearchForEnd
                 Else
-                    Debug.Print I & ">", "Found End!!!"
+                    Debug.Print i & ">", "Found End!!!"
                     Print #fleOut, strIn
-                    I = I + 1
+                    i = i + 1
                     Line Input #fleIn, strIn
-                    Debug.Print I & ":", strIn
+                    Debug.Print i & ":", strIn
                     'Stop
                     GoTo NextIteration
                 End If
@@ -463,7 +463,7 @@ SearchForEnd:
         Else
             'Stop
             Print #fleOut, strIn
-            Debug.Print I, strIn
+            Debug.Print i, strIn
         End If
     Loop
 
