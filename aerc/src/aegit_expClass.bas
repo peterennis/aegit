@@ -39,7 +39,7 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.6.3"
+Private Const aegit_expVERSION As String = "1.6.4"
 Private Const aegit_expVERSION_DATE As String = "December 31, 2015"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -125,6 +125,7 @@ Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
 Private Const aeAppHiddQry As String = "OutputListOfAllHiddenQueries.txt"
 Private Const aeAppListFrm As String = "OutputListOfForms.txt"
+Private Const aeAppListRpt As String = "OutputListOfReports.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
 '
@@ -1379,6 +1380,7 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
 ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 ' Ref: http://www.pcreview.co.uk/threads/re-help-dirk-goldgar-or-someone-familiar-with-dev-ashish-search.3482377/
 
+    'Debug.Print "OutputListOfForms"
     On Error GoTo PROC_ERR
 
     ' MSysObjects list of types - Ref: http://allenbrowne.com/func-DDL.html - Query = 5
@@ -1445,11 +1447,72 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 3192 Then
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfAllHiddenQueries of Class aegit_expClass" & vbCrLf & vbCrLf & _
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass" & vbCrLf & vbCrLf & _
                 "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
         Resume PROC_EXIT
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    End If
+
+End Sub
+
+Private Sub OutputListOfReports(Optional ByVal varDebug As Variant)
+
+    'Debug.Print "OutputListOfReports"
+    On Error GoTo PROC_ERR
+
+    Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
+                                "FROM MSysObjects AS m " & _
+                                "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+                                "m.Type=-32764 " & _
+                                "ORDER BY m.Name;"
+    
+    Dim fle As Integer
+    fle = FreeFile()
+
+    If aegitFrontEndApp Then
+        Debug.Print aestrSourceLocation & aeAppListRpt
+        Open aestrSourceLocation & aeAppListRpt For Output As #fle
+    Else
+        Debug.Print aestrSourceLocationBe & aeAppListRpt
+        Open aestrSourceLocationBe & aeAppListRpt For Output As #fle
+    End If
+
+    CurrentProject.Connection.Execute "GRANT SELECT ON MSysObjects TO Admin;"
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb
+    Dim rst As DAO.Recordset
+    Set rst = dbs.OpenRecordset(strSQL)
+
+    Do While Not rst.EOF
+        If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
+        Print #fle, rst.Fields(0), IsRptHidden(rst.Fields(0))
+        rst.MoveNext
+    Loop
+    Close fle
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "OutputListOfReports"
+        Debug.Print strSQL
+    End If
+
+PROC_EXIT:
+    rst.Close
+    Set rst = Nothing
+    dbs.Close
+    Set dbs = Nothing
+    'Stop
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3192 Then
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfReports of Class aegit_expClass" & vbCrLf & vbCrLf & _
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfReports of Class aegit_expClass", vbCritical, "ERROR"
         Resume PROC_EXIT
     End If
 
@@ -3731,6 +3794,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputCatalogUserCreatedObjects varDebug
         OutputListOfAllHiddenQueries varDebug
         OutputListOfForms varDebug
+        OutputListOfReports varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
         OutputTableProperties varDebug
@@ -3751,6 +3815,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputCatalogUserCreatedObjects
         OutputListOfAllHiddenQueries
         OutputListOfForms
+        OutputListOfReports
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
         OutputTableProperties

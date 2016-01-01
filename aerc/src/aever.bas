@@ -441,6 +441,8 @@ Private Function GetEdition2010(ByRef strSku As String) As String
     Select Case strSku
         Case "0011"
             GetEdition2010 = "Microsoft Office Professional Plus 2010"
+        Case "011D"
+            GetEdition2010 = "Microsoft Office Professional Plus Subscription 2010 "
         Case "0012"
             GetEdition2010 = "Microsoft Office Standard 2010"
         Case "0013"

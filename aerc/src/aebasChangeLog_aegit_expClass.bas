@@ -2,10 +2,10 @@ Option Compare Database
 Option Explicit
 
 ' Tools:
-' MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
+' MZ-Tools 8.0 for VBA - Ref: http://www.mztools.com/index.aspx
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
 ' RibbonX Visual Designer 2010 - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
-' IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
+' IDBE RibbonCreator 2016 (Office 2016) - Ref: http://www.ribboncreator2016.de/en/?Download
 '
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
@@ -34,7 +34,6 @@ Option Explicit
 ' %063 -
 ' %062 -
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
-' %058 - Windows 10, GetEdition in aeVer reports Office Home and Student Guid and but Office 2010 Pro is installed
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
@@ -43,10 +42,7 @@ Option Explicit
 '           *** Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
 '           *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
-' %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
-'           Ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
-' %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
 ' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:
@@ -59,12 +55,19 @@ Option Explicit
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 ' #026 - Output list of visible/hidden reports
 ' #025 - Output list of visible/hidden modules
-' #024 - Output list of visible/hidden forms
 ' #023 - Output list of visible/hidden tables
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
 '=============================================================================================================================
 '
 '
+'20151231 - v164 -
+    ' OBSOLETE - IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
+    ' OBSOLETE - MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx
+    ' OBSOLETE? - %058 - Windows 10, GetEdition in aeVer reports Office Home and Student Guid and but Office 2010 Pro is installed
+    ' WONTFIX - %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
+    '           Ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
+    ' WONTFIX - %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
+    ' FIXED - #024 - Output list of visible/hidden forms
 '20151222 - v161 -
     ' FIXED - %060 - Fix output list of forms so that it does not need to use a temp table
     ' FIXED - %059 - Database opened exclusive error when exporting hidden queries, Ref: http://stackoverflow.com/questions/18121099/trying-to-read-data-out-of-msysobjects-with-odbc-in-c-but-getting-no-permissio
