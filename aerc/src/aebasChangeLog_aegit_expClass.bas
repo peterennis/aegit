@@ -53,7 +53,6 @@ Option Explicit
 ' #041 - Output list of visible/hidden macros
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
-' #026 - Output list of visible/hidden reports
 ' #025 - Output list of visible/hidden modules
 ' #023 - Output list of visible/hidden tables
 ' #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
@@ -67,6 +66,7 @@ Option Explicit
     ' WONTFIX - %043 - Enable communication between VBA and HTML5/JavaScript via the Access 2010+ native Web Browser control - Ref: http://www.dymeng.com/browseEmbed/
     '           Ref: http://www.dymeng.com/techblog/browseembed-html5javascript-for-your-access-projects/
     ' WONTFIX - %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
+    ' FIXED - #026 - Output list of visible/hidden reports
     ' FIXED - #024 - Output list of visible/hidden forms
 '20151222 - v161 -
     ' FIXED - %060 - Fix output list of forms so that it does not need to use a temp table

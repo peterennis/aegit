@@ -125,6 +125,7 @@ Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
 Private Const aeAppHiddQry As String = "OutputListOfAllHiddenQueries.txt"
 Private Const aeAppListFrm As String = "OutputListOfForms.txt"
+Private Const aeAppListMac As String = "OutputListOfMacros.txt"
 Private Const aeAppListRpt As String = "OutputListOfReports.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
@@ -1452,6 +1453,67 @@ PROC_ERR:
         Resume PROC_EXIT
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfForms of Class aegit_expClass", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    End If
+
+End Sub
+
+Private Sub OutputListOfMacros(Optional ByVal varDebug As Variant)
+
+    'Debug.Print "OutputListOfMacros"
+    On Error GoTo PROC_ERR
+
+    Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
+                                "FROM MSysObjects AS m " & _
+                                "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+                                "m.Type=-32766 " & _
+                                "ORDER BY m.Name;"
+    
+    Dim fle As Integer
+    fle = FreeFile()
+
+    If aegitFrontEndApp Then
+        Debug.Print aestrSourceLocation & aeAppListMac
+        Open aestrSourceLocation & aeAppListMac For Output As #fle
+    Else
+        Debug.Print aestrSourceLocationBe & aeAppListMac
+        Open aestrSourceLocationBe & aeAppListMac For Output As #fle
+    End If
+
+    CurrentProject.Connection.Execute "GRANT SELECT ON MSysObjects TO Admin;"
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb
+    Dim rst As DAO.Recordset
+    Set rst = dbs.OpenRecordset(strSQL)
+
+    Do While Not rst.EOF
+        If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
+        Print #fle, rst.Fields(0), IsMacHidden(rst.Fields(0))
+        rst.MoveNext
+    Loop
+    Close fle
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "OutputListOfReports"
+        Debug.Print strSQL
+    End If
+
+PROC_EXIT:
+    rst.Close
+    Set rst = Nothing
+    dbs.Close
+    Set dbs = Nothing
+    'Stop
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3192 Then
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfMacros of Class aegit_expClass" & vbCrLf & vbCrLf & _
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfMacros of Class aegit_expClass", vbCritical, "ERROR"
         Resume PROC_EXIT
     End If
 
@@ -3794,6 +3856,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputCatalogUserCreatedObjects varDebug
         OutputListOfAllHiddenQueries varDebug
         OutputListOfForms varDebug
+        OutputListOfMacros varDebug
         OutputListOfReports varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
@@ -3815,6 +3878,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputCatalogUserCreatedObjects
         OutputListOfAllHiddenQueries
         OutputListOfForms
+        OutputListOfMacros
         OutputListOfReports
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
