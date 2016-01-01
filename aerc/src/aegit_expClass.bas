@@ -128,6 +128,7 @@ Private Const aeAppListFrm As String = "OutputListOfForms.txt"
 Private Const aeAppListMac As String = "OutputListOfMacros.txt"
 Private Const aeAppListMod As String = "OutputListOfModules.txt"
 Private Const aeAppListRpt As String = "OutputListOfReports.txt"
+Private Const aeAppListTbl As String = "OutputListOfTables.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
 '
@@ -1163,7 +1164,7 @@ PROC_ERR:
 End Function
 
 Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
-    Debug.Print "IsQryHidden"
+    'Debug.Print "IsQryHidden"
     On Error GoTo 0
     If IsNull(strQueryName) Or strQueryName = vbNullString Then
         IsQryHidden = False
@@ -1184,18 +1185,8 @@ Private Function IsFrmHidden(ByVal strFormName As String) As Boolean
     End If
 End Function
 
-Private Function IsRptHidden(ByVal strReportName As String) As Boolean
-    Debug.Print "IsRptHidden"
-    On Error GoTo 0
-    If IsNull(strReportName) Or strReportName = vbNullString Then
-        IsRptHidden = False
-    Else
-        IsRptHidden = GetHiddenAttribute(acReport, strReportName)
-    End If
-End Function
-
 Private Function IsMacHidden(ByVal strMacroName As String) As Boolean
-    Debug.Print "IsMacHidden"
+    'Debug.Print "IsMacHidden"
     On Error GoTo 0
     If IsNull(strMacroName) Or strMacroName = vbNullString Then
         IsMacHidden = False
@@ -1205,12 +1196,32 @@ Private Function IsMacHidden(ByVal strMacroName As String) As Boolean
 End Function
 
 Private Function IsModHidden(ByVal strModuleName As String) As Boolean
-    Debug.Print "IsModHidden"
+    'Debug.Print "IsModHidden"
     On Error GoTo 0
     If IsNull(strModuleName) Or strModuleName = vbNullString Then
         IsModHidden = False
     Else
         IsModHidden = GetHiddenAttribute(acModule, strModuleName)
+    End If
+End Function
+
+Private Function IsRptHidden(ByVal strReportName As String) As Boolean
+    'Debug.Print "IsRptHidden"
+    On Error GoTo 0
+    If IsNull(strReportName) Or strReportName = vbNullString Then
+        IsRptHidden = False
+    Else
+        IsRptHidden = GetHiddenAttribute(acReport, strReportName)
+    End If
+End Function
+
+Private Function IsTblHidden(ByVal strTableName As String) As Boolean
+    'Debug.Print "IsTblHidden"
+    On Error GoTo 0
+    If IsNull(strTableName) Or strTableName = vbNullString Then
+        IsTblHidden = False
+    Else
+        IsTblHidden = GetHiddenAttribute(acTable, strTableName)
     End If
 End Function
 
@@ -1647,6 +1658,71 @@ PROC_ERR:
         Resume PROC_EXIT
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfReports of Class aegit_expClass", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    End If
+
+End Sub
+
+Private Sub OutputListOfTables(Optional ByVal varDebug As Variant)
+
+    'Debug.Print "OutputListOfTables"
+    On Error GoTo PROC_ERR
+
+    Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
+                                "FROM MSysObjects AS m " & _
+                                "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+                                "(m.Type=1 OR m.Type=4 OR m.Type=6) " & _
+                                "ORDER BY m.Name;"
+    
+    Dim fle As Integer
+    fle = FreeFile()
+
+    If aegitFrontEndApp Then
+        Debug.Print aestrSourceLocation & aeAppListTbl
+        Open aestrSourceLocation & aeAppListTbl For Output As #fle
+    Else
+        Debug.Print aestrSourceLocationBe & aeAppListTbl
+        Open aestrSourceLocationBe & aeAppListTbl For Output As #fle
+    End If
+
+    CurrentProject.Connection.Execute "GRANT SELECT ON MSysObjects TO Admin;"
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb
+    Dim rst As DAO.Recordset
+    Set rst = dbs.OpenRecordset(strSQL)
+
+    Do While Not rst.EOF
+        If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
+        'Debug.Print "IsTblHidden(rst.Fields(0)) = " & IsTblHidden(rst.Fields(0))
+        Print #fle, rst.Fields(0), IsTblHidden(rst.Fields(0))
+        rst.MoveNext
+    Loop
+    Close fle
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "OutputListOfTables"
+        Debug.Print strSQL
+    End If
+
+PROC_EXIT:
+    rst.Close
+    Set rst = Nothing
+    dbs.Close
+    Set dbs = Nothing
+    'Stop
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3192 Then
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfTables of Class aegit_expClass" & vbCrLf & vbCrLf & _
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    ElseIf Err = 3011 Then
+        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfTables of Class aegit_expClass", vbCritical, "ERROR"
+        Resume Next
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfTables of Class aegit_expClass", vbCritical, "ERROR"
         Resume PROC_EXIT
     End If
 
@@ -3931,6 +4007,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfMacros varDebug
         OutputListOfModules varDebug
         OutputListOfReports varDebug
+        OutputListOfTables varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
         OutputTableProperties varDebug
@@ -3954,6 +4031,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfMacros
         OutputListOfModules
         OutputListOfReports
+        OutputListOfTables
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
         OutputTableProperties

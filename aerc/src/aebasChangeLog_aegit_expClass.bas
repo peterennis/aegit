@@ -52,8 +52,6 @@ Option Explicit
 ' #042 -
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
-' #025 - Output list of visible/hidden modules
-' #023 - Output list of visible/hidden tables
 '=============================================================================================================================
 '
 '
@@ -66,7 +64,9 @@ Option Explicit
     ' WONTFIX - %035 - Relates to #004, Integrate with baem - Ref: https://www.youtube.com/watch?v=960UNEiOdTo, research media players
     ' FIXED - #041 - Output list of visible/hidden macros
     ' FIXED - #026 - Output list of visible/hidden reports
+    ' FIXED - #025 - Output list of visible/hidden modules
     ' FIXED - #024 - Output list of visible/hidden forms
+    ' FIXED - #023 - Output list of visible/hidden tables
     ' OBSOLETE - #012 - Document custom tabs - adaept sample tab displayed, but no output indication => Not clear. Need more detail.
 '20151222 - v161 -
     ' FIXED - %060 - Fix output list of forms so that it does not need to use a temp table
