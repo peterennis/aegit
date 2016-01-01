@@ -126,6 +126,7 @@ Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
 Private Const aeAppHiddQry As String = "OutputListOfAllHiddenQueries.txt"
 Private Const aeAppListFrm As String = "OutputListOfForms.txt"
 Private Const aeAppListMac As String = "OutputListOfMacros.txt"
+Private Const aeAppListMod As String = "OutputListOfModules.txt"
 Private Const aeAppListRpt As String = "OutputListOfReports.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
@@ -1203,6 +1204,16 @@ Private Function IsMacHidden(ByVal strMacroName As String) As Boolean
     End If
 End Function
 
+Private Function IsModHidden(ByVal strModuleName As String) As Boolean
+    Debug.Print "IsModHidden"
+    On Error GoTo 0
+    If IsNull(strModuleName) Or strModuleName = vbNullString Then
+        IsModHidden = False
+    Else
+        IsModHidden = GetHiddenAttribute(acModule, strModuleName)
+    End If
+End Function
+
 Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As Variant)
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=52635
 ' Set focus to the Access window
@@ -1495,7 +1506,7 @@ Private Sub OutputListOfMacros(Optional ByVal varDebug As Variant)
     Close fle
 
     If Not IsMissing(varDebug) Then
-        Debug.Print "OutputListOfReports"
+        Debug.Print "OutputListOfMacros"
         Debug.Print strSQL
     End If
 
@@ -1514,6 +1525,67 @@ PROC_ERR:
         Resume PROC_EXIT
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfMacros of Class aegit_expClass", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    End If
+
+End Sub
+
+Private Sub OutputListOfModules(Optional ByVal varDebug As Variant)
+
+    'Debug.Print "OutputListOfModules"
+    On Error GoTo PROC_ERR
+
+    Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
+                                "FROM MSysObjects AS m " & _
+                                "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+                                "m.Type=-32761 " & _
+                                "ORDER BY m.Name;"
+    
+    Dim fle As Integer
+    fle = FreeFile()
+
+    If aegitFrontEndApp Then
+        Debug.Print aestrSourceLocation & aeAppListMod
+        Open aestrSourceLocation & aeAppListMod For Output As #fle
+    Else
+        Debug.Print aestrSourceLocationBe & aeAppListMod
+        Open aestrSourceLocationBe & aeAppListMod For Output As #fle
+    End If
+
+    CurrentProject.Connection.Execute "GRANT SELECT ON MSysObjects TO Admin;"
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb
+    Dim rst As DAO.Recordset
+    Set rst = dbs.OpenRecordset(strSQL)
+
+    Do While Not rst.EOF
+        If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
+        Print #fle, rst.Fields(0), IsModHidden(rst.Fields(0))
+        rst.MoveNext
+    Loop
+    Close fle
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "OutputListOfModules"
+        Debug.Print strSQL
+    End If
+
+PROC_EXIT:
+    rst.Close
+    Set rst = Nothing
+    dbs.Close
+    Set dbs = Nothing
+    'Stop
+    Exit Sub
+
+PROC_ERR:
+    If Err = 3192 Then
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfModules of Class aegit_expClass" & vbCrLf & vbCrLf & _
+                "Could not create temp table. You do not have exclusive access to the database. You are not in developer mode? Compact/Repair and try the export again.", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    Else
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfModules of Class aegit_expClass", vbCritical, "ERROR"
         Resume PROC_EXIT
     End If
 
@@ -3857,6 +3929,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfAllHiddenQueries varDebug
         OutputListOfForms varDebug
         OutputListOfMacros varDebug
+        OutputListOfModules varDebug
         OutputListOfReports varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
@@ -3879,6 +3952,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfAllHiddenQueries
         OutputListOfForms
         OutputListOfMacros
+        OutputListOfModules
         OutputListOfReports
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
