@@ -3744,28 +3744,7 @@ Private Sub KillAllFiles(ByVal strLoc As String)
     Debug.Print , "strLoc = " & strLoc
     ' Test for relative path - it should already have been converted to an absolute location
     If Left(strLoc, 1) = "." Then Stop
-
-'    If IsMissing(varDebug) Then
-'        Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
-'        Debug.Print , "DEBUGGING IS OFF"
-'    Else
-'        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to KillAllFiles"
-'        Debug.Print , "DEBUGGING TURNED ON"
-'    End If
-
-'    If Not IsMissing(varDebug) Then
-'        Debug.Print "KillAllFiles aegitSetup"
-'        Debug.Print , "aegitSetup = " & aegitSetup
-'        Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
-'        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-'        Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-'        Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-'        Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-'        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-'        Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-'    End If
-Exit Sub
-    Stop
+    'Stop
 
     ' Delete exported files
     strFile = Dir$(strLoc & "*.*")
@@ -3774,74 +3753,6 @@ Exit Sub
         ' Need to specify full path again because a file was deleted
         strFile = Dir$(strLoc & "*.*")
     Loop
-
-''    If aegitSetup Then
-'        '
-'        ' Delete all the exported src files
-'        strFile = Dir$(aestrSourceLocation & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrSourceLocation & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrSourceLocation & "*.*")
-'        Loop
-'        'Stop
-'        ' Delete all the exported xml files
-'        strFile = Dir$(aestrXMLLocation & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrXMLLocation & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrXMLLocation & "*.*")
-'        Loop
-'        'Stop
-'        ' Delete all the exported xmldata files
-'        strFile = Dir$(aestrXMLDataLocation & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrXMLDataLocation & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrXMLDataLocation & "*.*")
-'        Loop
-'        'Stop
-''        Exit Sub
-''    End If
-
-'    If aegitFrontEndApp And strLoc = "src" Then
-'        ' Delete all the exported src files
-'        strFile = Dir$(aestrSourceLocation & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrSourceLocation & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrSourceLocation & "*.*")
-'        Loop
-'        strFile = Dir$(aestrSourceLocation & "xml\" & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrSourceLocation & "xml\" & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrSourceLocation & "xml\" & "*.*")
-'        Loop
-'    ElseIf Not aegitFrontEndApp And strLoc = "srcbe" Then
-'        ' Delete all the exported srcbe files
-'        Debug.Print "KillAllFiles"
-'        Debug.Print , "aestrBackEndDb1 = " & aestrBackEndDb1
-'        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-'        Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-'        '
-'        strFile = Dir$(aestrSourceLocationBe & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrSourceLocationBe & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrSourceLocationBe & "*.*")
-'        Loop
-'        strFile = Dir$(aestrSourceLocationBe & "xml\" & "*.*")
-'        Do While strFile <> vbNullString
-'            KillProperly (aestrSourceLocationBe & "xml\" & strFile)
-'            ' Need to specify full path again because a file was deleted
-'            strFile = Dir$(aestrSourceLocationBe & "xml\" & "*.*")
-'        Loop
-'        'Stop
-'    Else
-'        MsgBox "Bad strLoc", vbCritical, "STOP " & aeAPP_NAME
-'        Stop
-'    End If
 
 PROC_EXIT:
     Exit Sub
@@ -3854,7 +3765,6 @@ PROC_ERR:
         Stop
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass", vbCritical, "ERROR"
-'''    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
     Resume PROC_EXIT
 
 End Sub
@@ -3930,15 +3840,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 
     ListOrCloseAllOpenQueries
 
-'''    If IsMissing(varDebug) Then
-'''        If aegitFrontEndApp Then KillAllFiles "src"
-'''        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe"
-'''    Else
-'''        If aegitFrontEndApp Then KillAllFiles "src", varDebug
-'''        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
-'''    End If
-'''    'Stop
-
     ' ===================================
     '    FORMS REPORTS SCRIPTS MODULES
     ' ===================================
@@ -3947,7 +3848,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Debug.Print "aeDocumentTheDatabase"
     Debug.Print , "aegitSetup = " & aegitSetup
     Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
-    Stop
+    'Stop
     
     Dim strTheSourceLocation As String
     If aegitSourceFolder = "default" Then
@@ -3972,24 +3873,17 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         KillAllFiles aestrXMLDataLocationBe
     End If
 
-'''    If FolderExists(strTheSourceLocation) Then
-        If Not IsMissing(varDebug) Then
-'''            KillAllFiles strTheSourceLocation, varDebug
-            DocumentTheContainer "Forms", "frm", varDebug
-            DocumentTheContainer "Reports", "rpt", varDebug
-            DocumentTheContainer "Scripts", "mac", varDebug
-            DocumentTheContainer "Modules", "bas", varDebug
-        Else
-'''            KillAllFiles strTheSourceLocation
-            DocumentTheContainer "Forms", "frm"
-            DocumentTheContainer "Reports", "rpt"
-            DocumentTheContainer "Scripts", "mac"
-            DocumentTheContainer "Modules", "bas"
-        End If
-'''    Else
-'''        MsgBox strTheSourceLocation & " Does not exist!", vbCritical, "aeDocumentTheDatabase"
-'''        Stop
-'''    End If
+    If Not IsMissing(varDebug) Then
+        DocumentTheContainer "Forms", "frm", varDebug
+        DocumentTheContainer "Reports", "rpt", varDebug
+        DocumentTheContainer "Scripts", "mac", varDebug
+        DocumentTheContainer "Modules", "bas", varDebug
+    Else
+        DocumentTheContainer "Forms", "frm"
+        DocumentTheContainer "Reports", "rpt"
+        DocumentTheContainer "Scripts", "mac"
+        DocumentTheContainer "Modules", "bas"
+    End If
 
     ' =============
     '    QUERIES
