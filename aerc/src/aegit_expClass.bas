@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.6.4"
-Private Const aegit_expVERSION_DATE As String = "December 31, 2015"
+Private Const aegit_expVERSION As String = "1.6.6"
+Private Const aegit_expVERSION_DATE As String = "January 26, 2016"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -265,15 +265,15 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
 End Property
 
 Public Property Get FrontEndApp() As Boolean
-    Debug.Print "Property Get FrontEndApp"
     On Error GoTo 0
+    Debug.Print "Property Get FrontEndApp"
     FrontEndApp = aegitFrontEndApp
     Debug.Print , "FrontEndApp = " & FrontEndApp
 End Property
 
 Public Property Let FrontEndApp(ByVal blnFrontEndApp As Boolean)
-    Debug.Print "Property Let FrontEndApp"
     On Error GoTo 0
+    Debug.Print "Property Let FrontEndApp"
     aegitFrontEndApp = blnFrontEndApp
     Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
 End Property
@@ -290,12 +290,17 @@ End Property
 
 Public Property Get SourceFolderBe() As String
     On Error GoTo 0
-    SourceFolderBe = aestrSourceLocationBe
+    Debug.Print "Property Get SourceFolderBe"
+    SourceFolderBe = aegitSourceFolderBe      'aestrSourceLocationBe
+    Debug.Print , "SourceFolderBe = " & SourceFolderBe
 End Property
 
 Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
     On Error GoTo 0
-    aestrSourceLocationBe = strSourceFolderBe
+    Debug.Print "Property Let SourceFolderBe"
+    aegitSourceFolderBe = strSourceFolderBe
+'    aestrSourceLocationBe = strSourceFolderBe
+    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
 End Property
 
 Public Property Get BackEndDb1() As String
@@ -306,48 +311,64 @@ End Property
 Public Property Let BackEndDb1(ByVal strBackEndDbFullPath As String)
     On Error GoTo 0
     Debug.Print "Property Let BackEndDb1"
-    Debug.Print , "strBackEndDbFullPath = " & strBackEndDbFullPath
     aestrBackEndDb1 = strBackEndDbFullPath
+    Debug.Print , "aestrBackEndDb1 = " & aestrBackEndDb1
 End Property
 
 Public Property Get XMLFolder() As String
     On Error GoTo 0
+    Debug.Print "Property Get XMLFolder"
     XMLFolder = aegitXMLFolder
+    Debug.Print , "XMLFolder = " & XMLFolder
 End Property
 
 Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
+    Debug.Print "Property Let XMLFolder"
     aegitXMLFolder = strXMLFolder
+    Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
 End Property
 
 Public Property Get XMLFolderBe() As String
     On Error GoTo 0
+    Debug.Print "Property Get XMLFolderBe"
     XMLFolderBe = aegitXMLFolderBe
+    Debug.Print , "XMLFolderBe = " & XMLFolderBe
 End Property
 
 Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     On Error GoTo 0
+    Debug.Print "Property Let XMLFolderBe"
     aegitXMLFolderBe = strXMLFolderBe
+    Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
 
 Public Property Get XMLDataFolder() As String
     On Error GoTo 0
+    Debug.Print "Property Get XMLDataFolder"
     XMLDataFolder = aegitXMLDataFolder
+    Debug.Print , "XMLDataFolder = " & XMLDataFolder
 End Property
 
 Public Property Let XMLDataFolder(ByVal strXMLDataFolder As String)
     On Error GoTo 0
+    Debug.Print "Property Let XMLDataFolder"
     aegitXMLDataFolder = strXMLDataFolder
+    Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
 End Property
 
 Public Property Get XMLDataFolderBe() As String
     On Error GoTo 0
-    XMLDataFolderBe = aestrXMLDataLocationBe
+    Debug.Print "Property Get XMLDataFolderBe"
+    XMLDataFolderBe = aegitXMLDataFolderBe
+    Debug.Print , "XMLDataFolderBe = " & XMLDataFolderBe
 End Property
 
 Public Property Let XMLDataFolderBe(ByVal strXMLDataFolderBe As String)
     On Error GoTo 0
-    aestrXMLDataLocationBe = strXMLDataFolderBe
+    Debug.Print "Property Let XMLDataFolderBe"
+    aegitXMLDataFolderBe = strXMLDataFolderBe
+    Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
 End Property
 
 Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
@@ -601,6 +622,7 @@ End Sub
 Private Sub VerifySetup(Optional ByVal varDebug As Variant)
     Debug.Print "VerifySetup"
     Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+    Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
 
     ' Test for aegit setup
     If aegitSourceFolder = "default" Then
@@ -3602,9 +3624,11 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
     End If
 
     Dim strTheSourceLocation As String
-    If aegitFrontEndApp Then
+    If aegitSourceFolder = "default" Then
+        strTheSourceLocation = aegitType.SourceFolder
+    ElseIf aegitFrontEndApp Then
         strTheSourceLocation = aestrSourceLocation
-    Else
+    ElseIf Not aegitFrontEndApp Then
         strTheSourceLocation = aestrSourceLocationBe
     End If
 
@@ -3710,7 +3734,7 @@ PROC_ERR:
 
 End Function
 
-Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Variant)
+Private Sub KillAllFiles(ByVal strLoc As String)
 
     Dim strFile As String
 
@@ -3721,55 +3745,64 @@ Private Sub KillAllFiles(ByVal strLoc As String, Optional ByVal varDebug As Vari
     ' Test for relative path - it should already have been converted to an absolute location
     If Left(strLoc, 1) = "." Then Stop
 
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
-        Debug.Print , "DEBUGGING IS OFF"
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to KillAllFiles"
-        Debug.Print , "DEBUGGING TURNED ON"
-    End If
-
-    If Not IsMissing(varDebug) Then
-        Debug.Print "KillAllFiles aegitSetup"
-        Debug.Print , "aegitSetup = " & aegitSetup
-        Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
-        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-        Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-        Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-        Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-        Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    End If
-    'Stop
-
-'    If aegitSetup Then
-        '
-        ' Delete all the exported src files
-        strFile = Dir$(aestrSourceLocation & "*.*")
-        Do While strFile <> vbNullString
-            KillProperly (aestrSourceLocation & strFile)
-            ' Need to specify full path again because a file was deleted
-            strFile = Dir$(aestrSourceLocation & "*.*")
-        Loop
-        'Stop
-        ' Delete all the exported xml files
-        strFile = Dir$(aestrXMLLocation & "*.*")
-        Do While strFile <> vbNullString
-            KillProperly (aestrXMLLocation & strFile)
-            ' Need to specify full path again because a file was deleted
-            strFile = Dir$(aestrXMLLocation & "*.*")
-        Loop
-        'Stop
-        ' Delete all the exported xmldata files
-        strFile = Dir$(aestrXMLDataLocation & "*.*")
-        Do While strFile <> vbNullString
-            KillProperly (aestrXMLDataLocation & strFile)
-            ' Need to specify full path again because a file was deleted
-            strFile = Dir$(aestrXMLDataLocation & "*.*")
-        Loop
-        'Stop
-'        Exit Sub
+'    If IsMissing(varDebug) Then
+'        Debug.Print , "varDebug IS missing so no parameter is passed to KillAllFiles"
+'        Debug.Print , "DEBUGGING IS OFF"
+'    Else
+'        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to KillAllFiles"
+'        Debug.Print , "DEBUGGING TURNED ON"
 '    End If
+
+'    If Not IsMissing(varDebug) Then
+'        Debug.Print "KillAllFiles aegitSetup"
+'        Debug.Print , "aegitSetup = " & aegitSetup
+'        Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+'        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+'        Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+'        Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+'        Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+'        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+'        Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+'    End If
+Exit Sub
+    Stop
+
+    ' Delete exported files
+    strFile = Dir$(strLoc & "*.*")
+    Do While strFile <> vbNullString
+        KillProperly (strLoc & strFile)
+        ' Need to specify full path again because a file was deleted
+        strFile = Dir$(strLoc & "*.*")
+    Loop
+
+''    If aegitSetup Then
+'        '
+'        ' Delete all the exported src files
+'        strFile = Dir$(aestrSourceLocation & "*.*")
+'        Do While strFile <> vbNullString
+'            KillProperly (aestrSourceLocation & strFile)
+'            ' Need to specify full path again because a file was deleted
+'            strFile = Dir$(aestrSourceLocation & "*.*")
+'        Loop
+'        'Stop
+'        ' Delete all the exported xml files
+'        strFile = Dir$(aestrXMLLocation & "*.*")
+'        Do While strFile <> vbNullString
+'            KillProperly (aestrXMLLocation & strFile)
+'            ' Need to specify full path again because a file was deleted
+'            strFile = Dir$(aestrXMLLocation & "*.*")
+'        Loop
+'        'Stop
+'        ' Delete all the exported xmldata files
+'        strFile = Dir$(aestrXMLDataLocation & "*.*")
+'        Do While strFile <> vbNullString
+'            KillProperly (aestrXMLDataLocation & strFile)
+'            ' Need to specify full path again because a file was deleted
+'            strFile = Dir$(aestrXMLDataLocation & "*.*")
+'        Loop
+'        'Stop
+''        Exit Sub
+''    End If
 
 '    If aegitFrontEndApp And strLoc = "src" Then
 '        ' Delete all the exported src files
@@ -3821,7 +3854,7 @@ PROC_ERR:
         Stop
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass", vbCritical, "ERROR"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
+'''    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure KillAllFiles of Class aegit_expClass"
     Resume PROC_EXIT
 
 End Sub
@@ -3897,45 +3930,66 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 
     ListOrCloseAllOpenQueries
 
-'    If IsMissing(varDebug) Then
-'        If aegitFrontEndApp Then KillAllFiles "src"
-'        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe"
-'    Else
-'        If aegitFrontEndApp Then KillAllFiles "src", varDebug
-'        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
-'    End If
-'    'Stop
+'''    If IsMissing(varDebug) Then
+'''        If aegitFrontEndApp Then KillAllFiles "src"
+'''        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe"
+'''    Else
+'''        If aegitFrontEndApp Then KillAllFiles "src", varDebug
+'''        If Not aegitFrontEndApp And aestrBackEndDb1 <> "default" Then KillAllFiles "srcbe", varDebug
+'''    End If
+'''    'Stop
 
     ' ===================================
     '    FORMS REPORTS SCRIPTS MODULES
     ' ===================================
-    ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first.
+    ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first: Resolved in VerifySetup
 
+    Debug.Print "aeDocumentTheDatabase"
+    Debug.Print , "aegitSetup = " & aegitSetup
+    Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+    Stop
+    
     Dim strTheSourceLocation As String
-    If aegitFrontEndApp Then
+    If aegitSourceFolder = "default" Then
+        strTheSourceLocation = aegitType.SourceFolder
+    ElseIf aegitFrontEndApp Then
         strTheSourceLocation = aestrSourceLocation
-    Else
+    ElseIf Not aegitFrontEndApp Then
         strTheSourceLocation = aestrSourceLocationBe
     End If
 
-    If FolderExists(strTheSourceLocation) Then
+    If aegitSetup Then
+        KillAllFiles aestrSourceLocation            '= aegitType.SourceFolder
+        KillAllFiles aestrXMLLocation               '= aegitType.XMLFolder
+        KillAllFiles aestrXMLDataLocation           '= aegitType.XMLDataFolder
+    ElseIf aegitFrontEndApp Then
+        KillAllFiles aestrSourceLocation
+        KillAllFiles aestrXMLLocation
+        KillAllFiles aestrXMLDataLocation
+    ElseIf Not aegitFrontEndApp Then
+        KillAllFiles aestrSourceLocationBe
+        KillAllFiles aestrXMLLocationBe
+        KillAllFiles aestrXMLDataLocationBe
+    End If
+
+'''    If FolderExists(strTheSourceLocation) Then
         If Not IsMissing(varDebug) Then
-            KillAllFiles strTheSourceLocation, varDebug
+'''            KillAllFiles strTheSourceLocation, varDebug
             DocumentTheContainer "Forms", "frm", varDebug
             DocumentTheContainer "Reports", "rpt", varDebug
             DocumentTheContainer "Scripts", "mac", varDebug
             DocumentTheContainer "Modules", "bas", varDebug
         Else
-            KillAllFiles strTheSourceLocation
+'''            KillAllFiles strTheSourceLocation
             DocumentTheContainer "Forms", "frm"
             DocumentTheContainer "Reports", "rpt"
             DocumentTheContainer "Scripts", "mac"
             DocumentTheContainer "Modules", "bas"
         End If
-    Else
-        MsgBox strTheSourceLocation & " Does not exist!", vbCritical, "aeDocumentTheDatabase"
-        Stop
-    End If
+'''    Else
+'''        MsgBox strTheSourceLocation & " Does not exist!", vbCritical, "aeDocumentTheDatabase"
+'''        Stop
+'''    End If
 
     ' =============
     '    QUERIES

@@ -32,7 +32,7 @@ Option Explicit
 ' %065 -
 ' %064 -
 ' %063 -
-' %062 -
+' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
@@ -55,6 +55,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160126 - v166 -
+    ' FIXED - #002 - v093 using export aegit 1.6.5 deletes files in root folder of C:\PETER\SVIP\SVIPDB
 '20151231 - v164 -
     ' OBSOLETE - IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download
     ' OBSOLETE - MZ-Tools 3.0 for VBA - Ref: http://www.mztools.com/v3/download.aspx

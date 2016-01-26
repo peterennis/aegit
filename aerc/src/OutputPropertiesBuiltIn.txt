@@ -100,7 +100,7 @@ Inherited: False;
 ---
 Name: ProjVer
 Type: dbInteger
-Value: 140
+Value: 119
 Inherited: False;
 ---
 Name: HasOfflineLists
@@ -245,7 +245,7 @@ Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 1.6.4
+Value: aegit 1.6.6
 Inherited: False;
 ---
 Name: AppIcon
