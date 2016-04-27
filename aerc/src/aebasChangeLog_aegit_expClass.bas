@@ -43,7 +43,6 @@ Option Explicit
 '           *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 ' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
-' %028 - Relates to %020, Compare export time for standalone vs. flag set for split
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:
 ' #045 -
@@ -56,6 +55,7 @@ Option Explicit
 '
 '
 '20160126 - v166 -
+    ' OBSOLETE - %028 - Relates to %020, Compare export time for standalone vs. flag set for split
     ' FIXED - #002 - v093 using export aegit 1.6.5 deletes files in root folder of C:\PETER\SVIP\SVIPDB
 '20151231 - v164 -
     ' OBSOLETE - IDBE RibbonCreator 2013 (Office 2013) - Ref: http://www.ribboncreator2013.de/en/?Download

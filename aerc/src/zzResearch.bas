@@ -103,7 +103,7 @@ Public Sub CatalogUserCreatedObjects()
         CurrentDb.CreateQueryDef MY_QUERY_NAME, strSQL
     Else
         ' other wise, update the sql
-        CurrentDb.QueryDefs(MY_QUERY_NAME).SQL = strSQL
+        CurrentDb.QueryDefs(MY_QUERY_NAME).sql = strSQL
     End If
 
     DoCmd.OpenQuery MY_QUERY_NAME

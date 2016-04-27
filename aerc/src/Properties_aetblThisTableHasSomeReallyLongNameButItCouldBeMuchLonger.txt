@@ -8,8 +8,6 @@
 |-- RecordCount >> 0
 |-- ValidationRule >> 
 |-- ValidationText >> 
-|-- ConflictTable >> 
-|-- ReplicaFilter >> 
 |-- GUID >> GUID
 |-- Orientation >> 0
 |-- OrderByOn >> False
