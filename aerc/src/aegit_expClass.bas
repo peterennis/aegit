@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.6.6"
-Private Const aegit_expVERSION_DATE As String = "January 26, 2016"
+Private Const aegit_expVERSION As String = "1.6.8"
+Private Const aegit_expVERSION_DATE As String = "May 5, 2016"
 Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -79,6 +79,7 @@ End Type
 
 Private myExclude As myExclusions
 Private pExclude As Boolean
+Private mblnIgnore As Boolean
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
@@ -828,6 +829,8 @@ Private Function LinkedTable(strTblName) As Boolean
     'Debug.Print "LinkedTable"
     On Error GoTo PROC_ERR
 
+    Dim intAnswer As Integer
+
     ' Linked table connection string is > 0
     If Len(CurrentDb.TableDefs(strTblName).Connect) > 0 Then
         ' Linked table exists, but is the link valid?
@@ -848,13 +851,23 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
+        Case 3151
+            'MsgBox "mblnIgnore = " & mblnIgnore
+            If mblnIgnore Then Resume PROC_EXIT
+            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "LinkedTable Error"
+            intAnswer = MsgBox("Ignore further errors of this type?", vbYesNo + vbQuestion, "LinkedTable Error")
+            If intAnswer = vbYes Then
+                mblnIgnore = True
+            Else
+                'do nothing
+            End If
         Case 3265
             MsgBox "[" & strTblName & "] does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
         Case 3011, 3024     'Linked Table does not exist or DB Path not valid
             MsgBox "[" & strTblName & "] is not a valid, Linked Table", vbCritical, "Link Not Valid"
         Case Else
-            MsgBox Err.Description & Err.Number, vbExclamation, "LinkedTable Error"
+            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "LinkedTable Error"
     End Select
     Resume PROC_EXIT
 End Function
@@ -2526,6 +2539,9 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
+        Case 3151
+            'MsgBox "mblnIgnore = " & mblnIgnore
+            If mblnIgnore Then Resume PROC_EXIT
         Case 3265
             MsgBox "(" & strTblName & ") does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
@@ -2993,9 +3009,15 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass", vbCritical, "ERROR"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
-    aeDocumentTablesXML = False
+    Select Case Err.Number
+        Case 31532
+            Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
+            Debug.Print , "strObjName=" & strObjName, "strTheXMLLocation=" & strTheXMLLocation          ' from line 430
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass", vbCritical, "ERROR"
+            If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
+            aeDocumentTablesXML = False
+    End Select
     Resume PROC_EXIT
 
 End Function
