@@ -35,10 +35,10 @@ Option Explicit
 '                                           ALTERNATIVE_EXPORT 1
 '
 ' Sample constants for settings of "TheProjectName"
-Public Const gstrDATE_TheProjectName As String = "January 1, 2000"
-Public Const gstrVERSION_TheProjectName As String = "0.0.0"
-Public Const gstrPROJECT_TheProjectName As String = "TheProjectName"
-Public Const gblnTEST_TheProjectName As Boolean = False
+'Public Const gstrDATE_TheProjectName As String = "January 1, 2000"
+'Public Const gstrVERSION_TheProjectName As String = "0.0.0"
+'Public Const gstrPROJECT_TheProjectName As String = "TheProjectName"
+'Public Const gblnTEST_TheProjectName As Boolean = False
 
 Public Const gstrPROJECT_aegit As String = "aegit export project"
 Public Const gstrVERSION_aegit As String = "0.0.0"
@@ -100,7 +100,7 @@ Private Function PassFail(ByVal bln As Boolean, Optional ByVal varOther As Varia
     End If
 End Function
 
-Private Function IsArrayInitialized(arr As Variant) As Boolean
+Private Function IsArrayInitialized(ByRef arr As Variant) As Boolean
     If Not IsArray(arr) Then Err.Raise 13
     On Error Resume Next
     IsArrayInitialized = (LBound(arr) <= UBound(arr))

@@ -17,20 +17,17 @@
                             stdole        OLE Automation
                                           C:\Windows\SysWOW64\stdole2.tlb
                                           {00020430-0000-0000-C000-000000000046}
-                            Scripting     Microsoft Scripting Runtime
-                                          C:\Windows\SysWOW64\scrrun.dll
-                                          {420B2830-E718-11CF-893D-00A0C9054228}
                             ADODB         Microsoft ActiveX Data Objects 6.1 Library
                                           C:\Program Files (x86)\Common Files\System\ado\msado15.dll
                                           {B691E011-1797-432E-907A-4D8C69339129}
                             ADOX          Microsoft ADO Ext. 6.0 for DDL and Security
                                           C:\Program Files (x86)\Common Files\System\ado\msadox.dll
                                           {00000600-0000-0010-8000-00AA006D2EA4}
-                            DAO           Microsoft DAO 3.6 Object Library
-                                          C:\Program Files (x86)\Common Files\Microsoft Shared\DAO\dao360.dll
-                                          {00025E01-0000-0000-C000-000000000046}
                             Office        Microsoft Office 14.0 Object Library
                                           C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE14\MSO.DLL
                                           {2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}
+                            DAO           Microsoft DAO 3.6 Object Library
+                                          C:\Program Files (x86)\Common Files\Microsoft Shared\DAO\dao360.dll
+                                          {00025E01-0000-0000-C000-000000000046}
               <*_*>
 <==<

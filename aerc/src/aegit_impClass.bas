@@ -384,7 +384,7 @@ Private Function GetLinkedTableCurrentPath(ByVal MyLinkedTable As String) As Str
 '=========================================================================
     On Error GoTo PROC_ERR
     GetLinkedTableCurrentPath = Mid$(CurrentDb.TableDefs(MyLinkedTable).Connect, InStr(1, CurrentDb.TableDefs(MyLinkedTable).Connect, "=") + 1)
-        ' Non-linked table returns blank - Instr removes the "Database="
+    ' Non-linked table returns blank - Instr removes the "Database="
 
 PROC_EXIT:
     On Error Resume Next

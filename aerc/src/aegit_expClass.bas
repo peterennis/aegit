@@ -39,9 +39,9 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.6.8"
-Private Const aegit_expVERSION_DATE As String = "May 5, 2016"
-Private Const aeAPP_NAME As String = "aegit_exp"
+Private Const aegit_expVERSION As String = "1.6.9"
+Private Const aegit_expVERSION_DATE As String = "May 7, 2016"
+'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
 ' If mblnUTF16 is False the BOM marker will be stripped and files will be ANSI
@@ -110,7 +110,7 @@ Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
 Private aestrBackEndDb1 As String
-Private aestrPassword As String
+'Private aestrPassword As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile As String = "OutputTblSetupForTables.txt"
@@ -572,47 +572,48 @@ Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnEx
 End Property
 
 Private Sub TestForRelativePath()
+    On Error GoTo 0
     Debug.Print "TestForRelativePath"
     ' Test for relative path
     Dim strTestPath As String
     strTestPath = aestrSourceLocation
-    If Left(aestrSourceLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
+    If Left$(aestrSourceLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
         aestrSourceLocation = strTestPath
     End If
     Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
     '
     strTestPath = aestrSourceLocationBe
-    If Left(aestrSourceLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
+    If Left$(aestrSourceLocationBe, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
         aestrSourceLocationBe = strTestPath
     End If
     Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
     '
     strTestPath = aestrXMLLocation
-    If Left(aestrXMLLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
+    If Left$(aestrXMLLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
     End If
     Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
     '
     strTestPath = aestrXMLLocationBe
-    If Left(aestrXMLLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
+    If Left$(aestrXMLLocationBe, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
         aestrXMLLocationBe = strTestPath
     End If
     Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
     '
     strTestPath = aestrXMLDataLocation
-    If Left(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
+    If Left$(aestrXMLDataLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
         aestrXMLDataLocation = strTestPath
     End If
     Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
     '
     strTestPath = aestrXMLDataLocationBe
-    If Left(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
+    If Left$(aestrXMLDataLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
         aestrXMLDataLocationBe = strTestPath
     End If
     Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
@@ -620,7 +621,8 @@ Private Sub TestForRelativePath()
 
 End Sub
 
-Private Sub VerifySetup(Optional ByVal varDebug As Variant)
+Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
+    On Error GoTo 0
     Debug.Print "VerifySetup"
     Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
     Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
@@ -740,10 +742,11 @@ End Sub
 
 Private Function IsLoaded(ByVal strFormName As String) As Boolean
  ' Returns True if the specified form is open in Form view or Datasheet view.
-    
+   
+    On Error GoTo 0
     Debug.Print "IsLoaded"
-    Const conObjStateClosed = 0
-    Const conDesignView = 0
+    Const conObjStateClosed As Integer = 0
+    Const conDesignView As Integer = 0
     
     If SysCmd(acSysCmdGetObjectState, acForm, strFormName) <> conObjStateClosed Then
         If Forms(strFormName).CurrentView <> conDesignView Then
@@ -824,7 +827,7 @@ NextTdf:
     Next tdf
 End Sub
 
-Private Function LinkedTable(strTblName) As Boolean
+Private Function LinkedTable(ByVal strTblName As String) As Boolean
 
     'Debug.Print "LinkedTable"
     On Error GoTo PROC_ERR
@@ -872,7 +875,7 @@ PROC_ERR:
     Resume PROC_EXIT
 End Function
 
-Private Sub OpenAllDatabases(blnInit As Boolean)
+Private Sub OpenAllDatabases(ByVal blnInit As Boolean)
 ' Open a handle to all databases and keep it open during the entire time the application runs.
 ' Parameter: blnInit - TRUE to initialize (call when application starts), FALSE to close (call when application ends)
 ' Ref: http://stackoverflow.com/questions/29838317/issue-when-using-a-dao-handle-when-the-database-closes-unexpectedly
@@ -880,7 +883,7 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
     Debug.Print "OpenAllDatabases"
 
     Dim intX As Integer
-    Dim strname As String
+    Dim strName As String
     Dim strMsg As String
 
     If aestrBackEndDb1 = "NONE" Then
@@ -902,29 +905,32 @@ Private Sub OpenAllDatabases(blnInit As Boolean)
             ' Specify your back end databases
             Select Case intX
                 Case 1:
-                    strname = aestrBackEndDb1
+                    strName = aestrBackEndDb1
                 Case 2:
-                    strname = "H:\folder\Backend2.mdb"
+                    strName = "H:\folder\Backend2.mdb"
+                Case Else
+                    MsgBox "This should never occur!", vbCritical, "OpenAllDatabases"
+                    Stop
             End Select
-        strMsg = ""
+        strMsg = vbNullString
         'Debug.Print , "strName = " & strName, "OpenAllDatabases"
 
         On Error Resume Next
         ' Ref: https://support.microsoft.com/en-us/kb/209953
         ' If you use a Connect argument and you do not provide the Options and Read-Only arguments, you receive run-time error 3031: Not a valid password.
         ' Ref: https://msdn.microsoft.com/en-us/library/office/ff835343.aspx
-        Set dbsOpen(intX) = OpenDatabase(strname) ' Shared, Read Only
+        Set dbsOpen(intX) = OpenDatabase(strName) ' Shared, Read Only
         ' Example for password protected back end requires use of Let property for aestrPassword
         'Set dbsOpen(intX) = OpenDatabase(strName, False, True, "MS Access;pwd=" & aestrPassword) ' Shared, Read Only
         If Err.Number > 0 Then
-            strMsg = "Trouble opening database: " & strname & vbCrLf & _
+            strMsg = "Trouble opening database: " & strName & vbCrLf & _
                     "Make sure the drive is available." & vbCrLf & _
                     "Error: " & Err.Description & " (" & Err.Number & ")"
         End If
 
         On Error GoTo 0
-        If strMsg <> "" Then
-            MsgBox strMsg & vbCrLf & "strName = " & strname, vbExclamation, "OpenAllDatabases"
+        If strMsg <> vbNullString Then
+            MsgBox strMsg & vbCrLf & "strName = " & strName, vbExclamation, "OpenAllDatabases"
             Exit For
         End If
         Next intX
@@ -950,20 +956,20 @@ Private Function defineMyExclusions() As myExclusions
     myExclude.exclude3 = EXCLUDE_3
 End Function
 
-Private Function fExclude(strname As String) As Boolean
+Private Function fExclude(ByVal strName As String) As Boolean
     'Debug.Print "fExclude"
     On Error GoTo 0
     fExclude = False
     'Debug.Print "1: fExclude", strName, "myExclude.exclude1 = " & myExclude.exclude1
-    If strname = myExclude.exclude1 Then
+    If strName = myExclude.exclude1 Then
         fExclude = True
         Exit Function
     End If
-    If strname = myExclude.exclude2 Then
+    If strName = myExclude.exclude2 Then
         fExclude = True
         Exit Function
     End If
-    If strname = myExclude.exclude3 Then
+    If strName = myExclude.exclude3 Then
         fExclude = True
         Exit Function
     End If
@@ -1038,10 +1044,10 @@ Private Function NoBOM(ByVal strFileName As String) As Boolean
     On Error GoTo PROC_ERR
 
     ' Define needed constants
-    Const ForReading = 1
-    Const ForWriting = 2
-    Const TriStateUseDefault = -2
-    Const adTypeText = 2
+    'Const ForReading As Integer = 1
+    Const ForWriting As Integer = 2
+    'Const TriStateUseDefault As Integer = -2
+    Const adTypeText As Integer = 2
     Dim strContent As String
 
     NoBOM = False
@@ -2510,7 +2516,7 @@ Private Function GetLinkedTableCurrentPath(ByVal strTblName As String) As String
 
     Dim strConnect As String
     Dim intStrConnectLen As Integer
-    Dim intEqualPos As Integer
+    'Dim intEqualPos As Integer
     Dim intDatabasePos As Integer
     Dim strMidLink As String
 
@@ -2628,7 +2634,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
-        If Left(strLinkedTablePath, 13) <> "Local Table=>" Then
+        If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
             Debug.Print strLinkedTablePath
         End If
         Debug.Print SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -2645,7 +2651,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     Print #1, SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
-    If Left(strLinkedTablePath, 13) <> "Local Table=>" Then
+    If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
         Print #1, "Linked=>" & strLinkedTablePath
     End If
     Print #1, SizeString("FIELD NAME", aeintFNLen, TextLeft, " ") _
@@ -3063,7 +3069,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 Or Left$(tdf.Name, 3) = "zzz") Then
 
             strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
-            If Left(strLinkedTablePath, 13) <> "Local Table=>" Then
+            If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
                 f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
             Else
                 f.WriteLine vbCrLf & "'Local Table"
@@ -3347,7 +3353,7 @@ Private Function OutputQueriesSqlText() As Boolean
     Debug.Print "OutputQueriesSqlText"
     On Error GoTo PROC_ERR
 
-    Dim strTheSchemaFile As String
+    'Dim strTheSchemaFile As String
     If aegitFrontEndApp Then
         strFile = aestrSourceLocation & aeSqlTxtFile
     Else
@@ -3765,7 +3771,7 @@ Private Sub KillAllFiles(ByVal strLoc As String)
 
     Debug.Print , "strLoc = " & strLoc
     ' Test for relative path - it should already have been converted to an absolute location
-    If Left(strLoc, 1) = "." Then Stop
+    If Left$(strLoc, 1) = "." Then Stop
     'Stop
 
     ' Delete exported files
@@ -3857,7 +3863,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        VerifySetup "varDebug"
+        VerifySetup ''' "varDebug"
     End If
 
     ListOrCloseAllOpenQueries
@@ -4729,8 +4735,8 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     ' Test for relative path
     Dim strTestPath As String
     strTestPath = strPathFileName
-    If Left(strPathFileName, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid(strPathFileName, 2, Len(strPathFileName) - 1)
+    If Left$(strPathFileName, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(strPathFileName, 2, Len(strPathFileName) - 1)
         strPathFileName = strTestPath
         'Debug.Print , "strPathFileName = " & strPathFileName, "PrettyXML"
         'Stop
@@ -5156,7 +5162,7 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     On Error GoTo PROC_ERR
     
     Dim strSQL As String
-    Const MY_QUERY_NAME = "zzzqryCatalogUserCreatedObjects"
+    Const MY_QUERY_NAME As String = "zzzqryCatalogUserCreatedObjects"
     
     Dim strPathFileName As String
     If aegitFrontEndApp Then
@@ -5180,14 +5186,14 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
 '    strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate "
 '    strSQL = strSQL & vbCrLf & "FROM MSysObjects "
 '    strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
-'    strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "
+'    strSQL = strSQL & vbCrLf & "AND Left$(Name, 4) <> ""MSys"" AND Left$(Name, 1) <> ""~"" "
 '    strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
 
     ' Ref: https://support.office.com/en-za/article/FormatDateTime-Function-aef62949-f957-4ba4-94ff-ace14be4f1ca
     ' Format DateCreate as short date, vbShortDate = 2
     'SELECT IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))) AS [Object Type], MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated
     'FROM MSysObjects
-    'WHERE (((MSysObjects.[Type]) In (1,5,6,-32768,-32764,-32766,-32761)) AND ((Left([Name],4))<>"MSys") AND ((Left([Name],1))<>"~"))
+    'WHERE (((MSysObjects.[Type]) In (1,5,6,-32768,-32764,-32766,-32761)) AND ((Left$([Name],4))<>"MSys") AND ((Left$([Name],1))<>"~"))
     'ORDER BY IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))), MSysObjects.Name;
 
     strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
@@ -5198,7 +5204,7 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     'strSQL = strSQL & vbCrLf & "MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated "
     strSQL = strSQL & vbCrLf & "FROM MSysObjects "
     strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
-    strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "
+    strSQL = strSQL & vbCrLf & "AND Left$(Name, 4) <> ""MSys"" AND Left$(Name, 1) <> ""~"" "
     strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
 
     'Debug.Print strSQL

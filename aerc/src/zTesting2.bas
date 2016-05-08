@@ -153,7 +153,7 @@ End Function
 '  dim $objShell, $objFolder,$i,$found
 '  if exist($FQFN)
 '    $objShell=CreateObject("Shell.Application")
-'    $objFolder=$objShell.Namespace(left($FQFN,instrrev($FQFN,"\")))
+'    $objFolder=$objShell.Namespace(Left$($FQFN,instrrev($FQFN,"\")))
 '    if $objFolder
 '      if vartypename($attribute)="string"
 '        While $i<298 and $found=0

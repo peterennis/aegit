@@ -65,9 +65,9 @@ End Sub
 '   For iCtr = 1 To iCount
 '     iSpot = InStr(1, sInString, sFindString)
 '     If iSpot > 0 Then
-'       sInString = Left(sInString, iSpot - 1) & _
+'       sInString = Left$(sInString, iSpot - 1) & _
 '                         sReplaceString & _
-'                         Mid(sInString, iSpot + Len(sFindString))
+'                         Mid$(sInString, iSpot + Len(sFindString))
 '     Else
 '       Exit For
 '     End If
@@ -92,7 +92,7 @@ Public Sub CatalogUserCreatedObjects()
     strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate, MSysObjects.DateUpdate "
     strSQL = strSQL & vbCrLf & "FROM MSysObjects "
     strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
-    strSQL = strSQL & vbCrLf & "AND Left(Name, 4) <> ""MSys"" AND Left(Name, 1) <> ""~"" "
+    strSQL = strSQL & vbCrLf & "AND Left$(Name, 4) <> ""MSys"" AND Left$(Name, 1) <> ""~"" "
     strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
 
     Debug.Print strSQL

@@ -451,7 +451,7 @@ Option Explicit
     ' Ref: http://www.granite.ab.ca/access/latebinding.htm
     ' DONE: Test for expected references when class first created OR fix to use late binding
     ' INFO: Say you want to display a list of reports available in your database to a user in one of your forms.  Simply add a combo-box to your form, then set the Row Source property as follows:
-    '   SELECT [Name] FROM [MSysObjects] WHERE [Type] = -32764 AND Left([Name],1) <> "~" ORDER BY [Name]
+    '   SELECT [Name] FROM [MSysObjects] WHERE [Type] = -32764 AND Left$([Name],1) <> "~" ORDER BY [Name]
     '   Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 '20131219 - v055 - Output GUID for project references
 '20131219 - v054 - Note about need for reference to Microsoft Scripting Runtime
