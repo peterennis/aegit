@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.6.9"
-Private Const aegit_expVERSION_DATE As String = "May 7, 2016"
+Private Const aegit_expVERSION As String = "1.7.0"
+Private Const aegit_expVERSION_DATE As String = "June 1, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -831,6 +831,7 @@ Private Function LinkedTable(ByVal strTblName As String) As Boolean
 
     'Debug.Print "LinkedTable"
     On Error GoTo PROC_ERR
+    If mblnIgnore Then Exit Function
 
     Dim intAnswer As Integer
 
@@ -854,7 +855,7 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
-        Case 3151
+        Case 3151, 3059
             'MsgBox "mblnIgnore = " & mblnIgnore
             If mblnIgnore Then Resume PROC_EXIT
             MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "LinkedTable Error"
@@ -2513,6 +2514,7 @@ Private Function GetLinkedTableCurrentPath(ByVal strTblName As String) As String
 
     'Debug.Print "GetLinkedTableCurrentPath"
     On Error GoTo PROC_ERR
+    If mblnIgnore Then Exit Function
 
     Dim strConnect As String
     Dim intStrConnectLen As Integer
@@ -2545,7 +2547,7 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
-        Case 3151
+        Case 3151, 3059
             'MsgBox "mblnIgnore = " & mblnIgnore
             If mblnIgnore Then Resume PROC_EXIT
         Case 3265
@@ -2849,6 +2851,7 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     Dim strFile As String
 
     On Error GoTo PROC_ERR
+    If mblnIgnore Then Exit Function
 
     intFailCount = 0
     
