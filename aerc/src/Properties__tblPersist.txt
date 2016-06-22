@@ -28,15 +28,16 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
-|-- id (Field in _tblPersist)
+|-- ID (Field in _tblPersist)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> id
+|------ Name >> ID
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> id
+|------ SourceField >> ID
 |------ SourceTable >> _tblPersist
 |------ DataUpdatable >> False
 |------ DefaultValue >> 

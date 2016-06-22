@@ -29,8 +29,9 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %065 -
-' %064 -
+' %070 -
+' %069 -
+' %068 -
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
@@ -53,6 +54,11 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160622 - v171 -
+    ' FIXED - %067 - Wrong field picked up for primary key
+    ' FIXED - %066 - Syntax error for OLE Object
+    ' FIXED - %065 - CreateDb script (OutputTheSchemaFile) fail when SQL string too long
+    ' FIXED - %064 - CreateDb script (OutputTheSchemaFile) missing Erl
 '20160505 - v168 -
     ' FIXED - %063 - Trap Error 31532 in aeDocumentTablesXML when the linked Azure tables are not available
 '20160126 - v166 -

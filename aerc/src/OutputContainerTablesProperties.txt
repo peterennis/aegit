@@ -91,7 +91,6 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               ReadOnlyWhenDisconnected    False
-              GUID          25-06-6D-F7-05-09-49-9E
 >>>_tblPersist
               Name          _tblPersist
               Owner         admin
@@ -119,6 +118,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
+              GUID          18-83-AA-07-72-C9-41-88
 >>>_tlkpChart
               Name          _tlkpChart
               Owner         admin
@@ -131,7 +131,6 @@
               Orientation    0 
               OrderByOn     False
               DefaultView    2 
-              GUID          73-8C-D5-DD-89-D7-49-8A
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
               FilterOnLoad  False
@@ -213,7 +212,6 @@
               Orientation    0 
               OrderByOn     False
               DefaultView    2 
-              GUID          A8-72-43-C1-65-62-4F-AA
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
               FilterOnLoad  False
@@ -229,8 +227,6 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
-              FCMinWriteVer 14.0.0000.0000
-              FCMinDesignVer              14.0.0000.0000
 >>>aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
               Name          aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
               Owner         admin
@@ -240,7 +236,6 @@
               Container     Tables
               DateCreated   DateCreated
               LastUpdated   LastUpdated
-              GUID          6F-22-C8-55-D9-C2-41-84
               Orientation    0 
               OrderByOn     False
               DefaultView    2 
@@ -259,6 +254,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
+              GUID          11-B3-B1-95-67-14-42-95
 >>>aetlkpStates
               Name          aetlkpStates
               Owner         admin
@@ -630,7 +626,6 @@
               Orientation    0 
               OrderByOn     False
               DefaultView    2 
-              GUID          EE-4B-03-94-5E-48-4A-BB
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
               FilterOnLoad  False
@@ -711,7 +706,6 @@
               Orientation    0 
               OrderByOn     False
               DefaultView    2 
-              GUID          AC-95-06-35-7B-E3-4B-BC
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
               FilterOnLoad  False

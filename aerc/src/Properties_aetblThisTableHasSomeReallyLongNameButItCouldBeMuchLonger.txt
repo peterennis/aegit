@@ -10,7 +10,6 @@
 |-- ValidationText >> 
 |-- ConflictTable >> 
 |-- ReplicaFilter >> 
-|-- GUID >> GUID
 |-- Orientation >> 0
 |-- OrderByOn >> False
 |-- DefaultView >> 2
@@ -29,15 +28,16 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
-|-- id (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
+|-- ID (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> id
+|------ Name >> ID
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> id
+|------ SourceField >> ID
 |------ SourceTable >> aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 |------ DataUpdatable >> False
 |------ DefaultValue >> 
@@ -47,7 +47,6 @@
 |------ AllowZeroLength >> False
 |------ AppendOnly >> False
 |------ Expression >> 
-|------ GUID >> GUID
 |------ ColumnWidth >> -1
 |------ ColumnOrder >> 0
 |------ ColumnHidden >> False
@@ -72,7 +71,6 @@
 |------ AllowZeroLength >> True
 |------ AppendOnly >> False
 |------ Expression >> 
-|------ GUID >> GUID
 |------ ColumnWidth >> -1
 |------ ColumnOrder >> 0
 |------ ColumnHidden >> False
@@ -101,7 +99,6 @@
 |------ AllowZeroLength >> True
 |------ AppendOnly >> False
 |------ Expression >> 
-|------ GUID >> GUID
 |------ ColumnWidth >> -1
 |------ ColumnOrder >> 0
 |------ ColumnHidden >> False

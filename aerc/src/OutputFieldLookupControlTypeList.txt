@@ -74,7 +74,7 @@ _tblChart
               FLD69          109          TextBox
               FLD70          109          TextBox
 _tblPersist
-              id             109          TextBox
+              ID             109          TextBox
               persist        109          TextBox
 _tlkpChart
               ID             109          TextBox
@@ -97,7 +97,7 @@ aeItems
               CHK            106          CheckBox
               CBO            111          ComboBox
 aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
-              id             111          ComboBox
+              ID             111          ComboBox
               Desc           109          TextBox
               Description    109          TextBox
 aetlkpStates

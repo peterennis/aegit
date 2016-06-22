@@ -28,7 +28,6 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- ReadOnlyWhenDisconnected >> False
-|-- GUID >> GUID
 --------------------------------------------------
 |-- ID (Field in _tblChart)
 |------ Attributes >> 1

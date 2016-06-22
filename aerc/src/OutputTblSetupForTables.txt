@@ -84,7 +84,7 @@ TABLE: _tblPersist
 ------------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-id                   AutoNumber            4                  
+ID                   AutoNumber            4                  
 persist              Text                  255                
 
 
@@ -137,7 +137,7 @@ TABLE: aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 ----------------------------------------------------------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION                       
 =================    ==================    ====    ==================================
-id                   AutoNumber            4                                         
+ID                   AutoNumber            4                                         
 Desc                 Text                  255                                       
 Description          Text                  255     This is a description of the field
 

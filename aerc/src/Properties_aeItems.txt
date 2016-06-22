@@ -13,7 +13,6 @@
 |-- Orientation >> 0
 |-- OrderByOn >> False
 |-- DefaultView >> 2
-|-- GUID >> GUID
 |-- DisplayViewsOnSharePointSite >> 1
 |-- TotalsRow >> False
 |-- FilterOnLoad >> False
@@ -29,8 +28,6 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
-|-- FCMinWriteVer >> 14.0.0000.0000
-|-- FCMinDesignVer >> 14.0.0000.0000
 --------------------------------------------------
 |-- Item (Field in aeItems)
 |------ Attributes >> 2

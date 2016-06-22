@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.0"
-Private Const aegit_expVERSION_DATE As String = "June 1, 2016"
+Private Const aegit_expVERSION As String = "1.7.1"
+Private Const aegit_expVERSION_DATE As String = "June 22, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3031,6 +3031,10 @@ PROC_ERR:
 
 End Function
 
+Private Function GetComplexType(strFieldVariable As String) As String
+
+End Function
+
 Private Sub OutputTheSchemaFile() ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
@@ -3044,9 +3048,10 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
     Dim ndx As DAO.Index
     Dim strSQL As String
     Dim strFlds As String
+    Dim strLongFlds As String
+    Dim blnLongFlds As Boolean
     Dim strCn As String
     Dim strLinkedTablePath As String
-    Dim f As Object
 
     Dim strTheSchemaFile As String
     If aegitFrontEndApp Then
@@ -3057,16 +3062,18 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
 
     Dim fs As Object
     Set fs = CreateObject("Scripting.FileSystemObject")
+    Dim f As Object
     Set f = fs.CreateTextFile(strTheSchemaFile)
 
     strSQL = "Public Sub CreateTheDb()" & vbCrLf
     f.WriteLine strSQL
     strSQL = "Dim strSQL As String"
     f.WriteLine strSQL
-    strSQL = "On Error GoTo ErrorTrap"
+    strSQL = "On Error GoTo PROC_ERR"
     f.WriteLine strSQL
 
     For Each tdf In dbs.TableDefs
+        blnLongFlds = False
         If Not (Left$(tdf.Name, 4) = "MSys" _
                 Or Left$(tdf.Name, 4) = "~TMP" _
                 Or Left$(tdf.Name, 3) = "zzz") Then
@@ -3083,10 +3090,17 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
 
             For Each fld In tdf.Fields
 
-                strFlds = strFlds & ",[" & fld.Name & "] "
+                If Len(strFlds) <= 900 Then
+                    strFlds = strFlds & ",[" & fld.Name & "] "
+                Else    ' Hack to deal with 1024 limit for immediate window output
+                    blnLongFlds = True
+                    strFlds = strFlds & ",[" & fld.Name & "] " & """"
+                    strLongFlds = strFlds
+                    strFlds = vbNullString
+                    'Stop
+                End If
 
-            ' Constants for complex types don't work prior to Access 2007 and later.
-
+                ' Constants for complex types don't work prior to Access 2007
                 Select Case fld.Type
                     Case dbText
                         ' No look-up fields
@@ -3139,7 +3153,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                     Case dbBoolean
                         strFlds = strFlds & "YesNo"
                     Case dbLongBinary
-                        strFlds = strFlds & "OLE Object"
+                        strFlds = strFlds & "OLEObject"
                     Case 101&                                   ' dbAttachment
                         strFlds = strFlds & "Attachment"
                     Case dbBinary
@@ -3152,12 +3166,24 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
 
             Next
 
-            strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
-            f.WriteLine vbCrLf & strSQL
+            'Debug.Print Len(strLongFlds), strLongFlds
+            'Debug.Print Len(strFlds), strFlds
+            If Not blnLongFlds Then
+                strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+                f.WriteLine vbCrLf & strSQL
+            Else
+                strSQL = strSQL & Mid$(strLongFlds, 2)                  '& strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+                f.WriteLine vbCrLf & strSQL
+                strSQL = "strSQL = strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+                f.WriteLine strSQL
+            End If
+            'Debug.Print strSQL
+            'Stop
 
             ' Indexes
             For Each ndx In tdf.Indexes
 
+                'Debug.Print ndx.Name, ndx.Fields, ndx.Primary
                 If ndx.Unique Then
                     strSQL = "strSQL=""CREATE UNIQUE INDEX "
                 Else
@@ -3168,7 +3194,13 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 strFlds = vbNullString
 
                 For Each fld In tdf.Fields
-                    strFlds = ",[" & fld.Name & "]"
+                    If ndx.Primary Then
+                        strFlds = ",[" & fld.Name & "]"
+                        Exit For
+                    Else
+                        strFlds = ",[" & fld.Name & "]"
+                    End If
+                    'Debug.Print , strFlds
                 Next
 
                 strSQL = strSQL & Mid$(strFlds, 2) & ") "
@@ -3190,8 +3222,10 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                     strSQL = strSQL & " WITH" & strCn & " "
                 End If
 
+                'Debug.Print strSQL
                 f.WriteLine vbCrLf & strSQL & """" & vbCrLf & "Currentdb.Execute strSQL"
             Next
+            Stop
         End If
     Next
 
@@ -3201,17 +3235,17 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
     f.WriteLine "'Access 2010 - Compact And Repair"
     strSQL = "SendKeys " & """" & "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}" & """" & ", False"
     f.WriteLine strSQL
-    strSQL = "Exit Sub"
-    f.WriteLine strSQL
-    strSQL = "ErrorTrap:"
-    f.WriteLine strSQL
+    f.WriteLine "Exit Sub"
+    f.WriteLine "PROC_ERR:"
+    f.WriteLine "If Err = 3010 Then Resume Next"
+    f.WriteLine "If Err = 3283 Then Resume Next"
+    f.WriteLine "If Err = 3375 Then Resume Next"
     'MsgBox "Erl=" & Erl & vbCrLf & "Err.Number=" & Err.Number & vbCrLf & "Err.Description=" & Err.Description
-    strSQL = "MsgBox " & """" & "Erl=" & """" & " & vbCrLf & " & _
+    strSQL = "MsgBox " & """" & "Erl=" & """" & " & Erl & vbCrLf & " & _
                 """" & "Err.Number=" & """" & " & Err.Number & vbCrLf & " & _
                 """" & "Err.Description=" & """" & " & Err.Description"
     f.WriteLine strSQL & vbCrLf
-    strSQL = "End Sub"
-    f.WriteLine strSQL
+    f.WriteLine "End Sub"
 
     f.Close
     'Debug.Print "Done"
@@ -4040,7 +4074,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass", vbCritical, "ERROR"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
+    'If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTheDatabase of Class aegit_expClass"
     aeDocumentTheDatabase = False
     Resume PROC_EXIT
 
