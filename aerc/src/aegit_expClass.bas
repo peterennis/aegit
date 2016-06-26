@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.1"
-Private Const aegit_expVERSION_DATE As String = "June 22, 2016"
+Private Const aegit_expVERSION As String = "1.7.2"
+Private Const aegit_expVERSION_DATE As String = "June 25, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -74,7 +74,7 @@ Private Type myExportType               ' Initialize defaults as:
     ExportCodeAndObjects As Boolean     ' True
     ExportModuleCodeOnly As Boolean     ' True
     ExportQAT As Boolean                ' True
-    ExportCBID As Boolean               ' False
+    ExportCBID As Boolean               ' True
 End Type
 
 Private myExclude As myExclusions
@@ -177,7 +177,7 @@ Private Sub Class_Initialize()
         .ExportCodeAndObjects = True
         .ExportModuleCodeOnly = True
         .ExportQAT = True
-        .ExportCBID = False
+        .ExportCBID = True
     End With
 
     pExclude = True             ' Default setting is not to export associated aegit_exp files
@@ -3225,7 +3225,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 'Debug.Print strSQL
                 f.WriteLine vbCrLf & strSQL & """" & vbCrLf & "Currentdb.Execute strSQL"
             Next
-            Stop
+            'Stop
         End If
     Next
 
@@ -4004,7 +4004,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfContainers aeAppListCnt, varDebug
         OutputListOfAccessApplicationOptions varDebug
         If aegitExport.ExportCBID Then
-            OutputListOfCommandBarIDs aeAppCmbrIds, varDebug
+            OutputListOfCommandBarIDs strTheSourceLocation & aeAppCmbrIds, varDebug
+            SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
+            KillProperly (strTheSourceLocation & aeAppCmbrIds)
         End If
         OutputTableDataMacros varDebug
         OutputPrinterInfo "Debug"
@@ -4028,7 +4030,12 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
         If aegitExport.ExportCBID Then
-            OutputListOfCommandBarIDs aeAppCmbrIds
+            OutputListOfCommandBarIDs strTheSourceLocation & aeAppCmbrIds
+            'Debug.Print , "strTheSourceLocation = " & strTheSourceLocation
+            'Debug.Print , "aeAppCmbrIds = " & aeAppCmbrIds
+            'Stop
+            SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
+            KillProperly (strTheSourceLocation & aeAppCmbrIds)
         End If
         OutputTableDataMacros
         OutputPrinterInfo
@@ -4331,14 +4338,27 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
     Set CBTN = Application.CommandBars.FindControls
     Dim fle As Integer
     Dim lng As Long
-    Dim strPathFileName As String
+'    Dim strPathFileName As String
     Dim strExtension As String
 
-    strPathFileName = aegitSourceFolder & strOutputFile
-    strExtension = ".sorted.txt"
+'    strPathFileName = aegitSourceFolder & strOutputFile
+'    Debug.Print , "strPathFileName = " & strPathFileName
+'    strExtension = ".sorted.txt"
+
+'    Dim strTheSourceLocation As String
+'    If aegitSourceFolder = "default" Then
+'        strTheSourceLocation = aegitType.SourceFolder
+'    ElseIf aegitFrontEndApp Then
+'        strTheSourceLocation = aestrSourceLocation
+'    ElseIf Not aegitFrontEndApp Then
+'        strTheSourceLocation = aestrSourceLocationBe
+'    End If
+'    Debug.Print , "strTheSourceLocation = " & strTheSourceLocation
+    Debug.Print , "strOutputFile = " & strOutputFile
+'    Stop
 
     fle = FreeFile()
-    Open strPathFileName For Output As #fle
+    Open strOutputFile For Output As #fle
 
     On Error Resume Next
 
@@ -4348,18 +4368,19 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
             Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
         Next
     Next
-    Close fle
 
-    ' Sort the file
-    If Not IsMissing(varDebug) Then
-        Debug.Print "strPathFileName=" & strPathFileName
-        Debug.Print "strExtension=" & strExtension
-    End If
-
-    lng = MySortIt(strPathFileName, strExtension, "Unicode")
-    'Stop
+' Use SortTheFile
+'    ' Sort the file
+'    If Not IsMissing(varDebug) Then
+'        Debug.Print "strPathFileName=" & strPathFileName
+'        Debug.Print "strExtension=" & strExtension
+'    End If
+'
+'    lng = MySortIt(strPathFileName, strExtension, "Unicode")
+'    'Stop
 
 PROC_EXIT:
+    Close fle
     Exit Sub
 
 PROC_ERR:
@@ -5190,6 +5211,55 @@ Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varE
     End If
 
 End Function
+
+Private Sub SortTheFile(ByVal strInFile As String, ByVal strOutFile As String)
+' Ref: http://www.vbaexpress.com/forum/showthread.php?46362-Sort-contents-in-a-text-file
+' Ref: http://www.vbaexpress.com/forum/showthread.php?48491Function ArrayListSort(sn As Variant, Optional bAscending As Boolean = True)
+
+    On Error GoTo PROC_ERR
+    Debug.Print "SortTheFile"
+    Debug.Print , "strInFile = " & strInFile
+    Debug.Print , "strOutFile = " & strOutFile
+    If Dir$(strInFile) = vbNullString Then Stop
+
+    Dim str As String
+    Dim ary() As Variant
+    Dim L As Long
+
+    'Close #1
+    'Close #2
+    Open strInFile For Input As #1
+    Open strOutFile For Output As #2
+
+    With CreateObject("System.Collections.ArrayList")
+        Do Until EOF(1)
+            Line Input #1, str
+            .Add Trim$(CStr(str))
+        Loop
+        .Sort
+        ary = .ToArray
+        For L = LBound(ary) To UBound(ary)
+            Print #2, ary(L)
+        Next
+    End With
+
+
+PROC_EXIT:
+    Close #1
+    Close #2
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case 70
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure SortTheFile of Class aegit_expClass", vbCritical, "ERROR"
+            Resume PROC_EXIT
+        Case Else
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure SortTheFile of Class aegit_expClass", vbCritical, "ERROR"
+            Resume Next
+    End Select
+
+End Sub
 
 Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
 ' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc

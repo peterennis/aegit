@@ -3,6 +3,123 @@ Option Explicit
 
 #Const conLateBinding = 0
 
+Public Sub TestReadInputWriteOutputFile()
+
+    Dim strFileIn As String
+    Dim strFileOut As String
+
+    strFileIn = "C:\ae\aegit\aerc\src\OutputSchemaFile.txt"
+    strFileOut = ".\Out.txt"
+
+    ReadInputWriteOutputFile strFileIn, strFileOut
+
+End Sub
+
+Public Sub ReadInputWriteOutputFile(ByVal strFileIn As String, ByVal strFileOut As String)
+
+    'Debug.Print "ReadInputFile"
+    On Error GoTo 0
+
+    Dim fleIn As Integer
+    Dim fleOut As Integer
+    Dim strIn As String
+    Dim i As Integer
+
+    fleIn = FreeFile()
+    Open strFileIn For Input As #fleIn
+
+    fleOut = FreeFile()
+    Open strFileOut For Output As #fleOut
+
+    i = 0
+    Do While Not EOF(fleIn)
+        i = i + 1
+        Line Input #fleIn, strIn
+        If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
+            Exit Do
+        Else
+            Debug.Print i, strIn
+            Print #fleOut, strIn
+        End If
+    Loop
+    Do While Not EOF(fleIn)
+        i = i + 1
+        Line Input #fleIn, strIn
+NextIteration:
+        If FoundKeywordInLine(strIn) Then
+            Debug.Print i & ">", strIn
+            Print #fleOut, strIn
+            Do While Not EOF(fleIn)
+                i = i + 1
+                Line Input #fleIn, strIn
+                If Not FoundKeywordInLine(strIn, "End") Then
+                    'Debug.Print "Not Found!!!", i
+                    GoTo SearchForEnd
+                Else
+                    Debug.Print i & ">", "Found End!!!"
+                    Print #fleOut, strIn
+                    i = i + 1
+                    Line Input #fleIn, strIn
+                    Debug.Print i & ":", strIn
+                    'Stop
+                    GoTo NextIteration
+                End If
+SearchForEnd:
+            Loop
+        Else
+            Print #fleOut, strIn
+            Debug.Print i, strIn
+        End If
+    Loop
+
+    Close fleIn
+    Close fleOut
+
+End Sub
+
+Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
+
+    'Debug.Print "FoundKeywordInLine"
+    On Error GoTo 0
+
+    FoundKeywordInLine = False
+    If Not IsMissing(varEnd) Then
+        If InStr(1, strLine, "End", vbTextCompare) > 0 Then
+            FoundKeywordInLine = True
+            Exit Function
+        End If
+    End If
+    If InStr(1, strLine, "NameMap = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtMip = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevMode = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevNames = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+    If InStr(1, strLine, "OleData = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
+
+End Function
+
 Public Function FileDelete(ByVal strFileName As String) As Boolean
     On Error GoTo 0
     If Len(Dir$(strFileName)) > 0 Then
