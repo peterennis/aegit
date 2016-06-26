@@ -4330,6 +4330,7 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 ' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
 
     Debug.Print "OutputListOfCommandBarIDs"
+    Debug.Print , "strOutputFile = " & strOutputFile
     On Error GoTo PROC_ERR
 
     Dim CBR As Object       ' CommandBar
@@ -4338,24 +4339,7 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
     Set CBTN = Application.CommandBars.FindControls
     Dim fle As Integer
     Dim lng As Long
-'    Dim strPathFileName As String
     Dim strExtension As String
-
-'    strPathFileName = aegitSourceFolder & strOutputFile
-'    Debug.Print , "strPathFileName = " & strPathFileName
-'    strExtension = ".sorted.txt"
-
-'    Dim strTheSourceLocation As String
-'    If aegitSourceFolder = "default" Then
-'        strTheSourceLocation = aegitType.SourceFolder
-'    ElseIf aegitFrontEndApp Then
-'        strTheSourceLocation = aestrSourceLocation
-'    ElseIf Not aegitFrontEndApp Then
-'        strTheSourceLocation = aestrSourceLocationBe
-'    End If
-'    Debug.Print , "strTheSourceLocation = " & strTheSourceLocation
-    Debug.Print , "strOutputFile = " & strOutputFile
-'    Stop
 
     fle = FreeFile()
     Open strOutputFile For Output As #fle
@@ -4368,16 +4352,6 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
             Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
         Next
     Next
-
-' Use SortTheFile
-'    ' Sort the file
-'    If Not IsMissing(varDebug) Then
-'        Debug.Print "strPathFileName=" & strPathFileName
-'        Debug.Print "strExtension=" & strExtension
-'    End If
-'
-'    lng = MySortIt(strPathFileName, strExtension, "Unicode")
-'    'Stop
 
 PROC_EXIT:
     Close fle
@@ -5226,8 +5200,6 @@ Private Sub SortTheFile(ByVal strInFile As String, ByVal strOutFile As String)
     Dim ary() As Variant
     Dim L As Long
 
-    'Close #1
-    'Close #2
     Open strInFile For Input As #1
     Open strOutFile For Output As #2
 
@@ -5251,7 +5223,7 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
-        Case 70
+        Case 53
             MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure SortTheFile of Class aegit_expClass", vbCritical, "ERROR"
             Resume PROC_EXIT
         Case Else
