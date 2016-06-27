@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.7.2"
-Private Const aegit_expVERSION_DATE As String = "June 25, 2016"
+Private Const aegit_expVERSION_DATE As String = "June 26, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3174,7 +3174,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
             Else
                 strSQL = strSQL & Mid$(strLongFlds, 2)                  '& strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
                 f.WriteLine vbCrLf & strSQL
-                strSQL = "strSQL = strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+                strSQL = "strSQL=strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
                 f.WriteLine strSQL
             End If
             'Debug.Print strSQL
