@@ -117,6 +117,10 @@ Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varE
         FoundKeywordInLine = True
         Exit Function
     End If
+    If InStr(1, strLine, "ImageData = Begin", vbTextCompare) > 0 Then
+        FoundKeywordInLine = True
+        Exit Function
+    End If
 
 End Function
 

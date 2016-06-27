@@ -6,7 +6,6 @@
 &Legacy Keyboard Support: 30016 - &Query
 : 109 - Print Pre&view
 : 11253 - &Report View
-: 11305 - &Design Tasks Pane
 : 12329 - Datas&heet View
 : 13157 - La&yout View
 : 14782 - &Close
@@ -527,22 +526,22 @@ Form PivotTable Popup: 2952 - &Design View
 Form PivotTable Popup: 502 - &Form View
 Form PivotTable Popup: 5815 - Pi&votChart View
 Form PivotTable Popup: 5897 - E&xport to Excel
-Form View Control: 10068 - Sort &Descending
-Form View Control: 10071 - Sort &Descending
-Form View Control: 10076 - Sort &Descending
-Form View Control: 10089 - Sort &Descending
-Form View Control: 10090 - Sort &Descending
-Form View Control: 10091 - Sort &Descending
-Form View Control: 10092 - Sort &Descending
-Form View Control: 10093 - Sort &Descending
-Form View Control: 10094 - Sort &Descending
-Form View Control: 10095 - Sort &Descending
+Form View Control: 10068 - So????
+Form View Control: 10071 - So????
+Form View Control: 10076 - So????
+Form View Control: 10089 - So????
+Form View Control: 10090 - So????
+Form View Control: 10091 - So????
+Form View Control: 10092 - So????
+Form View Control: 10093 - So????
+Form View Control: 10094 - So????
+Form View Control: 10095 - So????
 Form View Control: 11108 - Sort &Descending
 Form View Control: 11669 - Select Entire Ro&w
 Form View Control: 11670 - Select Entire &Column
 Form View Control: 12076 - &Group On
-Form View Control: 12265 - Sort &Descending
-Form View Control: 12266 - Sort &Descending
+Form View Control: 12265 - So????
+Form View Control: 12266 - So????
 Form View Control: 12616 - &Paste Formatting
 Form View Control: 12898 - &Forward
 Form View Control: 12899 - &Back
@@ -577,7 +576,7 @@ Form View Control: 31381 - &Layout
 Form View Control: 31382 - &Gridlines
 Form View Control: 31398 - &Total
 Form View Control: 31574 - P&osition
-Form View Control: 31581 - ng
+Form View Control: 31581 - ?????
 Form View Control: 31626 - &Insert
 Form View Control: 31627 - &Merge/Split
 Form View Control: 3492 - Han&gul Hanja Conversion...
@@ -1239,6 +1238,7 @@ Print Preview: 5802 - &Setup
 Print Preview: 639 - &Two Pages
 Print Preview: 984 - Microsoft Access &Help
 Proofing: 5746 - Tas&k Pane
+Property Sheet: 11305 - &Design Tasks Pane
 Query Datasheet: 108 - &Format Painter
 Query Datasheet: 109 - Print Pre&view
 Query Datasheet: 128 - Can't &Undo
