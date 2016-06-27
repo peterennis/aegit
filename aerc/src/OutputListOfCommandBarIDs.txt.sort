@@ -6,6 +6,7 @@
 &Legacy Keyboard Support: 30016 - &Query
 : 109 - Print Pre&view
 : 11253 - &Report View
+: 11305 - &Design Tasks Pane
 : 12329 - Datas&heet View
 : 13157 - La&yout View
 : 14782 - &Close
@@ -526,11 +527,11 @@ Form PivotTable Popup: 2952 - &Design View
 Form PivotTable Popup: 502 - &Form View
 Form PivotTable Popup: 5815 - Pi&votChart View
 Form PivotTable Popup: 5897 - E&xport to Excel
-Form View Control: 10068 - So????
-Form View Control: 10071 - So????
+Form View Control: 10068 - Sort &Descending
+Form View Control: 10071 - Sort &Descending
 Form View Control: 10076 - So????
 Form View Control: 10089 - So????
-Form View Control: 10090 - So????
+Form View Control: 10090 - Sort &Descending
 Form View Control: 10091 - So????
 Form View Control: 10092 - So????
 Form View Control: 10093 - So????
@@ -576,7 +577,7 @@ Form View Control: 31381 - &Layout
 Form View Control: 31382 - &Gridlines
 Form View Control: 31398 - &Total
 Form View Control: 31574 - P&osition
-Form View Control: 31581 - ?????
+Form View Control: 31581 - ng
 Form View Control: 31626 - &Insert
 Form View Control: 31627 - &Merge/Split
 Form View Control: 3492 - Han&gul Hanja Conversion...
@@ -1238,7 +1239,6 @@ Print Preview: 5802 - &Setup
 Print Preview: 639 - &Two Pages
 Print Preview: 984 - Microsoft Access &Help
 Proofing: 5746 - Tas&k Pane
-Property Sheet: 11305 - &Design Tasks Pane
 Query Datasheet: 108 - &Format Painter
 Query Datasheet: 109 - Print Pre&view
 Query Datasheet: 128 - Can't &Undo
@@ -1658,19 +1658,19 @@ Table Datasheet: 577 - &Navigation Pane
 Table Datasheet: 5905 - File Searc&h...
 Table Datasheet: 644 - Delete &Record
 Table Datasheet: 984 - Microsoft Access &Help
-Table Design Datasheet Cell: 10068 - Sort &Descen??????????
-Table Design Datasheet Cell: 10071 - Sort &Descen??????????
-Table Design Datasheet Cell: 10076 - Sort &Descen??????????
-Table Design Datasheet Cell: 10089 - Sort &Descen??????????
-Table Design Datasheet Cell: 10090 - Sort &Descen??????????
-Table Design Datasheet Cell: 10091 - Sort &Descen??????????
-Table Design Datasheet Cell: 10092 - Sort &Descen??????????
-Table Design Datasheet Cell: 10093 - Sort &Descen??????????
-Table Design Datasheet Cell: 10094 - Sort &Descen??????????
-Table Design Datasheet Cell: 10095 - Sort &Descen??????????
-Table Design Datasheet Cell: 11108 - Sort &Descen??????????
-Table Design Datasheet Cell: 12265 - Sort &Descen??????????
-Table Design Datasheet Cell: 12266 - Sort &Descen??????????
+Table Design Datasheet Cell: 10068 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10071 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10076 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10089 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10090 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10091 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10092 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10093 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 10094 - So¿|??
+Table Design Datasheet Cell: 10095 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 11108 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 12265 - Sort &Descen???s?????s
+Table Design Datasheet Cell: 12266 - Sort &Descen???s?????s
 Table Design Datasheet Cell: 12900 - &Manage Attachments...
 Table Design Datasheet Cell: 12950 - Edit List &Items...
 Table Design Datasheet Cell: 12952 - S&how column history...
@@ -1684,7 +1684,7 @@ Table Design Datasheet Cell: 22 - &Paste
 Table Design Datasheet Cell: 2995 - Insert Ob&ject...
 Table Design Datasheet Cell: 30019 - &Object
 Table Design Datasheet Cell: 30094 - &Hyperlink
-Table Design Datasheet Cell: 31581 - ????????
+Table Design Datasheet Cell: 31581 - ?s?????s
 Table Design Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Table Design Datasheet Cell: 3720 - Recon&vert
 Table Design Datasheet Column: 141 - &Find...

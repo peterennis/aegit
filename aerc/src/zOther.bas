@@ -17,7 +17,7 @@ End Sub
 
 Public Sub ReadInputWriteOutputFile(ByVal strFileIn As String, ByVal strFileOut As String)
 
-    'Debug.Print "ReadInputFile"
+    'Debug.Print "ReadInputWriteOutputFile"
     On Error GoTo 0
 
     Dim fleIn As Integer
@@ -35,90 +35,28 @@ Public Sub ReadInputWriteOutputFile(ByVal strFileIn As String, ByVal strFileOut 
     Do While Not EOF(fleIn)
         i = i + 1
         Line Input #fleIn, strIn
-        If Left$(strIn, Len("Checksum =")) = "Checksum =" Then
-            Exit Do
-        Else
-            Debug.Print i, strIn
+        If FoundSqlKeywordInLine(strIn) Then
+            'Debug.Print i & ">", strIn
             Print #fleOut, strIn
+        Else
+            'Debug.Print i, strIn
         End If
     Loop
-    Do While Not EOF(fleIn)
-        i = i + 1
-        Line Input #fleIn, strIn
-NextIteration:
-        If FoundKeywordInLine(strIn) Then
-            Debug.Print i & ">", strIn
-            Print #fleOut, strIn
-            Do While Not EOF(fleIn)
-                i = i + 1
-                Line Input #fleIn, strIn
-                If Not FoundKeywordInLine(strIn, "End") Then
-                    'Debug.Print "Not Found!!!", i
-                    GoTo SearchForEnd
-                Else
-                    Debug.Print i & ">", "Found End!!!"
-                    Print #fleOut, strIn
-                    i = i + 1
-                    Line Input #fleIn, strIn
-                    Debug.Print i & ":", strIn
-                    'Stop
-                    GoTo NextIteration
-                End If
-SearchForEnd:
-            Loop
-        Else
-            Print #fleOut, strIn
-            Debug.Print i, strIn
-        End If
-    Loop
+    Debug.Print "DONE !!!"
 
     Close fleIn
     Close fleOut
 
 End Sub
 
-Private Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
+Private Function FoundSqlKeywordInLine(ByVal strLine As String) ', Optional ByVal varEnd As Variant) As Boolean
 
-    'Debug.Print "FoundKeywordInLine"
+    'Debug.Print "FoundSqlKeywordInLine"
     On Error GoTo 0
 
-    FoundKeywordInLine = False
-    If Not IsMissing(varEnd) Then
-        If InStr(1, strLine, "End", vbTextCompare) > 0 Then
-            FoundKeywordInLine = True
-            Exit Function
-        End If
-    End If
-    If InStr(1, strLine, "NameMap = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "PrtMip = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "PrtDevMode = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "PrtDevNames = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "PrtDevModeW = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "PrtDevNamesW = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "OleData = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
-        Exit Function
-    End If
-    If InStr(1, strLine, "ImageData = Begin", vbTextCompare) > 0 Then
-        FoundKeywordInLine = True
+    FoundSqlKeywordInLine = False
+    If InStr(1, strLine, "strSQL=", vbTextCompare) > 0 Then
+        FoundSqlKeywordInLine = True
         Exit Function
     End If
 
