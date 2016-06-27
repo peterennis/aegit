@@ -39,7 +39,7 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.2"
+Private Const aegit_expVERSION As String = "1.7.3"
 Private Const aegit_expVERSION_DATE As String = "June 26, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -3219,15 +3219,16 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 End If
 
                 If Trim$(strCn) <> vbNullString Then
-                    strSQL = strSQL & " WITH" & strCn & " "
+                    strSQL = strSQL & "WITH" & strCn & " "
                 End If
 
-                'Debug.Print strSQL
-                f.WriteLine vbCrLf & strSQL & """" & vbCrLf & "Currentdb.Execute strSQL"
+                Debug.Print strSQL
+                f.WriteLine vbCrLf & Trim(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
             Next
             'Stop
         End If
     Next
+    'Stop
 
     'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
     'f.WriteLine strSQL
@@ -3251,6 +3252,57 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
     'Debug.Print "Done"
 
 End Sub
+
+Private Sub OutputTheSqlFile(ByVal strFileIn As String, ByVal strFileOut As String)
+    ReadInputWriteOutputFileSql strFileIn, strFileOut
+End Sub
+
+Private Sub ReadInputWriteOutputFileSql(ByVal strFileIn As String, ByVal strFileOut As String)
+
+    'Debug.Print "ReadInputWriteOutputFile"
+    On Error GoTo 0
+
+    Dim fleIn As Integer
+    Dim fleOut As Integer
+    Dim strIn As String
+    Dim i As Integer
+
+    fleIn = FreeFile()
+    Open strFileIn For Input As #fleIn
+
+    fleOut = FreeFile()
+    Open strFileOut For Output As #fleOut
+
+    i = 0
+    Do While Not EOF(fleIn)
+        i = i + 1
+        Line Input #fleIn, strIn
+        If FoundSqlKeywordInLine(strIn) Then
+            'Debug.Print i & ">", strIn
+            Print #fleOut, strIn
+        Else
+            'Debug.Print i, strIn
+        End If
+    Loop
+    Debug.Print "DONE !!!"
+
+    Close fleIn
+    Close fleOut
+
+End Sub
+
+Private Function FoundSqlKeywordInLine(ByVal strLine As String) ', Optional ByVal varEnd As Variant) As Boolean
+
+    'Debug.Print "FoundSqlKeywordInLine"
+    On Error GoTo 0
+
+    FoundSqlKeywordInLine = False
+    If InStr(1, strLine, "strSQL=", vbTextCompare) > 0 Then
+        FoundSqlKeywordInLine = True
+        Exit Function
+    End If
+
+End Function
 
 Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     Debug.Print "isPK"
@@ -4061,6 +4113,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputQueriesSqlText
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
+    OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then

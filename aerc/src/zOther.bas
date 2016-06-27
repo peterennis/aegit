@@ -3,65 +3,6 @@ Option Explicit
 
 #Const conLateBinding = 0
 
-Public Sub TestReadInputWriteOutputFile()
-
-    Dim strFileIn As String
-    Dim strFileOut As String
-
-    strFileIn = "C:\ae\aegit\aerc\src\OutputSchemaFile.txt"
-    strFileOut = ".\Out.txt"
-
-    ReadInputWriteOutputFile strFileIn, strFileOut
-
-End Sub
-
-Public Sub ReadInputWriteOutputFile(ByVal strFileIn As String, ByVal strFileOut As String)
-
-    'Debug.Print "ReadInputWriteOutputFile"
-    On Error GoTo 0
-
-    Dim fleIn As Integer
-    Dim fleOut As Integer
-    Dim strIn As String
-    Dim i As Integer
-
-    fleIn = FreeFile()
-    Open strFileIn For Input As #fleIn
-
-    fleOut = FreeFile()
-    Open strFileOut For Output As #fleOut
-
-    i = 0
-    Do While Not EOF(fleIn)
-        i = i + 1
-        Line Input #fleIn, strIn
-        If FoundSqlKeywordInLine(strIn) Then
-            'Debug.Print i & ">", strIn
-            Print #fleOut, strIn
-        Else
-            'Debug.Print i, strIn
-        End If
-    Loop
-    Debug.Print "DONE !!!"
-
-    Close fleIn
-    Close fleOut
-
-End Sub
-
-Private Function FoundSqlKeywordInLine(ByVal strLine As String) ', Optional ByVal varEnd As Variant) As Boolean
-
-    'Debug.Print "FoundSqlKeywordInLine"
-    On Error GoTo 0
-
-    FoundSqlKeywordInLine = False
-    If InStr(1, strLine, "strSQL=", vbTextCompare) > 0 Then
-        FoundSqlKeywordInLine = True
-        Exit Function
-    End If
-
-End Function
-
 Public Function FileDelete(ByVal strFileName As String) As Boolean
     On Error GoTo 0
     If Len(Dir$(strFileName)) > 0 Then
