@@ -3,6 +3,83 @@ Option Explicit
 
 #Const conLateBinding = 0
 
+Public Sub TestOutputLovefieldFile()
+
+    Dim strFileIn As String
+    Dim strFileOut As String
+
+    strFileIn = "C:\ae\aegit\aerc\src\OutputSchemaFile.txt.sql"
+    strFileOut = ".\Out.txt"
+
+    ReadInputWriteOutputSqlSchemaOnlyFile strFileIn, strFileOut
+
+End Sub
+
+Public Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByVal strFileOut As String)
+
+    'Debug.Print "ReadInputWriteOutputSqlSchemaOnlyFile"
+    On Error GoTo PROC_ERR
+
+    Dim fleIn As Integer
+    Dim fleOut As Integer
+    Dim strIn As String
+    Dim strIn2 As String
+    Dim i As Integer
+
+    fleOut = FreeFile()
+    Open strFileOut For Output As #fleOut
+
+    Dim arrSQL() As String
+    i = 0
+    fleIn = FreeFile()
+    Open strFileIn For Input As #fleIn
+    Do While Not EOF(fleIn)
+        ReDim Preserve arrSQL(i)
+        Line Input #fleIn, arrSQL(i)
+        i = i + 1
+    Loop
+    Close fleIn
+
+    For i = 0 To UBound(arrSQL)
+        Debug.Print i & ">", arrSQL(i)
+    Next
+    
+    Exit Sub
+    
+PROC_EXIT:
+    Close fleIn
+    Close fleOut
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err
+    Case Else
+        MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure ReadInputWriteOutputSqlSchemaOnlyFile of Class aegitClass"
+        Resume PROC_EXIT
+    End Select
+
+End Sub
+
+Private Function FoundSqlInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
+
+    'Debug.Print "FoundSqlInLine"
+    On Error GoTo 0
+
+    FoundSqlInLine = False
+    If Not IsMissing(varEnd) Then
+        If InStr(1, strLine, "strSQL=strSQL & ", vbTextCompare) > 0 Then
+            FoundSqlInLine = True
+        Else
+            FoundSqlInLine = True
+        End If
+        Exit Function
+    ElseIf InStr(1, strLine, "strSQL=", vbTextCompare) > 0 Then
+        FoundSqlInLine = True
+        Exit Function
+    End If
+
+End Function
+
 Public Function FileDelete(ByVal strFileName As String) As Boolean
     On Error GoTo 0
     If Len(Dir$(strFileName)) > 0 Then

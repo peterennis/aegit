@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.3"
-Private Const aegit_expVERSION_DATE As String = "June 26, 2016"
+Private Const aegit_expVERSION As String = "1.7.4"
+Private Const aegit_expVERSION_DATE As String = "June 27, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3250,6 +3250,22 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
 
     f.Close
     'Debug.Print "Done"
+
+End Sub
+
+Private Sub OutputTheLovefieldFile(ByVal strFileIn As String, ByVal strFileOut As String)
+' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
+' Type, Default Value, Nullable by default, Description
+' lf.Type.ARRAY_BUFFER, null, Yes, JavaScript ArrayBuffer object
+' lf.Type.BOOLEAN, false, No, JavaScript boolean object
+' lf.Type.DATE_TIME, Date(0), No, JavaScript Date - will be converted to timestamp integer internally
+' lf.Type.INTEGER, 0, No, 32-bit integer
+' lf.Type.NUMBER, 0, No, JavaScript number type
+' lf.Type.String, '', No, JavaScript string type
+' lf.Type.OBJECT, null, Yes, JavaScript Object - stored as-is
+
+    'Debug.Print "OutputTheLovefieldFile"
+    On Error GoTo 0
 
 End Sub
 
