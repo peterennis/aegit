@@ -23,8 +23,9 @@ Public Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByVa
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
-    Dim strIn2 As String
     Dim i As Integer
+    Dim strSqlA As String
+    Dim strSqlB As String
 
     fleOut = FreeFile()
     Open strFileOut For Output As #fleOut
@@ -40,12 +41,41 @@ Public Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByVa
     Loop
     Close fleIn
 
+    'For i = 0 To UBound(arrSQL)
+    '    Debug.Print i & ">", arrSQL(i)
+    'Next
+
     For i = 0 To UBound(arrSQL)
-        Debug.Print i & ">", arrSQL(i)
+        If (i <> UBound(arrSQL)) Then
+            If Left$(arrSQL(i + 1), 16) = "strSQL=strSQL & " Then
+                If Left$(arrSQL(i), 7) = "strSQL=" Then
+                    strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
+                    strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
+                    Debug.Print i & ">", "strSqlA=" & strSqlA
+                    strSqlB = Right$(arrSQL(i + 1), Len(arrSQL(i + 1)) - 17)
+                    strSqlB = Left$(strSqlB, Len(strSqlB) - 1)
+                    Debug.Print i & ">", "strSqlB=" & strSqlB
+                    Print #fleOut, strSqlA & strSqlB
+                    i = i + 1
+                End If
+            ElseIf Left$(arrSQL(i), 7) = "strSQL=" Then
+                strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
+                strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
+                Debug.Print i, strSqlA
+                Print #fleOut, strSqlA
+            End If
+        Else
+            If Left$(arrSQL(i), 7) = "strSQL=" Then
+                strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
+                strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
+                Debug.Print i, strSqlA
+                Print #fleOut, strSqlA
+            End If
+        Debug.Print "UBound"
+        End If
     Next
-    
-    Exit Sub
-    
+    Debug.Print "DONE !!!"
+
 PROC_EXIT:
     Close fleIn
     Close fleOut
@@ -60,25 +90,25 @@ PROC_ERR:
 
 End Sub
 
-Private Function FoundSqlInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
-
-    'Debug.Print "FoundSqlInLine"
-    On Error GoTo 0
-
-    FoundSqlInLine = False
-    If Not IsMissing(varEnd) Then
-        If InStr(1, strLine, "strSQL=strSQL & ", vbTextCompare) > 0 Then
-            FoundSqlInLine = True
-        Else
-            FoundSqlInLine = True
-        End If
-        Exit Function
-    ElseIf InStr(1, strLine, "strSQL=", vbTextCompare) > 0 Then
-        FoundSqlInLine = True
-        Exit Function
-    End If
-
-End Function
+'Private Function FoundSqlInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
+'
+'    'Debug.Print "FoundSqlInLine"
+'    On Error GoTo 0
+'
+'    FoundSqlInLine = False
+'    If Not IsMissing(varEnd) Then
+'        If InStr(1, strLine, "strSQL=strSQL & ", vbTextCompare) > 0 Then
+'            FoundSqlInLine = True
+'        Else
+'            FoundSqlInLine = True
+'        End If
+'        Exit Function
+'    ElseIf InStr(1, strLine, "strSQL=", vbTextCompare) > 0 Then
+'        FoundSqlInLine = True
+'        Exit Function
+'    End If
+'
+'End Function
 
 Public Function FileDelete(ByVal strFileName As String) As Boolean
     On Error GoTo 0

@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.4"
-Private Const aegit_expVERSION_DATE As String = "June 27, 2016"
+Private Const aegit_expVERSION As String = "1.7.5"
+Private Const aegit_expVERSION_DATE As String = "June 28, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3320,6 +3320,89 @@ Private Function FoundSqlKeywordInLine(ByVal strLine As String) ', Optional ByVa
 
 End Function
 
+Private Sub OutputTheSqlOnlyFile(ByVal strFileIn As String, ByVal strFileOut As String)
+    Debug.Print "OutputTheSqlOnlyFile"
+    Debug.Print , "strFileIn=" & strFileIn
+    Debug.Print , "strFileOut=" & strFileOut
+    Stop
+    ReadInputWriteOutputFileSql strFileIn, strFileOut
+End Sub
+
+Private Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByVal strFileOut As String)
+
+    'Debug.Print "ReadInputWriteOutputSqlSchemaOnlyFile"
+    On Error GoTo PROC_ERR
+
+    Dim fleIn As Integer
+    Dim fleOut As Integer
+    Dim strIn As String
+    Dim i As Integer
+    Dim strSqlA As String
+    Dim strSqlB As String
+
+    fleOut = FreeFile()
+    Open strFileOut For Output As #fleOut
+
+    Dim arrSQL() As String
+    i = 0
+    fleIn = FreeFile()
+    Open strFileIn For Input As #fleIn
+    Do While Not EOF(fleIn)
+        ReDim Preserve arrSQL(i)
+        Line Input #fleIn, arrSQL(i)
+        i = i + 1
+    Loop
+    Close fleIn
+
+    'For i = 0 To UBound(arrSQL)
+    '    Debug.Print i & ">", arrSQL(i)
+    'Next
+
+    For i = 0 To UBound(arrSQL)
+        If (i <> UBound(arrSQL)) Then
+            If Left$(arrSQL(i + 1), 16) = "strSQL=strSQL & " Then
+                If Left$(arrSQL(i), 7) = "strSQL=" Then
+                    strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
+                    strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
+                    Debug.Print i & ">", "strSqlA=" & strSqlA
+                    strSqlB = Right$(arrSQL(i + 1), Len(arrSQL(i + 1)) - 17)
+                    strSqlB = Left$(strSqlB, Len(strSqlB) - 1)
+                    Debug.Print i & ">", "strSqlB=" & strSqlB
+                    Print #fleOut, strSqlA & strSqlB
+                    i = i + 1
+                End If
+            ElseIf Left$(arrSQL(i), 7) = "strSQL=" Then
+                strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
+                strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
+                Debug.Print i, strSqlA
+                Print #fleOut, strSqlA
+            End If
+        Else
+            If Left$(arrSQL(i), 7) = "strSQL=" Then
+                strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
+                strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
+                Debug.Print i, strSqlA
+                Print #fleOut, strSqlA
+            End If
+        Debug.Print "UBound"
+        End If
+    Next
+    Debug.Print "DONE !!!"
+
+PROC_EXIT:
+    Close fleIn
+    Close fleOut
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err
+    Case Else
+        MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure ReadInputWriteOutputSqlSchemaOnlyFile of Class aegitClass"
+        Resume PROC_EXIT
+    End Select
+
+End Sub
+
 Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     Debug.Print "isPK"
     On Error GoTo 0
@@ -4130,6 +4213,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputFieldLookupControlTypeList
     OutputTheSchemaFile
     OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
+    OutputTheSqlOnlyFile strTheSourceLocation & aeSchemaFile & ".sql", strTheSourceLocation & aeSchemaFile & ".sql" & ".only"
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then
