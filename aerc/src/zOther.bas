@@ -4,6 +4,83 @@ Option Explicit
 #Const conLateBinding = 0
 
 Public Sub GenerateLovefieldSchema()
+
+    Dim strFileIn As String
+    Dim strFileOut As String
+
+    strFileIn = "C:\ae\aegit\aerc\src\OutputSchemaFile.txt.sql.only"
+    strFileOut = ".\Out.txt"
+
+    ReadInputWriteOutputLovefieldSchema strFileIn, strFileOut
+
+End Sub
+
+Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal strFileOut As String)
+
+    'Debug.Print "ReadInputWriteOutputLovefieldSchema"
+    On Error GoTo PROC_ERR
+
+    Dim fleIn As Integer
+    Dim fleOut As Integer
+    Dim strIn As String
+    Dim i As Integer
+    Dim strLfCreateTable As String
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb()
+    Dim strAppName As String
+    strAppName = Application.VBE.ActiveVBProject.Name
+    Dim strLfBegin As String
+    strLfBegin = "// Begin schema creation" & vbCrLf & "var schemaBuilder = lf.schema.create('" & strAppName & "', 1);"
+
+    fleOut = FreeFile()
+    Open strFileOut For Output As #fleOut
+
+    Dim arrSQL() As String
+    i = 0
+    fleIn = FreeFile()
+    Open strFileIn For Input As #fleIn
+    Do While Not EOF(fleIn)
+        ReDim Preserve arrSQL(i)
+        Line Input #fleIn, arrSQL(i)
+        i = i + 1
+    Loop
+    Close fleIn
+
+    'For i = 0 To UBound(arrSQL)
+    '    Debug.Print i & ">", arrSQL(i)
+    'Next
+
+    Debug.Print strLfBegin
+
+    For i = 0 To UBound(arrSQL)
+        If Left$(arrSQL(i), 12) = "CREATE TABLE" Then
+            ' Get the table name
+            strLfCreateTable = "schemaBuilder.createTable('" & GetTableName(arrSQL(i)) & "')."
+            Debug.Print i, strLfCreateTable
+        ElseIf Left$(arrSQL(i), 19) = "CREATE UNIQUE INDEX" Then
+            ' Create the index
+            'Print #fleOut, strSqlA
+            Debug.Print i, arrSQL(i)
+        End If
+    Next
+    Debug.Print "DONE !!!"
+
+PROC_EXIT:
+    Close fleIn
+    Close fleOut
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err
+        Case Else
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure ReadInputWriteOutputLovefieldSchema of Class aegitClass"
+            Resume PROC_EXIT
+    End Select
+
+End Sub
+
+Public Sub GenerateLovefieldSchemaSample()
 ' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
 
     Const APP_NAME As String = "aelfdb"
@@ -39,6 +116,18 @@ End Function
 
 Private Function AddPrimaryKey(ByVal strColName As String) As String
     AddPrimaryKey = Space(4) & "addPrimaryKey('[" & strColName & "']);"
+End Function
+
+Public Function GetTableName(ByVal strSchemaLine As String) As String
+
+    Dim strResult As String
+    Dim intPos1 As Integer
+    Dim intPos2 As Integer
+
+    intPos1 = InStr(1, strSchemaLine, "[")
+    intPos2 = InStr(1, strSchemaLine, "]")
+    GetTableName = Mid$(strSchemaLine, intPos1 + 1, intPos2 - intPos1 - 1)
+
 End Function
 
 Public Sub TestOutputLovefieldFile()
