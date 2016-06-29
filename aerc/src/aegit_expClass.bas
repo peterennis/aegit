@@ -3325,7 +3325,7 @@ Private Sub OutputTheSqlOnlyFile(ByVal strFileIn As String, ByVal strFileOut As 
     Debug.Print , "strFileIn=" & strFileIn
     Debug.Print , "strFileOut=" & strFileOut
     Stop
-    ReadInputWriteOutputFileSql strFileIn, strFileOut
+    ReadInputWriteOutputSqlSchemaOnlyFile strFileIn, strFileOut
 End Sub
 
 Private Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByVal strFileOut As String)

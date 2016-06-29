@@ -3,6 +3,44 @@ Option Explicit
 
 #Const conLateBinding = 0
 
+Public Sub GenerateLovefieldSchema()
+' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
+
+    Const APP_NAME As String = "aelfdb"
+    Const LF_BEGIN As String = "// Begin schema creation" & vbCrLf & "var schemaBuilder = lf.schema.create('" & APP_NAME & "', 1);"
+    
+    Dim strTableName As String
+    Dim strColumnName As String
+    Dim strLfCreateTable As String
+
+    strTableName = "Assets"
+    strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
+
+    Debug.Print LF_BEGIN
+    Debug.Print strLfCreateTable
+    strColumnName = "id"
+    Debug.Print AddColumnString(strColumnName)
+    strColumnName = "asset"
+    Debug.Print AddColumnString(strColumnName)
+    strColumnName = "timestamp"
+    Debug.Print AddColumnInteger(strColumnName)
+    strColumnName = "id"
+    Debug.Print AddPrimaryKey(strColumnName)
+
+End Sub
+
+Private Function AddColumnString(ByVal strColName As String) As String
+    AddColumnString = Space(4) & "addColumn('" & strColName & "', lf.Type.STRING)."
+End Function
+
+Private Function AddColumnInteger(ByVal strColName As String) As String
+    AddColumnInteger = Space(4) & "addColumn('" & strColName & "', lf.Type.INTEGER)."
+End Function
+
+Private Function AddPrimaryKey(ByVal strColName As String) As String
+    AddPrimaryKey = Space(4) & "addPrimaryKey('[" & strColName & "']);"
+End Function
+
 Public Sub TestOutputLovefieldFile()
 
     Dim strFileIn As String
