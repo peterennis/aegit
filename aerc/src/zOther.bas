@@ -3,6 +3,8 @@ Option Explicit
 
 #Const conLateBinding = 0
 
+Private mstrToParse As String
+
 Public Sub GenerateLovefieldSchema()
 
     Dim strFileIn As String
@@ -25,7 +27,6 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
-    Dim strToParse As String
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
@@ -59,11 +60,10 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Get the table name
             strLfCreateTable = "schemaBuilder.createTable('" & GetTableName(arrSQL(i)) & "')."
             Debug.Print i, strLfCreateTable
-            strToParse = "Something"
-            Do While strToParse <> vbNullString
-                strToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
-                Debug.Print , strToParse
-                strToParse = vbNullString
+            mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
+            Do While mstrToParse <> vbNullString
+                Debug.Print , GetFieldInfo(mstrToParse) ', mstrToParse
+                'Stop
             Loop
         ElseIf Left$(arrSQL(i), 19) = "CREATE UNIQUE INDEX" Then
             ' Create the index
@@ -135,6 +135,26 @@ Public Function GetTableName(ByVal strSchemaLine As String) As String
     intPos2 = InStr(1, strSchemaLine, "]")
     GetTableName = Mid$(strSchemaLine, intPos1 + 1, intPos2 - intPos1 - 1)
 
+End Function
+
+Public Function GetFieldInfo(ByVal strSchemaLine As String) As String
+
+    Dim strResult As String
+    Dim intPos1 As Integer
+    Dim intPos2 As Integer
+
+    intPos1 = InStr(1, strSchemaLine, "[")
+    If InStr(1, strSchemaLine, ",") <> 0 Then
+        intPos2 = InStr(1, strSchemaLine, ",")
+    Else
+        intPos2 = InStr(1, strSchemaLine, " )") + 1
+    End If
+    strResult = Mid$(strSchemaLine, intPos1 + 1, intPos2 - intPos1 - 1)
+    GetFieldInfo = Replace(strResult, "]", vbNullString)
+    ' Shorten the parse string by removing the found field
+    mstrToParse = Right$(strSchemaLine, Len(strSchemaLine) - intPos2)
+    If strSchemaLine = " )" Then mstrToParse = vbNullString
+    
 End Function
 
 Public Sub TestOutputLovefieldFile()
