@@ -3,7 +3,7 @@ TABLE: _tblChart
 ----------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   Long Integer          4                  
+id                   Long Integer          4                  
 VersionApp           Text                  255                
 VersionData          Text                  255                
 EnterDate            Date/Time             8                  
@@ -84,7 +84,7 @@ TABLE: _tblPersist
 ------------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 persist              Text                  255                
 
 
@@ -93,7 +93,7 @@ TABLE: _tlkpChart
 -----------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 ChartNum             Text                  255                
 ChartDesc            Text                  255                
 ChartTitle           Text                  255                
@@ -104,7 +104,7 @@ TABLE: _tlkpMonth
 -----------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 TheMonthShort        Text                  3                  
 TheMonthLong         Text                  9                  
 TheMonthCode         Text                  2                  
@@ -115,7 +115,7 @@ TABLE: _tlkpYear
 ----------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 TheYear              Text                  4                  
 
 
@@ -137,7 +137,7 @@ TABLE: aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 ----------------------------------------------------------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION                       
 =================    ==================    ====    ==================================
-ID                   AutoNumber            4                                         
+id                   AutoNumber            4                                         
 Desc                 Text                  255                                       
 Description          Text                  255     This is a description of the field
 
@@ -157,7 +157,7 @@ TABLE: tblBinary
 ----------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 FileName             Text (fixed width)    255                
 binary               OLE Object            0                  
 
@@ -191,7 +191,7 @@ TABLE: USysRibbons
 ------------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 RibbonName           Text                  255                
 RibbonXML            Memo                  0                  
 

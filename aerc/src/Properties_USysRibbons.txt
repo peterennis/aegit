@@ -27,15 +27,16 @@
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
 |-- RowHeight >> 5640
+|-- GUID >> GUID
 --------------------------------------------------
-|-- ID (Field in USysRibbons)
+|-- id (Field in USysRibbons)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> ID
+|------ Name >> id
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> ID
+|------ SourceField >> id
 |------ SourceTable >> USysRibbons
 |------ DataUpdatable >> False
 |------ DefaultValue >> 
@@ -46,7 +47,7 @@
 |------ AppendOnly >> False
 |------ Expression >> 
 |------ ColumnWidth >> -1
-|------ ColumnOrder >> 1
+|------ ColumnOrder >> 0
 |------ ColumnHidden >> False
 |------ TextAlign >> 0
 |------ AggregateType >> -1

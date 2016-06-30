@@ -1,5 +1,5 @@
 _tblChart
-              ID             109          TextBox
+              id             109          TextBox
               VersionApp     109          TextBox
               VersionData    109          TextBox
               EnterDate      109          TextBox
@@ -74,20 +74,20 @@ _tblChart
               FLD69          109          TextBox
               FLD70          109          TextBox
 _tblPersist
-              ID             109          TextBox
+              id             109          TextBox
               persist        109          TextBox
 _tlkpChart
-              ID             109          TextBox
+              id             109          TextBox
               ChartNum       109          TextBox
               ChartDesc      109          TextBox
               ChartTitle     109          TextBox
 _tlkpMonth
-              ID             109          TextBox
+              id             109          TextBox
               TheMonthShort  109          TextBox
               TheMonthLong   109          TextBox
               TheMonthCode   109          TextBox
 _tlkpYear
-              ID             109          TextBox
+              id             109          TextBox
               TheYear        109          TextBox
 aeItems
               Item           109          TextBox
@@ -97,7 +97,7 @@ aeItems
               CHK            106          CheckBox
               CBO            111          ComboBox
 aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
-              ID             111          ComboBox
+              id             111          ComboBox
               Desc           109          TextBox
               Description    109          TextBox
 aetlkpStates
@@ -105,7 +105,7 @@ aetlkpStates
               StateAbbreviation            109          TextBox
               StateName      109          TextBox
 tblBinary
-              ID             109          TextBox
+              id             109          TextBox
               FileName       109          TextBox
               binary         109          TextBox
 tblDummy0
@@ -115,7 +115,7 @@ tblDummy1
 tblDummy2
               Num            109          TextBox
 USysRibbons
-              ID             109          TextBox
+              id             109          TextBox
               RibbonName     109          TextBox
               RibbonXML      109          TextBox
 Count of Check box = 1

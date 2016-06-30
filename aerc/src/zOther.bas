@@ -25,6 +25,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
+    Dim strToParse As String
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
@@ -58,6 +59,12 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Get the table name
             strLfCreateTable = "schemaBuilder.createTable('" & GetTableName(arrSQL(i)) & "')."
             Debug.Print i, strLfCreateTable
+            strToParse = "Something"
+            Do While strToParse <> vbNullString
+                strToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
+                Debug.Print , strToParse
+                strToParse = vbNullString
+            Loop
         ElseIf Left$(arrSQL(i), 19) = "CREATE UNIQUE INDEX" Then
             ' Create the index
             'Print #fleOut, strSqlA

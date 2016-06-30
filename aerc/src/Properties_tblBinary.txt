@@ -36,15 +36,16 @@
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
-|-- ID (Field in tblBinary)
+|-- id (Field in tblBinary)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> ID
+|------ Name >> id
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> ID
+|------ SourceField >> id
 |------ SourceTable >> tblBinary
 |------ DataUpdatable >> False
 |------ DefaultValue >> 

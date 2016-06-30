@@ -91,6 +91,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               ReadOnlyWhenDisconnected    False
+              GUID          00-B5-B9-49-81-0D-45-9A
 >>>_tblPersist
               Name          _tblPersist
               Owner         admin
@@ -146,6 +147,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
+              GUID          D8-CE-0B-A9-1E-BB-45-A2
 >>>_tlkpMonth
               Name          _tlkpMonth
               Owner         admin
@@ -173,6 +175,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          DE-06-20-33-A2-13-4C-98
 >>>_tlkpYear
               Name          _tlkpYear
               Owner         admin
@@ -200,6 +203,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          B2-65-F4-86-95-40-49-A7
 >>>aeItems
               Name          aeItems
               Owner         admin
@@ -613,6 +617,7 @@
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
+              GUID          7D-91-7D-EF-17-98-46-87
 >>>tblDummy0
               Name          tblDummy0
               Owner         admin
@@ -722,3 +727,4 @@
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
               RowHeight      5640 
+              GUID          0F-7B-6A-21-50-9E-4D-95

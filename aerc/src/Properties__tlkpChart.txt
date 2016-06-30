@@ -26,15 +26,16 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
-|-- ID (Field in _tlkpChart)
+|-- id (Field in _tlkpChart)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> ID
+|------ Name >> id
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> ID
+|------ SourceField >> id
 |------ SourceTable >> _tlkpChart
 |------ DataUpdatable >> False
 |------ DefaultValue >> 
@@ -45,7 +46,7 @@
 |------ AppendOnly >> False
 |------ Expression >> 
 |------ ColumnWidth >> -1
-|------ ColumnOrder >> 1
+|------ ColumnOrder >> 0
 |------ ColumnHidden >> False
 |------ TextAlign >> 0
 |------ AggregateType >> -1
