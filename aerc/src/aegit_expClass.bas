@@ -3222,7 +3222,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                     strSQL = strSQL & "WITH" & strCn & " "
                 End If
 
-                Debug.Print strSQL
+                'Debug.Print strSQL
                 f.WriteLine vbCrLf & Trim(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
             Next
             'Stop
@@ -3300,7 +3300,7 @@ Private Sub ReadInputWriteOutputFileSql(ByVal strFileIn As String, ByVal strFile
             'Debug.Print i, strIn
         End If
     Loop
-    Debug.Print "DONE !!!"
+    'Debug.Print "DONE !!!"
 
     Close fleIn
     Close fleOut
@@ -3364,30 +3364,30 @@ Private Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByV
                 If Left$(arrSQL(i), 7) = "strSQL=" Then
                     strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
                     strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
-                    Debug.Print i & ">", "strSqlA=" & strSqlA
+                    'Debug.Print i & ">", "strSqlA=" & strSqlA
                     strSqlB = Right$(arrSQL(i + 1), Len(arrSQL(i + 1)) - 17)
                     strSqlB = Left$(strSqlB, Len(strSqlB) - 1)
-                    Debug.Print i & ">", "strSqlB=" & strSqlB
+                    'Debug.Print i & ">", "strSqlB=" & strSqlB
                     Print #fleOut, strSqlA & strSqlB
                     i = i + 1
                 End If
             ElseIf Left$(arrSQL(i), 7) = "strSQL=" Then
                 strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
                 strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
-                Debug.Print i, strSqlA
+                'Debug.Print i, strSqlA
                 Print #fleOut, strSqlA
             End If
         Else
             If Left$(arrSQL(i), 7) = "strSQL=" Then
                 strSqlA = Right$(arrSQL(i), Len(arrSQL(i)) - 8)
                 strSqlA = Left$(strSqlA, Len(strSqlA) - 1)
-                Debug.Print i, strSqlA
+                'Debug.Print i, strSqlA
                 Print #fleOut, strSqlA
             End If
-        Debug.Print "UBound"
+        'Debug.Print "UBound"
         End If
     Next
-    Debug.Print "DONE !!!"
+    'Debug.Print "DONE !!!"
 
 PROC_EXIT:
     Close fleIn
@@ -4214,6 +4214,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputTheSchemaFile
     OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
     OutputTheSqlOnlyFile strTheSourceLocation & aeSchemaFile & ".sql", strTheSourceLocation & aeSchemaFile & ".sql" & ".only"
+    KillProperly (strTheSourceLocation & aeSchemaFile & ".sql")
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then
