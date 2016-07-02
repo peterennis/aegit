@@ -27,6 +27,10 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
+    Dim strFieldInfoToParse As String
+    Dim strFieldName As String
+    Dim strAccFieldType As String
+    Dim strLfFieldType As String
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
@@ -62,7 +66,13 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             Debug.Print i, strLfCreateTable
             mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
             Do While mstrToParse <> vbNullString
-                Debug.Print , GetFieldInfo(mstrToParse) ', mstrToParse
+                strFieldInfoToParse = GetFieldInfo(mstrToParse)
+                'Debug.Print "strFieldInfoToParse=" & strFieldInfoToParse
+                strFieldName = Trim(Left$(strFieldInfoToParse, InStr(strFieldInfoToParse, " ")))
+                strAccFieldType = Trim(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStr(strFieldInfoToParse, " ")))
+                'Debug.Print , "'" & strFieldName & "'", "'" & strAccFieldType & "'"
+                strLfFieldType = GetLovefieldType(strAccFieldType)
+                Debug.Print , strFieldName, strLfFieldType
                 'Stop
             Loop
         ElseIf Left$(arrSQL(i), 19) = "CREATE UNIQUE INDEX" Then
@@ -80,12 +90,46 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err
+        Case 5
+            Debug.Print "mstrToParse=" & mstrToParse
+            Stop
         Case Else
             MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure ReadInputWriteOutputLovefieldSchema of Class aegitClass"
             Resume PROC_EXIT
     End Select
 
 End Sub
+
+Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
+    'Debug.Print "GetLovefieldType"
+    On Error GoTo 0
+
+    'Debug.Print , "strAccessFieldType=" & strAccessFieldType
+    If Left$(strAccessFieldType, 4) = "Text" Then
+        strAccessFieldType = "Text"
+    End If
+
+    Select Case strAccessFieldType
+        Case "Counter"
+            GetLovefieldType = "Counter/Integer?"
+        Case "DateTime"
+            GetLovefieldType = "DateTime/Integer?"
+        Case "Long"
+            GetLovefieldType = "Integer"
+        Case "Memo"
+            GetLovefieldType = "Memo/String?"
+        Case "OleObject"
+            GetLovefieldType = "OleObject/???"
+        Case "Text"
+            GetLovefieldType = "String"
+        Case "YesNo"
+            GetLovefieldType = "YesNo/Boolean?"
+        Case Else
+            MsgBox "Unknown Access Field Type in procedure GetLovefieldType of Class aegitClass" & vbCrLf & _
+                "strAccessFieldType=" & strAccessFieldType, vbCritical, "GetLovefieldType"
+    End Select
+
+End Function
 
 Public Sub GenerateLovefieldSchemaSample()
 ' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
