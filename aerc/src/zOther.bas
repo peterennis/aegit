@@ -111,19 +111,19 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
 
     Select Case strAccessFieldType
         Case "Counter"
-            GetLovefieldType = "Counter/Integer?"
+            GetLovefieldType = "INTEGER"
         Case "DateTime"
-            GetLovefieldType = "DateTime/Integer?"
+            GetLovefieldType = "DATE_TIME"
         Case "Long"
-            GetLovefieldType = "Integer"
+            GetLovefieldType = "INTEGER"
         Case "Memo"
-            GetLovefieldType = "Memo/String?"
+            GetLovefieldType = "STRING"
         Case "OleObject"
             GetLovefieldType = "OleObject/???"
         Case "Text"
-            GetLovefieldType = "String"
+            GetLovefieldType = "STRING"
         Case "YesNo"
-            GetLovefieldType = "YesNo/Boolean?"
+            GetLovefieldType = "BOOLEAN"
         Case Else
             MsgBox "Unknown Access Field Type in procedure GetLovefieldType of Class aegitClass" & vbCrLf & _
                 "strAccessFieldType=" & strAccessFieldType, vbCritical, "GetLovefieldType"
