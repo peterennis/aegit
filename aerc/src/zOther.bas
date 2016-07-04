@@ -31,6 +31,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strFieldName As String
     Dim strAccFieldType As String
     Dim strLfFieldType As String
+    Dim strLfFieldName As String
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
@@ -64,6 +65,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Get the table name
             strLfCreateTable = "schemaBuilder.createTable('" & GetTableName(arrSQL(i)) & "')."
             Debug.Print i, strLfCreateTable
+            Print #fleOut, strLfCreateTable
             mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
             Do While mstrToParse <> vbNullString
                 strFieldInfoToParse = GetFieldInfo(mstrToParse)
@@ -72,7 +74,9 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 strAccFieldType = Trim(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStr(strFieldInfoToParse, " ")))
                 'Debug.Print , "'" & strFieldName & "'", "'" & strAccFieldType & "'"
                 strLfFieldType = GetLovefieldType(strAccFieldType)
-                Debug.Print , strFieldName, strLfFieldType
+                strLfFieldName = Space(4) & "addColumn('" & strFieldName
+                Debug.Print , strLfFieldName & strLfFieldType, "{" & strAccFieldType & "}"
+                Print #fleOut, strLfFieldName & strLfFieldType
                 'Stop
             Loop
         ElseIf Left$(arrSQL(i), 19) = "CREATE UNIQUE INDEX" Then
@@ -111,19 +115,19 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
 
     Select Case strAccessFieldType
         Case "Counter"
-            GetLovefieldType = "INTEGER"
+            GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "DateTime"
-            GetLovefieldType = "DATE_TIME"
+            GetLovefieldType = "', lf.Type.DATE_TIME)."     ' "DATE_TIME"
         Case "Long"
-            GetLovefieldType = "INTEGER"
+            GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "Memo"
-            GetLovefieldType = "STRING"
+            GetLovefieldType = "', lf.Type.STRING)."        ' "STRING"
         Case "OleObject"
-            GetLovefieldType = "OleObject/???"
+            GetLovefieldType = "', lf.Type.ARRAY_BUFFER)."  ' "OleObject/???"
         Case "Text"
-            GetLovefieldType = "STRING"
+            GetLovefieldType = "', lf.Type.STRING)."        ' "STRING"
         Case "YesNo"
-            GetLovefieldType = "BOOLEAN"
+            GetLovefieldType = "', lf.Type.BOOLEAN)."       ' "BOOLEAN"
         Case Else
             MsgBox "Unknown Access Field Type in procedure GetLovefieldType of Class aegitClass" & vbCrLf & _
                 "strAccessFieldType=" & strAccessFieldType, vbCritical, "GetLovefieldType"
