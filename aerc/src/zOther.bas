@@ -4,6 +4,7 @@ Option Explicit
 #Const conLateBinding = 0
 
 Private mstrToParse As String
+Private Const mPRIMARYKEY As String = "CREATE UNIQUE INDEX [PrimaryKey] ON ["
 
 Public Sub GenerateLovefieldSchema()
 
@@ -32,6 +33,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strAccFieldType As String
     Dim strLfFieldType As String
     Dim strLfFieldName As String
+    Dim strThePrimaryKeyField As String
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
@@ -79,10 +81,11 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 Print #fleOut, strLfFieldName & strLfFieldType
                 'Stop
             Loop
-        ElseIf Left$(arrSQL(i), 19) = "CREATE UNIQUE INDEX" Then
-            ' Create the index
-            'Print #fleOut, strSqlA
-            Debug.Print i, arrSQL(i)
+        ElseIf Left$(arrSQL(i), Len(mPRIMARYKEY)) = mPRIMARYKEY Then
+            ' Create the PrimaryKey
+            strThePrimaryKeyField = GetPrimaryKey(arrSQL(i))
+            Debug.Print i, strThePrimaryKeyField
+            Print #fleOut, strThePrimaryKeyField
         End If
     Next
     Debug.Print "DONE !!!"
@@ -135,43 +138,58 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
 
 End Function
 
-Public Sub GenerateLovefieldSchemaSample()
-' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
-
-    Const APP_NAME As String = "aelfdb"
-    Const LF_BEGIN As String = "// Begin schema creation" & vbCrLf & "var schemaBuilder = lf.schema.create('" & APP_NAME & "', 1);"
-    
-    Dim strTableName As String
-    Dim strColumnName As String
-    Dim strLfCreateTable As String
-
-    strTableName = "Assets"
-    strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
-
-    Debug.Print LF_BEGIN
-    Debug.Print strLfCreateTable
-    strColumnName = "id"
-    Debug.Print AddColumnString(strColumnName)
-    strColumnName = "asset"
-    Debug.Print AddColumnString(strColumnName)
-    strColumnName = "timestamp"
-    Debug.Print AddColumnInteger(strColumnName)
-    strColumnName = "id"
-    Debug.Print AddPrimaryKey(strColumnName)
-
-End Sub
-
-Private Function AddColumnString(ByVal strColName As String) As String
-    AddColumnString = Space(4) & "addColumn('" & strColName & "', lf.Type.STRING)."
+Private Function GetPrimaryKey(ByVal strSQL As String) As String
+    'Debug.Print "GetPrimaryKey"
+    'Debug.Print , strSQL
+    Dim intPosLB As Integer
+    Dim intPosRBP As Integer
+    Dim strPrimaryField As String
+    strPrimaryField = Right$(strSQL, Len(strSQL) - Len(mPRIMARYKEY))
+    'Debug.Print , ">>", strPrimaryField
+    intPosLB = InStr(strPrimaryField, "[")
+    intPosRBP = InStr(strPrimaryField, "])")
+    strPrimaryField = Mid$(strPrimaryField, intPosLB + 1, intPosRBP - intPosLB - 1)
+    'Debug.Print , ">>", intPosLB, intPosRBP, strPrimaryField
+    GetPrimaryKey = Space(4) & "addPrimaryKey(['" & strPrimaryField & "']);"
 End Function
 
-Private Function AddColumnInteger(ByVal strColName As String) As String
-    AddColumnInteger = Space(4) & "addColumn('" & strColName & "', lf.Type.INTEGER)."
-End Function
-
-Private Function AddPrimaryKey(ByVal strColName As String) As String
-    AddPrimaryKey = Space(4) & "addPrimaryKey('[" & strColName & "']);"
-End Function
+'Public Sub GenerateLovefieldSchemaSample()
+'' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
+'
+'    Const APP_NAME As String = "aelfdb"
+'    Const LF_BEGIN As String = "// Begin schema creation" & vbCrLf & "var schemaBuilder = lf.schema.create('" & APP_NAME & "', 1);"
+'
+'    Dim strTableName As String
+'    Dim strColumnName As String
+'    Dim strLfCreateTable As String
+'
+'    strTableName = "Assets"
+'    strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
+'
+'    Debug.Print LF_BEGIN
+'    Debug.Print strLfCreateTable
+'    strColumnName = "id"
+'    Debug.Print AddColumnString(strColumnName)
+'    strColumnName = "asset"
+'    Debug.Print AddColumnString(strColumnName)
+'    strColumnName = "timestamp"
+'    Debug.Print AddColumnInteger(strColumnName)
+'    strColumnName = "id"
+'    Debug.Print AddPrimaryKey(strColumnName)
+'
+'End Sub
+'
+'Private Function AddColumnString(ByVal strColName As String) As String
+'    AddColumnString = Space(4) & "addColumn('" & strColName & "', lf.Type.STRING)."
+'End Function
+'
+'Private Function AddColumnInteger(ByVal strColName As String) As String
+'    AddColumnInteger = Space(4) & "addColumn('" & strColName & "', lf.Type.INTEGER)."
+'End Function
+'
+'Private Function AddPrimaryKey(ByVal strColName As String) As String
+'    AddPrimaryKey = Space(4) & "addPrimaryKey('[" & strColName & "']);"
+'End Function
 
 Public Function GetTableName(ByVal strSchemaLine As String) As String
 
