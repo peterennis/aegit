@@ -17,18 +17,12 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [_tblPersist] ([id] Counter,[persist] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [id] ON [_tblPersist] ([persist])"
-Currentdb.Execute strSQL
-
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblPersist] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
 
 strSQL="CREATE TABLE [_tlkpChart] ([id] Counter,[ChartNum] Text (255),[ChartDesc] Text (255),[ChartTitle] Text (255) )"
-Currentdb.Execute strSQL
-
-strSQL="CREATE INDEX [id] ON [_tlkpChart] ([ChartTitle])"
 Currentdb.Execute strSQL
 
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpChart] ([id]) WITH PRIMARY DISALLOW NULL"
@@ -66,9 +60,6 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [id] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([Description])"
-Currentdb.Execute strSQL
-
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
@@ -88,7 +79,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [tblBinary] ([id] Counter,[FileName] Text (255),[binary] OLEObject )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [ID] ON [tblBinary] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblBinary] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -118,9 +109,6 @@ Currentdb.Execute strSQL
 'Local Table
 
 strSQL="CREATE TABLE [USysRibbons] ([id] Counter,[RibbonName] Text (255),[RibbonXML] Memo )"
-Currentdb.Execute strSQL
-
-strSQL="CREATE INDEX [ID] ON [USysRibbons] ([RibbonXML])"
 Currentdb.Execute strSQL
 
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [USysRibbons] ([id]) WITH PRIMARY DISALLOW NULL"

@@ -11,7 +11,6 @@
   <xsd:element name="aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger">
     <xsd:annotation>
       <xsd:appinfo>
-        <od:index index-name="id" index-key="id " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="PrimaryKey" index-key="id " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>

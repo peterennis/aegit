@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.7.7"
-Private Const aegit_expVERSION_DATE As String = "July 4, 2016"
+Private Const aegit_expVERSION_DATE As String = "July 5, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -132,6 +132,7 @@ Private Const aeAppListRpt As String = "OutputListOfReports.txt"
 Private Const aeAppListTbl As String = "OutputListOfTables.txt"
 Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
+Private Const aeIndexLists As String = "OutputListOfIndexes.txt"
 '
 
 Private Sub Class_Initialize()
@@ -3031,9 +3032,74 @@ PROC_ERR:
 
 End Function
 
-Private Function GetComplexType(strFieldVariable As String) As String
+Private Sub OutputListOfIndexes(ByVal strFileOut As String)
+    Debug.Print "OutputListOfIndexes"
+    Debug.Print , strFileOut
+    On Error GoTo 0
 
-End Function
+    Dim fle As Integer
+    fle = FreeFile()
+    Open strFileOut For Output As #fle
+    Close fle
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Set dbs = CurrentDb()
+
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
+            OutputTableListOfIndexesDAO strFileOut, tdf
+        End If
+    Next
+    Set tdf = Nothing
+    Set dbs = Nothing
+    Stop
+End Sub
+
+Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn As DAO.TableDef)
+    'Debug.Print "OutputTableListOfIndexesDAO"
+    On Error GoTo 0
+
+    Dim fle As Integer
+    fle = FreeFile()
+    Open strFileOut For Append As #fle
+
+    Dim dbs As DAO.Database
+    Dim rst As DAO.Recordset
+    Dim idx As DAO.Index
+    Dim fld As DAO.Field
+    Dim strIndexName As String
+    Dim strFieldName As String
+
+    Set dbs = CurrentDb()
+    Set rst = dbs.OpenRecordset(tdfIn.Name, dbOpenTable)
+ 
+    Debug.Print tdfIn.Name
+    Print #fle, tdfIn.Name
+    ' List values for each index
+    For Each idx In tdfIn.Indexes
+        ' List collection of fields the index contains
+        strIndexName = "[" & idx.Name & "]"
+        Debug.Print , "Index:" & strIndexName
+        Print #fle, , "Index:" & strIndexName
+ 
+        For Each fld In idx.Fields
+            Debug.Print , , "Field Name:" & fld.Name
+            Print #fle, , , "Field Name:" & fld.Name
+            strFieldName = "[" & fld.Name & "], "
+        Next fld
+        Debug.Print ">" & strIndexName, strFieldName
+        Print #fle, ">" & strIndexName, strFieldName
+    Next idx
+    Debug.Print "========================================"
+    Print #fle, "========================================"
+    Set rst = Nothing
+    Set tdfIn = Nothing
+    Close fle
+
+End Sub
 
 Private Sub OutputTheSchemaFile() ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
@@ -4215,6 +4281,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
     OutputTheSqlOnlyFile strTheSourceLocation & aeSchemaFile & ".sql", strTheSourceLocation & aeSchemaFile & ".sql" & ".only"
     KillProperly (strTheSourceLocation & aeSchemaFile & ".sql")
+    OutputListOfIndexes strTheSourceLocation & aeIndexLists
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then

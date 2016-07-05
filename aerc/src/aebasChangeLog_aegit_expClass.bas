@@ -29,8 +29,12 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %075 -
+' %074 -
+' %073 -
+' %072 -
+' %071 -
 ' %070 -
-' %069 -
 ' %068 - Creation of schema adds index to wrong field
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
@@ -54,6 +58,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160705 - v177 -
+    ' FIXED - %069 - Fix name case of id for indexes, remove superfluous reference to index on id when it is already the PrimaryKey
 '20160622 - v171 -
     ' FIXED - %067 - Wrong field picked up for primary key
     ' FIXED - %066 - Syntax error for OLE Object
