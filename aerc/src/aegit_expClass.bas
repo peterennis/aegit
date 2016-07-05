@@ -3055,7 +3055,7 @@ Private Sub OutputListOfIndexes(ByVal strFileOut As String)
     Next
     Set tdf = Nothing
     Set dbs = Nothing
-    Stop
+    'Stop
 End Sub
 
 Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn As DAO.TableDef)
