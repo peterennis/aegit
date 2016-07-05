@@ -4,17 +4,11 @@ _tblChart
 >[PrimaryKey] [id], 
 ========================================
 _tblPersist
-              Index:[id]
-                            Field Name:id
->[id]         [id], 
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
 ========================================
 _tlkpChart
-              Index:[id]
-                            Field Name:id
->[id]         [id], 
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
@@ -38,9 +32,6 @@ _tlkpYear
 aeItems
 ========================================
 aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
-              Index:[id]
-                            Field Name:id
->[id]         [id], 
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
@@ -54,9 +45,9 @@ aetlkpStates
 >[State Code] [StateCode], 
 ========================================
 tblBinary
-              Index:[ID]
+              Index:[PrimaryKey]
                             Field Name:id
->[ID]         [id], 
+>[PrimaryKey] [id], 
 ========================================
 tblDummy0
               Index:[PrimaryKey]
@@ -74,9 +65,6 @@ tblDummy2
 >[PrimaryKey] [Num], 
 ========================================
 USysRibbons
-              Index:[ID]
-                            Field Name:id
->[ID]         [id], 
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
