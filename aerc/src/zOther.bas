@@ -204,7 +204,7 @@ Private Function GetIndex(ByVal strSQL As String) As String
     Debug.Print , intPosLB, intPosRB
     strIndexField = Mid$(strSQL, intPosLB + 1, intPosRB - intPosLB - 1)
     'Debug.Print , ">>>", strIndexField
-    strIndexName = "idx" & UCase(Left$(strIndexField, 1)) & Right$(strIndexField, Len(strIndexField) - 1)
+    strIndexName = "idx" & UCase$(Left$(strIndexField, 1)) & LCase$(Right$(strIndexField, Len(strIndexField) - 1))
     Debug.Print , ">>>", strIndexName
 
     Dim intPosPLB As Integer
