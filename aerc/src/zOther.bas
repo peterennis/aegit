@@ -4,7 +4,10 @@ Option Explicit
 #Const conLateBinding = 0
 
 Private mstrToParse As String
+Private mstrTableName As String
+Private Const mTABLE As String = "CREATE TABLE ["
 Private Const mPRIMARYKEY As String = "CREATE UNIQUE INDEX [PrimaryKey] ON ["
+Private Const mINDEX As String = "CREATE INDEX ["
 
 Public Sub GenerateLovefieldSchema()
 
@@ -23,17 +26,20 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     'Debug.Print "ReadInputWriteOutputLovefieldSchema"
     On Error GoTo PROC_ERR
 
+    Const SEMICOLON As String = ";"
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
+    Dim strTheTableName As String
     Dim strFieldInfoToParse As String
     Dim strFieldName As String
     Dim strAccFieldType As String
     Dim strLfFieldType As String
     Dim strLfFieldName As String
     Dim strThePrimaryKeyField As String
+    Dim strTheIndex As String
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
@@ -63,13 +69,19 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Debug.Print strLfBegin
 
     For i = 0 To UBound(arrSQL)
-        If Left$(arrSQL(i), 12) = "CREATE TABLE" Then
+        If Left$(arrSQL(i), Len(mTABLE)) = mTABLE Then
             ' Get the table name
-            strLfCreateTable = "schemaBuilder.createTable('" & GetTableName(arrSQL(i)) & "')."
-            Debug.Print i, strLfCreateTable
+            mstrTableName = GetTableName(arrSQL(i))
+            ' Test if the table schema is finished
+            If i < UBound(arrSQL) Then
+            
+            End If
+            strLfCreateTable = "schemaBuilder.createTable('" & mstrTableName & "')."
+            Debug.Print i & ">", strLfCreateTable
             Print #fleOut, strLfCreateTable
             mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
             Do While mstrToParse <> vbNullString
+                ' Create the table
                 strFieldInfoToParse = GetFieldInfo(mstrToParse)
                 'Debug.Print "strFieldInfoToParse=" & strFieldInfoToParse
                 strFieldName = Trim(Left$(strFieldInfoToParse, InStr(strFieldInfoToParse, " ")))
@@ -84,8 +96,15 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
         ElseIf Left$(arrSQL(i), Len(mPRIMARYKEY)) = mPRIMARYKEY Then
             ' Create the PrimaryKey
             strThePrimaryKeyField = GetPrimaryKey(arrSQL(i))
-            Debug.Print i, strThePrimaryKeyField
+            If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then strThePrimaryKeyField = strThePrimaryKeyField & SEMICOLON
+            Debug.Print i & ">", strThePrimaryKeyField
             Print #fleOut, strThePrimaryKeyField
+        ElseIf Left$(arrSQL(i), Len(mINDEX)) = mINDEX Then
+            ' Create the Index
+            strTheIndex = GetIndex(arrSQL(i))
+            If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then strTheIndex = strTheIndex & SEMICOLON
+            Debug.Print i & ">", strTheIndex
+            Print #fleOut, strTheIndex
         End If
     Next
     Debug.Print "DONE !!!"
@@ -99,13 +118,22 @@ PROC_ERR:
     Select Case Err
         Case 5
             Debug.Print "mstrToParse=" & mstrToParse
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure ReadInputWriteOutputLovefieldSchema of Class aegitClass"
             Stop
+            Resume PROC_EXIT
         Case Else
             MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure ReadInputWriteOutputLovefieldSchema of Class aegitClass"
             Resume PROC_EXIT
     End Select
 
 End Sub
+
+Private Function IsTableSchemaDone(ByVal strTableName As String, ByVal strSQL As String) As Boolean
+    IsTableSchemaDone = True
+    If InStr(strSQL, strTableName) Then
+        IsTableSchemaDone = False
+    End If
+End Function
 
 Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
     'Debug.Print "GetLovefieldType"
@@ -141,6 +169,8 @@ End Function
 Private Function GetPrimaryKey(ByVal strSQL As String) As String
     'Debug.Print "GetPrimaryKey"
     'Debug.Print , strSQL
+    On Error GoTo 0
+
     Dim intPosLB As Integer
     Dim intPosRBP As Integer
     Dim strPrimaryField As String
@@ -150,7 +180,60 @@ Private Function GetPrimaryKey(ByVal strSQL As String) As String
     intPosRBP = InStr(strPrimaryField, "])")
     strPrimaryField = Mid$(strPrimaryField, intPosLB + 1, intPosRBP - intPosLB - 1)
     'Debug.Print , ">>", intPosLB, intPosRBP, strPrimaryField
-    GetPrimaryKey = Space(4) & "addPrimaryKey(['" & strPrimaryField & "']);"
+    GetPrimaryKey = Space(4) & "addPrimaryKey(['" & strPrimaryField & "'])"
+End Function
+
+Public Function TestGetIndex() As String
+    Dim strResult As String
+    strResult = GetIndex("CREATE INDEX [id] ON [_tblPersist] ([persist])")
+End Function
+
+Private Function GetIndex(ByVal strSQL As String) As String
+    Debug.Print "GetIndex"
+    Debug.Print , strSQL
+    On Error GoTo PROC_ERR
+
+    Dim intPosLB As Integer
+    Dim intPosRB As Integer
+    Dim strIndexField As String
+    Dim strIndexName As String
+    Dim strParseSQL As String
+
+    intPosLB = InStr(strSQL, "[")
+    intPosRB = InStr(strSQL, "]")
+    Debug.Print , intPosLB, intPosRB
+    strIndexField = Mid$(strSQL, intPosLB + 1, intPosRB - intPosLB - 1)
+    'Debug.Print , ">>>", strIndexField
+    strIndexName = "idx" & UCase(Left$(strIndexField, 1)) & Right$(strIndexField, Len(strIndexField) - 1)
+    Debug.Print , ">>>", strIndexName
+
+    Dim intPosPLB As Integer
+    intPosPLB = InStr(strSQL, "([")
+    strParseSQL = Right$(strSQL, Len(strSQL) - intPosPLB)
+    Debug.Print , ">>>", strParseSQL
+
+    strIndexField = Mid$(strIndexField, intPosLB + 1, intPosRB - intPosLB - 1)
+    Debug.Print , ">>>", intPosLB, intPosRB, strIndexField
+    intPosLB = InStr(strIndexField, "[")
+    intPosRB = InStr(strIndexField, "])")
+    strIndexField = Mid$(strIndexField, intPosLB + 1, intPosRB - intPosLB - 1)
+    Debug.Print , ">>>", intPosLB, intPosRB, strIndexField
+    GetIndex = Space(4) & "addIndex_FIXTHIS(['" & strIndexField & "']);"
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err
+        Case 5
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure GetIndex of Class aegitClass"
+            Stop
+            Resume PROC_EXIT
+        Case Else
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure GetIndex of Class aegitClass"
+            Resume PROC_EXIT
+    End Select
+
 End Function
 
 'Public Sub GenerateLovefieldSchemaSample()

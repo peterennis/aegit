@@ -31,7 +31,7 @@ Option Explicit
 ' Tasks:
 ' %070 -
 ' %069 -
-' %068 -
+' %068 - Creation of schema adds index to wrong field
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
