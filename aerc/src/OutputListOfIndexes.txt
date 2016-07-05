@@ -1,0 +1,83 @@
+_tblChart
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+========================================
+_tblPersist
+              Index:[id]
+                            Field Name:id
+>[id]         [id], 
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+========================================
+_tlkpChart
+              Index:[id]
+                            Field Name:id
+>[id]         [id], 
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+              Index:[QAQCnum]
+                            Field Name:ChartNum
+>[QAQCnum]    [ChartNum], 
+========================================
+_tlkpMonth
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+              Index:[TheMonthCode]
+                            Field Name:TheMonthCode
+>[TheMonthCode]             [TheMonthCode], 
+========================================
+_tlkpYear
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+========================================
+aeItems
+========================================
+aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+              Index:[id]
+                            Field Name:id
+>[id]         [id], 
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+========================================
+aetlkpStates
+              Index:[PrimaryKey]
+                            Field Name:StateCode
+>[PrimaryKey] [StateCode], 
+              Index:[State Code]
+                            Field Name:StateCode
+>[State Code] [StateCode], 
+========================================
+tblBinary
+              Index:[ID]
+                            Field Name:id
+>[ID]         [id], 
+========================================
+tblDummy0
+              Index:[PrimaryKey]
+                            Field Name:Num
+>[PrimaryKey] [Num], 
+========================================
+tblDummy1
+              Index:[PrimaryKey]
+                            Field Name:Num
+>[PrimaryKey] [Num], 
+========================================
+tblDummy2
+              Index:[PrimaryKey]
+                            Field Name:Num
+>[PrimaryKey] [Num], 
+========================================
+USysRibbons
+              Index:[ID]
+                            Field Name:id
+>[ID]         [id], 
+              Index:[PrimaryKey]
+                            Field Name:id
+>[PrimaryKey] [id], 
+========================================
