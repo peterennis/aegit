@@ -4,226 +4,226 @@ Option Explicit
 Public Const Desktop = &H10&
 Public Const MyDocuments = &H5&
 
-Public Sub TestOutputTheSchemaFile() ' CreateDbScript()
-
-    'Debug.Print "TestOutputTheSchemaFile"
-    On Error GoTo 0
-
-    Dim dbs As DAO.Database
-    Set dbs = CurrentDb
-    Dim tdf As DAO.TableDef
-    Dim fld As DAO.Field
-    Dim ndx As DAO.Index
-    Dim strSQL As String
-    Dim strFlds As String
-    Dim strLongFlds As String
-    Dim blnLongFlds As Boolean
-    Dim strCn As String
-    Dim strLinkedTablePath As String
-
-    Dim strTheSchemaFile As String
-'    If aegitFrontEndApp Then
-'        strTheSchemaFile = aestrSourceLocation & aeSchemaFile
-'    Else
-'        strTheSchemaFile = aestrSourceLocationBe & aeSchemaFile
-'    End If
-
-    strTheSchemaFile = ".\TestSchema.txt"
-
-    Dim fs As Object
-    Set fs = CreateObject("Scripting.FileSystemObject")
-    Dim f As Object
-    Set f = fs.CreateTextFile(strTheSchemaFile)
-
-    strSQL = "Public Sub CreateTheDb()" & vbCrLf
-    f.WriteLine strSQL
-    strSQL = "Dim strSQL As String"
-    f.WriteLine strSQL
-    strSQL = "On Error GoTo PROC_ERR"
-    f.WriteLine strSQL
-
-    For Each tdf In dbs.TableDefs
-        blnLongFlds = False
-        If Not (Left$(tdf.Name, 4) = "MSys" _
-                Or Left$(tdf.Name, 4) = "~TMP" _
-                Or Left$(tdf.Name, 3) = "zzz") Then
-
-'            strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
-'            If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
-'                f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
+'Public Sub TestOutputTheSchemaFile() ' CreateDbScript()
+'
+'    'Debug.Print "TestOutputTheSchemaFile"
+'    On Error GoTo 0
+'
+'    Dim dbs As DAO.Database
+'    Set dbs = CurrentDb
+'    Dim tdf As DAO.TableDef
+'    Dim fld As DAO.Field
+'    Dim ndx As DAO.Index
+'    Dim strSQL As String
+'    Dim strFlds As String
+'    Dim strLongFlds As String
+'    Dim blnLongFlds As Boolean
+'    Dim strCn As String
+'    Dim strLinkedTablePath As String
+'
+'    Dim strTheSchemaFile As String
+''    If aegitFrontEndApp Then
+''        strTheSchemaFile = aestrSourceLocation & aeSchemaFile
+''    Else
+''        strTheSchemaFile = aestrSourceLocationBe & aeSchemaFile
+''    End If
+'
+'    strTheSchemaFile = ".\TestSchema.txt"
+'
+'    Dim fs As Object
+'    Set fs = CreateObject("Scripting.FileSystemObject")
+'    Dim f As Object
+'    Set f = fs.CreateTextFile(strTheSchemaFile)
+'
+'    strSQL = "Public Sub CreateTheDb()" & vbCrLf
+'    f.WriteLine strSQL
+'    strSQL = "Dim strSQL As String"
+'    f.WriteLine strSQL
+'    strSQL = "On Error GoTo PROC_ERR"
+'    f.WriteLine strSQL
+'
+'    For Each tdf In dbs.TableDefs
+'        blnLongFlds = False
+'        If Not (Left$(tdf.Name, 4) = "MSys" _
+'                Or Left$(tdf.Name, 4) = "~TMP" _
+'                Or Left$(tdf.Name, 3) = "zzz") Then
+'
+''            strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
+''            If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
+''                f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
+''            Else
+''                f.WriteLine vbCrLf & "'Local Table"
+''            End If
+'
+'            strSQL = "strSQL=""CREATE TABLE [" & tdf.Name & "] ("
+'            strFlds = vbNullString
+'
+'            For Each fld In tdf.Fields
+'
+'                If Len(strFlds) <= 900 Then
+'                    strFlds = strFlds & ",[" & fld.Name & "] "
+'                Else    ' Hack to deal with 1024 limit for immediate window output
+'                    blnLongFlds = True
+'                    strFlds = strFlds & ",[" & fld.Name & "] " & """"
+'                    strLongFlds = strFlds
+'                    strFlds = vbNullString
+'                    'Stop
+'                End If
+'
+'                ' Constants for complex types don't work prior to Access 2007
+'                Select Case fld.Type
+'                    Case dbText
+'                        ' No look-up fields
+'                        strFlds = strFlds & "Text (" & fld.size & ")"
+'                    Case 109&                                   ' dbComplexText
+'                        strFlds = strFlds & "Text (" & fld.size & ")"
+'                    Case dbMemo
+'                        If (fld.Attributes And dbHyperlinkField) = 0& Then
+'                            strFlds = strFlds & "Memo"
+'                        Else
+'                            strFlds = strFlds & "Hyperlink"
+'                        End If
+'                    Case dbByte
+'                        strFlds = strFlds & "Byte"
+'                    Case 102&                                   ' dbComplexByte
+'                        strFlds = strFlds & "Complex Byte"
+'                    Case dbInteger
+'                        strFlds = strFlds & "Integer"
+'                    Case 103&                                   ' dbComplexInteger
+'                        strFlds = strFlds & "Complex Integer"
+'                    Case dbLong
+'                        If (fld.Attributes And dbAutoIncrField) = 0& Then
+'                            strFlds = strFlds & "Long"
+'                        Else
+'                            strFlds = strFlds & "Counter"
+'                        End If
+'                    Case 104&                                   ' dbComplexLong
+'                        strFlds = strFlds & "Complex Long"
+'                    Case dbSingle
+'                        strFlds = strFlds & "Single"
+'                    Case 105&                                   ' dbComplexSingle
+'                        strFlds = strFlds & "Complex Single"
+'                    Case dbDouble
+'                        strFlds = strFlds & "Double"
+'                    Case 106&                                   ' dbComplexDouble
+'                        strFlds = strFlds & "Complex Double"
+'                    Case dbGUID
+'                        strFlds = strFlds & "GUID"
+'                        'strFlds = strFlds & "Replica"
+'                    Case 107&                                   ' dbComplexGUID
+'                        strFlds = strFlds & "Complex GUID"
+'                    Case dbDecimal
+'                        strFlds = strFlds & "Decimal"
+'                    Case 108&                                   ' dbComplexDecimal
+'                        strFlds = strFlds & "Complex Decimal"
+'                    Case dbDate
+'                        strFlds = strFlds & "DateTime"
+'                    Case dbCurrency
+'                        strFlds = strFlds & "Currency"
+'                    Case dbBoolean
+'                        strFlds = strFlds & "YesNo"
+'                    Case dbLongBinary
+'                        strFlds = strFlds & "OLEObject"
+'                    Case 101&                                   ' dbAttachment
+'                        strFlds = strFlds & "Attachment"
+'                    Case dbBinary
+'                        strFlds = strFlds & "Binary"
+'                    Case Else
+'                        MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, "ERROR"
+'                        Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
+'                                "tdf.Name=" & tdf.Name & " strFlds=" & strFlds
+'                End Select
+'
+'            Next
+'
+'            'Debug.Print Len(strLongFlds), strLongFlds
+'            'Debug.Print Len(strFlds), strFlds
+'            If Not blnLongFlds Then
+'                strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+'                f.WriteLine vbCrLf & strSQL
+'                Debug.Print strSQL
 '            Else
-'                f.WriteLine vbCrLf & "'Local Table"
+'                strSQL = strSQL & Mid$(strLongFlds, 2)                  '& strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+'                f.WriteLine vbCrLf & strSQL
+'                Debug.Print strSQL
+'                strSQL = "strSQL=strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+'                f.WriteLine strSQL
+'                Debug.Print strSQL
 '            End If
-
-            strSQL = "strSQL=""CREATE TABLE [" & tdf.Name & "] ("
-            strFlds = vbNullString
-
-            For Each fld In tdf.Fields
-
-                If Len(strFlds) <= 900 Then
-                    strFlds = strFlds & ",[" & fld.Name & "] "
-                Else    ' Hack to deal with 1024 limit for immediate window output
-                    blnLongFlds = True
-                    strFlds = strFlds & ",[" & fld.Name & "] " & """"
-                    strLongFlds = strFlds
-                    strFlds = vbNullString
-                    'Stop
-                End If
-
-                ' Constants for complex types don't work prior to Access 2007
-                Select Case fld.Type
-                    Case dbText
-                        ' No look-up fields
-                        strFlds = strFlds & "Text (" & fld.size & ")"
-                    Case 109&                                   ' dbComplexText
-                        strFlds = strFlds & "Text (" & fld.size & ")"
-                    Case dbMemo
-                        If (fld.Attributes And dbHyperlinkField) = 0& Then
-                            strFlds = strFlds & "Memo"
-                        Else
-                            strFlds = strFlds & "Hyperlink"
-                        End If
-                    Case dbByte
-                        strFlds = strFlds & "Byte"
-                    Case 102&                                   ' dbComplexByte
-                        strFlds = strFlds & "Complex Byte"
-                    Case dbInteger
-                        strFlds = strFlds & "Integer"
-                    Case 103&                                   ' dbComplexInteger
-                        strFlds = strFlds & "Complex Integer"
-                    Case dbLong
-                        If (fld.Attributes And dbAutoIncrField) = 0& Then
-                            strFlds = strFlds & "Long"
-                        Else
-                            strFlds = strFlds & "Counter"
-                        End If
-                    Case 104&                                   ' dbComplexLong
-                        strFlds = strFlds & "Complex Long"
-                    Case dbSingle
-                        strFlds = strFlds & "Single"
-                    Case 105&                                   ' dbComplexSingle
-                        strFlds = strFlds & "Complex Single"
-                    Case dbDouble
-                        strFlds = strFlds & "Double"
-                    Case 106&                                   ' dbComplexDouble
-                        strFlds = strFlds & "Complex Double"
-                    Case dbGUID
-                        strFlds = strFlds & "GUID"
-                        'strFlds = strFlds & "Replica"
-                    Case 107&                                   ' dbComplexGUID
-                        strFlds = strFlds & "Complex GUID"
-                    Case dbDecimal
-                        strFlds = strFlds & "Decimal"
-                    Case 108&                                   ' dbComplexDecimal
-                        strFlds = strFlds & "Complex Decimal"
-                    Case dbDate
-                        strFlds = strFlds & "DateTime"
-                    Case dbCurrency
-                        strFlds = strFlds & "Currency"
-                    Case dbBoolean
-                        strFlds = strFlds & "YesNo"
-                    Case dbLongBinary
-                        strFlds = strFlds & "OLEObject"
-                    Case 101&                                   ' dbAttachment
-                        strFlds = strFlds & "Attachment"
-                    Case dbBinary
-                        strFlds = strFlds & "Binary"
-                    Case Else
-                        MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, "ERROR"
-                        Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
-                                "tdf.Name=" & tdf.Name & " strFlds=" & strFlds
-                End Select
-
-            Next
-
-            'Debug.Print Len(strLongFlds), strLongFlds
-            'Debug.Print Len(strFlds), strFlds
-            If Not blnLongFlds Then
-                strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
-                f.WriteLine vbCrLf & strSQL
-                Debug.Print strSQL
-            Else
-                strSQL = strSQL & Mid$(strLongFlds, 2)                  '& strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
-                f.WriteLine vbCrLf & strSQL
-                Debug.Print strSQL
-                strSQL = "strSQL=strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
-                f.WriteLine strSQL
-                Debug.Print strSQL
-            End If
-            'Stop
-
-            ' Indexes
-            For Each ndx In tdf.Indexes
-
-                Debug.Print ">", ndx.Name, ndx.Fields, ndx.Primary
-                If ndx.Unique Then
-                    strSQL = "strSQL=""CREATE UNIQUE INDEX "
-                Else
-                    strSQL = "strSQL=""CREATE INDEX "
-                End If
-
-                strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
-                strFlds = vbNullString
-
-                For Each fld In tdf.Fields
-                    If ndx.Primary Then
-                        strFlds = ",[" & fld.Name & "]"
-                        Exit For
-                    Else
-                        strFlds = ",[" & fld.Name & "]"
-                    End If
-                    Debug.Print , strFlds, ndx.Primary
-                Next
-
-                strSQL = strSQL & Mid$(strFlds, 2) & ") "
-                strCn = vbNullString
-
-                If ndx.Primary Then
-                    strCn = " PRIMARY"
-                End If
-
-                If ndx.Required Then
-                    strCn = strCn & " DISALLOW NULL"
-                End If
-
-                If ndx.IgnoreNulls Then
-                    strCn = strCn & " IGNORE NULL"
-                End If
-
-                If Trim$(strCn) <> vbNullString Then
-                    strSQL = strSQL & "WITH" & strCn & " "
-                End If
-
-                Debug.Print strSQL
-                f.WriteLine vbCrLf & Trim(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
-            Next
-            'Stop
-        End If
-    Next
-    'Stop
-
-    'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
-    'f.WriteLine strSQL
-    f.WriteLine
-    f.WriteLine "'Access 2010 - Compact And Repair"
-    strSQL = "SendKeys " & """" & "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}" & """" & ", False"
-    f.WriteLine strSQL
-    f.WriteLine "Exit Sub"
-    f.WriteLine "PROC_ERR:"
-    f.WriteLine "If Err = 3010 Then Resume Next"
-    f.WriteLine "If Err = 3283 Then Resume Next"
-    f.WriteLine "If Err = 3375 Then Resume Next"
-    'MsgBox "Erl=" & Erl & vbCrLf & "Err.Number=" & Err.Number & vbCrLf & "Err.Description=" & Err.Description
-    strSQL = "MsgBox " & """" & "Erl=" & """" & " & Erl & vbCrLf & " & _
-                """" & "Err.Number=" & """" & " & Err.Number & vbCrLf & " & _
-                """" & "Err.Description=" & """" & " & Err.Description"
-    f.WriteLine strSQL & vbCrLf
-    f.WriteLine "End Sub"
-
-    f.Close
-    Debug.Print "Done"
-
-End Sub
+'            'Stop
+'
+'            ' Indexes
+'            For Each ndx In tdf.Indexes
+'
+'                Debug.Print ">", ndx.Name, ndx.Fields, ndx.Primary
+'                If ndx.Unique Then
+'                    strSQL = "strSQL=""CREATE UNIQUE INDEX "
+'                Else
+'                    strSQL = "strSQL=""CREATE INDEX "
+'                End If
+'
+'                strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
+'                strFlds = vbNullString
+'
+'                For Each fld In tdf.Fields
+'                    If ndx.Primary Then
+'                        strFlds = ",[" & fld.Name & "]"
+'                        Exit For
+'                    Else
+'                        strFlds = ",[" & fld.Name & "]"
+'                    End If
+'                    Debug.Print , strFlds, ndx.Primary
+'                Next
+'
+'                strSQL = strSQL & Mid$(strFlds, 2) & ") "
+'                strCn = vbNullString
+'
+'                If ndx.Primary Then
+'                    strCn = " PRIMARY"
+'                End If
+'
+'                If ndx.Required Then
+'                    strCn = strCn & " DISALLOW NULL"
+'                End If
+'
+'                If ndx.IgnoreNulls Then
+'                    strCn = strCn & " IGNORE NULL"
+'                End If
+'
+'                If Trim$(strCn) <> vbNullString Then
+'                    strSQL = strSQL & "WITH" & strCn & " "
+'                End If
+'
+'                Debug.Print strSQL
+'                f.WriteLine vbCrLf & Trim(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
+'            Next
+'            'Stop
+'        End If
+'    Next
+'    'Stop
+'
+'    'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
+'    'f.WriteLine strSQL
+'    f.WriteLine
+'    f.WriteLine "'Access 2010 - Compact And Repair"
+'    strSQL = "SendKeys " & """" & "%F{END}{ENTER}%F{TAB}{TAB}{ENTER}" & """" & ", False"
+'    f.WriteLine strSQL
+'    f.WriteLine "Exit Sub"
+'    f.WriteLine "PROC_ERR:"
+'    f.WriteLine "If Err = 3010 Then Resume Next"
+'    f.WriteLine "If Err = 3283 Then Resume Next"
+'    f.WriteLine "If Err = 3375 Then Resume Next"
+'    'MsgBox "Erl=" & Erl & vbCrLf & "Err.Number=" & Err.Number & vbCrLf & "Err.Description=" & Err.Description
+'    strSQL = "MsgBox " & """" & "Erl=" & """" & " & Erl & vbCrLf & " & _
+'                """" & "Err.Number=" & """" & " & Err.Number & vbCrLf & " & _
+'                """" & "Err.Description=" & """" & " & Err.Description"
+'    f.WriteLine strSQL & vbCrLf
+'    f.WriteLine "End Sub"
+'
+'    f.Close
+'    Debug.Print "Done"
+'
+'End Sub
 
 Public Sub ListIndexes()
 

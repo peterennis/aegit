@@ -1,0 +1,135 @@
+schemaBuilder.createTable('_tblChart').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('VersionApp', lf.Type.STRING).
+    addColumn('VersionData', lf.Type.STRING).
+    addColumn('EnterDate', lf.Type.DATE_TIME).
+    addColumn('FLD01', lf.Type.INTEGER).
+    addColumn('FLD02', lf.Type.INTEGER).
+    addColumn('FLD03', lf.Type.INTEGER).
+    addColumn('FLD04', lf.Type.INTEGER).
+    addColumn('FLD05', lf.Type.INTEGER).
+    addColumn('FLD06', lf.Type.INTEGER).
+    addColumn('FLD07', lf.Type.INTEGER).
+    addColumn('FLD08', lf.Type.INTEGER).
+    addColumn('FLD09', lf.Type.INTEGER).
+    addColumn('FLD10', lf.Type.INTEGER).
+    addColumn('FLD11', lf.Type.INTEGER).
+    addColumn('FLD12', lf.Type.INTEGER).
+    addColumn('FLD13', lf.Type.INTEGER).
+    addColumn('FLD14', lf.Type.INTEGER).
+    addColumn('FLD15', lf.Type.INTEGER).
+    addColumn('FLD16', lf.Type.INTEGER).
+    addColumn('FLD17', lf.Type.INTEGER).
+    addColumn('FLD18', lf.Type.INTEGER).
+    addColumn('FLD19', lf.Type.INTEGER).
+    addColumn('FLD20', lf.Type.INTEGER).
+    addColumn('FLD21', lf.Type.INTEGER).
+    addColumn('FLD22', lf.Type.INTEGER).
+    addColumn('FLD23', lf.Type.INTEGER).
+    addColumn('FLD24', lf.Type.INTEGER).
+    addColumn('FLD25', lf.Type.INTEGER).
+    addColumn('FLD26', lf.Type.INTEGER).
+    addColumn('FLD27', lf.Type.INTEGER).
+    addColumn('FLD28', lf.Type.INTEGER).
+    addColumn('FLD29', lf.Type.INTEGER).
+    addColumn('FLD30', lf.Type.INTEGER).
+    addColumn('FLD31', lf.Type.INTEGER).
+    addColumn('FLD32', lf.Type.INTEGER).
+    addColumn('FLD33', lf.Type.INTEGER).
+    addColumn('FLD34', lf.Type.INTEGER).
+    addColumn('FLD35', lf.Type.INTEGER).
+    addColumn('FLD36', lf.Type.INTEGER).
+    addColumn('FLD37', lf.Type.INTEGER).
+    addColumn('FLD38', lf.Type.INTEGER).
+    addColumn('FLD39', lf.Type.INTEGER).
+    addColumn('FLD40', lf.Type.INTEGER).
+    addColumn('FLD41', lf.Type.INTEGER).
+    addColumn('FLD42', lf.Type.INTEGER).
+    addColumn('FLD43', lf.Type.INTEGER).
+    addColumn('FLD44', lf.Type.INTEGER).
+    addColumn('FLD45', lf.Type.INTEGER).
+    addColumn('FLD46', lf.Type.INTEGER).
+    addColumn('FLD47', lf.Type.INTEGER).
+    addColumn('FLD48', lf.Type.INTEGER).
+    addColumn('FLD49', lf.Type.INTEGER).
+    addColumn('FLD50', lf.Type.INTEGER).
+    addColumn('FLD51', lf.Type.INTEGER).
+    addColumn('FLD52', lf.Type.INTEGER).
+    addColumn('FLD53', lf.Type.INTEGER).
+    addColumn('FLD54', lf.Type.INTEGER).
+    addColumn('FLD55', lf.Type.INTEGER).
+    addColumn('FLD56', lf.Type.INTEGER).
+    addColumn('FLD57', lf.Type.INTEGER).
+    addColumn('FLD58', lf.Type.INTEGER).
+    addColumn('FLD59', lf.Type.INTEGER).
+    addColumn('FLD60', lf.Type.INTEGER).
+    addColumn('FLD61', lf.Type.INTEGER).
+    addColumn('FLD62', lf.Type.INTEGER).
+    addColumn('FLD63', lf.Type.INTEGER).
+    addColumn('FLD64', lf.Type.INTEGER).
+    addColumn('FLD65', lf.Type.INTEGER).
+    addColumn('FLD66', lf.Type.INTEGER).
+    addColumn('FLD67', lf.Type.INTEGER).
+    addColumn('FLD68', lf.Type.INTEGER).
+    addColumn('FLD69', lf.Type.INTEGER).
+    addColumn('FLD70', lf.Type.INTEGER).
+    addPrimaryKey(['id']);
+schemaBuilder.createTable('_tblPersist').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('persist', lf.Type.STRING).
+    addPrimaryKey(['id']);
+schemaBuilder.createTable('_tlkpChart').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('ChartNum', lf.Type.STRING).
+    addColumn('ChartDesc', lf.Type.STRING).
+    addColumn('ChartTitle', lf.Type.STRING).
+    addPrimaryKey(['id']).
+    addIndex(['idxQaqcnum'], ['ChartTitle'], false, lf.Order.ASC);
+schemaBuilder.createTable('_tlkpMonth').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('TheMonthShort', lf.Type.STRING).
+    addColumn('TheMonthLong', lf.Type.STRING).
+    addColumn('TheMonthCode', lf.Type.STRING).
+    addPrimaryKey(['id']).
+    addIndex(['idxThemonthcode'], ['TheMonthCode'], false, lf.Order.ASC);
+schemaBuilder.createTable('_tlkpYear').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('TheYear', lf.Type.STRING).
+    addPrimaryKey(['id']);
+schemaBuilder.createTable('aeItems').
+    addColumn('Item', lf.Type.STRING).
+    addColumn('Quantity', lf.Type.INTEGER).
+    addColumn('Status', lf.Type.STRING).
+    addColumn('YNO', lf.Type.STRING).
+    addColumn('CHK', lf.Type.BOOLEAN).
+    addColumn('CBO', lf.Type.STRING).
+schemaBuilder.createTable('aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('Desc', lf.Type.STRING).
+    addColumn('Description', lf.Type.STRING).
+    addPrimaryKey(['id']);
+schemaBuilder.createTable('aetlkpStates').
+    addColumn('StateCode', lf.Type.STRING).
+    addColumn('StateAbbreviation', lf.Type.STRING).
+    addColumn('StateName', lf.Type.STRING).
+    addPrimaryKey(['StateCode']).
+    addIndex(['idxState code'], ['StateName'], false, lf.Order.ASC);
+schemaBuilder.createTable('tblBinary').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('FileName', lf.Type.STRING).
+    addColumn('binary', lf.Type.ARRAY_BUFFER).
+    addPrimaryKey(['id']);
+schemaBuilder.createTable('tblDummy0').
+    addColumn('Num', lf.Type.INTEGER).
+    addPrimaryKey(['Num']);
+schemaBuilder.createTable('tblDummy1').
+    addColumn('Num', lf.Type.INTEGER).
+    addPrimaryKey(['Num']);
+schemaBuilder.createTable('tblDummy2').
+    addColumn('Num', lf.Type.INTEGER).
+    addPrimaryKey(['Num']);
+schemaBuilder.createTable('USysRibbons').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('RibbonName', lf.Type.STRING).
+    addColumn('RibbonXML', lf.Type.STRING).
+    addPrimaryKey(['id']);

@@ -33,9 +33,8 @@ Option Explicit
 ' %074 -
 ' %073 -
 ' %072 -
-' %071 -
-' %070 -
-' %068 - Creation of schema adds index to wrong field
+' %071 - Add varDebug for schema output debugging
+' %070 - Create multi field index sample and fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
@@ -58,6 +57,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160705 - v178 -
+    ' FIXED - %068 - Creation of schema adds index to wrong field
 '20160705 - v177 -
     ' FIXED - %069 - Fix name case of id for indexes, remove superfluous reference to index on id when it is already the PrimaryKey
 '20160622 - v171 -
