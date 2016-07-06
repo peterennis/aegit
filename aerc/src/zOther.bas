@@ -27,6 +27,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     On Error GoTo PROC_ERR
 
     Const SEMICOLON As String = ";"
+    Const PERIOD As String = "."
     Dim fleIn As Integer
     Dim fleOut As Integer
     Dim strIn As String
@@ -96,13 +97,21 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
         ElseIf Left$(arrSQL(i), Len(mPRIMARYKEY)) = mPRIMARYKEY Then
             ' Create the PrimaryKey
             strThePrimaryKeyField = GetPrimaryKey(arrSQL(i))
-            If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then strThePrimaryKeyField = strThePrimaryKeyField & SEMICOLON
+            If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then
+                strThePrimaryKeyField = strThePrimaryKeyField & SEMICOLON
+            Else
+                strThePrimaryKeyField = strThePrimaryKeyField & PERIOD
+            End If
             Debug.Print i & ">", strThePrimaryKeyField
             Print #fleOut, strThePrimaryKeyField
         ElseIf Left$(arrSQL(i), Len(mINDEX)) = mINDEX Then
             ' Create the Index
             strTheIndex = GetIndex(arrSQL(i))
-            If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then strTheIndex = strTheIndex & SEMICOLON
+            If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then
+                strTheIndex = strTheIndex & SEMICOLON
+            Else
+                strTheIndex = strTheIndex & PERIOD
+            End If
             Debug.Print i & ">", strTheIndex
             Print #fleOut, strTheIndex
         End If
@@ -189,36 +198,33 @@ Public Function TestGetIndex() As String
 End Function
 
 Private Function GetIndex(ByVal strSQL As String) As String
-    Debug.Print "GetIndex"
-    Debug.Print , strSQL
+    'Debug.Print "GetIndex"
+    'Debug.Print , strSQL
     On Error GoTo PROC_ERR
 
     Dim intPosLB As Integer
     Dim intPosRB As Integer
-    Dim strIndexField As String
     Dim strIndexName As String
+    Dim strIndexNameIdx As String
+    Dim strIndexField As String
     Dim strParseSQL As String
 
     intPosLB = InStr(strSQL, "[")
     intPosRB = InStr(strSQL, "]")
-    Debug.Print , intPosLB, intPosRB
-    strIndexField = Mid$(strSQL, intPosLB + 1, intPosRB - intPosLB - 1)
-    'Debug.Print , ">>>", strIndexField
-    strIndexName = "idx" & UCase$(Left$(strIndexField, 1)) & LCase$(Right$(strIndexField, Len(strIndexField) - 1))
-    Debug.Print , ">>>", strIndexName
+    strIndexName = Mid$(strSQL, intPosLB + 1, intPosRB - intPosLB - 1)
+    'Debug.Print , "A>>>strIndexName", strIndexName, intPosLB + 1, intPosRB - 1
+    strIndexNameIdx = "idx" & UCase$(Left$(strIndexName, 1)) & LCase$(Right$(strIndexName, Len(strIndexName) - 1))
+    'Debug.Print , "B>>>strIndexNameIdx", strIndexNameIdx
 
     Dim intPosPLB As Integer
     intPosPLB = InStr(strSQL, "([")
     strParseSQL = Right$(strSQL, Len(strSQL) - intPosPLB)
-    Debug.Print , ">>>", strParseSQL
-
-    strIndexField = Mid$(strIndexField, intPosLB + 1, intPosRB - intPosLB - 1)
-    Debug.Print , ">>>", intPosLB, intPosRB, strIndexField
-    intPosLB = InStr(strIndexField, "[")
-    intPosRB = InStr(strIndexField, "])")
-    strIndexField = Mid$(strIndexField, intPosLB + 1, intPosRB - intPosLB - 1)
-    Debug.Print , ">>>", intPosLB, intPosRB, strIndexField
-    GetIndex = Space(4) & "addIndex_FIXTHIS(['" & strIndexField & "']);"
+    'Debug.Print , "C>>>strParseSQL", strParseSQL
+    intPosLB = InStr(strParseSQL, "[")
+    intPosRB = InStr(strParseSQL, "])")
+    strIndexField = Mid$(strParseSQL, intPosLB + 1, intPosRB - intPosLB - 1)
+    'Debug.Print , "D>>>strIndexField", strIndexField, intPosLB + 1, intPosRB - 1
+    GetIndex = Space(4) & "addIndex(['" & strIndexNameIdx & "'], ['" & strIndexField & "'], false, lf.Order.ASC)"
 
 PROC_EXIT:
     Exit Function

@@ -1,14 +1,14 @@
-_tblChart
+<<<[_tblChart]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
 ========================================
-_tblPersist
+<<<[_tblPersist]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
 ========================================
-_tlkpChart
+<<<[_tlkpChart]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
@@ -16,7 +16,7 @@ _tlkpChart
                             Field Name:ChartNum
 >[QAQCnum]    [ChartNum], 
 ========================================
-_tlkpMonth
+<<<[_tlkpMonth]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
@@ -24,19 +24,19 @@ _tlkpMonth
                             Field Name:TheMonthCode
 >[TheMonthCode]             [TheMonthCode], 
 ========================================
-_tlkpYear
+<<<[_tlkpYear]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
 ========================================
-aeItems
+<<<[aeItems]>>>
 ========================================
-aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
+<<<[aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
 ========================================
-aetlkpStates
+<<<[aetlkpStates]>>>
               Index:[PrimaryKey]
                             Field Name:StateCode
 >[PrimaryKey] [StateCode], 
@@ -44,27 +44,27 @@ aetlkpStates
                             Field Name:StateCode
 >[State Code] [StateCode], 
 ========================================
-tblBinary
+<<<[tblBinary]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 
 ========================================
-tblDummy0
+<<<[tblDummy0]>>>
               Index:[PrimaryKey]
                             Field Name:Num
 >[PrimaryKey] [Num], 
 ========================================
-tblDummy1
+<<<[tblDummy1]>>>
               Index:[PrimaryKey]
                             Field Name:Num
 >[PrimaryKey] [Num], 
 ========================================
-tblDummy2
+<<<[tblDummy2]>>>
               Index:[PrimaryKey]
                             Field Name:Num
 >[PrimaryKey] [Num], 
 ========================================
-USysRibbons
+<<<[USysRibbons]>>>
               Index:[PrimaryKey]
                             Field Name:id
 >[PrimaryKey] [id], 

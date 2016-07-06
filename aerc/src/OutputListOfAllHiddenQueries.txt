@@ -1,7 +1,7 @@
-_aeQryUSysRibbons            8 
-qapp_HiddenDummy             72 
-qmak_HiddenDummy             88 
-qpt_HiddenDummy              120 
-qry_HiddenDummy              8 
-quni_HiddenDummy             136 
-qupd_HiddenDummy             56 
+[_aeQryUSysRibbons]          8 
+[qapp_HiddenDummy]           72 
+[qmak_HiddenDummy]           88 
+[qpt_HiddenDummy]            120 
+[qry_HiddenDummy]            8 
+[quni_HiddenDummy]           136 
+[qupd_HiddenDummy]           56 

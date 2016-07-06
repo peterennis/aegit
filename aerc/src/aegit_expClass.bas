@@ -39,7 +39,7 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.7"
+Private Const aegit_expVERSION As String = "1.7.8"
 Private Const aegit_expVERSION_DATE As String = "July 5, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -1410,7 +1410,7 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
 
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0), rst.Fields(1)
-        Print #fle, rst.Fields(0), rst.Fields(1)
+        Print #fle, "[" & rst.Fields(0) & "]", rst.Fields(1)
         rst.MoveNext
     Loop
     Close fle
@@ -1493,7 +1493,7 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
 
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
-        Print #fle, rst.Fields(0), IsFrmHidden(rst.Fields(0))
+        Print #fle, "[" & rst.Fields(0) & "]", IsFrmHidden(rst.Fields(0))
         rst.MoveNext
     Loop
     Close fle
@@ -1554,7 +1554,7 @@ Private Sub OutputListOfMacros(Optional ByVal varDebug As Variant)
 
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
-        Print #fle, rst.Fields(0), IsMacHidden(rst.Fields(0))
+        Print #fle, "[" & rst.Fields(0) & "]", IsMacHidden(rst.Fields(0))
         rst.MoveNext
     Loop
     Close fle
@@ -1615,7 +1615,7 @@ Private Sub OutputListOfModules(Optional ByVal varDebug As Variant)
 
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
-        Print #fle, rst.Fields(0), IsModHidden(rst.Fields(0))
+        Print #fle, "[" & rst.Fields(0) & "]", IsModHidden(rst.Fields(0))
         rst.MoveNext
     Loop
     Close fle
@@ -1676,7 +1676,7 @@ Private Sub OutputListOfReports(Optional ByVal varDebug As Variant)
 
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
-        Print #fle, rst.Fields(0), IsRptHidden(rst.Fields(0))
+        Print #fle, "[" & rst.Fields(0) & "]", IsRptHidden(rst.Fields(0))
         rst.MoveNext
     Loop
     Close fle
@@ -1738,7 +1738,7 @@ Private Sub OutputListOfTables(Optional ByVal varDebug As Variant)
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
         'Debug.Print "IsTblHidden(rst.Fields(0)) = " & IsTblHidden(rst.Fields(0))
-        Print #fle, rst.Fields(0), IsTblHidden(rst.Fields(0))
+        Print #fle, "[" & rst.Fields(0) & "]", IsTblHidden(rst.Fields(0))
         rst.MoveNext
     Loop
     Close fle
@@ -3077,7 +3077,7 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
     Set rst = dbs.OpenRecordset(tdfIn.Name, dbOpenTable)
  
     Debug.Print tdfIn.Name
-    Print #fle, tdfIn.Name
+    Print #fle, "<<<[" & tdfIn.Name & "]>>>"
     ' List values for each index
     For Each idx In tdfIn.Indexes
         ' List collection of fields the index contains
@@ -3627,7 +3627,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
                         Or Left$(qdf.Name, 4) = "~TMP" _
                         Or Left$(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<" & qdf.Name & ">>>" & vbCrLf & qdf.SQL
+            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.SQL
         End If
     Next
 
@@ -4481,11 +4481,11 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
     For Each tbl In tdf
         If Left$(tbl.Name, 4) <> "MSys" And Left$(tbl.Name, 3) <> "zzz" _
             And Left$(tbl.Name, 1) <> "~" Then
-            Print #fle, tbl.Name
+            Print #fle, "[" & tbl.Name & "]"
             For Each fld In tbl.Fields
                 intAllFieldsCount = intAllFieldsCount + 1
                 lng = fld.Properties("DisplayControl").Value
-                Print #fle, , fld.Name, lng, GetType(lng)
+                Print #fle, , "[" & fld.Name & "]", lng, GetType(lng)
                 Select Case lng
                     Case acCheckBox
                         intChk = intChk + 1

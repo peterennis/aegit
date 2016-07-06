@@ -1,8 +1,8 @@
-_aeFrmUSysRibbons           False
-_chtChart     False
-_chtChartBig  False
-_chtChartBigList            False
-_chtKPI01     False
-_frmPersist   True
-frm_Dummy     False
-frm_HiddenDummy             True
+[_aeFrmUSysRibbons]         False
+[_chtChart]   False
+[_chtChartBig]              False
+[_chtChartBigList]          False
+[_chtKPI01]   False
+[_frmPersist] True
+[frm_Dummy]   False
+[frm_HiddenDummy]           True
