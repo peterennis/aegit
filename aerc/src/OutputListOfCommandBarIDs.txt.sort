@@ -12,14 +12,16 @@
 : 14782 - &Close
 : 2952 - &Design View
 : 3 - &Save
-: 50000 - Add Field to View
-: 50000 - Edit Record Source
-: 50000 - Edit Record Source
-: 50000 - Open Table in Datasheet View
+: 32768 - Add Field to View
+: 32768 - Edit Record Source
+: 32768 - Edit Record Source
+: 32768 - Open Table in Datasheet View
 : 502 - &Form View
 : 528 - S&QL View
 : 528 - S&QL View
 : 5746 -
+: 5814 - Piv&otTable View
+: 5815 - Pi&votChart View
 : 747 - &Close All
 Accessibility Checker: 5746 - Tas&k Pane
 Action Catalog: 5746 - Action Catalog
@@ -27,8 +29,8 @@ Actions: 14782 - &Close
 Actions: 1789 - &Save Layout
 Actions: 530 - Show &Table...
 Actions: 623 - Show A&ll
-Add New Field: 18515 - Short &Text
-Add New Field: 18516 - L&ong Text
+Add New Field: 18515 - &Text
+Add New Field: 18516 - &Memo
 Add New Field: 18517 - Rich Te&xt
 Add New Field: 18518 - &Number
 Add New Field: 18519 - &Date && Time
@@ -51,10 +53,10 @@ Calculated Field: 22331 - C&urrency
 Calculated Field: 22332 - &Yes/No
 Calculated Field: 22333 - &Date/Time
 Clip Art: 5746 - Tas&k Pane
-Column Filter: 11108 - Sort &Descending
+Column Filter: 11108 - Sort &Descendi
 Column Filter: 210 - Sort &Ascending
 Column Filter: 211 - Sort &Descending
-Column Filter: 31581 - ng
+Column Filter: 31581 - Sort &?ó??
 Database Background: 1695 - &Visual Basic Editor
 Database Background: 1795 - &Link Tables...
 Database Background: 1825 - Line &Up Icons
@@ -276,7 +278,6 @@ Diagram Popup: 3865 - Arrange &Tables
 Diagram Popup: 3866 - New Ta&ble
 Diagram Popup: 5963 - Size &Diagram to Window
 Diagram Popup: 5964 - Add Ta&ble...
-Dictionaries: 5746 - Tas&k Pane
 Document Actions: 5746 - Tas&k Pane
 Document Management: 5746 - Tas&k Pane
 Document Updates: 5746 - Tas&k Pane
@@ -289,6 +290,7 @@ Export Pop-up: 11727 - &Text File
 Export Pop-up: 11728 - XM&L File
 Export Pop-up: 11729 - ODB&C Database
 Export Pop-up: 11731 - &HTML Document
+Export Pop-up: 11732 - d&BASE File
 Export Pop-up: 12951 - &PDF or XPS
 Export Pop-up: 626 - &Word Merge
 Fax Service: 5746 - Tas&k Pane
@@ -336,19 +338,19 @@ Font/Fore Color: 1457 - &Recently Used Colors
 Font/Fore Color: 1457 - &Recently Used Colors
 Font/Fore Color: 3079 - &Font/Fore Color
 Font/Fore Color: 3080 - &Font/Fore Color
-Form Datasheet Cell: 10068 - Sort &Descending
-Form Datasheet Cell: 10071 - Sort &Descending
-Form Datasheet Cell: 10076 - Sort &Descending
-Form Datasheet Cell: 10089 - Sort &Descending
-Form Datasheet Cell: 10090 - Sort &Descending
-Form Datasheet Cell: 10091 - Sort &Descending
-Form Datasheet Cell: 10092 - Sort &Descending
-Form Datasheet Cell: 10093 - Sort &Descending
-Form Datasheet Cell: 10094 - Sort &Descending
-Form Datasheet Cell: 10095 - Sort &Descending
-Form Datasheet Cell: 11108 - Sort &Descending
-Form Datasheet Cell: 12265 - Sort &Descending
-Form Datasheet Cell: 12266 - Sort &Descending
+Form Datasheet Cell: 10068 - Sort &?ó??
+Form Datasheet Cell: 10071 - Sort &?ó??
+Form Datasheet Cell: 10076 - Sort &?ó??
+Form Datasheet Cell: 10089 - Sort &?ó??
+Form Datasheet Cell: 10090 - Sort &?ó??
+Form Datasheet Cell: 10091 - Sort &?ó??
+Form Datasheet Cell: 10092 - Sort &?ó??
+Form Datasheet Cell: 10093 - Sort &?ó??
+Form Datasheet Cell: 10094 - Sort &?ó??
+Form Datasheet Cell: 10095 - Sort &?ó??
+Form Datasheet Cell: 11108 - Sort &Descendi
+Form Datasheet Cell: 12265 - Sort &?ó??
+Form Datasheet Cell: 12266 - Sort &?ó??
 Form Datasheet Cell: 12900 - &Manage Attachments...
 Form Datasheet Cell: 12950 - Edit List &Items...
 Form Datasheet Cell: 12952 - S&how column history...
@@ -365,7 +367,7 @@ Form Datasheet Cell: 22285 - &Report Properties
 Form Datasheet Cell: 2995 - Insert Ob&ject...
 Form Datasheet Cell: 30019 - &Object
 Form Datasheet Cell: 30094 - &Hyperlink
-Form Datasheet Cell: 31581 - ng
+Form Datasheet Cell: 31581 - Sort &?ó??
 Form Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Form Datasheet Cell: 3720 - Recon&vert
 Form Datasheet Column: 1794 - Unfreeze &All Fields
@@ -415,6 +417,8 @@ Form Datasheet: 253 - &Font...
 Form Datasheet: 2764 - &Unhide Fields
 Form Datasheet: 2952 - &Design View
 Form Datasheet: 502 - &Form View
+Form Datasheet: 5814 - Piv&otTable View
+Form Datasheet: 5815 - Pi&votChart View
 Form Datasheet: 855 - Datash&eet...
 Form Design Control OLE: 19 - &Copy
 Form Design Control OLE: 2086 - Build &Event...
@@ -468,6 +472,8 @@ Form Design Form: 22285 - &Report Properties
 Form Design Form: 2952 - &Design View
 Form Design Form: 469 - Ta&b Order...
 Form Design Form: 502 - &Form View
+Form Design Form: 5814 - Piv&otTable View
+Form Design Form: 5815 - Pi&votChart View
 Form Design Section: 14205 - Al&ternate Fill/Back Color
 Form Design Section: 2086 - Build &Event...
 Form Design Section: 22 - &Paste
@@ -513,6 +519,8 @@ Form DesignTitleBar: 469 - Ta&b Order...
 Form DesignTitleBar: 502 - &Form View
 Form DesignTitleBar: 556 - P&age Header/Footer
 Form DesignTitleBar: 557 - Form &Header/Footer
+Form DesignTitleBar: 5814 - Piv&otTable View
+Form DesignTitleBar: 5815 - Pi&votChart View
 Form PivotChart Popup: 12329 - Datas&heet View
 Form PivotChart Popup: 14442 - Field &List
 Form PivotChart Popup: 222 - &Properties
@@ -527,22 +535,22 @@ Form PivotTable Popup: 2952 - &Design View
 Form PivotTable Popup: 502 - &Form View
 Form PivotTable Popup: 5815 - Pi&votChart View
 Form PivotTable Popup: 5897 - E&xport to Excel
-Form View Control: 10068 - Sort &Descending
-Form View Control: 10071 - Sort &Descending
-Form View Control: 10076 - Sort &Descending
-Form View Control: 10089 - Sort &Descending
-Form View Control: 10090 - Sort &Descending
-Form View Control: 10091 - Sort &Descending
-Form View Control: 10092 - Sort &Descending
-Form View Control: 10093 - Sort &Descending
-Form View Control: 10094 - Sort &Descending
-Form View Control: 10095 - Sort &Descending
-Form View Control: 11108 - Sort &Descending
+Form View Control: 10068 - Sort &?ó??
+Form View Control: 10071 - Sort &?ó??
+Form View Control: 10076 - Sort &?ó??
+Form View Control: 10089 - Sort &?ó??
+Form View Control: 10090 - Sort &?ó??
+Form View Control: 10091 - Sort &?ó??
+Form View Control: 10092 - Sort &?ó??
+Form View Control: 10093 - Sort &?ó??
+Form View Control: 10094 - Sort &?ó??
+Form View Control: 10095 - Sort &?ó??
+Form View Control: 11108 - Sort &Descendi
 Form View Control: 11669 - Select Entire Ro&w
 Form View Control: 11670 - Select Entire &Column
 Form View Control: 12076 - &Group On
-Form View Control: 12265 - Sort &Descending
-Form View Control: 12266 - Sort &Descending
+Form View Control: 12265 - Sort &?ó??
+Form View Control: 12266 - Sort &?ó??
 Form View Control: 12616 - &Paste Formatting
 Form View Control: 12898 - &Forward
 Form View Control: 12899 - &Back
@@ -577,7 +585,7 @@ Form View Control: 31381 - &Layout
 Form View Control: 31382 - &Gridlines
 Form View Control: 31398 - &Total
 Form View Control: 31574 - P&osition
-Form View Control: 31581 - ng
+Form View Control: 31581 - Sort &?ó??
 Form View Control: 31626 - &Insert
 Form View Control: 31627 - &Merge/Split
 Form View Control: 3492 - Han&gul Hanja Conversion...
@@ -598,28 +606,30 @@ Form View Popup: 2952 - &Design View
 Form View Popup: 3938 - A&pply Server Filter
 Form View Popup: 3971 - Ser&ver Filter by Form
 Form View Popup: 502 - &Form View
+Form View Popup: 5814 - Piv&otTable View
+Form View Popup: 5815 - Pi&votChart View
 Form View Record: 19 - &Copy
 Form View Record: 21 - Cu&t
 Form View Record: 22 - &Paste
 Form View Record: 222 - &Properties
 Form View Record: 22284 - &Form Properties
 Form View Record: 22285 - &Report Properties
-Form View Subform Control: 10068 - Sort &Descending
-Form View Subform Control: 10071 - Sort &Descending
-Form View Subform Control: 10076 - Sort &Descending
-Form View Subform Control: 10089 - Sort &Descending
-Form View Subform Control: 10090 - Sort &Descending
-Form View Subform Control: 10091 - Sort &Descending
-Form View Subform Control: 10092 - Sort &Descending
-Form View Subform Control: 10093 - Sort &Descending
-Form View Subform Control: 10094 - Sort &Descending
-Form View Subform Control: 10095 - Sort &Descending
-Form View Subform Control: 11108 - Sort &Descending
+Form View Subform Control: 10068 - Sort &?ó??
+Form View Subform Control: 10071 - Sort &?ó??
+Form View Subform Control: 10076 - Sort &?ó??
+Form View Subform Control: 10089 - Sort &?ó??
+Form View Subform Control: 10090 - Sort &?ó??
+Form View Subform Control: 10091 - Sort &?ó??
+Form View Subform Control: 10092 - Sort &?ó??
+Form View Subform Control: 10093 - Sort &?ó??
+Form View Subform Control: 10094 - Sort &?ó??
+Form View Subform Control: 10095 - Sort &?ó??
+Form View Subform Control: 11108 - Sort &Descendi
 Form View Subform Control: 11669 - Select Entire Ro&w
 Form View Subform Control: 11670 - Select Entire &Column
 Form View Subform Control: 12076 - &Group On
-Form View Subform Control: 12265 - Sort &Descending
-Form View Subform Control: 12266 - Sort &Descending
+Form View Subform Control: 12265 - Sort &?ó??
+Form View Subform Control: 12266 - Sort &?ó??
 Form View Subform Control: 12616 - &Paste Formatting
 Form View Subform Control: 12898 - &Forward
 Form View Subform Control: 12899 - &Back
@@ -653,25 +663,25 @@ Form View Subform Control: 31220 - S&ubform
 Form View Subform Control: 31381 - &Layout
 Form View Subform Control: 31398 - &Total
 Form View Subform Control: 31574 - P&osition
-Form View Subform Control: 31581 - ng
+Form View Subform Control: 31581 - Sort &?ó??
 Form View Subform Control: 31626 - &Insert
 Form View Subform Control: 31627 - &Merge/Split
 Form View Subform Control: 3492 - Han&gul Hanja Conversion...
 Form View Subform Control: 3720 - Recon&vert
 Form View Subform Control: 478 - &Delete
-Form View Subform: 10068 - Sort &Descending
-Form View Subform: 10071 - Sort &Descending
-Form View Subform: 10076 - Sort &Descending
-Form View Subform: 10089 - Sort &Descending
-Form View Subform: 10090 - Sort &Descending
-Form View Subform: 10091 - Sort &Descending
-Form View Subform: 10092 - Sort &Descending
-Form View Subform: 10093 - Sort &Descending
-Form View Subform: 10094 - Sort &Descending
-Form View Subform: 10095 - Sort &Descending
-Form View Subform: 11108 - Sort &Descending
-Form View Subform: 12265 - Sort &Descending
-Form View Subform: 12266 - Sort &Descending
+Form View Subform: 10068 - Sort &?ó??
+Form View Subform: 10071 - Sort &?ó??
+Form View Subform: 10076 - Sort &?ó??
+Form View Subform: 10089 - Sort &?ó??
+Form View Subform: 10090 - Sort &?ó??
+Form View Subform: 10091 - Sort &?ó??
+Form View Subform: 10092 - Sort &?ó??
+Form View Subform: 10093 - Sort &?ó??
+Form View Subform: 10094 - Sort &?ó??
+Form View Subform: 10095 - Sort &?ó??
+Form View Subform: 11108 - Sort &Descendi
+Form View Subform: 12265 - Sort &?ó??
+Form View Subform: 12266 - Sort &?ó??
 Form View Subform: 12900 - &Manage Attachments...
 Form View Subform: 12952 - S&how column history...
 Form View Subform: 15195 - Is S&elected
@@ -682,7 +692,7 @@ Form View Subform: 222 - &Properties
 Form View Subform: 22284 - &Form Properties
 Form View Subform: 22285 - &Report Properties
 Form View Subform: 31220 - S&ubform
-Form View Subform: 31581 - ng
+Form View Subform: 31581 - Sort &?ó??
 Form View: 108 - &Format Painter
 Form View: 109 - Print Pre&view
 Form View: 128 - &Undo
@@ -712,7 +722,6 @@ Form/Report Properties: 3492 - Han&gul Hanja Conversion...
 Form/Report Properties: 3720 - Recon&vert
 Form/Report Properties: 645 - &Build...
 Form/Report Properties: 925 - &Zoom...
-Format Object: 5746 - Tas&k Pane
 Formatting (Datasheet): 113 - &Bold
 Formatting (Datasheet): 114 - &Italic
 Formatting (Datasheet): 115 - &Underline
@@ -758,6 +767,8 @@ Function Datasheet Popup: 22 - &Paste
 Function Datasheet Popup: 253 - &Font...
 Function Datasheet Popup: 2764 - &Unhide Fields
 Function Datasheet Popup: 2952 - Function &Design
+Function Datasheet Popup: 5814 - Piv&otTable View
+Function Datasheet Popup: 5815 - Pi&votChart View
 Function Datasheet Popup: 855 - Datash&eet...
 Function Design: 128 - &Undo
 Function Design: 129 - &Redo
@@ -777,8 +788,8 @@ Function Design: 4012 - &Diagram
 Function Design: 4013 - &Grid
 Function Design: 4014 - &SQL
 Function Design: 577 - &Navigation Pane
-Function Design: 5865 - Edit S&QL
-Function Design: 5865 - Edit S&QL
+Function Design: 5865 - &Insert SQL
+Function Design: 5865 - &Insert SQL
 Function Design: 5905 - File Searc&h...
 Function Design: 5964 - Add Ta&ble...
 Function Design: 964 - &Run
@@ -800,7 +811,6 @@ Gridlines: 635 - Gridlines: &Both
 Gridlines: 636 - Gridlines: &Vertical
 Gridlines: 637 - Gridlines: &Horizontal
 Gridlines: 638 - Gridlines: &None
-History: 5746 - Tas&k Pane
 Import/Link Pop-up: 11711 - &Access Database
 Import/Link Pop-up: 11712 - E&xcel
 Import/Link Pop-up: 11713 - &Text File
@@ -827,7 +837,6 @@ Insert: 16757 - Insert &Above
 Insert: 16758 - Insert &Below
 Insert: 16759 - Insert &Left
 Insert: 16760 - Insert &Right
-Insights: 5746 - Tas&k Pane
 Join Line Popup: 222 - &Properties
 Join Line Popup: 3884 - Dele&te Relationship from Database
 Line/Border Color: 1457 - &Recently Used Colors
@@ -835,13 +844,13 @@ Line/Border Color: 1457 - &Recently Used Colors
 Line/Border Color: 2085 - &Transparent
 Line/Border Color: 3083 - &Line/Border Color
 Line/Border Color: 3084 - &Line/Border Color
-Line/Border Style: 613 - Line Style &1
-Line/Border Style: 614 - Line Style &4
+Line/Border Style: 613 - &Line/Border Style
+Line/Border Style: 614 - &Line/Border Style
 Line/Border Style: 615 - &Line/Border Style
-Line/Border Style: 616 - Line Style &3
+Line/Border Style: 616 - &Line/Border Style
 Line/Border Style: 617 - &Line/Border Style
-Line/Border Style: 618 - Line Style &5
-Line/Border Style: 619 - Line Style &6
+Line/Border Style: 618 - &Line/Border Style
+Line/Border Style: 619 - &Line/Border Style
 Line/Border Width: 490 - &Line/Border Width
 Line/Border Width: 491 - &Line/Border Width
 Line/Border Width: 492 - &Line/Border Width
@@ -1024,8 +1033,10 @@ Navigation Pane List Pop-up: 11117 - &Unhide in this Group
 Navigation Pane List Pop-up: 11266 - &Rename Shortcut
 Navigation Pane List Pop-up: 11267 - Re&move
 Navigation Pane List Pop-up: 15169 - De&lete
+Navigation Pane List Pop-up: 16203 - Co&llect and Update Data via E-mail
 Navigation Pane List Pop-up: 1787 - Rena&me
 Navigation Pane List Pop-up: 19 - &Copy
+Navigation Pane List Pop-up: 19644 - Check &Web Compatibility
 Navigation Pane List Pop-up: 19954 - Con&vert to Local Table
 Navigation Pane List Pop-up: 21 - Cu&t
 Navigation Pane List Pop-up: 22 - &Paste
@@ -1048,6 +1059,7 @@ Navigation Pane object Pop-up: 11117 - &Unhide in this Group
 Navigation Pane object Pop-up: 11266 - &Rename Shortcut
 Navigation Pane object Pop-up: 11267 - Re&move
 Navigation Pane object Pop-up: 15169 - De&lete
+Navigation Pane object Pop-up: 16203 - Co&llect and Update Data via E-mail
 Navigation Pane object Pop-up: 1787 - Rena&me
 Navigation Pane object Pop-up: 19 - &Copy
 Navigation Pane object Pop-up: 21 - Cu&t
@@ -1075,8 +1087,10 @@ Navigation Pane query or macro Pop-up: 11117 - &Unhide in this Group
 Navigation Pane query or macro Pop-up: 11266 - &Rename Shortcut
 Navigation Pane query or macro Pop-up: 11267 - Re&move
 Navigation Pane query or macro Pop-up: 15169 - De&lete
+Navigation Pane query or macro Pop-up: 16203 - Co&llect and Update Data via E-mail
 Navigation Pane query or macro Pop-up: 1787 - Rena&me
 Navigation Pane query or macro Pop-up: 19 - &Copy
+Navigation Pane query or macro Pop-up: 19644 - Check &Web Compatibility
 Navigation Pane query or macro Pop-up: 21 - Cu&t
 Navigation Pane query or macro Pop-up: 22 - &Paste
 Navigation Pane query or macro Pop-up: 222 - O&bject Properties
@@ -1106,10 +1120,10 @@ Navigation Pane View Pop-up: 13157 - La&yout View
 Navigation Pane View Pop-up: 15169 - De&lete
 Navigation Pane View Pop-up: 1787 - Rena&me
 Navigation Pane View Pop-up: 19 - &Copy
+Navigation Pane View Pop-up: 19644 - Check &Web Compatibility
 Navigation Pane View Pop-up: 21 - Cu&t
 Navigation Pane View Pop-up: 22 - &Paste
 Navigation Pane View Pop-up: 222 - V&iew Properties
-Navigation Pane View Pop-up: 25274 - &Duplicate
 Navigation Pane View Pop-up: 2649 - Check &In...
 Navigation Pane View Pop-up: 2652 - Show &Differences...
 Navigation Pane View Pop-up: 2669 - &Get Latest Version
@@ -1132,6 +1146,13 @@ Object Browser: 942 - Re&ferences...
 Object Dependencies: 5746 - Object Dependencies
 Office Clipboard: 5746 - Office Clipboard
 OLE Shared: 106 - &Close
+Online Meeting: 3729 - &Participant List
+Online Meeting: 3732 - &Call Participant
+Online Meeting: 3733 - &Allow Others to Edit
+Online Meeting: 3734 - &Remove Participants
+Online Meeting: 3735 - &Display Chat Window
+Online Meeting: 3736 - Display &Whiteboard
+Online Meeting: 3737 - &End Meeting
 PivotChart Popup: 14442 - Field &List
 PivotChart Popup: 222 - &Properties
 PivotChart Popup: 30103 - &Sort
@@ -1238,7 +1259,6 @@ Print Preview: 577 - &Navigation Pane
 Print Preview: 5802 - &Setup
 Print Preview: 639 - &Two Pages
 Print Preview: 984 - Microsoft Access &Help
-Proofing: 5746 - Tas&k Pane
 Query Datasheet: 108 - &Format Painter
 Query Datasheet: 109 - Print Pre&view
 Query Datasheet: 128 - Can't &Undo
@@ -1259,19 +1279,19 @@ Query Datasheet: 577 - &Navigation Pane
 Query Datasheet: 5905 - File Searc&h...
 Query Datasheet: 644 - Delete &Record
 Query Datasheet: 984 - Microsoft Access &Help
-Query Design Datasheet Cell: 10068 - Sort &
-Query Design Datasheet Cell: 10071 - Sort &
-Query Design Datasheet Cell: 10076 - Sort &
-Query Design Datasheet Cell: 10089 - Sort &
-Query Design Datasheet Cell: 10090 - Sort &
-Query Design Datasheet Cell: 10091 - Sort &
-Query Design Datasheet Cell: 10092 - Sort &
-Query Design Datasheet Cell: 10093 - Sort &
-Query Design Datasheet Cell: 10094 - Sort &
-Query Design Datasheet Cell: 10095 - Sort &
-Query Design Datasheet Cell: 11108 - Sort &
-Query Design Datasheet Cell: 12265 - Sort &
-Query Design Datasheet Cell: 12266 - Sort &
+Query Design Datasheet Cell: 10068 - Sort &?ó??
+Query Design Datasheet Cell: 10071 - Sort &?ó??
+Query Design Datasheet Cell: 10076 - Sort &?ó??
+Query Design Datasheet Cell: 10089 - Sort &?ó??
+Query Design Datasheet Cell: 10090 - Sort &?ó??
+Query Design Datasheet Cell: 10091 - Sort &?ó??
+Query Design Datasheet Cell: 10092 - Sort &?ó??
+Query Design Datasheet Cell: 10093 - Sort &?ó??
+Query Design Datasheet Cell: 10094 - Sort &?ó??
+Query Design Datasheet Cell: 10095 - Sort &?ó??
+Query Design Datasheet Cell: 11108 - Sort &Descendi
+Query Design Datasheet Cell: 12265 - Sort &?ó??
+Query Design Datasheet Cell: 12266 - Sort &?ó??
 Query Design Datasheet Cell: 12900 - &Manage Attachments...
 Query Design Datasheet Cell: 12950 - Edit List &Items...
 Query Design Datasheet Cell: 12952 - S&how column history...
@@ -1285,7 +1305,7 @@ Query Design Datasheet Cell: 22 - &Paste
 Query Design Datasheet Cell: 2995 - Insert Ob&ject...
 Query Design Datasheet Cell: 30019 - &Object
 Query Design Datasheet Cell: 30094 - &Hyperlink
-Query Design Datasheet Cell: 31581 - >
+Query Design Datasheet Cell: 31581 - Sort &?ó??
 Query Design Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Query Design Datasheet Cell: 3720 - Recon&vert
 Query Design Datasheet Column: 1794 - Unfreeze &All Fields
@@ -1317,6 +1337,8 @@ Query Design Datasheet: 2764 - &Unhide Fields
 Query Design Datasheet: 3492 - Han&gul Hanja Conversion...
 Query Design Datasheet: 3720 - Recon&vert
 Query Design Datasheet: 528 - S&QL View
+Query Design Datasheet: 5814 - Piv&otTable View
+Query Design Datasheet: 5815 - Pi&votChart View
 Query Design Datasheet: 855 - Datash&eet...
 Query Design Join: 1824 - &Join Properties
 Query Design Join: 478 - &Delete
@@ -1383,6 +1405,8 @@ Query SQLText: 3720 - Recon&vert
 Query SQLTitleBar: 12329 - Datas&heet View
 Query SQLTitleBar: 2037 - &Properties...
 Query SQLTitleBar: 2043 - Query &Design
+Query SQLTitleBar: 5814 - Piv&otTable View
+Query SQLTitleBar: 5815 - Pi&votChart View
 Query: 12329 - Datas&heet View
 Query: 14782 - &Close
 Query: 1766 - Q&uery Type
@@ -1392,6 +1416,8 @@ Query: 523 - &Relationships...
 Query: 528 - S&QL View
 Query: 530 - Show &Table...
 Query: 537 - Para&meters...
+Query: 5814 - Piv&otTable View
+Query: 5815 - Pi&votChart View
 Relationship Join: 1805 - Edit &Relationship...
 Relationship Join: 478 - &Delete
 Relationship QueryFieldList: 1806 - &Hide Table
@@ -1517,7 +1543,6 @@ Report DesignTitleBar: 558 - &First 10 Records Preview
 Report DesignTitleBar: 574 - Form &Header/Footer
 Research: 5746 - Tas&k Pane
 Ribbon: 5746 - Ribbon
-Share: 5746 - Tas&k Pane
 SharePoint List Options Popup: 12687 - &Modify Columns and Settings...
 SharePoint List Options Popup: 12688 - &Alert Me...
 SharePoint List Options Popup: 12689 - Modify &Workflow...
@@ -1551,11 +1576,13 @@ Stored Procedure Design Datasheet: 22 - &Paste
 Stored Procedure Design Datasheet: 253 - &Font...
 Stored Procedure Design Datasheet: 2764 - &Unhide Fields
 Stored Procedure Design Datasheet: 3985 - Stored Procedure &Design
+Stored Procedure Design Datasheet: 5814 - Piv&otTable View
+Stored Procedure Design Datasheet: 5815 - Pi&votChart View
 Stored Procedure Design Datasheet: 855 - Datash&eet...
 Stored Procedure Design Popup: 19 - &Copy
 Stored Procedure Design Popup: 21 - Cu&t
 Stored Procedure Design Popup: 22 - &Paste
-Stored Procedure Design Popup: 5865 - Edit S&QL
+Stored Procedure Design Popup: 5865 - &Insert SQL
 Stored Procedure Design: 128 - &Undo
 Stored Procedure Design: 129 - &Redo
 Stored Procedure Design: 1766 - Q&uery Type
@@ -1572,7 +1599,7 @@ Stored Procedure Design: 4012 - &Diagram
 Stored Procedure Design: 4013 - &Grid
 Stored Procedure Design: 4014 - &SQL
 Stored Procedure Design: 577 - &Navigation Pane
-Stored Procedure Design: 5865 - Edit S&QL
+Stored Procedure Design: 5865 - &Insert SQL
 Stored Procedure Design: 5905 - File Searc&h...
 Stored Procedure Design: 5964 - Add Ta&ble...
 Stored Procedure Design: 964 - &Run
@@ -1658,19 +1685,19 @@ Table Datasheet: 577 - &Navigation Pane
 Table Datasheet: 5905 - File Searc&h...
 Table Datasheet: 644 - Delete &Record
 Table Datasheet: 984 - Microsoft Access &Help
-Table Design Datasheet Cell: 10068 - Sort &Descen??????????
-Table Design Datasheet Cell: 10071 - Sort &Descen??????????
-Table Design Datasheet Cell: 10076 - Sort &Descen??????????
-Table Design Datasheet Cell: 10089 - Sort &Descen??????????
-Table Design Datasheet Cell: 10090 - Sort &Descen??????????
-Table Design Datasheet Cell: 10091 - Sort &Descen??????????
-Table Design Datasheet Cell: 10092 - Sort &Descen??????????
-Table Design Datasheet Cell: 10093 - Sort &Descen??????????
-Table Design Datasheet Cell: 10094 - Sort &Descen??????????
-Table Design Datasheet Cell: 10095 - Sort &Descen??????????
-Table Design Datasheet Cell: 11108 - Sort &Descen??????????
-Table Design Datasheet Cell: 12265 - Sort &Descen??????????
-Table Design Datasheet Cell: 12266 - Sort &Descen??????????
+Table Design Datasheet Cell: 10068 - Sort &?ó??
+Table Design Datasheet Cell: 10071 - Sort &?ó??
+Table Design Datasheet Cell: 10076 - Sort &?ó??
+Table Design Datasheet Cell: 10089 - Sort &?ó??
+Table Design Datasheet Cell: 10090 - Sort &?ó??
+Table Design Datasheet Cell: 10091 - Sort &?ó??
+Table Design Datasheet Cell: 10092 - Sort &?ó??
+Table Design Datasheet Cell: 10093 - Sort &?ó??
+Table Design Datasheet Cell: 10094 - Sort &?ó??
+Table Design Datasheet Cell: 10095 - Sort &?ó??
+Table Design Datasheet Cell: 11108 - Sort &Descendi
+Table Design Datasheet Cell: 12265 - Sort &?ó??
+Table Design Datasheet Cell: 12266 - Sort &?ó??
 Table Design Datasheet Cell: 12900 - &Manage Attachments...
 Table Design Datasheet Cell: 12950 - Edit List &Items...
 Table Design Datasheet Cell: 12952 - S&how column history...
@@ -1684,7 +1711,8 @@ Table Design Datasheet Cell: 22 - &Paste
 Table Design Datasheet Cell: 2995 - Insert Ob&ject...
 Table Design Datasheet Cell: 30019 - &Object
 Table Design Datasheet Cell: 30094 - &Hyperlink
-Table Design Datasheet Cell: 31581 - ????????
+Table Design Datasheet Cell: 31454 - Workflow
+Table Design Datasheet Cell: 31581 - Sort &?ó??
 Table Design Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Table Design Datasheet Cell: 3720 - Recon&vert
 Table Design Datasheet Column: 141 - &Find...
@@ -1719,6 +1747,8 @@ Table Design Datasheet: 253 - &Font...
 Table Design Datasheet: 2764 - &Unhide Fields
 Table Design Datasheet: 3492 - Han&gul Hanja Conversion...
 Table Design Datasheet: 3720 - Recon&vert
+Table Design Datasheet: 5814 - Piv&otTable View
+Table Design Datasheet: 5815 - Pi&votChart View
 Table Design Datasheet: 855 - Datash&eet...
 Table Design Lower Pane: 19 - &Copy
 Table Design Lower Pane: 21 - Cu&t
@@ -1773,6 +1803,8 @@ Table DesignTitleBar: 22 - &Paste
 Table DesignTitleBar: 2771 - &Properties
 Table DesignTitleBar: 523 - &Relationships...
 Table DesignTitleBar: 527 - &Indexes
+Table DesignTitleBar: 5814 - Piv&otTable View
+Table DesignTitleBar: 5815 - Pi&votChart View
 Table PivotChart Popup: 12329 - Datas&heet View
 Table PivotChart Popup: 14442 - Field &List
 Table PivotChart Popup: 212 - Table &Design
@@ -1786,7 +1818,6 @@ Table PivotTable Popup: 222 - &Properties
 Table PivotTable Popup: 5815 - Pi&votChart View
 Table PivotTable Popup: 5897 - E&xport to Excel
 Task Pane: 5746 - Tas&k Pane
-Thesaurus: 5746 - Tas&k Pane
 Toolbox: 130 - &Line
 Toolbox: 131 - R&ectangle
 Toolbox: 182 - &Select
@@ -1810,7 +1841,7 @@ Toolbox: 965 - I&mage
 Trigger Design Popup: 19 - &Copy
 Trigger Design Popup: 21 - Cu&t
 Trigger Design Popup: 22 - &Paste
-Trigger Design Popup: 5865 - Edit S&QL
+Trigger Design Popup: 5865 - &Insert SQL
 Trigger Design: 109 - Print Pre&view
 Trigger Design: 19 - &Copy
 Trigger Design: 21 - Cu&t
@@ -1833,6 +1864,8 @@ View Design Datasheet: 22 - &Paste
 View Design Datasheet: 253 - &Font...
 View Design Datasheet: 2764 - &Unhide Fields
 View Design Datasheet: 3984 - View &Design
+View Design Datasheet: 5814 - Piv&otTable View
+View Design Datasheet: 5815 - Pi&votChart View
 View Design Datasheet: 855 - Datash&eet...
 View Design Diagram Pane Popup: 222 - &Properties
 View Design Diagram Pane Popup: 4010 - &Group By
@@ -1921,5 +1954,9 @@ Web: 1740 - &Address:
 Web: 1922 - Search the &Web
 Web: 30176 - Favorite&s
 Web: 30328 - &Go
+Workflow: 13381 - Start New Workflow ...
+Workflow: 13382 - Workflow Tasks ...
+Workflow: 13383 - Show All Workflow Status Columns
+Workflow: 13384 - Hide All Workflow Status Columns
 XML Document: 5746 - Tas&k Pane
 XML Source: 5746 - Tas&k Pane

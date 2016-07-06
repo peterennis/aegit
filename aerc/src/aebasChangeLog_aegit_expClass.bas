@@ -31,8 +31,6 @@ Option Explicit
 ' Tasks:
 ' %075 -
 ' %074 -
-' %073 -
-' %072 -
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample and fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
@@ -57,6 +55,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160706 - v179 -
+    ' FIXED - %073 - Unknown Access Field Type in GetLovefieldType, strAccessFieldType=Double => running on Access 2013
+    ' FIXED - %072 - Unknown Access Field Type in GetLovefieldType, strAccessFieldType=Integer => running on Access 2013
 '20160705 - v178 -
     ' FIXED - %068 - Creation of schema adds index to wrong field
 '20160705 - v177 -

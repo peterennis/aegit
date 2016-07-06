@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.8"
-Private Const aegit_expVERSION_DATE As String = "July 5, 2016"
+Private Const aegit_expVERSION As String = "1.7.9"
+Private Const aegit_expVERSION_DATE As String = "July 6, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3715,6 +3715,10 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
             GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "DateTime"
             GetLovefieldType = "', lf.Type.DATE_TIME)."     ' "DATE_TIME"
+        Case "Double"
+            GetLovefieldType = "', lf.Type.NUMBER)."        ' "NUMBER"
+        Case "Integer"
+            GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "Long"
             GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "Memo"
@@ -4843,8 +4847,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
         Next
     Next
 
