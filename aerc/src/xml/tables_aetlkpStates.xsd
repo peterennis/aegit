@@ -12,7 +12,7 @@
     <xsd:annotation>
       <xsd:appinfo>
         <od:index index-name="PrimaryKey" index-key="StateCode " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
-        <od:index index-name="State Code" index-key="StateCode " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="State Name" index-key="StateName " primary="no" unique="no" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
     <xsd:complexType>

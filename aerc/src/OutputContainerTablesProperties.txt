@@ -287,6 +287,7 @@
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
+              GUID          F3-89-82-DE-F8-75-4B-B2
 >>>qapp_Dummy
               Name          qapp_Dummy
               Owner         admin

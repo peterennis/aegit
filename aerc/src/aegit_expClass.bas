@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.7.9"
-Private Const aegit_expVERSION_DATE As String = "July 6, 2016"
+Private Const aegit_expVERSION As String = "1.8.0"
+Private Const aegit_expVERSION_DATE As String = "July 7, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -50,7 +50,7 @@ Private Const mblnUTF16 As Boolean = False
 Private mstrToParse As String
 Private mstrTableName As String
 Private Const mTABLE As String = "CREATE TABLE ["
-Private Const mPRIMARYKEY As String = "CREATE UNIQUE INDEX [PrimaryKey] ON ["
+Private Const mPRIMARYKEY As String = "CREATE UNIQUE INDEX ["       'PrimaryKey] ON ["
 Private Const mINDEX As String = "CREATE INDEX ["
 
 Private Enum SizeStringSide
@@ -4560,6 +4560,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     KillProperly (strTheSourceLocation & aeSchemaFile & ".sql")
     OutputListOfIndexes strTheSourceLocation & aeIndexLists
     GenerateLovefieldSchema strTheSourceLocation & aeSchemaFile & ".sql" & ".only", strTheSourceLocation & aeLoveSchema
+    Stop
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then
@@ -4847,8 +4848,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
         Next
     Next
 

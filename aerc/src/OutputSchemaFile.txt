@@ -60,7 +60,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [ID] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -71,7 +71,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [aetlkpStates] ([StateCode]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [State Code] ON [aetlkpStates] ([StateName])"
+strSQL="CREATE INDEX [State Name] ON [aetlkpStates] ([StateName])"
 Currentdb.Execute strSQL
 
 'Local Table

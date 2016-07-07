@@ -6,7 +6,6 @@
 &Legacy Keyboard Support: 30016 - &Query
 : 109 - Print Pre&view
 : 11253 - &Report View
-: 11305 - &Design Tasks Pane
 : 12329 - Datas&heet View
 : 13157 - La&yout View
 : 14782 - &Close
@@ -56,7 +55,7 @@ Clip Art: 5746 - Tas&k Pane
 Column Filter: 11108 - Sort &Descendi
 Column Filter: 210 - Sort &Ascending
 Column Filter: 211 - Sort &Descending
-Column Filter: 31581 - Sort &?ó??
+Column Filter: 31581 - Sort &?l??
 Database Background: 1695 - &Visual Basic Editor
 Database Background: 1795 - &Link Tables...
 Database Background: 1825 - Line &Up Icons
@@ -338,19 +337,19 @@ Font/Fore Color: 1457 - &Recently Used Colors
 Font/Fore Color: 1457 - &Recently Used Colors
 Font/Fore Color: 3079 - &Font/Fore Color
 Font/Fore Color: 3080 - &Font/Fore Color
-Form Datasheet Cell: 10068 - Sort &?ó??
-Form Datasheet Cell: 10071 - Sort &?ó??
-Form Datasheet Cell: 10076 - Sort &?ó??
-Form Datasheet Cell: 10089 - Sort &?ó??
-Form Datasheet Cell: 10090 - Sort &?ó??
-Form Datasheet Cell: 10091 - Sort &?ó??
-Form Datasheet Cell: 10092 - Sort &?ó??
-Form Datasheet Cell: 10093 - Sort &?ó??
-Form Datasheet Cell: 10094 - Sort &?ó??
-Form Datasheet Cell: 10095 - Sort &?ó??
+Form Datasheet Cell: 10068 - Sort &?l??
+Form Datasheet Cell: 10071 - Sort &?l??
+Form Datasheet Cell: 10076 - Sort &?l??
+Form Datasheet Cell: 10089 - Sort &?l??
+Form Datasheet Cell: 10090 - Sort &?l??
+Form Datasheet Cell: 10091 - Sort &?l??
+Form Datasheet Cell: 10092 - Sort &?l??
+Form Datasheet Cell: 10093 - Sort &?l??
+Form Datasheet Cell: 10094 - Sort &?l??
+Form Datasheet Cell: 10095 - Sort &?l??
 Form Datasheet Cell: 11108 - Sort &Descendi
-Form Datasheet Cell: 12265 - Sort &?ó??
-Form Datasheet Cell: 12266 - Sort &?ó??
+Form Datasheet Cell: 12265 - Sort &?l??
+Form Datasheet Cell: 12266 - Sort &?l??
 Form Datasheet Cell: 12900 - &Manage Attachments...
 Form Datasheet Cell: 12950 - Edit List &Items...
 Form Datasheet Cell: 12952 - S&how column history...
@@ -367,7 +366,7 @@ Form Datasheet Cell: 22285 - &Report Properties
 Form Datasheet Cell: 2995 - Insert Ob&ject...
 Form Datasheet Cell: 30019 - &Object
 Form Datasheet Cell: 30094 - &Hyperlink
-Form Datasheet Cell: 31581 - Sort &?ó??
+Form Datasheet Cell: 31581 - Sort &?l??
 Form Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Form Datasheet Cell: 3720 - Recon&vert
 Form Datasheet Column: 1794 - Unfreeze &All Fields
@@ -535,22 +534,22 @@ Form PivotTable Popup: 2952 - &Design View
 Form PivotTable Popup: 502 - &Form View
 Form PivotTable Popup: 5815 - Pi&votChart View
 Form PivotTable Popup: 5897 - E&xport to Excel
-Form View Control: 10068 - Sort &?ó??
-Form View Control: 10071 - Sort &?ó??
-Form View Control: 10076 - Sort &?ó??
-Form View Control: 10089 - Sort &?ó??
-Form View Control: 10090 - Sort &?ó??
-Form View Control: 10091 - Sort &?ó??
-Form View Control: 10092 - Sort &?ó??
-Form View Control: 10093 - Sort &?ó??
-Form View Control: 10094 - Sort &?ó??
-Form View Control: 10095 - Sort &?ó??
+Form View Control: 10068 - Sort &?l??
+Form View Control: 10071 - Sort &?l??
+Form View Control: 10076 - Sort &?l??
+Form View Control: 10089 - Sort &?l??
+Form View Control: 10090 - Sort &?l??
+Form View Control: 10091 - Sort &?l??
+Form View Control: 10092 - Sort &?l??
+Form View Control: 10093 - Sort &?l??
+Form View Control: 10094 - Sort &?l??
+Form View Control: 10095 - Sort &?l??
 Form View Control: 11108 - Sort &Descendi
 Form View Control: 11669 - Select Entire Ro&w
 Form View Control: 11670 - Select Entire &Column
 Form View Control: 12076 - &Group On
-Form View Control: 12265 - Sort &?ó??
-Form View Control: 12266 - Sort &?ó??
+Form View Control: 12265 - Sort &?l??
+Form View Control: 12266 - Sort &?l??
 Form View Control: 12616 - &Paste Formatting
 Form View Control: 12898 - &Forward
 Form View Control: 12899 - &Back
@@ -585,7 +584,7 @@ Form View Control: 31381 - &Layout
 Form View Control: 31382 - &Gridlines
 Form View Control: 31398 - &Total
 Form View Control: 31574 - P&osition
-Form View Control: 31581 - Sort &?ó??
+Form View Control: 31581 - Sort &?l??
 Form View Control: 31626 - &Insert
 Form View Control: 31627 - &Merge/Split
 Form View Control: 3492 - Han&gul Hanja Conversion...
@@ -614,22 +613,22 @@ Form View Record: 22 - &Paste
 Form View Record: 222 - &Properties
 Form View Record: 22284 - &Form Properties
 Form View Record: 22285 - &Report Properties
-Form View Subform Control: 10068 - Sort &?ó??
-Form View Subform Control: 10071 - Sort &?ó??
-Form View Subform Control: 10076 - Sort &?ó??
-Form View Subform Control: 10089 - Sort &?ó??
-Form View Subform Control: 10090 - Sort &?ó??
-Form View Subform Control: 10091 - Sort &?ó??
-Form View Subform Control: 10092 - Sort &?ó??
-Form View Subform Control: 10093 - Sort &?ó??
-Form View Subform Control: 10094 - Sort &?ó??
-Form View Subform Control: 10095 - Sort &?ó??
+Form View Subform Control: 10068 - Sort &?l??
+Form View Subform Control: 10071 - Sort &?l??
+Form View Subform Control: 10076 - Sort &?l??
+Form View Subform Control: 10089 - Sort &?l??
+Form View Subform Control: 10090 - Sort &?l??
+Form View Subform Control: 10091 - Sort &?l??
+Form View Subform Control: 10092 - Sort &?l??
+Form View Subform Control: 10093 - Sort &?l??
+Form View Subform Control: 10094 - Sort &?l??
+Form View Subform Control: 10095 - Sort &?l??
 Form View Subform Control: 11108 - Sort &Descendi
 Form View Subform Control: 11669 - Select Entire Ro&w
 Form View Subform Control: 11670 - Select Entire &Column
 Form View Subform Control: 12076 - &Group On
-Form View Subform Control: 12265 - Sort &?ó??
-Form View Subform Control: 12266 - Sort &?ó??
+Form View Subform Control: 12265 - Sort &?l??
+Form View Subform Control: 12266 - Sort &?l??
 Form View Subform Control: 12616 - &Paste Formatting
 Form View Subform Control: 12898 - &Forward
 Form View Subform Control: 12899 - &Back
@@ -663,25 +662,25 @@ Form View Subform Control: 31220 - S&ubform
 Form View Subform Control: 31381 - &Layout
 Form View Subform Control: 31398 - &Total
 Form View Subform Control: 31574 - P&osition
-Form View Subform Control: 31581 - Sort &?ó??
+Form View Subform Control: 31581 - Sort &?l??
 Form View Subform Control: 31626 - &Insert
 Form View Subform Control: 31627 - &Merge/Split
 Form View Subform Control: 3492 - Han&gul Hanja Conversion...
 Form View Subform Control: 3720 - Recon&vert
 Form View Subform Control: 478 - &Delete
-Form View Subform: 10068 - Sort &?ó??
-Form View Subform: 10071 - Sort &?ó??
-Form View Subform: 10076 - Sort &?ó??
-Form View Subform: 10089 - Sort &?ó??
-Form View Subform: 10090 - Sort &?ó??
-Form View Subform: 10091 - Sort &?ó??
-Form View Subform: 10092 - Sort &?ó??
-Form View Subform: 10093 - Sort &?ó??
-Form View Subform: 10094 - Sort &?ó??
-Form View Subform: 10095 - Sort &?ó??
+Form View Subform: 10068 - Sort &?l??
+Form View Subform: 10071 - Sort &?l??
+Form View Subform: 10076 - Sort &?l??
+Form View Subform: 10089 - Sort &?l??
+Form View Subform: 10090 - Sort &?l??
+Form View Subform: 10091 - Sort &?l??
+Form View Subform: 10092 - Sort &?l??
+Form View Subform: 10093 - Sort &?l??
+Form View Subform: 10094 - Sort &?l??
+Form View Subform: 10095 - Sort &?l??
 Form View Subform: 11108 - Sort &Descendi
-Form View Subform: 12265 - Sort &?ó??
-Form View Subform: 12266 - Sort &?ó??
+Form View Subform: 12265 - Sort &?l??
+Form View Subform: 12266 - Sort &?l??
 Form View Subform: 12900 - &Manage Attachments...
 Form View Subform: 12952 - S&how column history...
 Form View Subform: 15195 - Is S&elected
@@ -692,7 +691,7 @@ Form View Subform: 222 - &Properties
 Form View Subform: 22284 - &Form Properties
 Form View Subform: 22285 - &Report Properties
 Form View Subform: 31220 - S&ubform
-Form View Subform: 31581 - Sort &?ó??
+Form View Subform: 31581 - Sort &?l??
 Form View: 108 - &Format Painter
 Form View: 109 - Print Pre&view
 Form View: 128 - &Undo
@@ -1259,6 +1258,7 @@ Print Preview: 577 - &Navigation Pane
 Print Preview: 5802 - &Setup
 Print Preview: 639 - &Two Pages
 Print Preview: 984 - Microsoft Access &Help
+Property Sheet: 11305 - &Design Tasks Pane
 Query Datasheet: 108 - &Format Painter
 Query Datasheet: 109 - Print Pre&view
 Query Datasheet: 128 - Can't &Undo
@@ -1279,19 +1279,19 @@ Query Datasheet: 577 - &Navigation Pane
 Query Datasheet: 5905 - File Searc&h...
 Query Datasheet: 644 - Delete &Record
 Query Datasheet: 984 - Microsoft Access &Help
-Query Design Datasheet Cell: 10068 - Sort &?ó??
-Query Design Datasheet Cell: 10071 - Sort &?ó??
-Query Design Datasheet Cell: 10076 - Sort &?ó??
-Query Design Datasheet Cell: 10089 - Sort &?ó??
-Query Design Datasheet Cell: 10090 - Sort &?ó??
-Query Design Datasheet Cell: 10091 - Sort &?ó??
-Query Design Datasheet Cell: 10092 - Sort &?ó??
-Query Design Datasheet Cell: 10093 - Sort &?ó??
-Query Design Datasheet Cell: 10094 - Sort &?ó??
-Query Design Datasheet Cell: 10095 - Sort &?ó??
+Query Design Datasheet Cell: 10068 - Sort &?l??
+Query Design Datasheet Cell: 10071 - Sort &?l??
+Query Design Datasheet Cell: 10076 - Sort &?l??
+Query Design Datasheet Cell: 10089 - Sort &?l??
+Query Design Datasheet Cell: 10090 - Sort &?l??
+Query Design Datasheet Cell: 10091 - Sort &?l??
+Query Design Datasheet Cell: 10092 - Sort &?l??
+Query Design Datasheet Cell: 10093 - Sort &?l??
+Query Design Datasheet Cell: 10094 - Sort &?l??
+Query Design Datasheet Cell: 10095 - Sort &?l??
 Query Design Datasheet Cell: 11108 - Sort &Descendi
-Query Design Datasheet Cell: 12265 - Sort &?ó??
-Query Design Datasheet Cell: 12266 - Sort &?ó??
+Query Design Datasheet Cell: 12265 - Sort &?l??
+Query Design Datasheet Cell: 12266 - Sort &?l??
 Query Design Datasheet Cell: 12900 - &Manage Attachments...
 Query Design Datasheet Cell: 12950 - Edit List &Items...
 Query Design Datasheet Cell: 12952 - S&how column history...
@@ -1305,7 +1305,7 @@ Query Design Datasheet Cell: 22 - &Paste
 Query Design Datasheet Cell: 2995 - Insert Ob&ject...
 Query Design Datasheet Cell: 30019 - &Object
 Query Design Datasheet Cell: 30094 - &Hyperlink
-Query Design Datasheet Cell: 31581 - Sort &?ó??
+Query Design Datasheet Cell: 31581 - Sort &?l??
 Query Design Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Query Design Datasheet Cell: 3720 - Recon&vert
 Query Design Datasheet Column: 1794 - Unfreeze &All Fields
@@ -1685,19 +1685,19 @@ Table Datasheet: 577 - &Navigation Pane
 Table Datasheet: 5905 - File Searc&h...
 Table Datasheet: 644 - Delete &Record
 Table Datasheet: 984 - Microsoft Access &Help
-Table Design Datasheet Cell: 10068 - Sort &?ó??
-Table Design Datasheet Cell: 10071 - Sort &?ó??
-Table Design Datasheet Cell: 10076 - Sort &?ó??
-Table Design Datasheet Cell: 10089 - Sort &?ó??
-Table Design Datasheet Cell: 10090 - Sort &?ó??
-Table Design Datasheet Cell: 10091 - Sort &?ó??
-Table Design Datasheet Cell: 10092 - Sort &?ó??
-Table Design Datasheet Cell: 10093 - Sort &?ó??
-Table Design Datasheet Cell: 10094 - Sort &?ó??
-Table Design Datasheet Cell: 10095 - Sort &?ó??
+Table Design Datasheet Cell: 10068 - Sort &?l??
+Table Design Datasheet Cell: 10071 - Sort &?l??
+Table Design Datasheet Cell: 10076 - Sort &?l??
+Table Design Datasheet Cell: 10089 - Sort &?l??
+Table Design Datasheet Cell: 10090 - Sort &?l??
+Table Design Datasheet Cell: 10091 - Sort &?l??
+Table Design Datasheet Cell: 10092 - Sort &?l??
+Table Design Datasheet Cell: 10093 - Sort &?l??
+Table Design Datasheet Cell: 10094 - Sort &?l??
+Table Design Datasheet Cell: 10095 - Sort &?l??
 Table Design Datasheet Cell: 11108 - Sort &Descendi
-Table Design Datasheet Cell: 12265 - Sort &?ó??
-Table Design Datasheet Cell: 12266 - Sort &?ó??
+Table Design Datasheet Cell: 12265 - Sort &?l??
+Table Design Datasheet Cell: 12266 - Sort &?l??
 Table Design Datasheet Cell: 12900 - &Manage Attachments...
 Table Design Datasheet Cell: 12950 - Edit List &Items...
 Table Design Datasheet Cell: 12952 - S&how column history...
@@ -1712,7 +1712,7 @@ Table Design Datasheet Cell: 2995 - Insert Ob&ject...
 Table Design Datasheet Cell: 30019 - &Object
 Table Design Datasheet Cell: 30094 - &Hyperlink
 Table Design Datasheet Cell: 31454 - Workflow
-Table Design Datasheet Cell: 31581 - Sort &?ó??
+Table Design Datasheet Cell: 31581 - Sort &?l??
 Table Design Datasheet Cell: 3492 - Han&gul Hanja Conversion...
 Table Design Datasheet Cell: 3720 - Recon&vert
 Table Design Datasheet Column: 141 - &Find...

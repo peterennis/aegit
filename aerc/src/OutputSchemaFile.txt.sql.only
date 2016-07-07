@@ -12,10 +12,10 @@ CREATE TABLE [_tlkpYear] ([id] Counter,[TheYear] Text (4) )
 CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpYear] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [aeItems] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )
 CREATE TABLE [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )
-CREATE UNIQUE INDEX [PrimaryKey] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL
+CREATE UNIQUE INDEX [ID] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [aetlkpStates] ([StateCode] Text (3),[StateAbbreviation] Text (2),[StateName] Text (15) )
 CREATE UNIQUE INDEX [PrimaryKey] ON [aetlkpStates] ([StateCode]) WITH PRIMARY DISALLOW NULL
-CREATE INDEX [State Code] ON [aetlkpStates] ([StateName])
+CREATE INDEX [State Name] ON [aetlkpStates] ([StateName])
 CREATE TABLE [tblBinary] ([id] Counter,[FileName] Text (255),[binary] OLEObject )
 CREATE UNIQUE INDEX [PrimaryKey] ON [tblBinary] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [tblDummy0] ([Num] Long )
