@@ -84,14 +84,14 @@ schemaBuilder.createTable('_tlkpChart').
     addColumn('ChartDesc', lf.Type.STRING).
     addColumn('ChartTitle', lf.Type.STRING).
     addPrimaryKey(['id']).
-    addIndex(['idxQaqcnum'], ['ChartTitle'], false, lf.Order.ASC);
+    addIndex(['idxQAQCnum'], ['ChartTitle'], false, lf.Order.ASC);
 schemaBuilder.createTable('_tlkpMonth').
     addColumn('id', lf.Type.INTEGER).
     addColumn('TheMonthShort', lf.Type.STRING).
     addColumn('TheMonthLong', lf.Type.STRING).
     addColumn('TheMonthCode', lf.Type.STRING).
     addPrimaryKey(['id']).
-    addIndex(['idxThemonthcode'], ['TheMonthCode'], false, lf.Order.ASC);
+    addIndex(['idxTheMonthCode'], ['TheMonthCode'], false, lf.Order.ASC);
 schemaBuilder.createTable('_tlkpYear').
     addColumn('id', lf.Type.INTEGER).
     addColumn('TheYear', lf.Type.STRING).
@@ -113,7 +113,7 @@ schemaBuilder.createTable('aetlkpStates').
     addColumn('StateAbbreviation', lf.Type.STRING).
     addColumn('StateName', lf.Type.STRING).
     addPrimaryKey(['StateCode']).
-    addIndex(['idxState name'], ['StateName'], false, lf.Order.ASC);
+    addIndex(['idxState Name'], ['StateName'], false, lf.Order.ASC);
 schemaBuilder.createTable('tblBinary').
     addColumn('id', lf.Type.INTEGER).
     addColumn('FileName', lf.Type.STRING).

@@ -3782,7 +3782,7 @@ Private Function GetIndex(ByVal strSQL As String) As String
     intPosRB = InStr(strSQL, "]")
     strIndexName = Mid$(strSQL, intPosLB + 1, intPosRB - intPosLB - 1)
     'Debug.Print , "A>>>strIndexName", strIndexName, intPosLB + 1, intPosRB - 1
-    strIndexNameIdx = "idx" & UCase$(Left$(strIndexName, 1)) & LCase$(Right$(strIndexName, Len(strIndexName) - 1))
+    strIndexNameIdx = "idx" & UCase$(Left$(strIndexName, 1)) & Right$(strIndexName, Len(strIndexName) - 1)
     'Debug.Print , "B>>>strIndexNameIdx", strIndexNameIdx
 
     Dim intPosPLB As Integer
