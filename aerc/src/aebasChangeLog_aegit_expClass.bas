@@ -32,7 +32,6 @@ Option Explicit
 ' %080 -
 ' %079 -
 ' %078 -
-' %077 -
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample and fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
@@ -58,6 +57,7 @@ Option Explicit
 '
 '
 '20160707 - v180 -
+    ' FIXED - %077 - Fix addPrimaryKey parsing for Lovefield schema
     ' FIXED - %076 - OutputContainerTablesProperties remove GUID number and replace with text "GUID"
     ' FIXED - %075 - Change mPRIMARYKEY to not include name of primary key in parsing
     ' FIXED - %074 - Add State Name index for aetlkpStates, change primary key name to ID for aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger

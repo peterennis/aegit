@@ -32,17 +32,17 @@
 <<<[aeItems]>>>
 ========================================
 <<<[aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger]>>>
-              Index:[PrimaryKey]
+              Index:[ID]
                             Field Name:id
->[PrimaryKey] [id], 
+>[ID]         [id], 
 ========================================
 <<<[aetlkpStates]>>>
               Index:[PrimaryKey]
                             Field Name:StateCode
 >[PrimaryKey] [StateCode], 
-              Index:[State Code]
-                            Field Name:StateCode
->[State Code] [StateCode], 
+              Index:[State Name]
+                            Field Name:StateName
+>[State Name] [StateName], 
 ========================================
 <<<[tblBinary]>>>
               Index:[PrimaryKey]

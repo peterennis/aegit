@@ -113,7 +113,7 @@ schemaBuilder.createTable('aetlkpStates').
     addColumn('StateAbbreviation', lf.Type.STRING).
     addColumn('StateName', lf.Type.STRING).
     addPrimaryKey(['StateCode']).
-    addIndex(['idxState code'], ['StateName'], false, lf.Order.ASC);
+    addIndex(['idxState name'], ['StateName'], false, lf.Order.ASC);
 schemaBuilder.createTable('tblBinary').
     addColumn('id', lf.Type.INTEGER).
     addColumn('FileName', lf.Type.STRING).

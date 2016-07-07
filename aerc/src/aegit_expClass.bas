@@ -3622,6 +3622,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 Debug.Print i & ">", strThePrimaryKeyField
                 Print #fleOut, strThePrimaryKeyField
             End If
+            'Stop
         ElseIf Left$(arrSQL(i), Len(mINDEX)) = mINDEX Then
             ' Create the Index
             strTheIndex = GetIndex(arrSQL(i))
@@ -3684,13 +3685,15 @@ End Function
 
 Public Function GetTableName(ByVal strSchemaLine As String) As String
 
-    Dim strResult As String
     Dim intPos1 As Integer
     Dim intPos2 As Integer
+    Dim strTableName As String
 
-    intPos1 = InStr(1, strSchemaLine, "[")
+    intPos1 = InStr(1, strSchemaLine, "[") + 1
     intPos2 = InStr(1, strSchemaLine, "]")
-    GetTableName = Mid$(strSchemaLine, intPos1 + 1, intPos2 - intPos1 - 1)
+    strTableName = Mid$(strSchemaLine, intPos1, intPos2 - intPos1)
+    'Debug.Print "strTableName=" & strTableName
+    GetTableName = strTableName
 
 End Function
 
@@ -3741,16 +3744,26 @@ Private Function GetPrimaryKey(ByVal strSQL As String) As String
     'Debug.Print , strSQL
     On Error GoTo 0
 
-    Dim intPosLB As Integer
+    Dim intPosRB As Integer
+    Dim intPosPLB As Integer
     Dim intPosRBP As Integer
+    Dim strPrimaryKeyName As String
+    Dim strParse As String
     Dim strPrimaryField As String
-    strPrimaryField = Right$(strSQL, Len(strSQL) - Len(mPRIMARYKEY))
-    'Debug.Print , ">>", strPrimaryField
-    intPosLB = InStr(strPrimaryField, "[")
-    intPosRBP = InStr(strPrimaryField, "])")
-    strPrimaryField = Mid$(strPrimaryField, intPosLB + 1, intPosRBP - intPosLB - 1)
-    'Debug.Print , ">>", intPosLB, intPosRBP, strPrimaryField
+
+    strParse = Right$(strSQL, Len(strSQL) - Len(mPRIMARYKEY))
+    Debug.Print , ">>strParse", strParse
+    intPosRB = InStr(strParse, "]")
+    strPrimaryKeyName = Left$(strParse, intPosRB - 1)
+    Debug.Print , ">>strPrimaryKeyName", strPrimaryKeyName
+    intPosPLB = InStr(strParse, "([") + 1
+    strParse = Right$(strParse, Len(strParse) - intPosPLB)
+    Debug.Print , ">>strParse", strParse
+    intPosRBP = InStr(strParse, "])") - 1
+    strPrimaryField = Left$(strParse, intPosRBP)
+    Debug.Print , ">>strPrimaryField", intPosRBP, strPrimaryField
     GetPrimaryKey = Space(4) & "addPrimaryKey(['" & strPrimaryField & "'])"
+    'Stop
 End Function
 
 Private Function GetIndex(ByVal strSQL As String) As String
