@@ -13,6 +13,7 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
+              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               TotalsRow     False
@@ -45,6 +46,7 @@
               OrderByOnLoad True
               TotalsRow     False
               PublishToWeb   1 
+              GUID          GUID
 >>>_qryKPI01
               Name          _qryKPI01
               Owner         admin
@@ -64,6 +66,7 @@
               OrderByOnLoad True
               TotalsRow     False
               PublishToWeb   1 
+              GUID          GUID
 >>>_tblChart
               Name          _tblChart
               Owner         admin
@@ -91,7 +94,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               ReadOnlyWhenDisconnected    False
-              GUID          00-B5-B9-49-81-0D-45-9A
+              GUID          GUID
 >>>_tblPersist
               Name          _tblPersist
               Owner         admin
@@ -119,7 +122,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
-              GUID          18-83-AA-07-72-C9-41-88
+              GUID          GUID
 >>>_tlkpChart
               Name          _tlkpChart
               Owner         admin
@@ -147,7 +150,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
-              GUID          D8-CE-0B-A9-1E-BB-45-A2
+              GUID          GUID
 >>>_tlkpMonth
               Name          _tlkpMonth
               Owner         admin
@@ -175,7 +178,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
-              GUID          DE-06-20-33-A2-13-4C-98
+              GUID          GUID
 >>>_tlkpYear
               Name          _tlkpYear
               Owner         admin
@@ -203,7 +206,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
-              GUID          B2-65-F4-86-95-40-49-A7
+              GUID          GUID
 >>>aeItems
               Name          aeItems
               Owner         admin
@@ -258,7 +261,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
-              GUID          11-B3-B1-95-67-14-42-95
+              GUID          GUID
 >>>aetlkpStates
               Name          aetlkpStates
               Owner         admin
@@ -287,7 +290,7 @@
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
-              GUID          F3-89-82-DE-F8-75-4B-B2
+              GUID          GUID
 >>>qapp_Dummy
               Name          qapp_Dummy
               Owner         admin
@@ -301,6 +304,7 @@
               ODBCTimeout    60 
               UseTransaction              True
               Orientation    0 
+              GUID          GUID
               PublishToWeb   1 
 >>>qapp_HiddenDummy
               Name          qapp_HiddenDummy
@@ -349,6 +353,7 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
+              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
@@ -368,6 +373,7 @@
               UseTransaction              True
               Orientation    0 
               PublishToWeb   1 
+              GUID          GUID
 >>>qmak_HiddenDummy
               Name          qmak_HiddenDummy
               Owner         admin
@@ -381,6 +387,7 @@
               ODBCTimeout    60 
               UseTransaction              True
               Orientation    0 
+              GUID          GUID
               PublishToWeb   1 
 >>>qpt_Dummy
               Name          qpt_Dummy
@@ -394,6 +401,7 @@
               ODBCTimeout    60 
               LogMessages   False
               Orientation    0 
+              GUID          GUID
               PublishToWeb   1 
               Description   Don't be a dummy!
 >>>qpt_HiddenDummy
@@ -422,6 +430,7 @@
               ODBCTimeout    60 
               LogMessages   False
               Orientation    0 
+              GUID          GUID
               PublishToWeb   1 
 >>>qry_HiddenDummy
               Name          qry_HiddenDummy
@@ -437,6 +446,7 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
+              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
@@ -455,6 +465,7 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
+              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
@@ -477,6 +488,7 @@
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
+              GUID          GUID
               RecordsetType  0 
               TotalsRow     False
 >>>qryLastUpdated
@@ -493,6 +505,7 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
+              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
@@ -512,6 +525,7 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
+              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
@@ -546,6 +560,7 @@
               UseTransaction              True
               FailOnError   False
               Orientation    0 
+              GUID          GUID
               PublishToWeb   1 
 >>>qupd_HiddenDummy
               Name          qupd_HiddenDummy
@@ -576,6 +591,7 @@
               UseTransaction              True
               FailOnError   False
               Orientation    0 
+              GUID          GUID
               PublishToWeb   1 
               OrderByOn     False
               DefaultView    2 
@@ -618,7 +634,7 @@
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
-              GUID          7D-91-7D-EF-17-98-46-87
+              GUID          GUID
 >>>tblDummy0
               Name          tblDummy0
               Owner         admin
@@ -728,4 +744,4 @@
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
               RowHeight      5640 
-              GUID          0F-7B-6A-21-50-9E-4D-95
+              GUID          GUID

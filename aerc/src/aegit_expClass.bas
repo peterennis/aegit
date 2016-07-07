@@ -4560,7 +4560,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     KillProperly (strTheSourceLocation & aeSchemaFile & ".sql")
     OutputListOfIndexes strTheSourceLocation & aeIndexLists
     GenerateLovefieldSchema strTheSourceLocation & aeSchemaFile & ".sql" & ".only", strTheSourceLocation & aeLoveSchema
-    Stop
+    'Stop
 
     If aegitExport.ExportQAT Then
         If Not IsMissing(varDebug) Then
@@ -5156,7 +5156,7 @@ Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional By
             For Each prp In doc.Properties
                 On Error Resume Next
                 If prp.Name = "GUID" And strContainer = "tables" Then
-                    Print #fle, , prp.Name, fListGUID(doc.Name)
+                    Print #fle, , prp.Name, "GUID"                  ' fListGUID(doc.Name) => just output "GUID" to file
                     If Not IsMissing(varDebug) Then Debug.Print , prp.Name, fListGUID(doc.Name)
                 ElseIf prp.Name = "DOL" Then
                     Print #fle, , prp.Name, "Track name AutoCorrect info is ON!"

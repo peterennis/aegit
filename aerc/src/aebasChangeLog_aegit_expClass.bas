@@ -33,9 +33,6 @@ Option Explicit
 ' %079 -
 ' %078 -
 ' %077 -
-' %076 -
-' %075 - Change mPRIMARYKEY to not include name of primary key in parsing
-' %074 - Add State Name index for aetlkpStates, change primary key name to ID for aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample and fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
@@ -60,6 +57,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160707 - v180 -
+    ' FIXED - %076 - OutputContainerTablesProperties remove GUID number and replace with text "GUID"
+    ' FIXED - %075 - Change mPRIMARYKEY to not include name of primary key in parsing
+    ' FIXED - %074 - Add State Name index for aetlkpStates, change primary key name to ID for aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 '20160706 - v179 -
     ' FIXED - %073 - Unknown Access Field Type in GetLovefieldType, strAccessFieldType=Double => running on Access 2013
     ' FIXED - %072 - Unknown Access Field Type in GetLovefieldType, strAccessFieldType=Integer => running on Access 2013
