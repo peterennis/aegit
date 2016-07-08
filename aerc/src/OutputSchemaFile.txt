@@ -108,6 +108,17 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [tblDummy3] ([id] Counter,[eventId] Long,[eventPerson] Long,[eventPosition] Long,[Multi] Text (255),[Field] Text (255),[String] Text (255),[Indexer] Text (255) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [MFSI] ON [tblDummy3] ([Indexer])"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy3] ([id]) WITH PRIMARY DISALLOW NULL"
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [USysRibbons] ([id] Counter,[RibbonName] Text (255),[RibbonXML] Memo )"
 Currentdb.Execute strSQL
 

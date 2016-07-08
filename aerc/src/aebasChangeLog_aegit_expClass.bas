@@ -29,9 +29,13 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %080 -
-' %079 -
-' %078 -
+' %085 -
+' %084 -
+' %083 -
+' %082 -
+' %081 -
+' %080 - Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
+' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample and fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
@@ -57,6 +61,7 @@ Option Explicit
 '
 '
 '20160707 - v180 -
+    ' FIXED - %079 - Create tblDummy3 with multi field primary key and multi field index
     ' FIXED - %077 - Fix addPrimaryKey parsing for Lovefield schema
     ' FIXED - %076 - OutputContainerTablesProperties remove GUID number and replace with text "GUID"
     ' FIXED - %075 - Change mPRIMARYKEY to not include name of primary key in parsing

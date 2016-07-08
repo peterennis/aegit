@@ -186,6 +186,21 @@ FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 Num                  Long Integer          4                  
 
 
+----------------
+TABLE: tblDummy3
+----------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+id                   AutoNumber            4                  
+eventId              Long Integer          4                  
+eventPerson          Long Integer          4                  
+eventPosition        Long Integer          4                  
+Multi                Text                  255                
+Field                Text                  255                
+String               Text                  255                
+Indexer              Text                  255                
+
+
 ------------------
 TABLE: USysRibbons
 ------------------

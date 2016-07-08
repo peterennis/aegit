@@ -24,5 +24,8 @@ CREATE TABLE [tblDummy1] ([Num] Long )
 CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy1] ([Num]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [tblDummy2] ([Num] Long )
 CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy2] ([Num]) WITH PRIMARY DISALLOW NULL
+CREATE TABLE [tblDummy3] ([id] Counter,[eventId] Long,[eventPerson] Long,[eventPosition] Long,[Multi] Text (255),[Field] Text (255),[String] Text (255),[Indexer] Text (255) )
+CREATE INDEX [MFSI] ON [tblDummy3] ([Indexer])
+CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy3] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [USysRibbons] ([id] Counter,[RibbonName] Text (255),[RibbonXML] Memo )
 CREATE UNIQUE INDEX [PrimaryKey] ON [USysRibbons] ([id]) WITH PRIMARY DISALLOW NULL
