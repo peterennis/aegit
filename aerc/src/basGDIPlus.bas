@@ -17,7 +17,7 @@ Option Explicit
 '  rev. 10/2011 better Timer Support
 '  rev. 08/2013 InitGDIP() updated
 
-Public Const GUID_IPicture = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}"    'IPicture
+Public Const GUID_IPicture As String = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}"    'IPicture
 
 'User-defined types: ----------------------------------------------------------------------
 
@@ -264,7 +264,7 @@ Private bSharedLoad As Boolean
 
 
 'Initialize GDI+
-Function InitGDIP() As Boolean
+Private Function InitGDIP() As Boolean
     Dim TGDP As GDIPStartupInput
     Dim hMod As Long
     
@@ -319,7 +319,7 @@ End Function
 
 
 'Clear GDI+
-Sub ShutDownGDIP()
+Private Sub ShutDownGDIP()
     'Debug.Print Now(), "ShutDownGDIP"
 
     If lGDIP <> 0 Then
@@ -380,7 +380,7 @@ End Sub
 'Load image file with GDIP
 'It's equivalent to the method LoadPicture() in OLE-Automation library (stdole2.tlb)
 'Allowed format: bmp, gif, jp(e)g, tif, png, wmf, emf, ico
-Function LoadPictureGDIP(sFileName As String) As StdPicture
+Private Function LoadPictureGDIP(sFileName As String) As StdPicture
     #If Win64 Then
         Dim hBmp As LongPtr
         Dim hPic As LongPtr
@@ -446,11 +446,11 @@ End Function
 
 #If Win64 Then
     'Help function to get a OLE-Picture from Windows-Bitmap-Handle
-    'If bIsIcon = TRUE, an Icon-Handle is commited
+    'If bIsIcon = TRUE, an Icon-Handle is committed
     Function BitmapToPicture(ByVal hBmp As LongPtr, Optional bIsIcon As Boolean = False) As StdPicture
-        
+
         Dim TPicConv As PICTDESC, UID As GUID
-    
+
         With TPicConv
             If bIsIcon Then
                 .cbSizeOfStruct = 16
@@ -461,13 +461,13 @@ End Function
             End If
             .hImage = hBmp
         End With
-    
+
         CLSIDFromString StrPtr(GUID_IPicture), UID
         OleCreatePictureIndirect TPicConv, UID, True, BitmapToPicture
-    
+
     End Function
 #Else
-    Function BitmapToPicture(ByVal hBmp As Long, Optional bIsIcon As Boolean = False) As StdPicture
+    Private Function BitmapToPicture(ByVal hBmp As Long, Optional bIsIcon As Boolean = False) As StdPicture
         
         Dim TPicConv As PICTDESC, UID As GUID
     

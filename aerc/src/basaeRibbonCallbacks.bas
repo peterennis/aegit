@@ -18,7 +18,7 @@ Public Sub OnActionButton(ByVal control As IRibbonControl)
     End Select
 End Sub
 
-Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled)
+Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
     ' Callbackname in XML File "getEnabled"
     On Error GoTo 0
     Select Case control.Id
@@ -27,7 +27,7 @@ Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled)
     End Select
 End Sub
 
-Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible)
+Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     ' Callbackname in XML File "getVisible"
     On Error GoTo 0
     Select Case control.Id
@@ -36,7 +36,7 @@ Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible)
     End Select
 End Sub
 
-Public Sub GetImages(ByVal control As IRibbonControl, ByRef Image)
+Public Sub GetImages(ByVal control As IRibbonControl, ByRef Image As Variant)
 
     On Error GoTo 0
     Dim strPicture As String

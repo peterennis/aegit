@@ -17,10 +17,10 @@ Public Sub NoBOM(ByVal strFileName As String)
 ' Use the same file name for input and output
 
     ' Define needed constants
-    Const ForReading = 1
-    Const ForWriting = 2
-    Const TriStateUseDefault = -2
-    Const adTypeText = 2
+    Const ForReading As Integer = 1
+    Const ForWriting As Integer = 2
+    Const TriStateUseDefault As Integer = -2
+    Const adTypeText As Integer = 2
     Dim strContent As String
 
     ' Convert UTF-8 file to ANSI file
@@ -83,7 +83,7 @@ Public Sub CatalogUserCreatedObjects()
 ' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
 
     Dim strSQL As String
-    Const MY_QUERY_NAME = "zzzqryCatalogUserCreatedObjects"
+    Const MY_QUERY_NAME As String = "zzzqryCatalogUserCreatedObjects"
 
     strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
     strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "

@@ -571,15 +571,16 @@ End Function
 
 Public Function FixCase(ByVal strText As String) As String
 ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
+    Dim strParse As String
     On Error GoTo 0
-    strText = Trim$(strText & vbNullString)
+    strParse = Trim$(strText & vbNullString)
     Dim nCurrent As Long
-    For nCurrent = 2 To Len(strText)
-        If Mid$(strText, nCurrent - 1, 1) <> " " And Mid$(strText, nCurrent - 1, 1) <> "." Then
-            strText = Left$(strText, nCurrent - 1) & LCase$(Mid$(strText, nCurrent, 1)) & Mid$(strText, nCurrent + 1)
+    For nCurrent = 2 To Len(strParse)
+        If Mid$(strParse, nCurrent - 1, 1) <> " " And Mid$(strParse, nCurrent - 1, 1) <> "." Then
+            strParse = Left$(strParse, nCurrent - 1) & LCase$(Mid$(strParse, nCurrent, 1)) & Mid$(strParse, nCurrent + 1)
         End If
     Next
-    FixCase = strText
+    FixCase = strParse
 End Function
 
 Public Function Deduplicate(ByVal strValue As String) As Boolean

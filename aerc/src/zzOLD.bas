@@ -1,8 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const Desktop = &H10&
-Public Const MyDocuments = &H5&
+Public Const Desktop As Long = &H10&
+Public Const MyDocuments As Long = &H5&
 
 Public Sub ListIndexes()
 
@@ -96,7 +96,7 @@ End Function
 
 '
 
-Public Function SpFolder(SpName)
+Public Function SpFolder(ByVal SpName As String)
 
     Dim objShell As Object
     Set objShell = CreateObject("Shell.Application")
@@ -174,7 +174,7 @@ Public Function CodeLinesInProjectCount() As Long
     Dim LineCount As Long
 
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=245480
-    Const vbext_pp_locked = 1
+    Const vbext_pp_locked As Integer = 1
 
     Set VBP = Access.Application.VBE.ActiveVBProject
 
@@ -367,7 +367,7 @@ Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
     ' Ref: http://msdn.microsoft.com/en-us/library/aa468547.aspx
     objXMLDOMDoc.Load (strPathFileName)
 
-    Dim strXMLResDoc
+    Dim strXMLResDoc As Object
     Set strXMLResDoc = CreateObject("Msxml2.DOMDocument.6.0")
 
     objXMLDOMDoc.transformNodeToObject objXMLStyleSheet, strXMLResDoc
