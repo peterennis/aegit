@@ -33,7 +33,7 @@ Option Explicit
 ' %084 -
 ' %083 -
 ' %082 -
-' %081 -
+' %081 - Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004
 ' %080 - Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
 ' %071 - Add varDebug for schema output debugging

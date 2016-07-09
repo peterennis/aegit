@@ -3544,7 +3544,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
-    Dim strTheTableName As String
+'    Dim strTheTableName As String
     Dim strFieldInfoToParse As String
     Dim strFieldName As String
     Dim strAccFieldType As String
@@ -4718,7 +4718,9 @@ Private Sub OutputFieldLookupControlTypeList()
     Debug.Print "OutputFieldLookupControlTypeList"
     On Error GoTo 0
     Dim bln As Boolean
-    bln = FieldLookupControlTypeList
+    bln = FieldLookupControlTypeList()
+    Debug.Print , "FieldLookupControlTypeList()=" & bln
+    Stop
 End Sub
 
 Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) As Boolean
@@ -4852,7 +4854,7 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
     Set CBTN = Application.CommandBars.FindControls
     Dim fle As Integer
     Dim lng As Long
-    Dim strExtension As String
+'    Dim strExtension As String
 
     fle = FreeFile()
     Open strOutputFile For Output As #fle

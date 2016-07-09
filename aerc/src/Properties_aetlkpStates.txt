@@ -27,6 +27,7 @@
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
 |-- StateCode (Field in aetlkpStates)
 |------ Attributes >> 2

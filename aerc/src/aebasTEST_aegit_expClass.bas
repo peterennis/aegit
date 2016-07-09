@@ -45,13 +45,13 @@ Public Const gstrVERSION_aegit As String = "0.0.0"
 Public gvarMyTablesForExportToXML() As Variant
 '
 
-Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
+Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
 
     On Error GoTo 0
 
     If Application.VBE.ActiveVBProject.Name <> "aegit" Then
         MsgBox "The is not the aegit project!", vbCritical, "aegit_EXPORT"
-        Exit Function
+        Exit Sub
     End If
 
     If Not IsMissing(varDebug) Then
@@ -59,7 +59,7 @@ Public Function aegit_EXPORT(Optional ByVal varDebug As Variant) As Boolean
     Else
         aegitClassTest varFrontEndApp:=True
     End If
-End Function
+End Sub
 
 Public Sub ALTERNATIVE_EXPORT(Optional ByVal varDebug As Variant)
 
@@ -87,48 +87,48 @@ PROC_ERR:
 
 End Sub
 
-Private Function PassFail(ByVal bln As Boolean, Optional ByVal varOther As Variant) As String
+Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther As Variant) As String
     On Error GoTo 0
     If Not IsMissing(varOther) Then
         PassFail = "NotUsed"
         Exit Function
     End If
-    If bln Then
+    If blnPassFail Then
         PassFail = "Pass"
     Else
         PassFail = "Fail"
     End If
 End Function
 
-Private Function IsArrayInitialized(ByRef arr As Variant) As Boolean
+Private Function IsArrayInitialized(ByVal arr As Variant) As Boolean
     If Not IsArray(arr) Then Err.Raise 13
     On Error Resume Next
     IsArrayInitialized = (LBound(arr) <= UBound(arr))
 End Function
 
-Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
+Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varSrcFldr As Variant, _
                                 Optional ByVal varXmlFldr As Variant, _
                                 Optional ByVal varXmlDataFldr As Variant, _
                                 Optional ByVal varSrcFldrBe As Variant, _
                                 Optional ByVal varXmlFldrBe As Variant, _
                                 Optional ByVal varXmlDataFldrBe As Variant, _
-                                Optional ByVal varBackEndDb1 As Variant, _
-                                Optional ByVal varFrontEndApp As Variant) As Boolean
+                                Optional ByVal varBackEndDbOne As Variant, _
+                                Optional ByVal varFrontEndApp As Variant)
 
     On Error GoTo PROC_ERR
 
     Dim oDbObjects As aegit_expClass
     Set oDbObjects = New aegit_expClass
 
-    Dim bln1 As Boolean
-    Dim bln2 As Boolean
-    Dim bln3 As Boolean
-    Dim bln4 As Boolean
-    Dim bln5 As Boolean
-    Dim bln6 As Boolean
-    Dim bln7 As Boolean
-    Dim bln8 As Boolean
+    Dim blnTestOne As Boolean
+    Dim blnTestTwo As Boolean
+    Dim blnTestThree As Boolean
+    Dim blnTestFour As Boolean
+    Dim blnTestFive As Boolean
+    Dim blnTestSix As Boolean
+    Dim blnTestSeven As Boolean
+    Dim blnTestEight As Boolean
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr                  ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr                     ' THE_XML_FOLDER
@@ -136,9 +136,9 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe            ' THE_BACK_END_SOURCE_FOLDER
     If Not IsMissing(varXmlFldrBe) Then oDbObjects.XMLFolderBe = varXmlFldrBe               ' THE_BACK_END_XML_FOLDER
     If Not IsMissing(varXmlDataFldrBe) Then oDbObjects.XMLDataFolderBe = varXmlDataFldrBe   ' THE_XML_DATA_FOLDER
-    If Not IsMissing(varBackEndDb1) Then oDbObjects.BackEndDb1 = varBackEndDb1              ' THE_BACK_END_DB1
+    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDb1 = varBackEndDbOne              ' THE_BACK_END_DB1
     If Not IsMissing(varFrontEndApp) Then oDbObjects.FrontEndApp = varFrontEndApp           ' THE_FRONT_END_APP
-    'MsgBox "varBackEndDb1 = " & varBackEndDb1, vbInformation, "Procedure aegitClassTest"
+    'MsgBox "varBackEndDbOne = " & varBackEndDbOne, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export
     gvarMyTablesForExportToXML = Array("USysRibbons")
@@ -161,7 +161,7 @@ Public Function aegitClassTest(Optional ByVal varDebug As Variant, _
     End If
     'Stop
 
-Test1:
+TestOne:
     '=============
     ' TEST 1
     '=============
@@ -173,16 +173,16 @@ Test1:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        bln1 = oDbObjects.DocumentTheDatabase()
+        blnTestOne = oDbObjects.DocumentTheDatabase()
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln1 = oDbObjects.DocumentTheDatabase("WithDebugging")
+        blnTestOne = oDbObjects.DocumentTheDatabase("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-Test2:
+TestTwo:
     '=============
     ' TEST 2
     '=============
@@ -192,16 +192,16 @@ Test2:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to Exists"
         Debug.Print , "DEBUGGING IS OFF"
-        bln2 = oDbObjects.Exists("Modules", "aegit_expClass")
+        blnTestTwo = oDbObjects.Exists("Modules", "aegit_expClass")
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to Exists"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln2 = oDbObjects.Exists("Modules", "aegit_expClass", "WithDebugging")
+        blnTestTwo = oDbObjects.Exists("Modules", "aegit_expClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-Test3:
+TestThree:
     '=============
     ' TEST 3
     '=============
@@ -209,12 +209,12 @@ Test3:
     Debug.Print "3. NOT USED"
     Debug.Print "aegitClassTest"
 
-    bln3 = False
+    blnTestThree = False
 
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-Test4:
+TestFour:
     '=============
     ' TEST 4
     '=============
@@ -224,16 +224,16 @@ Test4:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to GetReferences"
         Debug.Print , "DEBUGGING IS OFF"
-        bln4 = oDbObjects.GetReferences()
+        blnTestFour = oDbObjects.GetReferences()
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to GetReferences"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln4 = oDbObjects.GetReferences("WithDebugging")
+        blnTestFour = oDbObjects.GetReferences("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
-Test5:
+TestFive:
     '=============
     ' TEST 5
     '=============
@@ -243,16 +243,16 @@ Test5:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTables"
         Debug.Print , "DEBUGGING IS OFF"
-        bln5 = oDbObjects.DocumentTables()
+        blnTestFive = oDbObjects.DocumentTables()
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTables"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln5 = oDbObjects.DocumentTables("WithDebugging")
+        blnTestFive = oDbObjects.DocumentTables("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
     
-Test6:
+TestSix:
     '=============
     ' TEST 6
     '=============
@@ -262,16 +262,16 @@ Test6:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to DocumentRelations"
         Debug.Print , "DEBUGGING IS OFF"
-        bln6 = oDbObjects.DocumentRelations()
+        blnTestSix = oDbObjects.DocumentRelations()
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentRelations"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln6 = oDbObjects.DocumentRelations("WithDebugging")
+        blnTestSix = oDbObjects.DocumentRelations("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-Test7:
+TestSeven:
     '=============
     ' TEST 7
     '=============
@@ -281,16 +281,16 @@ Test7:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        bln7 = oDbObjects.DocumentTablesXML()
+        blnTestSeven = oDbObjects.DocumentTablesXML()
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        bln7 = oDbObjects.DocumentTablesXML("WithDebugging")
+        blnTestSeven = oDbObjects.DocumentTablesXML("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-Test8:
+TestEight:
     '=============
     ' TEST 8
     '=============
@@ -298,7 +298,7 @@ Test8:
     Debug.Print "8. NOT USED"
     Debug.Print "aegitClassTest"
 
-    bln8 = False
+    blnTestEight = False
 
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -314,10 +314,10 @@ RESULTS:
     Debug.Print "Test 8: NOT USED"
     Debug.Print
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
-    Debug.Print PassFail(bln1), PassFail(bln2), PassFail(bln3, "X"), PassFail(bln4), PassFail(bln5), PassFail(bln6), PassFail(bln7), PassFail(bln8, "X")
+    Debug.Print PassFail(blnTestOne), PassFail(blnTestTwo), PassFail(blnTestThree, "X"), PassFail(blnTestFour), PassFail(blnTestFive), PassFail(blnTestSix), PassFail(blnTestSeven), PassFail(blnTestEight, "X")
 
 PROC_EXIT:
-    Exit Function
+    Exit Sub
 
 PROC_ERR:
     Select Case Err.Number
@@ -326,4 +326,4 @@ PROC_ERR:
             Stop
     End Select
 
-End Function
+End Sub
