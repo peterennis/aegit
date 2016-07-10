@@ -176,7 +176,7 @@ End Type
     Private lGDIP As LongPtr
     '-----------------------------------------------------------------------------------------
     
-    Public TempVarGDIPlus As LongPtr
+    Private TempVarGDIPlus As LongPtr
 #Else
 
     'API-Declarations: ----------------------------------------------------------------------------
@@ -447,9 +447,10 @@ End Function
 #If Win64 Then
     'Help function to get a OLE-Picture from Windows-Bitmap-Handle
     'If bIsIcon = TRUE, an Icon-Handle is committed
-    Function BitmapToPicture(ByVal hBmp As LongPtr, Optional bIsIcon As Boolean = False) As StdPicture
+    Private Function BitmapToPicture(ByVal hBmp As LongPtr, Optional bIsIcon As Boolean = False) As StdPicture
 
-        Dim TPicConv As PICTDESC, UID As GUID
+        Dim TPicConv As PICTDESC
+        Dim UID As GUID
 
         With TPicConv
             If bIsIcon Then

@@ -16,8 +16,8 @@ Begin Form
     Width =22320
     DatasheetFontHeight =11
     ItemSuffix =79
-    Right =22575
-    Bottom =11265
+    Right =19470
+    Bottom =9465
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xe51f90fed85ee440
@@ -1619,6 +1619,7 @@ NextIteration:
 End Sub
 
 Private Sub cmd01_Click()
+    Debug.Print "cmd01_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("01")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT01'")
@@ -1627,6 +1628,7 @@ Private Sub cmd01_Click()
 End Sub
 
 Private Sub cmd02_Click()
+    Debug.Print "cmd02_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("02")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT02'")
@@ -1634,6 +1636,7 @@ Private Sub cmd02_Click()
 End Sub
 
 Private Sub cmd03_Click()
+    Debug.Print "cmd03_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("03")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT03'")
@@ -1641,6 +1644,7 @@ Private Sub cmd03_Click()
 End Sub
 
 Private Sub cmd04_Click()
+    Debug.Print "cmd04_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("04")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT04'")
@@ -1648,6 +1652,7 @@ Private Sub cmd04_Click()
 End Sub
 
 Private Sub cmd05_Click()
+    Debug.Print "cmd05_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("05")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT05'")
@@ -1655,6 +1660,7 @@ Private Sub cmd05_Click()
 End Sub
 
 Private Sub cmd06_Click()
+    Debug.Print "cmd06_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("06")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT06'")
@@ -1662,6 +1668,7 @@ Private Sub cmd06_Click()
 End Sub
 
 Private Sub cmd07_Click()
+    Debug.Print "cmd07_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("07")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT07'")
@@ -1669,6 +1676,7 @@ Private Sub cmd07_Click()
 End Sub
 
 Private Sub cmd08_Click()
+    Debug.Print "cmd08_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("08")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT08'")
@@ -1676,6 +1684,7 @@ Private Sub cmd08_Click()
 End Sub
 
 Private Sub cmd09_Click()
+    Debug.Print "cmd09_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("09")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT09'")
@@ -1683,6 +1692,7 @@ Private Sub cmd09_Click()
 End Sub
 
 Private Sub cmd10_Click()
+    Debug.Print "cmd10_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("10")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT10'")
@@ -1690,6 +1700,7 @@ Private Sub cmd10_Click()
 End Sub
 
 Private Sub cmd11_Click()
+    Debug.Print "cmd11_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("11")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT11'")
@@ -1697,6 +1708,7 @@ Private Sub cmd11_Click()
 End Sub
 
 Private Sub cmd12_Click()
+    Debug.Print "cmd12_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("12")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT12'")
@@ -1704,6 +1716,7 @@ Private Sub cmd12_Click()
 End Sub
 
 Private Sub cmd13_Click()
+    Debug.Print "cmd13_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("13")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT13'")
@@ -1711,6 +1724,7 @@ Private Sub cmd13_Click()
 End Sub
 
 Private Sub cmd14_Click()
+    Debug.Print "cmd14_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("14")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT14'")
@@ -1718,6 +1732,7 @@ Private Sub cmd14_Click()
 End Sub
 
 Private Sub cmd15_Click()
+    Debug.Print "cmd15_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("15")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT15'")
@@ -1725,6 +1740,7 @@ Private Sub cmd15_Click()
 End Sub
 
 Private Sub cmd16_Click()
+    Debug.Print "cmd16_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("16")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT16'")
@@ -1732,6 +1748,7 @@ Private Sub cmd16_Click()
 End Sub
 
 Private Sub cmd17_Click()
+    Debug.Print "cmd17_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("17")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT17'")
@@ -1739,6 +1756,7 @@ Private Sub cmd17_Click()
 End Sub
 
 Private Sub cmd18_Click()
+    Debug.Print "cmd18_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("18")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT18'")
@@ -1746,6 +1764,7 @@ Private Sub cmd18_Click()
 End Sub
 
 Private Sub cmd19_Click()
+    Debug.Print "cmd19_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("19")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT19'")
@@ -1753,6 +1772,7 @@ Private Sub cmd19_Click()
 End Sub
 
 Private Sub cmd20_Click()
+    Debug.Print "cmd20_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("20")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT20'")
@@ -1760,6 +1780,7 @@ Private Sub cmd20_Click()
 End Sub
 
 Private Sub cmd21_Click()
+    Debug.Print "cmd21_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("21")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT21'")
@@ -1767,6 +1788,7 @@ Private Sub cmd21_Click()
 End Sub
 
 Private Sub cmd22_Click()
+    Debug.Print "cmd22_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("22")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT22'")
@@ -1774,6 +1796,7 @@ Private Sub cmd22_Click()
 End Sub
 
 Private Sub cmd23_Click()
+    Debug.Print "cmd23_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("23")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT23'")
@@ -1781,6 +1804,7 @@ Private Sub cmd23_Click()
 End Sub
 
 Private Sub cmd24_Click()
+    Debug.Print "cmd24_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("24")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT24'")
@@ -1788,6 +1812,7 @@ Private Sub cmd24_Click()
 End Sub
 
 Private Sub cmd25_Click()
+    Debug.Print "cmd25_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("25")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT25'")
@@ -1795,6 +1820,7 @@ Private Sub cmd25_Click()
 End Sub
 
 Private Sub cmd26_Click()
+    Debug.Print "cmd26_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("26")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT26'")
@@ -1802,6 +1828,7 @@ Private Sub cmd26_Click()
 End Sub
 
 Private Sub cmd27_Click()
+    Debug.Print "cmd27_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("27")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT27'")
@@ -1809,6 +1836,7 @@ Private Sub cmd27_Click()
 End Sub
 
 Private Sub cmd28_Click()
+    Debug.Print "cmd28_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("28")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT28'")
@@ -1816,6 +1844,7 @@ Private Sub cmd28_Click()
 End Sub
 
 Private Sub cmd29_Click()
+    Debug.Print "cmd29_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("29")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT29'")
@@ -1823,6 +1852,7 @@ Private Sub cmd29_Click()
 End Sub
 
 Private Sub cmd30_Click()
+    Debug.Print "cmd30_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("30")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT30'")
@@ -1830,6 +1860,7 @@ Private Sub cmd30_Click()
 End Sub
 
 Private Sub cmd31_Click()
+    Debug.Print "cmd31_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("31")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT31'")
@@ -1837,6 +1868,7 @@ Private Sub cmd31_Click()
 End Sub
 
 Private Sub cmd32_Click()
+    Debug.Print "cmd32_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("32")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT32'")
@@ -1844,6 +1876,7 @@ Private Sub cmd32_Click()
 End Sub
 
 Private Sub cmd33_Click()
+    Debug.Print "cmd33_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("33")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT33'")
@@ -1851,6 +1884,7 @@ Private Sub cmd33_Click()
 End Sub
 
 Private Sub cmd34_Click()
+    Debug.Print "cmd34_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("34")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT34'")
@@ -1858,6 +1892,7 @@ Private Sub cmd34_Click()
 End Sub
 
 Private Sub cmd35_Click()
+    Debug.Print "cmd35_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("35")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT35'")
@@ -1865,6 +1900,7 @@ Private Sub cmd35_Click()
 End Sub
 
 Private Sub cmd36_Click()
+    Debug.Print "cmd36_Click"
     On Error GoTo 0
     Me.chtChart.RowSource = GetRowSource("36")
     SetChartTitle DLookup("ChartTitle", "_tlkpChart", "ChartNum='CHT36'")
@@ -1915,4 +1951,43 @@ PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Load of " & Me.Name
     Resume Next
 
+End Sub
+
+Private Sub DummyUseProc()
+    cmd01_Click
+    cmd02_Click
+    cmd03_Click
+    cmd04_Click
+    cmd05_Click
+    cmd06_Click
+    cmd07_Click
+    cmd08_Click
+    cmd09_Click
+    cmd10_Click
+    cmd11_Click
+    cmd12_Click
+    cmd13_Click
+    cmd14_Click
+    cmd15_Click
+    cmd16_Click
+    cmd17_Click
+    cmd18_Click
+    cmd19_Click
+    cmd20_Click
+    cmd21_Click
+    cmd22_Click
+    cmd23_Click
+    cmd24_Click
+    cmd25_Click
+    cmd26_Click
+    cmd27_Click
+    cmd28_Click
+    cmd29_Click
+    cmd30_Click
+    cmd31_Click
+    cmd32_Click
+    cmd33_Click
+    cmd34_Click
+    cmd35_Click
+    cmd36_Click
 End Sub

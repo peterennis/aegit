@@ -59,9 +59,9 @@ Private Enum SizeStringSide
 End Enum
 
 Private Type myExclusions
-    exclude1 As String
-    exclude2 As String
-    exclude3 As String
+    excludeOne As String
+    excludeTwo As String
+    excludeThree As String
 End Type
 
 Private Type mySetupType
@@ -106,7 +106,6 @@ Private aestrXMLLocation As String
 Private aestrXMLLocationBe As String
 Private aestrXMLDataLocation As String
 Private aestrXMLDataLocationBe As String
-Private aeintLTN As Long                        ' Longest Table Name
 Private aestrLFN As String                      ' Longest Field Name
 Private aestrLFNTN As String
 Private aeintFNLen As Long
@@ -115,7 +114,7 @@ Private aeintFTLen As Long                      ' Field Type Length
 Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
-Private aestrBackEndDb1 As String
+Private aestrBackEndDbOne As String
 'Private aestrPassword As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
@@ -163,7 +162,7 @@ Private Sub Class_Initialize()
     aegitXMLFolderBe = "default"
     aegitXMLDataFolder = "default"
     aegitXMLDataFolderBe = "default"
-    aestrBackEndDb1 = "default"             ' default for aegit is no back end database
+    aestrBackEndDbOne = "default"             ' default for aegit is no back end database
     ReDim Preserve aegitDataXML(0 To 0)
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         aegitDataXML(0) = "aetlkpStates"
@@ -175,7 +174,8 @@ Private Sub Class_Initialize()
     aegitType.XMLFolderBe = "C:\ae\aegit\aerc\srcbe\xml\"
     aegitType.XMLDataFolder = "C:\ae\aegit\aerc\src\xmldata\"
     aegitType.XMLDataFolderBe = "C:\ae\aegit\aerc\srcbe\xmldata\"
-    aeintLTN = 11           ' Set a minimum default
+
+    Const aeintLTN As Integer = 11           ' Set a minimum default
     aeintFNLen = 4          ' Set a minimum default
     aeintFTLen = 4          ' Set a minimum default
     aeintFDLen = 4          ' Set a minimum default
@@ -209,7 +209,7 @@ Private Sub Class_Initialize()
     Debug.Print , "Default for aestrXMLLocationBe = " & aestrXMLLocationBe
     Debug.Print , "Default for aestrXMLDataLocation = " & aestrXMLDataLocation
     Debug.Print , "Default for aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    Debug.Print , "Default for aestrBackEndDb1 = " & aestrBackEndDb1
+    Debug.Print , "Default for aestrBackEndDbOne = " & aestrBackEndDbOne
     Debug.Print , "aeintLTN = " & aeintLTN
     Debug.Print , "aeintFNLen = " & aeintFNLen
     Debug.Print , "aeintFTLen = " & aeintFTLen
@@ -312,16 +312,16 @@ Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
     Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
 End Property
 
-Public Property Get BackEndDb1() As String
+Public Property Get BackEndDbOne() As String
     On Error GoTo 0
-    BackEndDb1 = aestrBackEndDb1
+    BackEndDbOne = aestrBackEndDbOne
 End Property
 
-Public Property Let BackEndDb1(ByVal strBackEndDbFullPath As String)
+Public Property Let BackEndDbOne(ByVal strBackEndDbFullPath As String)
     On Error GoTo 0
-    Debug.Print "Property Let BackEndDb1"
-    aestrBackEndDb1 = strBackEndDbFullPath
-    Debug.Print , "aestrBackEndDb1 = " & aestrBackEndDb1
+    Debug.Print "Property Let BackEndDbOne"
+    aestrBackEndDbOne = strBackEndDbFullPath
+    Debug.Print , "aestrBackEndDbOne = " & aestrBackEndDbOne
 End Property
 
 Public Property Get XMLFolder() As String
@@ -733,17 +733,17 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
     Debug.Print , "--------------------------------------------------"
 
     '???
-    If aestrBackEndDb1 = vbNullString Then
-        MsgBox "aestrBackEndDb1 is not set!", vbCritical, "VerifySetup"
+    If aestrBackEndDbOne = vbNullString Then
+        MsgBox "aestrBackEndDbOne is not set!", vbCritical, "VerifySetup"
         Stop
     End If
 
     Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
 
-    If aestrBackEndDb1 <> "default" Then
+    If aestrBackEndDbOne <> "default" Then
         OpenAllDatabases True
     End If
-    Debug.Print , "Property Get BackEndDb1 = " & aestrBackEndDb1
+    Debug.Print , "Property Get BackEndDbOne = " & aestrBackEndDbOne
     'Stop
 
 End Sub
@@ -895,10 +895,10 @@ Private Sub OpenAllDatabases(ByVal blnInit As Boolean)
     Dim strName As String
     Dim strMsg As String
 
-    If aestrBackEndDb1 = "NONE" Then
+    If aestrBackEndDbOne = "NONE" Then
         Exit Sub
     Else
-        Debug.Print , "aestrBackEndDb1 = " & aestrBackEndDb1, "OpenAllDatabases"
+        Debug.Print , "aestrBackEndDbOne = " & aestrBackEndDbOne, "OpenAllDatabases"
     End If
 
     ' Maximum number of back end databases to link
@@ -907,14 +907,14 @@ Private Sub OpenAllDatabases(ByVal blnInit As Boolean)
     ' List of databases kept in a static array so we can close them later
     Static dbsOpen() As DAO.Database
  
-    'MsgBox "aestrBackEndDb1 = " & aestrBackEndDb1, vbInformation, "OpenAllDatabases"
+    'MsgBox "aestrBackEndDbOne = " & aestrBackEndDbOne, vbInformation, "OpenAllDatabases"
     If blnInit Then
         ReDim dbsOpen(1 To cintMaxDatabases)
         For intX = 1 To cintMaxDatabases
             ' Specify your back end databases
             Select Case intX
                 Case 1:
-                    strName = aestrBackEndDb1
+                    strName = aestrBackEndDbOne
                 Case 2:
                     strName = "H:\folder\Backend2.mdb"
                 Case Else
@@ -960,25 +960,25 @@ End Function
 Private Function defineMyExclusions() As myExclusions
     Debug.Print "defineMyExclusions"
     On Error GoTo 0
-    myExclude.exclude1 = EXCLUDE_1
-    myExclude.exclude2 = EXCLUDE_2
-    myExclude.exclude3 = EXCLUDE_3
+    myExclude.excludeOne = EXCLUDE_1
+    myExclude.excludeTwo = EXCLUDE_2
+    myExclude.excludeThree = EXCLUDE_3
 End Function
 
 Private Function fExclude(ByVal strName As String) As Boolean
     'Debug.Print "fExclude"
     On Error GoTo 0
     fExclude = False
-    'Debug.Print "1: fExclude", strName, "myExclude.exclude1 = " & myExclude.exclude1
-    If strName = myExclude.exclude1 Then
+    'Debug.Print "1: fExclude", strName, "myExclude.excludeOne = " & myExclude.excludeOne
+    If strName = myExclude.excludeOne Then
         fExclude = True
         Exit Function
     End If
-    If strName = myExclude.exclude2 Then
+    If strName = myExclude.excludeTwo Then
         fExclude = True
         Exit Function
     End If
-    If strName = myExclude.exclude3 Then
+    If strName = myExclude.excludeThree Then
         fExclude = True
         Exit Function
     End If
@@ -3666,32 +3666,32 @@ End Sub
 Public Function GetFieldInfo(ByVal strSchemaLine As String) As String
 
     Dim strResult As String
-    Dim intPos1 As Integer
-    Dim intPos2 As Integer
+    Dim intPosOne As Integer
+    Dim intPosTwo As Integer
 
-    intPos1 = InStr(1, strSchemaLine, "[")
+    intPosOne = InStr(1, strSchemaLine, "[")
     If InStr(1, strSchemaLine, ",") <> 0 Then
-        intPos2 = InStr(1, strSchemaLine, ",")
+        intPosTwo = InStr(1, strSchemaLine, ",")
     Else
-        intPos2 = InStr(1, strSchemaLine, " )") + 1
+        intPosTwo = InStr(1, strSchemaLine, " )") + 1
     End If
-    strResult = Mid$(strSchemaLine, intPos1 + 1, intPos2 - intPos1 - 1)
+    strResult = Mid$(strSchemaLine, intPosOne + 1, intPosTwo - intPosOne - 1)
     GetFieldInfo = Replace(strResult, "]", vbNullString)
     ' Shorten the parse string by removing the found field
-    mstrToParse = Right$(strSchemaLine, Len(strSchemaLine) - intPos2)
+    mstrToParse = Right$(strSchemaLine, Len(strSchemaLine) - intPosTwo)
     If strSchemaLine = " )" Then mstrToParse = vbNullString
 
 End Function
 
 Public Function GetTableName(ByVal strSchemaLine As String) As String
 
-    Dim intPos1 As Integer
-    Dim intPos2 As Integer
+    Dim intPosOne As Integer
+    Dim intPosTwo As Integer
     Dim strTableName As String
 
-    intPos1 = InStr(1, strSchemaLine, "[") + 1
-    intPos2 = InStr(1, strSchemaLine, "]")
-    strTableName = Mid$(strSchemaLine, intPos1, intPos2 - intPos1)
+    intPosOne = InStr(1, strSchemaLine, "[") + 1
+    intPosTwo = InStr(1, strSchemaLine, "]")
+    strTableName = Mid$(strSchemaLine, intPosOne, intPosTwo - intPosOne)
     'Debug.Print "strTableName=" & strTableName
     GetTableName = strTableName
 
@@ -4720,7 +4720,7 @@ Private Sub OutputFieldLookupControlTypeList()
     Dim bln As Boolean
     bln = FieldLookupControlTypeList()
     Debug.Print , "FieldLookupControlTypeList()=" & bln
-    Stop
+    'Stop
 End Sub
 
 Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) As Boolean
@@ -5524,7 +5524,7 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
             'Debug.Print "OutputTableDataMacros: strTheXMLDataLocation = " & strTheXMLDataLocation
             'Debug.Print "OutputTableDataMacros: strFile = " & strFile
             SaveAsText acTableDataMacro, tdf.Name, strFile
-2220:
+TwentyTwoTwenty:
             If Not IsMissing(varDebug) Then
                 Debug.Print "OutputTableDataMacros:", tdf.Name, strTheXMLDataLocation, strFile
                 PrettyXML strFile, varDebug
@@ -5544,7 +5544,7 @@ PROC_ERR:
     If Err = 2950 Then ' Reserved Error
         Resume NextTdf
     ElseIf Err = 2220 Then
-        Resume 2220
+        Resume TwentyTwoTwenty
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableDataMacros of Class aegit_expClass", vbCritical, "ERROR"
     Resume PROC_EXIT

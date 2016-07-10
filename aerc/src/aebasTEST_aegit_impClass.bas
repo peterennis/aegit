@@ -55,18 +55,17 @@ End Function
 
 Public Function aegitClassImportTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varImpFldr As Variant) As Boolean
-' Usage:
-' Run in immediate window: aegitClassImportTest
 
     On Error GoTo 0
+
     Dim oDbObjects As aegit_impClass
     Set oDbObjects = New aegit_impClass
 
-    Dim bln1 As Boolean
+    Dim blnOne As Boolean
 
     If Not IsMissing(varImpFldr) Then oDbObjects.ImportFolder = varImpFldr      ' THE_IMPORT_FOLDER
 
-ImportTest1:
+ImportTestOne:
     '==============
     ' IMPORT TEST 1
     '==============
@@ -78,10 +77,10 @@ ImportTest1:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to ReadDocDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        bln1 = oDbObjects.ReadDocDatabase(True)
+        blnOne = oDbObjects.ReadDocDatabase(True)
     Else
         Debug.Print , "varDebug IS NOT missing so blnDebug is set to True"
-        bln1 = oDbObjects.ReadDocDatabase(True, "WithDebugging")
+        blnOne = oDbObjects.ReadDocDatabase(True, "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
@@ -90,6 +89,6 @@ RESULTS:
     Debug.Print "Test 1: ReadDocDatabase"
     Debug.Print
     Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
-    Debug.Print ImpPassFail(bln1)
+    Debug.Print ImpPassFail(blnOne)
 
 End Function

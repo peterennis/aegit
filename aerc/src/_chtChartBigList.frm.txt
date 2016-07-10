@@ -17,8 +17,8 @@ Begin Form
     ItemSuffix =112
     Left =16875
     Top =1485
-    Right =23265
-    Bottom =10530
+    Right =19470
+    Bottom =9465
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0x7741e1fa7061e440
@@ -3930,4 +3930,77 @@ Private Sub Form_Load()
     
     SetLabelsCaption
 
+End Sub
+
+Private Sub DummyUseProc()
+    cmd01_Click
+    cmd02_Click
+    cmd03_Click
+    cmd04_Click
+    cmd05_Click
+    cmd06_Click
+    cmd07_Click
+    cmd08_Click
+    cmd09_Click
+    cmd10_Click
+    cmd11_Click
+    cmd12_Click
+    cmd13_Click
+    cmd14_Click
+    cmd15_Click
+    cmd16_Click
+    cmd17_Click
+    cmd18_Click
+    cmd19_Click
+    cmd20_Click
+    cmd21_Click
+    cmd22_Click
+    cmd23_Click
+    cmd24_Click
+    cmd25_Click
+    cmd26_Click
+    cmd27_Click
+    cmd28_Click
+    cmd29_Click
+    cmd30_Click
+    cmd31_Click
+    cmd32_Click
+    cmd33_Click
+    cmd34_Click
+    cmd35_Click
+    cmd36_Click
+    cmd37_Click
+    cmd38_Click
+    cmd39_Click
+    cmd40_Click
+    cmd41_Click
+    cmd42_Click
+    cmd43_Click
+    cmd44_Click
+    cmd45_Click
+    cmd46_Click
+    cmd47_Click
+    cmd48_Click
+    cmd49_Click
+    cmd50_Click
+    cmd51_Click
+    cmd52_Click
+    cmd53_Click
+    cmd54_Click
+    cmd55_Click
+    cmd56_Click
+    cmd57_Click
+    cmd58_Click
+    cmd59_Click
+    cmd60_Click
+    cmd61_Click
+    cmd62_Click
+    cmd63_Click
+    cmd64_Click
+    cmd65_Click
+    cmd66_Click
+    cmd67_Click
+    cmd68_Click
+    cmd69_Click
+    cmd70_Click
 End Sub

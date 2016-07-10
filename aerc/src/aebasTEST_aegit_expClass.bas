@@ -136,7 +136,7 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe            ' THE_BACK_END_SOURCE_FOLDER
     If Not IsMissing(varXmlFldrBe) Then oDbObjects.XMLFolderBe = varXmlFldrBe               ' THE_BACK_END_XML_FOLDER
     If Not IsMissing(varXmlDataFldrBe) Then oDbObjects.XMLDataFolderBe = varXmlDataFldrBe   ' THE_XML_DATA_FOLDER
-    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDb1 = varBackEndDbOne              ' THE_BACK_END_DB1
+    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDbOne = varBackEndDbOne              ' THE_BACK_END_DB1
     If Not IsMissing(varFrontEndApp) Then oDbObjects.FrontEndApp = varFrontEndApp           ' THE_FRONT_END_APP
     'MsgBox "varBackEndDbOne = " & varBackEndDbOne, vbInformation, "Procedure aegitClassTest"
 

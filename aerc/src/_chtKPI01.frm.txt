@@ -17,7 +17,7 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =88
     Right =17535
-    Bottom =11265
+    Bottom =9465
     DatasheetGridlinesColor =14806254
     RecSrcDt = Begin
         0xe51f90fed85ee440
@@ -1139,4 +1139,30 @@ PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Load of " & Me.Name
     Resume Next
 
+End Sub
+
+Private Sub DummyUseProc()
+    cmdM01_Click
+    cmdM02_Click
+    cmdM03_Click
+    cmdM04_Click
+    cmdM05_Click
+    cmdM06_Click
+    cmdM07_Click
+    cmdM08_Click
+    cmdM09_Click
+    cmdM10_Click
+    cmdM11_Click
+    cmdM12_Click
+    '
+    cmdBar_Click
+    cmdPie_Click
+    cmdY01_Click
+    cmdY02_Click
+    cmdY03_Click
+    cmdY04_Click
+    cmdY05_Click
+    '
+    SetChartTitle "Dummy"
+    GetMainTitle
 End Sub
