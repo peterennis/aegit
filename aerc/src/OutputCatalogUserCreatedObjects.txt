@@ -19,6 +19,7 @@
 "Module","basGDIPlus","DateCreated"
 "Module","mac_Dummy","DateCreated"
 "Module","mac_HiddenDummy","DateCreated"
+"Module","TestModuleA","DateCreated"
 "Module","zOther","DateCreated"
 "Module","zRibbons","DateCreated"
 "Module","zTesting1","DateCreated"

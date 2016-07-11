@@ -3906,7 +3906,6 @@ Private Sub Form_Load()
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
     Dim objNewAppTitle As Object
-
     Set objNewAppTitle = dbs.CreateProperty("AppTitle", dbText, "Test")
     dbs.Properties("AppTitle").Value = gstrPROJECT_aegit & " " & gstrVERSION_aegit
     Application.RefreshTitleBar

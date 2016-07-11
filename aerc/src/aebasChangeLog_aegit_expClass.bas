@@ -32,7 +32,7 @@ Option Explicit
 ' %085 -
 ' %084 -
 ' %083 -
-' %082 -
+' %082 - aegit drowns Rubberduck, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2018
 ' %081 - Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004
 ' %080 - Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
@@ -60,6 +60,7 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160711 - v182 -
 '20160707 - v180 -
     ' FIXED - %079 - Create tblDummy3 with multi field primary key and multi field index
     ' FIXED - %077 - Fix addPrimaryKey parsing for Lovefield schema

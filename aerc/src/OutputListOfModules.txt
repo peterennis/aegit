@@ -9,6 +9,7 @@
 [aexl]        False
 [basaeRibbonCallbacks]      False
 [basGDIPlus]  False
+[TestModuleA] False
 [zOther]      False
 [zRibbons]    False
 [zTesting1]   False

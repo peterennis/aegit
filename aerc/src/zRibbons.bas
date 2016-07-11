@@ -23,7 +23,6 @@ Public Function LoadRibbons() As Boolean
 PROC_EXIT:
     On Error Resume Next
     Close fle
-    'PopCallStack
     Exit Function
 
 PROC_ERR:
@@ -34,7 +33,6 @@ PROC_ERR:
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LoadRibbons of Class aegitClass"
     End Select
     LoadRibbons = False
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Function

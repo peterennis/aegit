@@ -112,18 +112,17 @@ ErrorHandler:
 
 End Function
 
-Public Function WUAversion()
+Public Function WUAversion() As String
 ' Get current WUA version
-    Dim oAgentInfo As Object
+    Dim objAgentInfo As Object
     Dim ProductVersion As String
-    Dim ErrNum As Long
     On Error Resume Next
     Err.Clear
-    Set oAgentInfo = CreateObject("Microsoft.Update.AgentInfo")
-    If ErrNum = 0 Then
-        WUAversion = oAgentInfo.GetInfo("ProductVersionString")
-        Debug.Print , "wuapi.dll version: " & oAgentInfo.GetInfo("ProductVersionString")
-        Debug.Print , "WUA version: " & oAgentInfo.GetInfo("ApiMajorVersion") & "." & oAgentInfo.GetInfo("ApiMinorVersion")
+    Set objAgentInfo = CreateObject("Microsoft.Update.AgentInfo")
+    If Err = 0 Then
+        WUAversion = objAgentInfo.GetInfo("ProductVersionString")
+        Debug.Print , "wuapi.dll version: " & objAgentInfo.GetInfo("ProductVersionString")
+        Debug.Print , "WUA version: " & objAgentInfo.GetInfo("ApiMajorVersion") & "." & objAgentInfo.GetInfo("ApiMinorVersion")
     Else
         MsgBox "Error getting WUA version.", vbCritical, "WUA Version"
         WUAversion = 0 ' Calling code can interpret 0 as an error

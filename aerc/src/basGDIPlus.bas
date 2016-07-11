@@ -97,13 +97,13 @@ End Type
 #If Win64 Then
 
     'API-Declarations: ----------------------------------------------------------------------------
-    
+
     ' G.A.: olepro32 in oleaut32 geändert. Olepro32 ist in x64 nicht verfügbar.
-    Private Declare PtrSafe Function OleCreatePictureIndirect Lib "oleaut32.dll" (lpPictDesc As PICTDESC, riid As GUID, ByVal fPictureOwnsHandle As LongPtr, IPic As Object) As Long
-    
+    Private Declare PtrSafe Function OleCreatePictureIndirect Lib "oleaut32.dll" (ByRef lpPictDesc As PICTDESC, ByRef riid As GUID, ByVal fPictureOwnsHandle As LongPtr, ByRef IPic As Object) As Long
+
     'Retrieve GUID-Type from string :
-    Private Declare PtrSafe Function CLSIDFromString Lib "ole32" (ByVal lpsz As Any, pclsid As GUID) As Long
-    
+    Private Declare PtrSafe Function CLSIDFromString Lib "ole32" (ByVal lpsz As Any, ByRef pclsid As GUID) As Long
+
     'Memory functions:
     Private Declare PtrSafe Function GlobalAlloc Lib "kernel32" (ByVal uFlags As LongPtr, ByVal dwBytes As LongPtr) As Long
     Private Declare PtrSafe Function GlobalSize Lib "kernel32.dll" (ByVal hMem As LongPtr) As Long
@@ -130,13 +130,13 @@ End Type
     'GDIPlus Flat-API declarations:
     
     'Initialization GDIP:
-    Private Declare PtrSafe Function GdiplusStartup Lib "GDIPlus" (token As LongPtr, inputbuf As GDIPStartupInput, Optional ByVal outputbuf As Long = 0) As Long
+    Private Declare PtrSafe Function GdiplusStartup Lib "GDIPlus" (ByRef token As LongPtr, ByRef inputbuf As GDIPStartupInput, Optional ByVal outputbuf As Long = 0) As Long
     'Tear down GDIP:
     Private Declare PtrSafe Function GdiplusShutdown Lib "GDIPlus" (ByVal token As LongPtr) As Long
     'Load GDIP-Image from file :
     Private Declare PtrSafe Function GdipCreateBitmapFromFile Lib "GDIPlus" (ByVal FileName As LongPtr, BITMAP As LongPtr) As Long
     'Create GDIP- graphical area from Windows-DeviceContext:
-    Private Declare PtrSafe Function GdipCreateFromHDC Lib "GDIPlus" (ByVal hdc As LongPtr, GpGraphics As LongPtr) As Long
+    Private Declare PtrSafe Function GdipCreateFromHDC Lib "GDIPlus" (ByVal hdc As LongPtr, ByRef GpGraphics As LongPtr) As Long
     'Delete GDIP graphical area :
     Private Declare PtrSafe Function GdipDeleteGraphics Lib "GDIPlus" (ByVal graphics As LongPtr) As Long
     'Copy GDIP-Image to graphical area:
@@ -144,29 +144,29 @@ End Type
     'Clear allocated bitmap memory from GDIP :
     Private Declare PtrSafe Function GdipDisposeImage Lib "GDIPlus" (ByVal Image As LongPtr) As Long
     'Retrieve windows bitmap handle from GDIP-Image:
-    Private Declare PtrSafe Function GdipCreateHBITMAPFromBitmap Lib "GDIPlus" (ByVal BITMAP As LongPtr, hbmReturn As LongPtr, ByVal background As LongPtr) As Long
+    Private Declare PtrSafe Function GdipCreateHBITMAPFromBitmap Lib "GDIPlus" (ByVal BITMAP As LongPtr, ByRef hbmReturn As LongPtr, ByVal background As LongPtr) As Long
     'Retrieve Windows-Icon-Handle from GDIP-Image:
-    Public Declare PtrSafe Function GdipCreateHICONFromBitmap Lib "GDIPlus" (ByVal BITMAP As LongPtr, hbmReturn As LongPtr) As Long
+    Public Declare PtrSafe Function GdipCreateHICONFromBitmap Lib "GDIPlus" (ByVal BITMAP As LongPtr, ByRef hbmReturn As LongPtr) As Long
     'Scaling GDIP-Image size:
-    Private Declare PtrSafe Function GdipGetImageThumbnail Lib "GDIPlus" (ByVal Image As LongPtr, ByVal thumbWidth As LongPtr, ByVal thumbHeight As LongPtr, thumbImage As LongPtr, Optional ByVal callback As LongPtr = 0, Optional ByVal callbackData As LongPtr = 0) As Long
+    Private Declare PtrSafe Function GdipGetImageThumbnail Lib "GDIPlus" (ByVal Image As LongPtr, ByVal thumbWidth As LongPtr, ByVal thumbHeight As LongPtr, ByRef thumbImage As LongPtr, Optional ByVal callback As LongPtr = 0, Optional ByVal callbackData As LongPtr = 0) As Long
     'Retrieve GDIP-Image from Windows-Bitmap-Handle:
-    Private Declare PtrSafe Function GdipCreateBitmapFromHBITMAP Lib "GDIPlus" (ByVal hbm As LongPtr, ByVal hPal As LongPtr, BITMAP As LongPtr) As Long
+    Private Declare PtrSafe Function GdipCreateBitmapFromHBITMAP Lib "GDIPlus" (ByVal hbm As LongPtr, ByVal hPal As LongPtr, ByRef BITMAP As LongPtr) As Long
     'Retrieve GDIP-Image from Windows-Icon-Handle:
-    Private Declare PtrSafe Function GdipCreateBitmapFromHICON Lib "GDIPlus" (ByVal hicon As LongPtr, BITMAP As LongPtr) As Long
+    Private Declare PtrSafe Function GdipCreateBitmapFromHICON Lib "GDIPlus" (ByVal hicon As LongPtr, ByRef BITMAP As LongPtr) As Long
     'Retrieve width of a GDIP-Image (Pixel):
-    Private Declare PtrSafe Function GdipGetImageWidth Lib "GDIPlus" (ByVal Image As LongPtr, Width As LongPtr) As Long
+    Private Declare PtrSafe Function GdipGetImageWidth Lib "GDIPlus" (ByVal Image As LongPtr, ByRef Width As LongPtr) As Long
     'Retrieve height of a GDIP-Image (Pixel):
-    Private Declare PtrSafe Function GdipGetImageHeight Lib "GDIPlus" (ByVal Image As LongPtr, Height As LongPtr) As Long
+    Private Declare PtrSafe Function GdipGetImageHeight Lib "GDIPlus" (ByVal Image As LongPtr, ByRef Height As LongPtr) As Long
     'Save GDIP-Image to file in seletable format:
-    Private Declare PtrSafe Function GdipSaveImageToFile Lib "GDIPlus" (ByVal Image As LongPtr, ByVal FileName As LongPtr, clsidEncoder As GUID, encoderParams As Any) As Long
+    Private Declare PtrSafe Function GdipSaveImageToFile Lib "GDIPlus" (ByVal Image As LongPtr, ByVal FileName As LongPtr, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
     'Save GDIP-Image in OLE-Stream with seletable format:
-    Private Declare PtrSafe Function GdipSaveImageToStream Lib "GDIPlus" (ByVal Image As LongPtr, ByVal stream As IUnknown, clsidEncoder As GUID, encoderParams As Any) As Long
+    Private Declare PtrSafe Function GdipSaveImageToStream Lib "GDIPlus" (ByVal Image As LongPtr, ByVal stream As IUnknown, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
     'Retrieve GDIP-Image from OLE-Stream-Object:
-    Private Declare PtrSafe Function GdipLoadImageFromStream Lib "GDIPlus" (ByVal stream As IUnknown, Image As LongPtr) As Long
+    Private Declare PtrSafe Function GdipLoadImageFromStream Lib "GDIPlus" (ByVal stream As IUnknown, ByRef Image As LongPtr) As Long
     'Create a gdip image from scratch
-    Private Declare PtrSafe Function GdipCreateBitmapFromScan0 Lib "GDIPlus" (ByVal Width As Long, ByVal Height As Long, ByVal stride As Long, ByVal PixelFormat As Long, scan0 As Any, BITMAP As Long) As Long
+    Private Declare PtrSafe Function GdipCreateBitmapFromScan0 Lib "GDIPlus" (ByVal Width As Long, ByVal Height As Long, ByVal stride As Long, ByVal PixelFormat As Long, ByRef scan0 As Any, ByRef BITMAP As Long) As Long
     'Get the DC of an gdip image
-    Private Declare PtrSafe Function GdipGetImageGraphicsContext Lib "GDIPlus" (ByVal Image As LongPtr, graphics As LongPtr) As Long
+    Private Declare PtrSafe Function GdipGetImageGraphicsContext Lib "GDIPlus" (ByVal Image As LongPtr, ByRef graphics As LongPtr) As Long
     'Blit the contents of an gdip image to another image DC using positioning
     Private Declare PtrSafe Function GdipDrawImageRectRectI Lib "GDIPlus" (ByVal graphics As LongPtr, ByVal Image As LongPtr, ByVal dstx As Long, ByVal dsty As Long, ByVal dstwidth As Long, ByVal dstheight As Long, ByVal srcx As Long, ByVal srcy As Long, ByVal srcwidth As Long, ByVal srcheight As Long, ByVal srcUnit As Long, Optional ByVal imageAttributes As Long = 0, Optional ByVal callback As Long = 0, Optional ByVal callbackData As Long = 0) As Long
 
@@ -380,7 +380,7 @@ End Sub
 'Load image file with GDIP
 'It's equivalent to the method LoadPicture() in OLE-Automation library (stdole2.tlb)
 'Allowed format: bmp, gif, jp(e)g, tif, png, wmf, emf, ico
-Private Function LoadPictureGDIP(sFileName As String) As StdPicture
+Private Function LoadPictureGDIP(ByRef sFileName As String) As StdPicture
     #If Win64 Then
         Dim hBmp As LongPtr
         Dim hPic As LongPtr
@@ -447,7 +447,7 @@ End Function
 #If Win64 Then
     'Help function to get a OLE-Picture from Windows-Bitmap-Handle
     'If bIsIcon = TRUE, an Icon-Handle is committed
-    Private Function BitmapToPicture(ByVal hBmp As LongPtr, Optional bIsIcon As Boolean = False) As StdPicture
+    Private Function BitmapToPicture(ByVal hBmp As LongPtr, Optional ByRef bIsIcon As Boolean = False) As StdPicture
 
         Dim TPicConv As PICTDESC
         Dim UID As GUID
