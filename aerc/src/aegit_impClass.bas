@@ -263,8 +263,6 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 '====================================================================
 
     Dim i As Integer
-    Dim RefName As String
-    Dim RefDesc As String
     Dim blnRefBroken As Boolean
     Dim strFile As String
 
@@ -322,12 +320,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 
         blnRefBroken = False
 
-        ' Get the Name of the Reference
-        RefName = vbaProj.References(i).Name
-
-        ' Get the Description of Reference
-        RefDesc = vbaProj.References(i).Description
-
+        ' Output reference details
         If Not IsMissing(varDebug) Then
             Debug.Print , , vbaProj.References(i).Name, vbaProj.References(i).Description
             Debug.Print , , , vbaProj.References(i).FullPath

@@ -146,12 +146,13 @@ Private Function IsNumeric(ByVal strCheck As String) As Boolean
 
     On Error GoTo 0
     Dim nCurrent As Long
+    Dim strResult As String
     IsNumeric = True
     nCurrent = 0
-    strCheck = Trim$(strCheck)
-    Do While nCurrent < Len(strCheck) And IsNumeric = True
+    strResult = Trim$(strCheck)
+    Do While nCurrent < Len(strResult) And IsNumeric = True
         nCurrent = nCurrent + 1
-        If InStr("01234567890", Mid$(strCheck, nCurrent, 1)) < 1 Then
+        If InStr("01234567890", Mid$(strResult, nCurrent, 1)) < 1 Then
             IsNumeric = False 'Part of the string is not a digit!
         End If
     Loop
