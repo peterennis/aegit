@@ -767,7 +767,6 @@ End Function
 Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
 ' Ref: http://bytes.com/topic/access/answers/709190-how-export-table-structure-including-description
 
-    Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim prp As DAO.Property
     Dim fldprp As DAO.Property
@@ -794,7 +793,6 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
         strTheSourceLocation = aestrSourceLocationBe
     End If
 
-    Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
 
         If Not (Left$(tdf.Name, 4) = "MSys" _
@@ -2360,7 +2358,6 @@ Private Function LongestTableName() As Integer
 ' History:  See comment details, basChangeLog, commit messages on github
 ' ====================================================================
 
-    Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim intTNLen As Integer
 
@@ -2368,7 +2365,6 @@ Private Function LongestTableName() As Integer
     On Error GoTo PROC_ERR
 
     intTNLen = 0
-    Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
         If Not (Left$(tdf.Name, 4) = "MSys" _
                 Or Left$(tdf.Name, 4) = "~TMP" _
@@ -2383,7 +2379,6 @@ Private Function LongestTableName() As Integer
 
 PROC_EXIT:
     Set tdf = Nothing
-    Set dbs = Nothing
     Exit Function
 
 PROC_ERR:
@@ -2402,7 +2397,6 @@ Private Function LongestFieldPropsName() As Boolean
 ' History:  See comment details, basChangeLog, commit messages on github
 ' =======================================================================
 
-    Dim dbs As DAO.Database
     Dim tblDef As DAO.TableDef
     Dim fld As DAO.Field
 
@@ -2413,7 +2407,6 @@ Private Function LongestFieldPropsName() As Boolean
     aeintFTLen = 0
     aeintFDLen = 0
 
-    Set dbs = CurrentDb()
 
     For Each tblDef In CurrentDb.TableDefs
         If Not (Left$(tblDef.Name, 4) = "MSys" _
@@ -2442,7 +2435,6 @@ Private Function LongestFieldPropsName() As Boolean
 PROC_EXIT:
     Set fld = Nothing
     Set tblDef = Nothing
-    Set dbs = Nothing
     Exit Function
 
 PROC_ERR:
