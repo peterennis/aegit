@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.8.1"
-Private Const aegit_expVERSION_DATE As String = "July 8, 2016"
+Private Const aegit_expVERSION As String = "1.8.2"
+Private Const aegit_expVERSION_DATE As String = "July 11, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -4714,8 +4714,8 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
     Dim tbl As DAO.TableDef
     Dim fld As DAO.Field
     Dim lng As Long
-    Dim strChkTbl As String
-    Dim strChkFld As String
+    Dim strCheckBoxTable As String
+    Dim strCheckBoxField As String
 
     ' Counters for DisplayControl types
     Static intChk As Integer
@@ -4761,8 +4761,8 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
                 Select Case lng
                     Case acCheckBox
                         intChk = intChk + 1
-                        strChkTbl = tbl.Name
-                        strChkFld = fld.Name
+                        strCheckBoxTable = tbl.Name
+                        strCheckBoxField = fld.Name
                     Case acTextBox
                         intTxt = intTxt + 1
                     Case acListBox
@@ -4784,8 +4784,8 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
         Debug.Print "Count of Else      = " & intElse
         Debug.Print "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
         Debug.Print "Count of All Fields = " & intAllFieldsCount - intElse
-        'Debug.Print "Table with check box is " & strChkTbl
-        'Debug.Print "Field with check box is " & strChkFld
+        'Debug.Print "Table with check box is " & strCheckBoxTable
+        'Debug.Print "Field with check box is " & strCheckBoxField
     End If
 
     Print #fle, "Count of Check box = " & intChk
@@ -4795,8 +4795,8 @@ Private Function FieldLookupControlTypeList(Optional ByVal varDebug As Variant) 
     Print #fle, "Count of Else      = " & intElse
     Print #fle, "Count of Display Controls = " & intChk + intTxt + intLst + intCbo
     Print #fle, "Count of All Fields = " & intAllFieldsCount - intElse
-    'Print #fle, "Table with check box is " & strChkTbl
-    'Print #fle, "Field with check box is " & strChkFld
+    'Print #fle, "Table with check box is " & strCheckBoxTable
+    'Print #fle, "Field with check box is " & strCheckBoxField
 
     If intAllFieldsCount - intElse = intChk + intTxt + intLst + intCbo Then
         FieldLookupControlTypeList = True
