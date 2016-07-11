@@ -3036,9 +3036,7 @@ Private Sub OutputListOfIndexes(ByVal strFileOut As String)
     Open strFileOut For Output As #fle
     Close fle
 
-    Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
-    Set dbs = CurrentDb()
 
     For Each tdf In CurrentDb.TableDefs
         If Not (Left$(tdf.Name, 4) = "MSys" _
@@ -3048,7 +3046,6 @@ Private Sub OutputListOfIndexes(ByVal strFileOut As String)
         End If
     Next
     Set tdf = Nothing
-    Set dbs = Nothing
     'Stop
 End Sub
 
@@ -3531,7 +3528,6 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
-'    Dim strTheTableName As String
     Dim strFieldInfoToParse As String
     Dim strFieldName As String
     Dim strAccFieldType As String
@@ -3540,8 +3536,6 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strThePrimaryKeyField As String
     Dim strTheIndex As String
 
-    Dim dbs As DAO.Database
-    Set dbs = CurrentDb()
     Dim strAppName As String
     strAppName = Application.VBE.ActiveVBProject.Name
     Dim strLfBegin As String
@@ -4378,7 +4372,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 ' History:  See comment details, basChangeLog, commit messages on github
 '=======================================================================
 
-    Dim dbs As DAO.Database
     Dim cnt As DAO.Container
     Dim doc As DAO.Document
     Dim qdf As DAO.QueryDef
@@ -4447,7 +4440,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     ' =============
     '    QUERIES
     ' =============
-    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
     i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
@@ -4576,7 +4568,6 @@ PROC_EXIT:
     Set qdf = Nothing
     Set doc = Nothing
     Set cnt = Nothing
-    Set dbs = Nothing
     Exit Function
 
 PROC_ERR:
@@ -5490,7 +5481,6 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
     Debug.Print "OutputTableDataMacros"
     On Error GoTo PROC_ERR
 
-    Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Dim strFile As String
 
@@ -5501,7 +5491,6 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
         strTheXMLDataLocation = aestrXMLDataLocationBe
     End If
 
-    Set dbs = CurrentDb()
     For Each tdf In CurrentDb.TableDefs
         If Not LinkedTable(tdf.Name) Or _
                 Not (Left$(tdf.Name, 4) = "MSys" _
@@ -5524,7 +5513,6 @@ NextTdf:
 
 PROC_EXIT:
     Set tdf = Nothing
-    Set dbs = Nothing
     Exit Sub
 
 PROC_ERR:

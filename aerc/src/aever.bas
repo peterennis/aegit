@@ -6,7 +6,7 @@ Public Sub Version_Test()
     Debug.Print GetEdition(Application.Version, Application.ProductCode)
 End Sub
 
-Public Function GetEdition(ByRef strAppVersion As String, ByRef strGuid As String) As String
+Public Function GetEdition(ByVal strAppVersion As String, ByVal strGuid As String) As String
 ' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
 ' Ref: http://p2p.wrox.com/excel-vba/82653-what-best-way-get-excel-version.html
 ' Ref: http://colinlegg.wordpress.com/2013/02/02/office-edition-in-vba/
@@ -72,7 +72,7 @@ PROC_ERR:
  
 End Function
  
-Private Function GetEdition2000(ByRef strSku As String) As String
+Private Function GetEdition2000(ByVal strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/230848/
  
     On Error GoTo 0
@@ -150,7 +150,7 @@ Private Function GetEdition2000(ByRef strSku As String) As String
     End Select
 End Function
  
-Private Function GetEdition2002(ByRef strSku As String) As String
+Private Function GetEdition2002(ByVal strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/302663/
  
     On Error GoTo 0
@@ -234,7 +234,7 @@ Private Function GetEdition2002(ByRef strSku As String) As String
     End Select
 End Function
  
-Private Function GetEdition2003(ByRef strSku As String) As String
+Private Function GetEdition2003(ByVal strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/832672/
  
     On Error GoTo 0
@@ -336,7 +336,7 @@ Private Function GetEdition2003(ByRef strSku As String) As String
     End Select
 End Function
  
-Private Function GetEdition2007(ByRef strSku As String) As String
+Private Function GetEdition2007(ByVal strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/928516/
  
     On Error GoTo 0
@@ -434,7 +434,7 @@ Private Function GetEdition2007(ByRef strSku As String) As String
     End Select
 End Function
  
-Private Function GetEdition2010(ByRef strSku As String) As String
+Private Function GetEdition2010(ByVal strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/2186281
  
     On Error GoTo 0
@@ -499,7 +499,7 @@ Private Function GetEdition2010(ByRef strSku As String) As String
     End Select
 End Function
  
-Private Function GetEdition2013(ByRef strSku As String) As String
+Private Function GetEdition2013(ByVal strSku As String) As String
 ' Ref: http://support.microsoft.com/kb/2786054
  
     On Error GoTo 0
@@ -558,7 +558,7 @@ Private Function GetEdition2013(ByRef strSku As String) As String
     End Select
 End Function
 
-Private Function GetEdition2016(ByRef strSku As String) As String
+Private Function GetEdition2016(ByVal strSku As String) As String
 ' Ref: https://support.microsoft.com/en-us/kb/3120274
  
     On Error GoTo 0
