@@ -1954,6 +1954,7 @@ PROC_ERR:
 End Sub
 
 Private Sub DummyUseProc()
+    On Error GoTo 0
     cmd01_Click
     cmd02_Click
     cmd03_Click

@@ -6,6 +6,8 @@ Private Declare Function GetTickCount Lib "kernel32" () As Long
 Public Sub HashAllModules()
 ' mwolfe02, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/1966
 
+    On Error GoTo 0
+
     Dim s As Long
     Dim LineCount As Long
 

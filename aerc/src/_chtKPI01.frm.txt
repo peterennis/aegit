@@ -1142,6 +1142,7 @@ PROC_ERR:
 End Sub
 
 Private Sub DummyUseProc()
+    On Error GoTo 0
     cmdM01_Click
     cmdM02_Click
     cmdM03_Click

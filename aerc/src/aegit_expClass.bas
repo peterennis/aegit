@@ -1020,7 +1020,7 @@ Private Function FixHeaderXML(ByVal strPathFileName As String) As Boolean
     fnr2 = FreeFile()
     Open fName2 For Binary Lock Read Write As #fnr2
 
-    While Not EOF(fnr)
+    Do While Not EOF(fnr)
         Get #fnr, , tstring
         Debug.Print Asc(tstring)
         If Not blnDone Then
@@ -1032,7 +1032,7 @@ Private Function FixHeaderXML(ByVal strPathFileName As String) As Boolean
         Else
             If Asc(tstring) <> 0 Then Put #fnr2, , tstring
         End If
-    Wend
+    Loop
     'Stop
 
 PROC_EXIT:
@@ -1149,14 +1149,14 @@ Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
     fnr2 = FreeFile()
     Open fName2 For Binary Lock Read Write As #fnr2
 
-    While Not EOF(fnr)
+    Do While Not EOF(fnr)
         Get #fnr, , tstring
         If Asc(tstring) = 254 Or Asc(tstring) = 255 Or _
                 Asc(tstring) = 0 Then
         Else
             Put #fnr2, , tstring
         End If
-    Wend
+    Loop
 
 PROC_EXIT:
     Close #fnr
@@ -3292,7 +3292,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 End If
 
                 'Debug.Print strSQL
-                f.WriteLine vbCrLf & Trim(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
+                f.WriteLine vbCrLf & Trim$(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
             Next
             'Stop
         End If
@@ -3339,6 +3339,7 @@ Private Sub OutputTheLovefieldFile(ByVal strFileIn As String, ByVal strFileOut A
 End Sub
 
 Private Sub OutputTheSqlFile(ByVal strFileIn As String, ByVal strFileOut As String)
+    On Error GoTo 0
     ReadInputWriteOutputFileSql strFileIn, strFileOut
 End Sub
 
@@ -3390,9 +3391,10 @@ Private Function FoundSqlKeywordInLine(ByVal strLine As String) ', Optional ByVa
 End Function
 
 Private Sub OutputTheSqlOnlyFile(ByVal strFileIn As String, ByVal strFileOut As String)
-    Debug.Print "OutputTheSqlOnlyFile"
-    Debug.Print , "strFileIn=" & strFileIn
-    Debug.Print , "strFileOut=" & strFileOut
+    'Debug.Print "OutputTheSqlOnlyFile"
+    'Debug.Print , "strFileIn=" & strFileIn
+    'Debug.Print , "strFileOut=" & strFileOut
+    On Error GoTo 0
     'Stop
     ReadInputWriteOutputSqlSchemaOnlyFile strFileIn, strFileOut
 End Sub
@@ -3526,6 +3528,7 @@ Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
 End Function
 
 Private Sub GenerateLovefieldSchema(ByVal strFileIn As String, ByVal strFileOut As String)
+    On Error GoTo 0
     ReadInputWriteOutputLovefieldSchema strFileIn, strFileOut
 End Sub
 
@@ -3590,11 +3593,11 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 ' Create the table
                 strFieldInfoToParse = GetFieldInfo(mstrToParse)
                 'Debug.Print "strFieldInfoToParse=" & strFieldInfoToParse
-                strFieldName = Trim(Left$(strFieldInfoToParse, InStr(strFieldInfoToParse, " ")))
-                strAccFieldType = Trim(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStr(strFieldInfoToParse, " ")))
+                strFieldName = Trim$(Left$(strFieldInfoToParse, InStr(strFieldInfoToParse, " ")))
+                strAccFieldType = Trim$(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStr(strFieldInfoToParse, " ")))
                 'Debug.Print , "'" & strFieldName & "'", "'" & strAccFieldType & "'"
                 strLfFieldType = GetLovefieldType(strAccFieldType)
-                strLfFieldName = Space(4) & "addColumn('" & strFieldName
+                strLfFieldName = Space$(4) & "addColumn('" & strFieldName
                 Debug.Print , strLfFieldName & strLfFieldType, "{" & strAccFieldType & "}"
                 Print #fleOut, strLfFieldName & strLfFieldType
                 'Stop
@@ -3659,6 +3662,8 @@ End Sub
 
 Public Function GetFieldInfo(ByVal strSchemaLine As String) As String
 
+    On Error GoTo 0
+
     Dim strResult As String
     Dim intPosOne As Integer
     Dim intPosTwo As Integer
@@ -3678,6 +3683,8 @@ Public Function GetFieldInfo(ByVal strSchemaLine As String) As String
 End Function
 
 Public Function GetTableName(ByVal strSchemaLine As String) As String
+    'Debug.print "GetTableName"
+    On Error GoTo 0
 
     Dim intPosOne As Integer
     Dim intPosTwo As Integer
@@ -3692,6 +3699,9 @@ Public Function GetTableName(ByVal strSchemaLine As String) As String
 End Function
 
 Private Function IsTableSchemaDone(ByVal strTableName As String, ByVal strSQL As String) As Boolean
+    'Debug.print "IsTableSchemaDone"
+    On Error GoTo 0
+    
     IsTableSchemaDone = True
     If InStr(strSQL, strTableName) Then
         IsTableSchemaDone = False
@@ -3756,7 +3766,7 @@ Private Function GetPrimaryKey(ByVal strSQL As String) As String
     intPosRBP = InStr(strParse, "])") - 1
     strPrimaryField = Left$(strParse, intPosRBP)
     Debug.Print , ">>strPrimaryField", intPosRBP, strPrimaryField
-    GetPrimaryKey = Space(4) & "addPrimaryKey(['" & strPrimaryField & "'])"
+    GetPrimaryKey = Space$(4) & "addPrimaryKey(['" & strPrimaryField & "'])"
     'Stop
 End Function
 
@@ -3787,7 +3797,7 @@ Private Function GetIndex(ByVal strSQL As String) As String
     intPosRB = InStr(strParseSQL, "])")
     strIndexField = Mid$(strParseSQL, intPosLB + 1, intPosRB - intPosLB - 1)
     'Debug.Print , "D>>>strIndexField", strIndexField, intPosLB + 1, intPosRB - 1
-    GetIndex = Space(4) & "addIndex(['" & strIndexNameIdx & "'], ['" & strIndexField & "'], false, lf.Order.ASC)"
+    GetIndex = Space$(4) & "addIndex(['" & strIndexNameIdx & "'], ['" & strIndexField & "'], false, lf.Order.ASC)"
 
 PROC_EXIT:
     Exit Function

@@ -8,29 +8,34 @@ Private Assert As Object
 
 '@ModuleInitialize
 Public Sub ModuleInitialize()
-    'this method runs once per module.
+    On Error GoTo 0
+    ' This method runs once per module.
     Set Assert = CreateObject("Rubberduck.AssertClass")
 
 End Sub
 
 '@ModuleCleanup
 Public Sub ModuleCleanup()
-    'this method runs once per module.
+    On Error GoTo 0
+    ' This method runs once per module.
 End Sub
 
 '@TestInitialize
 Public Sub TestInitialize()
-    'this method runs before every test in the module.
+    On Error GoTo 0
+    ' This method runs before every test in the module.
 End Sub
 
 '@TestCleanup
 Public Sub TestCleanup()
-    'this method runs after every test in the module.
+    On Error GoTo 0
+    ' This method runs after every test in the module.
 End Sub
 
 '@TestMethod
 Public Sub TestMethodIsPK()
-    'On Error GoTo TestFail
+
+    On Error GoTo TestFail
 
     Dim blnTestResult As Boolean
 

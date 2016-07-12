@@ -265,9 +265,11 @@ Private bSharedLoad As Boolean
 
 'Initialize GDI+
 Private Function InitGDIP() As Boolean
+
+    On Error GoTo 0
+
     Dim TGDP As GDIPStartupInput
     Dim hMod As Long
-    
 
     'Debug.Print Now(), "InitGDIP"
 
@@ -317,10 +319,11 @@ Private Function InitGDIP() As Boolean
     
 End Function
 
-
 'Clear GDI+
 Private Sub ShutDownGDIP()
     'Debug.Print Now(), "ShutDownGDIP"
+
+    On Error GoTo 0
 
     If lGDIP <> 0 Then
     
@@ -358,6 +361,8 @@ Private Sub AutoShutDown()
     'Set to 5 seconds for next shutdown
     'That's IMO appropriate for looped routines  - but configure for your own purposes
  
+    On Error GoTo 0
+ 
     If lGDIP <> 0 Then
         ReDim Preserve tVarTimer(lCounter)
         tVarTimer(lCounter) = SetTimer(0&, 0&, 5000, AddressOf TimerProc)
@@ -371,6 +376,7 @@ End Sub
 'Callback for AutoShutDown
 Private Sub TimerProc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal idEvent As Long, ByVal dwTime As Long)
     'Debug.Print Now(), "TimerProc Start"
+    On Error GoTo 0
     
     ShutDownGDIP
 
@@ -389,6 +395,8 @@ Private Function LoadPictureGDIP(ByRef sFileName As String) As StdPicture
         Dim hPic As Long
     #End If
     
+    On Error GoTo 0
+    
     If Not InitGDIP Then Exit Function
     
         If GdipCreateBitmapFromFile(StrPtr(sFileName), hPic) = 0 Then
@@ -406,6 +414,8 @@ End Function
 
 'Create an OLE-Picture from Byte-Array PicBin()
 Public Function ArrayToPicture(ByRef PicBin() As Byte) As Picture
+
+    On Error GoTo 0
 
     Dim IStm As IUnknown
     #If Win64 Then
@@ -449,6 +459,8 @@ End Function
     'If bIsIcon = TRUE, an Icon-Handle is committed
     Private Function BitmapToPicture(ByVal hBmp As LongPtr, Optional ByRef bIsIcon As Boolean = False) As StdPicture
 
+        On Error GoTo 0
+
         Dim TPicConv As PICTDESC
         Dim UID As GUID
 
@@ -469,6 +481,8 @@ End Function
     End Function
 #Else
     Private Function BitmapToPicture(ByVal hBmp As Long, Optional bIsIcon As Boolean = False) As StdPicture
+        
+        On Error GoTo 0
         
         Dim TPicConv As PICTDESC, UID As GUID
     
