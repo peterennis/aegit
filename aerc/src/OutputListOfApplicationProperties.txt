@@ -47,7 +47,7 @@ NavPane View By: 0, 4, False;
 NavPane Sort By: 0, 4, False;
 Track Name AutoCorrect Info: 0, 4, False;
 Perform Name AutoCorrect: 0, 4, False;
-AppTitle: aegit 1.8.2, 10, False;
+AppTitle: aegit 1.8.3, 10, False;
 AppIcon: .\adaept64.ico, 10, False;
 aeRibbonID: adaept, 10, False;
 Property Sheet Label Width: 2310, 4, False;
