@@ -9,6 +9,8 @@
 [aexl]        False
 [basaeRibbonCallbacks]      False
 [basGDIPlus]  False
+[basHash]     False
+[TestCodeForModuleA]        False
 [TestModuleA] False
 [zOther]      False
 [zRibbons]    False

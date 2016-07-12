@@ -4,6 +4,7 @@ Option Private Module
 
 '@TestModule - change - change - change
 Private Assert As Object
+'
 
 '@ModuleInitialize
 Public Sub ModuleInitialize()
@@ -29,19 +30,22 @@ End Sub
 
 '@TestMethod
 Public Sub TestMethodIsPK()
-    On Error GoTo TestFail
-    
-    'Arrange:
+    'On Error GoTo TestFail
 
-    'Act:
+    Dim blnTestResult As Boolean
 
-    'Assert:
-    Assert.Inconclusive
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    blnTestResult = oDbObjects.IsPrimaryKey("_tblChart", "id")
+    Debug.Print "blnTestResult=" & blnTestResult
+    Assert.IsTrue blnTestResult
 
 TestExit:
+    Set oDbObjects = Nothing
     Exit Sub
 TestFail:
-    Assert.Fail "TestMethodIsPK raised an error: #" & Err.Number & " - " & Err.Description
+    Assert.Fail "TestMethodIsPK raised an error: #" & Err.Number & " - " & "Erl=" & Erl & " " & Err.Description
 End Sub
 
 '@TestMethod

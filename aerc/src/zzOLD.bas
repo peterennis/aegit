@@ -31,7 +31,7 @@ Public Sub ListIndexes()
     Set cnn = Nothing
 End Sub
 
-Public Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Public Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     'Debug.Print "isPK"
     On Error GoTo 0
 
@@ -41,7 +41,7 @@ Public Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boo
         If idx.Primary Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
-                    isPK = True
+                    IsPK = True
                     Exit Function
                 End If
             Next fld

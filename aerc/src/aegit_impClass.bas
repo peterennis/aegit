@@ -414,7 +414,7 @@ Private Function GetDescrip(ByVal obj As Object) As String
     GetDescrip = obj.Properties("Description")
 End Function
 
-Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Private Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
@@ -422,7 +422,7 @@ Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
         If idx.Primary Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
-                    isPK = True
+                    IsPK = True
                     Exit Function
                 End If
             Next fld

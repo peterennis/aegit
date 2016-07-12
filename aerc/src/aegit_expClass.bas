@@ -86,6 +86,7 @@ End Type
 Private myExclude As myExclusions
 Private pExclude As Boolean
 Private mblnIgnore As Boolean
+Private mblnResult As Boolean
 
 Private aegitSetup As Boolean
 Private aegitType As mySetupType
@@ -577,6 +578,17 @@ Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnEx
     On Error GoTo 0
     pExclude = blnExclude
     Debug.Print , "Let ExcludeFiles = " & pExclude
+End Property
+
+Public Property Get IsPrimaryKey(ByVal strTableName As String, ByVal strField As String) As Boolean
+    On Error GoTo 0
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb()
+    Dim tdf As DAO.TableDef
+    Set tdf = dbs.TableDefs(strTableName)
+    mblnResult = IsPK(tdf, strField)
+    IsPrimaryKey = mblnResult
+    Set tdf = Nothing
 End Property
 
 Private Sub TestForRelativePath()
@@ -3460,17 +3472,18 @@ PROC_ERR:
 
 End Sub
 
-Private Function isPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Private Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     'Debug.Print "isPK"
     On Error GoTo 0
 
     Dim idx As DAO.Index
     Dim fld As DAO.Field
+    IsPK = False
     For Each idx In tdf.Indexes
         If idx.Primary Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
-                    isPK = True
+                    IsPK = True
                     Exit Function
                 End If
             Next fld
