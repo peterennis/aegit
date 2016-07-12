@@ -3322,22 +3322,6 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
 
 End Sub
 
-Private Sub OutputTheLovefieldFile(ByVal strFileIn As String, ByVal strFileOut As String)
-' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
-' Type, Default Value, Nullable by default, Description
-' lf.Type.ARRAY_BUFFER, null, Yes, JavaScript ArrayBuffer object
-' lf.Type.BOOLEAN, false, No, JavaScript boolean object
-' lf.Type.DATE_TIME, Date(0), No, JavaScript Date - will be converted to timestamp integer internally
-' lf.Type.INTEGER, 0, No, 32-bit integer
-' lf.Type.NUMBER, 0, No, JavaScript number type
-' lf.Type.String, '', No, JavaScript string type
-' lf.Type.OBJECT, null, Yes, JavaScript Object - stored as-is
-
-    'Debug.Print "OutputTheLovefieldFile"
-    On Error GoTo 0
-
-End Sub
-
 Private Sub OutputTheSqlFile(ByVal strFileIn As String, ByVal strFileOut As String)
     On Error GoTo 0
     ReadInputWriteOutputFileSql strFileIn, strFileOut
@@ -3533,6 +3517,15 @@ Private Sub GenerateLovefieldSchema(ByVal strFileIn As String, ByVal strFileOut 
 End Sub
 
 Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal strFileOut As String)
+' Ref: https://github.com/google/lovefield/blob/master/docs/spec/01_schema.md
+' Type, Default Value, Nullable by default, Description
+' lf.Type.ARRAY_BUFFER, null, Yes, JavaScript ArrayBuffer object
+' lf.Type.BOOLEAN, false, No, JavaScript boolean object
+' lf.Type.DATE_TIME, Date(0), No, JavaScript Date - will be converted to timestamp integer internally
+' lf.Type.INTEGER, 0, No, 32-bit integer
+' lf.Type.NUMBER, 0, No, JavaScript number type
+' lf.Type.String, '', No, JavaScript string type
+' lf.Type.OBJECT, null, Yes, JavaScript Object - stored as-is
 
     'Debug.Print "ReadInputWriteOutputLovefieldSchema"
     On Error GoTo PROC_ERR

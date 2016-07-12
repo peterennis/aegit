@@ -38,7 +38,7 @@ Public Sub HashAllModules()
         Dim Pos As Integer, HexedHash As String
         HexedHash = vbNullString
         For Pos = 1 To LenB((HashedBytes))
-            HexedHash = HexedHash & LCase(Right("0" & Hex(AscB(MidB(HashedBytes, Pos, 1))), 2))
+            HexedHash = HexedHash & LCase$(Right$("0" & Hex$(AscB(MidB$(HashedBytes, Pos, 1))), 2))
         Next
         Debug.Print HexedHash, mdl.Name    'Returns a 40 byte/character hex string
 

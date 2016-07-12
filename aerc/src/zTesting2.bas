@@ -529,7 +529,7 @@ Private Function GetFiles(ByVal strPath As String, _
     If Err <> 0 Then
         ' Incorrect path.
         GetFiles = False
-        GoTo PROC_EXIT
+        Exit Function
     End If
     On Error GoTo 0
 

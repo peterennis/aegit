@@ -15,11 +15,12 @@ End Function
 Public Sub NoBOM(ByVal strFileName As String)
 ' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
 ' Use the same file name for input and output
+    On Error GoTo 0
 
     ' Define needed constants
-    Const ForReading As Integer = 1
+'    Const ForReading As Integer = 1
     Const ForWriting As Integer = 2
-    Const TriStateUseDefault As Integer = -2
+'    Const TriStateUseDefault As Integer = -2
     Const adTypeText As Integer = 2
     Dim strContent As String
 
@@ -81,6 +82,7 @@ End Sub
 Public Sub CatalogUserCreatedObjects()
 ' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc
 ' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
+    On Error GoTo 0
 
     Dim strSQL As String
     Const MY_QUERY_NAME As String = "zzzqryCatalogUserCreatedObjects"

@@ -6,6 +6,8 @@ Public Const MyDocuments As Long = &H5&
 
 Public Sub ListIndexes()
 
+    On Error GoTo 0
+
     Const adSchemaIndexes As Long = 12
     Dim cnn As Object ' ADODB.Connection
     Dim rst As Object ' ADODB.Recordset
@@ -98,6 +100,8 @@ End Function
 
 Public Function SpFolder(ByVal SpName As String)
 
+    On Error GoTo 0
+
     Dim objShell As Object
     Set objShell = CreateObject("Shell.Application")
     Dim objFolder As Object
@@ -114,6 +118,7 @@ Public Sub ExportAllModulesToFile()
 ' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
 ' The reference for the FileSystemObject Object is Windows Script Host Object Model
 ' but it not necessary to add the reference for this procedure.
+    On Error GoTo 0
 
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -144,8 +149,8 @@ Public Sub ExportAllModulesToFile()
             End If
             ' and then write it to a file, first marking the start with
             ' some equal signs and the component name.
-            fil.WriteLine String(15, "=") & vbCrLf & mdl.Name _
-                & vbCrLf & String(15, "=") & vbCrLf & strMod
+            fil.WriteLine String$(15, "=") & vbCrLf & mdl.Name _
+                & vbCrLf & String$(15, "=") & vbCrLf & strMod
         End If
     Next
        
@@ -168,6 +173,7 @@ Public Function CodeLinesInProjectCount() As Long
 ' Ref: http://www.cpearson.com/excel/vbe.aspx
 ' Adjusted for Microsoft Access and Late Binding. No reference needed.
 ' Access.Application is used. Returns -1 if the VBProject is locked.
+    On Error GoTo 0
 
     Dim VBP As Object               'VBIDE.VBProject
     Dim VBComp As Object            'VBIDE.VBComponent
@@ -256,6 +262,7 @@ Public Sub TestPropertiesOutput()
 'SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate,
 'MSysObjects.Name , MSysObjects.Type
 'FROM MSysObjects;
+    On Error GoTo 0
 
     Debug.Print ">>>frm_Dummy"
     Debug.Print "DateCreated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("DateCreated").Value
@@ -281,6 +288,8 @@ Public Sub TestPropertiesOutput()
 End Sub
 
 Public Sub ObjectCounts()
+
+    On Error GoTo 0
  
     Dim qry As DAO.QueryDef
     Dim cnt As DAO.Container
@@ -321,6 +330,8 @@ Public Sub ObjectCounts()
 End Sub
 
 Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
+
+    On Error GoTo 0
 
     ' Beautify XML in VBA with MSXML6 only
     ' Ref: http://social.msdn.microsoft.com/Forums/en-US/409601d4-ca95-448a-aafc-aa0ee1ad67cd/beautify-xml-in-vba-with-msxml6-only?forum=xmlandnetfx
@@ -383,6 +394,7 @@ End Sub
 
 Public Sub FormUseDefaultPrinter()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
+    On Error GoTo 0
 
     Dim obj As Object
     For Each obj In CurrentProject.AllForms
@@ -398,6 +410,7 @@ End Sub
 
 Public Sub ReportUseDefaultPrinter()
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
+    On Error GoTo 0
 
     Dim obj As Object
     For Each obj In CurrentProject.AllReports
@@ -420,6 +433,7 @@ Public Sub TestForCreateFormReportTextFile()
 ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
 ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
 ' "OleData = Begin"
+    On Error GoTo 0
 
     Dim fleIn As Integer
     Dim fleOut As Integer
@@ -485,6 +499,7 @@ Public Sub CreateFormReportTextFile()
 ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
 ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
 ' "OleData = Begin"
+    On Error GoTo 0
 
     Dim fleIn As Integer
     Dim fleOut As Integer
@@ -554,6 +569,8 @@ End Sub
 
 Public Function FoundKeywordInLine(strLine As String, Optional varEnd As Variant) As Boolean
 
+    On Error GoTo 0
+
     FoundKeywordInLine = False
     If Not IsMissing(varEnd) Then
         If InStr(1, strLine, "End", vbTextCompare) > 0 Then
@@ -594,6 +611,7 @@ End Function
 
 Public Sub SaveTableMacros()
 
+    On Error GoTo 0
     ' Export Table Data to XML
     ' Ref: http://technet.microsoft.com/en-us/library/ee692914.aspx
 '    Application.ExportXML acExportTable, "aeItems", "C:\Temp\aeItemsData.xml"
