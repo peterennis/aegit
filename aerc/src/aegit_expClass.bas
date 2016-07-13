@@ -5622,7 +5622,7 @@ NextIteration:
                 Line Input #fleIn, strIn
                 If Not FoundKeywordInLine(strIn, "End") Then
                     'Debug.Print "Not Found!!!", i
-                    GoTo SearchForEnd
+                    'GoTo SearchForEnd
                 Else
                     If Not IsMissing(varDebug) Then Debug.Print i & ">", "Found End!!!"
                     Print #fleOut, strIn

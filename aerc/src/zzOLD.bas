@@ -1,9 +1,6 @@
 Option Compare Database
 Option Explicit
 
-Public Const Desktop As Long = &H10&
-Public Const MyDocuments As Long = &H5&
-
 Public Sub ListIndexes()
 
     On Error GoTo 0
@@ -98,7 +95,7 @@ End Function
 
 '
 
-Public Function SpFolder(ByVal SpName As String)
+Public Function SpFolder(ByVal SpName As String) As String
 
     On Error GoTo 0
 
@@ -128,7 +125,7 @@ Public Sub ExportAllModulesToFile()
     Dim mdl As Object
     Dim i As Integer
     Dim strTxtFile As String
-
+    Const Desktop As Long = &H10&
 
     ' Set up the file
     Debug.Print "CurrentProject.Name = " & CurrentProject.Name
@@ -540,7 +537,7 @@ NextIteration:
                 Line Input #fleIn, strIn
                 If Not FoundKeywordInLine(strIn, "End") Then
                     'Debug.Print "Not Found!!!", i
-                    GoTo SearchForEnd
+                    'GoTo SearchForEnd
                 Else
                     Debug.Print i & ">", "Found End!!!"
                     Print #fleOut, strIn

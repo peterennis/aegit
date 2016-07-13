@@ -115,7 +115,6 @@ End Function
 Public Function WUAversion() As String
 ' Get current WUA version
     Dim objAgentInfo As Object
-    Dim ProductVersion As String
     On Error Resume Next
     Err.Clear
     Set objAgentInfo = CreateObject("Microsoft.Update.AgentInfo")

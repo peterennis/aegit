@@ -411,7 +411,6 @@ Private Function LoadPictureGDIP(ByRef sFileName As String) As StdPicture
 
 End Function
 
-
 'Create an OLE-Picture from Byte-Array PicBin()
 Public Function ArrayToPicture(ByRef PicBin() As Byte) As Picture
 
