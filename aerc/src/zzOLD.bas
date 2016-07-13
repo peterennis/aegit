@@ -11,7 +11,7 @@ Public Sub ListIndexes()
     Const adSchemaIndexes As Long = 12
     Dim cnn As Object ' ADODB.Connection
     Dim rst As Object ' ADODB.Recordset
-    Dim i As Long
+    'Dim i As Long
 
     Set cnn = CurrentProject.Connection
     Set rst = cnn.OpenSchema(adSchemaIndexes)
@@ -213,7 +213,7 @@ Public Sub GetAK()
 
 End Sub
 
-Public Sub IsAppOpen(strAppName As String)
+Public Sub IsAppOpen(ByVal strAppName As String)
 ' Ref: http://www.ehow.com/how_12111794_determine-excel-already-running-vba.html
 ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164798(v=office.10).aspx
 
@@ -329,7 +329,7 @@ Public Sub ObjectCounts()
  
 End Sub
 
-Public Sub PrettyXML(strPathFileName As String, Optional varDebug As Variant)
+Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As Variant)
 
     On Error GoTo 0
 
@@ -440,7 +440,6 @@ Public Sub TestForCreateFormReportTextFile()
     Dim strFileIn As String
     Dim strFileOut As String
     Dim strIn As String
-    Dim strOut As String
     Dim i As Integer
 
     i = 0
@@ -506,7 +505,6 @@ Public Sub CreateFormReportTextFile()
     Dim strFileIn As String
     Dim strFileOut As String
     Dim strIn As String
-    Dim strOut As String
     Dim i As Integer
 
     fleIn = FreeFile()
@@ -567,7 +565,7 @@ SearchForEnd:
 
 End Sub
 
-Public Function FoundKeywordInLine(strLine As String, Optional varEnd As Variant) As Boolean
+Public Function FoundKeywordInLine(ByVal strLine As String, Optional ByVal varEnd As Variant) As Boolean
 
     On Error GoTo 0
 
@@ -625,7 +623,7 @@ Public Sub SaveTableMacros()
 
 End Sub
 
-Public Function Increment(ByVal oValue As String) As Long
+Public Function IncrementReset() As Long
 ' This function returns an incremented number each time it's called.  Resets after 2 seconds.
     On Error GoTo 0
     Static nIncrement As Long
@@ -639,5 +637,5 @@ Public Function Increment(ByVal oValue As String) As Long
         nIncrement = 1
     End If
     nLastSecond = nNowSecond
-    Increment = nIncrement
+    IncrementReset = nIncrement
 End Function
