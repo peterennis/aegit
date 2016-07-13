@@ -6,7 +6,9 @@ Option Explicit
 ' TM VBA-Inspector - Ref: http://www.team-moeller.de/en/?Add-Ins:TM_VBA-Inspector
 ' RibbonX Visual Designer 2010 - Ref: http://www.andypope.info/vba/ribboneditor_2010.htm
 ' IDBE RibbonCreator 2016 (Office 2016) - Ref: http://www.ribboncreator2016.de/en/?Download
-'
+' V-Tools - Ref: http://www.skrol29.com/us/vtools.php
+' Bill Mosca - Ref: http://www.thatlldoit.com/Pages/utilsaddins.aspx
+
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
 ' The Ribbon and QAT settings - C:\Users\%username%\AppData\Local\Microsoft\Office
@@ -29,15 +31,20 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %085 -
-' %084 -
-' %083 -
+' %090 -
+' %089 -
+' %088 -
+' %087 -
+' %086 -
+' %085 - Automation goal - Ref: https://github.com/blog/1271-how-we-ship-github-for-windows
+' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
+' %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
 ' %082 - aegit drowns Rubberduck, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2018
 ' %081 - Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004
 ' %080 - Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
 ' %071 - Add varDebug for schema output debugging
-' %070 - Create multi field index sample and fix access and lf schema output
+' %070 - Create multi field index sample then fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
@@ -47,7 +54,6 @@ Option Explicit
 '           Ref: http://www.vb-helper.com/tip_internationalization.html
 '           *** Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
 '           *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
-' %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:
@@ -60,7 +66,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20160711 - v182 -
+'20160713 - v185 -
+    ' WONTFIX - %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
+    '           Not needed for aegit but possibly useful for other forms development work
 '20160707 - v180 -
     ' FIXED - %079 - Create tblDummy3 with multi field primary key and multi field index
     ' FIXED - %077 - Fix addPrimaryKey parsing for Lovefield schema

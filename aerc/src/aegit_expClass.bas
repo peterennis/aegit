@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.8.4"
-Private Const aegit_expVERSION_DATE As String = "July 12, 2016"
+Private Const aegit_expVERSION As String = "1.8.5"
+Private Const aegit_expVERSION_DATE As String = "July 13, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3389,7 +3389,6 @@ Private Sub ReadInputWriteOutputSqlSchemaOnlyFile(ByVal strFileIn As String, ByV
 
     Dim fleIn As Integer
     Dim fleOut As Integer
-    Dim strIn As String
     Dim i As Integer
     Dim strSqlA As String
     Dim strSqlB As String
@@ -3533,7 +3532,6 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Const PERIOD As String = "."
     Dim fleIn As Integer
     Dim fleOut As Integer
-    Dim strIn As String
     Dim i As Integer
     Dim strLfCreateTable As String
     Dim strFieldInfoToParse As String
@@ -4847,8 +4845,6 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
     Dim CBTN As Object      ' CommandBarButton
     Set CBTN = Application.CommandBars.FindControls
     Dim fle As Integer
-    Dim lng As Long
-'    Dim strExtension As String
 
     fle = FreeFile()
     Open strOutputFile For Output As #fle
