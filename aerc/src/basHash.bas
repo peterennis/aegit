@@ -31,7 +31,7 @@ Public Sub HashAllModules()
         Content = mdl.Lines(1, mdl.CountOfLines)
 
         '...and hash it
-        Dim HashedBytes    '() As Byte
+        Dim HashedBytes As Variant
         HashedBytes = enc.ComputeHash_2((Content))
 
         'Convert the hashed byte array to a hex string

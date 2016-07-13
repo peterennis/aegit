@@ -48,7 +48,6 @@ Private Const mblnOutputPrinterInfo As Boolean = False
 Private Const mblnUTF16 As Boolean = False
 
 Private mstrToParse As String
-Private mstrTableName As String
 Private Const mTABLE As String = "CREATE TABLE ["
 Private Const mPRIMARYKEY As String = "CREATE UNIQUE INDEX ["       'PrimaryKey] ON ["
 Private Const mINDEX As String = "CREATE INDEX ["
@@ -3544,6 +3543,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strLfFieldName As String
     Dim strThePrimaryKeyField As String
     Dim strTheIndex As String
+    Dim mstrTableName As String
 
     Dim strAppName As String
     strAppName = Application.VBE.ActiveVBProject.Name
