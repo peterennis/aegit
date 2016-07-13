@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.8.3"
-Private Const aegit_expVERSION_DATE As String = "July 11, 2016"
+Private Const aegit_expVERSION As String = "1.8.4"
+Private Const aegit_expVERSION_DATE As String = "July 12, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3543,7 +3543,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strLfFieldName As String
     Dim strThePrimaryKeyField As String
     Dim strTheIndex As String
-    Dim mstrTableName As String
+    Dim strTableName As String
 
     Dim strAppName As String
     strAppName = Application.VBE.ActiveVBProject.Name
@@ -3573,12 +3573,12 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     For i = 0 To UBound(arrSQL)
         If Left$(arrSQL(i), Len(mTABLE)) = mTABLE Then
             ' Get the table name
-            mstrTableName = GetTableName(arrSQL(i))
+            strTableName = GetTableName(arrSQL(i))
             ' Test if the table schema is finished
             If i < UBound(arrSQL) Then
             
             End If
-            strLfCreateTable = "schemaBuilder.createTable('" & mstrTableName & "')."
+            strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
             Debug.Print i & ">", strLfCreateTable
             Print #fleOut, strLfCreateTable
             mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
@@ -3599,7 +3599,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Create the PrimaryKey
             strThePrimaryKeyField = GetPrimaryKey(arrSQL(i))
             If i <> UBound(arrSQL) Then
-                If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then
+                If IsTableSchemaDone(strTableName, arrSQL(i + 1)) Then
                     strThePrimaryKeyField = strThePrimaryKeyField & SEMICOLON
                 Else
                     strThePrimaryKeyField = strThePrimaryKeyField & PERIOD
@@ -3617,7 +3617,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Create the Index
             strTheIndex = GetIndex(arrSQL(i))
             If i <> UBound(arrSQL) Then
-                If IsTableSchemaDone(mstrTableName, arrSQL(i + 1)) Then
+                If IsTableSchemaDone(strTableName, arrSQL(i + 1)) Then
                     strTheIndex = strTheIndex & SEMICOLON
                 Else
                     strTheIndex = strTheIndex & PERIOD
