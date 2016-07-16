@@ -15,50 +15,125 @@ Private mlngStartTime As Long
 Private mlngEndTime As Long
 Private aeLog As aeLogger
 
+Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther As Variant) As String
+    On Error GoTo 0
+    If Not IsMissing(varOther) Then
+        PassFail = "NotUsed"
+        Exit Function
+    End If
+    If blnPassFail Then
+        PassFail = "Pass"
+    Else
+        PassFail = "Fail"
+    End If
+End Function
+
+Public Sub aegitClassTimingTest(Optional ByVal varDebug As Variant, _
+                                Optional ByVal varSrcFldr As Variant, _
+                                Optional ByVal varXmlFldr As Variant, _
+                                Optional ByVal varXmlDataFldr As Variant, _
+                                Optional ByVal varSrcFldrBe As Variant, _
+                                Optional ByVal varXmlFldrBe As Variant, _
+                                Optional ByVal varXmlDataFldrBe As Variant, _
+                                Optional ByVal varBackEndDbOne As Variant, _
+                                Optional ByVal varFrontEndApp As Variant)
+
+    On Error GoTo PROC_ERR
+
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    Dim blnTestOne As Boolean
+
+    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr                  ' THE_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr                     ' THE_XML_FOLDER
+    If Not IsMissing(varXmlDataFldr) Then oDbObjects.XMLDataFolder = varXmlDataFldr         ' THE_XML_DATA_FOLDER
+    If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe            ' THE_BACK_END_SOURCE_FOLDER
+    If Not IsMissing(varXmlFldrBe) Then oDbObjects.XMLFolderBe = varXmlFldrBe               ' THE_BACK_END_XML_FOLDER
+    If Not IsMissing(varXmlDataFldrBe) Then oDbObjects.XMLDataFolderBe = varXmlDataFldrBe   ' THE_XML_DATA_FOLDER
+    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDbOne = varBackEndDbOne        ' THE_BACK_END_DB1
+    If Not IsMissing(varFrontEndApp) Then oDbObjects.FrontEndApp = varFrontEndApp           ' THE_FRONT_END_APP
+
+TestOne:
+    '=============
+    ' TEST 1
+    '=============
+    oDbObjects.ExportQAT = False
+    If IsMissing(varDebug) Then
+        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING IS OFF"
+        aeBeginLogging "DocumentTheDatabase"
+        blnTestOne = oDbObjects.DocumentTheDatabase()
+        aeEndLogging "DocumentTheDatabase"
+    Else
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
+        aeBeginLogging "DocumentTheDatabase", "WithDebugging"
+        blnTestOne = oDbObjects.DocumentTheDatabase("WithDebugging")
+        aeEndLogging "DocumentTheDatabase"
+    End If
+
+RESULTS:
+    Debug.Print "Test 1: DocumentTheDatabase"
+    Debug.Print PassFail(blnTestOne)
+
+PROC_EXIT:
+    Set oDbObjects = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassTimingTest"
+            Stop
+    End Select
+
+End Sub
+
 Public Sub TestLogging()
     On Error GoTo 0
     aeBeginLogging "MyProc", "Some Parameter varOne", "varTwo", "varThree"
     ' more code here
     aePrintLog "Some Status"
     ' more code here
-    aeEndLogging
+    aeEndLogging "MyProc"
 End Sub
 
 Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
         Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
     On Error GoTo 0
     mlngStartTime = timeGetTime()
-    Debug.Print ">aeBeginLogging"; Space$(1); "mlngStartTime=" & mlngStartTime
+    'Debug.Print ">aeBeginLogging"; Space$(1); "mlngStartTime=" & mlngStartTime
     If aeLog.blnNoTrace Then
-        Debug.Print "B1: aeBeginLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        'Debug.Print "B1: aeBeginLogging", "blnNoTrace=" & aeLog.blnNoTrace
         Exit Sub
     End If
     If Not aeLog.blnNoTimer Then
-        Debug.Print "B2: aeBeginLogging", "blnNoTimer=" & aeLog.blnNoTimer
+        'Debug.Print "B2: aeBeginLogging", "blnNoTimer=" & aeLog.blnNoTimer
         Debug.Print Format$(mlngStartTime, "0.00"); Space$(2);
     End If
     Debug.Print Space$(lngIndent * 4); strProcName; Space$(1); "'" & varOne & "'"; Space$(1); "'" & varTwo & "'"; Space$(1); "'" & varThree & "'"
     lngIndent = lngIndent + 1
 End Sub
 
-Private Sub aeEndLogging(Optional ByVal varOne As Variant = vbNullString, _
+Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
         Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
     On Error GoTo 0
     If aeLog.blnNoTrace Then
-        Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        'Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
         Exit Sub
     End If
     lngIndent = lngIndent - 1
     mlngEndTime = timeGetTime()
     If Not aeLog.blnNoEnd Then
         If Not aeLog.blnNoTimer Then
-            Debug.Print ">aeEndLogging"; Space$(1); "mlngEndTime=" & mlngEndTime
+            'Debug.Print ">aeEndLogging"; Space$(1); "mlngEndTime=" & mlngEndTime
             mlngEndTime = timeGetTime()
-            Debug.Print "E2: aeEndLogging", "blnNoTimer=" & aeLog.blnNoTimer
+            'Debug.Print "E2: aeEndLogging", "blnNoTimer=" & aeLog.blnNoTimer
             Debug.Print Format$(mlngEndTime, "0.00"); Space$(2);
         End If
         Debug.Print Space$(lngIndent * 4); "End " & lngIndent; Space$(1); varOne; Space$(1); varTwo; Space$(1); varThree
-        Debug.Print "It took " & (mlngEndTime - mlngStartTime) / 1000 & " seconds to process this procedure"
+        Debug.Print "It took " & (mlngEndTime - mlngStartTime) / 1000 & " seconds to process " & "'" & strProcName & "' procedure"
     End If
 End Sub
 
@@ -69,7 +144,7 @@ Public Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
         Exit Sub
     End If
     If Not aeLog.blnNoTimer Then
-        Debug.Print Format$(Timer, "0.00"); Space$(2);
+        Debug.Print Format$(timeGetTime(), "0.00"); Space$(2);
     End If
     Debug.Print Space$(lngIndent * 4); "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
 End Sub
