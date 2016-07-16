@@ -377,9 +377,7 @@ End Sub
 Private Sub TimerProc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal idEvent As Long, ByVal dwTime As Long)
     'Debug.Print Now(), "TimerProc Start"
     On Error GoTo 0
-    
     ShutDownGDIP
-
     'Debug.Print Now(), "TimerProc End"
 End Sub
 

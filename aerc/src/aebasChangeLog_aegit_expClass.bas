@@ -31,11 +31,17 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %095 -
+' %094 -
+' %093 -
+' %092 -
+' %091 -
 ' %090 -
 ' %089 -
-' %088 -
-' %087 -
-' %086 -
+' %088 - Use timing, Ref: https://bytes.com/topic/access/insights/618175-timegettime-vs-timer
+'           NOTE: Timer() rolls over every 24 hours. timeGetTime() keeps on ticking for up to 49 days before it resets the returned tick count to 0 => Use in Excel chart player?
+' %087 - Allow setup options to be loaded from a file. Consider yaml, json, other
+' %086 - Improve debug ouput, provide trace levels and logging to file. Ref: http://pixcels.nl/debug-and-trace-in-vba/
 ' %085 - Automation goal - Ref: https://github.com/blog/1271-how-we-ship-github-for-windows
 ' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
 ' %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
@@ -54,6 +60,7 @@ Option Explicit
 '           Ref: http://www.vb-helper.com/tip_internationalization.html
 '           *** Ref: http://blog.nkadesign.com/2013/vba-unicode-strings-and-the-windows-api/
 '           *** Ref: http://accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
+'           *** Ref: https://github.com/timabell/msaccess-vcs-integration/blob/master/MSAccess-VCS/VCS_IE_Functions.bas
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:

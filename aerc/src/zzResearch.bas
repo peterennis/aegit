@@ -1,6 +1,84 @@
 Option Compare Database
 Option Explicit
 
+Private Declare Function timeGetTime Lib "winmm.dll" () As Long
+
+Private Type aeLogger
+    blnNoTrace As Boolean
+    blnNoEnd As Boolean
+    blnNoPrint As Boolean
+    blnNoTimer As Boolean
+End Type
+
+'''Private Const iDELAY As Integer = 2
+Private lngIndent As Long
+Private sngTimer As Single
+Private mlngStartTime As Long
+Private mlngEndTime As Long
+Private aeLog As aeLogger
+
+Public Sub TestLogging()
+    On Error GoTo 0
+    aeBeginLogging "MyProc", "'Some Parameter varOne'", "varTwo", "varThree"
+    ' more code here
+    aePrintLog "'Some Status'"
+    ' more code here
+    aeEndLogging
+End Sub
+
+Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    mlngStartTime = timeGetTime()
+    sngTimer = Timer
+    Debug.Print ">aeBeginLogging"; Space$(1); "mlngStartTime=" & mlngStartTime
+    Debug.Print ">aeBeginLogging"; Space$(1); "sngTimer=" & sngTimer
+    If aeLog.blnNoTrace Then
+        Debug.Print "B1: aeBeginLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        Exit Sub
+    End If
+    Debug.Print "sngTimer=" & sngTimer
+    If Not aeLog.blnNoTimer Then
+        Debug.Print "B2: aeBeginLogging", "blnNoTimer=" & aeLog.blnNoTimer
+        Debug.Print Format$(Timer, "0.00"); Space$(2);
+    End If
+    Debug.Print Space$(lngIndent * 4); strProcName; Space$(1); varOne; Space$(1); varTwo; Space$(1); varThree
+    lngIndent = lngIndent + 1
+End Sub
+
+Private Sub aeEndLogging(Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    If aeLog.blnNoTrace Then
+        Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        Exit Sub
+    End If
+    lngIndent = lngIndent - 1
+    If Not aeLog.blnNoEnd Then
+        If Not aeLog.blnNoTimer Then
+            Debug.Print ">aeEndLogging"; Space$(1); "mlngEndTime=" & mlngEndTime
+            Debug.Print "E2: aeEndLogging", "blnNoTimer=" & aeLog.blnNoTimer
+            Debug.Print Format$(Timer, "0.00"); Space$(2);
+        End If
+        Debug.Print Space$(lngIndent * 4); "End " & lngIndent; Space$(1); varOne; Space$(1); varTwo; Space$(1); varThree
+        mlngEndTime = timeGetTime()
+        Debug.Print "It took " & (Timer - sngTimer) & " seconds to process this procedure"
+        Debug.Print "It took " & (mlngEndTime - mlngStartTime) / 1000 & " seconds to process this procedure"
+    End If
+End Sub
+
+Public Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    If aeLog.blnNoTrace Or aeLog.blnNoPrint Then
+        Exit Sub
+    End If
+    If Not aeLog.blnNoTimer Then
+        Debug.Print Format$(Timer, "0.00"); Space$(2);
+    End If
+    Debug.Print Space$(lngIndent * 4); varOne; Space$(1); varTwo; Space$(1); varThree
+End Sub
+
 Public Function IsMacHidden(ByVal strMacroName As String) As Boolean
     On Error GoTo 0
     If IsNull(strMacroName) Or strMacroName = vbNullString Then
