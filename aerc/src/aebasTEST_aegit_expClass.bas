@@ -123,7 +123,6 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
 
     Dim blnTestOne As Boolean
     Dim blnTestTwo As Boolean
-    Dim blnTestThree As Boolean
     Dim blnTestFour As Boolean
     Dim blnTestFive As Boolean
     Dim blnTestSix As Boolean
@@ -181,37 +180,24 @@ TestOne:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-TestThree:
-    '=============
-    ' TEST 3
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "3. NOT USED"
-    Debug.Print "aegitClassTest"
-
-    blnTestThree = False
-
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-
-TestFour:
-    '=============
-    ' TEST 4
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "4. aegitClassTest => GetReferences"
-    Debug.Print "aegitClassTest"
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to GetReferences"
-        Debug.Print , "DEBUGGING IS OFF"
-        blnTestFour = oDbObjects.GetReferences()
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to GetReferences"
-        Debug.Print , "DEBUGGING TURNED ON"
-        blnTestFour = oDbObjects.GetReferences("WithDebugging")
-    End If
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
+'TestFour:
+'    '=============
+'    ' TEST 4
+'    '=============
+'    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+'    Debug.Print "4. aegitClassTest => GetReferences"
+'    Debug.Print "aegitClassTest"
+'    If IsMissing(varDebug) Then
+'        Debug.Print , "varDebug IS missing so no parameter is passed to GetReferences"
+'        Debug.Print , "DEBUGGING IS OFF"
+'        blnTestFour = oDbObjects.GetReferences()
+'    Else
+'        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to GetReferences"
+'        Debug.Print , "DEBUGGING TURNED ON"
+'        blnTestFour = oDbObjects.GetReferences("WithDebugging")
+'    End If
+'    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+'    Debug.Print
     
 TestFive:
     '=============
@@ -270,31 +256,15 @@ TestSeven:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-TestEight:
-    '=============
-    ' TEST 8
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "8. NOT USED"
-    Debug.Print "aegitClassTest"
-
-    blnTestEight = False
-
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-
 RESULTS:
     Debug.Print "Test 1: DocumentTheDatabase"
-    Debug.Print "Test 2: Exists"
-    Debug.Print "Test 3: NOT USED"
     Debug.Print "Test 4: GetReferences"
     Debug.Print "Test 5: DocumentTables"
     Debug.Print "Test 6: DocumentRelations"
     Debug.Print "Test 7: DocumentTablesXML"
-    Debug.Print "Test 8: NOT USED"
     Debug.Print
-    Debug.Print "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8"
-    Debug.Print PassFail(blnTestOne), PassFail(blnTestTwo), PassFail(blnTestThree, "X"), PassFail(blnTestFour), PassFail(blnTestFive), PassFail(blnTestSix), PassFail(blnTestSeven), PassFail(blnTestEight, "X")
+    Debug.Print "Test 1", "Test 4", "Test 5", "Test 6", "Test 7"
+    Debug.Print PassFail(blnTestOne), PassFail(blnTestFour), PassFail(blnTestFive), PassFail(blnTestSix), PassFail(blnTestSeven)
 
 PROC_EXIT:
     Exit Sub
