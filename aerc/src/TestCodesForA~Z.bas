@@ -19,7 +19,8 @@ Private aeLog As aeLogger
 Public Sub aeTestLogging()
     aegitClassLoggingTestA
     aegitClassLoggingTestB
-    
+    aegitClassLoggingTestC
+
 End Sub
 
 Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther As Variant) As String
@@ -51,16 +52,15 @@ TestA:
     If IsMissing(varDebug) Then
         aeBeginLogging "DocumentTheDatabase"
         blnTestA = oDbObjects.DocumentTheDatabase()
-        aeEndLogging "DocumentTheDatabase"
     Else
         aeBeginLogging "DocumentTheDatabase", "WithDebugging"
         blnTestA = oDbObjects.DocumentTheDatabase("WithDebugging")
-        aeEndLogging "DocumentTheDatabase"
     End If
 
 RESULTS:
     Debug.Print "Test A: DocumentTheDatabase"
     Debug.Print PassFail(blnTestA)
+    aeEndLogging "DocumentTheDatabase"
 
 PROC_EXIT:
     Set oDbObjects = Nothing
@@ -91,16 +91,15 @@ TestB:
     If IsMissing(varDebug) Then
         aeBeginLogging "Exists"
         blnTestB = oDbObjects.Exists("Modules", "aegit_expClass")
-        aeEndLogging "Exists"
     Else
         aeBeginLogging "Exists", "WithDebugging"
         blnTestB = oDbObjects.Exists("Modules", "aegit_expClass", "WithDebugging")
-        aeEndLogging "Exists"
     End If
 
 RESULTS:
     Debug.Print "Test B: Exists"
     Debug.Print PassFail(blnTestB)
+    aeEndLogging "Exists"
 
 PROC_EXIT:
     Set oDbObjects = Nothing
@@ -110,6 +109,45 @@ PROC_ERR:
     Select Case Err.Number
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestB"
+            Stop
+    End Select
+
+End Sub
+
+Private Sub aegitClassLoggingTestC(Optional ByVal varDebug As Variant)
+
+    On Error GoTo PROC_ERR
+
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    Dim blnTestC As Boolean
+
+TestC:
+    '=============
+    ' TEST C
+    '=============
+    If IsMissing(varDebug) Then
+        aeBeginLogging "GetReferences"
+        blnTestC = oDbObjects.GetReferences()
+    Else
+        aeBeginLogging "GetReferences", "WithDebugging"
+        blnTestC = oDbObjects.GetReferences("WithDebugging")
+    End If
+
+RESULTS:
+    Debug.Print "Test C: GetReferences"
+    Debug.Print PassFail(blnTestC)
+    aeEndLogging "GetReferences"
+
+PROC_EXIT:
+    Set oDbObjects = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestC"
             Stop
     End Select
 

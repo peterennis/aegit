@@ -180,25 +180,6 @@ TestOne:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-'TestFour:
-'    '=============
-'    ' TEST 4
-'    '=============
-'    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-'    Debug.Print "4. aegitClassTest => GetReferences"
-'    Debug.Print "aegitClassTest"
-'    If IsMissing(varDebug) Then
-'        Debug.Print , "varDebug IS missing so no parameter is passed to GetReferences"
-'        Debug.Print , "DEBUGGING IS OFF"
-'        blnTestFour = oDbObjects.GetReferences()
-'    Else
-'        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to GetReferences"
-'        Debug.Print , "DEBUGGING TURNED ON"
-'        blnTestFour = oDbObjects.GetReferences("WithDebugging")
-'    End If
-'    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-'    Debug.Print
-    
 TestFive:
     '=============
     ' TEST 5
