@@ -20,6 +20,7 @@ Public Sub aeTestLogging()
     aegitClassLoggingTestA
     aegitClassLoggingTestB
     aegitClassLoggingTestC
+    aegitClassLoggingTestD
 
 End Sub
 
@@ -148,6 +149,45 @@ PROC_ERR:
     Select Case Err.Number
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestC"
+            Stop
+    End Select
+
+End Sub
+
+Private Sub aegitClassLoggingTestD(Optional ByVal varDebug As Variant)
+
+    On Error GoTo PROC_ERR
+
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    Dim blnTestD As Boolean
+
+TestD:
+    '=============
+    ' TEST D
+    '=============
+    If IsMissing(varDebug) Then
+        aeBeginLogging "DocumentTables"
+        blnTestD = oDbObjects.DocumentTables()
+    Else
+        aeBeginLogging "DocumentTables", "WithDebugging"
+        blnTestD = oDbObjects.DocumentTables("WithDebugging")
+    End If
+
+RESULTS:
+    Debug.Print "Test D: DocumentTables"
+    Debug.Print PassFail(blnTestD)
+    aeEndLogging "DocumentTables"
+
+PROC_EXIT:
+    Set oDbObjects = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestD"
             Stop
     End Select
 

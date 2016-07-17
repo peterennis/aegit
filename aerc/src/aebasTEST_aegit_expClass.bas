@@ -122,9 +122,6 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     Set oDbObjects = New aegit_expClass
 
     Dim blnTestOne As Boolean
-    Dim blnTestTwo As Boolean
-    Dim blnTestFour As Boolean
-    Dim blnTestFive As Boolean
     Dim blnTestSix As Boolean
     Dim blnTestSeven As Boolean
     Dim blnTestEight As Boolean
@@ -180,25 +177,6 @@ TestOne:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-TestFive:
-    '=============
-    ' TEST 5
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "5. aegitClassTest => DocumentTables"
-    Debug.Print "aegitClassTest"
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTables"
-        Debug.Print , "DEBUGGING IS OFF"
-        blnTestFive = oDbObjects.DocumentTables()
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTables"
-        Debug.Print , "DEBUGGING TURNED ON"
-        blnTestFive = oDbObjects.DocumentTables("WithDebugging")
-    End If
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-    
 TestSix:
     '=============
     ' TEST 6
@@ -239,13 +217,11 @@ TestSeven:
 
 RESULTS:
     Debug.Print "Test 1: DocumentTheDatabase"
-    Debug.Print "Test 4: GetReferences"
-    Debug.Print "Test 5: DocumentTables"
     Debug.Print "Test 6: DocumentRelations"
     Debug.Print "Test 7: DocumentTablesXML"
     Debug.Print
-    Debug.Print "Test 1", "Test 4", "Test 5", "Test 6", "Test 7"
-    Debug.Print PassFail(blnTestOne), PassFail(blnTestFour), PassFail(blnTestFive), PassFail(blnTestSix), PassFail(blnTestSeven)
+    Debug.Print "Test 1", "Test 6", "Test 7"
+    Debug.Print PassFail(blnTestOne), PassFail(blnTestSix), PassFail(blnTestSeven)
 
 PROC_EXIT:
     Exit Sub

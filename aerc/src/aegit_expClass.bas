@@ -4527,6 +4527,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputAllContainerProperties varDebug
         OutputTableProperties varDebug
         aeGetReferences varDebug
+        aeDocumentTables varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -4557,6 +4558,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputAllContainerProperties
         OutputTableProperties
         aeGetReferences
+        aeDocumentTables
     End If
 
     OutputListOfApplicationProperties
