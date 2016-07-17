@@ -35,17 +35,14 @@ Option Explicit
 ' %094 -
 ' %093 -
 ' %092 -
-' %091 -
-' %090 -
-' %089 -
-' %088 - Use timing, Ref: https://bytes.com/topic/access/insights/618175-timegettime-vs-timer
-'           NOTE: Timer() rolls over every 24 hours. timeGetTime() keeps on ticking for up to 49 days before it resets the returned tick count to 0 => Use in Excel chart player?
+' %091 - Update aegitClassTest to be one export, move tests to module TestsCodeForA~Z
+' %090 - Consider using build number
+' %089 - Add timing and test ouptut to a file; identify PC, OS, Office
 ' %087 - Allow setup options to be loaded from a file. Consider yaml, json, other
 ' %086 - Improve debug ouput, provide trace levels and logging to file. Ref: http://pixcels.nl/debug-and-trace-in-vba/
 ' %085 - Automation goal - Ref: https://github.com/blog/1271-how-we-ship-github-for-windows
 ' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
 ' %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
-' %082 - aegit drowns Rubberduck, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2018
 ' %081 - Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004
 ' %080 - Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
@@ -73,6 +70,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160716 - v187 -
+    ' FIXED - %088 - Use timing, Ref: https://bytes.com/topic/access/insights/618175-timegettime-vs-timer
+    '           NOTE: Timer() rolls over every 24 hours. timeGetTime() keeps on ticking for up to 49 days before it resets the returned tick count to 0 => Use in Excel chart player?
+    ' OBSOLETE - %082 - aegit drowns Rubberduck, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2018
 '20160713 - v185 -
     ' WONTFIX - %044 - Generalizing Form Behavior e.g. global error handling ??? Ref: http://www.dymeng.com/techblog/generalizing-form-behavior-refined/
     '           Not needed for aegit but possibly useful for other forms development work

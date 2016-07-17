@@ -165,7 +165,6 @@ TestOne:
     '=============
     ' TEST 1
     '=============
-    oDbObjects.ExportQAT = False
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"
@@ -178,25 +177,6 @@ TestOne:
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
         blnTestOne = oDbObjects.DocumentTheDatabase("WithDebugging")
-    End If
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-
-TestTwo:
-    '=============
-    ' TEST 2
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "2. aegitClassTest => Exists"
-    Debug.Print "aegitClassTest"
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to Exists"
-        Debug.Print , "DEBUGGING IS OFF"
-        blnTestTwo = oDbObjects.Exists("Modules", "aegit_expClass")
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to Exists"
-        Debug.Print , "DEBUGGING TURNED ON"
-        blnTestTwo = oDbObjects.Exists("Modules", "aegit_expClass", "WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print

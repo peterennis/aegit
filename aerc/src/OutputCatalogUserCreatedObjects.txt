@@ -20,7 +20,7 @@
 "Module","basHash","DateCreated"
 "Module","mac_Dummy","DateCreated"
 "Module","mac_HiddenDummy","DateCreated"
-"Module","TestCodeForModuleA","DateCreated"
+"Module","TestCodesForA~Z","DateCreated"
 "Module","TestModuleA","DateCreated"
 "Module","zOther","DateCreated"
 "Module","zRibbons","DateCreated"

@@ -78,7 +78,7 @@ Private Type myExportType               ' Initialize defaults as:
     ExportAll As Boolean                ' True
     ExportCodeAndObjects As Boolean     ' True
     ExportModuleCodeOnly As Boolean     ' True
-    ExportQAT As Boolean                ' True
+    ExportQAT As Boolean                ' False
     ExportCBID As Boolean               ' True
 End Type
 
@@ -184,7 +184,7 @@ Private Sub Class_Initialize()
         .ExportAll = True
         .ExportCodeAndObjects = True
         .ExportModuleCodeOnly = True
-        .ExportQAT = True
+        .ExportQAT = False
         .ExportCBID = True
     End With
 
