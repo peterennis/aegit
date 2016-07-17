@@ -28,15 +28,7 @@ Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther 
     End If
 End Function
 
-Public Sub aegitClassTimingTest(Optional ByVal varDebug As Variant, _
-                                Optional ByVal varSrcFldr As Variant, _
-                                Optional ByVal varXmlFldr As Variant, _
-                                Optional ByVal varXmlDataFldr As Variant, _
-                                Optional ByVal varSrcFldrBe As Variant, _
-                                Optional ByVal varXmlFldrBe As Variant, _
-                                Optional ByVal varXmlDataFldrBe As Variant, _
-                                Optional ByVal varBackEndDbOne As Variant, _
-                                Optional ByVal varFrontEndApp As Variant)
+Public Sub aegitClassTimingTest(Optional ByVal varDebug As Variant)
 
     On Error GoTo PROC_ERR
 
@@ -45,29 +37,16 @@ Public Sub aegitClassTimingTest(Optional ByVal varDebug As Variant, _
 
     Dim blnTestOne As Boolean
 
-    If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr                  ' THE_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr                     ' THE_XML_FOLDER
-    If Not IsMissing(varXmlDataFldr) Then oDbObjects.XMLDataFolder = varXmlDataFldr         ' THE_XML_DATA_FOLDER
-    If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe            ' THE_BACK_END_SOURCE_FOLDER
-    If Not IsMissing(varXmlFldrBe) Then oDbObjects.XMLFolderBe = varXmlFldrBe               ' THE_BACK_END_XML_FOLDER
-    If Not IsMissing(varXmlDataFldrBe) Then oDbObjects.XMLDataFolderBe = varXmlDataFldrBe   ' THE_XML_DATA_FOLDER
-    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDbOne = varBackEndDbOne        ' THE_BACK_END_DB1
-    If Not IsMissing(varFrontEndApp) Then oDbObjects.FrontEndApp = varFrontEndApp           ' THE_FRONT_END_APP
-
 TestOne:
     '=============
     ' TEST 1
     '=============
     oDbObjects.ExportQAT = False
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
         aeBeginLogging "DocumentTheDatabase"
         blnTestOne = oDbObjects.DocumentTheDatabase()
         aeEndLogging "DocumentTheDatabase"
     Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
-        Debug.Print , "DEBUGGING TURNED ON"
         aeBeginLogging "DocumentTheDatabase", "WithDebugging"
         blnTestOne = oDbObjects.DocumentTheDatabase("WithDebugging")
         aeEndLogging "DocumentTheDatabase"
