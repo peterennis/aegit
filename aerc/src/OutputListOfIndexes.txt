@@ -44,6 +44,30 @@
                             Field Name:StateName
 >[State Name] [StateName], 
 ========================================
+<<<[City]>>>
+              Index:[{9FE42E10-50FB-4C47-86D3-1F637474513A}]
+                            Field Name:Country
+>[{9FE42E10-50FB-4C47-86D3-1F637474513A}] [Country], 
+              Index:[ID]
+                            Field Name:ID
+>[ID]         [ID], 
+========================================
+<<<[Country]>>>
+              Index:[CountryKey]
+                            Field Name:Capital
+>[CountryKey] [Capital], 
+              Index:[PrimaryKey]
+                            Field Name:Code
+>[PrimaryKey] [Code], 
+========================================
+<<<[Province]>>>
+              Index:[{A17AD50C-9F50-4524-AA99-265A323F405C}]
+                            Field Name:Country
+>[{A17AD50C-9F50-4524-AA99-265A323F405C}] [Country], 
+              Index:[ID]
+                            Field Name:ID
+>[ID]         [ID], 
+========================================
 <<<[tblBinary]>>>
               Index:[PrimaryKey]
                             Field Name:id

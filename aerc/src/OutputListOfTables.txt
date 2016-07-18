@@ -6,6 +6,8 @@
 [aeItems]     False
 [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger]           False
 [aetlkpStates]              False
+[City]        False
+[Country]     False
 [MSysAccessStorage]         True
 [MSysAccessXML]             True
 [MSysACEs]    True
@@ -21,6 +23,7 @@
 [MSysWSDPCacheComplexColumnMapping]       True
 [MSysWSDPChangeTokenMapping]              True
 [MSysWSDPRelationshipMapping]             True
+[Province]    False
 [tblBinary]   False
 [tblDummy0]   True
 [tblDummy1]   True

@@ -17,10 +17,11 @@ Private mlngEndTime As Long
 Private aeLog As aeLogger
 
 Public Sub aeTestLogging()
-    aegitClassLoggingTestA
-    aegitClassLoggingTestB
-    aegitClassLoggingTestC
-    aegitClassLoggingTestD
+'    aegitClassLoggingTestA
+'    aegitClassLoggingTestB
+'    aegitClassLoggingTestC
+'    aegitClassLoggingTestD
+    aegitClassLoggingTestE
 
 End Sub
 
@@ -46,10 +47,6 @@ Private Sub aegitClassLoggingTestA(Optional ByVal varDebug As Variant)
 
     Dim blnTestA As Boolean
 
-TestA:
-    '=============
-    ' TEST A
-    '=============
     If IsMissing(varDebug) Then
         aeBeginLogging "DocumentTheDatabase"
         blnTestA = oDbObjects.DocumentTheDatabase()
@@ -85,10 +82,6 @@ Private Sub aegitClassLoggingTestB(Optional ByVal varDebug As Variant)
 
     Dim blnTestB As Boolean
 
-TestB:
-    '=============
-    ' TEST B
-    '=============
     If IsMissing(varDebug) Then
         aeBeginLogging "Exists"
         blnTestB = oDbObjects.Exists("Modules", "aegit_expClass")
@@ -124,10 +117,6 @@ Private Sub aegitClassLoggingTestC(Optional ByVal varDebug As Variant)
 
     Dim blnTestC As Boolean
 
-TestC:
-    '=============
-    ' TEST C
-    '=============
     If IsMissing(varDebug) Then
         aeBeginLogging "GetReferences"
         blnTestC = oDbObjects.GetReferences()
@@ -163,10 +152,6 @@ Private Sub aegitClassLoggingTestD(Optional ByVal varDebug As Variant)
 
     Dim blnTestD As Boolean
 
-TestD:
-    '=============
-    ' TEST D
-    '=============
     If IsMissing(varDebug) Then
         aeBeginLogging "DocumentTables"
         blnTestD = oDbObjects.DocumentTables()
@@ -188,6 +173,41 @@ PROC_ERR:
     Select Case Err.Number
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestD"
+            Stop
+    End Select
+
+End Sub
+
+Private Sub aegitClassLoggingTestE(Optional ByVal varDebug As Variant)
+
+    On Error GoTo PROC_ERR
+
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    Dim blnTestE As Boolean
+
+    If IsMissing(varDebug) Then
+        aeBeginLogging "DocumentRelations"
+        blnTestE = oDbObjects.DocumentRelations()
+    Else
+        aeBeginLogging "DocumentRelations", "WithDebugging"
+        blnTestE = oDbObjects.DocumentRelations("WithDebugging")
+    End If
+
+RESULTS:
+    Debug.Print "Test E: DocumentRelations"
+    Debug.Print PassFail(blnTestE)
+    aeEndLogging "DocumentRelations"
+
+PROC_EXIT:
+    Set oDbObjects = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestE"
             Stop
     End Select
 

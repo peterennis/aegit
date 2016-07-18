@@ -114,6 +114,34 @@ schemaBuilder.createTable('aetlkpStates').
     addColumn('StateName', lf.Type.STRING).
     addPrimaryKey(['StateCode']).
     addIndex(['idxState Name'], ['StateName'], false, lf.Order.ASC);
+schemaBuilder.createTable('City').
+    addColumn('ID', lf.Type.INTEGER).
+    addColumn('CityName', lf.Type.STRING).
+    addColumn('Country', lf.Type.STRING).
+    addColumn('Population', lf.Type.STRING).
+    addColumn('Longitude', lf.Type.STRING).
+    addColumn('Latitude', lf.Type.STRING).
+    addIndex(['idx{9FE42E10-50FB-4C47-86D3-1F637474513A}'], ['Latitude'], false, lf.Order.ASC).
+    addPrimaryKey(['ID']);
+schemaBuilder.createTable('Country').
+    addColumn('CountryName', lf.Type.STRING).
+    addColumn('Code', lf.Type.STRING).
+    addColumn('Capital', lf.Type.STRING).
+    addColumn('Province', lf.Type.STRING).
+    addColumn('Area', lf.Type.INTEGER).
+    addColumn('Population', lf.Type.INTEGER).
+    addIndex(['idxCountryKey'], ['Population'], false, lf.Order.ASC).
+    addPrimaryKey(['CountryName']).
+schemaBuilder.createTable('Province').
+    addColumn('ID', lf.Type.INTEGER).
+    addColumn('ProvinceName', lf.Type.STRING).
+    addColumn('Country', lf.Type.STRING).
+    addColumn('Population', lf.Type.INTEGER).
+    addColumn('Area', lf.Type.STRING).
+    addColumn('Capital', lf.Type.STRING).
+    addColumn('CapProv', lf.Type.STRING).
+    addIndex(['idx{A17AD50C-9F50-4524-AA99-265A323F405C}'], ['CapProv'], false, lf.Order.ASC).
+    addPrimaryKey(['ID']);
 schemaBuilder.createTable('tblBinary').
     addColumn('id', lf.Type.INTEGER).
     addColumn('FileName', lf.Type.STRING).

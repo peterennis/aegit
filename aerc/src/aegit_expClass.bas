@@ -3818,7 +3818,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
 
     On Error GoTo PROC_ERR
 
-    Debug.Print "aeDocumentRelations"
+    'Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING IS OFF"
@@ -3827,25 +3827,23 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 
+    strFile = aestrSourceLocation & aeRelTxtFile
     If aegitFrontEndApp Then
         strFile = aestrSourceLocation & aeRelTxtFile
     Else
         strFile = aestrSourceLocationBe & aeRelTxtFile
     End If
 
-    If Dir$(strFile) <> vbNullString Then
-        ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
-        Open strFile For Append As #1
-    Else
-        If Not FileLocked(strFile) Then Open strFile For Append As #1
-    End If
+    'Debug.Print "strFile=" & strFile
+    If Not FileLocked(strFile) Then KillProperly (strFile)
+    Open strFile For Append As #1
 
     For Each rel In CurrentDb.Relations
+        'Debug.Print rel.Name
         If Not (Left$(rel.Name, 4) = "MSys" _
                         Or Left$(rel.Name, 4) = "~TMP" _
                         Or Left$(rel.Name, 3) = "zzz") Then
-            strDocument = strDocument & vbCrLf & "Name: " & rel.Name & vbCrLf
+            strDocument = strDocument & "Name: " & rel.Name & vbCrLf
             strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
             strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
             For Each fld In rel.Fields
@@ -3853,9 +3851,14 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
                 strDocument = strDocument & vbCrLf
             Next fld
         End If
+
+        If Not IsMissing(varDebug) Then
+            Debug.Print strDocument
+        Else
+        End If
+        Print #1, strDocument
+        strDocument = vbNullString
     Next rel
-    If Not IsMissing(varDebug) Then Debug.Print strDocument
-    Print #1, strDocument
     
     aeDocumentRelations = True
 
@@ -4528,6 +4531,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputTableProperties varDebug
         aeGetReferences varDebug
         aeDocumentTables varDebug
+        aeDocumentRelations varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -4559,6 +4563,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputTableProperties
         aeGetReferences
         aeDocumentTables
+        aeDocumentRelations
     End If
 
     OutputListOfApplicationProperties

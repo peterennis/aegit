@@ -1,0 +1,194 @@
+|-- Name >> Country
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 0
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- NameMap >> NameMap
+|-- DefaultView >> 2
+|-- DisplayViewsOnSharePointSite >> 1
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> True
+|-- HideNewField >> False
+|-- BackTint >> 100
+|-- BackShade >> 100
+|-- ThemeFontIndex >> 1
+|-- AlternateBackThemeColorIndex >> 1
+|-- AlternateBackTint >> 100
+|-- AlternateBackShade >> 95
+|-- ReadOnlyWhenDisconnected >> False
+|-- DatasheetGridlinesThemeColorIndex >> 3
+|-- DatasheetForeThemeColorIndex >> 0
+|-- PublishToWeb >> 1
+--------------------------------------------------
+|-- CountryName (Field in Country)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> CountryName
+|------ OrdinalPosition >> 0
+|------ Size >> 255
+|------ SourceField >> CountryName
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 1
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Code (Field in Country)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Code
+|------ OrdinalPosition >> 1
+|------ Size >> 255
+|------ SourceField >> Code
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Capital (Field in Country)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Capital
+|------ OrdinalPosition >> 2
+|------ Size >> 255
+|------ SourceField >> Capital
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Province (Field in Country)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Province
+|------ OrdinalPosition >> 3
+|------ Size >> 255
+|------ SourceField >> Province
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Area (Field in Country)
+|------ Attributes >> 1
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Area
+|------ OrdinalPosition >> 4
+|------ Size >> 4
+|------ SourceField >> Area
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> [area]>=0
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Population (Field in Country)
+|------ Attributes >> 1
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Population
+|------ OrdinalPosition >> 5
+|------ Size >> 4
+|------ SourceField >> Population
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> [Population]>=0
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0

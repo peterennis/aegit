@@ -152,6 +152,46 @@ StateAbbreviation    Text                  2
 StateName            Text                  15                 
 
 
+-----------
+TABLE: City
+-----------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+ID                   AutoNumber            4                  
+CityName             Text                  255                
+Country              Text                  255                
+Population           Text                  255                
+Longitude            Text                  255                
+Latitude             Text                  255                
+
+
+--------------
+TABLE: Country
+--------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+CountryName          Text                  255                
+Code                 Text                  255                
+Capital              Text                  255                
+Province             Text                  255                
+Area                 Long Integer          4                  
+Population           Long Integer          4                  
+
+
+---------------
+TABLE: Province
+---------------
+FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
+=================    ==================    ====    ===========
+ID                   AutoNumber            4                  
+ProvinceName         Text                  255                
+Country              Text                  255                
+Population           Long Integer          4                  
+Area                 Text                  255                
+Capital              Text                  255                
+CapProv              Text                  255                
+
+
 ----------------
 TABLE: tblBinary
 ----------------

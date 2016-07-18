@@ -177,25 +177,6 @@ TestOne:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-TestSix:
-    '=============
-    ' TEST 6
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "6. aegitClassTest => DocumentRelations"
-    Debug.Print "aegitClassTest"
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentRelations"
-        Debug.Print , "DEBUGGING IS OFF"
-        blnTestSix = oDbObjects.DocumentRelations()
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentRelations"
-        Debug.Print , "DEBUGGING TURNED ON"
-        blnTestSix = oDbObjects.DocumentRelations("WithDebugging")
-    End If
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-
 TestSeven:
     '=============
     ' TEST 7

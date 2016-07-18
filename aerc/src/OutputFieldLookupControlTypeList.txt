@@ -104,6 +104,28 @@
               [StateCode]    109          TextBox
               [StateAbbreviation]          109          TextBox
               [StateName]    109          TextBox
+[City]
+              [ID]           109          TextBox
+              [CityName]     109          TextBox
+              [Country]      109          TextBox
+              [Population]   109          TextBox
+              [Longitude]    109          TextBox
+              [Latitude]     109          TextBox
+[Country]
+              [CountryName]  109          TextBox
+              [Code]         109          TextBox
+              [Capital]      109          TextBox
+              [Province]     109          TextBox
+              [Area]         109          TextBox
+              [Population]   109          TextBox
+[Province]
+              [ID]           109          TextBox
+              [ProvinceName]               109          TextBox
+              [Country]      109          TextBox
+              [Population]   109          TextBox
+              [Area]         109          TextBox
+              [Capital]      109          TextBox
+              [CapProv]      109          TextBox
 [tblBinary]
               [id]           109          TextBox
               [FileName]     109          TextBox
@@ -128,9 +150,9 @@
               [RibbonName]   109          TextBox
               [RibbonXML]    109          TextBox
 Count of Check box = 1
-Count of Text box  = 111
+Count of Text box  = 130
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 115
-Count of All Fields = 115
+Count of Display Controls = 134
+Count of All Fields = 134

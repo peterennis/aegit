@@ -1,0 +1,187 @@
+|-- Name >> City
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 0
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- NameMap >> NameMap
+|-- DefaultView >> 2
+|-- DisplayViewsOnSharePointSite >> 1
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> True
+|-- HideNewField >> False
+|-- BackTint >> 100
+|-- BackShade >> 100
+|-- ThemeFontIndex >> -1
+|-- AlternateBackThemeColorIndex >> -1
+|-- AlternateBackTint >> 100
+|-- AlternateBackShade >> 100
+|-- ReadOnlyWhenDisconnected >> False
+|-- DatasheetGridlinesThemeColorIndex >> -1
+|-- DatasheetForeThemeColorIndex >> -1
+--------------------------------------------------
+|-- ID (Field in City)
+|------ Attributes >> 18
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> ID
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> ID
+|------ SourceTable >> City
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnOrder >> 0
+|-- CityName (Field in City)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> CityName
+|------ OrdinalPosition >> 1
+|------ Size >> 255
+|------ SourceField >> CityName
+|------ SourceTable >> City
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Country (Field in City)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Country
+|------ OrdinalPosition >> 2
+|------ Size >> 255
+|------ SourceField >> Country
+|------ SourceTable >> City
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Population (Field in City)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Population
+|------ OrdinalPosition >> 3
+|------ Size >> 255
+|------ SourceField >> Population
+|------ SourceTable >> City
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Longitude (Field in City)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Longitude
+|------ OrdinalPosition >> 4
+|------ Size >> 255
+|------ SourceField >> Longitude
+|------ SourceTable >> City
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Latitude (Field in City)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Latitude
+|------ OrdinalPosition >> 5
+|------ Size >> 255
+|------ SourceField >> Latitude
+|------ SourceTable >> City
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0

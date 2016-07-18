@@ -76,6 +76,39 @@ Currentdb.Execute strSQL
 
 'Local Table
 
+strSQL="CREATE TABLE [City] ([ID] Counter,[CityName] Text (255),[Country] Text (255),[Population] Text (255),[Longitude] Text (255),[Latitude] Text (255) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [{9FE42E10-50FB-4C47-86D3-1F637474513A}] ON [City] ([Latitude])"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [ID] ON [City] ([ID]) WITH PRIMARY DISALLOW NULL"
+Currentdb.Execute strSQL
+
+'Local Table
+
+strSQL="CREATE TABLE [Country] ([CountryName] Text (255),[Code] Text (255),[Capital] Text (255),[Province] Text (255),[Area] Long,[Population] Long )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [CountryKey] ON [Country] ([Population])"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [Country] ([CountryName]) WITH PRIMARY DISALLOW NULL"
+Currentdb.Execute strSQL
+
+'Local Table
+
+strSQL="CREATE TABLE [Province] ([ID] Counter,[ProvinceName] Text (255),[Country] Text (255),[Population] Long,[Area] Text (255),[Capital] Text (255),[CapProv] Text (255) )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [{A17AD50C-9F50-4524-AA99-265A323F405C}] ON [Province] ([CapProv])"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [ID] ON [Province] ([ID]) WITH PRIMARY DISALLOW NULL"
+Currentdb.Execute strSQL
+
+'Local Table
+
 strSQL="CREATE TABLE [tblBinary] ([id] Counter,[FileName] Text (255),[binary] OLEObject )"
 Currentdb.Execute strSQL
 

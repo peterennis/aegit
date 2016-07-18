@@ -291,6 +291,88 @@
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
               GUID          GUID
+>>>City
+              Name          City
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              Orientation    0 
+              OrderByOn     False
+              NameMap       Track name AutoCorrect info is ON!
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex              -1 
+              AlternateBackThemeColorIndex              -1 
+              AlternateBackTint            100 
+              AlternateBackShade           100 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex         -1 
+              DatasheetForeThemeColorIndex              -1 
+>>>Country
+              Name          Country
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              Orientation    0 
+              OrderByOn     False
+              NameMap       Track name AutoCorrect info is ON!
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex               1 
+              AlternateBackThemeColorIndex               1 
+              AlternateBackTint            100 
+              AlternateBackShade           95 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex          3 
+              DatasheetForeThemeColorIndex               0 
+              PublishToWeb   1 
+>>>Province
+              Name          Province
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              Orientation    0 
+              OrderByOn     False
+              NameMap       Track name AutoCorrect info is ON!
+              DefaultView    2 
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex              -1 
+              AlternateBackThemeColorIndex              -1 
+              AlternateBackTint            100 
+              AlternateBackShade           100 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex         -1 
+              DatasheetForeThemeColorIndex              -1 
 >>>qapp_Dummy
               Name          qapp_Dummy
               Owner         admin

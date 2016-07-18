@@ -34,7 +34,7 @@ Option Explicit
 ' %095 -
 ' %094 -
 ' %093 -
-' %092 -
+' %092 - Add relationship example from MONDIAL (no data), Ref: http://www.dbis.informatik.uni-goettingen.de/Mondial/
 ' %091 - Update aegitClassTest to be one export, move tests to module TestsCodeForA~Z
 ' %090 - Consider using build number
 ' %089 - Add timing and test ouptut to a file; identify PC, OS, Office

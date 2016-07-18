@@ -1,0 +1,213 @@
+|-- Name >> Province
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 0
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- NameMap >> NameMap
+|-- DefaultView >> 2
+|-- DisplayViewsOnSharePointSite >> 1
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> True
+|-- HideNewField >> False
+|-- BackTint >> 100
+|-- BackShade >> 100
+|-- ThemeFontIndex >> -1
+|-- AlternateBackThemeColorIndex >> -1
+|-- AlternateBackTint >> 100
+|-- AlternateBackShade >> 100
+|-- ReadOnlyWhenDisconnected >> False
+|-- DatasheetGridlinesThemeColorIndex >> -1
+|-- DatasheetForeThemeColorIndex >> -1
+--------------------------------------------------
+|-- ID (Field in Province)
+|------ Attributes >> 18
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> ID
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> ID
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnOrder >> 0
+|-- ProvinceName (Field in Province)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> ProvinceName
+|------ OrdinalPosition >> 1
+|------ Size >> 255
+|------ SourceField >> ProvinceName
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Country (Field in Province)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Country
+|------ OrdinalPosition >> 2
+|------ Size >> 255
+|------ SourceField >> Country
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Population (Field in Province)
+|------ Attributes >> 1
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Population
+|------ OrdinalPosition >> 3
+|------ Size >> 4
+|------ SourceField >> Population
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Area (Field in Province)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Area
+|------ OrdinalPosition >> 4
+|------ Size >> 255
+|------ SourceField >> Area
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- Capital (Field in Province)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Capital
+|------ OrdinalPosition >> 5
+|------ Size >> 255
+|------ SourceField >> Capital
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- CapProv (Field in Province)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> CapProv
+|------ OrdinalPosition >> 6
+|------ Size >> 255
+|------ SourceField >> CapProv
+|------ SourceTable >> Province
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
