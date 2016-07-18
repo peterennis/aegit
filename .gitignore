@@ -4,6 +4,7 @@ OutputReferencesSetup.txt
 aegit.exe
 archive/
 docfx/
+old/
 
 ###################
 ## Microsoft Excel
