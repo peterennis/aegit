@@ -63,6 +63,7 @@
     "template": [
       "default"
     ],
+    "postProcessors": [],
     "noLangKeyword": false
   }
 }
