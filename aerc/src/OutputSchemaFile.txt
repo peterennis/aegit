@@ -79,7 +79,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [City] ([ID] Counter,[CityName] Text (255),[Country] Text (255),[Population] Text (255),[Longitude] Text (255),[Latitude] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [{9FE42E10-50FB-4C47-86D3-1F637474513A}] ON [City] ([Latitude])"
+strSQL="CREATE INDEX [CountryCity] ON [City] ([Latitude])"
 Currentdb.Execute strSQL
 
 strSQL="CREATE UNIQUE INDEX [ID] ON [City] ([ID]) WITH PRIMARY DISALLOW NULL"
@@ -101,7 +101,10 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [Province] ([ID] Counter,[ProvinceName] Text (255),[Country] Text (255),[Population] Long,[Area] Text (255),[Capital] Text (255),[CapProv] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [{A17AD50C-9F50-4524-AA99-265A323F405C}] ON [Province] ([CapProv])"
+strSQL="CREATE INDEX [CapProv] ON [Province] ([CapProv])"
+Currentdb.Execute strSQL
+
+strSQL="CREATE INDEX [CountryProvince] ON [Province] ([CapProv])"
 Currentdb.Execute strSQL
 
 strSQL="CREATE UNIQUE INDEX [ID] ON [Province] ([ID]) WITH PRIMARY DISALLOW NULL"

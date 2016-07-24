@@ -45,9 +45,9 @@
 >[State Name] [StateName], 
 ========================================
 <<<[City]>>>
-              Index:[{9FE42E10-50FB-4C47-86D3-1F637474513A}]
+              Index:[CountryCity]
                             Field Name:Country
->[{9FE42E10-50FB-4C47-86D3-1F637474513A}] [Country], 
+>[CountryCity]              [Country], 
               Index:[ID]
                             Field Name:ID
 >[ID]         [ID], 
@@ -61,9 +61,12 @@
 >[PrimaryKey] [Code], 
 ========================================
 <<<[Province]>>>
-              Index:[{A17AD50C-9F50-4524-AA99-265A323F405C}]
+              Index:[CapProv]
+                            Field Name:CapProv
+>[CapProv]    [CapProv], 
+              Index:[CountryProvince]
                             Field Name:Country
->[{A17AD50C-9F50-4524-AA99-265A323F405C}] [Country], 
+>[CountryProvince]          [Country], 
               Index:[ID]
                             Field Name:ID
 >[ID]         [ID], 

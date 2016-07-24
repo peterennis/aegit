@@ -373,6 +373,8 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
+              GUID          GUID
+              PublishToWeb   1 
 >>>qapp_Dummy
               Name          qapp_Dummy
               Owner         admin

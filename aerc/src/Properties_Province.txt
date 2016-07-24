@@ -26,6 +26,8 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
+|-- GUID >> GUID
+|-- PublishToWeb >> 1
 --------------------------------------------------
 |-- ID (Field in Province)
 |------ Attributes >> 18
@@ -45,6 +47,12 @@
 |------ AppendOnly >> False
 |------ Expression >> 
 |------ ColumnOrder >> 0
+|------ ColumnWidth >> -1
+|------ ColumnHidden >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- ProvinceName (Field in Province)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033

@@ -11,6 +11,8 @@
   <xsd:element name="Province">
     <xsd:annotation>
       <xsd:appinfo>
+        <od:index index-name="CapProv" index-key="CapProv " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="CountryProvince" index-key="Country " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="ID" index-key="ID " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
