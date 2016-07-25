@@ -3075,15 +3075,15 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
     fle = FreeFile()
     Open strFileOut For Append As #fle
 
-    Dim dbs As DAO.Database
-    Dim rst As DAO.Recordset
+'    Dim dbs As DAO.Database
+'    Dim rst As DAO.Recordset
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     Dim strIndexName As String
     Dim strFieldName As String
 
-    Set dbs = CurrentDb()
-    Set rst = dbs.OpenRecordset(tdfIn.Name, dbOpenTable)
+'    Set dbs = CurrentDb()
+'    Set rst = dbs.OpenRecordset(tdfIn.Name, dbOpenTable)
  
     Debug.Print tdfIn.Name
     Print #fle, "<<<[" & tdfIn.Name & "]>>>"
@@ -3104,8 +3104,8 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
     Next idx
     Debug.Print "========================================"
     Print #fle, "========================================"
-    Set rst = Nothing
-    Set tdfIn = Nothing
+'    Set rst = Nothing
+'    Set tdfIn = Nothing
     Close fle
 
 End Sub

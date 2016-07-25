@@ -31,7 +31,12 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %095 -
+' %100 -
+' %099 -
+' %098 -
+' %097 -
+' %096 -
+' %095 - Set minimum support to 2010 - Ref: http://stackoverflow.com/documentation/vba/3364/conditional-compilation/11558/using-declare-imports-that-work-on-all-versions-of-office#t=201607251720494878701, Rubberduck
 ' %094 - Comment out debug print statements when varDebug is not used
 ' %093 - Create a results folder to hold test output and configure the test system to use it
 ' %090 - Consider using build number

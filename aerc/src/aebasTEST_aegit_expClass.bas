@@ -122,9 +122,6 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     Set oDbObjects = New aegit_expClass
 
     Dim blnTestOne As Boolean
-    Dim blnTestSix As Boolean
-    Dim blnTestSeven As Boolean
-    Dim blnTestEight As Boolean
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr                  ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr                     ' THE_XML_FOLDER
@@ -179,10 +176,7 @@ TestOne:
 
 RESULTS:
     Debug.Print "Test 1: DocumentTheDatabase"
-    Debug.Print "Test 7: DocumentTablesXML"
-    Debug.Print
-    Debug.Print "Test 1", "Test 7"
-    Debug.Print PassFail(blnTestOne), PassFail(blnTestSeven)
+    Debug.Print PassFail(blnTestOne)
 
 PROC_EXIT:
     Exit Sub
