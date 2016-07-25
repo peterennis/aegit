@@ -32,11 +32,8 @@ Option Explicit
 '=============================================================================================================================
 ' Tasks:
 ' %095 -
-' %094 -
-' %093 -
-' %092 - Add relationship example from MONDIAL (no data), Ref: http://www.dbis.informatik.uni-goettingen.de/Mondial/
-'           Ref: http://databases.about.com/od/sampleaccessdatabases/a/Microsoft-Access-Sample-Database-Countries-Cities-And-Provinces.htm
-' %091 - Update aegitClassTest to be one export, move tests to module TestsCodeForA~Z
+' %094 - Comment out debug print statements when varDebug is not used
+' %093 - Create a results folder to hold test output and configure the test system to use it
 ' %090 - Consider using build number
 ' %089 - Add timing and test ouptut to a file; identify PC, OS, Office
 ' %087 - Allow setup options to be loaded from a file. Consider yaml, json, other
@@ -71,6 +68,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160724 - v190 -
+    ' FIXED - %092 - Add relationship example from MONDIAL (no data), Ref: http://www.dbis.informatik.uni-goettingen.de/Mondial/
+    '           Ref: http://databases.about.com/od/sampleaccessdatabases/a/Microsoft-Access-Sample-Database-Countries-Cities-And-Provinces.htm
+    ' FIXED - %091 - Update aegitClassTest to be one export, move tests to module TestsCodeForA~Z
 '20160716 - v187 -
     ' FIXED - %088 - Use timing, Ref: https://bytes.com/topic/access/insights/618175-timegettime-vs-timer
     '           NOTE: Timer() rolls over every 24 hours. timeGetTime() keeps on ticking for up to 49 days before it resets the returned tick count to 0 => Use in Excel chart player?

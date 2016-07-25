@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.8.9"
-Private Const aegit_expVERSION_DATE As String = "July 21, 2016"
+Private Const aegit_expVERSION As String = "1.9.0"
+Private Const aegit_expVERSION_DATE As String = "July 24, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -115,6 +115,10 @@ Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
 Private aestrBackEndDbOne As String
+'
+Private Const DebugPrintInitialize As Boolean = False
+Private Const DebugPrintTerminate As Boolean = True
+'
 'Private aestrPassword As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
@@ -192,36 +196,39 @@ Private Sub Class_Initialize()
     aegitFrontEndApp = True     ' Default is a front end app
 
     Debug.Print "Class_Initialize"
-    Debug.Print , "Default for aegitFrontEndApp = " & aegitFrontEndApp
-    Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
-    Debug.Print , "Default for aegitType.SourceFolderBe = " & aegitType.SourceFolderBe
-    Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
-    Debug.Print , "Default for aegitType.XMLFolderBe = " & aegitType.XMLFolderBe
-    Debug.Print , "Default for aegitType.XMLDataFolder = " & aegitType.XMLDataFolder
-    Debug.Print , "Default for aegitType.XMLDataFolderBe = " & aegitType.XMLDataFolderBe
-    Debug.Print , "--------------------------------------------------"
-    Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
-    Debug.Print , "Default for aegitSourceFolderBe = " & aegitSourceFolderBe
-    Debug.Print , "--------------------------------------------------"
-    Debug.Print , "Default for aestrSourceLocation = " & aestrSourceLocation
-    Debug.Print , "Default for aestrSourceLocationBe = " & aestrSourceLocationBe
-    Debug.Print , "Default for aestrXMLLocation = " & aestrXMLLocation
-    Debug.Print , "Default for aestrXMLLocationBe = " & aestrXMLLocationBe
-    Debug.Print , "Default for aestrXMLDataLocation = " & aestrXMLDataLocation
-    Debug.Print , "Default for aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    Debug.Print , "Default for aestrBackEndDbOne = " & aestrBackEndDbOne
-    Debug.Print , "aeintLTN = " & aeintLTN
-    Debug.Print , "aeintFNLen = " & aeintFNLen
-    Debug.Print , "aeintFTLen = " & aeintFTLen
-    Debug.Print , "aeintFSize = " & aeintFSize
-    '
-    Debug.Print , "aegitExport.ExportAll = " & aegitExport.ExportAll
-    Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
-    Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
-    Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
-    Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
-    defineMyExclusions
-    Debug.Print , "pExclude = " & pExclude
+    If DebugPrintInitialize Then
+        Debug.Print , "Default for aegitFrontEndApp = " & aegitFrontEndApp
+        Debug.Print , "Default for aegitType.SourceFolder = " & aegitType.SourceFolder
+        Debug.Print , "Default for aegitType.SourceFolderBe = " & aegitType.SourceFolderBe
+        Debug.Print , "Default for aegitType.XMLFolder = " & aegitType.XMLFolder
+        Debug.Print , "Default for aegitType.XMLFolderBe = " & aegitType.XMLFolderBe
+        Debug.Print , "Default for aegitType.XMLDataFolder = " & aegitType.XMLDataFolder
+        Debug.Print , "Default for aegitType.XMLDataFolderBe = " & aegitType.XMLDataFolderBe
+        Debug.Print , "--------------------------------------------------"
+        Debug.Print , "Default for aegitSourceFolder = " & aegitSourceFolder
+        Debug.Print , "Default for aegitSourceFolderBe = " & aegitSourceFolderBe
+        Debug.Print , "--------------------------------------------------"
+        Debug.Print , "Default for aestrSourceLocation = " & aestrSourceLocation
+        Debug.Print , "Default for aestrSourceLocationBe = " & aestrSourceLocationBe
+        Debug.Print , "Default for aestrXMLLocation = " & aestrXMLLocation
+        Debug.Print , "Default for aestrXMLLocationBe = " & aestrXMLLocationBe
+        Debug.Print , "Default for aestrXMLDataLocation = " & aestrXMLDataLocation
+        Debug.Print , "Default for aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        Debug.Print , "Default for aestrBackEndDbOne = " & aestrBackEndDbOne
+        Debug.Print , "aeintLTN = " & aeintLTN
+        Debug.Print , "aeintFNLen = " & aeintFNLen
+        Debug.Print , "aeintFTLen = " & aeintFTLen
+        Debug.Print , "aeintFSize = " & aeintFSize
+        '
+        Debug.Print , "aegitExport.ExportAll = " & aegitExport.ExportAll
+        Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
+        Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
+        Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
+        Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
+        defineMyExclusions
+        Debug.Print , "pExclude = " & pExclude
+    End If
+
     If aeExists("Forms", "_frmPersist") Then
         If Not IsLoaded("_frmPersist") Then
             DoCmd.OpenForm "_frmPersist", acNormal, , , acFormReadOnly, acHidden
@@ -429,9 +436,9 @@ End Property
 Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        Debug.Print "Get DocumentTheDatabase"
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get DocumentTheDatabase"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
+        'Debug.Print , "DEBUGGING IS OFF"
         DocumentTheDatabase = aeDocumentTheDatabase()
     Else
         Debug.Print "Get DocumentTheDatabase"
@@ -446,9 +453,9 @@ Public Property Get Exists(ByVal strAccObjType As String, _
                         Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        Debug.Print "Get Exists"
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get Exists"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
+        'Debug.Print , "DEBUGGING IS OFF"
         Exists = aeExists(strAccObjType, strAccObjName)
     Else
         Debug.Print "Get Exists"
@@ -461,9 +468,9 @@ End Property
 Public Property Get GetReferences(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        Debug.Print "Get GetReferences"
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get GetReferences"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+        'Debug.Print , "DEBUGGING IS OFF"
         GetReferences = aeGetReferences()
     Else
         Debug.Print "Get GetReferences"
@@ -476,9 +483,9 @@ End Property
 Public Property Get DocumentRelations(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        Debug.Print "Get DocumentRelations"
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get DocumentRelations"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
+        'Debug.Print , "DEBUGGING IS OFF"
         DocumentRelations = aeDocumentRelations()
     Else
         Debug.Print "Get DocumentRelations"
@@ -491,9 +498,9 @@ End Property
 Public Property Get DocumentTables(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        Debug.Print "Get DocumentTables"
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get DocumentTables"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
+        'Debug.Print , "DEBUGGING IS OFF"
         DocumentTables = aeDocumentTables()
     Else
         Debug.Print "Get DocumentTables"
@@ -506,9 +513,9 @@ End Property
 Public Property Get DocumentTablesXML(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        Debug.Print "Get DocumentTablesXML"
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get DocumentTablesXML"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
+        'Debug.Print , "DEBUGGING IS OFF"
         DocumentTablesXML = aeDocumentTablesXML()
     Else
         Debug.Print "Get DocumentTablesXML"
@@ -563,9 +570,9 @@ Public Property Get ExcludeFiles(Optional ByVal varDebug As Variant) As Boolean
     ExcludeFiles = pExclude
     Debug.Print , "ExcludeFiles = " & pExclude
     If IsMissing(varDebug) Then
-        Debug.Print "Get ExcludeFiles"
-        Debug.Print , "varDebug IS missing so no parameter is passed to ExcludeFiles"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "Get ExcludeFiles"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to ExcludeFiles"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print "Get ExcludeFiles"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to ExcludeFiles"
@@ -763,7 +770,7 @@ Private Function IsLoaded(ByVal strFormName As String) As Boolean
  ' Returns True if the specified form is open in Form view or Datasheet view.
    
     On Error GoTo 0
-    Debug.Print "IsLoaded"
+    'Debug.Print "IsLoaded"
     Const conObjStateClosed As Integer = 0
     Const conDesignView As Integer = 0
     
@@ -784,9 +791,9 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
     Dim fld As DAO.Field
 
     If IsMissing(varDebug) Then
-        Debug.Print "OutputTableProperties"
-        Debug.Print , "varDebug IS missing so no parameter is passed to OutputTableProperties"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "OutputTableProperties"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to OutputTableProperties"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print "OutputTableProperties"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputTableProperties"
@@ -1815,9 +1822,9 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     Dim fle As Integer
 
     If IsMissing(varDebug) Then
-        Debug.Print "OutputListOfAccessApplicationOptions"
-        Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print "OutputListOfAccessApplicationOptions"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfAccessApplicationOptions"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print "OutputListOfAccessApplicationOptions"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfAccessApplicationOptions"
@@ -2272,8 +2279,8 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo PROC_ERR
 
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING TURNED ON"
@@ -2877,8 +2884,8 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
 
     Debug.Print "aeDocumentTables"
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
         Debug.Print , "DEBUGGING TURNED ON"
@@ -2984,8 +2991,8 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     intFailCount = 0
     Debug.Print "aeDocumentTablesXML"
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
         Debug.Print , "DEBUGGING TURNED ON"
@@ -3820,8 +3827,8 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
 
     'Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING TURNED ON"
@@ -4186,8 +4193,8 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
     Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
 
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheContainer"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheContainer"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheContainer"
         Debug.Print , "DEBUGGING TURNED ON"
@@ -4398,8 +4405,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     On Error GoTo PROC_ERR
 
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
+        'Debug.Print , "DEBUGGING IS OFF"
         VerifySetup
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
@@ -4532,6 +4539,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         aeGetReferences varDebug
         aeDocumentTables varDebug
         aeDocumentRelations varDebug
+        aeDocumentTablesXML varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -4564,6 +4572,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         aeGetReferences
         aeDocumentTables
         aeDocumentRelations
+        aeDocumentTablesXML
     End If
 
     OutputListOfApplicationProperties
@@ -4622,8 +4631,8 @@ Private Function aeExists(ByVal strAccObjType As String, _
     On Error GoTo PROC_ERR
 
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
         Debug.Print , "DEBUGGING TURNED ON"
@@ -5002,8 +5011,8 @@ Private Function OutputListOfContainers(ByVal strTheFileName As String, Optional
 
     Debug.Print "OutputListOfContainers"
     If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
-        Debug.Print , "DEBUGGING IS OFF"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to OutputListOfContainers"
+        'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to OutputListOfContainers"
         Debug.Print , "DEBUGGING TURNED ON"

@@ -21,7 +21,8 @@ Public Sub aeTestLogging()
 '    aegitClassLoggingTestB
 '    aegitClassLoggingTestC
 '    aegitClassLoggingTestD
-    aegitClassLoggingTestE
+'    aegitClassLoggingTestE
+    aegitClassLoggingTestF
 
 End Sub
 
@@ -208,6 +209,49 @@ PROC_ERR:
     Select Case Err.Number
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestE"
+            Stop
+    End Select
+
+End Sub
+
+Private Sub aegitClassLoggingTestF(Optional ByVal varDebug As Variant)
+
+    On Error GoTo PROC_ERR
+
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    Dim blnTestF As Boolean
+
+    If Application.VBE.ActiveVBProject.Name = "aegit" Then
+        Dim myArray() As Variant
+        myArray = Array("aeItems", "aetlkpStates", "USysRibbons")
+        oDbObjects.TablesExportToXML = myArray()
+        oDbObjects.ExcludeFiles = False
+        Debug.Print , "oDbObjects.ExcludeFiles = " & oDbObjects.ExcludeFiles
+    End If
+
+    If IsMissing(varDebug) Then
+        aeBeginLogging "DocumentRelations"
+        blnTestF = oDbObjects.DocumentTablesXML()
+    Else
+        aeBeginLogging "DocumentRelations", "WithDebugging"
+        blnTestF = oDbObjects.DocumentTablesXML("WithDebugging")
+    End If
+
+RESULTS:
+    Debug.Print "Test F: DocumentTablesXML"
+    Debug.Print PassFail(blnTestF)
+    aeEndLogging "DocumentTablesXML"
+
+PROC_EXIT:
+    Set oDbObjects = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestF"
             Stop
     End Select
 

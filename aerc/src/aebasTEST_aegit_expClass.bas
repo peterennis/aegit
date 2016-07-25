@@ -177,32 +177,12 @@ TestOne:
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
-TestSeven:
-    '=============
-    ' TEST 7
-    '=============
-    Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    Debug.Print "7. aegitClassTestXML => DocumentTablesXML"
-    Debug.Print "aegitClassTestXML"
-    If IsMissing(varDebug) Then
-        Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
-        Debug.Print , "DEBUGGING IS OFF"
-        blnTestSeven = oDbObjects.DocumentTablesXML()
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
-        Debug.Print , "DEBUGGING TURNED ON"
-        blnTestSeven = oDbObjects.DocumentTablesXML("WithDebugging")
-    End If
-    Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    Debug.Print
-
 RESULTS:
     Debug.Print "Test 1: DocumentTheDatabase"
-    Debug.Print "Test 6: DocumentRelations"
     Debug.Print "Test 7: DocumentTablesXML"
     Debug.Print
-    Debug.Print "Test 1", "Test 6", "Test 7"
-    Debug.Print PassFail(blnTestOne), PassFail(blnTestSix), PassFail(blnTestSeven)
+    Debug.Print "Test 1", "Test 7"
+    Debug.Print PassFail(blnTestOne), PassFail(blnTestSeven)
 
 PROC_EXIT:
     Exit Sub
