@@ -1,6 +1,7 @@
 OutputRelationsSetup.txt
 OutputTblSetupForTables.txt
 OutputReferencesSetup.txt
+OutputSchemaFile.txt
 aegit.exe
 archive/
 docfx/
