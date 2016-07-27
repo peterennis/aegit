@@ -35,7 +35,8 @@ Public Sub HashAllModules()
         HashedBytes = enc.ComputeHash_2((Content))
 
         'Convert the hashed byte array to a hex string
-        Dim Pos As Integer, HexedHash As String
+        Dim Pos As Integer
+        Dim HexedHash As String
         HexedHash = vbNullString
         For Pos = 1 To LenB((HashedBytes))
             HexedHash = HexedHash & LCase$(Right$("0" & Hex$(AscB(MidB$(HashedBytes, Pos, 1))), 2))

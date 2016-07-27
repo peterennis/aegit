@@ -270,6 +270,7 @@ End Sub
 
 Public Property Get SourceFolder() As String
     On Error GoTo 0
+    Debug.Print "Property Get SourceFolder"
     SourceFolder = aegitSourceFolder
 End Property
 
@@ -277,7 +278,15 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
 ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
 ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
     On Error GoTo 0
+    Debug.Print "Property Let SourceFolder"
     aegitSourceFolder = strSourceFolder
+End Property
+
+Public Property Get SchemaFile(Optional ByVal varDebug As Variant) As Boolean
+    On Error GoTo 0
+    Debug.Print "Property Get SchemaFile"
+    OutputTheSchemaFile
+    SchemaFile = True
 End Property
 
 Public Property Get FrontEndApp() As Boolean
@@ -3075,16 +3084,11 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
     fle = FreeFile()
     Open strFileOut For Append As #fle
 
-'    Dim dbs As DAO.Database
-'    Dim rst As DAO.Recordset
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     Dim strIndexName As String
     Dim strFieldName As String
 
-'    Set dbs = CurrentDb()
-'    Set rst = dbs.OpenRecordset(tdfIn.Name, dbOpenTable)
- 
     Debug.Print tdfIn.Name
     Print #fle, "<<<[" & tdfIn.Name & "]>>>"
     ' List values for each index
@@ -3104,8 +3108,6 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
     Next idx
     Debug.Print "========================================"
     Print #fle, "========================================"
-'    Set rst = Nothing
-'    Set tdfIn = Nothing
     Close fle
 
 End Sub

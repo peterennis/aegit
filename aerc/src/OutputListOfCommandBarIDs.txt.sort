@@ -6,7 +6,6 @@
 &Legacy Keyboard Support: 30016 - &Query
 : 109 - Print Pre&view
 : 11253 - &Report View
-: 11305 - &Design Tasks Pane
 : 12329 - Datas&heet View
 : 13157 - La&yout View
 : 14782 - &Close
@@ -1239,6 +1238,7 @@ Print Preview: 5802 - &Setup
 Print Preview: 639 - &Two Pages
 Print Preview: 984 - Microsoft Access &Help
 Proofing: 5746 - Tas&k Pane
+Property Sheet: 11305 - &Design Tasks Pane
 Query Datasheet: 108 - &Format Painter
 Query Datasheet: 109 - Print Pre&view
 Query Datasheet: 128 - Can't &Undo

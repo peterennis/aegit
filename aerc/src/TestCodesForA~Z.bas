@@ -22,7 +22,8 @@ Public Sub aeTestLogging()
 '    aegitClassLoggingTestC
 '    aegitClassLoggingTestD
 '    aegitClassLoggingTestE
-    aegitClassLoggingTestF
+'>>>    aegitClassLoggingTestF
+    aegitClassLoggingTestG
 
 End Sub
 
@@ -252,6 +253,41 @@ PROC_ERR:
     Select Case Err.Number
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestF"
+            Stop
+    End Select
+
+End Sub
+
+Private Sub aegitClassLoggingTestG(Optional ByVal varDebug As Variant)
+
+    On Error GoTo PROC_ERR
+
+    Dim oDbObjects As aegit_expClass
+    Set oDbObjects = New aegit_expClass
+
+    Dim blnTestG As Boolean
+
+    If IsMissing(varDebug) Then
+        aeBeginLogging "SchemaFile"
+        blnTestG = oDbObjects.SchemaFile
+    Else
+        aeBeginLogging "SchemaFile", "WithDebugging"
+        blnTestG = oDbObjects.SchemaFile("WithDebugging")
+    End If
+
+RESULTS:
+    Debug.Print "Test G: SchemaFile"
+    Debug.Print PassFail(blnTestG)
+    aeEndLogging "SchemaFile"
+
+PROC_EXIT:
+    Set oDbObjects = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegitClassLoggingTestG"
             Stop
     End Select
 
