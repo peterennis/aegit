@@ -34,7 +34,7 @@ Option Explicit
 ' %100 -
 ' %099 -
 ' %098 -
-' %097 -
+' %097 - Pass the actual value "varDebug" for debugging in all cases so potentially strange variant parameters will not be transferred
 ' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
 ' %095 - Set minimum support to 2010 - Ref: http://stackoverflow.com/documentation/vba/3364/conditional-compilation/11558/using-declare-imports-that-work-on-all-versions-of-office#t=201607251720494878701, Rubberduck
 ' %094 - Comment out debug print statements when varDebug is not used

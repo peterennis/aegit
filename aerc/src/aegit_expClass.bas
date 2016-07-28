@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.9.0"
-Private Const aegit_expVERSION_DATE As String = "July 24, 2016"
+Private Const aegit_expVERSION_DATE As String = "July 27, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -285,7 +285,14 @@ End Property
 Public Property Get SchemaFile(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     Debug.Print "Property Get SchemaFile"
-    OutputTheSchemaFile
+    If IsMissing(varDebug) Then
+        OutputTheSchemaFile
+    Else
+        Debug.Print "Get SchemaFile"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to SchemaFile"
+        Debug.Print , "DEBUGGING TURNED ON"
+        OutputTheSchemaFile "varDebug"
+    End If
     SchemaFile = True
 End Property
 
@@ -3112,7 +3119,7 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
 
 End Sub
 
-Private Sub OutputTheSchemaFile() ' CreateDbScript()
+Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
     Debug.Print "OutputTheSchemaFile"
@@ -3254,7 +3261,7 @@ Private Sub OutputTheSchemaFile() ' CreateDbScript()
                 strSQL = "strSQL=strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
                 f.WriteLine strSQL
             End If
-            'Debug.Print strSQL
+            If Not IsMissing(varDebug) Then Debug.Print strSQL
             'Stop
 
             ' Indexes

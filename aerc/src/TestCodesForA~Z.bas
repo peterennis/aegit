@@ -23,7 +23,7 @@ Public Sub aeTestLogging()
 '    aegitClassLoggingTestD
 '    aegitClassLoggingTestE
 '>>>    aegitClassLoggingTestF
-    aegitClassLoggingTestG
+    aegitClassLoggingTestG "WithDebugging"
 
 End Sub
 
