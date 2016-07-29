@@ -1,4 +1,6 @@
 @ECHO OFF
+:: Ref https://dotnet.github.io/docfx/tutorial/walkthrough/walkthrough_create_a_docfx_project.html
+
 set root_folder=c:\ae\aegit\
 set project_folder=aefx
 
@@ -10,7 +12,14 @@ cd
 pause
 .\docfx\docfx.exe init --quiet --output %project_folder%
 
-.\docfx\docfx.exe serve %root_folder%\_site
+cd %project_folder%
+cd
+
+:: Build the site
+..\docfx\docfx.exe docfx.json
+
+:: Serve the site
+..\docfx\docfx.exe serve .\_site
 
 
 
