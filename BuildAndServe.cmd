@@ -10,6 +10,10 @@ cd
 pause
 .\docfx\docfx.exe init --quiet --output %project_folder%
 
+.\docfx\docfx.exe serve %root_folder%\_site
+
+
+
 echo Press any key to exit . . .
 pause > nul
 
