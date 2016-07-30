@@ -3,6 +3,7 @@
 
 set root_folder=c:\ae\aegit\
 set project_folder=aefx
+set theme=C:\ae\aegit\themes\ae\
 
 :: Change to the root folder
 cd %root_folder%
@@ -17,6 +18,10 @@ cd
 
 :: Build the site
 ..\docfx\docfx.exe docfx.json
+
+:: Copy the assets
+copy %theme%images\favicon.ico .\_site
+copy %theme%images\logo.svg .\_site
 
 :: Serve the site
 ..\docfx\docfx.exe serve .\_site
