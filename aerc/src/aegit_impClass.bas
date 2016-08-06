@@ -42,14 +42,6 @@ Private Type mySetupType
     NotUsed As Boolean
 End Type
 
-' Current pointer to the array element of the call stack
-Private mintStackPointer As Integer
-' Array of procedure names in the call stack
-Private mastrCallStack() As String
-' The number of elements to increase the array
-Private Const mcintIncrementStackSize As Integer = 10
-'Private mfInErrorHandler As Boolean
-
 Private aegitType As mySetupType
 Private aegitImportFolder As String
 Private aestrImportLocation As String
@@ -468,9 +460,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
     Dim prop As DAO.Property
     Dim strFile As String
 
-    ' Use a call stack and global error handler
-    If mblnHandleErrors Then On Error GoTo PROC_ERR
-'    PushCallStack "aeDocumentRelations"
+    On Error GoTo PROC_ERR
 
     Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
@@ -529,10 +519,6 @@ End Function
 Private Sub KillProperly(ByVal Killfile As String)
 ' Ref: http://word.mvps.org/faqs/macrosvba/DeleteFiles.htm
 
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "KillProperly"
-
     On Error GoTo PROC_ERR
 
 TryAgain:
@@ -542,7 +528,6 @@ TryAgain:
     End If
 
 PROC_EXIT:
-    'PopCallStack
     Exit Sub
 
 PROC_ERR:
@@ -551,7 +536,6 @@ PROC_ERR:
         Resume TryAgain
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_impClass", vbCritical, aeAPP_NAME
-    'GlobalErrHandler
     Resume PROC_EXIT
 
 End Sub
@@ -560,10 +544,6 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 ' Ref: http://accessexperts.com/blog/2012/03/06/checking-if-files-are-locked/
 
     'Debug.Print "IsFileLocked Entry PathFileName=" & PathFileName
-
-    ' Use a call stack and global error handler
-    'If mblnHandleErrors Then On Error GoTo PROC_ERR
-    'PushCallStack "IsFileLocked"
 
     On Error GoTo PROC_ERR
 
@@ -582,7 +562,6 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
 
 PROC_EXIT:
     On Error GoTo 0
-    'PopCallStack
     Exit Function
 
 PROC_ERR:
@@ -595,12 +574,10 @@ PROC_ERR:
                     vbCrLf & "IsFileLocked Entry PathFileName=" & PathFileName, vbCritical, "ERROR=9"
             IsFileLocked = False
             'Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
-            'GlobalErrHandler
             Resume PROC_EXIT
         Case Else
             MsgBox "C:Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass", vbCritical, aeAPP_NAME
             'Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure IsFileLocked of Class aegit_impClass"
-            'GlobalErrHandler
             Resume PROC_EXIT
     End Select
     Resume
@@ -631,9 +608,7 @@ Private Function BuildTheDirectory(ByVal fso As Object, _
 
     Dim objImportFolder As Object
 
-    ' Use a call stack and global error handler
-    If mblnHandleErrors Then On Error GoTo PROC_ERR
-'    PushCallStack "BuildTheDirectory"
+    On Error GoTo PROC_ERR
 
     Debug.Print "BuildTheDirectory"
     If IsMissing(varDebug) Then
@@ -709,9 +684,7 @@ Private Function aeReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal va
     Dim strFileBaseName As String
     Dim bln As Boolean
 
-    ' Use a call stack and global error handler
-    If mblnHandleErrors Then On Error GoTo PROC_ERR
-'    PushCallStack "aeReadDocDatabase"
+    On Error GoTo PROC_ERR
 
     Debug.Print "aeReadDocDatabase"
     If IsMissing(varDebug) Then
@@ -858,9 +831,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
     Dim obj As Variant
     Dim blnDebug As Boolean
     
-    ' Use a call stack and global error handler
-    If mblnHandleErrors Then On Error GoTo PROC_ERR
-'    PushCallStack "aeExists"
+    On Error GoTo PROC_ERR
 
     Debug.Print "aeExists"
     If IsMissing(varDebug) Then
@@ -988,109 +959,6 @@ End Function
 ' Global Error Handler Routines
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
 '==================================================
-
-'Private Sub ResetWorkspace()
-'    Dim intCounter As Integer
-'
-'    On Error Resume Next
-'
-'    Application.MenuBar = vbNullString
-'    DoCmd.SetWarnings False
-'    DoCmd.Hourglass False
-'    DoCmd.Echo True
-'
-'    ' Clean up workspace by closing open forms and reports
-'    For intCounter = 0 To Forms.Count - 1
-'        DoCmd.Close acForm, Forms(intCounter).Name
-'    Next intCounter
-'
-'    For intCounter = 0 To Reports.Count - 1
-'        DoCmd.Close acReport, Reports(intCounter).Name
-'    Next intCounter
-'End Sub
-
-'Private Sub GlobalErrHandler()
-'' Main procedure to handle errors that occur.
-'
-'    On Error GoTo 0
-'    Dim strError As String
-'    Dim lngError As Long
-'    Dim intErl As Integer
-'    Dim strMsg As String
-'
-'    ' Variables to preserve error information
-'    strError = Err.Description
-'    lngError = Err.Number
-'    intErl = Erl
-'
-'    ' Reset workspace, close open objects
-'    ResetWorkspace
-'
-'    ' Prompt the user with information on the error:
-'    strMsg = "Procedure: " & CurrentProcName() & vbCrLf & _
-'             "Line: " & Erl & vbCrLf & _
-'             "Error: (" & lngError & ")" & strError & vbCrLf & _
-'             "Application Quit is turned OFF !!!"
-'    MsgBox strMsg, vbCritical, "GlobalErrHandler"
-'
-'    ' Write error to file:
-'    WriteErrorToFile intErl, lngError, CurrentProcName(), strError
-'
-'    ' Exit Access without saving any changes
-'    ' (you might want to change this to save all changes)
-'
-'    'Application.Quit acExit
-'End Sub
-
-'Private Function CurrentProcName() As String
-'    On Error GoTo 0
-'    CurrentProcName = mastrCallStack(mintStackPointer - 1)
-'End Function
-
-'Private Sub PushCallStack(ByVal strProcName As String)
-'' Add the current procedure name to the Call Stack.
-'' Should be called whenever a procedure is called
-'
-'    On Error Resume Next
-'
-'    ' Verify the stack array can handle the current array element
-'    If mintStackPointer > UBound(mastrCallStack) Then
-'    ' If array has not been defined, initialize the error handler
-'        If Err.Number = 9 Then
-'            ErrorHandlerInit
-'        Else
-'            ' Increase the size of the array to not go out of bounds
-'            ReDim Preserve mastrCallStack(UBound(mastrCallStack) + _
-'            mcintIncrementStackSize)
-'        End If
-'    End If
-'
-'    On Error GoTo 0
-'
-'    mastrCallStack(mintStackPointer) = strProcName
-'
-'    ' Increment pointer to next element
-'    mintStackPointer = mintStackPointer + 1
-'End Sub
-
-'Private Sub ErrorHandlerInit()
-'    On Error GoTo 0
-'    mfInErrorHandler = False
-'    mintStackPointer = 1
-'    ReDim mastrCallStack(1 To mcintIncrementStackSize)
-'End Sub
-
-'Private Sub PopCallStack()
-'' Remove a procedure name from the call stack
-'
-'    On Error GoTo 0
-'    If mintStackPointer <= UBound(mastrCallStack) Then
-'        mastrCallStack(mintStackPointer) = vbNullString
-'    End If
-'
-'    ' Reset pointer to previous element
-'    mintStackPointer = mintStackPointer - 1
-'End Sub
 
 Private Sub WriteErrorToFile(ByVal intTheErl As Integer, ByVal lngTheErrorNum As Long, _
                 ByVal strCurrentProcName As String, ByVal strErrorDescription As String)
