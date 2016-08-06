@@ -97,7 +97,7 @@ Private Function GetIPAddress(ByVal pstrHost As String) As String
             GetIPAddress = strIPAddress
         End If
 
-        Call WSACleanup
+        WSACleanup
     Else
         Err.Raise vbObjectError, , "Could not start winsock service"
     End If

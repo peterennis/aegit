@@ -48,7 +48,7 @@ Private mintStackPointer As Integer
 Private mastrCallStack() As String
 ' The number of elements to increase the array
 Private Const mcintIncrementStackSize As Integer = 10
-Private mfInErrorHandler As Boolean
+'Private mfInErrorHandler As Boolean
 
 Private aegitType As mySetupType
 Private aegitImportFolder As String
@@ -271,7 +271,7 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 
     ' Use a call stack and global error handler
     If mblnHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeGetReferences"
+'    PushCallStack "aeGetReferences"
 
     Debug.Print "aeGetReferences"
     If IsMissing(varDebug) Then
@@ -352,14 +352,12 @@ Private Function aeGetReferences(Optional ByVal varDebug As Variant) As Boolean
 PROC_EXIT:
     Set vbaProj = Nothing
     Close 1
-    PopCallStack
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeGetReferences of Class aegit_impClass"
     aeGetReferences = False
-    GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -472,7 +470,7 @@ Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Bool
 
     ' Use a call stack and global error handler
     If mblnHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeDocumentRelations"
+'    PushCallStack "aeDocumentRelations"
 
     Debug.Print "aeDocumentRelations"
     If IsMissing(varDebug) Then
@@ -518,14 +516,12 @@ PROC_EXIT:
     Set fld = Nothing
     Set rel = Nothing
     Close 1
-    PopCallStack
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_impClass"
     aeDocumentRelations = False
-    GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -637,7 +633,7 @@ Private Function BuildTheDirectory(ByVal fso As Object, _
 
     ' Use a call stack and global error handler
     If mblnHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "BuildTheDirectory"
+'    PushCallStack "BuildTheDirectory"
 
     Debug.Print "BuildTheDirectory"
     If IsMissing(varDebug) Then
@@ -678,14 +674,12 @@ Private Function BuildTheDirectory(ByVal fso As Object, _
 
 PROC_EXIT:
     Set objImportFolder = Nothing
-    PopCallStack
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure BuildTheDirectory of Class aegit_impClass"
     BuildTheDirectory = False
-    GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -717,7 +711,7 @@ Private Function aeReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal va
 
     ' Use a call stack and global error handler
     If mblnHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeReadDocDatabase"
+'    PushCallStack "aeReadDocDatabase"
 
     Debug.Print "aeReadDocDatabase"
     If IsMissing(varDebug) Then
@@ -834,14 +828,12 @@ PROC_EXIT:
     Set fso = Nothing
     Set wsh = Nothing
     aeReadDocDatabase = True
-    PopCallStack
     Exit Function
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass", vbCritical, aeAPP_NAME
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeReadDocDatabase of Class aegit_impClass"
     aeReadDocDatabase = False
-    GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -868,7 +860,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
     
     ' Use a call stack and global error handler
     If mblnHandleErrors Then On Error GoTo PROC_ERR
-    PushCallStack "aeExists"
+'    PushCallStack "aeExists"
 
     Debug.Print "aeExists"
     If IsMissing(varDebug) Then
@@ -932,7 +924,6 @@ Private Function aeExists(ByVal strAccObjType As String, _
 
 PROC_EXIT:
     Set obj = Nothing
-    PopCallStack
     Exit Function
 
 PROC_ERR:
@@ -944,7 +935,6 @@ PROC_ERR:
         If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeExists of Class aegit_impClass"
         aeExists = False
     End If
-    GlobalErrHandler
     Resume PROC_EXIT
 
 End Function
@@ -999,108 +989,108 @@ End Function
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
 '==================================================
 
-Private Sub ResetWorkspace()
-    Dim intCounter As Integer
+'Private Sub ResetWorkspace()
+'    Dim intCounter As Integer
+'
+'    On Error Resume Next
+'
+'    Application.MenuBar = vbNullString
+'    DoCmd.SetWarnings False
+'    DoCmd.Hourglass False
+'    DoCmd.Echo True
+'
+'    ' Clean up workspace by closing open forms and reports
+'    For intCounter = 0 To Forms.Count - 1
+'        DoCmd.Close acForm, Forms(intCounter).Name
+'    Next intCounter
+'
+'    For intCounter = 0 To Reports.Count - 1
+'        DoCmd.Close acReport, Reports(intCounter).Name
+'    Next intCounter
+'End Sub
 
-    On Error Resume Next
+'Private Sub GlobalErrHandler()
+'' Main procedure to handle errors that occur.
+'
+'    On Error GoTo 0
+'    Dim strError As String
+'    Dim lngError As Long
+'    Dim intErl As Integer
+'    Dim strMsg As String
+'
+'    ' Variables to preserve error information
+'    strError = Err.Description
+'    lngError = Err.Number
+'    intErl = Erl
+'
+'    ' Reset workspace, close open objects
+'    ResetWorkspace
+'
+'    ' Prompt the user with information on the error:
+'    strMsg = "Procedure: " & CurrentProcName() & vbCrLf & _
+'             "Line: " & Erl & vbCrLf & _
+'             "Error: (" & lngError & ")" & strError & vbCrLf & _
+'             "Application Quit is turned OFF !!!"
+'    MsgBox strMsg, vbCritical, "GlobalErrHandler"
+'
+'    ' Write error to file:
+'    WriteErrorToFile intErl, lngError, CurrentProcName(), strError
+'
+'    ' Exit Access without saving any changes
+'    ' (you might want to change this to save all changes)
+'
+'    'Application.Quit acExit
+'End Sub
 
-    Application.MenuBar = vbNullString
-    DoCmd.SetWarnings False
-    DoCmd.Hourglass False
-    DoCmd.Echo True
+'Private Function CurrentProcName() As String
+'    On Error GoTo 0
+'    CurrentProcName = mastrCallStack(mintStackPointer - 1)
+'End Function
 
-    ' Clean up workspace by closing open forms and reports
-    For intCounter = 0 To Forms.Count - 1
-        DoCmd.Close acForm, Forms(intCounter).Name
-    Next intCounter
+'Private Sub PushCallStack(ByVal strProcName As String)
+'' Add the current procedure name to the Call Stack.
+'' Should be called whenever a procedure is called
+'
+'    On Error Resume Next
+'
+'    ' Verify the stack array can handle the current array element
+'    If mintStackPointer > UBound(mastrCallStack) Then
+'    ' If array has not been defined, initialize the error handler
+'        If Err.Number = 9 Then
+'            ErrorHandlerInit
+'        Else
+'            ' Increase the size of the array to not go out of bounds
+'            ReDim Preserve mastrCallStack(UBound(mastrCallStack) + _
+'            mcintIncrementStackSize)
+'        End If
+'    End If
+'
+'    On Error GoTo 0
+'
+'    mastrCallStack(mintStackPointer) = strProcName
+'
+'    ' Increment pointer to next element
+'    mintStackPointer = mintStackPointer + 1
+'End Sub
 
-    For intCounter = 0 To Reports.Count - 1
-        DoCmd.Close acReport, Reports(intCounter).Name
-    Next intCounter
-End Sub
+'Private Sub ErrorHandlerInit()
+'    On Error GoTo 0
+'    mfInErrorHandler = False
+'    mintStackPointer = 1
+'    ReDim mastrCallStack(1 To mcintIncrementStackSize)
+'End Sub
 
-Private Sub GlobalErrHandler()
-' Main procedure to handle errors that occur.
-
-    On Error GoTo 0
-    Dim strError As String
-    Dim lngError As Long
-    Dim intErl As Integer
-    Dim strMsg As String
-
-    ' Variables to preserve error information
-    strError = Err.Description
-    lngError = Err.Number
-    intErl = Erl
-
-    ' Reset workspace, close open objects
-    ResetWorkspace
-
-    ' Prompt the user with information on the error:
-    strMsg = "Procedure: " & CurrentProcName() & vbCrLf & _
-             "Line: " & Erl & vbCrLf & _
-             "Error: (" & lngError & ")" & strError & vbCrLf & _
-             "Application Quit is turned OFF !!!"
-    MsgBox strMsg, vbCritical, "GlobalErrHandler"
-
-    ' Write error to file:
-    WriteErrorToFile intErl, lngError, CurrentProcName(), strError
-
-    ' Exit Access without saving any changes
-    ' (you might want to change this to save all changes)
-
-    'Application.Quit acExit
-End Sub
-
-Private Function CurrentProcName() As String
-    On Error GoTo 0
-    CurrentProcName = mastrCallStack(mintStackPointer - 1)
-End Function
-
-Private Sub PushCallStack(ByVal strProcName As String)
-' Add the current procedure name to the Call Stack.
-' Should be called whenever a procedure is called
-
-    On Error Resume Next
-
-    ' Verify the stack array can handle the current array element
-    If mintStackPointer > UBound(mastrCallStack) Then
-    ' If array has not been defined, initialize the error handler
-        If Err.Number = 9 Then
-            ErrorHandlerInit
-        Else
-            ' Increase the size of the array to not go out of bounds
-            ReDim Preserve mastrCallStack(UBound(mastrCallStack) + _
-            mcintIncrementStackSize)
-        End If
-    End If
-
-    On Error GoTo 0
-
-    mastrCallStack(mintStackPointer) = strProcName
-
-    ' Increment pointer to next element
-    mintStackPointer = mintStackPointer + 1
-End Sub
-
-Private Sub ErrorHandlerInit()
-    On Error GoTo 0
-    mfInErrorHandler = False
-    mintStackPointer = 1
-    ReDim mastrCallStack(1 To mcintIncrementStackSize)
-End Sub
-
-Private Sub PopCallStack()
-' Remove a procedure name from the call stack
-
-    On Error GoTo 0
-    If mintStackPointer <= UBound(mastrCallStack) Then
-        mastrCallStack(mintStackPointer) = vbNullString
-    End If
-
-    ' Reset pointer to previous element
-    mintStackPointer = mintStackPointer - 1
-End Sub
+'Private Sub PopCallStack()
+'' Remove a procedure name from the call stack
+'
+'    On Error GoTo 0
+'    If mintStackPointer <= UBound(mastrCallStack) Then
+'        mastrCallStack(mintStackPointer) = vbNullString
+'    End If
+'
+'    ' Reset pointer to previous element
+'    mintStackPointer = mintStackPointer - 1
+'End Sub
 
 Private Sub WriteErrorToFile(ByVal intTheErl As Integer, ByVal lngTheErrorNum As Long, _
                 ByVal strCurrentProcName As String, ByVal strErrorDescription As String)
