@@ -1,6 +1,7 @@
 Option Compare Database
 Option Explicit
 
+'@Ignore EncapsulatePublicField, MoveFieldCloserToUsage
 Public gobjaeRibbon As IRibbonUI
 
 Public Sub OnRibbonLoad(ByVal ribbon As IRibbonUI)
@@ -18,6 +19,7 @@ Public Sub OnActionButton(ByVal control As IRibbonControl)
     End Select
 End Sub
 
+'@Ignore ProcedureCanBeWrittenAsFunction
 Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
     ' Callbackname in XML File "getEnabled"
     On Error GoTo 0
@@ -27,6 +29,7 @@ Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
     End Select
 End Sub
 
+'@Ignore ProcedureCanBeWrittenAsFunction
 Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     ' Callbackname in XML File "getVisible"
     On Error GoTo 0
@@ -36,6 +39,7 @@ Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     End Select
 End Sub
 
+'@Ignore ProcedureCanBeWrittenAsFunction
 Public Sub GetImages(ByVal control As IRibbonControl, ByRef Image As Variant)
 
     On Error GoTo 0
