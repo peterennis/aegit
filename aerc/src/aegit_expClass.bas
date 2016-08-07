@@ -1433,10 +1433,10 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     fle = FreeFile()
 
     If aegitFrontEndApp Then
-        Debug.Print aestrSourceLocation & aeAppHiddQry
+        'Debug.Print aestrSourceLocation & aeAppHiddQry
         Open aestrSourceLocation & aeAppHiddQry For Output As #fle
     Else
-        Debug.Print aestrSourceLocationBe & aeAppHiddQry
+        'Debug.Print aestrSourceLocationBe & aeAppHiddQry
         Open aestrSourceLocationBe & aeAppHiddQry For Output As #fle
     End If
 
@@ -1457,8 +1457,8 @@ Private Sub OutputListOfAllHiddenQueries(Optional ByVal varDebug As Variant)
     If Not IsMissing(varDebug) Then Debug.Print strSQL
     If Not IsMissing(varDebug) And _
                 Application.VBE.ActiveVBProject.Name = "aegit" Then
-        Debug.Print "IsQryHidden('qpt_Dummy') = " & IsQryHidden("qpt_Dummy")
-        Debug.Print "IsQryHidden('qry_HiddenDummy') = " & IsQryHidden("qry_HiddenDummy")
+        'Debug.Print "IsQryHidden('qpt_Dummy') = " & IsQryHidden("qpt_Dummy")
+        'Debug.Print "IsQryHidden('qry_HiddenDummy') = " & IsQryHidden("qry_HiddenDummy")
     End If
 
 PROC_EXIT:
@@ -1516,10 +1516,10 @@ Private Sub OutputListOfForms(Optional ByVal varDebug As Variant)
     fle = FreeFile()
 
     If aegitFrontEndApp Then
-        Debug.Print aestrSourceLocation & aeAppListFrm
+        'Debug.Print aestrSourceLocation & aeAppListFrm
         Open aestrSourceLocation & aeAppListFrm For Output As #fle
     Else
-        Debug.Print aestrSourceLocationBe & aeAppListFrm
+        'Debug.Print aestrSourceLocationBe & aeAppListFrm
         Open aestrSourceLocationBe & aeAppListFrm For Output As #fle
     End If
 
@@ -1577,10 +1577,10 @@ Private Sub OutputListOfMacros(Optional ByVal varDebug As Variant)
     fle = FreeFile()
 
     If aegitFrontEndApp Then
-        Debug.Print aestrSourceLocation & aeAppListMac
+        'Debug.Print aestrSourceLocation & aeAppListMac
         Open aestrSourceLocation & aeAppListMac For Output As #fle
     Else
-        Debug.Print aestrSourceLocationBe & aeAppListMac
+        'Debug.Print aestrSourceLocationBe & aeAppListMac
         Open aestrSourceLocationBe & aeAppListMac For Output As #fle
     End If
 
@@ -1638,10 +1638,10 @@ Private Sub OutputListOfModules(Optional ByVal varDebug As Variant)
     fle = FreeFile()
 
     If aegitFrontEndApp Then
-        Debug.Print aestrSourceLocation & aeAppListMod
+        'Debug.Print aestrSourceLocation & aeAppListMod
         Open aestrSourceLocation & aeAppListMod For Output As #fle
     Else
-        Debug.Print aestrSourceLocationBe & aeAppListMod
+        'Debug.Print aestrSourceLocationBe & aeAppListMod
         Open aestrSourceLocationBe & aeAppListMod For Output As #fle
     End If
 
@@ -1699,10 +1699,10 @@ Private Sub OutputListOfReports(Optional ByVal varDebug As Variant)
     fle = FreeFile()
 
     If aegitFrontEndApp Then
-        Debug.Print aestrSourceLocation & aeAppListRpt
+        'Debug.Print aestrSourceLocation & aeAppListRpt
         Open aestrSourceLocation & aeAppListRpt For Output As #fle
     Else
-        Debug.Print aestrSourceLocationBe & aeAppListRpt
+        'Debug.Print aestrSourceLocationBe & aeAppListRpt
         Open aestrSourceLocationBe & aeAppListRpt For Output As #fle
     End If
 
@@ -1760,10 +1760,10 @@ Private Sub OutputListOfTables(Optional ByVal varDebug As Variant)
     fle = FreeFile()
 
     If aegitFrontEndApp Then
-        Debug.Print aestrSourceLocation & aeAppListTbl
+        'Debug.Print aestrSourceLocation & aeAppListTbl
         Open aestrSourceLocation & aeAppListTbl For Output As #fle
     Else
-        Debug.Print aestrSourceLocationBe & aeAppListTbl
+        'Debug.Print aestrSourceLocationBe & aeAppListTbl
         Open aestrSourceLocationBe & aeAppListTbl For Output As #fle
     End If
 
@@ -3023,7 +3023,7 @@ End Function
 
 Private Sub OutputListOfIndexes(ByVal strFileOut As String)
     Debug.Print "OutputListOfIndexes"
-    Debug.Print , strFileOut
+    'Debug.Print , strFileOut
     On Error GoTo 0
 
     Dim fle As Integer
@@ -4290,9 +4290,9 @@ Private Sub KillAllFiles(ByVal strLoc As String)
     Dim strFile As String
 
     Debug.Print "KillAllFiles"
+    'Debug.Print , "strLoc = " & strLoc
     On Error GoTo PROC_ERR
 
-    Debug.Print , "strLoc = " & strLoc
     ' Test for relative path - it should already have been converted to an absolute location
     If Left$(strLoc, 1) = "." Then Stop
     'Stop
@@ -4703,7 +4703,7 @@ Private Sub OutputFieldLookupControlTypeList()
     On Error GoTo 0
     Dim bln As Boolean
     bln = FieldLookupControlTypeList()
-    Debug.Print , "FieldLookupControlTypeList()=" & bln
+    'Debug.Print , "FieldLookupControlTypeList()=" & bln
     'Stop
 End Sub
 
@@ -4829,7 +4829,7 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 ' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
 
     Debug.Print "OutputListOfCommandBarIDs"
-    Debug.Print , "strOutputFile = " & strOutputFile
+    'Debug.Print , "strOutputFile = " & strOutputFile
     On Error GoTo PROC_ERR
 
     Dim CBR As Object       ' CommandBar
@@ -5690,8 +5690,8 @@ Private Sub SortTheFile(ByVal strInFile As String, ByVal strOutFile As String)
 
     On Error GoTo PROC_ERR
     Debug.Print "SortTheFile"
-    Debug.Print , "strInFile = " & strInFile
-    Debug.Print , "strOutFile = " & strOutFile
+    'Debug.Print , "strInFile = " & strInFile
+    'Debug.Print , "strOutFile = " & strOutFile
     If Dir$(strInFile) = vbNullString Then Stop
 
     Dim str As String
