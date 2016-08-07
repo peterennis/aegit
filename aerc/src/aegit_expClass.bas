@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.9.1"
-Private Const aegit_expVERSION_DATE As String = "August 6, 2016"
+Private Const aegit_expVERSION_DATE As String = "August 7, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -303,11 +303,11 @@ Public Property Get FrontEndApp() As Boolean
     Debug.Print , "FrontEndApp = " & FrontEndApp
 End Property
 
-Public Property Let FrontEndApp(ByVal blnFrontEndApp As Boolean)
+Public Property Let FrontEndApp(ByVal IsFrontEndApp As Boolean)
     On Error GoTo 0
-    Debug.Print "Property Let FrontEndApp"
-    aegitFrontEndApp = blnFrontEndApp
-    Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+    'Debug.Print "Property Let FrontEndApp"
+    aegitFrontEndApp = IsFrontEndApp
+    'Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
 End Property
 
 Public Property Get TextEncoding() As String
@@ -403,18 +403,18 @@ Public Property Let XMLDataFolderBe(ByVal strXMLDataFolderBe As String)
     Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
 End Property
 
-Public Property Let ExportQAT(ByVal blnExportQAT As Boolean)
+Public Property Let ExportQAT(ByVal IsExportQAT As Boolean)
     On Error GoTo 0
-    If blnExportQAT Then
+    If IsExportQAT Then
         aegitExport.ExportQAT = True
     Else
         aegitExport.ExportQAT = False
     End If
 End Property
 
-Public Property Let ExportCBID(ByVal blnExportCBID As Boolean)
+Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
     On Error GoTo 0
-    If blnExportCBID Then
+    If IsExportCBID Then
         aegitExport.ExportCBID = True
     Else
         aegitExport.ExportCBID = False
@@ -425,11 +425,11 @@ Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
 ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
     On Error GoTo PROC_ERR
     Debug.Print "Property Let TablesExportToXML"
-    Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0) = " & varTablesArray(0)
-    Debug.Print , "UBound(varTablesArray) = " & UBound(varTablesArray)
-    If UBound(varTablesArray) > 0 Then
-        Debug.Print , "varTablesArray(1) = " & varTablesArray(1)
-    End If
+    'Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0) = " & varTablesArray(0)
+    'Debug.Print , "UBound(varTablesArray) = " & UBound(varTablesArray)
+    'If UBound(varTablesArray) > 0 Then
+    '    Debug.Print , "varTablesArray(1) = " & varTablesArray(1)
+    'End If
     ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
     aegitDataXML = varTablesArray
     Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
@@ -4012,7 +4012,7 @@ Private Function GetPropEnum(ByVal typeNum As Long, Optional ByVal varDebug As V
         Case Else
             'MsgBox "Unknown typeNum:" & typeNum, vbInformation, aeAPP_NAME
             GetPropEnum = "Unknown typeNum"
-            Debug.Print "Unknown typeNum:" & typeNum & " in procedure GetPropEnum of aegit_expClass"
+            Debug.Print , "Unknown typeNum:" & typeNum & " in procedure GetPropEnum of aegit_expClass"
     End Select
 
 PROC_EXIT:
@@ -4274,7 +4274,7 @@ PROC_EXIT:
 
 PROC_ERR:
     If Err = 2220 Then  ' Run-time error 2220 Microsoft Access can't open the file
-        Debug.Print "Err=2220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
+        Debug.Print , "Err=2220 : Resume SaveAsText - " & doc.Name & " - " & strTheCurrentPathAndFile
         Err.Clear
         Pause (0.25)
         Resume SaveAsText
@@ -4395,9 +4395,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     ' ===================================
     ' NOTE: Erl(0) Error 2950 if the ouput location does not exist so test for it first: Resolved in VerifySetup
 
-    Debug.Print "aeDocumentTheDatabase"
-    Debug.Print , "aegitSetup = " & aegitSetup
-    Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+    Debug.Print "aeDocumentTheDatabase", "aegitSetup = " & aegitSetup, "aegitFrontEndApp = " & aegitFrontEndApp
     'Stop
     
     Dim strTheSourceLocation As String
@@ -4601,7 +4599,7 @@ Private Function aeExists(ByVal strAccObjType As String, _
     Dim objType As Object
     Dim obj As Variant
     
-    Debug.Print "aeExists", strAccObjType, strAccObjName
+    'Debug.Print "aeExists", strAccObjType, strAccObjName
     On Error GoTo PROC_ERR
 
     If IsMissing(varDebug) Then
