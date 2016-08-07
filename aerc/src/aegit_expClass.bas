@@ -2383,7 +2383,7 @@ PROC_ERR:
 
 End Function
 
-Private Function LongestTableName() As Integer
+Private Function zzzLongestTableName() As Integer
 ' ====================================================================
 ' Author:   Peter F. Ennis
 ' Date:     November 30, 2012
@@ -2409,7 +2409,7 @@ Private Function LongestTableName() As Integer
         End If
     Next tdf
 
-    LongestTableName = intTNLen
+    zzzLongestTableName = intTNLen
 
 PROC_EXIT:
     Set tdf = Nothing
@@ -2417,7 +2417,7 @@ PROC_EXIT:
 
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass", vbCritical, "ERROR"
-    LongestTableName = 0
+    zzzLongestTableName = 0
     Resume PROC_EXIT
 
 End Function
@@ -3096,24 +3096,24 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
     Dim strIndexName As String
     Dim strFieldName As String
 
-    Debug.Print tdfIn.Name
+    'Debug.Print tdfIn.Name
     Print #fle, "<<<[" & tdfIn.Name & "]>>>"
     ' List values for each index
     For Each idx In tdfIn.Indexes
         ' List collection of fields the index contains
         strIndexName = "[" & idx.Name & "]"
-        Debug.Print , "Index:" & strIndexName
+        'Debug.Print , "Index:" & strIndexName
         Print #fle, , "Index:" & strIndexName
  
         For Each fld In idx.Fields
-            Debug.Print , , "Field Name:" & fld.Name
+            'Debug.Print , , "Field Name:" & fld.Name
             Print #fle, , , "Field Name:" & fld.Name
             strFieldName = "[" & fld.Name & "], "
         Next fld
-        Debug.Print ">" & strIndexName, strFieldName
+        'Debug.Print ">" & strIndexName, strFieldName
         Print #fle, ">" & strIndexName, strFieldName
     Next idx
-    Debug.Print "========================================"
+    'Debug.Print "========================================"
     Print #fle, "========================================"
     Close fle
 
@@ -3314,7 +3314,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
     Next
     'Stop
 
-    'strSQL = vbCrLf & "Debug.Print " & """" & "Done" & """"
+    'strSQL = vbCrLf & "Debug.Print " & """" & "DONE !!!" & """"
     'f.WriteLine strSQL
     f.WriteLine
     f.WriteLine "'Access 2010 - Compact And Repair"
@@ -3333,7 +3333,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
     f.WriteLine "End Sub"
 
     f.Close
-    'Debug.Print "Done"
+    'Debug.Print "DONE !!!"
 
 End Sub
 
@@ -3582,7 +3582,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     '    Debug.Print i & ">", arrSQL(i)
     'Next
 
-    Debug.Print strLfBegin
+    'Debug.Print strLfBegin
 
     For i = 0 To UBound(arrSQL)
         If Left$(arrSQL(i), Len(mTABLE)) = mTABLE Then
@@ -3593,7 +3593,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             
             End If
             strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
-            Debug.Print i & ">", strLfCreateTable
+            'Debug.Print i & ">", strLfCreateTable
             Print #fleOut, strLfCreateTable
             mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
             Do While mstrToParse <> vbNullString
@@ -3605,7 +3605,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 'Debug.Print , "'" & strFieldName & "'", "'" & strAccFieldType & "'"
                 strLfFieldType = GetLovefieldType(strAccFieldType)
                 strLfFieldName = Space$(4) & "addColumn('" & strFieldName
-                Debug.Print , strLfFieldName & strLfFieldType, "{" & strAccFieldType & "}"
+                'Debug.Print , strLfFieldName & strLfFieldType, "{" & strAccFieldType & "}"
                 Print #fleOut, strLfFieldName & strLfFieldType
                 'Stop
             Loop
@@ -3620,10 +3620,10 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 End If
             End If
             If i = UBound(arrSQL) Then
-                Debug.Print i & ">", strThePrimaryKeyField & SEMICOLON
+                'Debug.Print i & ">", strThePrimaryKeyField & SEMICOLON
                 Print #fleOut, strThePrimaryKeyField & SEMICOLON
             Else
-                Debug.Print i & ">", strThePrimaryKeyField
+                'Debug.Print i & ">", strThePrimaryKeyField
                 Print #fleOut, strThePrimaryKeyField
             End If
             'Stop
@@ -3638,15 +3638,15 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
                 End If
             End If
             If i = UBound(arrSQL) Then
-                Debug.Print i & ">", strTheIndex & SEMICOLON
+                'Debug.Print i & ">", strTheIndex & SEMICOLON
                 Print #fleOut, strTheIndex & SEMICOLON
             Else
-                Debug.Print i & ">", strTheIndex
+                'Debug.Print i & ">", strTheIndex
                 Print #fleOut, strTheIndex
             End If
         End If
     Next
-    Debug.Print "DONE !!!"
+    'Debug.Print "DONE !!!"
 
 PROC_EXIT:
     Close fleIn
@@ -3719,12 +3719,16 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
     'Debug.Print "GetLovefieldType"
     On Error GoTo 0
 
+    Dim accessFieldType As String
+
     'Debug.Print , "strAccessFieldType=" & strAccessFieldType
     If Left$(strAccessFieldType, 4) = "Text" Then
-        strAccessFieldType = "Text"
+        accessFieldType = "Text"
+    Else
+        accessFieldType = strAccessFieldType
     End If
 
-    Select Case strAccessFieldType
+    Select Case accessFieldType
         Case "Counter"
             GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "DateTime"
@@ -3745,7 +3749,7 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
             GetLovefieldType = "', lf.Type.BOOLEAN)."       ' "BOOLEAN"
         Case Else
             MsgBox "Unknown Access Field Type in procedure GetLovefieldType of Class aegitClass" & vbCrLf & _
-                "strAccessFieldType=" & strAccessFieldType, vbCritical, "GetLovefieldType"
+                "accessFieldType=" & accessFieldType, vbCritical, "GetLovefieldType"
     End Select
 
 End Function
@@ -3763,16 +3767,16 @@ Private Function GetPrimaryKey(ByVal strSQL As String) As String
     Dim strPrimaryField As String
 
     strParse = Right$(strSQL, Len(strSQL) - Len(mPRIMARYKEY))
-    Debug.Print , ">>strParse", strParse
+    'Debug.Print , ">>strParse", strParse
     intPosRB = InStr(strParse, "]")
     strPrimaryKeyName = Left$(strParse, intPosRB - 1)
-    Debug.Print , ">>strPrimaryKeyName", strPrimaryKeyName
+    'Debug.Print , ">>strPrimaryKeyName", strPrimaryKeyName
     intPosPLB = InStr(strParse, "([") + 1
     strParse = Right$(strParse, Len(strParse) - intPosPLB)
-    Debug.Print , ">>strParse", strParse
+    'Debug.Print , ">>strParse", strParse
     intPosRBP = InStr(strParse, "])") - 1
     strPrimaryField = Left$(strParse, intPosRBP)
-    Debug.Print , ">>strPrimaryField", intPosRBP, strPrimaryField
+    'Debug.Print , ">>strPrimaryField", intPosRBP, strPrimaryField
     GetPrimaryKey = Space$(4) & "addPrimaryKey(['" & strPrimaryField & "'])"
     'Stop
 End Function
@@ -4943,7 +4947,7 @@ Private Function MySortIt(ByVal strFPName As String, ByVal strExtension As Strin
     Close #1
     Close #2
     Set arrayIn = Nothing
-    'Debug.Print "Done!"
+    'Debug.Print "DONE !!!"
 
 PROC_EXIT:
     Exit Function
