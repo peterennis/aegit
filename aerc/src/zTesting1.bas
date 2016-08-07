@@ -128,3 +128,42 @@ Public Function WUAversion() As String
     End If
     On Error GoTo 0
 End Function
+
+Private Function zzzLongestTableName() As Integer
+' ====================================================================
+' Author:   Peter F. Ennis
+' Date:     November 30, 2012
+' Comment:  Return the length of the longest table name
+' Updated:  All notes moved to change log
+' History:  See comment details, basChangeLog, commit messages on github
+' ====================================================================
+
+    Dim tdf As DAO.TableDef
+    Dim intTNLen As Integer
+
+    Debug.Print "LongestTableName"
+    On Error GoTo PROC_ERR
+
+    intTNLen = 0
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+                Or Left$(tdf.Name, 4) = "~TMP" _
+                Or Left$(tdf.Name, 3) = "zzz") Then
+            If Len(tdf.Name) > intTNLen Then
+                intTNLen = Len(tdf.Name)
+            End If
+        End If
+    Next tdf
+
+    zzzLongestTableName = intTNLen
+
+PROC_EXIT:
+    Set tdf = Nothing
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure LongestTableName of Class aegit_expClass", vbCritical, "ERROR"
+    zzzLongestTableName = 0
+    Resume PROC_EXIT
+
+End Function
