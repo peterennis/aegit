@@ -623,51 +623,51 @@ Private Sub TestForRelativePath()
         strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
         aestrSourceLocation = strTestPath
     End If
-    Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+    'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
     '
     strTestPath = aestrSourceLocationBe
     If Left$(aestrSourceLocationBe, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
         aestrSourceLocationBe = strTestPath
     End If
-    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+    'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
     '
     strTestPath = aestrXMLLocation
     If Left$(aestrXMLLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
     End If
-    Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+    'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
     '
     strTestPath = aestrXMLLocationBe
     If Left$(aestrXMLLocationBe, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
         aestrXMLLocationBe = strTestPath
     End If
-    Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+    'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
     '
     strTestPath = aestrXMLDataLocation
     If Left$(aestrXMLDataLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
         aestrXMLDataLocation = strTestPath
     End If
-    Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+    'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
     '
     strTestPath = aestrXMLDataLocationBe
     If Left$(aestrXMLDataLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
         aestrXMLDataLocationBe = strTestPath
     End If
-    Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    Debug.Print , "--------------------------------------------------"
+    'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+    'Debug.Print , "--------------------------------------------------"
 
 End Sub
 
 Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
     On Error GoTo 0
     Debug.Print "VerifySetup"
-    Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
-    Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
+    'Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+    'Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
 
     ' Test for aegit setup
     If aegitSourceFolder = "default" Then
@@ -675,10 +675,10 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
         aestrSourceLocation = aegitType.SourceFolder
         aestrXMLLocation = aegitType.XMLFolder
         aestrXMLDataLocation = aegitType.XMLDataFolder
-        Debug.Print , "aegitSetup = True"
-        Debug.Print , "aegitSourceFolder = ""default"""
-        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-        Debug.Print , "--------------------------------------------------"
+        'Debug.Print , "aegitSetup = True"
+        'Debug.Print , "aegitSourceFolder = ""default"""
+        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+        'Debug.Print , "--------------------------------------------------"
 
         TestForRelativePath
 
@@ -687,12 +687,12 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
             MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
-        Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
         If Not FolderExists(aestrXMLLocation) Then
             MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
-        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
         If Not FolderExists(aestrXMLDataLocation) Then
             MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
             Stop
@@ -704,13 +704,13 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
         aestrXMLLocationBe = aegitXMLFolderBe
         aestrXMLDataLocation = aegitXMLDataFolder
         aestrXMLDataLocationBe = aegitXMLDataFolderBe
-        Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-        Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-        Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-        Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-        Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-        Debug.Print , "--------------------------------------------------"
+        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        'Debug.Print , "--------------------------------------------------"
 
         TestForRelativePath
 
@@ -719,12 +719,12 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
             MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
-        Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
         If Not FolderExists(aestrXMLLocation) Then
             MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
-        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
         If Not FolderExists(aestrXMLDataLocation) Then
             MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
             Stop
@@ -733,10 +733,10 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
         aestrSourceLocationBe = aegitSourceFolderBe
         aestrXMLLocationBe = aegitXMLFolderBe
         aestrXMLDataLocationBe = aegitXMLDataFolderBe
-        Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-        Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-        Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-        Debug.Print , "--------------------------------------------------"
+        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        'Debug.Print , "--------------------------------------------------"
 
         TestForRelativePath
 
@@ -756,15 +756,15 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
     End If
 
     ' Final paths are absolute
-    Debug.Print "VerifySetup"
-    Debug.Print , ">==> Final Paths >==>"
-    Debug.Print , "Property Get SourceFolder:       aestrSourceLocation = " & aestrSourceLocation
-    Debug.Print , "Property Get SourceFolderBe:     aestrSourceLocationBe = " & aestrSourceLocationBe
-    Debug.Print , "Property Get XMLFolder:          aestrXMLLocation = " & aestrXMLLocation
-    Debug.Print , "Property Get XMLFolderBe:        aestrXMLLocationBe = " & aestrXMLLocationBe
-    Debug.Print , "Property Get XMLDataFolder:      aestrXMLDataLocation = " & aestrXMLDataLocation
-    Debug.Print , "Property Get XMLDataFolderBe:    aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    Debug.Print , "--------------------------------------------------"
+    'Debug.Print "VerifySetup"
+    'Debug.Print , ">==> Final Paths >==>"
+    'Debug.Print , "Property Get SourceFolder:       aestrSourceLocation = " & aestrSourceLocation
+    'Debug.Print , "Property Get SourceFolderBe:     aestrSourceLocationBe = " & aestrSourceLocationBe
+    'Debug.Print , "Property Get XMLFolder:          aestrXMLLocation = " & aestrXMLLocation
+    'Debug.Print , "Property Get XMLFolderBe:        aestrXMLLocationBe = " & aestrXMLLocationBe
+    'Debug.Print , "Property Get XMLDataFolder:      aestrXMLDataLocation = " & aestrXMLDataLocation
+    'Debug.Print , "Property Get XMLDataFolderBe:    aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+    'Debug.Print , "--------------------------------------------------"
 
     '???
     If aestrBackEndDbOne = vbNullString Then
@@ -772,12 +772,12 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
         Stop
     End If
 
-    Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
+    'Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
 
     If aestrBackEndDbOne <> "default" Then
         OpenAllDatabases True
     End If
-    Debug.Print , "Property Get BackEndDbOne = " & aestrBackEndDbOne
+    'Debug.Print , "Property Get BackEndDbOne = " & aestrBackEndDbOne
     'Stop
 
 End Sub
