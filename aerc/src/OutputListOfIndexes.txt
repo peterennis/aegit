@@ -32,9 +32,9 @@
 <<<[aeItems]>>>
 ========================================
 <<<[aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger]>>>
-              Index:[ID]
+              Index:[id]
                             Field Name:id
->[ID]         [id], 
+>[id]         [id], 
 ========================================
 <<<[aetlkpStates]>>>
               Index:[PrimaryKey]
@@ -48,9 +48,9 @@
               Index:[CountryCity]
                             Field Name:Country
 >[CountryCity]              [Country], 
-              Index:[ID]
-                            Field Name:ID
->[ID]         [ID], 
+              Index:[id]
+                            Field Name:id
+>[id]         [id], 
 ========================================
 <<<[Country]>>>
               Index:[CountryKey]
@@ -67,9 +67,9 @@
               Index:[CountryProvince]
                             Field Name:Country
 >[CountryProvince]          [Country], 
-              Index:[ID]
-                            Field Name:ID
->[ID]         [ID], 
+              Index:[id]
+                            Field Name:id
+>[id]         [id], 
 ========================================
 <<<[tblBinary]>>>
               Index:[PrimaryKey]

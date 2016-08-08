@@ -29,14 +29,14 @@
 |-- GUID >> GUID
 |-- PublishToWeb >> 1
 --------------------------------------------------
-|-- ID (Field in Province)
+|-- id (Field in Province)
 |------ Attributes >> 18
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> ID
+|------ Name >> id
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> ID
+|------ SourceField >> id
 |------ SourceTable >> Province
 |------ DataUpdatable >> False
 |------ DefaultValue >> 

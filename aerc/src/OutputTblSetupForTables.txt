@@ -157,7 +157,7 @@ TABLE: City
 -----------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 CityName             Text                  255                
 Country              Text                  255                
 Population           Text                  255                
@@ -183,7 +183,7 @@ TABLE: Province
 ---------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-ID                   AutoNumber            4                  
+id                   AutoNumber            4                  
 ProvinceName         Text                  255                
 Country              Text                  255                
 Population           Long Integer          4                  

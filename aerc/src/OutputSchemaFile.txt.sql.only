@@ -12,20 +12,20 @@ CREATE TABLE [_tlkpYear] ([id] Counter,[TheYear] Text (4) )
 CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpYear] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [aeItems] ([Item] Text (255),[Quantity] Long,[Status] Text (255),[YNO] Text (255),[CHK] YesNo,[CBO] Text (255) )
 CREATE TABLE [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id] Counter,[Desc] Text (255),[Description] Text (255) )
-CREATE UNIQUE INDEX [ID] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL
+CREATE UNIQUE INDEX [id] ON [aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [aetlkpStates] ([StateCode] Text (3),[StateAbbreviation] Text (2),[StateName] Text (15) )
 CREATE UNIQUE INDEX [PrimaryKey] ON [aetlkpStates] ([StateCode]) WITH PRIMARY DISALLOW NULL
 CREATE INDEX [State Name] ON [aetlkpStates] ([StateName])
-CREATE TABLE [City] ([ID] Counter,[CityName] Text (255),[Country] Text (255),[Population] Text (255),[Longitude] Text (255),[Latitude] Text (255) )
+CREATE TABLE [City] ([id] Counter,[CityName] Text (255),[Country] Text (255),[Population] Text (255),[Longitude] Text (255),[Latitude] Text (255) )
 CREATE INDEX [CountryCity] ON [City] ([Latitude])
-CREATE UNIQUE INDEX [ID] ON [City] ([ID]) WITH PRIMARY DISALLOW NULL
+CREATE UNIQUE INDEX [id] ON [City] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [Country] ([CountryName] Text (255),[Code] Text (255),[Capital] Text (255),[Province] Text (255),[Area] Long,[Population] Long )
 CREATE INDEX [CountryKey] ON [Country] ([Population])
 CREATE UNIQUE INDEX [PrimaryKey] ON [Country] ([CountryName]) WITH PRIMARY DISALLOW NULL
-CREATE TABLE [Province] ([ID] Counter,[ProvinceName] Text (255),[Country] Text (255),[Population] Long,[Area] Text (255),[Capital] Text (255),[CapProv] Text (255) )
+CREATE TABLE [Province] ([id] Counter,[ProvinceName] Text (255),[Country] Text (255),[Population] Long,[Area] Text (255),[Capital] Text (255),[CapProv] Text (255) )
 CREATE INDEX [CapProv] ON [Province] ([CapProv])
 CREATE INDEX [CountryProvince] ON [Province] ([CapProv])
-CREATE UNIQUE INDEX [ID] ON [Province] ([ID]) WITH PRIMARY DISALLOW NULL
+CREATE UNIQUE INDEX [id] ON [Province] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [tblBinary] ([id] Counter,[FileName] Text (255),[binary] OLEObject )
 CREATE UNIQUE INDEX [PrimaryKey] ON [tblBinary] ([id]) WITH PRIMARY DISALLOW NULL
 CREATE TABLE [tblDummy0] ([Num] Long )

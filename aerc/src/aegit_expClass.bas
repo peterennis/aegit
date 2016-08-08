@@ -3240,6 +3240,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
 
                 For Each fld In tdf.Fields
                     If ndx.Primary Then
+                        Debug.Print tdf.Name, fld.Name, ndx.Name, ndx.Primary, ndx.Foreign, ndx.Unique, ndx.Required
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     Else

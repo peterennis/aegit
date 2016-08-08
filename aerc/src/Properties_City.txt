@@ -26,15 +26,17 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
+|-- GUID >> GUID
+|-- PublishToWeb >> 1
 --------------------------------------------------
-|-- ID (Field in City)
+|-- id (Field in City)
 |------ Attributes >> 18
 |------ CollatingOrder >> 1033
 |------ Type >> 4
-|------ Name >> ID
+|------ Name >> id
 |------ OrdinalPosition >> 0
 |------ Size >> 4
-|------ SourceField >> ID
+|------ SourceField >> id
 |------ SourceTable >> City
 |------ DataUpdatable >> False
 |------ DefaultValue >> 
@@ -45,6 +47,12 @@
 |------ AppendOnly >> False
 |------ Expression >> 
 |------ ColumnOrder >> 0
+|------ ColumnWidth >> -1
+|------ ColumnHidden >> False
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- CityName (Field in City)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
