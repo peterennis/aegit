@@ -112,8 +112,8 @@
               [Longitude]    109          TextBox
               [Latitude]     109          TextBox
 [Country]
-              [CountryName]  109          TextBox
               [Code]         109          TextBox
+              [CountryName]  109          TextBox
               [Capital]      109          TextBox
               [Province]     109          TextBox
               [Area]         109          TextBox

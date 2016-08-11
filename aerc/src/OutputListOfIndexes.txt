@@ -1,33 +1,33 @@
 <<<[_tblChart]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
 ========================================
 <<<[_tblPersist]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
 ========================================
 <<<[_tlkpChart]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
               Index:[QAQCnum]
                             Field Name:ChartNum
 >[QAQCnum]    [ChartNum], 
 ========================================
 <<<[_tlkpMonth]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
               Index:[TheMonthCode]
                             Field Name:TheMonthCode
 >[TheMonthCode]             [TheMonthCode], 
 ========================================
 <<<[_tlkpYear]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
 ========================================
 <<<[aeItems]>>>
 ========================================
@@ -37,12 +37,12 @@
 >[id]         [id], 
 ========================================
 <<<[aetlkpStates]>>>
-              Index:[PrimaryKey]
+              Index:[StateCode]
                             Field Name:StateCode
->[PrimaryKey] [StateCode], 
-              Index:[State Name]
+>[StateCode]  [StateCode], 
+              Index:[StateName]
                             Field Name:StateName
->[State Name] [StateName], 
+>[StateName]  [StateName], 
 ========================================
 <<<[City]>>>
               Index:[CountryCity]
@@ -53,12 +53,12 @@
 >[id]         [id], 
 ========================================
 <<<[Country]>>>
+              Index:[Code]
+                            Field Name:Code
+>[Code]       [Code], 
               Index:[CountryKey]
                             Field Name:Capital
 >[CountryKey] [Capital], 
-              Index:[PrimaryKey]
-                            Field Name:Code
->[PrimaryKey] [Code], 
 ========================================
 <<<[Province]>>>
               Index:[CapProv]
@@ -72,24 +72,24 @@
 >[id]         [id], 
 ========================================
 <<<[tblBinary]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
 ========================================
 <<<[tblDummy0]>>>
-              Index:[PrimaryKey]
+              Index:[Num]
                             Field Name:Num
->[PrimaryKey] [Num], 
+>[Num]        [Num], 
 ========================================
 <<<[tblDummy1]>>>
-              Index:[PrimaryKey]
+              Index:[Num]
                             Field Name:Num
->[PrimaryKey] [Num], 
+>[Num]        [Num], 
 ========================================
 <<<[tblDummy2]>>>
-              Index:[PrimaryKey]
+              Index:[Num]
                             Field Name:Num
->[PrimaryKey] [Num], 
+>[Num]        [Num], 
 ========================================
 <<<[tblDummy3]>>>
               Index:[MFSI]
@@ -104,7 +104,7 @@
 >[PrimaryKey] [eventPerson], 
 ========================================
 <<<[USysRibbons]>>>
-              Index:[PrimaryKey]
+              Index:[id]
                             Field Name:id
->[PrimaryKey] [id], 
+>[id]         [id], 
 ========================================

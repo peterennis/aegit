@@ -11,20 +11,20 @@
   <xsd:element name="Country">
     <xsd:annotation>
       <xsd:appinfo>
+        <od:index index-name="Code" index-key="Code " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
         <od:index index-name="CountryKey" index-key="Capital " primary="no" unique="no" clustered="no" order="asc"></od:index>
-        <od:index index-name="PrimaryKey" index-key="Code " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element name="CountryName" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+        <xsd:element name="Code" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
           <xsd:simpleType>
             <xsd:restriction base="xsd:string">
               <xsd:maxLength value="255"></xsd:maxLength>
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
-        <xsd:element name="Code" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+        <xsd:element name="CountryName" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
           <xsd:simpleType>
             <xsd:restriction base="xsd:string">
               <xsd:maxLength value="255"></xsd:maxLength>

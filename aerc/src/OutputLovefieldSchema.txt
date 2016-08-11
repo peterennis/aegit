@@ -113,7 +113,7 @@ schemaBuilder.createTable('aetlkpStates').
     addColumn('StateAbbreviation', lf.Type.STRING).
     addColumn('StateName', lf.Type.STRING).
     addPrimaryKey(['StateCode']).
-    addIndex(['idxState Name'], ['StateName'], false, lf.Order.ASC);
+    addIndex(['idxStateName'], ['StateName'], false, lf.Order.ASC);
 schemaBuilder.createTable('City').
     addColumn('id', lf.Type.INTEGER).
     addColumn('CityName', lf.Type.STRING).
@@ -124,14 +124,14 @@ schemaBuilder.createTable('City').
     addIndex(['idxCountryCity'], ['Latitude'], false, lf.Order.ASC).
     addPrimaryKey(['id']);
 schemaBuilder.createTable('Country').
-    addColumn('CountryName', lf.Type.STRING).
     addColumn('Code', lf.Type.STRING).
+    addColumn('CountryName', lf.Type.STRING).
     addColumn('Capital', lf.Type.STRING).
     addColumn('Province', lf.Type.STRING).
     addColumn('Area', lf.Type.INTEGER).
     addColumn('Population', lf.Type.INTEGER).
+    addPrimaryKey(['Code']).
     addIndex(['idxCountryKey'], ['Population'], false, lf.Order.ASC).
-    addPrimaryKey(['CountryName']).
 schemaBuilder.createTable('Province').
     addColumn('id', lf.Type.INTEGER).
     addColumn('ProvinceName', lf.Type.STRING).

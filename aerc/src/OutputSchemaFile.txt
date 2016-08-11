@@ -9,7 +9,7 @@ strSQL="CREATE TABLE [_tblChart] ([id] Long,[VersionApp] Text (255),[VersionData
 strSQL=strSQL & "Long,[FLD66] Long,[FLD67] Long,[FLD68] Long,[FLD69] Long,[FLD70] Long )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblChart] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [_tblChart] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -17,7 +17,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [_tblPersist] ([id] Counter,[persist] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tblPersist] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [_tblPersist] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -25,7 +25,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [_tlkpChart] ([id] Counter,[ChartNum] Text (255),[ChartDesc] Text (255),[ChartTitle] Text (255) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpChart] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [_tlkpChart] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 strSQL="CREATE INDEX [QAQCnum] ON [_tlkpChart] ([ChartTitle])"
@@ -36,7 +36,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [_tlkpMonth] ([id] Counter,[TheMonthShort] Text (3),[TheMonthLong] Text (9),[TheMonthCode] Text (2) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpMonth] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [_tlkpMonth] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 strSQL="CREATE INDEX [TheMonthCode] ON [_tlkpMonth] ([TheMonthCode])"
@@ -47,7 +47,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [_tlkpYear] ([id] Counter,[TheYear] Text (4) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [_tlkpYear] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [_tlkpYear] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -68,10 +68,10 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [aetlkpStates] ([StateCode] Text (3),[StateAbbreviation] Text (2),[StateName] Text (15) )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [aetlkpStates] ([StateCode]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [StateCode] ON [aetlkpStates] ([StateCode]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
-strSQL="CREATE INDEX [State Name] ON [aetlkpStates] ([StateName])"
+strSQL="CREATE INDEX [StateName] ON [aetlkpStates] ([StateName])"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -87,13 +87,13 @@ Currentdb.Execute strSQL
 
 'Local Table
 
-strSQL="CREATE TABLE [Country] ([CountryName] Text (255),[Code] Text (255),[Capital] Text (255),[Province] Text (255),[Area] Long,[Population] Long )"
+strSQL="CREATE TABLE [Country] ([Code] Text (255),[CountryName] Text (255),[Capital] Text (255),[Province] Text (255),[Area] Long,[Population] Long )"
+Currentdb.Execute strSQL
+
+strSQL="CREATE UNIQUE INDEX [Code] ON [Country] ([Code]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 strSQL="CREATE INDEX [CountryKey] ON [Country] ([Population])"
-Currentdb.Execute strSQL
-
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [Country] ([CountryName]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -115,7 +115,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [tblBinary] ([id] Counter,[FileName] Text (255),[binary] OLEObject )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblBinary] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [tblBinary] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -123,7 +123,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [tblDummy0] ([Num] Long )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy0] ([Num]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [Num] ON [tblDummy0] ([Num]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -131,7 +131,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [tblDummy1] ([Num] Long )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy1] ([Num]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [Num] ON [tblDummy1] ([Num]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -139,7 +139,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [tblDummy2] ([Num] Long )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [tblDummy2] ([Num]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [Num] ON [tblDummy2] ([Num]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Local Table
@@ -158,7 +158,7 @@ Currentdb.Execute strSQL
 strSQL="CREATE TABLE [USysRibbons] ([id] Counter,[RibbonName] Text (255),[RibbonXML] Memo )"
 Currentdb.Execute strSQL
 
-strSQL="CREATE UNIQUE INDEX [PrimaryKey] ON [USysRibbons] ([id]) WITH PRIMARY DISALLOW NULL"
+strSQL="CREATE UNIQUE INDEX [id] ON [USysRibbons] ([id]) WITH PRIMARY DISALLOW NULL"
 Currentdb.Execute strSQL
 
 'Access 2010 - Compact And Repair

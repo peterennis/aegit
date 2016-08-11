@@ -11,7 +11,7 @@
   <xsd:element name="_tlkpChart">
     <xsd:annotation>
       <xsd:appinfo>
-        <od:index index-name="PrimaryKey" index-key="id " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
+        <od:index index-name="id" index-key="id " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
         <od:index index-name="QAQCnum" index-key="ChartNum " primary="no" unique="no" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>

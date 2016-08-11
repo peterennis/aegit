@@ -27,43 +27,44 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
-|-- CountryName (Field in Country)
-|------ Attributes >> 2
-|------ CollatingOrder >> 1033
-|------ Type >> 10
-|------ Name >> CountryName
-|------ OrdinalPosition >> 0
-|------ Size >> 255
-|------ SourceField >> CountryName
-|------ SourceTable >> Country
-|------ DataUpdatable >> False
-|------ DefaultValue >> 
-|------ ValidationRule >> 
-|------ ValidationText >> 
-|------ Required >> False
-|------ AllowZeroLength >> True
-|------ AppendOnly >> False
-|------ Expression >> 
-|------ ColumnWidth >> -1
-|------ ColumnOrder >> 1
-|------ ColumnHidden >> False
-|------ DisplayControl >> 109
-|------ IMEMode >> 0
-|------ IMESentenceMode >> 3
-|------ UnicodeCompression >> False
-|------ TextAlign >> 0
-|------ AggregateType >> -1
-|------ ResultType >> 0
-|------ CurrencyLCID >> 0
 |-- Code (Field in Country)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
 |------ Type >> 10
 |------ Name >> Code
-|------ OrdinalPosition >> 1
+|------ OrdinalPosition >> 0
 |------ Size >> 255
 |------ SourceField >> Code
+|------ SourceTable >> Country
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> True
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 3
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- CountryName (Field in Country)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> CountryName
+|------ OrdinalPosition >> 1
+|------ Size >> 255
+|------ SourceField >> CountryName
 |------ SourceTable >> Country
 |------ DataUpdatable >> False
 |------ DefaultValue >> 
@@ -79,7 +80,7 @@
 |------ DisplayControl >> 109
 |------ IMEMode >> 0
 |------ IMESentenceMode >> 3
-|------ UnicodeCompression >> True
+|------ UnicodeCompression >> False
 |------ TextAlign >> 0
 |------ AggregateType >> -1
 |------ ResultType >> 0

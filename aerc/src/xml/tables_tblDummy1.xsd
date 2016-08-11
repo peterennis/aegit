@@ -11,12 +11,12 @@
   <xsd:element name="tblDummy1">
     <xsd:annotation>
       <xsd:appinfo>
-        <od:index index-name="PrimaryKey" index-key="Num " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
+        <od:index index-name="Num" index-key="Num " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element name="Num" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
+        <xsd:element name="Num" minOccurs="1" od:jetType="longinteger" od:sqlSType="int" od:nonNullable="yes" type="xsd:int"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

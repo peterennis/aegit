@@ -116,6 +116,7 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
                                 Optional ByVal varBackEndDbOne As Variant, _
                                 Optional ByVal varFrontEndApp As Variant)
 
+    Debug.Print "aegitClassTest"
     On Error GoTo PROC_ERR
 
     Dim oDbObjects As aegit_expClass
@@ -129,7 +130,7 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     If Not IsMissing(varSrcFldrBe) Then oDbObjects.SourceFolderBe = varSrcFldrBe            ' THE_BACK_END_SOURCE_FOLDER
     If Not IsMissing(varXmlFldrBe) Then oDbObjects.XMLFolderBe = varXmlFldrBe               ' THE_BACK_END_XML_FOLDER
     If Not IsMissing(varXmlDataFldrBe) Then oDbObjects.XMLDataFolderBe = varXmlDataFldrBe   ' THE_XML_DATA_FOLDER
-    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDbOne = varBackEndDbOne              ' THE_BACK_END_DB1
+    If Not IsMissing(varBackEndDbOne) Then oDbObjects.BackEndDbOne = varBackEndDbOne        ' THE_BACK_END_DB1
     If Not IsMissing(varFrontEndApp) Then oDbObjects.FrontEndApp = varFrontEndApp           ' THE_FRONT_END_APP
     'MsgBox "varBackEndDbOne = " & varBackEndDbOne, vbInformation, "Procedure aegitClassTest"
 
@@ -137,10 +138,9 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     gvarMyTablesForExportToXML = Array("USysRibbons")
     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML()
 
-    Debug.Print "aegitClassTest"
     If IsArrayInitialized(gvarMyTablesForExportToXML) Then
         Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
-        oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+'''        oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
     Else
         Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for data export."
     End If

@@ -432,7 +432,7 @@ Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
     'End If
     ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
     aegitDataXML = varTablesArray
-    Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
+    'Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
     If UBound(varTablesArray) > 0 Then
         Debug.Print , "aegitDataXML(1) = " & aegitDataXML(1)
     End If

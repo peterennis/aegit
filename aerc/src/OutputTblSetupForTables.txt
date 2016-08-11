@@ -170,8 +170,8 @@ TABLE: Country
 --------------
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
-CountryName          Text                  255                
 Code                 Text                  255                
+CountryName          Text                  255                
 Capital              Text                  255                
 Province             Text                  255                
 Area                 Long Integer          4                  

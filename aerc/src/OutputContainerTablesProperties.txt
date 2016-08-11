@@ -348,6 +348,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
+              GUID          GUID
 >>>Province
               Name          Province
               Owner         admin
@@ -748,6 +749,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          GUID
 >>>tblDummy1
               Name          tblDummy1
               Owner         admin
@@ -775,6 +777,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          GUID
 >>>tblDummy2
               Name          tblDummy2
               Owner         admin
@@ -802,6 +805,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          GUID
 >>>tblDummy3
               Name          tblDummy3
               Owner         admin
