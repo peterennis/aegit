@@ -137,7 +137,6 @@
 [tblDummy2]
               [Num]          109          TextBox
 [tblDummy3]
-              [id]           109          TextBox
               [eventId]      109          TextBox
               [eventPerson]  109          TextBox
               [eventPosition]              109          TextBox
@@ -145,6 +144,7 @@
               [Field]        109          TextBox
               [String]       109          TextBox
               [Indexer]      109          TextBox
+              [id]           109          TextBox
 [USysRibbons]
               [id]           109          TextBox
               [RibbonName]   109          TextBox

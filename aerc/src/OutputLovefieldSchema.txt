@@ -158,7 +158,6 @@ schemaBuilder.createTable('tblDummy2').
     addColumn('Num', lf.Type.INTEGER).
     addPrimaryKey(['Num']);
 schemaBuilder.createTable('tblDummy3').
-    addColumn('id', lf.Type.INTEGER).
     addColumn('eventId', lf.Type.INTEGER).
     addColumn('eventPerson', lf.Type.INTEGER).
     addColumn('eventPosition', lf.Type.INTEGER).
@@ -166,8 +165,9 @@ schemaBuilder.createTable('tblDummy3').
     addColumn('Field', lf.Type.STRING).
     addColumn('String', lf.Type.STRING).
     addColumn('Indexer', lf.Type.STRING).
-    addIndex(['idxMFSI'], ['Indexer'], false, lf.Order.ASC).
-    addPrimaryKey(['id']);
+    addColumn('id', lf.Type.INTEGER).
+    addPrimaryKey(['eventId']).
+    addIndex(['idxMFSI'], ['id'], false, lf.Order.ASC);
 schemaBuilder.createTable('USysRibbons').
     addColumn('id', lf.Type.INTEGER).
     addColumn('RibbonName', lf.Type.STRING).

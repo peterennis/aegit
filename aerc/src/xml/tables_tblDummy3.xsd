@@ -11,13 +11,12 @@
   <xsd:element name="tblDummy3">
     <xsd:annotation>
       <xsd:appinfo>
+        <od:index index-name="eventId" index-key="eventId eventPerson " primary="yes" unique="yes" clustered="no" order="asc asc"></od:index>
         <od:index index-name="MFSI" index-key="Multi Field String Indexer " primary="no" unique="no" clustered="no" order="asc asc asc asc"></od:index>
-        <od:index index-name="PrimaryKey" index-key="eventId eventPerson " primary="yes" unique="yes" clustered="no" order="asc asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element name="id" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int"></xsd:element>
         <xsd:element name="eventId" minOccurs="1" od:jetType="longinteger" od:sqlSType="int" od:nonNullable="yes" type="xsd:int"></xsd:element>
         <xsd:element name="eventPerson" minOccurs="1" od:jetType="longinteger" od:sqlSType="int" od:nonNullable="yes" type="xsd:int"></xsd:element>
         <xsd:element name="eventPosition" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
@@ -49,6 +48,7 @@
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
+        <xsd:element name="id" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

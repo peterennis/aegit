@@ -92,16 +92,16 @@
 >[Num]        [Num], 
 ========================================
 <<<[tblDummy3]>>>
+              Index:[eventId]
+                            Field Name:eventId
+                            Field Name:eventPerson
+>[eventId]    [eventPerson], 
               Index:[MFSI]
                             Field Name:Multi
                             Field Name:Field
                             Field Name:String
                             Field Name:Indexer
 >[MFSI]       [Indexer], 
-              Index:[PrimaryKey]
-                            Field Name:eventId
-                            Field Name:eventPerson
->[PrimaryKey] [eventPerson], 
 ========================================
 <<<[USysRibbons]>>>
               Index:[id]

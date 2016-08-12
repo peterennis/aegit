@@ -28,36 +28,12 @@
 |-- DatasheetForeThemeColorIndex >> 0
 |-- GUID >> GUID
 --------------------------------------------------
-|-- id (Field in tblDummy3)
-|------ Attributes >> 17
-|------ CollatingOrder >> 1033
-|------ Type >> 4
-|------ Name >> id
-|------ OrdinalPosition >> 0
-|------ Size >> 4
-|------ SourceField >> id
-|------ SourceTable >> tblDummy3
-|------ DataUpdatable >> False
-|------ DefaultValue >> 
-|------ ValidationRule >> 
-|------ ValidationText >> 
-|------ Required >> False
-|------ AllowZeroLength >> False
-|------ AppendOnly >> False
-|------ Expression >> 
-|------ ColumnWidth >> -1
-|------ ColumnOrder >> 0
-|------ ColumnHidden >> False
-|------ TextAlign >> 0
-|------ AggregateType >> -1
-|------ ResultType >> 0
-|------ CurrencyLCID >> 0
 |-- eventId (Field in tblDummy3)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
 |------ Type >> 4
 |------ Name >> eventId
-|------ OrdinalPosition >> 1
+|------ OrdinalPosition >> 0
 |------ Size >> 4
 |------ SourceField >> eventId
 |------ SourceTable >> tblDummy3
@@ -83,7 +59,7 @@
 |------ CollatingOrder >> 1033
 |------ Type >> 4
 |------ Name >> eventPerson
-|------ OrdinalPosition >> 2
+|------ OrdinalPosition >> 1
 |------ Size >> 4
 |------ SourceField >> eventPerson
 |------ SourceTable >> tblDummy3
@@ -109,7 +85,7 @@
 |------ CollatingOrder >> 1033
 |------ Type >> 4
 |------ Name >> eventPosition
-|------ OrdinalPosition >> 3
+|------ OrdinalPosition >> 2
 |------ Size >> 4
 |------ SourceField >> eventPosition
 |------ SourceTable >> tblDummy3
@@ -135,7 +111,7 @@
 |------ CollatingOrder >> 1033
 |------ Type >> 10
 |------ Name >> Multi
-|------ OrdinalPosition >> 4
+|------ OrdinalPosition >> 3
 |------ Size >> 255
 |------ SourceField >> Multi
 |------ SourceTable >> tblDummy3
@@ -163,7 +139,7 @@
 |------ CollatingOrder >> 1033
 |------ Type >> 10
 |------ Name >> Field
-|------ OrdinalPosition >> 5
+|------ OrdinalPosition >> 4
 |------ Size >> 255
 |------ SourceField >> Field
 |------ SourceTable >> tblDummy3
@@ -191,7 +167,7 @@
 |------ CollatingOrder >> 1033
 |------ Type >> 10
 |------ Name >> String
-|------ OrdinalPosition >> 6
+|------ OrdinalPosition >> 5
 |------ Size >> 255
 |------ SourceField >> String
 |------ SourceTable >> tblDummy3
@@ -219,7 +195,7 @@
 |------ CollatingOrder >> 1033
 |------ Type >> 10
 |------ Name >> Indexer
-|------ OrdinalPosition >> 7
+|------ OrdinalPosition >> 6
 |------ Size >> 255
 |------ SourceField >> Indexer
 |------ SourceTable >> tblDummy3
@@ -238,6 +214,30 @@
 |------ IMEMode >> 0
 |------ IMESentenceMode >> 3
 |------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- id (Field in tblDummy3)
+|------ Attributes >> 17
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> id
+|------ OrdinalPosition >> 7
+|------ Size >> 4
+|------ SourceField >> id
+|------ SourceTable >> tblDummy3
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
 |------ TextAlign >> 0
 |------ AggregateType >> -1
 |------ ResultType >> 0
