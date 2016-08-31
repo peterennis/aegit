@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Ref: https://www.599cd.com/tips/hta/advanced/accessdb/ -->
+   <title>Connect to aegit database</title>
+   
+   <HTA:APPLICATION
+        APPLICATIONNAME = "Connect to aegit database"
+		ICON = "C:\\ae\aegit\\adaept64.icoo"
+    />
+
+	<script language="vbscript">
+	Sub FillNames()
+		' Connection String
+		Dim sConnect
+		' Commands
+		Dim objCmd
+
+		' RecordSets
+		Dim objRS
+
+		' Initialize Connection String to connect to an MS Access accdb Database
+		sConnect = "Provider=Microsoft.Ace.OLEDB.12.0;Data Source=C:\ae\aegit\adaept_revision_control.accdb;Persist Security Info=False"
+
+		' Create a command object to execute Advancded SQL Statements
+		Set objCmd = CreateObject("ADODB.Command")
+		objCmd.ActiveConnection = sConnect    'Connect to database
+
+		objCmd.CommandText = "SELECT StateName FROM aetlkpStates Order By StateName Asc"          // WHERE StateName Like 'M*';"
+
+		' Create the actual recordset to be used in this script 
+		' and retrieve or display information from database
+		Set objRS = CreateObject("ADODB.Recordset")
+		Set objRS = objCmd.Execute
+		
+		Dim strStates
+		
+		While Not objRS.EOF
+			'msgbox objRS(0)
+			'msgbox objRS("StateName")
+			strStates = strStates & objRS("StateName") & ", "
+			objRS.MoveNext
+		Wend
+		
+		'msgbox strStates
+		myContent.innerHTML = "<p>Names: " & strStates & "</p>" 
+		
+		' Clean Up and Close
+		objRS.Close
+		Set objRS = Nothing
+	End Sub
+	</script>
+
+</head>
+
+<body onload="FillNames()">
+	
+	<h1>Connect to aegit database</h1>
+	<div id="myContent">
+	</div>
+
+</body>
+
+</html>

@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.1"
-Private Const aegit_expVERSION_DATE As String = "August 7, 2016"
+Private Const aegit_expVERSION As String = "1.9.2"
+Private Const aegit_expVERSION_DATE As String = "August 31, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3239,6 +3239,9 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 strFlds = vbNullString
 
                 For Each fld In tdf.Fields
+                    ' NOTE: FIXIT - Resolution needed for multi field indexes and primary keys
+                    ' Answer here: https://groups.google.com/forum/#!topic/comp.databases.ms-access/CYhK9ZMrMDk
+                    ' from: http://allenbrowne.com/AppRelReportCode.html
                     If ndx.Primary Then
                         Debug.Print tdf.Name, fld.Name, ndx.Name, ndx.Primary, ndx.Foreign, ndx.Unique, ndx.Required
                         strFlds = ",[" & fld.Name & "]"

@@ -31,8 +31,13 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %105 -
+' %104 -
+' %103 -
+' %102 -
+' %101 -
 ' %100 -
-' %099 -
+' %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
 ' %098 - tblDummy3 shows incorrect output for primary key
 ' %097 - Pass the actual value "varDebug" for debugging in all cases so potentially strange variant parameters will not be transferred
 ' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
