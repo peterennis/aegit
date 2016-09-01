@@ -1,7 +1,7 @@
 Option Compare Database
 Option Explicit
 
-Private Declare Function GetTickCount Lib "kernel32" () As Long
+Private Declare PtrSafe Function GetTickCount Lib "kernel32" () As Long
 
 Public Sub HashAllModules()
 ' mwolfe02, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/1966

@@ -2,11 +2,9 @@ Option Compare Database
 Option Explicit
 Option Private Module
 
-'@TestModule - change - change - change
 Private Assert As Object
 '
 
-'@ModuleInitialize
 Public Sub ModuleInitialize()
     On Error GoTo 0
     ' This method runs once per module.
@@ -14,25 +12,21 @@ Public Sub ModuleInitialize()
 
 End Sub
 
-'@ModuleCleanup
 Public Sub ModuleCleanup()
     On Error GoTo 0
     ' This method runs once per module.
 End Sub
 
-'@TestInitialize
 Public Sub TestInitialize()
     On Error GoTo 0
     ' This method runs before every test in the module.
 End Sub
 
-'@TestCleanup
 Public Sub TestCleanup()
     On Error GoTo 0
     ' This method runs after every test in the module.
 End Sub
 
-'@TestMethod
 Public Sub TestMethodIsPK()
 
     On Error GoTo TestFail
@@ -53,7 +47,6 @@ TestFail:
     Assert.Fail "TestMethodIsPK raised an error: #" & Err.Number & " - " & "Erl=" & Erl & " " & Err.Description
 End Sub
 
-'@TestMethod
 Public Sub TestMethodWithManyLettersInTheNameButThereCouldBeManyMore()
     On Error GoTo TestFail
     

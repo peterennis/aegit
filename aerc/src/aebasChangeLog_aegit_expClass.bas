@@ -33,10 +33,9 @@ Option Explicit
 ' Tasks:
 ' %105 -
 ' %104 -
-' %103 -
-' %102 -
-' %101 -
-' %100 -
+' %103 - Get DbIssueChecker.mdb from Allen Browne and use it to identify issues
+' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
+' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
 ' %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
 ' %098 - tblDummy3 shows incorrect output for primary key
 ' %097 - Pass the actual value "varDebug" for debugging in all cases so potentially strange variant parameters will not be transferred
@@ -57,7 +56,6 @@ Option Explicit
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample then fix access and lf schema output
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
-' %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to create zzz query
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
 ' %051 - UTF-16 to UTF-8, http://www.di-mgt.com.au/howto-convert-vba-unicode-to-utf8.html, David Ireland
@@ -78,6 +76,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160831 - v193 -
+    ' FIXED - %102 - Add extra Lovefield types to match SQL Database tables from Azure
+    ' FIXED - %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to leave zzz query
 '20160724 - v190 -
     ' FIXED - %092 - Add relationship example from MONDIAL (no data), Ref: http://www.dbis.informatik.uni-goettingen.de/Mondial/
     '           Ref: http://databases.about.com/od/sampleaccessdatabases/a/Microsoft-Access-Sample-Database-Countries-Cities-And-Provinces.htm

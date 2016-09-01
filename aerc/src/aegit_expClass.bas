@@ -39,7 +39,7 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.2"
+Private Const aegit_expVERSION As String = "1.9.3"
 Private Const aegit_expVERSION_DATE As String = "August 31, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
@@ -3712,6 +3712,14 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
             GetLovefieldType = "', lf.Type.STRING)."        ' "STRING"
         Case "YesNo"
             GetLovefieldType = "', lf.Type.BOOLEAN)."       ' "BOOLEAN"
+        '
+        ' NOTE: The following come from tables linked with SQL Database Azure
+        Case "BYTE"
+            GetLovefieldType = "', lf.Type.INTEGER)."
+        Case "DECIMAL"
+            GetLovefieldType = "', lf.Type.NUMBER)."
+        Case "GUID"
+            GetLovefieldType = "', lf.Type.STRING)."
         Case Else
             MsgBox "Unknown Access Field Type in procedure GetLovefieldType of Class aegitClass" & vbCrLf & _
                 "accessFieldType=" & accessFieldType, vbCritical, "GetLovefieldType"
@@ -5800,6 +5808,11 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     'DoCmd.OpenQuery MY_QUERY_NAME
 e3167:
     DoCmd.TransferText acExportDelim, , MY_QUERY_NAME, strPathFileName
+    ' Delete the query
+    On Error Resume Next
+    DoCmd.DeleteObject acQuery, MY_QUERY_NAME
+    Err.Clear
+    On Error GoTo PROC_ERR
 
 PROC_EXIT:
     Exit Sub

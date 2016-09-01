@@ -2,7 +2,7 @@ Option Compare Database
 Option Explicit
 Option Private Module
 
-Private Declare Function timeGetTime Lib "winmm.dll" () As Long
+Private Declare PtrSafe Function timeGetTime Lib "winmm.dll" () As Long
 
 Private Type aeLogger
     blnNoTrace As Boolean
