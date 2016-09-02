@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.3"
-Private Const aegit_expVERSION_DATE As String = "August 31, 2016"
+Private Const aegit_expVERSION As String = "1.9.4"
+Private Const aegit_expVERSION_DATE As String = "September 1, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -2660,12 +2660,12 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
         'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
             Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
         End If
         Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
             & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-            & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
+            & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
             & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
     Next
     If Not IsMissing(varDebug) Then Debug.Print
@@ -3080,11 +3080,41 @@ Private Sub OutputTableListOfIndexesDAO(ByVal strFileOut As String, ByVal tdfIn 
 
 End Sub
 
+Private Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
+' allenbrowne.com
+'Purpose:   Indicate if the field is part of a primary key or unique index.
+'Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
+'           Lower case letters if secondary field in index. Can have multiple indexes.
+'Arguments: tdf = the TableDef the field belongs to.
+'           strField = name of the field to search the Indexes for.
+    Dim ind As DAO.Index        'Each index of this table.
+    Dim fld As DAO.Field        'Each field of the index
+    Dim iCount As Integer
+    Dim strReturn As String     'Return string
+    
+    For Each ind In tdf.Indexes
+        iCount = 0
+        For Each fld In ind.Fields
+            If fld.Name = strField Then
+                If ind.Primary Then
+                    strReturn = strReturn & IIf(iCount = 0, "P", "p")
+                ElseIf ind.Unique Then
+                    strReturn = strReturn & IIf(iCount = 0, "U", "u")
+                Else
+                    strReturn = strReturn & IIf(iCount = 0, "I", "i")
+                End If
+            End If
+            iCount = iCount + 1
+        Next
+    Next
+    DescribeIndexField = strReturn
+End Function
+
 Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbScript()
 ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
     Debug.Print "OutputTheSchemaFile"
-    On Error GoTo 0
+    On Error GoTo PROC_ERR
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
@@ -3149,9 +3179,9 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 Select Case fld.Type
                     Case dbText
                         ' No look-up fields
-                        strFlds = strFlds & "Text (" & fld.size & ")"
+                        strFlds = strFlds & "Text (" & fld.Size & ")"
                     Case 109&                                   ' dbComplexText
-                        strFlds = strFlds & "Text (" & fld.size & ")"
+                        strFlds = strFlds & "Text (" & fld.Size & ")"
                     Case dbMemo
                         If (fld.Attributes And dbHyperlinkField) = 0& Then
                             strFlds = strFlds & "Memo"
@@ -3242,6 +3272,11 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                     ' NOTE: FIXIT - Resolution needed for multi field indexes and primary keys
                     ' Answer here: https://groups.google.com/forum/#!topic/comp.databases.ms-access/CYhK9ZMrMDk
                     ' from: http://allenbrowne.com/AppRelReportCode.html
+                    If tdf.Name = "tblDummy3" Then
+                        ' Testing show info for multi-field PK and multi-field index
+                        Debug.Print fld.Name, DescribeIndexField(tdf, fld.Name)
+                    End If
+
                     If ndx.Primary Then
                         Debug.Print tdf.Name, fld.Name, ndx.Name, ndx.Primary, ndx.Foreign, ndx.Unique, ndx.Required
                         strFlds = ",[" & fld.Name & "]"
@@ -3299,6 +3334,18 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
 
     f.Close
     'Debug.Print "DONE !!!"
+
+PROC_EXIT:
+    Set dbs = Nothing
+    Set fs = Nothing
+    Exit Sub
+
+PROC_ERR:
+    Select Case Err
+    Case Else
+        MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure OutputTheSchemaFile of Class aegitClass"
+        Resume PROC_EXIT
+    End Select
 
 End Sub
 
