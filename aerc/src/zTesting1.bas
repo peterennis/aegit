@@ -1,6 +1,85 @@
 Option Compare Database
 Option Explicit
 
+Public Sub TestGetIndexDetails()
+
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb
+    Dim tdf As DAO.TableDef
+    Set tdf = dbs.TableDefs("tblDummy3")
+    Dim fld As DAO.Field
+    Dim ndx As DAO.Index
+
+    For Each ndx In tdf.Indexes
+        Debug.Print ndx.Name, ndx.Fields, ndx.Foreign, ndx.IgnoreNulls, ndx.Primary, ndx.Properties.Count, ndx.Required, ndx.Unique
+    Next
+    Debug.Print "--------------------"
+
+    For Each fld In tdf.Fields
+        ' Testing show info for multi-field PK and multi-field index
+        Debug.Print fld.Name, GetIndexDetails(tdf, fld.Name)
+    Next
+
+End Sub
+
+Public Function GetIndexDetails(tdf As DAO.TableDef, strField As String) As String
+' Ref: allenbrowne.com DescribeIndexField
+
+    'Debug.Print "GetIndexDetails"
+    Dim ind As DAO.Index
+    Dim fld As DAO.Field
+    Dim iCount As Integer
+    Dim strReturn As String
+
+    For Each ind In tdf.Indexes
+        iCount = 0
+        For Each fld In ind.Fields
+            If fld.Name = strField Then
+                If ind.Primary Then
+                    strReturn = strReturn & IIf(iCount = 0, "P", "p")
+                ElseIf ind.Unique Then
+                    strReturn = strReturn & IIf(iCount = 0, "U", "u")
+                Else
+                    strReturn = strReturn & IIf(iCount = 0, "I", "i")
+                End If
+            End If
+            iCount = iCount + 1
+        Next
+    Next
+    GetIndexDetails = strReturn
+
+End Function
+
+Public Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
+' allenbrowne.com
+'Purpose:   Indicate if the field is part of a primary key or unique index.
+'Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
+'           Lower case letters if secondary field in index. Can have multiple indexes.
+'Arguments: tdf = the TableDef the field belongs to.
+'           strField = name of the field to search the Indexes for.
+    Dim ind As DAO.Index        'Each index of this table.
+    Dim fld As DAO.Field        'Each field of the index
+    Dim iCount As Integer
+    Dim strReturn As String     'Return string
+    
+    For Each ind In tdf.Indexes
+        iCount = 0
+        For Each fld In ind.Fields
+            If fld.Name = strField Then
+                If ind.Primary Then
+                    strReturn = strReturn & IIf(iCount = 0, "P", "p")
+                ElseIf ind.Unique Then
+                    strReturn = strReturn & IIf(iCount = 0, "U", "u")
+                Else
+                    strReturn = strReturn & IIf(iCount = 0, "I", "i")
+                End If
+            End If
+            iCount = iCount + 1
+        Next
+    Next
+    DescribeIndexField = strReturn
+End Function
+
 'zzzTmpTblQueries
 Public Function RecordsetUpdatable(ByVal strSQL As String) As Boolean
 ' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
