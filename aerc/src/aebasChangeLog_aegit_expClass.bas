@@ -70,7 +70,7 @@ Option Explicit
 ' #045 -
 ' #044 -
 ' #043 -
-' #042 -
+' #042 - Global Error Handler Routines, Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
 ' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 '=============================================================================================================================

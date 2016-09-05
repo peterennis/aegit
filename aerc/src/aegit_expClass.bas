@@ -268,73 +268,6 @@ Private Sub Class_Terminate()
 
 End Sub
 
-Public Property Get SourceFolder() As String
-    On Error GoTo 0
-    Debug.Print "Property Get SourceFolder"
-    SourceFolder = aegitSourceFolder
-End Property
-
-Public Property Let SourceFolder(ByVal strSourceFolder As String)
-    ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
-    ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
-    On Error GoTo 0
-    Debug.Print "Property Let SourceFolder"
-    aegitSourceFolder = strSourceFolder
-End Property
-
-Public Property Get SchemaFile(Optional ByVal varDebug As Variant) As Boolean
-    On Error GoTo 0
-    Debug.Print "Property Get SchemaFile"
-    If IsMissing(varDebug) Then
-        OutputTheSchemaFile
-    Else
-        Debug.Print "Get SchemaFile"
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to SchemaFile"
-        Debug.Print , "DEBUGGING TURNED ON"
-        OutputTheSchemaFile "varDebug"
-    End If
-    SchemaFile = True
-End Property
-
-Public Property Get FrontEndApp() As Boolean
-    On Error GoTo 0
-    Debug.Print "Property Get FrontEndApp"
-    FrontEndApp = aegitFrontEndApp
-    Debug.Print , "FrontEndApp = " & FrontEndApp
-End Property
-
-Public Property Let FrontEndApp(ByVal IsFrontEndApp As Boolean)
-    On Error GoTo 0
-    'Debug.Print "Property Let FrontEndApp"
-    aegitFrontEndApp = IsFrontEndApp
-    'Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
-End Property
-
-Public Property Get TextEncoding() As String
-    On Error GoTo 0
-    TextEncoding = aegitTextEncoding
-End Property
-
-Public Property Let TextEncoding(ByVal strTextEncoding As String)
-    On Error GoTo 0
-    aegitTextEncoding = strTextEncoding
-End Property
-
-Public Property Get SourceFolderBe() As String
-    On Error GoTo 0
-    Debug.Print "Property Get SourceFolderBe"
-    SourceFolderBe = aegitSourceFolderBe      'aestrSourceLocationBe
-    Debug.Print , "SourceFolderBe = " & SourceFolderBe
-End Property
-
-Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
-    On Error GoTo 0
-    Debug.Print "Property Let SourceFolderBe"
-    aegitSourceFolderBe = strSourceFolderBe
-    'aestrSourceLocationBe = strSourceFolderBe
-    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-End Property
-
 Public Property Get BackEndDbOne() As String
     On Error GoTo 0
     BackEndDbOne = aestrBackEndDbOne
@@ -347,154 +280,44 @@ Public Property Let BackEndDbOne(ByVal strBackEndDbFullPath As String)
     Debug.Print , "aestrBackEndDbOne = " & aestrBackEndDbOne
 End Property
 
-Public Property Get XMLFolder() As String
-    On Error GoTo 0
-    Debug.Print "Property Get XMLFolder"
-    XMLFolder = aegitXMLFolder
-    Debug.Print , "XMLFolder = " & XMLFolder
-End Property
+Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As Boolean
+    ' Automation for Compact and Repair
 
-Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
-    Debug.Print "Property Let XMLFolder"
-    aegitXMLFolder = strXMLFolder
-    Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
-End Property
+    Dim blnRun As Boolean
 
-Public Property Get XMLFolderBe() As String
-    On Error GoTo 0
-    Debug.Print "Property Get XMLFolderBe"
-    XMLFolderBe = aegitXMLFolderBe
-    Debug.Print , "XMLFolderBe = " & XMLFolderBe
-End Property
-
-Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
-    On Error GoTo 0
-    Debug.Print "Property Let XMLFolderBe"
-    aegitXMLFolderBe = strXMLFolderBe
-    Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
-End Property
-
-Public Property Get XMLDataFolder() As String
-    On Error GoTo 0
-    Debug.Print "Property Get XMLDataFolder"
-    XMLDataFolder = aegitXMLDataFolder
-    Debug.Print , "XMLDataFolder = " & XMLDataFolder
-End Property
-
-Public Property Let XMLDataFolder(ByVal strXMLDataFolder As String)
-    On Error GoTo 0
-    Debug.Print "Property Let XMLDataFolder"
-    aegitXMLDataFolder = strXMLDataFolder
-    Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
-End Property
-
-Public Property Get XMLDataFolderBe() As String
-    On Error GoTo 0
-    Debug.Print "Property Get XMLDataFolderBe"
-    XMLDataFolderBe = aegitXMLDataFolderBe
-    Debug.Print , "XMLDataFolderBe = " & XMLDataFolderBe
-End Property
-
-Public Property Let XMLDataFolderBe(ByVal strXMLDataFolderBe As String)
-    On Error GoTo 0
-    Debug.Print "Property Let XMLDataFolderBe"
-    aegitXMLDataFolderBe = strXMLDataFolderBe
-    Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
-End Property
-
-Public Property Let ExportQAT(ByVal IsExportQAT As Boolean)
-    On Error GoTo 0
-    If IsExportQAT Then
-        aegitExport.ExportQAT = True
+    Debug.Print "CompactAndRepair"
+    If Not IsMissing(varTrueFalse) Then
+        blnRun = False
+        Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
+        Debug.Print , "RUN CompactAndRepair IS OFF"
     Else
-        aegitExport.ExportQAT = False
+        blnRun = True
+        Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
+        Debug.Print , "RUN CompactAndRepair IS ON..."
     End If
-End Property
 
-Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
-    On Error GoTo 0
-    If IsExportCBID Then
-        aegitExport.ExportCBID = True
+    ' TableDefs not refreshed after create
+    ' Ref: http://support.microsoft.com/kb/104339
+    ' So force a compact and repair
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/aa202943(v=office.10).aspx
+    ' Not a "good practice" but for this use it is simple and works
+    ' From the Access window
+    ' Access 2003: SendKeys "%(TDC)", False
+    ' Access 2007: SendKeys "%(FMC)", False
+    ' Access 2010: SendKeys "%(YC)", False
+    ' From the Immediate window
+    
+    If blnRun Then
+        ' Close VBA
+        SendKeys "%F{END}{ENTER}", False
+        ' Run Compact and Repair
+        SendKeys "%F{TAB}{TAB}{ENTER}", False
+        CompactAndRepair = True
     Else
-        aegitExport.ExportCBID = False
+        CompactAndRepair = False
     End If
-End Property
-
-Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
-    ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
-    On Error GoTo PROC_ERR
-    Debug.Print "Property Let TablesExportToXML"
-    'Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0) = " & varTablesArray(0)
-    'Debug.Print , "UBound(varTablesArray) = " & UBound(varTablesArray)
-    'If UBound(varTablesArray) > 0 Then
-    '    Debug.Print , "varTablesArray(1) = " & varTablesArray(1)
-    'End If
-    ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
-    aegitDataXML = varTablesArray
-    'Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
-    If UBound(varTablesArray) > 0 Then
-        Debug.Print , "aegitDataXML(1) = " & aegitDataXML(1)
-    End If
-
-PROC_EXIT:
-    Exit Property
-
-PROC_ERR:
-    Select Case Err.Number
-        Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML", vbCritical, "ERROR"
-            Stop
-    End Select
-
-End Property
-
-Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean
-    On Error GoTo 0
-    If IsMissing(varDebug) Then
-        'Debug.Print "Get DocumentTheDatabase"
-        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
-        'Debug.Print , "DEBUGGING IS OFF"
-        DocumentTheDatabase = aeDocumentTheDatabase()
-    Else
-        Debug.Print "Get DocumentTheDatabase"
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
-        Debug.Print , "DEBUGGING TURNED ON"
-        DocumentTheDatabase = aeDocumentTheDatabase(varDebug)
-    End If
-End Property
-
-Public Property Get Exists(ByVal strAccObjType As String, _
-    ByVal strAccObjName As String, _
-    Optional ByVal varDebug As Variant) As Boolean
-
-    On Error GoTo 0
-    If IsMissing(varDebug) Then
-        'Debug.Print "Get Exists"
-        'Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
-        'Debug.Print , "DEBUGGING IS OFF"
-        Exists = aeExists(strAccObjType, strAccObjName)
-    Else
-        Debug.Print "Get Exists"
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
-        Debug.Print , "DEBUGGING TURNED ON"
-        Exists = aeExists(strAccObjType, strAccObjName, varDebug)
-    End If
-End Property
-
-Public Property Get GetReferences(Optional ByVal varDebug As Variant) As Boolean
-    On Error GoTo 0
-    If IsMissing(varDebug) Then
-        'Debug.Print "Get GetReferences"
-        'Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
-        'Debug.Print , "DEBUGGING IS OFF"
-        GetReferences = aeGetReferences()
-    Else
-        Debug.Print "Get GetReferences"
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
-        Debug.Print , "DEBUGGING TURNED ON"
-        GetReferences = aeGetReferences(varDebug)
-    End If
+    
 End Property
 
 Public Property Get DocumentRelations(Optional ByVal varDebug As Variant) As Boolean
@@ -542,44 +365,19 @@ Public Property Get DocumentTablesXML(Optional ByVal varDebug As Variant) As Boo
     End If
 End Property
 
-Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As Boolean
-    ' Automation for Compact and Repair
-
+Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
-    Dim blnRun As Boolean
-
-    Debug.Print "CompactAndRepair"
-    If Not IsMissing(varTrueFalse) Then
-        blnRun = False
-        Debug.Print , "varTrueFalse IS NOT MISSING so blnRun of CompactAndRepair is set to False"
-        Debug.Print , "RUN CompactAndRepair IS OFF"
+    If IsMissing(varDebug) Then
+        'Debug.Print "Get DocumentTheDatabase"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
+        'Debug.Print , "DEBUGGING IS OFF"
+        DocumentTheDatabase = aeDocumentTheDatabase()
     Else
-        blnRun = True
-        Debug.Print , "varTrueFalse IS MISSING so blnRun of CompactAndRepair is set to True"
-        Debug.Print , "RUN CompactAndRepair IS ON..."
+        Debug.Print "Get DocumentTheDatabase"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
+        Debug.Print , "DEBUGGING TURNED ON"
+        DocumentTheDatabase = aeDocumentTheDatabase(varDebug)
     End If
-
-    ' TableDefs not refreshed after create
-    ' Ref: http://support.microsoft.com/kb/104339
-    ' So force a compact and repair
-    ' Ref: http://msdn.microsoft.com/en-us/library/office/aa202943(v=office.10).aspx
-    ' Not a "good practice" but for this use it is simple and works
-    ' From the Access window
-    ' Access 2003: SendKeys "%(TDC)", False
-    ' Access 2007: SendKeys "%(FMC)", False
-    ' Access 2010: SendKeys "%(YC)", False
-    ' From the Immediate window
-    
-    If blnRun Then
-        ' Close VBA
-        SendKeys "%F{END}{ENTER}", False
-        ' Run Compact and Repair
-        SendKeys "%F{TAB}{TAB}{ENTER}", False
-        CompactAndRepair = True
-    Else
-        CompactAndRepair = False
-    End If
-    
 End Property
 
 Public Property Get ExcludeFiles(Optional ByVal varDebug As Variant) As Boolean
@@ -603,6 +401,71 @@ Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnEx
     Debug.Print , "Let ExcludeFiles = " & pExclude
 End Property
 
+Public Property Get Exists(ByVal strAccObjType As String, _
+    ByVal strAccObjName As String, _
+    Optional ByVal varDebug As Variant) As Boolean
+
+    On Error GoTo 0
+    If IsMissing(varDebug) Then
+        'Debug.Print "Get Exists"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
+        'Debug.Print , "DEBUGGING IS OFF"
+        Exists = aeExists(strAccObjType, strAccObjName)
+    Else
+        Debug.Print "Get Exists"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
+        Debug.Print , "DEBUGGING TURNED ON"
+        Exists = aeExists(strAccObjType, strAccObjName, varDebug)
+    End If
+End Property
+
+Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
+    On Error GoTo 0
+    If IsExportCBID Then
+        aegitExport.ExportCBID = True
+    Else
+        aegitExport.ExportCBID = False
+    End If
+End Property
+
+Public Property Let ExportQAT(ByVal IsExportQAT As Boolean)
+    On Error GoTo 0
+    If IsExportQAT Then
+        aegitExport.ExportQAT = True
+    Else
+        aegitExport.ExportQAT = False
+    End If
+End Property
+
+Public Property Get FrontEndApp() As Boolean
+    On Error GoTo 0
+    Debug.Print "Property Get FrontEndApp"
+    FrontEndApp = aegitFrontEndApp
+    Debug.Print , "FrontEndApp = " & FrontEndApp
+End Property
+
+Public Property Let FrontEndApp(ByVal IsFrontEndApp As Boolean)
+    On Error GoTo 0
+    'Debug.Print "Property Let FrontEndApp"
+    aegitFrontEndApp = IsFrontEndApp
+    'Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+End Property
+
+Public Property Get GetReferences(Optional ByVal varDebug As Variant) As Boolean
+    On Error GoTo 0
+    If IsMissing(varDebug) Then
+        'Debug.Print "Get GetReferences"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
+        'Debug.Print , "DEBUGGING IS OFF"
+        GetReferences = aeGetReferences()
+    Else
+        Debug.Print "Get GetReferences"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
+        Debug.Print , "DEBUGGING TURNED ON"
+        GetReferences = aeGetReferences(varDebug)
+    End If
+End Property
+
 Public Property Get IsPrimaryKey(ByVal strTableName As String, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim dbs As DAO.Database
@@ -614,174 +477,305 @@ Public Property Get IsPrimaryKey(ByVal strTableName As String, ByVal strField As
     Set tdf = Nothing
 End Property
 
-Private Sub TestForRelativePath()
+Public Property Get SchemaFile(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
-    Debug.Print "TestForRelativePath"
-    ' Test for relative path
-    Dim strTestPath As String
-    strTestPath = aestrSourceLocation
-    If Left$(aestrSourceLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
-        aestrSourceLocation = strTestPath
+    Debug.Print "Property Get SchemaFile"
+    If IsMissing(varDebug) Then
+        OutputTheSchemaFile
+    Else
+        Debug.Print "Get SchemaFile"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to SchemaFile"
+        Debug.Print , "DEBUGGING TURNED ON"
+        OutputTheSchemaFile "varDebug"
     End If
-    'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-    '
-    strTestPath = aestrSourceLocationBe
-    If Left$(aestrSourceLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
-        aestrSourceLocationBe = strTestPath
-    End If
-    'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-    '
-    strTestPath = aestrXMLLocation
-    If Left$(aestrXMLLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
-        aestrXMLLocation = strTestPath
-    End If
-    'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-    '
-    strTestPath = aestrXMLLocationBe
-    If Left$(aestrXMLLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
-        aestrXMLLocationBe = strTestPath
-    End If
-    'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-    '
-    strTestPath = aestrXMLDataLocation
-    If Left$(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
-        aestrXMLDataLocation = strTestPath
-    End If
-    'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-    '
-    strTestPath = aestrXMLDataLocationBe
-    If Left$(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
-        aestrXMLDataLocationBe = strTestPath
-    End If
-    'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    'Debug.Print , "--------------------------------------------------"
+    SchemaFile = True
+End Property
 
-End Sub
-
-Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
+Public Property Get SourceFolder() As String
     On Error GoTo 0
-    Debug.Print "VerifySetup"
-    'Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
-    'Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
+    Debug.Print "Property Get SourceFolder"
+    SourceFolder = aegitSourceFolder
+End Property
 
-    ' Test for aegit setup
-    If aegitSourceFolder = "default" Then
-        aegitSetup = True
-        aestrSourceLocation = aegitType.SourceFolder
-        aestrXMLLocation = aegitType.XMLFolder
-        aestrXMLDataLocation = aegitType.XMLDataFolder
-        'Debug.Print , "aegitSetup = True"
-        'Debug.Print , "aegitSourceFolder = ""default"""
-        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-        'Debug.Print , "--------------------------------------------------"
+Public Property Let SourceFolder(ByVal strSourceFolder As String)
+    ' Ref: http://www.techrepublic.com/article/build-your-skills-using-class-modules-in-an-access-database-solution/5031814
+    ' Ref: http://www.utteraccess.com/wiki/index.php/Classes
+    On Error GoTo 0
+    Debug.Print "Property Let SourceFolder"
+    aegitSourceFolder = strSourceFolder
+End Property
 
-        TestForRelativePath
+Public Property Get SourceFolderBe() As String
+    On Error GoTo 0
+    Debug.Print "Property Get SourceFolderBe"
+    SourceFolderBe = aegitSourceFolderBe      'aestrSourceLocationBe
+    Debug.Print , "SourceFolderBe = " & SourceFolderBe
+End Property
 
-        ' Check folders exist
-        If Not FolderExists(aestrSourceLocation) Then
-            MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-        If Not FolderExists(aestrXMLLocation) Then
-            MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-        If Not FolderExists(aestrXMLDataLocation) Then
-            MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-    ElseIf aegitFrontEndApp Then
-        aestrSourceLocation = aegitSourceFolder
-        aestrSourceLocationBe = aegitSourceFolderBe
-        aestrXMLLocation = aegitXMLFolder
-        aestrXMLLocationBe = aegitXMLFolderBe
-        aestrXMLDataLocation = aegitXMLDataFolder
-        aestrXMLDataLocationBe = aegitXMLDataFolderBe
-        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
-        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-        'Debug.Print , "--------------------------------------------------"
+Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
+    On Error GoTo 0
+    Debug.Print "Property Let SourceFolderBe"
+    aegitSourceFolderBe = strSourceFolderBe
+    'aestrSourceLocationBe = strSourceFolderBe
+    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+End Property
 
-        TestForRelativePath
-
-        ' Check folders exist
-        If Not FolderExists(aestrSourceLocation) Then
-            MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
-        If Not FolderExists(aestrXMLLocation) Then
-            MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
-        If Not FolderExists(aestrXMLDataLocation) Then
-            MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-    ElseIf Not aegitFrontEndApp Then
-        aestrSourceLocationBe = aegitSourceFolderBe
-        aestrXMLLocationBe = aegitXMLFolderBe
-        aestrXMLDataLocationBe = aegitXMLDataFolderBe
-        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-        'Debug.Print , "--------------------------------------------------"
-
-        TestForRelativePath
-
-        ' Check folders exist
-        If Not FolderExists(aestrSourceLocationBe) Then
-            MsgBox "aestrSourceLocationBe does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-        If Not FolderExists(aestrXMLLocationBe) Then
-            MsgBox "aestrXMLLocationBe does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-        If Not FolderExists(aestrXMLDataLocationBe) Then
-            MsgBox "aestrXMLDataLocationBe does not exist!", vbCritical, "VerifySetup"
-            Stop
-        End If
-    End If
-
-    ' Final paths are absolute
-    'Debug.Print "VerifySetup"
-    'Debug.Print , ">==> Final Paths >==>"
-    'Debug.Print , "Property Get SourceFolder:       aestrSourceLocation = " & aestrSourceLocation
-    'Debug.Print , "Property Get SourceFolderBe:     aestrSourceLocationBe = " & aestrSourceLocationBe
-    'Debug.Print , "Property Get XMLFolder:          aestrXMLLocation = " & aestrXMLLocation
-    'Debug.Print , "Property Get XMLFolderBe:        aestrXMLLocationBe = " & aestrXMLLocationBe
-    'Debug.Print , "Property Get XMLDataFolder:      aestrXMLDataLocation = " & aestrXMLDataLocation
-    'Debug.Print , "Property Get XMLDataFolderBe:    aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    'Debug.Print , "--------------------------------------------------"
-
-    '???
-    If aestrBackEndDbOne = vbNullString Then
-        MsgBox "aestrBackEndDbOne is not set!", vbCritical, "VerifySetup"
-        Stop
-    End If
-
+Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
+    ' Ref: http://stackoverflow.com/questions/2265349/how-can-i-use-an-optional-array-argument-in-a-vba-procedure
+    On Error GoTo PROC_ERR
+    Debug.Print "Property Let TablesExportToXML"
+    'Debug.Print , "LBound(varTablesArray) = " & LBound(varTablesArray), "varTablesArray(0) = " & varTablesArray(0)
+    'Debug.Print , "UBound(varTablesArray) = " & UBound(varTablesArray)
+    'If UBound(varTablesArray) > 0 Then
+    '    Debug.Print , "varTablesArray(1) = " & varTablesArray(1)
+    'End If
+    ReDim Preserve aegitDataXML(0 To UBound(varTablesArray))
+    aegitDataXML = varTablesArray
     'Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
-
-    If aestrBackEndDbOne <> "default" Then
-        OpenAllDatabases True
+    If UBound(varTablesArray) > 0 Then
+        Debug.Print , "aegitDataXML(1) = " & aegitDataXML(1)
     End If
-    'Debug.Print , "Property Get BackEndDbOne = " & aestrBackEndDbOne
-    'Stop
 
-End Sub
+PROC_EXIT:
+    Exit Property
+
+PROC_ERR:
+    Select Case Err.Number
+        Case Else
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML", vbCritical, "ERROR"
+            Stop
+    End Select
+
+End Property
+
+Public Property Get TextEncoding() As String
+    On Error GoTo 0
+    TextEncoding = aegitTextEncoding
+End Property
+
+Public Property Let TextEncoding(ByVal strTextEncoding As String)
+    On Error GoTo 0
+    aegitTextEncoding = strTextEncoding
+End Property
+
+Public Property Get XMLDataFolder() As String
+    On Error GoTo 0
+    Debug.Print "Property Get XMLDataFolder"
+    XMLDataFolder = aegitXMLDataFolder
+    Debug.Print , "XMLDataFolder = " & XMLDataFolder
+End Property
+
+Public Property Let XMLDataFolder(ByVal strXMLDataFolder As String)
+    On Error GoTo 0
+    Debug.Print "Property Let XMLDataFolder"
+    aegitXMLDataFolder = strXMLDataFolder
+    Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
+End Property
+
+Public Property Get XMLDataFolderBe() As String
+    On Error GoTo 0
+    Debug.Print "Property Get XMLDataFolderBe"
+    XMLDataFolderBe = aegitXMLDataFolderBe
+    Debug.Print , "XMLDataFolderBe = " & XMLDataFolderBe
+End Property
+
+Public Property Let XMLDataFolderBe(ByVal strXMLDataFolderBe As String)
+    On Error GoTo 0
+    Debug.Print "Property Let XMLDataFolderBe"
+    aegitXMLDataFolderBe = strXMLDataFolderBe
+    Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
+End Property
+
+Public Property Get XMLFolder() As String
+    On Error GoTo 0
+    Debug.Print "Property Get XMLFolder"
+    XMLFolder = aegitXMLFolder
+    Debug.Print , "XMLFolder = " & XMLFolder
+End Property
+
+Public Property Let XMLFolder(ByVal strXMLFolder As String)
+    On Error GoTo 0
+    Debug.Print "Property Let XMLFolder"
+    aegitXMLFolder = strXMLFolder
+    Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
+End Property
+
+Public Property Get XMLFolderBe() As String
+    On Error GoTo 0
+    Debug.Print "Property Get XMLFolderBe"
+    XMLFolderBe = aegitXMLFolderBe
+    Debug.Print , "XMLFolderBe = " & XMLFolderBe
+End Property
+
+Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
+    On Error GoTo 0
+    Debug.Print "Property Let XMLFolderBe"
+    aegitXMLFolderBe = strXMLFolderBe
+    Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
+End Property
+
+Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
+    ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
+  
+    Dim strDocument As String
+    Dim rel As DAO.Relation
+    Dim fld As DAO.Field
+    Dim idx As DAO.Index
+    Dim prop As DAO.Property
+    Dim strFile As String
+
+    On Error GoTo PROC_ERR
+
+    'Debug.Print "aeDocumentRelations"
+    If IsMissing(varDebug) Then
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
+        'Debug.Print , "DEBUGGING IS OFF"
+    Else
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
+        Debug.Print , "DEBUGGING TURNED ON"
+    End If
+
+    strFile = aestrSourceLocation & aeRelTxtFile
+    If aegitFrontEndApp Then
+        strFile = aestrSourceLocation & aeRelTxtFile
+    Else
+        strFile = aestrSourceLocationBe & aeRelTxtFile
+    End If
+
+    'Debug.Print "strFile=" & strFile
+    If Not FileLocked(strFile) Then KillProperly (strFile)
+    Open strFile For Append As #1
+
+    For Each rel In CurrentDb.Relations
+        'Debug.Print rel.Name
+        If Not (Left$(rel.Name, 4) = "MSys" _
+            Or Left$(rel.Name, 4) = "~TMP" _
+            Or Left$(rel.Name, 3) = "zzz") Then
+            strDocument = strDocument & "Name: " & rel.Name & vbCrLf
+            strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
+            strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
+            For Each fld In rel.Fields
+                strDocument = strDocument & "  PK: " & fld.Name & "   FK:" & fld.ForeignName
+                strDocument = strDocument & vbCrLf
+            Next fld
+        End If
+
+        If Not IsMissing(varDebug) Then
+            Debug.Print strDocument
+        Else
+        End If
+        Print #1, strDocument
+        strDocument = vbNullString
+    Next rel
+    
+    aeDocumentRelations = True
+
+PROC_EXIT:
+    Set prop = Nothing
+    Set idx = Nothing
+    Set fld = Nothing
+    Set rel = Nothing
+    Close 1
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass", vbCritical, "ERROR"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
+    aeDocumentRelations = False
+    Resume PROC_EXIT
+
+End Function
+
+Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
+    ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
+    ' Ref: http://allenbrowne.com/func-06.html
+    ' Document the tables, fields, and relationships
+    ' Tables, field type, primary keys, foreign keys, indexes
+    ' Relationships in the database with table, foreign table, primary keys, foreign keys
+
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim blnResult As Boolean
+    Dim intFailCount As Integer
+    Dim strFile As String
+
+    On Error GoTo PROC_ERR
+    If mblnIgnore Then Exit Function
+
+    intFailCount = 0
+    
+    LongestFieldPropsName
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name=" & aestrLFN
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Length=" & aeintFNLen
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description=" & aestrLFD
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description Length=" & aeintFDLen
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type=" & aestrLFT
+    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type Length=" & aeintFTLen
+
+    ' Reset values
+    aestrLFN = vbNullString
+    If aeintFNLen < 11 Then aeintFNLen = 11     ' Minimum required by design
+    aeintFDLen = 0
+
+    Debug.Print "aeDocumentTables"
+    If IsMissing(varDebug) Then
+        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
+        'Debug.Print , "DEBUGGING IS OFF"
+    Else
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
+        Debug.Print , "DEBUGGING TURNED ON"
+    End If
+
+    If aegitFrontEndApp Then
+        strFile = aestrSourceLocation & aeTblTxtFile
+    Else
+        strFile = aestrSourceLocationBe & aeTblTxtFile
+    End If
+
+    If Dir$(strFile) <> vbNullString Then
+        ' The file exists
+        If Not FileLocked(strFile) Then KillProperly (strFile)
+        Open strFile For Append As #1
+    Else
+        If Not FileLocked(strFile) Then Open strFile For Append As #1
+    End If
+
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+            Or Left$(tdf.Name, 4) = "~TMP" _
+            Or Left$(tdf.Name, 3) = "zzz") Then
+            If Not IsMissing(varDebug) Then
+                blnResult = TableInfo(tdf.Name, "WithDebugging")
+                If Not blnResult Then intFailCount = intFailCount + 1
+                If Not IsMissing(varDebug) And aeintFDLen <> 11 Then Debug.Print "aeintFDLen=" & aeintFDLen
+            Else
+                blnResult = TableInfo(tdf.Name)
+                If Not blnResult Then intFailCount = intFailCount + 1
+            End If
+            aeintFDLen = 0
+        End If
+    Next tdf
+
+    If Not IsMissing(varDebug) Then
+        Debug.Print "intFailCount = " & intFailCount
+    End If
+
+    aeDocumentTables = True
+
+PROC_EXIT:
+    Set fld = Nothing
+    Set tdf = Nothing
+    Close 1
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass", vbCritical, "ERROR"
+    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
+    aeDocumentTables = False
+    Resume PROC_EXIT
+
+End Function
 
 Private Function IsLoaded(ByVal strFormName As String) As Boolean
     ' Returns True if the specified form is open in Form view or Datasheet view.
@@ -2823,97 +2817,6 @@ Private Function FieldTypeName(ByVal fld As DAO.Field) As String
 
 End Function
 
-Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
-    ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
-    ' Ref: http://allenbrowne.com/func-06.html
-    ' Document the tables, fields, and relationships
-    ' Tables, field type, primary keys, foreign keys, indexes
-    ' Relationships in the database with table, foreign table, primary keys, foreign keys
-
-    Dim tdf As DAO.TableDef
-    Dim fld As DAO.Field
-    Dim blnResult As Boolean
-    Dim intFailCount As Integer
-    Dim strFile As String
-
-    On Error GoTo PROC_ERR
-    If mblnIgnore Then Exit Function
-
-    intFailCount = 0
-    
-    LongestFieldPropsName
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name=" & aestrLFN
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Length=" & aeintFNLen
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Name Table Name=" & aestrLFNTN
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description=" & aestrLFD
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Description Length=" & aeintFDLen
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type=" & aestrLFT
-    If Not IsMissing(varDebug) Then Debug.Print "Longest Field Type Length=" & aeintFTLen
-
-    ' Reset values
-    aestrLFN = vbNullString
-    If aeintFNLen < 11 Then aeintFNLen = 11     ' Minimum required by design
-    aeintFDLen = 0
-
-    Debug.Print "aeDocumentTables"
-    If IsMissing(varDebug) Then
-        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
-        'Debug.Print , "DEBUGGING IS OFF"
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
-        Debug.Print , "DEBUGGING TURNED ON"
-    End If
-
-    If aegitFrontEndApp Then
-        strFile = aestrSourceLocation & aeTblTxtFile
-    Else
-        strFile = aestrSourceLocationBe & aeTblTxtFile
-    End If
-
-    If Dir$(strFile) <> vbNullString Then
-        ' The file exists
-        If Not FileLocked(strFile) Then KillProperly (strFile)
-        Open strFile For Append As #1
-    Else
-        If Not FileLocked(strFile) Then Open strFile For Append As #1
-    End If
-
-    For Each tdf In CurrentDb.TableDefs
-        If Not (Left$(tdf.Name, 4) = "MSys" _
-            Or Left$(tdf.Name, 4) = "~TMP" _
-            Or Left$(tdf.Name, 3) = "zzz") Then
-            If Not IsMissing(varDebug) Then
-                blnResult = TableInfo(tdf.Name, "WithDebugging")
-                If Not blnResult Then intFailCount = intFailCount + 1
-                If Not IsMissing(varDebug) And aeintFDLen <> 11 Then Debug.Print "aeintFDLen=" & aeintFDLen
-            Else
-                blnResult = TableInfo(tdf.Name)
-                If Not blnResult Then intFailCount = intFailCount + 1
-            End If
-            aeintFDLen = 0
-        End If
-    Next tdf
-
-    If Not IsMissing(varDebug) Then
-        Debug.Print "intFailCount = " & intFailCount
-    End If
-
-    aeDocumentTables = True
-
-PROC_EXIT:
-    Set fld = Nothing
-    Set tdf = Nothing
-    Close 1
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass", vbCritical, "ERROR"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTables of Class aegit_expClass"
-    aeDocumentTables = False
-    Resume PROC_EXIT
-
-End Function
-
 Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Boolean
     ' Ref: http://stackoverflow.com/questions/4867727/how-to-use-ms-access-saveastext-with-queries-specifically-stored-procedures
 
@@ -3840,78 +3743,6 @@ PROC_ERR:
             MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure GetIndex of Class aegitClass"
             Resume PROC_EXIT
     End Select
-
-End Function
-
-Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
-    ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
-  
-    Dim strDocument As String
-    Dim rel As DAO.Relation
-    Dim fld As DAO.Field
-    Dim idx As DAO.Index
-    Dim prop As DAO.Property
-    Dim strFile As String
-
-    On Error GoTo PROC_ERR
-
-    'Debug.Print "aeDocumentRelations"
-    If IsMissing(varDebug) Then
-        'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
-        'Debug.Print , "DEBUGGING IS OFF"
-    Else
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
-        Debug.Print , "DEBUGGING TURNED ON"
-    End If
-
-    strFile = aestrSourceLocation & aeRelTxtFile
-    If aegitFrontEndApp Then
-        strFile = aestrSourceLocation & aeRelTxtFile
-    Else
-        strFile = aestrSourceLocationBe & aeRelTxtFile
-    End If
-
-    'Debug.Print "strFile=" & strFile
-    If Not FileLocked(strFile) Then KillProperly (strFile)
-    Open strFile For Append As #1
-
-    For Each rel In CurrentDb.Relations
-        'Debug.Print rel.Name
-        If Not (Left$(rel.Name, 4) = "MSys" _
-            Or Left$(rel.Name, 4) = "~TMP" _
-            Or Left$(rel.Name, 3) = "zzz") Then
-            strDocument = strDocument & "Name: " & rel.Name & vbCrLf
-            strDocument = strDocument & "  " & "Table: " & rel.Table & vbCrLf
-            strDocument = strDocument & "  " & "Foreign Table: " & rel.ForeignTable & vbCrLf
-            For Each fld In rel.Fields
-                strDocument = strDocument & "  PK: " & fld.Name & "   FK:" & fld.ForeignName
-                strDocument = strDocument & vbCrLf
-            Next fld
-        End If
-
-        If Not IsMissing(varDebug) Then
-            Debug.Print strDocument
-        Else
-        End If
-        Print #1, strDocument
-        strDocument = vbNullString
-    Next rel
-    
-    aeDocumentRelations = True
-
-PROC_EXIT:
-    Set prop = Nothing
-    Set idx = Nothing
-    Set fld = Nothing
-    Set rel = Nothing
-    Close 1
-    Exit Function
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass", vbCritical, "ERROR"
-    If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentRelations of Class aegit_expClass"
-    aeDocumentRelations = False
-    Resume PROC_EXIT
 
 End Function
 
@@ -5873,11 +5704,6 @@ PROC_ERR:
 
 End Sub
 
-' ==================================================
-' Global Error Handler Routines
-' Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
-' ==================================================
-
 Private Sub ResetWorkspace()
     Debug.Print "ResetWorkspace"
     On Error Resume Next
@@ -5896,6 +5722,175 @@ Private Sub ResetWorkspace()
     For intCounter = 0 To Reports.Count - 1
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
+End Sub
+
+Private Sub TestForRelativePath()
+    On Error GoTo 0
+    Debug.Print "TestForRelativePath"
+    ' Test for relative path
+    Dim strTestPath As String
+    strTestPath = aestrSourceLocation
+    If Left$(aestrSourceLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
+        aestrSourceLocation = strTestPath
+    End If
+    'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+    '
+    strTestPath = aestrSourceLocationBe
+    If Left$(aestrSourceLocationBe, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
+        aestrSourceLocationBe = strTestPath
+    End If
+    'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+    '
+    strTestPath = aestrXMLLocation
+    If Left$(aestrXMLLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
+        aestrXMLLocation = strTestPath
+    End If
+    'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+    '
+    strTestPath = aestrXMLLocationBe
+    If Left$(aestrXMLLocationBe, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
+        aestrXMLLocationBe = strTestPath
+    End If
+    'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+    '
+    strTestPath = aestrXMLDataLocation
+    If Left$(aestrXMLDataLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
+        aestrXMLDataLocation = strTestPath
+    End If
+    'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+    '
+    strTestPath = aestrXMLDataLocationBe
+    If Left$(aestrXMLDataLocation, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
+        aestrXMLDataLocationBe = strTestPath
+    End If
+    'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+    'Debug.Print , "--------------------------------------------------"
+
+End Sub
+
+Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
+    On Error GoTo 0
+    Debug.Print "VerifySetup"
+    'Debug.Print , "aegitFrontEndApp = " & aegitFrontEndApp
+    'Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
+
+    ' Test for aegit setup
+    If aegitSourceFolder = "default" Then
+        aegitSetup = True
+        aestrSourceLocation = aegitType.SourceFolder
+        aestrXMLLocation = aegitType.XMLFolder
+        aestrXMLDataLocation = aegitType.XMLDataFolder
+        'Debug.Print , "aegitSetup = True"
+        'Debug.Print , "aegitSourceFolder = ""default"""
+        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+        'Debug.Print , "--------------------------------------------------"
+
+        TestForRelativePath
+
+        ' Check folders exist
+        If Not FolderExists(aestrSourceLocation) Then
+            MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+        If Not FolderExists(aestrXMLLocation) Then
+            MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        If Not FolderExists(aestrXMLDataLocation) Then
+            MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+    ElseIf aegitFrontEndApp Then
+        aestrSourceLocation = aegitSourceFolder
+        aestrSourceLocationBe = aegitSourceFolderBe
+        aestrXMLLocation = aegitXMLFolder
+        aestrXMLLocationBe = aegitXMLFolderBe
+        aestrXMLDataLocation = aegitXMLDataFolder
+        aestrXMLDataLocationBe = aegitXMLDataFolderBe
+        'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        'Debug.Print , "--------------------------------------------------"
+
+        TestForRelativePath
+
+        ' Check folders exist
+        If Not FolderExists(aestrSourceLocation) Then
+            MsgBox "aestrSourceLocation does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+        'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+        If Not FolderExists(aestrXMLLocation) Then
+            MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        If Not FolderExists(aestrXMLDataLocation) Then
+            MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+    ElseIf Not aegitFrontEndApp Then
+        aestrSourceLocationBe = aegitSourceFolderBe
+        aestrXMLLocationBe = aegitXMLFolderBe
+        aestrXMLDataLocationBe = aegitXMLDataFolderBe
+        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        'Debug.Print , "--------------------------------------------------"
+
+        TestForRelativePath
+
+        ' Check folders exist
+        If Not FolderExists(aestrSourceLocationBe) Then
+            MsgBox "aestrSourceLocationBe does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+        If Not FolderExists(aestrXMLLocationBe) Then
+            MsgBox "aestrXMLLocationBe does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+        If Not FolderExists(aestrXMLDataLocationBe) Then
+            MsgBox "aestrXMLDataLocationBe does not exist!", vbCritical, "VerifySetup"
+            Stop
+        End If
+    End If
+
+    ' Final paths are absolute
+    'Debug.Print "VerifySetup"
+    'Debug.Print , ">==> Final Paths >==>"
+    'Debug.Print , "Property Get SourceFolder:       aestrSourceLocation = " & aestrSourceLocation
+    'Debug.Print , "Property Get SourceFolderBe:     aestrSourceLocationBe = " & aestrSourceLocationBe
+    'Debug.Print , "Property Get XMLFolder:          aestrXMLLocation = " & aestrXMLLocation
+    'Debug.Print , "Property Get XMLFolderBe:        aestrXMLLocationBe = " & aestrXMLLocationBe
+    'Debug.Print , "Property Get XMLDataFolder:      aestrXMLDataLocation = " & aestrXMLDataLocation
+    'Debug.Print , "Property Get XMLDataFolderBe:    aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+    'Debug.Print , "--------------------------------------------------"
+
+    '???
+    If aestrBackEndDbOne = vbNullString Then
+        MsgBox "aestrBackEndDbOne is not set!", vbCritical, "VerifySetup"
+        Stop
+    End If
+
+    'Debug.Print , "aegitDataXML(0) = " & aegitDataXML(0)
+
+    If aestrBackEndDbOne <> "default" Then
+        OpenAllDatabases True
+    End If
+    'Debug.Print , "Property Get BackEndDbOne = " & aestrBackEndDbOne
+    'Stop
+
 End Sub
 
 Private Sub WriteStringToFile(ByVal lngFileNum As Long, ByVal strTheString As String, _
