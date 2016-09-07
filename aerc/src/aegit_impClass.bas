@@ -420,21 +420,21 @@ Private Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
     Next idx
 End Function
 
-Private Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Private Function IsIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
     For Each idx In tdf.Indexes
         For Each fld In idx.Fields
             If strField = fld.Name Then
-                isIndex = True
+                IsIndex = True
                 Exit Function
             End If
         Next fld
     Next idx
 End Function
 
-Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Private Function IsFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     On Error GoTo 0
     Dim idx As DAO.Index
     Dim fld As DAO.Field
@@ -442,7 +442,7 @@ Private Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
         If idx.Foreign Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
-                    isFK = True
+                    IsFK = True
                     Exit Function
                 End If
             Next fld

@@ -48,7 +48,7 @@ Public Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boo
     Next idx
 End Function
 
-Public Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Public Function IsIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     'Debug.Print "isIndex"
     On Error GoTo 0
 
@@ -57,14 +57,14 @@ Public Function isIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As 
     For Each idx In tdf.Indexes
         For Each fld In idx.Fields
             If strField = fld.Name Then
-                isIndex = True
+                IsIndex = True
                 Exit Function
             End If
         Next fld
     Next idx
 End Function
 
-Public Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+Public Function IsFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
     'Debug.Print "isFK"
     On Error GoTo 0
     
@@ -74,7 +74,7 @@ Public Function isFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boo
         If idx.Foreign Then
             For Each fld In idx.Fields
                 If strField = fld.Name Then
-                    isFK = True
+                    IsFK = True
                     Exit Function
                 End If
             Next fld
