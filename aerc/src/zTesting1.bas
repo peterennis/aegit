@@ -1,6 +1,52 @@
 Option Compare Database
 Option Explicit
 
+Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
+    'Debug.Print "IsQryHidden"
+    On Error GoTo 0
+    If IsNull(strQueryName) Or strQueryName = vbNullString Then
+        IsQryHidden = False
+        'Debug.Print "IsQryHidden Null Test", strQueryName, IsQryHidden
+    Else
+        IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
+        'Debug.Print "IsQryHidden Attribute Test", strQueryName, IsQryHidden
+    End If
+End Function
+
+Private Function IsIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+    'Debug.Print "IsIndex"
+    On Error GoTo 0
+
+    Dim idx As DAO.Index
+    Dim fld As DAO.Field
+    For Each idx In tdf.Indexes
+        For Each fld In idx.Fields
+            If strField = fld.Name Then
+                IsIndex = True
+                Exit Function
+            End If
+        Next fld
+    Next idx
+End Function
+
+Private Function IsFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
+    'Debug.Print "IsFK"
+    On Error GoTo 0
+    
+    Dim idx As DAO.Index
+    Dim fld As DAO.Field
+    For Each idx In tdf.Indexes
+        If idx.Foreign Then
+            For Each fld In idx.Fields
+                If strField = fld.Name Then
+                    IsFK = True
+                    Exit Function
+                End If
+            Next fld
+        End If
+    Next idx
+End Function
+
 Public Sub TestGetIndexDetails()
 
     Dim dbs As DAO.Database

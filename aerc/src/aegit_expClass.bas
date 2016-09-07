@@ -117,8 +117,6 @@ Private aestrLFD As String
 Private aestrBackEndDbOne As String
 '
 Private Const DebugPrintInitialize As Boolean = False
-Private Const DebugPrintTerminate As Boolean = True
-'
 'Private aestrPassword As String
 Private Const aestr4 As String = "    "
 Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
@@ -2397,24 +2395,6 @@ PROC_ERR:
 
 End Function
 
-Private Function IsFK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
-    'Debug.Print "IsFK"
-    On Error GoTo 0
-    
-    Dim idx As DAO.Index
-    Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        If idx.Foreign Then
-            For Each fld In idx.Fields
-                If strField = fld.Name Then
-                    IsFK = True
-                    Exit Function
-                End If
-            Next fld
-        End If
-    Next idx
-End Function
-
 Private Function IsFormHidden(ByVal strFormName As String) As Boolean
     'Debug.Print "IsFormHidden"
     On Error GoTo 0
@@ -2423,22 +2403,6 @@ Private Function IsFormHidden(ByVal strFormName As String) As Boolean
     Else
         IsFormHidden = GetHiddenAttribute(acForm, strFormName)
     End If
-End Function
-
-Private Function IsIndex(ByVal tdf As DAO.TableDef, ByVal strField As String) As Boolean
-    'Debug.Print "IsIndex"
-    On Error GoTo 0
-
-    Dim idx As DAO.Index
-    Dim fld As DAO.Field
-    For Each idx In tdf.Indexes
-        For Each fld In idx.Fields
-            If strField = fld.Name Then
-                IsIndex = True
-                Exit Function
-            End If
-        Next fld
-    Next idx
 End Function
 
 Private Function IsLoaded(ByVal strFormName As String) As Boolean
@@ -2494,18 +2458,6 @@ Private Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
             Next fld
         End If
     Next idx
-End Function
-
-Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
-    'Debug.Print "IsQryHidden"
-    On Error GoTo 0
-    If IsNull(strQueryName) Or strQueryName = vbNullString Then
-        IsQryHidden = False
-        'Debug.Print "IsQryHidden Null Test", strQueryName, IsQryHidden
-    Else
-        IsQryHidden = GetHiddenAttribute(acQuery, strQueryName)
-        'Debug.Print "IsQryHidden Attribute Test", strQueryName, IsQryHidden
-    End If
 End Function
 
 Private Function IsRptHidden(ByVal strReportName As String) As Boolean
