@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.9.6"
-Private Const aegit_expVERSION_DATE As String = "September 6, 2016"
+Private Const aegit_expVERSION_DATE As String = "September 7, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -2034,8 +2034,9 @@ Public Function GetFieldInfo(ByVal strSchemaLine As String) As String
     Else
         intPosTwo = InStr(1, strSchemaLine, " )") + 1
     End If
-    strResult = Mid$(strSchemaLine, intPosOne + 1, intPosTwo - intPosOne - 1)
-    GetFieldInfo = Replace(strResult, "]", vbNullString)
+    strResult = Mid$(strSchemaLine, intPosOne, intPosTwo - intPosOne)
+    'Debug.Print "GetFieldInfo", "strResult=" & strResult
+    GetFieldInfo = strResult
     ' Shorten the parse string by removing the found field
     mstrToParse = Right$(strSchemaLine, Len(strSchemaLine) - intPosTwo)
     If strSchemaLine = " )" Then mstrToParse = vbNullString
@@ -2069,7 +2070,7 @@ Private Function GetIndex(ByVal strSQL As String) As String
     intPosRB = InStr(strParseSQL, "])")
     strIndexField = Mid$(strParseSQL, intPosLB + 1, intPosRB - intPosLB - 1)
     'Debug.Print , "D>>>strIndexField", strIndexField, intPosLB + 1, intPosRB - 1
-    GetIndex = Space$(4) & "addIndex(['" & strIndexNameIdx & "'], ['" & strIndexField & "'], false, lf.Order.ASC)"
+    GetIndex = Space$(4) & "addIndex('" & strIndexNameIdx & "', ['" & strIndexField & "'], false, lf.Order.ASC)"
 
 PROC_EXIT:
     Exit Function
@@ -5225,7 +5226,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             strTableName = GetTableName(arrSQL(i))
             ' Test if the table schema is finished
             If i < UBound(arrSQL) Then
-            
+                ' FIX THIS !!!
             End If
             strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
             'Debug.Print i & ">", strLfCreateTable
@@ -5234,12 +5235,15 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             Do While mstrToParse <> vbNullString
                 ' Create the table
                 strFieldInfoToParse = GetFieldInfo(mstrToParse)
-                'Debug.Print "strFieldInfoToParse=" & strFieldInfoToParse
-                strFieldName = Trim$(Left$(strFieldInfoToParse, InStr(strFieldInfoToParse, " ")))
-                strAccFieldType = Trim$(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStr(strFieldInfoToParse, " ")))
-                'Debug.Print , "'" & strFieldName & "'", "'" & strAccFieldType & "'"
+                'Debug.Print strLfCreateTable
+                'Debug.Print , mstrToParse
+                'Debug.Print , "strFieldInfoToParse=" & strFieldInfoToParse, Len(strFieldInfoToParse)
+                strFieldName = Trim$(Left$(strFieldInfoToParse, InStrRev(strFieldInfoToParse, "] ")))
+                'strAccFieldType = Trim$(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStr(strFieldInfoToParse, " ")))
+                strAccFieldType = Trim$(Right$(strFieldInfoToParse, Len(strFieldInfoToParse) - InStrRev(strFieldInfoToParse, "] ")))
+                'Debug.Print , "strFieldName=" & strFieldName, Len(strFieldName), "strAccFieldType=" & strAccFieldType, Len(strAccFieldType)
                 strLfFieldType = GetLovefieldType(strAccFieldType)
-                strLfFieldName = Space$(4) & "addColumn('" & strFieldName
+                strLfFieldName = Space$(4) & "addColumn('" & Mid$(strFieldName, 2, Len(strFieldName) - 2)
                 'Debug.Print , strLfFieldName & strLfFieldType, "{" & strAccFieldType & "}"
                 Print #fleOut, strLfFieldName & strLfFieldType
                 'Stop

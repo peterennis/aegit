@@ -31,8 +31,12 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %110 -
+' %109 -
+' %108 -
+' %107 -
+' %106 -
 ' %105 -
-' %104 -
 ' %103 - Get DbIssueChecker.mdb from Allen Browne and use it to identify issues
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
@@ -76,6 +80,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160907 - v196 -
+    ' FIXED - %104 - Parse field string fails when there are spaces in the name
 '20160831 - v193 -
     ' FIXED - %102 - Add extra Lovefield types to match SQL Database tables from Azure
     ' FIXED - %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to leave zzz query

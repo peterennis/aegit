@@ -3,6 +3,7 @@ OutputTblSetupForTables.txt
 OutputReferencesSetup.txt
 OutputSchemaFile.txt
 aegit.exe
+mzt/
 archive/
 docfx/
 old/
