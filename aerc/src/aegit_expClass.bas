@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.6"
-Private Const aegit_expVERSION_DATE As String = "September 7, 2016"
+Private Const aegit_expVERSION As String = "1.9.7"
+Private Const aegit_expVERSION_DATE As String = "September 10, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -74,12 +74,13 @@ Private Type mySetupType
     UseImportFolder As Boolean
 End Type
 
-Private Type myExportType               ' Initialize defaults as:
-    ExportAll As Boolean                ' True
-    ExportCodeAndObjects As Boolean     ' True
-    ExportModuleCodeOnly As Boolean     ' True
-    ExportQAT As Boolean                ' False
-    ExportCBID As Boolean               ' True
+Private Type myExportType                   ' Initialize defaults as:
+    ExportAll As Boolean                    ' True
+    ExportCodeAndObjects As Boolean         ' True
+    ExportModuleCodeOnly As Boolean         ' True
+    ExportQAT As Boolean                    ' False
+    ExportCBID As Boolean                   ' True
+    ExportAllTableTypesInfo As Boolean      ' False, default does not export info about ODBC linked tables
 End Type
 
 Private myExclude As myExclusions
@@ -115,6 +116,7 @@ Private Const aeintFSize As Long = 4
 Private aeintFDLen As Long
 Private aestrLFD As String
 Private aestrBackEndDbOne As String
+Private aeListOfTables() As Variant
 '
 Private Const DebugPrintInitialize As Boolean = False
 'Private aestrPassword As String
@@ -188,6 +190,7 @@ Private Sub Class_Initialize()
         .ExportModuleCodeOnly = True
         .ExportQAT = False
         .ExportCBID = True
+        .ExportAllTableTypesInfo = False
     End With
 
     pExclude = True             ' Default setting is not to export associated aegit_exp files
@@ -1012,6 +1015,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
             KillProperly (strTheSourceLocation & aeAppCmbrIds)
         End If
+        OutputListOfTables aegitExport.ExportAllTableTypesInfo, varDebug
         OutputTableDataMacros varDebug
         OutputPrinterInfo "Debug"
         If aeExists("Tables", "aetlkpStates", varDebug) Then
@@ -1026,7 +1030,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfMacros varDebug
         OutputListOfModules varDebug
         OutputListOfReports varDebug
-        OutputListOfTables varDebug
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
         OutputTableProperties varDebug
@@ -1045,6 +1048,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
             KillProperly (strTheSourceLocation & aeAppCmbrIds)
         End If
+        OutputListOfTables aegitExport.ExportAllTableTypesInfo
         OutputTableDataMacros
         OutputPrinterInfo
         If aeExists("Tables", "aetlkpStates") Then
@@ -1059,7 +1063,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputListOfMacros
         OutputListOfModules
         OutputListOfReports
-        OutputListOfTables
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
         OutputTableProperties
@@ -4130,16 +4133,35 @@ PROC_ERR:
 
 End Sub
 
-Private Sub OutputListOfTables(Optional ByVal varDebug As Variant)
+Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug As Variant)
+    ' 1   Table - Local Access Tables
+    ' 4   Table - Linked ODBC Tables
+    ' 6   Table - Linked Access Tables
 
     'Debug.Print "OutputListOfTables"
     On Error GoTo PROC_ERR
 
-    Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
-        "FROM MSysObjects AS m " & _
-        "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
-        "(m.Type=1 OR m.Type=4 OR m.Type=6) " & _
-        "ORDER BY m.Name;"
+    Dim strSQL As String
+    Const strAllTables As String = "(m.Type=1 OR m.Type=4 OR m.Type=6) "
+    Const strAccessTables As String = "(m.Type=1 OR m.Type=6) "
+
+    If blnAllTypes Then
+        strSQL = "SELECT m.Name, """" AS Attribute " & _
+            "FROM MSysObjects AS m " & _
+            "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+            "m.Name Not Like ""~TMP*"" AND " & _
+            "m.Name Not Like ""MSys*"" AND " & _
+            strAllTables & _
+            "ORDER BY m.Name;"
+    Else
+        strSQL = "SELECT m.Name, """" AS Attribute " & _
+            "FROM MSysObjects AS m " & _
+            "WHERE m.Name Not Like ""~%"" AND m.Name Not Like ""zzz*"" AND " & _
+            "m.Name Not Like ""~TMP*"" AND " & _
+            "m.Name Not Like ""MSys*"" AND " & _
+            strAccessTables & _
+            "ORDER BY m.Name;"
+    End If
     
     Dim fle As Integer
     fle = FreeFile()
@@ -4154,18 +4176,28 @@ Private Sub OutputListOfTables(Optional ByVal varDebug As Variant)
 
     CurrentProject.Connection.Execute "GRANT SELECT ON MSysObjects TO Admin;"
 
+    Dim i As Integer
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim rst As DAO.Recordset
     Set rst = dbs.OpenRecordset(strSQL)
 
+    i = 0
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
         'Debug.Print "IsTableHidden(rst.Fields(0)) = " & IsTableHidden(rst.Fields(0))
         Print #fle, "[" & rst.Fields(0) & "]", IsTableHidden(rst.Fields(0))
+        ReDim Preserve aeListOfTables(i)
+        aeListOfTables(i) = rst.Fields(0)
+        i = i + 1
         rst.MoveNext
     Loop
     Close fle
+
+    For i = 0 To UBound(aeListOfTables)
+        Debug.Print i, aeListOfTables(i)
+    Next i
+    Stop
 
     If Not IsMissing(varDebug) Then
         Debug.Print "OutputListOfTables"

@@ -34,15 +34,12 @@ Option Explicit
 ' %110 -
 ' %109 -
 ' %108 -
-' %107 -
-' %106 -
-' %105 -
-' %103 - Get DbIssueChecker.mdb from Allen Browne and use it to identify issues
+' %107 - Export spinning after third KillAllFiles, investigate and resolve
+' %105 - Set option to export all tables info or only Access tables, i.e. skip ODBC linked tables is possible
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
 ' %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
-' %098 - tblDummy3 shows incorrect output for primary key; Use DescribeIndexField from Allan Browne
-' %097 - Pass the actual value "varDebug" for debugging in all cases so potentially strange variant parameters will not be transferred
+' %098 - tblDummy3 shows incorrect output for primary key; Use DescribeIndexField from Allan Browne; Relates to %099
 ' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
 ' %095 - Set minimum support to 2010 - Ref: http://stackoverflow.com/documentation/vba/3364/conditional-compilation/11558/using-declare-imports-that-work-on-all-versions-of-office#t=201607251720494878701, Rubberduck
 ' %094 - Comment out debug print statements when varDebug is not used
@@ -55,10 +52,9 @@ Option Explicit
 ' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
 ' %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
 ' %081 - Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004
-' %080 - Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
 ' %071 - Add varDebug for schema output debugging
-' %070 - Create multi field index sample then fix access and lf schema output
+' %070 - Create multi field index sample then fix access and lf schema output; tblDummy3 is test case, Relates to %080, %098
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
@@ -71,17 +67,18 @@ Option Explicit
 ' %041 - Relates to %039, %040, Create Set property so that mblnUTF16 is not Const and can be changed outside of the aegit class
 ' %007 - Make varDebug work as optional parameter to Let property
 ' Issues:
-' #045 -
-' #044 -
-' #043 -
-' #042 - Global Error Handler Routines, Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
 ' #040 - Picture for command button is stored in MSysResources, include option to export the records of this table
-' #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 '=============================================================================================================================
 '
 '
 '20160907 - v196 -
+    ' FIXED - %106 - Do not show ~TMP* or MSys* tables in OutputListOfTables
     ' FIXED - %104 - Parse field string fails when there are spaces in the name
+    ' FIXED - %103 - Get DbIssueChecker.mdb from Allen Browne and use it to identify issues
+    ' FIXED - %097 - Pass the actual value "varDebug" for debugging in all cases so potentially strange variant parameters will not be transferred
+    ' DUPLICATE %080 - Relates to %098, Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
+    ' OBSOLETE - #042 - Global Error Handler Routines, Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
+    ' FIXED - #039 - x64 support - https://github.com/peterennis/aegit/issues/3
 '20160831 - v193 -
     ' FIXED - %102 - Add extra Lovefield types to match SQL Database tables from Azure
     ' FIXED - %061 - Fix OutputCatalogUserCreatedObjects so that it does not need to leave zzz query
