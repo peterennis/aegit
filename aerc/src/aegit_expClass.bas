@@ -4786,56 +4786,21 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                         107&, dbDecimal, 108&, dbCurrency, _
                         101&, dbBinary
                         strFlds = strFlds & FieldTypeName(fld)
-'                        If (fld.Attributes And dbHyperlinkField) = 0& Then
-'                            strFlds = strFlds & "Memo"
-'                        Else
-'                            strFlds = strFlds & "Hyperlink"
-'                        End If
-'                    Case dbByte
-'                        strFlds = strFlds & "Byte"
-'                    Case 102&                                   ' dbComplexByte
-'                        strFlds = strFlds & "Complex Byte"
-'                    Case dbInteger
-'                        strFlds = strFlds & "Integer"
-'                    Case 103&                                   ' dbComplexInteger
-'                        strFlds = strFlds & "Complex Integer"
                     Case dbLong
                         If (fld.Attributes And dbAutoIncrField) = 0& Then
                             strFlds = strFlds & "Long"
                         Else
                             strFlds = strFlds & "Counter"
                         End If
-'                    Case 104&                                   ' dbComplexLong
-'                        strFlds = strFlds & "Complex Long"
-'                    Case dbSingle
-'                        strFlds = strFlds & "Single"
-'                    Case 105&                                   ' dbComplexSingle
-'                        strFlds = strFlds & "Complex Single"
-'                    Case dbDouble
-'                        strFlds = strFlds & "Double"
-'                    Case 106&                                   ' dbComplexDouble
-'                        strFlds = strFlds & "Complex Double"
 ''                    Case dbGUID
 ''                        strFlds = strFlds & "GUID"
 ''                        'strFlds = strFlds & "Replica"
-'                    Case 107&                                   ' dbComplexGUID
-'                        strFlds = strFlds & "Complex GUID"
-'                    Case dbDecimal
-'                        strFlds = strFlds & "Decimal"
-'                    Case 108&                                   ' dbComplexDecimal
-'                        strFlds = strFlds & "Complex Decimal"
                     Case dbDate
                         strFlds = strFlds & "DateTime"
-'                    Case dbCurrency
-'                        strFlds = strFlds & "Currency"
                     Case dbBoolean
                         strFlds = strFlds & "YesNo"
                     Case dbLongBinary
                         strFlds = strFlds & "OLEObject"
-'                    Case 101&                                   ' dbAttachment
-'                        strFlds = strFlds & "Attachment"
-'                    Case dbBinary
-'                        strFlds = strFlds & "Binary"
                     Case Else
                         MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, "ERROR"
                         Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
