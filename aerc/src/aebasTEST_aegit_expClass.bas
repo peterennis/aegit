@@ -122,7 +122,7 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     Dim oDbObjects As aegit_expClass
     Set oDbObjects = New aegit_expClass
 
-    Dim blnTestOne As Boolean
+    Dim blnTest As Boolean
 
     If Not IsMissing(varSrcFldr) Then oDbObjects.SourceFolder = varSrcFldr                  ' THE_SOURCE_FOLDER
     If Not IsMissing(varXmlFldr) Then oDbObjects.XMLFolder = varXmlFldr                     ' THE_XML_FOLDER
@@ -154,10 +154,6 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     End If
     'Stop
 
-TestOne:
-    '=============
-    ' TEST 1
-    '=============
     Debug.Print
     Debug.Print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
     Debug.Print "1. aegitClassTest => DocumentTheDatabase"
@@ -165,18 +161,18 @@ TestOne:
     If IsMissing(varDebug) Then
         Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING IS OFF"
-        blnTestOne = oDbObjects.DocumentTheDatabase()
+        blnTest = oDbObjects.DocumentTheDatabase()
     Else
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to DocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
-        blnTestOne = oDbObjects.DocumentTheDatabase("WithDebugging")
+        blnTest = oDbObjects.DocumentTheDatabase("WithDebugging")
     End If
     Debug.Print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     Debug.Print
 
 RESULTS:
-    Debug.Print "Test 1: DocumentTheDatabase"
-    Debug.Print PassFail(blnTestOne)
+    Debug.Print "Test: DocumentTheDatabase"
+    Debug.Print PassFail(blnTest)
 
 PROC_EXIT:
     Exit Sub

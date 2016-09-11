@@ -10,8 +10,7 @@
 [basaeRibbonCallbacks]      False
 [basGDIPlus]  False
 [basHash]     False
-[TestCodesForA~Z]           False
-[TestModuleA] False
+[Test_aegit]  False
 [zOther]      False
 [zRibbons]    False
 [zTesting1]   False

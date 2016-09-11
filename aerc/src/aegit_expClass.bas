@@ -4194,10 +4194,10 @@ Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug A
     Loop
     Close fle
 
-    For i = 0 To UBound(aeListOfTables)
-        Debug.Print i, aeListOfTables(i)
-    Next i
-    Stop
+    'For i = 0 To UBound(aeListOfTables)
+    '    Debug.Print i, aeListOfTables(i)
+    'Next i
+    'Stop
 
     If Not IsMissing(varDebug) Then
         Debug.Print "OutputListOfTables"
