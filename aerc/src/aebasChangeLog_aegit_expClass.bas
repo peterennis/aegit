@@ -51,7 +51,6 @@ Option Explicit
 ' %085 - Automation goal - Ref: https://github.com/blog/1271-how-we-ship-github-for-windows
 ' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
 ' %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
-' %081 - Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample then fix access and lf schema output; tblDummy3 is test case, Relates to %080, %098
@@ -76,6 +75,7 @@ Option Explicit
     ' FIXED - %104 - Parse field string fails when there are spaces in the name
     ' FIXED - %103 - Get DbIssueChecker.mdb from Allen Browne and use it to identify issues
     ' FIXED - %097 - Pass the actual value "varDebug" for debugging in all cases so potentially strange variant parameters will not be transferred
+    ' NOTABUG - %081 - Cannot redim dimensioned array (Inefficient file reading, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/2004)
     ' DUPLICATE %080 - Relates to %098, Wrong output for tblDummy3 in OutputListOfIndexes.txt and therefore OutputLovefieldSchema.txt is incorrect
     ' OBSOLETE - #042 - Global Error Handler Routines, Ref: http://msdn.microsoft.com/en-us/library/office/ee358847(v=office.12).aspx#odc_ac2007_ta_ErrorHandlingAndDebuggingTipsForAccessVBAndVBA_WritingCodeForDebugging
     ' FIXED - #039 - x64 support - https://github.com/peterennis/aegit/issues/3

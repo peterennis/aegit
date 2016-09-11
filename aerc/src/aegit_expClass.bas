@@ -4138,7 +4138,7 @@ Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug A
     ' 4   Table - Linked ODBC Tables
     ' 6   Table - Linked Access Tables
 
-    'Debug.Print "OutputListOfTables"
+    Debug.Print "OutputListOfTables"
     On Error GoTo PROC_ERR
 
     Dim strSQL As String
@@ -4781,57 +4781,61 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                         strFlds = strFlds & "Text (" & fld.Size & ")"
                     Case 109&                                   ' dbComplexText
                         strFlds = strFlds & "Text (" & fld.Size & ")"
-                    Case dbMemo
-                        If (fld.Attributes And dbHyperlinkField) = 0& Then
-                            strFlds = strFlds & "Memo"
-                        Else
-                            strFlds = strFlds & "Hyperlink"
-                        End If
-                    Case dbByte
-                        strFlds = strFlds & "Byte"
-                    Case 102&                                   ' dbComplexByte
-                        strFlds = strFlds & "Complex Byte"
-                    Case dbInteger
-                        strFlds = strFlds & "Integer"
-                    Case 103&                                   ' dbComplexInteger
-                        strFlds = strFlds & "Complex Integer"
+                    Case dbMemo, dbByte, 102&, dbInteger, 103&, _
+                        104&, dbSingle, 105&, dbDouble, 106&, dbGUID, _
+                        107&, dbDecimal, 108&, dbCurrency, _
+                        101&, dbBinary
+                        strFlds = strFlds & FieldTypeName(fld)
+'                        If (fld.Attributes And dbHyperlinkField) = 0& Then
+'                            strFlds = strFlds & "Memo"
+'                        Else
+'                            strFlds = strFlds & "Hyperlink"
+'                        End If
+'                    Case dbByte
+'                        strFlds = strFlds & "Byte"
+'                    Case 102&                                   ' dbComplexByte
+'                        strFlds = strFlds & "Complex Byte"
+'                    Case dbInteger
+'                        strFlds = strFlds & "Integer"
+'                    Case 103&                                   ' dbComplexInteger
+'                        strFlds = strFlds & "Complex Integer"
                     Case dbLong
                         If (fld.Attributes And dbAutoIncrField) = 0& Then
                             strFlds = strFlds & "Long"
                         Else
                             strFlds = strFlds & "Counter"
                         End If
-                    Case 104&                                   ' dbComplexLong
-                        strFlds = strFlds & "Complex Long"
-                    Case dbSingle
-                        strFlds = strFlds & "Single"
-                    Case 105&                                   ' dbComplexSingle
-                        strFlds = strFlds & "Complex Single"
-                    Case dbDouble
-                        strFlds = strFlds & "Double"
-                    Case 106&                                   ' dbComplexDouble
-                        strFlds = strFlds & "Complex Double"
-                    Case dbGUID
-                        strFlds = strFlds & "GUID"
-                        'strFlds = strFlds & "Replica"
-                    Case 107&                                   ' dbComplexGUID
-                        strFlds = strFlds & "Complex GUID"
-                    Case dbDecimal
-                        strFlds = strFlds & "Decimal"
-                    Case 108&                                   ' dbComplexDecimal
-                        strFlds = strFlds & "Complex Decimal"
+'                    Case 104&                                   ' dbComplexLong
+'                        strFlds = strFlds & "Complex Long"
+'                    Case dbSingle
+'                        strFlds = strFlds & "Single"
+'                    Case 105&                                   ' dbComplexSingle
+'                        strFlds = strFlds & "Complex Single"
+'                    Case dbDouble
+'                        strFlds = strFlds & "Double"
+'                    Case 106&                                   ' dbComplexDouble
+'                        strFlds = strFlds & "Complex Double"
+''                    Case dbGUID
+''                        strFlds = strFlds & "GUID"
+''                        'strFlds = strFlds & "Replica"
+'                    Case 107&                                   ' dbComplexGUID
+'                        strFlds = strFlds & "Complex GUID"
+'                    Case dbDecimal
+'                        strFlds = strFlds & "Decimal"
+'                    Case 108&                                   ' dbComplexDecimal
+'                        strFlds = strFlds & "Complex Decimal"
                     Case dbDate
                         strFlds = strFlds & "DateTime"
-                    Case dbCurrency
-                        strFlds = strFlds & "Currency"
+'                    Case dbCurrency
+'                        strFlds = strFlds & "Currency"
                     Case dbBoolean
                         strFlds = strFlds & "YesNo"
                     Case dbLongBinary
                         strFlds = strFlds & "OLEObject"
-                    Case 101&                                   ' dbAttachment
-                        strFlds = strFlds & "Attachment"
-                    Case dbBinary
-                        strFlds = strFlds & "Binary"
+'                    Case 101&                                   ' dbAttachment
+'                        strFlds = strFlds & "Attachment"
+'                    Case dbBinary
+'                        strFlds = strFlds & "Binary"
                     Case Else
                         MsgBox "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass", vbCritical, "ERROR"
                         Debug.Print "Unknown fld.Type=" & fld.Type & " in procedure OutputTheSchemaFile of aegit_expClass" & vbCrLf & _
@@ -4877,7 +4881,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                     End If
 
                     If ndx.Primary Then
-                        Debug.Print tdf.Name, fld.Name, ndx.Name, ndx.Primary, ndx.Foreign, ndx.Unique, ndx.Required
+                        Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     Else
