@@ -1465,24 +1465,24 @@ End Function
 
 Private Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
     ' allenbrowne.com
-    'Purpose:   Indicate if the field is part of a primary key or unique index.
-    'Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
-    '           Lower case letters if secondary field in index. Can have multiple indexes.
-    'Arguments: tdf = the TableDef the field belongs to.
-    '           strField = name of the field to search the Indexes for.
+    ' Purpose:   Indicate if the field is part of a primary key or unique index.
+    ' Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
+    '            Lower case letters if secondary field in index. Can have multiple indexes.
+    ' Arguments: tdf = the TableDef the field belongs to.
+    '            strField = name of the field to search the Indexes for.
 
-    Dim ind As DAO.Index        'Each index of this table.
-    Dim fld As DAO.Field        'Each field of the index
+    Dim idx As DAO.Index        ' Each index of this table
+    Dim fld As DAO.Field        ' Each field of the index
     Dim iCount As Integer
-    Dim strReturn As String     'Return string
+    Dim strReturn As String     ' Return string
     
-    For Each ind In tdf.Indexes
+    For Each idx In tdf.Indexes
         iCount = 0
-        For Each fld In ind.Fields
+        For Each fld In idx.Fields
             If fld.Name = strField Then
-                If ind.Primary Then
+                If idx.Primary Then
                     strReturn = strReturn & IIf(iCount = 0, "P", "p")
-                ElseIf ind.Unique Then
+                ElseIf idx.Unique Then
                     strReturn = strReturn & IIf(iCount = 0, "U", "u")
                 Else
                     strReturn = strReturn & IIf(iCount = 0, "I", "i")
@@ -2555,6 +2555,15 @@ PROC_ERR:
     Resume PROC_EXIT
 
 End Sub
+
+Public Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
+    Dim i As Long
+    For i = 1 To Len(searchString)
+        If Mid$(LCase$(searchString), i, 1) = LCase(searchChar) Then
+        LCaseCountChar = LCaseCountChar + 1
+    End If
+    Next
+End Function
 
 Private Function LinkedTable(ByVal strTblName As String) As Boolean
 
@@ -4149,7 +4158,7 @@ Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug A
         strSQL = "SELECT m.Name, """" AS Attribute " & _
             "FROM MSysObjects AS m " & _
             "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
-            "m.Name Not Like ""~TMP*"" AND " & _
+            "m.Name Not Like ""~*"" AND " & _
             "m.Name Not Like ""MSys*"" AND " & _
             strAllTables & _
             "ORDER BY m.Name;"
@@ -4157,7 +4166,7 @@ Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug A
         strSQL = "SELECT m.Name, """" AS Attribute " & _
             "FROM MSysObjects AS m " & _
             "WHERE m.Name Not Like ""~%"" AND m.Name Not Like ""zzz*"" AND " & _
-            "m.Name Not Like ""~TMP*"" AND " & _
+            "m.Name Not Like ""~*"" AND " & _
             "m.Name Not Like ""MSys*"" AND " & _
             strAccessTables & _
             "ORDER BY m.Name;"
@@ -4836,14 +4845,34 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
                 strFlds = vbNullString
 
+                '
+'                Dim strIndexFieldInfo As String
+'                strIndexFieldInfo = vbNullString
+'                Dim blnSingleFieldPrimary As Boolean
+''                For Each fld In tdf.Fields
+'                    strIndexFieldInfo = DescribeIndexField(tdf, fld.Name)
+''                    Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
+''                Next
+'                Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
+'                If LCaseCountChar("P", strIndexFieldInfo) = 1 Then
+'                    blnSingleFieldPrimary = True
+'                    Debug.Print , "Single Field Primary Key"
+'                ElseIf LCaseCountChar("P", strIndexFieldInfo) > 1 Then
+'                    blnSingleFieldPrimary = False
+'                    Debug.Print , "Multi Field Primary Key"
+'                ElseIf LCaseCountChar("P", strIndexFieldInfo) = 0 Then
+'                    blnSingleFieldPrimary = False
+'                    Debug.Print , "No Primary Key"
+'                End If
+
                 For Each fld In tdf.Fields
-                    ' NOTE: FIXIT - Resolution needed for multi field indexes and primary keys
+                    ' Resolution needed for multi field indexes and primary keys
                     ' Answer here: https://groups.google.com/forum/#!topic/comp.databases.ms-access/CYhK9ZMrMDk
                     ' from: http://allenbrowne.com/AppRelReportCode.html
-                    If tdf.Name = "tblDummy3" Then
-                        ' Testing show info for multi-field PK and multi-field index
-                        Debug.Print fld.Name, DescribeIndexField(tdf, fld.Name)
-                    End If
+                    'If tdf.Name = "tblDummy3" Then
+                    '    ' Testing show info for multi-field PK and multi-field index
+                    '    Debug.Print fld.Name, DescribeIndexField(tdf, fld.Name)
+                    'End If
 
                     If ndx.Primary Then
                         Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required

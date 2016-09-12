@@ -1,6 +1,64 @@
 Option Compare Database
 Option Explicit
 
+Public Function IsSinglePrimaryField() As Boolean
+
+End Function
+
+Public Function AllTablesIndexSummary() As Boolean
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Dim strTableIndexInfo As String
+    strTableIndexInfo = vbNullString
+    Set dbs = CurrentDb
+    For Each tdf In dbs.TableDefs
+        ' Ignore system and temporary tables
+        If Not (tdf.Name Like "MSys*" Or tdf.Name Like "~*") Then
+            strTableIndexInfo = SingleTableIndexSummary(tdf)
+            Debug.Print tdf.Name, strTableIndexInfo
+        End If
+    Next
+    Set tdf = Nothing
+    Set dbs = Nothing
+
+'    If LCaseCountChar("P", strIndexFieldInfo) = 1 Then
+'        SinglePrimaryField = True
+'        Debug.Print , "Single Field Primary Key", SinglePrimaryField
+'    ElseIf LCaseCountChar("P", strIndexFieldInfo) > 1 Then
+'        SinglePrimaryField = False
+'        Debug.Print , "Multi Field Primary Key", SinglePrimaryField
+'    ElseIf LCaseCountChar("P", strIndexFieldInfo) = 0 Then
+'        SinglePrimaryField = False
+'        Debug.Print , "No Primary Key", SinglePrimaryField
+'    End If
+
+End Function
+
+Public Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
+
+    Dim strIndexFieldInfo As String
+    strIndexFieldInfo = vbNullString
+    Dim fld As DAO.Field
+
+    For Each fld In tdf.Fields
+        strIndexFieldInfo = strIndexFieldInfo & DescribeIndexField(tdf, fld.Name)
+        'Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
+    Next
+    'Debug.Print "TableIndexSummary", tdf.Name, "strIndexFieldInfo=" & strIndexFieldInfo
+    SingleTableIndexSummary = strIndexFieldInfo
+
+End Function
+
+Public Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
+    Dim i As Long
+    For i = 1 To Len(searchString)
+        If Mid$(LCase$(searchString), i, 1) = LCase(searchChar) Then
+        LCaseCountChar = LCaseCountChar + 1
+    End If
+    Next
+End Function
+
 Private Function IsQryHidden(ByVal strQueryName As String) As Boolean
     'Debug.Print "IsQryHidden"
     On Error GoTo 0
