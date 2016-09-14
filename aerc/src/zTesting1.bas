@@ -1,7 +1,41 @@
 Option Compare Database
 Option Explicit
 
-Public Function IsSinglePrimaryField() As Boolean
+Public Function Test_IsSinglePrimaryField() As Boolean
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Set dbs = CurrentDb
+
+    Set tdf = dbs.TableDefs("aeItems")
+    Debug.Print tdf.Name
+    Debug.Print , IsSinglePrimaryField(tdf)
+
+    Set tdf = dbs.TableDefs("tblDummy2")
+    Debug.Print tdf.Name
+    Debug.Print , IsSinglePrimaryField(tdf)
+
+    Set tdf = dbs.TableDefs("tblDummy3")
+    Debug.Print tdf.Name
+    Debug.Print , IsSinglePrimaryField(tdf)
+
+End Function
+
+Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef) As Boolean
+
+    Dim strIndexInfo As String
+    strIndexInfo = SingleTableIndexSummary(tdf)
+    Debug.Print strIndexInfo
+    If LCaseCountChar("P", strIndexInfo) = 1 Then
+        IsSinglePrimaryField = True
+        Debug.Print , "Single Field Primary Key", IsSinglePrimaryField
+    ElseIf LCaseCountChar("P", strIndexInfo) > 1 Then
+        IsSinglePrimaryField = False
+        Debug.Print , "Multi Field Primary Key", IsSinglePrimaryField
+    ElseIf LCaseCountChar("P", strIndexInfo) = 0 Then
+        IsSinglePrimaryField = False
+        Debug.Print , "No Primary Key", IsSinglePrimaryField
+    End If
 
 End Function
 
@@ -22,20 +56,9 @@ Public Function AllTablesIndexSummary() As Boolean
     Set tdf = Nothing
     Set dbs = Nothing
 
-'    If LCaseCountChar("P", strIndexFieldInfo) = 1 Then
-'        SinglePrimaryField = True
-'        Debug.Print , "Single Field Primary Key", SinglePrimaryField
-'    ElseIf LCaseCountChar("P", strIndexFieldInfo) > 1 Then
-'        SinglePrimaryField = False
-'        Debug.Print , "Multi Field Primary Key", SinglePrimaryField
-'    ElseIf LCaseCountChar("P", strIndexFieldInfo) = 0 Then
-'        SinglePrimaryField = False
-'        Debug.Print , "No Primary Key", SinglePrimaryField
-'    End If
-
 End Function
 
-Public Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
+Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
 
     Dim strIndexFieldInfo As String
     strIndexFieldInfo = vbNullString
@@ -50,7 +73,7 @@ Public Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
 
 End Function
 
-Public Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
+Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
     Dim i As Long
     For i = 1 To Len(searchString)
         If Mid$(LCase$(searchString), i, 1) = LCase(searchChar) Then

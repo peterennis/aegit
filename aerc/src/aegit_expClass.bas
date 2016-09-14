@@ -2464,14 +2464,31 @@ Private Function IsPK(ByVal tdf As DAO.TableDef, ByVal strField As String) As Bo
     Next idx
 End Function
 
-Private Function IsRptHidden(ByVal strReportName As String) As Boolean
-    'Debug.Print "IsRptHidden"
+Private Function IsReportHidden(ByVal strReportName As String) As Boolean
+    'Debug.Print "IsReportHidden"
     On Error GoTo 0
     If IsNull(strReportName) Or strReportName = vbNullString Then
-        IsRptHidden = False
+        IsReportHidden = False
     Else
-        IsRptHidden = GetHiddenAttribute(acReport, strReportName)
+        IsReportHidden = GetHiddenAttribute(acReport, strReportName)
     End If
+End Function
+
+Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef) As Boolean
+
+    Dim strIndexInfo As String
+    strIndexInfo = SingleTableIndexSummary(tdf)
+    If LCaseCountChar("P", strIndexInfo) = 1 Then
+        IsSinglePrimaryField = True
+        'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
+    ElseIf LCaseCountChar("P", strIndexInfo) > 1 Then
+        IsSinglePrimaryField = False
+        Debug.Print , strIndexInfo, "Multi Field Primary Key"
+    ElseIf LCaseCountChar("P", strIndexInfo) = 0 Then
+        IsSinglePrimaryField = False
+        Debug.Print , strIndexInfo, "No Primary Key"
+    End If
+
 End Function
 
 Private Function IsTableHidden(ByVal strTableName As String) As Boolean
@@ -2556,7 +2573,7 @@ PROC_ERR:
 
 End Sub
 
-Public Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
+Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
     Dim i As Long
     For i = 1 To Len(searchString)
         If Mid$(LCase$(searchString), i, 1) = LCase(searchChar) Then
@@ -4112,7 +4129,7 @@ Private Sub OutputListOfReports(Optional ByVal varDebug As Variant)
 
     Do While Not rst.EOF
         If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0)
-        Print #fle, "[" & rst.Fields(0) & "]", IsRptHidden(rst.Fields(0))
+        Print #fle, "[" & rst.Fields(0) & "]", IsReportHidden(rst.Fields(0))
         rst.MoveNext
     Loop
     Close fle
@@ -4845,40 +4862,15 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
                 strFlds = vbNullString
 
-                '
-'                Dim strIndexFieldInfo As String
-'                strIndexFieldInfo = vbNullString
-'                Dim blnSingleFieldPrimary As Boolean
-''                For Each fld In tdf.Fields
-'                    strIndexFieldInfo = DescribeIndexField(tdf, fld.Name)
-''                    Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
-''                Next
-'                Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
-'                If LCaseCountChar("P", strIndexFieldInfo) = 1 Then
-'                    blnSingleFieldPrimary = True
-'                    Debug.Print , "Single Field Primary Key"
-'                ElseIf LCaseCountChar("P", strIndexFieldInfo) > 1 Then
-'                    blnSingleFieldPrimary = False
-'                    Debug.Print , "Multi Field Primary Key"
-'                ElseIf LCaseCountChar("P", strIndexFieldInfo) = 0 Then
-'                    blnSingleFieldPrimary = False
-'                    Debug.Print , "No Primary Key"
-'                End If
-
                 For Each fld In tdf.Fields
-                    ' Resolution needed for multi field indexes and primary keys
-                    ' Answer here: https://groups.google.com/forum/#!topic/comp.databases.ms-access/CYhK9ZMrMDk
-                    ' from: http://allenbrowne.com/AppRelReportCode.html
-                    'If tdf.Name = "tblDummy3" Then
-                    '    ' Testing show info for multi-field PK and multi-field index
-                    '    Debug.Print fld.Name, DescribeIndexField(tdf, fld.Name)
-                    'End If
 
-                    If ndx.Primary Then
-                        Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
+                    '''If ndx.Primary Then
+                    If IsSinglePrimaryField(tdf) Then
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     Else
+                        Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
+                        Debug.Print "FIX here for Multi Field Primary and Multi Field Index"
                         strFlds = ",[" & fld.Name & "]"
                     End If
                     'Debug.Print , strFlds
@@ -5474,6 +5466,21 @@ Private Sub ResetWorkspace()
         DoCmd.Close acReport, Reports(intCounter).Name
     Next intCounter
 End Sub
+
+Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
+
+    Dim strIndexFieldInfo As String
+    strIndexFieldInfo = vbNullString
+    Dim fld As DAO.Field
+
+    For Each fld In tdf.Fields
+        strIndexFieldInfo = strIndexFieldInfo & DescribeIndexField(tdf, fld.Name)
+        'Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
+    Next
+    'Debug.Print "TableIndexSummary", tdf.Name, "strIndexFieldInfo=" & strIndexFieldInfo
+    SingleTableIndexSummary = strIndexFieldInfo
+
+End Function
 
 Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
     Optional ByVal TextSide As SizeStringSide = TextLeft, _
