@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.7"
-Private Const aegit_expVERSION_DATE As String = "September 11, 2016"
+Private Const aegit_expVERSION As String = "1.9.8"
+Private Const aegit_expVERSION_DATE As String = "September 21, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -79,8 +79,8 @@ Private Type myExportType                   ' Initialize defaults as:
     ExportCodeAndObjects As Boolean         ' True
     ExportModuleCodeOnly As Boolean         ' True
     ExportQAT As Boolean                    ' False
-    ExportCBID As Boolean                   ' True
-    ExportAllTableTypesInfo As Boolean      ' False, default does not export info about ODBC linked tables
+    ExportCBID As Boolean                   ' False
+    ExportNoODBCTablesInfo As Boolean       ' True, default does not export info about ODBC linked tables
 End Type
 
 Private myExclude As myExclusions
@@ -121,28 +121,28 @@ Private aeListOfTables() As Variant
 Private Const DebugPrintInitialize As Boolean = False
 'Private aestrPassword As String
 Private Const aestr4 As String = "    "
-Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
-Private Const aeTblTxtFile As String = "OutputTblSetupForTables.txt"
-Private Const aeRefTxtFile As String = "OutputReferencesSetup.txt"
-Private Const aeRelTxtFile As String = "OutputRelationsSetup.txt"
-Private Const aePrpTxtFile As String = "OutputPropertiesBuiltIn.txt"
-Private Const aeFLkCtrFile As String = "OutputFieldLookupControlTypeList.txt"
-Private Const aeSchemaFile As String = "OutputSchemaFile.txt"
-Private Const aePrnterInfo As String = "OutputPrinterInfo.txt"
-Private Const aeAppOptions As String = "OutputListOfAccessApplicationOptions.txt"
-Private Const aeAppListPrp As String = "OutputListOfApplicationProperties.txt"
-Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
 Private Const aeAppHiddQry As String = "OutputListOfAllHiddenQueries.txt"
+Private Const aeAppListCnt As String = "OutputListOfContainers.txt"
 Private Const aeAppListFrm As String = "OutputListOfForms.txt"
 Private Const aeAppListMac As String = "OutputListOfMacros.txt"
 Private Const aeAppListMod As String = "OutputListOfModules.txt"
+Private Const aeAppListPrp As String = "OutputListOfApplicationProperties.txt"
+Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
 Private Const aeAppListRpt As String = "OutputListOfReports.txt"
 Private Const aeAppListTbl As String = "OutputListOfTables.txt"
-Private Const aeAppListQAT As String = "OutputQAT"  ' Will be saved with file extension .exportedUI
+Private Const aeAppOptions As String = "OutputListOfAccessApplicationOptions.txt"
 Private Const aeCatalogObj As String = "OutputCatalogUserCreatedObjects.txt"
+Private Const aeFLkCtrFile As String = "OutputFieldLookupControlTypeList.txt"
 Private Const aeIndexLists As String = "OutputListOfIndexes.txt"
 Private Const aeLoveSchema As String = "OutputLovefieldSchema.txt"
+Private Const aePrnterInfo As String = "OutputPrinterInfo.txt"
+Private Const aePrpTxtFile As String = "OutputPropertiesBuiltIn.txt"
+Private Const aeRefTxtFile As String = "OutputReferencesSetup.txt"
+Private Const aeRelTxtFile As String = "OutputRelationsSetup.txt"
+Private Const aeSchemaFile As String = "OutputSchemaFile.txt"
+Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
+Private Const aeTblTxtFile As String = "OutputFieldsForTables.txt"
 '
 
 Private Sub Class_Initialize()
@@ -189,8 +189,8 @@ Private Sub Class_Initialize()
         .ExportCodeAndObjects = True
         .ExportModuleCodeOnly = True
         .ExportQAT = False
-        .ExportCBID = True
-        .ExportAllTableTypesInfo = False
+        .ExportCBID = False
+        .ExportNoODBCTablesInfo = True
     End With
 
     pExclude = True             ' Default setting is not to export associated aegit_exp files
@@ -226,6 +226,7 @@ Private Sub Class_Initialize()
         Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
         Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
         Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
+        Debug.Print , "aegitExport.ExportNoODBCTablesInfo = " & aegitExport.ExportNoODBCTablesInfo
         DefineMyExclusions
         Debug.Print , "pExclude = " & pExclude
     End If
@@ -271,6 +272,7 @@ End Sub
 
 Public Property Get BackEndDbOne() As String
     On Error GoTo 0
+    Debug.Print "Property Get BackEndDbOne"
     BackEndDbOne = aestrBackEndDbOne
 End Property
 
@@ -285,6 +287,7 @@ Public Property Get CompactAndRepair(Optional ByVal varTrueFalse As Variant) As 
     ' Automation for Compact and Repair
 
     On Error GoTo 0
+    Debug.Print "Property Get CompactAndRepair"
     Dim blnRun As Boolean
 
     Debug.Print "CompactAndRepair"
@@ -324,12 +327,12 @@ End Property
 Public Property Get DocumentRelations(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        'Debug.Print "Get DocumentRelations"
+        'Debug.Print "Property Get DocumentRelations"
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentRelations"
         'Debug.Print , "DEBUGGING IS OFF"
         DocumentRelations = aeDocumentRelations()
     Else
-        Debug.Print "Get DocumentRelations"
+        Debug.Print "Property Get DocumentRelations"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentRelations"
         Debug.Print , "DEBUGGING TURNED ON"
         DocumentRelations = aeDocumentRelations(varDebug)
@@ -339,12 +342,12 @@ End Property
 Public Property Get DocumentTables(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        'Debug.Print "Get DocumentTables"
+        'Debug.Print "Property Get DocumentTables"
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTables"
         'Debug.Print , "DEBUGGING IS OFF"
         DocumentTables = aeDocumentTables()
     Else
-        Debug.Print "Get DocumentTables"
+        Debug.Print "Property Get DocumentTables"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTables"
         Debug.Print , "DEBUGGING TURNED ON"
         DocumentTables = aeDocumentTables(varDebug)
@@ -354,12 +357,12 @@ End Property
 Public Property Get DocumentTablesXML(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        'Debug.Print "Get DocumentTablesXML"
+        'Debug.Print "Property Get DocumentTablesXML"
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTablesXML"
         'Debug.Print , "DEBUGGING IS OFF"
         DocumentTablesXML = aeDocumentTablesXML()
     Else
-        Debug.Print "Get DocumentTablesXML"
+        Debug.Print "Property Get DocumentTablesXML"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTablesXML"
         Debug.Print , "DEBUGGING TURNED ON"
         DocumentTablesXML = aeDocumentTablesXML(varDebug)
@@ -369,12 +372,12 @@ End Property
 Public Property Get DocumentTheDatabase(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        'Debug.Print "Get DocumentTheDatabase"
+        'Debug.Print "Property Get DocumentTheDatabase"
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
         'Debug.Print , "DEBUGGING IS OFF"
         DocumentTheDatabase = aeDocumentTheDatabase()
     Else
-        Debug.Print "Get DocumentTheDatabase"
+        Debug.Print "Property Get DocumentTheDatabase"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeDocumentTheDatabase"
         Debug.Print , "DEBUGGING TURNED ON"
         DocumentTheDatabase = aeDocumentTheDatabase(varDebug)
@@ -386,11 +389,11 @@ Public Property Get ExcludeFiles(Optional ByVal varDebug As Variant) As Boolean
     ExcludeFiles = pExclude
     Debug.Print , "ExcludeFiles = " & pExclude
     If IsMissing(varDebug) Then
-        'Debug.Print "Get ExcludeFiles"
+        'Debug.Print "Property Get ExcludeFiles"
         'Debug.Print , "varDebug IS missing so no parameter is passed to ExcludeFiles"
         'Debug.Print , "DEBUGGING IS OFF"
     Else
-        Debug.Print "Get ExcludeFiles"
+        Debug.Print "Property Get ExcludeFiles"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to ExcludeFiles"
         Debug.Print , "DEBUGGING TURNED ON"
     End If
@@ -398,6 +401,7 @@ End Property
 
 Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnExclude As Boolean)
     On Error GoTo 0
+    Debug.Print "Property Let ExcludeFiles"
     pExclude = blnExclude
     Debug.Print , "Let ExcludeFiles = " & pExclude
 End Property
@@ -408,20 +412,31 @@ Public Property Get Exists(ByVal strAccObjType As String, _
 
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        'Debug.Print "Get Exists"
+        'Debug.Print "Property Get Exists"
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeExists"
         'Debug.Print , "DEBUGGING IS OFF"
         Exists = aeExists(strAccObjType, strAccObjName)
     Else
-        Debug.Print "Get Exists"
+        Debug.Print "Property Get Exists"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeExists"
         Debug.Print , "DEBUGGING TURNED ON"
         Exists = aeExists(strAccObjType, strAccObjName, varDebug)
     End If
 End Property
 
+Public Property Let ExportNoODBCTablesInfo(ByVal ExportNoODBCTablesInfo As Boolean)
+    On Error GoTo 0
+    Debug.Print "Property Let ExportNoODBCTablesInfo"
+    If ExportNoODBCTablesInfo Then
+        aegitExport.ExportNoODBCTablesInfo = True
+    Else
+        aegitExport.ExportNoODBCTablesInfo = False
+    End If
+End Property
+
 Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
     On Error GoTo 0
+    Debug.Print "Property Let ExportCBID"
     If IsExportCBID Then
         aegitExport.ExportCBID = True
     Else
@@ -431,6 +446,7 @@ End Property
 
 Public Property Let ExportQAT(ByVal IsExportQAT As Boolean)
     On Error GoTo 0
+    Debug.Print "Property Let ExportQAT"
     If IsExportQAT Then
         aegitExport.ExportQAT = True
     Else
@@ -442,7 +458,7 @@ Public Property Get FrontEndApp() As Boolean
     On Error GoTo 0
     Debug.Print "Property Get FrontEndApp"
     FrontEndApp = aegitFrontEndApp
-    Debug.Print , "FrontEndApp = " & FrontEndApp
+    'Debug.Print , "FrontEndApp = " & FrontEndApp
 End Property
 
 Public Property Let FrontEndApp(ByVal IsFrontEndApp As Boolean)
@@ -455,12 +471,12 @@ End Property
 Public Property Get GetReferences(Optional ByVal varDebug As Variant) As Boolean
     On Error GoTo 0
     If IsMissing(varDebug) Then
-        'Debug.Print "Get GetReferences"
+        'Debug.Print "Property Get GetReferences"
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeGetReferences"
         'Debug.Print , "DEBUGGING IS OFF"
         GetReferences = aeGetReferences()
     Else
-        Debug.Print "Get GetReferences"
+        Debug.Print "Property Get GetReferences"
         Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to aeGetReferences"
         Debug.Print , "DEBUGGING TURNED ON"
         GetReferences = aeGetReferences(varDebug)
@@ -469,6 +485,7 @@ End Property
 
 Public Property Get IsPrimaryKey(ByVal strTableName As String, ByVal strField As String) As Boolean
     On Error GoTo 0
+    Debug.Print "Property Get IsPrimaryKey"
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
     Dim tdf As DAO.TableDef
@@ -510,7 +527,7 @@ Public Property Get SourceFolderBe() As String
     On Error GoTo 0
     Debug.Print "Property Get SourceFolderBe"
     SourceFolderBe = aegitSourceFolderBe      'aestrSourceLocationBe
-    Debug.Print , "SourceFolderBe = " & SourceFolderBe
+    'Debug.Print , "SourceFolderBe = " & SourceFolderBe
 End Property
 
 Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
@@ -518,7 +535,7 @@ Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
     Debug.Print "Property Let SourceFolderBe"
     aegitSourceFolderBe = strSourceFolderBe
     'aestrSourceLocationBe = strSourceFolderBe
-    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+    'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
 End Property
 
 Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
@@ -551,11 +568,13 @@ End Property
 
 Public Property Get TextEncoding() As String
     On Error GoTo 0
+    Debug.Print "Property Get TextEncoding"
     TextEncoding = aegitTextEncoding
 End Property
 
 Public Property Let TextEncoding(ByVal strTextEncoding As String)
     On Error GoTo 0
+    Debug.Print "Property Let TextEncoding"
     aegitTextEncoding = strTextEncoding
 End Property
 
@@ -563,56 +582,56 @@ Public Property Get XMLDataFolder() As String
     On Error GoTo 0
     Debug.Print "Property Get XMLDataFolder"
     XMLDataFolder = aegitXMLDataFolder
-    Debug.Print , "XMLDataFolder = " & XMLDataFolder
+    'Debug.Print , "XMLDataFolder = " & XMLDataFolder
 End Property
 
 Public Property Let XMLDataFolder(ByVal strXMLDataFolder As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLDataFolder"
     aegitXMLDataFolder = strXMLDataFolder
-    Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
+    'Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
 End Property
 
 Public Property Get XMLDataFolderBe() As String
     On Error GoTo 0
     Debug.Print "Property Get XMLDataFolderBe"
     XMLDataFolderBe = aegitXMLDataFolderBe
-    Debug.Print , "XMLDataFolderBe = " & XMLDataFolderBe
+    'Debug.Print , "XMLDataFolderBe = " & XMLDataFolderBe
 End Property
 
 Public Property Let XMLDataFolderBe(ByVal strXMLDataFolderBe As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLDataFolderBe"
     aegitXMLDataFolderBe = strXMLDataFolderBe
-    Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
+    'Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
 End Property
 
 Public Property Get XMLFolder() As String
     On Error GoTo 0
     Debug.Print "Property Get XMLFolder"
     XMLFolder = aegitXMLFolder
-    Debug.Print , "XMLFolder = " & XMLFolder
+    'Debug.Print , "XMLFolder = " & XMLFolder
 End Property
 
 Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLFolder"
     aegitXMLFolder = strXMLFolder
-    Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
+    'Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
 End Property
 
 Public Property Get XMLFolderBe() As String
     On Error GoTo 0
     Debug.Print "Property Get XMLFolderBe"
     XMLFolderBe = aegitXMLFolderBe
-    Debug.Print , "XMLFolderBe = " & XMLFolderBe
+    'Debug.Print , "XMLFolderBe = " & XMLFolderBe
 End Property
 
 Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLFolderBe"
     aegitXMLFolderBe = strXMLFolderBe
-    Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
+    'Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
 
 Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
@@ -836,19 +855,39 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     End If
 
     If Not IsMissing(varDebug) Then Debug.Print ">List of tables exported as XML to " & strTheXMLLocation
-    For Each tbl In dbs.TableDefs
-        If Not LinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") Then
-            strObjName = tbl.Name
-            Application.ExportXML acExportTable, strObjName, , _
-                strTheXMLLocation & "tables_" & strObjName & ".xsd"
-            If Not IsMissing(varDebug) Then
-                Debug.Print , "- " & strObjName & ".xsd"
-                PrettyXML strTheXMLLocation & "tables_" & strObjName & ".xsd", varDebug
-            Else
-                PrettyXML strTheXMLLocation & "tables_" & strObjName & ".xsd"
+    If Not aegitExport.ExportNoODBCTablesInfo Then
+        For Each tbl In dbs.TableDefs
+            If Not IsLinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") Then
+                strObjName = tbl.Name
+                Application.ExportXML acExportTable, strObjName, , _
+                    strTheXMLLocation & "tables_" & strObjName & ".xsd"
+                If Not IsMissing(varDebug) Then
+                    Debug.Print , "- " & strObjName & ".xsd"
+                    PrettyXML strTheXMLLocation & "tables_" & strObjName & ".xsd", varDebug
+                Else
+                    PrettyXML strTheXMLLocation & "tables_" & strObjName & ".xsd"
+                End If
             End If
-        End If
-    Next
+        Next
+    Else
+        For Each tbl In dbs.TableDefs
+            If IsLinkedODBC(tbl.Name) Then
+                ' Do nothing
+            Else
+                If Not IsLinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") Then
+                    strObjName = tbl.Name
+                    Application.ExportXML acExportTable, strObjName, , _
+                        strTheXMLLocation & "tables_" & strObjName & ".xsd"
+                    If Not IsMissing(varDebug) Then
+                        Debug.Print , "- " & strObjName & ".xsd"
+                        PrettyXML strTheXMLLocation & "tables_" & strObjName & ".xsd", varDebug
+                    Else
+                        PrettyXML strTheXMLLocation & "tables_" & strObjName & ".xsd"
+                    End If
+                End If
+            End If
+        Next
+    End If
 
     If intFailCount > 0 Then
         aeDocumentTablesXML = False
@@ -1015,7 +1054,11 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
             KillProperly (strTheSourceLocation & aeAppCmbrIds)
         End If
-        OutputListOfTables aegitExport.ExportAllTableTypesInfo, varDebug
+        If aegitExport.ExportNoODBCTablesInfo Then
+            OutputListOfTables aegitExport.ExportNoODBCTablesInfo, varDebug
+        Else
+            OutputListOfTables Not (aegitExport.ExportNoODBCTablesInfo), varDebug
+        End If
         OutputTableDataMacros varDebug
         OutputPrinterInfo "Debug"
         If aeExists("Tables", "aetlkpStates", varDebug) Then
@@ -1048,7 +1091,11 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
             KillProperly (strTheSourceLocation & aeAppCmbrIds)
         End If
-        OutputListOfTables aegitExport.ExportAllTableTypesInfo
+        If aegitExport.ExportNoODBCTablesInfo Then
+            OutputListOfTables aegitExport.ExportNoODBCTablesInfo, varDebug
+        Else
+            OutputListOfTables Not (aegitExport.ExportNoODBCTablesInfo), varDebug
+        End If
         OutputTableDataMacros
         OutputPrinterInfo
         If aeExists("Tables", "aetlkpStates") Then
@@ -2091,7 +2138,7 @@ PROC_ERR:
 
 End Function
 
-Private Function GetLinkedTableCurrentPath(ByVal strTblName As String) As String
+Private Function GetLinkedTableCurrentPath(ByVal strTableName As String) As String
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
     ' =========================================================================
     ' Procedure: GetLinkedTableCurrentPath
@@ -2111,24 +2158,39 @@ Private Function GetLinkedTableCurrentPath(ByVal strTblName As String) As String
     Dim intDatabasePos As Integer
     Dim strMidLink As String
 
-    If Len(CurrentDb.TableDefs(strTblName).Connect) > 0 Then
-        ' Linked table exists, but is the link valid?
-        ' The next line of code will generate Errors 3011 or 3024 if it isn't
-        CurrentDb.TableDefs(strTblName).RefreshLink
-        ' If you get to this point, you have a valid, Linked Table
-        strConnect = CurrentDb.TableDefs(strTblName).Connect
-        intStrConnectLen = Len(strConnect)
-        intDatabasePos = InStr(1, strConnect, "Database=") + 8
-        strMidLink = Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos)
-        'MsgBox "strTblName = " & strTblName & vbCrLf & _
-        '    "strConnect = " & strConnect & vbCrLf & _
-        '    "intStrConnectLen = " & intStrConnectLen & vbCrLf & _
-        '    "intDatabasePos = " & intDatabasePos & " : " & Left$(strConnect, intDatabasePos) & vbCrLf & _
-        '    "strMidLink = " & Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos) & vbCrLf _
-        '    , vbInformation, "GetLinkedTableCurrentPath"
-        GetLinkedTableCurrentPath = strMidLink
+    If Not aegitExport.ExportNoODBCTablesInfo Then
+        If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
+            ' Linked table exists, but is the link valid?
+            ' The next line of code will generate Errors 3011 or 3024 if it isn't
+            CurrentDb.TableDefs(strTableName).RefreshLink
+            ' If you get to this point, you have a valid, Linked Table
+            strConnect = CurrentDb.TableDefs(strTableName).Connect
+            intStrConnectLen = Len(strConnect)
+            intDatabasePos = InStr(1, strConnect, "Database=") + 8
+            strMidLink = Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos)
+            'MsgBox "strTableName = " & strTblName & vbCrLf & _
+            '    "strConnect = " & strConnect & vbCrLf & _
+            '    "intStrConnectLen = " & intStrConnectLen & vbCrLf & _
+            '    "intDatabasePos = " & intDatabasePos & " : " & Left$(strConnect, intDatabasePos) & vbCrLf & _
+            '    "strMidLink = " & Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos) & vbCrLf _
+            '    , vbInformation, "GetLinkedTableCurrentPath"
+            GetLinkedTableCurrentPath = strMidLink
+        Else
+            GetLinkedTableCurrentPath = "Local Table=>" & strTableName
+        End If
     Else
-        GetLinkedTableCurrentPath = "Local Table=>" & strTblName
+        ' Check if it is an ODBC link
+        If IsLinkedODBC(strTableName) Then
+            ' Return an indicator that it is an ODBC table
+            GetLinkedTableCurrentPath = "ODBC"
+        Else
+            If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
+                CurrentDb.TableDefs(strTableName).RefreshLink
+                GetLinkedTableCurrentPath = "Local Table=>" & strTableName
+            Else
+                GetLinkedTableCurrentPath = vbNullString
+            End If
+        End If
     End If
 
 PROC_EXIT:
@@ -2140,10 +2202,10 @@ PROC_ERR:
             'MsgBox "mblnIgnore = " & mblnIgnore
             If mblnIgnore Then Resume PROC_EXIT
         Case 3265
-            MsgBox "(" & strTblName & ") does not exist as either an Internal or Linked Table", _
+            MsgBox "(" & strTableName & ") does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
         Case 3011, 3024                 ' Linked Table does not exist or DB Path not valid
-            MsgBox "(" & strTblName & ") is not a valid, Linked Table", vbCritical, "Link Not Valid"
+            MsgBox "(" & strTableName & ") is not a valid Linked Table", vbCritical, "Link Not Valid"
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "ERROR"
     End Select
@@ -2409,6 +2471,83 @@ Private Function IsFormHidden(ByVal strFormName As String) As Boolean
     End If
 End Function
 
+Private Function IsLinkedODBC(strTableName As String) As Boolean
+    ' Ref: http://www.pcreview.co.uk/threads/check-if-a-table-is-linked.3748757/
+    ' Non-linked tables are type 1
+    ' ODBC linked tables are type 4
+    ' All other linked tables are type 6
+
+    'Debug.Print strTableName, Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"))
+    IsLinkedODBC = Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"), 0) = 4
+End Function
+
+Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
+
+    'Debug.Print "LinkedTable"
+    On Error GoTo PROC_ERR
+    If mblnIgnore Then Exit Function
+
+    Dim intAnswer As Integer
+
+    ' Check if it is an ODBC table and ignore if aegitExport.ExportNoODBCTablesInfo is true
+    ' Use results from IsLinkedODBC(strTableName) before trying to connect so the ODBC login
+    ' window does not open
+    If Not aegitExport.ExportNoODBCTablesInfo Then
+        ' Linked table connection string is > 0
+        If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
+            ' Linked table exists, but is the link valid?
+            ' The next line of code will generate Errors 3011 or 3024 if it isn't
+            CurrentDb.TableDefs(strTableName).RefreshLink
+            'If you get to this point, you have a valid, Linked Table
+            IsLinkedTable = True
+            'Debug.Print "LinkedTable = True"
+        Else
+            ' Local table connect string length = 0
+            ' MsgBox "[" & strTableName & "] is a Non-Linked Table", vbInformation, "Internal Table"
+            IsLinkedTable = False
+            'Debug.Print "LinkedTable = False"
+        End If
+    Else
+        ' Check if it is an ODBC link
+        If IsLinkedODBC(strTableName) Then
+            ' Do nothing and treat the link as false
+            IsLinkedTable = False
+        Else
+            If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
+                CurrentDb.TableDefs(strTableName).RefreshLink
+                IsLinkedTable = True
+            Else
+                IsLinkedTable = False
+            End If
+        End If
+    End If
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        Case 3151, 3059
+            'MsgBox "mblnIgnore = " & mblnIgnore
+            If mblnIgnore Then Resume PROC_EXIT
+            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
+            intAnswer = MsgBox("Ignore further errors of this type?", vbYesNo + vbQuestion, "IsLinkedTable Error")
+            If intAnswer = vbYes Then
+                mblnIgnore = True
+            Else
+                'do nothing
+            End If
+        Case 3265
+            MsgBox "[" & strTableName & "] does not exist as either an Internal or Linked Table", _
+                vbCritical, "Table Missing"
+        Case 3011, 3024     'Linked Table does not exist or DB Path not valid
+            MsgBox "[" & strTableName & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
+        Case Else
+            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
+    End Select
+    Resume PROC_EXIT
+End Function
+
 Private Function IsLoaded(ByVal strFormName As String) As Boolean
     ' Returns True if the specified form is open in Form view or Datasheet view.
    
@@ -2474,19 +2613,22 @@ Private Function IsReportHidden(ByVal strReportName As String) As Boolean
     End If
 End Function
 
-Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef) As Boolean
+Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByRef idxPrimaryFieldCount As Integer) As Boolean
 
     Dim strIndexInfo As String
     strIndexInfo = SingleTableIndexSummary(tdf)
     If LCaseCountChar("P", strIndexInfo) = 1 Then
+        idxPrimaryFieldCount = 1
         IsSinglePrimaryField = True
         'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
     ElseIf LCaseCountChar("P", strIndexInfo) > 1 Then
+        idxPrimaryFieldCount = LCaseCountChar("P", strIndexInfo)
         IsSinglePrimaryField = False
         Debug.Print , strIndexInfo, "Multi Field Primary Key"
     ElseIf LCaseCountChar("P", strIndexInfo) = 0 Then
+        idxPrimaryFieldCount = 0
         IsSinglePrimaryField = False
-        Debug.Print , strIndexInfo, "No Primary Key"
+        'Debug.Print , strIndexInfo, "No Primary Key"
     End If
 
 End Function
@@ -2580,55 +2722,6 @@ Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString A
         LCaseCountChar = LCaseCountChar + 1
     End If
     Next
-End Function
-
-Private Function LinkedTable(ByVal strTblName As String) As Boolean
-
-    'Debug.Print "LinkedTable"
-    On Error GoTo PROC_ERR
-    If mblnIgnore Then Exit Function
-
-    Dim intAnswer As Integer
-
-    ' Linked table connection string is > 0
-    If Len(CurrentDb.TableDefs(strTblName).Connect) > 0 Then
-        ' Linked table exists, but is the link valid?
-        ' The next line of code will generate Errors 3011 or 3024 if it isn't
-        CurrentDb.TableDefs(strTblName).RefreshLink
-        'If you get to this point, you have a valid, Linked Table
-        LinkedTable = True
-        'Debug.Print "LinkedTable = True"
-    Else
-        ' Local table connect string length = 0
-        ' MsgBox "[" & strTblName & "] is a Non-Linked Table", vbInformation, "Internal Table"
-        LinkedTable = False
-        'Debug.Print "LinkedTable = False"
-    End If
-
-PROC_EXIT:
-    Exit Function
-
-PROC_ERR:
-    Select Case Err.Number
-        Case 3151, 3059
-            'MsgBox "mblnIgnore = " & mblnIgnore
-            If mblnIgnore Then Resume PROC_EXIT
-            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "LinkedTable Error"
-            intAnswer = MsgBox("Ignore further errors of this type?", vbYesNo + vbQuestion, "LinkedTable Error")
-            If intAnswer = vbYes Then
-                mblnIgnore = True
-            Else
-                'do nothing
-            End If
-        Case 3265
-            MsgBox "[" & strTblName & "] does not exist as either an Internal or Linked Table", _
-                vbCritical, "Table Missing"
-        Case 3011, 3024     'Linked Table does not exist or DB Path not valid
-            MsgBox "[" & strTblName & "] is not a valid, Linked Table", vbCritical, "Link Not Valid"
-        Case Else
-            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "LinkedTable Error"
-    End Select
-    Resume PROC_EXIT
 End Function
 
 Private Sub ListAllContainerProperties(ByVal strContainer As String, Optional ByVal varDebug As Variant)
@@ -4159,7 +4252,7 @@ PROC_ERR:
 
 End Sub
 
-Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug As Variant)
+Private Sub OutputListOfTables(blnNoODBC As Boolean, Optional ByVal varDebug As Variant)
     ' 1   Table - Local Access Tables
     ' 4   Table - Linked ODBC Tables
     ' 6   Table - Linked Access Tables
@@ -4171,15 +4264,7 @@ Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug A
     Const strAllTables As String = "(m.Type=1 OR m.Type=4 OR m.Type=6) "
     Const strAccessTables As String = "(m.Type=1 OR m.Type=6) "
 
-    If blnAllTypes Then
-        strSQL = "SELECT m.Name, """" AS Attribute " & _
-            "FROM MSysObjects AS m " & _
-            "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
-            "m.Name Not Like ""~*"" AND " & _
-            "m.Name Not Like ""MSys*"" AND " & _
-            strAllTables & _
-            "ORDER BY m.Name;"
-    Else
+    If blnNoODBC Then
         strSQL = "SELECT m.Name, """" AS Attribute " & _
             "FROM MSysObjects AS m " & _
             "WHERE m.Name Not Like ""~%"" AND m.Name Not Like ""zzz*"" AND " & _
@@ -4187,8 +4272,18 @@ Private Sub OutputListOfTables(blnAllTypes As Boolean, Optional ByVal varDebug A
             "m.Name Not Like ""MSys*"" AND " & _
             strAccessTables & _
             "ORDER BY m.Name;"
+    Else
+        strSQL = "SELECT m.Name, """" AS Attribute " & _
+            "FROM MSysObjects AS m " & _
+            "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+            "m.Name Not Like ""~*"" AND " & _
+            "m.Name Not Like ""MSys*"" AND " & _
+            strAllTables & _
+            "ORDER BY m.Name;"
     End If
-    
+    Debug.Print "StrSQL = " & strSQL
+    'Stop
+
     Dim fle As Integer
     fle = FreeFile()
 
@@ -4515,7 +4610,7 @@ Private Sub OutputTableDataMacros(Optional ByVal varDebug As Variant)
     End If
 
     For Each tdf In CurrentDb.TableDefs
-        If Not LinkedTable(tdf.Name) Or _
+        If Not IsLinkedTable(tdf.Name) Or _
             Not (Left$(tdf.Name, 4) = "MSys" _
             Or Left$(tdf.Name, 4) = "~TMP" _
             Or Left$(tdf.Name, 3) = "zzz") Then
@@ -4841,7 +4936,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 strSQL = strSQL & Mid$(strFlds, 2) & " )""" & vbCrLf & "Currentdb.Execute strSQL"
                 f.WriteLine vbCrLf & strSQL
             Else
-                strSQL = strSQL & Mid$(strLongFlds, 2)                  '& strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
+                strSQL = strSQL & Mid$(strLongFlds, 2)
                 f.WriteLine vbCrLf & strSQL
                 strSQL = "strSQL=strSQL & " & """" & strFlds & " )""" & vbCrLf & "Currentdb.Execute strSQL"
                 f.WriteLine strSQL
@@ -4850,6 +4945,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
             'Stop
 
             ' Indexes
+            Debug.Print tdf.Name
             For Each ndx In tdf.Indexes
 
                 'Debug.Print ndx.Name, ndx.Fields, ndx.Primary
@@ -4862,18 +4958,24 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
                 strFlds = vbNullString
 
+                Dim IndexPrimaryFieldCount As Integer
                 For Each fld In tdf.Fields
 
                     '''If ndx.Primary Then
-                    If IsSinglePrimaryField(tdf) Then
+                    If IsSinglePrimaryField(tdf, IndexPrimaryFieldCount) Then
+                        strFlds = ",[" & fld.Name & "]"
+                        Exit For
+                    ElseIf IndexPrimaryFieldCount > 1 Then
+                        Debug.Print tdf.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary and Multi Field Index"
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     Else
-                        Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
-                        Debug.Print "FIX here for Multi Field Primary and Multi Field Index"
+                        'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
                         strFlds = ",[" & fld.Name & "]"
+'''                    End If
+'''                    'Debug.Print , strFlds
                     End If
-                    'Debug.Print , strFlds
+
                 Next
 
                 strSQL = strSQL & Mid$(strFlds, 2) & ") "
@@ -5655,19 +5757,40 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
         & aestr4 & SizeString("=", aeintFSize, TextLeft, "=") _
         & aestr4 & SizeString("=", aeintFDLen, TextLeft, "=")
 
-    For Each fld In tdf.Fields
-        If Not IsMissing(varDebug) Then
-            'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
-            Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
+    If Not aegitExport.ExportNoODBCTablesInfo Then
+        For Each fld In tdf.Fields
+            If Not IsMissing(varDebug) Then
+                'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
+                Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
+                    & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
+                    & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                    & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
+            End If
+            Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
                 & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
+        Next
+    Else
+        If IsLinkedODBC(strTableName) Then
+            ' Do nothing
+        Else
+            For Each fld In tdf.Fields
+                If Not IsMissing(varDebug) Then
+                    'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
+                    Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
+                        & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
+                        & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                        & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
+                End If
+                Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
+                    & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
+                    & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                    & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
+            Next
         End If
-        Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
-            & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-            & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
-            & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
-    Next
+    End If
+
     If Not IsMissing(varDebug) Then Debug.Print
     'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then Debug.Print
     Print #1, vbCrLf

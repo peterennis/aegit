@@ -33,7 +33,7 @@ Option Explicit
 ' Tasks:
 ' %110 -
 ' %109 -
-' %108 -
+' %108 - Relates to %105, Create function to check for linked ODBC tables
 ' %107 - Export spinning after third KillAllFiles, investigate and resolve
 ' %105 - Set option to export all tables info or only Access tables, i.e. skip ODBC linked tables is possible
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
