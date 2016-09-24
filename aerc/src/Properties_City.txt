@@ -8,6 +8,8 @@
 |-- RecordCount >> 0
 |-- ValidationRule >> 
 |-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
 |-- Orientation >> 0
 |-- OrderByOn >> False
 |-- NameMap >> NameMap
