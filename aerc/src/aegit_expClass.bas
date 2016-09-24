@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.8"
-Private Const aegit_expVERSION_DATE As String = "September 21, 2016"
+Private Const aegit_expVERSION As String = "1.9.9"
+Private Const aegit_expVERSION_DATE As String = "September 24, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -144,6 +144,20 @@ Private Const aeSchemaFile As String = "OutputSchemaFile.txt"
 Private Const aeSqlTxtFile As String = "OutputSqlCodeForQueries.txt"
 Private Const aeTblTxtFile As String = "OutputFieldsForTables.txt"
 '
+' aeLogger begin variables
+Private Declare PtrSafe Function timeGetTime Lib "winmm.dll" () As Long
+Private Type aeLogger
+    blnNoTrace As Boolean
+    blnNoEnd As Boolean
+    blnNoPrint As Boolean
+    blnNoTimer As Boolean
+End Type
+
+Private lngIndent As Long
+Private mlngStartTime As Long
+Private mlngEndTime As Long
+Private aeLog As aeLogger
+' aeLogger end variables
 
 Private Sub Class_Initialize()
     ' Ref: http://www.cadalyst.com/cad/autocad/programming-with-class-part-1-5050
@@ -151,7 +165,8 @@ Private Sub Class_Initialize()
     ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
     On Error GoTo PROC_ERR
-    
+    aeBeginLogging "Class_Initialize"
+
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         Dim dbs As DAO.Database
         Set dbs = CurrentDb()
@@ -240,6 +255,7 @@ Private Sub Class_Initialize()
     'Stop
 
 PROC_EXIT:
+    aeEndLogging "Class_Initialize"
     Exit Sub
 
 PROC_ERR:
@@ -634,6 +650,72 @@ Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     'Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
 
+' aeLogger begin functions
+Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    mlngStartTime = timeGetTime()
+    'Debug.Print ">aeBeginLogging"; Space$(1); "mlngStartTime=" & mlngStartTime
+    If aeLog.blnNoTrace Then
+        'Debug.Print "B1: aeBeginLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        Exit Sub
+    End If
+    If Not aeLog.blnNoTimer Then
+        'Debug.Print "B2: aeBeginLogging", "blnNoTimer=" & aeLog.blnNoTimer
+        'Debug.Print Format$(mlngStartTime, "0.00"); Space$(2);
+    End If
+    'Debug.Print Space$(lngIndent * 4); strProcName; Space$(1); "'" & varOne & "'"; Space$(1); "'" & varTwo & "'"; Space$(1); "'" & varThree & "'"
+    lngIndent = lngIndent + 1
+End Sub
+
+Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    If aeLog.blnNoTrace Then
+        'Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        Exit Sub
+    End If
+    lngIndent = lngIndent - 1
+    mlngEndTime = timeGetTime()
+    If Not aeLog.blnNoEnd Then
+        If Not aeLog.blnNoTimer Then
+            'Debug.Print ">aeEndLogging"; Space$(1); "mlngEndTime=" & mlngEndTime
+            mlngEndTime = timeGetTime()
+            'Debug.Print "E2: aeEndLogging", "blnNoTimer=" & aeLog.blnNoTimer
+            'Debug.Print Format$(mlngEndTime, "0.00"); Space$(2);
+        End If
+        'Debug.Print Space$(lngIndent * 4); "End " & lngIndent; Space$(1); varOne; Space$(1); varTwo; Space$(1); varThree
+        Debug.Print , "It took " & (mlngEndTime - mlngStartTime) / 1000 & " seconds to process " & "'" & strProcName & "' procedure"
+    End If
+End Sub
+
+Private Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    If aeLog.blnNoTrace Or aeLog.blnNoPrint Then
+        Exit Sub
+    End If
+    If Not aeLog.blnNoTimer Then
+        'Debug.Print Format$(timeGetTime(), "0.00"); Space$(2);
+    End If
+    'Debug.Print Space$(lngIndent * 4); "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
+    Debug.Print , "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
+End Sub
+
+Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther As Variant) As String
+    On Error GoTo 0
+    If Not IsMissing(varOther) Then
+        PassFail = "NotUsed"
+        Exit Function
+    End If
+    If blnPassFail Then
+        PassFail = "Pass"
+    Else
+        PassFail = "Fail"
+    End If
+End Function
+' aeLogger end functions
+
 Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
     ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
   
@@ -941,6 +1023,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Dim strqdfName As String
 
     On Error GoTo PROC_ERR
+    'aeBeginLogging "aeDocumentTheDatabase"
 
     If IsMissing(varDebug) Then
         'Debug.Print , "varDebug IS missing so no parameter is passed to aeDocumentTheDatabase"
@@ -971,6 +1054,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         strTheSourceLocation = aestrSourceLocationBe
     End If
 
+    aeBeginLogging "aeDocumentTheDatabase"
     If aegitSetup Then
         KillAllFiles aestrSourceLocation            '= aegitType.SourceFolder
         KillAllFiles aestrXMLLocation               '= aegitType.XMLFolder
@@ -984,6 +1068,8 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         KillAllFiles aestrXMLLocationBe
         KillAllFiles aestrXMLDataLocationBe
     End If
+    aePrintLog "Timing for KillAllFiles"
+    aeEndLogging "aeDocumentTheDatabase"
 
     If Not IsMissing(varDebug) Then
         DocumentTheContainer "Forms", "frm", varDebug
@@ -1144,6 +1230,7 @@ PROC_EXIT:
     Set qdf = Nothing
     Set doc = Nothing
     Set cnt = Nothing
+    'aeEndLogging "aeDocumentTheDatabase"
     Exit Function
 
 PROC_ERR:
