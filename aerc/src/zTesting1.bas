@@ -1,6 +1,50 @@
 Option Compare Database
 Option Explicit
 
+Public Function Test_IsSingleIndexField() As Boolean
+
+    Dim dbs As DAO.Database
+    Dim tdf As DAO.TableDef
+    Set dbs = CurrentDb
+    Dim FieldCountRes As Integer
+
+    Set tdf = dbs.TableDefs("aeItems")
+    Debug.Print tdf.Name
+    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
+
+    Set tdf = dbs.TableDefs("_tlkpChart")
+    Debug.Print tdf.Name
+    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
+
+    Set tdf = dbs.TableDefs("tblDummy2")
+    Debug.Print tdf.Name
+    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
+
+    Set tdf = dbs.TableDefs("tblDummy3")
+    Debug.Print tdf.Name
+    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
+
+End Function
+
+Private Function IsSingleIndexField(ByVal tdf As DAO.TableDef, ByRef FieldCountResult As Integer) As Boolean
+
+    Dim strIndexInfo As String
+    strIndexInfo = SingleTableIndexSummary(tdf)
+    Debug.Print strIndexInfo
+    FieldCountResult = LCaseCountChar("I", strIndexInfo)
+    If FieldCountResult = 1 Then
+        IsSingleIndexField = True
+        Debug.Print , "Single Field Index", "IsSingleIndexField is " & IsSingleIndexField
+    ElseIf FieldCountResult > 1 Then
+        IsSingleIndexField = False
+        Debug.Print , "Multi Field Index", "IsSingleIndexField is " & IsSingleIndexField
+    ElseIf FieldCountResult = 0 Then
+        IsSingleIndexField = False
+        Debug.Print , "No Index", "IsSingleIndexField is " & IsSingleIndexField
+    End If
+
+End Function
+
 Public Function Test_IsSinglePrimaryField() As Boolean
 
     Dim dbs As DAO.Database
@@ -28,13 +72,13 @@ Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef) As Boolean
     Debug.Print strIndexInfo
     If LCaseCountChar("P", strIndexInfo) = 1 Then
         IsSinglePrimaryField = True
-        Debug.Print , "Single Field Primary Key", IsSinglePrimaryField
+        Debug.Print , "Single Field Primary Key", "IsSinglePrimaryField is " & IsSinglePrimaryField
     ElseIf LCaseCountChar("P", strIndexInfo) > 1 Then
         IsSinglePrimaryField = False
-        Debug.Print , "Multi Field Primary Key", IsSinglePrimaryField
+        Debug.Print , "Multi Field Primary Key", "IsSinglePrimaryField is " & IsSinglePrimaryField
     ElseIf LCaseCountChar("P", strIndexInfo) = 0 Then
         IsSinglePrimaryField = False
-        Debug.Print , "No Primary Key", IsSinglePrimaryField
+        Debug.Print , "No Primary Key", "IsSinglePrimaryField is " & IsSinglePrimaryField
     End If
 
 End Function
