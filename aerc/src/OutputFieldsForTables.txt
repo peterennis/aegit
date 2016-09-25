@@ -1,7 +1,6 @@
 ----------------
 TABLE: _tblChart
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   Long Integer          4                  
@@ -83,7 +82,6 @@ FLD70                Long Integer          4
 ------------------
 TABLE: _tblPersist
 ------------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -93,7 +91,6 @@ persist              Text                  255
 -----------------
 TABLE: _tlkpChart
 -----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -105,7 +102,6 @@ ChartTitle           Text                  255
 -----------------
 TABLE: _tlkpMonth
 -----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -117,7 +113,6 @@ TheMonthCode         Text                  2
 ----------------
 TABLE: _tlkpYear
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -127,7 +122,6 @@ TheYear              Text                  4
 --------------
 TABLE: aeItems
 --------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION        
 =================    ==================    ====    ===================
 Item                 Text                  255                        
@@ -141,7 +135,6 @@ CBO                  Text                  255
 ----------------------------------------------------------------
 TABLE: aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 ----------------------------------------------------------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION                       
 =================    ==================    ====    ==================================
 id                   AutoNumber            4                                         
@@ -152,7 +145,6 @@ Description          Text                  255     This is a description of the 
 -------------------
 TABLE: aetlkpStates
 -------------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 StateCode            Text                  3                  
@@ -163,7 +155,6 @@ StateName            Text                  15
 -----------
 TABLE: City
 -----------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -177,7 +168,6 @@ Latitude             Text                  255
 --------------
 TABLE: Country
 --------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 Code                 Text                  255                
@@ -191,7 +181,6 @@ Population           Long Integer          4
 ---------------
 TABLE: Province
 ---------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -206,7 +195,6 @@ CapProv              Text                  255
 ----------------
 TABLE: tblBinary
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  
@@ -217,7 +205,6 @@ binary               OLE Object            0
 ----------------
 TABLE: tblDummy0
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 Num                  Long Integer          4                  
@@ -226,7 +213,6 @@ Num                  Long Integer          4
 ----------------
 TABLE: tblDummy1
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 Num                  Long Integer          4                  
@@ -235,7 +221,6 @@ Num                  Long Integer          4
 ----------------
 TABLE: tblDummy2
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 Num                  Long Integer          4                  
@@ -244,7 +229,6 @@ Num                  Long Integer          4
 ----------------
 TABLE: tblDummy3
 ----------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 eventId              Long Integer          4                  
@@ -260,7 +244,6 @@ id                   AutoNumber            4
 ------------------
 TABLE: USysRibbons
 ------------------
-Linked=>
 FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
 =================    ==================    ====    ===========
 id                   AutoNumber            4                  

@@ -414,11 +414,11 @@ Public Property Get ExcludeFiles(Optional ByVal varDebug As Variant) As Boolean
     Debug.Print , "ExcludeFiles = " & pExclude
     If IsMissing(varDebug) Then
         'Debug.Print "Property Get ExcludeFiles"
-        'Debug.Print , "varDebug IS missing so no parameter is passed to ExcludeFiles"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to Get ExcludeFiles"
         'Debug.Print , "DEBUGGING IS OFF"
     Else
         Debug.Print "Property Get ExcludeFiles"
-        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to ExcludeFiles"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to Get ExcludeFiles"
         Debug.Print , "DEBUGGING TURNED ON"
     End If
 End Property
@@ -428,6 +428,15 @@ Public Property Let ExcludeFiles(Optional ByVal varDebug As Variant, ByVal blnEx
     Debug.Print "Property Let ExcludeFiles"
     pExclude = blnExclude
     Debug.Print , "Let ExcludeFiles = " & pExclude
+    If IsMissing(varDebug) Then
+        'Debug.Print "Property Let ExcludeFiles"
+        'Debug.Print , "varDebug IS missing so no parameter is passed to Let ExcludeFiles"
+        'Debug.Print , "DEBUGGING IS OFF"
+    Else
+        Debug.Print "Property Let ExcludeFiles"
+        Debug.Print , "varDebug IS NOT missing so a variant parameter is passed to Let ExcludeFiles"
+        Debug.Print , "DEBUGGING TURNED ON"
+    End If
 End Property
 
 Public Property Get Exists(ByVal strAccObjType As String, _
@@ -659,7 +668,8 @@ Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
 End Property
 
 Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+
     On Error GoTo 0
     mlngStartTime = timeGetTime()
     'Debug.Print ">aeBeginLogging"; Space$(1); "mlngStartTime=" & mlngStartTime
@@ -1201,7 +1211,8 @@ PROC_ERR:
 End Function
 
 Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+
     On Error GoTo 0
     If aeLog.blnNoTrace Then
         'Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
@@ -1432,7 +1443,8 @@ PROC_ERR:
 End Function
 
 Private Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+
     On Error GoTo 0
     If aeLog.blnNoTrace Or aeLog.blnNoPrint Then
         Exit Sub
@@ -2266,9 +2278,14 @@ Private Function GetLinkedTableCurrentPath(ByVal strTableName As String) As Stri
         Else
             If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
                 CurrentDb.TableDefs(strTableName).RefreshLink
-                GetLinkedTableCurrentPath = "Local Table=>" & strTableName
+                ' If you get to this point, you have a valid, Linked Table
+                strConnect = CurrentDb.TableDefs(strTableName).Connect
+                intStrConnectLen = Len(strConnect)
+                intDatabasePos = InStr(1, strConnect, "Database=") + 8
+                strMidLink = Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos)
+                GetLinkedTableCurrentPath = strMidLink
             Else
-                GetLinkedTableCurrentPath = vbNullString
+                GetLinkedTableCurrentPath = "Local Table=>" & strTableName
             End If
         End If
     End If
@@ -2799,8 +2816,8 @@ Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString A
     Dim i As Long
     For i = 1 To Len(searchString)
         If Mid$(LCase$(searchString), i, 1) = LCase(searchChar) Then
-        LCaseCountChar = LCaseCountChar + 1
-    End If
+            LCaseCountChar = LCaseCountChar + 1
+        End If
     Next
 End Function
 
@@ -4954,6 +4971,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
             Or Left$(tdf.Name, 3) = "zzz") Then
 
             strLinkedTablePath = GetLinkedTableCurrentPath(tdf.Name)
+            'Debug.Print "strLinkedTablePath = " & strLinkedTablePath
             If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
                 f.WriteLine vbCrLf & "'OriginalLink=>" & strLinkedTablePath
             Else
@@ -4993,9 +5011,9 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                         Else
                             strFlds = strFlds & "Counter"
                         End If
-''                    Case dbGUID
-''                        strFlds = strFlds & "GUID"
-''                        'strFlds = strFlds & "Replica"
+                        ' Case dbGUID
+                        '    strFlds = strFlds & "GUID"
+                        '    'strFlds = strFlds & "Replica"
                     Case dbDate
                         strFlds = strFlds & "DateTime"
                     Case dbBoolean
@@ -5047,13 +5065,12 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                         Exit For
                     ElseIf IndexPrimaryFieldCount > 1 Then
                         Debug.Print tdf.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary and Multi Field Index"
-                        strFlds = ",[" & fld.Name & "]"
+                        strFlds = ",[" & "FIX ME" & "]"
                         Exit For
                     Else
                         'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
                         strFlds = ",[" & fld.Name & "]"
-'''                    End If
-'''                    'Debug.Print , strFlds
+                        'Debug.Print , strFlds
                     End If
 
                 Next
