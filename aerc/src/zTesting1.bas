@@ -50,35 +50,36 @@ Public Function Test_IsSinglePrimaryField() As Boolean
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Set dbs = CurrentDb
+    Dim IndexPrimaryFieldCount As Integer
 
     Set tdf = dbs.TableDefs("aeItems")
     Debug.Print tdf.Name
-    Debug.Print , IsSinglePrimaryField(tdf)
+    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
 
     Set tdf = dbs.TableDefs("tblDummy2")
     Debug.Print tdf.Name
-    Debug.Print , IsSinglePrimaryField(tdf)
+    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
 
     Set tdf = dbs.TableDefs("tblDummy3")
     Debug.Print tdf.Name
-    Debug.Print , IsSinglePrimaryField(tdf)
+    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
 
 End Function
 
-Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef) As Boolean
+Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByRef PrimaryIndexFieldCount As Integer) As Boolean
 
     Dim strIndexInfo As String
     strIndexInfo = SingleTableIndexSummary(tdf)
-    Debug.Print strIndexInfo
-    If LCaseCountChar("P", strIndexInfo) = 1 Then
+    PrimaryIndexFieldCount = LCaseCountChar("P", strIndexInfo)
+    If PrimaryIndexFieldCount = 1 Then
         IsSinglePrimaryField = True
-        Debug.Print , "Single Field Primary Key", "IsSinglePrimaryField is " & IsSinglePrimaryField
-    ElseIf LCaseCountChar("P", strIndexInfo) > 1 Then
+        'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
+    ElseIf PrimaryIndexFieldCount > 1 Then
         IsSinglePrimaryField = False
-        Debug.Print , "Multi Field Primary Key", "IsSinglePrimaryField is " & IsSinglePrimaryField
-    ElseIf LCaseCountChar("P", strIndexInfo) = 0 Then
+        Debug.Print , strIndexInfo, "Multi Field Primary Key"
+    ElseIf PrimaryIndexFieldCount = 0 Then
         IsSinglePrimaryField = False
-        Debug.Print , "No Primary Key", "IsSinglePrimaryField is " & IsSinglePrimaryField
+        'Debug.Print , strIndexInfo, "No Primary Key"
     End If
 
 End Function

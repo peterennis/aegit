@@ -31,11 +31,13 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %115 -
+' %114 -
+' %113 -
+' %112 -
+' %111 -
 ' %110 -
-' %109 -
-' %108 - Relates to %105, Create function to check for linked ODBC tables
-' %107 - Export spinning after third KillAllFiles, investigate and resolve
-' %105 - Set option to export all tables info or only Access tables, i.e. skip ODBC linked tables is possible
+' %109 - Schema export error for primary and index when field order changed in tables. Need to remember the field names and pass to create db schema.
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
 ' %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
@@ -70,6 +72,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20160925 - v199 -
+    ' FIXED - %108 - Relates to %105, Create function to check for linked ODBC tables
+    ' FIXED - %107 - Relates to %108, Export spinning after third KillAllFiles, investigate and resolve - related to ODBC linked tables
+    ' FIXED - %105 - Set option to export all tables info or only Access tables, i.e. skip ODBC linked tables is possible
 '20160907 - v196 -
     ' FIXED - %106 - Do not show ~TMP* or MSys* tables in OutputListOfTables
     ' FIXED - %104 - Parse field string fails when there are spaces in the name
