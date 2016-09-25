@@ -2710,20 +2710,37 @@ Private Function IsReportHidden(ByVal strReportName As String) As Boolean
     End If
 End Function
 
-Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByRef idxPrimaryFieldCount As Integer) As Boolean
+Private Function IsSingleIndexField(ByVal tdf As DAO.TableDef, ByRef FieldCountResult As Integer) As Boolean
 
     Dim strIndexInfo As String
     strIndexInfo = SingleTableIndexSummary(tdf)
-    If LCaseCountChar("P", strIndexInfo) = 1 Then
-        idxPrimaryFieldCount = 1
+    Debug.Print strIndexInfo
+    FieldCountResult = LCaseCountChar("I", strIndexInfo)
+    If FieldCountResult = 1 Then
+        IsSingleIndexField = True
+        Debug.Print , "Single Field Index", "IsSingleIndexField is " & IsSingleIndexField
+    ElseIf FieldCountResult > 1 Then
+        IsSingleIndexField = False
+        Debug.Print , "Multi Field Index", "IsSingleIndexField is " & IsSingleIndexField
+    ElseIf FieldCountResult = 0 Then
+        IsSingleIndexField = False
+        Debug.Print , "No Index", "IsSingleIndexField is " & IsSingleIndexField
+    End If
+
+End Function
+
+Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByRef PrimaryIndexFieldCount As Integer) As Boolean
+
+    Dim strIndexInfo As String
+    strIndexInfo = SingleTableIndexSummary(tdf)
+    PrimaryIndexFieldCount = LCaseCountChar("P", strIndexInfo)
+    If PrimaryIndexFieldCount = 1 Then
         IsSinglePrimaryField = True
         'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
-    ElseIf LCaseCountChar("P", strIndexInfo) > 1 Then
-        idxPrimaryFieldCount = LCaseCountChar("P", strIndexInfo)
+    ElseIf PrimaryIndexFieldCount > 1 Then
         IsSinglePrimaryField = False
         Debug.Print , strIndexInfo, "Multi Field Primary Key"
-    ElseIf LCaseCountChar("P", strIndexInfo) = 0 Then
-        idxPrimaryFieldCount = 0
+    ElseIf PrimaryIndexFieldCount = 0 Then
         IsSinglePrimaryField = False
         'Debug.Print , strIndexInfo, "No Primary Key"
     End If
@@ -5057,21 +5074,33 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 strFlds = vbNullString
 
                 Dim IndexPrimaryFieldCount As Integer
+                Dim IndexFieldCount As Integer
                 For Each fld In tdf.Fields
 
-                    '''If ndx.Primary Then
+                    ' Test for multi field primary key
                     If IsSinglePrimaryField(tdf, IndexPrimaryFieldCount) Then
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     ElseIf IndexPrimaryFieldCount > 1 Then
-                        Debug.Print tdf.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary and Multi Field Index"
-                        strFlds = ",[" & "FIX ME" & "]"
+                        Debug.Print tdf.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary Index"
+                        strFlds = ",[" & "P FIX ME" & "]"
                         Exit For
-                    Else
-                        'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
-                        strFlds = ",[" & fld.Name & "]"
-                        'Debug.Print , strFlds
                     End If
+                    
+                    ' Test for multi field index
+                    If IsSingleIndexField(tdf, IndexFieldCount) Then
+                        strFlds = ",[" & fld.Name & "]"
+                        Exit For
+                    ElseIf IndexFieldCount > 1 Then
+                        Debug.Print tdf.Name, IndexFieldCount, "FIX here for Multi Field Index"
+                        strFlds = ",[" & "I FIX ME" & "]"
+                        Exit For
+                    End If
+                    'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
+                        
+                    ''    strFlds = ",[" & fld.Name & "]"
+                    ''    Debug.Print , strFlds
+                    ''End If
 
                 Next
 
