@@ -5082,17 +5082,17 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     ElseIf IndexPrimaryFieldCount > 1 Then
-                        Debug.Print tdf.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary Index"
+                        Debug.Print tdf.Name, fld.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary Index"
                         strFlds = ",[" & "P FIX ME" & "]"
                         Exit For
                     End If
-                    
+
                     ' Test for multi field index
                     If IsSingleIndexField(tdf, IndexFieldCount) Then
                         strFlds = ",[" & fld.Name & "]"
                         Exit For
                     ElseIf IndexFieldCount > 1 Then
-                        Debug.Print tdf.Name, IndexFieldCount, "FIX here for Multi Field Index"
+                        Debug.Print tdf.Name, fld.Name, IndexFieldCount, "FIX here for Multi Field Index"
                         strFlds = ",[" & "I FIX ME" & "]"
                         Exit For
                     End If
