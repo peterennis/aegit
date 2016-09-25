@@ -165,6 +165,14 @@ Private Sub Class_Initialize()
     ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
     On Error GoTo PROC_ERR
+    
+    With aeLog
+        .blnNoEnd = False
+        .blnNoPrint = False
+        .blnNoTimer = False
+        .blnNoTrace = False
+    End With
+
     aeBeginLogging "Class_Initialize"
 
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
@@ -440,16 +448,6 @@ Public Property Get Exists(ByVal strAccObjType As String, _
     End If
 End Property
 
-Public Property Let ExportNoODBCTablesInfo(ByVal ExportNoODBCTablesInfo As Boolean)
-    On Error GoTo 0
-    Debug.Print "Property Let ExportNoODBCTablesInfo"
-    If ExportNoODBCTablesInfo Then
-        aegitExport.ExportNoODBCTablesInfo = True
-    Else
-        aegitExport.ExportNoODBCTablesInfo = False
-    End If
-End Property
-
 Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
     On Error GoTo 0
     Debug.Print "Property Let ExportCBID"
@@ -457,6 +455,16 @@ Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
         aegitExport.ExportCBID = True
     Else
         aegitExport.ExportCBID = False
+    End If
+End Property
+
+Public Property Let ExportNoODBCTablesInfo(ByVal ExportNoODBCTablesInfo As Boolean)
+    On Error GoTo 0
+    Debug.Print "Property Let ExportNoODBCTablesInfo"
+    If ExportNoODBCTablesInfo Then
+        aegitExport.ExportNoODBCTablesInfo = True
+    Else
+        aegitExport.ExportNoODBCTablesInfo = False
     End If
 End Property
 
@@ -650,7 +658,6 @@ Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     'Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
 
-' aeLogger begin functions
 Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
         Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
     On Error GoTo 0
@@ -667,54 +674,6 @@ Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As
     'Debug.Print Space$(lngIndent * 4); strProcName; Space$(1); "'" & varOne & "'"; Space$(1); "'" & varTwo & "'"; Space$(1); "'" & varThree & "'"
     lngIndent = lngIndent + 1
 End Sub
-
-Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
-    On Error GoTo 0
-    If aeLog.blnNoTrace Then
-        'Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
-        Exit Sub
-    End If
-    lngIndent = lngIndent - 1
-    mlngEndTime = timeGetTime()
-    If Not aeLog.blnNoEnd Then
-        If Not aeLog.blnNoTimer Then
-            'Debug.Print ">aeEndLogging"; Space$(1); "mlngEndTime=" & mlngEndTime
-            mlngEndTime = timeGetTime()
-            'Debug.Print "E2: aeEndLogging", "blnNoTimer=" & aeLog.blnNoTimer
-            'Debug.Print Format$(mlngEndTime, "0.00"); Space$(2);
-        End If
-        'Debug.Print Space$(lngIndent * 4); "End " & lngIndent; Space$(1); varOne; Space$(1); varTwo; Space$(1); varThree
-        Debug.Print , "It took " & (mlngEndTime - mlngStartTime) / 1000 & " seconds to process " & "'" & strProcName & "' procedure"
-    End If
-End Sub
-
-Private Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
-    On Error GoTo 0
-    If aeLog.blnNoTrace Or aeLog.blnNoPrint Then
-        Exit Sub
-    End If
-    If Not aeLog.blnNoTimer Then
-        'Debug.Print Format$(timeGetTime(), "0.00"); Space$(2);
-    End If
-    'Debug.Print Space$(lngIndent * 4); "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
-    Debug.Print , "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
-End Sub
-
-Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther As Variant) As String
-    On Error GoTo 0
-    If Not IsMissing(varOther) Then
-        PassFail = "NotUsed"
-        Exit Function
-    End If
-    If blnPassFail Then
-        PassFail = "Pass"
-    Else
-        PassFail = "Fail"
-    End If
-End Function
-' aeLogger end functions
 
 Private Function aeDocumentRelations(Optional ByVal varDebug As Variant) As Boolean
     ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
@@ -1241,6 +1200,27 @@ PROC_ERR:
 
 End Function
 
+Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    If aeLog.blnNoTrace Then
+        'Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
+        Exit Sub
+    End If
+    lngIndent = lngIndent - 1
+    mlngEndTime = timeGetTime()
+    If Not aeLog.blnNoEnd Then
+        If Not aeLog.blnNoTimer Then
+            'Debug.Print ">aeEndLogging"; Space$(1); "mlngEndTime=" & mlngEndTime
+            mlngEndTime = timeGetTime()
+            'Debug.Print "E2: aeEndLogging", "blnNoTimer=" & aeLog.blnNoTimer
+            'Debug.Print Format$(mlngEndTime, "0.00"); Space$(2);
+        End If
+        'Debug.Print Space$(lngIndent * 4); "End " & lngIndent; Space$(1); varOne; Space$(1); varTwo; Space$(1); varThree
+        Debug.Print , "It took " & (mlngEndTime - mlngStartTime) / 1000 & " seconds to process " & "'" & strProcName & "' procedure"
+    End If
+End Sub
+
 Private Function aeExists(ByVal strAccObjType As String, _
     ByVal strAccObjName As String, Optional ByVal varDebug As Variant) As Boolean
     ' Ref: http://vbabuff.blogspot.com/2010/03/does-access-object-exists.html
@@ -1450,6 +1430,19 @@ PROC_ERR:
     Resume PROC_EXIT
 
 End Function
+
+Private Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
+        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    On Error GoTo 0
+    If aeLog.blnNoTrace Or aeLog.blnNoPrint Then
+        Exit Sub
+    End If
+    If Not aeLog.blnNoTimer Then
+        'Debug.Print Format$(timeGetTime(), "0.00"); Space$(2);
+    End If
+    'Debug.Print Space$(lngIndent * 4); "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
+    Debug.Print , "'" & varOne & "'"; Space$(1); "'" & varTwo; "'"; Space$(1); "'" & varThree; "'"
+End Sub
 
 Private Function aeReadWriteStream(ByVal strPathFileName As String) As Boolean
 
@@ -5219,6 +5212,19 @@ PROC_ERR:
     Resume PROC_EXIT
 
 End Sub
+
+Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther As Variant) As String
+    On Error GoTo 0
+    If Not IsMissing(varOther) Then
+        PassFail = "NotUsed"
+        Exit Function
+    End If
+    If blnPassFail Then
+        PassFail = "Pass"
+    Else
+        PassFail = "Fail"
+    End If
+End Function
 
 Private Function Pause(ByVal NumberOfSeconds As Variant) As Boolean
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?p=952355
