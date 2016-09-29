@@ -8,6 +8,7 @@
 [aever]       False
 [aexl]        False
 [basaeRibbonCallbacks]      False
+[basExportImport]           False
 [basGDIPlus]  False
 [basHash]     False
 [Test_aegit]  False
