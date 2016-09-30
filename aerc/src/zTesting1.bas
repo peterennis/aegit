@@ -8,20 +8,8 @@ Public Function Test_IsSingleIndexField() As Boolean
     Set dbs = CurrentDb
     Dim FieldCountRes As Integer
 
-    Set tdf = dbs.TableDefs("aeItems")
-    Debug.Print tdf.Name
-    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
-
-    Set tdf = dbs.TableDefs("_tlkpChart")
-    Debug.Print tdf.Name
-    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
-
-    Set tdf = dbs.TableDefs("tblDummy2")
-    Debug.Print tdf.Name
-    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
-
     Set tdf = dbs.TableDefs("tblDummy3")
-    Debug.Print tdf.Name
+'    Debug.Print tdf.Name
     Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
 
 End Function
@@ -105,16 +93,18 @@ End Function
 
 Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
 
-    Dim strIndexFieldInfo As String
-    strIndexFieldInfo = vbNullString
+    Dim strIndexFieldInfo As Variant
     Dim fld As DAO.Field
 
-    For Each fld In tdf.Fields
-        strIndexFieldInfo = strIndexFieldInfo & DescribeIndexField(tdf, fld.Name)
-        'Debug.Print fld.Name, "strIndexFieldInfo=" & strIndexFieldInfo
-    Next
-    'Debug.Print "TableIndexSummary", tdf.Name, "strIndexFieldInfo=" & strIndexFieldInfo
-    SingleTableIndexSummary = strIndexFieldInfo
+    'On Error Resume Next
+    Debug.Print tdf.Name
+'    For Each fld In tdf.Fields
+        strIndexFieldInfo = aeDescribeIndexField(tdf)
+        'Debug.Print strIndexFieldInfo(0, 0), strIndexFieldInfo(0, 1)
+        'Debug.Print strIndexFieldInfo(1, 0), strIndexFieldInfo(1, 1)
+        'Debug.Print strIndexFieldInfo(2, 0), strIndexFieldInfo(2, 1)
+        'Debug.Print strIndexFieldInfo(3, 0), strIndexFieldInfo(3, 1)
+'    Next
 
 End Function
 
@@ -222,6 +212,48 @@ Public Function GetIndexDetails(tdf As DAO.TableDef, strField As String) As Stri
 
 End Function
 
+Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
+    ' Based on work from allenbrowne.com
+    ' Purpose:   Get details of all indexes in a table.
+    ' Return:    Array of descriptors and field names.
+    '            String containing "P" if primary key, "U" if unique index, "I" if non-unique index.
+    '            Lower case letters if secondary field in index. Can have multiple indexes.
+    ' Arguments: tdf = the TableDef the field belongs to.
+    '            strField = name of the field to search the Indexes for.
+
+    Dim idx As DAO.Index        ' Each index of this table
+    Dim fld As DAO.Field        ' Each field of the index
+    Dim iCount As Integer
+    Dim iCountMax As Integer
+    Dim iCountTotal As Integer
+    Dim arrReturn() As String   ' Return array
+    ReDim arrReturn(1, 0)       ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
+
+    For Each idx In tdf.Indexes
+        iCount = 0
+        Debug.Print idx.Name
+        For Each fld In idx.Fields
+            If idx.Primary Then
+                arrReturn(0, iCount) = arrReturn(0, iCount) & IIf(iCount = 0, "P", "p")
+                arrReturn(1, iCount) = fld.Name
+            ElseIf idx.Unique Then
+                arrReturn(0, iCount) = arrReturn(0, iCount) & IIf(iCount = 0, "U", "u")
+                arrReturn(1, iCount) = fld.Name
+            Else
+                arrReturn(0, iCount) = arrReturn(0, iCount) & IIf(iCount = 0, "I", "i")
+                arrReturn(1, iCount) = fld.Name
+            End If
+            iCount = iCount + 1
+            iCountMax = iCount
+            ReDim Preserve arrReturn(1, iCount)
+        Next
+        Debug.Print "> ", "iCountMax = " & iCountMax
+        iCountTotal = iCountTotal + iCountMax
+    Next
+    Debug.Print ">> ", "iCountTotal = " & iCountTotal
+    aeDescribeIndexField = arrReturn()
+End Function
+
 Public Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
 ' allenbrowne.com
 'Purpose:   Indicate if the field is part of a primary key or unique index.
@@ -295,35 +327,6 @@ PROC_ERR:
     Resume Next
 
 End Function
-
-Public Sub ApplicationInformation()
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa223101(v=office.11).aspx
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa173218(v=office.11).aspx
-' Ref: http://msdn.microsoft.com/en-us/library/office/ff845735(v=office.15).aspx
-
-    On Error GoTo 0
-    Dim intProjType As Integer
-    Dim strProjType As String
-    Dim lng As Long
-
-    intProjType = Application.CurrentProject.ProjectType
-
-    Select Case intProjType
-        Case 0 ' acNull
-            strProjType = "acNull"
-        Case 1 ' acADP
-            strProjType = "acADP"
-        Case 2 ' acMDB
-            strProjType = "acMDB"
-        Case Else
-            MsgBox "Can't determine ProjectType"
-    End Select
-
-    Debug.Print Application.CurrentProject.FullName
-    Debug.Print "Project Type", intProjType, strProjType
-    lng = CodeLinesInProjectCount
-
-End Sub
 
 Public Sub TestRegKey()
 

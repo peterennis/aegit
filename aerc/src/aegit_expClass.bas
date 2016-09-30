@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.9.9"
-Private Const aegit_expVERSION_DATE As String = "September 24, 2016"
+Private Const aegit_expVERSION_DATE As String = "September 29, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -1046,15 +1046,31 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         DocumentTheContainer "Scripts", "mac", varDebug
         DocumentTheContainer "Modules", "bas", varDebug
     Else
+        aeBeginLogging "aeDocumentTheDatabase"
         DocumentTheContainer "Forms", "frm"
+        aePrintLog "Timing for DocumentTheContainer Forms"
+        aeEndLogging "aeDocumentTheDatabase"
+
+        aeBeginLogging "aeDocumentTheDatabase"
         DocumentTheContainer "Reports", "rpt"
+        aePrintLog "Timing for DocumentTheContainer Reports"
+        aeEndLogging "aeDocumentTheDatabase"
+
+        aeBeginLogging "aeDocumentTheDatabase"
         DocumentTheContainer "Scripts", "mac"
+        aePrintLog "Timing for DocumentTheContainer Macros"
+        aeEndLogging "aeDocumentTheDatabase"
+
+        aeBeginLogging "aeDocumentTheDatabase"
         DocumentTheContainer "Modules", "bas"
+        aePrintLog "Timing for DocumentTheContainer Modules"
+        aeEndLogging "aeDocumentTheDatabase"
     End If
 
     ' =============
     '    QUERIES
     ' =============
+    aeBeginLogging "aeDocumentTheDatabase"
     i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
 
@@ -1068,21 +1084,22 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Next qdf
     If Not IsMissing(varDebug) Then Debug.Print , "Temp queries deleted"
 
-    For Each qdf In CurrentDb.QueryDefs
-        strqdfName = qdf.Name
-        If Not IsMissing(varDebug) Then Debug.Print , strqdfName
-        If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
-            Or Left$(strqdfName, 4) = "~TMP" _
-            Or Left$(strqdfName, 3) = "zzz") Then
-            i = i + 1
-            Application.SaveAsText acQuery, strqdfName, strTheSourceLocation & strqdfName & ".qry"
-            ' Convert UTF-16 to txt - fix for Access 2013
-            If aeReadWriteStream(strTheSourceLocation & strqdfName & ".qry") = True Then
-                KillProperly (strTheSourceLocation & strqdfName & ".qry")
-                Name strTheSourceLocation & strqdfName & ".qry" & ".clean.txt" As strTheSourceLocation & strqdfName & ".qry"
-            End If
-        End If
-    Next qdf
+'    ' This will output each query specification to a file and convert UTF-16 to regular text
+'    For Each qdf In CurrentDb.QueryDefs
+'        strqdfName = qdf.Name
+'        If Not IsMissing(varDebug) Then Debug.Print , strqdfName
+'        If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
+'            Or Left$(strqdfName, 4) = "~TMP" _
+'            Or Left$(strqdfName, 3) = "zzz") Then
+'            i = i + 1
+'            Application.SaveAsText acQuery, strqdfName, strTheSourceLocation & strqdfName & ".qry"
+'            ' Convert UTF-16 to txt - fix for Access 2013+
+'            If aeReadWriteStream(strTheSourceLocation & strqdfName & ".qry") = True Then
+'                KillProperly (strTheSourceLocation & strqdfName & ".qry")
+'                Name strTheSourceLocation & strqdfName & ".qry" & ".clean.txt" As strTheSourceLocation & strqdfName & ".qry"
+'            End If
+'        End If
+'    Next qdf
 
     If Not IsMissing(varDebug) Then
         If i = 1 Then
@@ -1097,6 +1114,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
             Debug.Print , CurrentDb.QueryDefs.Count & " Queries EXISTING!"
         End If
     End If
+    aePrintLog "Timing for DocumentTheContainer Queries"
+    aeEndLogging "aeDocumentTheDatabase"
+    'Stop
 
     ' =============
     '    OUTPUTS
@@ -1602,10 +1622,10 @@ Private Function Delay(ByVal mSecs As Long) As Boolean
     Sleep mSecs ' delay milli seconds
 End Function
 
-Private Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
+Private Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As Variant
     ' allenbrowne.com
     ' Purpose:   Indicate if the field is part of a primary key or unique index.
-    ' Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
+    ' Return:    String containing "P" if primary key, "U" if unique index, "I" if non-unique index.
     '            Lower case letters if secondary field in index. Can have multiple indexes.
     ' Arguments: tdf = the TableDef the field belongs to.
     '            strField = name of the field to search the Indexes for.
@@ -1613,24 +1633,29 @@ Private Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As 
     Dim idx As DAO.Index        ' Each index of this table
     Dim fld As DAO.Field        ' Each field of the index
     Dim iCount As Integer
-    Dim strReturn As String     ' Return string
-    
+    Dim arrReturn() As Variant  ' Return array
+    ReDim arrReturn(1, 0)       ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
+
     For Each idx In tdf.Indexes
         iCount = 0
         For Each fld In idx.Fields
             If fld.Name = strField Then
                 If idx.Primary Then
-                    strReturn = strReturn & IIf(iCount = 0, "P", "p")
+                    arrReturn(iCount, iCount) = arrReturn(iCount, iCount) & IIf(iCount = 0, "P", "p")
+                    arrReturn(iCount, iCount + 1) = arrReturn(iCount, iCount + 1) & strField
                 ElseIf idx.Unique Then
-                    strReturn = strReturn & IIf(iCount = 0, "U", "u")
+                    arrReturn(iCount, iCount) = arrReturn(iCount, iCount) & IIf(iCount = 0, "U", "u")
+                    arrReturn(iCount, iCount + 1) = arrReturn(iCount, iCount + 1) & strField
                 Else
-                    strReturn = strReturn & IIf(iCount = 0, "I", "i")
+                    arrReturn(iCount, iCount) = arrReturn(iCount, iCount) & IIf(iCount = 0, "I", "i")
+                    arrReturn(iCount, iCount + 1) = arrReturn(iCount, iCount + 1) & strField
                 End If
             End If
             iCount = iCount + 1
+            ReDim Preserve arrReturn(1, iCount)
         Next
     Next
-    DescribeIndexField = strReturn
+    DescribeIndexField = arrReturn()
 End Function
 
 Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal strExt As String, Optional ByVal varDebug As Variant) As Boolean
@@ -5001,10 +5026,10 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
             For Each fld In tdf.Fields
 
                 If Len(strFlds) <= 900 Then
-                    strFlds = strFlds & ",[" & fld.Name & "] "
+                    strFlds = strFlds & ", [" & fld.Name & "] "
                 Else    ' Hack to deal with 1024 limit for immediate window output
                     blnLongFlds = True
-                    strFlds = strFlds & ",[" & fld.Name & "] " & """"
+                    strFlds = strFlds & ", [" & fld.Name & "] " & """"
                     strLongFlds = strFlds
                     strFlds = vbNullString
                     'Stop
@@ -5079,26 +5104,26 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
 
                     ' Test for multi field primary key
                     If IsSinglePrimaryField(tdf, IndexPrimaryFieldCount) Then
-                        strFlds = ",[" & fld.Name & "]"
+                        strFlds = ", [" & fld.Name & "]"
                         Exit For
                     ElseIf IndexPrimaryFieldCount > 1 Then
                         Debug.Print tdf.Name, fld.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary Index"
-                        strFlds = ",[" & "P FIX ME" & "]"
+                        strFlds = ", [" & "P FIX ME" & "]"
                         Exit For
                     End If
 
                     ' Test for multi field index
                     If IsSingleIndexField(tdf, IndexFieldCount) Then
-                        strFlds = ",[" & fld.Name & "]"
+                        strFlds = ", [" & fld.Name & "]"
                         Exit For
                     ElseIf IndexFieldCount > 1 Then
                         Debug.Print tdf.Name, fld.Name, IndexFieldCount, "FIX here for Multi Field Index"
-                        strFlds = ",[" & "I FIX ME" & "]"
+                        strFlds = ", [" & "I FIX ME" & "]"
                         Exit For
                     End If
                     'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
                         
-                    ''    strFlds = ",[" & fld.Name & "]"
+                    ''    strFlds = ", [" & fld.Name & "]"
                     ''    Debug.Print , strFlds
                     ''End If
 
