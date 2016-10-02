@@ -7,10 +7,10 @@ dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbBoolean "LogMessages" ="0"
 dbByte "Orientation" ="0"
-dbBinary "GUID" = Begin
-    0x7813c0c25ba5d64bb9f6c2b5261d3ff9
-End
 dbByte "PublishToWeb" ="1"
+dbBinary "GUID" = Begin
+    0x1d83572fe062d440b922164fe70caac5
+End
 Begin
     Begin
         dbText "Name" ="qpt_SqlTables.name"

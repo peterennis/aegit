@@ -18,14 +18,14 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0x10cb38ec2c8e274483bf74d696d4e178
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
 dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
+dbBinary "GUID" = Begin
+    0x7d424cf30bf52d479fa89346bcae4b40
+End
 Begin
     Begin
         dbText "Name" ="MSysObjects.DateCreate"
@@ -52,12 +52,12 @@ Begin
     State =0
     Left =0
     Top =0
-    Right =1475
-    Bottom =851
+    Right =1705
+    Bottom =856
     Left =-1
     Top =-1
-    Right =1459
-    Bottom =555
+    Right =1689
+    Bottom =521
     Left =0
     Top =0
     ColumnsShown =539

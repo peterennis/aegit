@@ -29,7 +29,6 @@
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
 |-- RowHeight >> 5640
-|-- GUID >> GUID
 --------------------------------------------------
 |-- id (Field in USysRibbons)
 |------ Attributes >> 17

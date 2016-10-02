@@ -36,7 +36,7 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 dbByte "PublishToWeb" ="1"
 dbBinary "GUID" = Begin
-    0x2117dd8462447e408d0153a5839310bd
+    0x9ef8b8e2ffbe8e41942dd00187f90774
 End
 Begin
     Begin
@@ -91,10 +91,16 @@ Begin
     Begin
         dbText "Name" ="TheYear"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x81d1d9b6eabdca4ca057f507972744f7
+        End
     End
     Begin
         dbText "Name" ="TheMonth"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0x99f492f29eb13448a3fa55b7a123bb8e
+        End
     End
     Begin
         dbText "Name" ="[_tblChart].EnterDate"
@@ -105,12 +111,12 @@ Begin
     State =0
     Left =0
     Top =0
-    Right =1235
-    Bottom =857
+    Right =1705
+    Bottom =856
     Left =-1
     Top =-1
-    Right =1203
-    Bottom =244
+    Right =1689
+    Bottom =210
     Left =0
     Top =0
     ColumnsShown =539

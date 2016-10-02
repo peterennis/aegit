@@ -21,7 +21,9 @@ Begin Form
         0xee8b0f747285e440
     End
     GUID = Begin
-        0xd2296e567aff2a44b6d412d08ddc1c55
+        0xb63b83946e72264a981b172e3a02782a
+    End
+    NameMap = Begin
     End
     RecordSource ="_aeQryUSysRibbons"
     Caption ="USysRibbons"
@@ -89,7 +91,7 @@ Begin Form
             BackColor =15849926
             Name ="FormHeader"
             GUID = Begin
-                0xd5d2061fb112064b8ff60fba88e09ba6
+                0x4052770655bd244a8f3a1298f1c01de1
             End
             AutoHeight =1
             AlternateBackThemeColorIndex =1
@@ -102,7 +104,7 @@ Begin Form
             Height =7020
             Name ="Detail"
             GUID = Begin
-                0x881cab7af6a93240b884a2c07724696f
+                0xd166bbb61b457247be1a769c80b78a23
             End
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -126,7 +128,7 @@ Begin Form
                     ControlSource ="ID"
                     FontName ="Consolas"
                     GUID = Begin
-                        0x358dcc0c14f8ec41ab7a3a55a1ff565c
+                        0x336a1009029c6346aa0a98724773db4f
                     End
                     GridlineColor =10921638
 
@@ -153,7 +155,7 @@ Begin Form
                             Caption ="ID"
                             FontName ="Consolas"
                             GUID = Begin
-                                0xc5615575ea2aae439aedc62adb968ac5
+                                0x3868299779f23946bd170d85ef390d07
                             End
                             GridlineColor =10921638
                             LayoutCachedLeft =60
@@ -183,7 +185,7 @@ Begin Form
                     ControlSource ="RibbonName"
                     FontName ="Consolas"
                     GUID = Begin
-                        0x2d7b92d8522c464293230cbed385abb2
+                        0x5ec17830902d1048a86358f20af6612c
                     End
                     GridlineColor =10921638
 
@@ -205,7 +207,7 @@ Begin Form
                             Caption ="RibbonName"
                             FontName ="Consolas"
                             GUID = Begin
-                                0x23cfbf6f5eace2479cd2b4f91ebbc137
+                                0xdbf167444923be478886109bc92ed507
                             End
                             GridlineColor =10921638
                             LayoutCachedTop =120
@@ -234,7 +236,7 @@ Begin Form
                     ControlSource ="RibbonXML"
                     FontName ="Consolas"
                     GUID = Begin
-                        0x9a04684bd1b2d74bbc88066632058ba1
+                        0x9657ed2b67caec42ba8419ac48f4e78d
                     End
                     GridlineColor =10921638
 
@@ -256,7 +258,7 @@ Begin Form
                             Caption ="RibbonXML"
                             FontName ="Consolas"
                             GUID = Begin
-                                0xb65a01a9a1148d44bfb163e5e845e17d
+                                0x0d8434fbfaecf546b8877cd367b1b17e
                             End
                             GridlineColor =10921638
                             LayoutCachedTop =480
@@ -272,7 +274,7 @@ Begin Form
             Height =0
             Name ="FormFooter"
             GUID = Begin
-                0x6bc05601723d0c478b4f5b36b2a3bcc5
+                0x2bb23081f6ceaf4fb554162afc2f7dd8
             End
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0

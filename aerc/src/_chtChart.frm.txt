@@ -23,7 +23,9 @@ Begin Form
         0xe51f90fed85ee440
     End
     GUID = Begin
-        0x57da32b0cb1684499b9162a8c05d6178
+        0xd0352cef0aa9784d9b32e4849ae2fcea
+    End
+    NameMap = Begin
     End
     Caption ="Charts"
     DatasheetFontName ="Calibri"
@@ -117,7 +119,7 @@ Begin Form
             Height =11280
             Name ="Detail"
             GUID = Begin
-                0xa5a448076149b942b3cdabe3e6d57d65
+                0x1c2ad99b28f3944f9481c354e9158239
             End
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -146,7 +148,7 @@ Begin Form
                     Class ="MSGraph.Chart.8"
                     OLEClass ="Microsoft Graph Chart"
                     GUID = Begin
-                        0x7145a7efdd6fe2458821631f2d4a2bd3
+                        0x1626e36059eaaf4eab3f0f6c28ab55b3
                     End
                     GridlineColor =10921638
 
@@ -167,7 +169,7 @@ Begin Form
                     Caption ="01"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x6785988d31b4c3439ef59fed12a30315
+                        0x01eeb4a03a96a8439a7f458aea3885b6
                     End
                     GridlineColor =10921638
 
@@ -195,7 +197,7 @@ Begin Form
                     Caption ="02"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x069ee9df8f7f8a4b919cecc1c74de038
+                        0x05f4102ba03b564e87ce970156fb7a6a
                     End
                     GridlineColor =10921638
 
@@ -223,7 +225,7 @@ Begin Form
                     Caption ="03"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x8897eed55a7ac446b63c300d355212da
+                        0x95552482f8d5ec4e83f4cd48c89652f0
                     End
                     GridlineColor =10921638
 
@@ -251,7 +253,7 @@ Begin Form
                     Caption ="04"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xec0bd3ecc559db469935cb47c087e0d4
+                        0xc11978a651675e44b41777d574de85b8
                     End
                     GridlineColor =10921638
 
@@ -279,7 +281,7 @@ Begin Form
                     Caption ="05"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xac8c8e6b24e63e45bdf983132e429112
+                        0x3f0cf0aafe70a44e8f9d6692c2920b23
                     End
                     GridlineColor =10921638
 
@@ -307,7 +309,7 @@ Begin Form
                     Caption ="06"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9a08af6fe6faed4b8688538e2210d0ea
+                        0x158a01f47fac3d4bac683e8e42107931
                     End
                     GridlineColor =10921638
 
@@ -335,7 +337,7 @@ Begin Form
                     Caption ="07"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x1556659a8022e04bae2e0dd4d7031c4c
+                        0x12d32e334bc6a846a6c74173d0b9f6a2
                     End
                     GridlineColor =10921638
 
@@ -363,7 +365,7 @@ Begin Form
                     Caption ="08"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xcb7489a2449b814c9190d447bec6921d
+                        0x5b96e1dba035dd44ada13601b728c26b
                     End
                     GridlineColor =10921638
 
@@ -391,7 +393,7 @@ Begin Form
                     Caption ="09"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xa4bae49fc3565f4487d1cb5e000cd7bc
+                        0x900c6ad3ec98e34eb35eb862582a46f1
                     End
                     GridlineColor =10921638
 
@@ -419,7 +421,7 @@ Begin Form
                     Caption ="10"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x1275830ac929e949ba6b2ac387410216
+                        0x09ae8f23e404e447bab74fbb56468aa8
                     End
                     GridlineColor =10921638
 
@@ -447,7 +449,7 @@ Begin Form
                     Caption ="11"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xf706457154d1b544a0021f82be10089e
+                        0x9fe34197a500c440a071c0f4e389059d
                     End
                     GridlineColor =10921638
 
@@ -475,7 +477,7 @@ Begin Form
                     Caption ="12"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xdfd0bd677abe274aa81db91f9e5d50c7
+                        0x58ccedaa1274da448f1503c63b673224
                     End
                     GridlineColor =10921638
 
@@ -503,7 +505,7 @@ Begin Form
                     Caption ="13"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xbeacf319f59bad40aff8de78029c3971
+                        0x2ec04ff3ac430b4597e65db180bac525
                     End
                     GridlineColor =10921638
 
@@ -531,7 +533,7 @@ Begin Form
                     Caption ="14"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xe0958a973566cb44835c6df1a5ec20c6
+                        0x529a85e1d1d71c4d9d4263a14b3288b4
                     End
                     GridlineColor =10921638
 
@@ -559,7 +561,7 @@ Begin Form
                     Caption ="15"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xf3b6c775fe99024a9dda6169abf87014
+                        0x091c79f91b84924c8520bdeb553f3c8b
                     End
                     GridlineColor =10921638
 
@@ -587,7 +589,7 @@ Begin Form
                     Caption ="16"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9a14524257d6b745818bd2d094a78347
+                        0x07062728c21195458a64b6e1a75f0278
                     End
                     GridlineColor =10921638
 
@@ -615,7 +617,7 @@ Begin Form
                     Caption ="17"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x1b4d6a6ae0845c42b777f202ea163ca7
+                        0x004664d1672bd140b05c22b608c52ac7
                     End
                     GridlineColor =10921638
 
@@ -643,7 +645,7 @@ Begin Form
                     Caption ="18"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x0a7fda502231b6498eb96cbf7da95ee0
+                        0xf9e07f5ae6a6de4d94ef58a097adbca3
                     End
                     GridlineColor =10921638
 
@@ -671,7 +673,7 @@ Begin Form
                     Caption ="19"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xd00f76c642de39408f55e53d7068b6c7
+                        0x2959a3c973ef744b98533f9131a6c298
                     End
                     GridlineColor =10921638
 
@@ -700,7 +702,7 @@ Begin Form
                     Caption ="20"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9e861a82546cbe49a29afe130f4bd24e
+                        0xc0208f58e84d6d44b2f016d833ab46e8
                     End
                     GridlineColor =10921638
 
@@ -729,7 +731,7 @@ Begin Form
                     Caption ="21"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xecba6b63843c0a4b8dd6437971d6b429
+                        0x0e0b0e97275f194fbc435f7bb56bc5d1
                     End
                     GridlineColor =10921638
 
@@ -758,7 +760,7 @@ Begin Form
                     Caption ="22"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x7657fad82c8a1140b04beaf31f7801ef
+                        0x3fb3ee8787cae24f9965e79832829236
                     End
                     GridlineColor =10921638
 
@@ -787,7 +789,7 @@ Begin Form
                     Caption ="23"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xd754a4ee85776345af1002d488eed6d6
+                        0xe6cb15a7215b124580bc96e66ba149a8
                     End
                     GridlineColor =10921638
 
@@ -816,7 +818,7 @@ Begin Form
                     Caption ="24"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xc6bde75059bd674285c103e7db5af253
+                        0x90e70c5acd876047a3eba7b59de86ecb
                     End
                     GridlineColor =10921638
 
@@ -845,7 +847,7 @@ Begin Form
                     Caption ="25"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xee4329bc1e775d45938333832fb8042a
+                        0x491fddf2fb2d354eab073f28a019a8a3
                     End
                     GridlineColor =10921638
 
@@ -873,7 +875,7 @@ Begin Form
                     Caption ="26"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x2a23ee4bdf068a4f8c3ee99a33a79d32
+                        0xa40a1203f67a7e419c3861268f05c0a1
                     End
                     GridlineColor =10921638
 
@@ -901,7 +903,7 @@ Begin Form
                     Caption ="27"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x473f31a6002d144881eacfba177a5647
+                        0xc2ea6dc38f86704ba70d945548ba9831
                     End
                     GridlineColor =10921638
 
@@ -929,7 +931,7 @@ Begin Form
                     Caption ="28"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x18e033825ab5414a99e2ae9205ed7788
+                        0xe53eaf151d01ee44a42cdcbaf178c9e0
                     End
                     GridlineColor =10921638
 
@@ -957,7 +959,7 @@ Begin Form
                     Caption ="29"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x152602d056cc154383c9e97cffd4643e
+                        0x35b0d969c636a7478a79522029043730
                     End
                     GridlineColor =10921638
 
@@ -985,7 +987,7 @@ Begin Form
                     Caption ="30"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xee382cae78064e4888a35129c381856b
+                        0x1528fafd7a094c49b470dca924315de4
                     End
                     GridlineColor =10921638
 
@@ -1013,7 +1015,7 @@ Begin Form
                     Caption ="31"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x9cf28b5a713dcc4796552456d53deec2
+                        0x8e94e663c7204b49828c582c6af734d7
                     End
                     GridlineColor =10921638
 
@@ -1041,7 +1043,7 @@ Begin Form
                     Caption ="32"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x729196f7ddcd0743990ca46337808e39
+                        0xe3ed7c4fcfb3ff4f84067b27ebf9fd71
                     End
                     GridlineColor =10921638
 
@@ -1069,7 +1071,7 @@ Begin Form
                     Caption ="33"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x8144f1ff93f4d643abfac486a2d2d0df
+                        0x31b4e3d69a17d847b1f88192bdfa00a0
                     End
                     GridlineColor =10921638
 
@@ -1097,7 +1099,7 @@ Begin Form
                     Caption ="34"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0xe08e6371d7c43949aa6c99b5c37c3492
+                        0x18775e148ec11d4989f335e2dbd15403
                     End
                     GridlineColor =10921638
 
@@ -1125,7 +1127,7 @@ Begin Form
                     Caption ="35"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x57e951bdd6633e439754856e0f800b4f
+                        0x26e3e48846aaee4b8bac3b645914e35b
                     End
                     GridlineColor =10921638
 
@@ -1153,7 +1155,7 @@ Begin Form
                     Caption ="36"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
-                        0x2670273f4705364eaf4d7d6c29899139
+                        0x303e64e59206654caa8bbfc05426d1ea
                     End
                     GridlineColor =10921638
 
@@ -1179,7 +1181,7 @@ Begin Form
                     Name ="lbl01"
                     Caption ="lbl01"
                     GUID = Begin
-                        0x377c3a1c92148841ac735364ccaf8c59
+                        0xa920c18b387dc04792e8f444369f5475
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1198,7 +1200,7 @@ Begin Form
                     Name ="lbl02"
                     Caption ="lbl02"
                     GUID = Begin
-                        0x08ca7219e6797e4e81f28a14f54a501a
+                        0x45089e9b5f157f4880e57a745063405f
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1217,7 +1219,7 @@ Begin Form
                     Name ="lbl03"
                     Caption ="lbl03"
                     GUID = Begin
-                        0x32d36f18c480da4eb73b24426f58ff62
+                        0x936b2991a263994080149a198bd2fe7a
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1236,7 +1238,7 @@ Begin Form
                     Name ="lbl04"
                     Caption ="lbl04"
                     GUID = Begin
-                        0xea52364f48910c4a9b7006b2df25971f
+                        0x8259d3c32377be4f912feb9ae0b4e2a6
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1255,7 +1257,7 @@ Begin Form
                     Name ="lbl05"
                     Caption ="lbl05"
                     GUID = Begin
-                        0x2a438f86b409d5459e8940ec6e25f680
+                        0x7ae4eb508e1f11428d42ffe350995274
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1274,7 +1276,7 @@ Begin Form
                     Name ="lbl06"
                     Caption ="lbl06"
                     GUID = Begin
-                        0xc64f523976fde44daa950641d64a2e11
+                        0x343b281bce6ed74c9e382f6d01b0ae6d
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1293,7 +1295,7 @@ Begin Form
                     Name ="lbl07"
                     Caption ="lbl07"
                     GUID = Begin
-                        0x14b21d3d50787947b2e9275db8c9f44c
+                        0x141a310187fc764081072446b9282579
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1312,7 +1314,7 @@ Begin Form
                     Name ="lbl08"
                     Caption ="lbl08"
                     GUID = Begin
-                        0x1db0cd4e7b669f4e9cd2ae2cebc49a63
+                        0x75a22d61bfe23b4e8edd69fc43849814
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1331,7 +1333,7 @@ Begin Form
                     Name ="lbl09"
                     Caption ="lbl09"
                     GUID = Begin
-                        0xf66467b48c82c1458add2144db882c75
+                        0x52c82efb861fe24ea837510618ea4af8
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1350,7 +1352,7 @@ Begin Form
                     Name ="lbl10"
                     Caption ="lbl10"
                     GUID = Begin
-                        0xe42733f1efc6f74eb8a14050559932a4
+                        0xf1406743779b0a46b6987d320d4be08d
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1369,7 +1371,7 @@ Begin Form
                     Name ="lbl11"
                     Caption ="lbl11"
                     GUID = Begin
-                        0x2f73dc1f02ea4741b489f70b06c00418
+                        0x32b85b61f421da4dabc4229565a1ec6f
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1388,7 +1390,7 @@ Begin Form
                     Name ="lbl12"
                     Caption ="lbl12"
                     GUID = Begin
-                        0x13fd0feb7fd11d43aa7dbc0e1cb70084
+                        0xd930bbc987d38c409dc3012cdbadda5d
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1407,7 +1409,7 @@ Begin Form
                     Name ="lbl13"
                     Caption ="lbl13"
                     GUID = Begin
-                        0x0c375ac89996ed4797b3bc09eed7cc94
+                        0x710051b9662e9e44943e3e4d888775d1
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1426,7 +1428,7 @@ Begin Form
                     Name ="lbl14"
                     Caption ="lbl14"
                     GUID = Begin
-                        0x5749efbf2a44814d8ad785332b7ec920
+                        0xf3a35643f024d2438e07d2b6652995e9
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1445,7 +1447,7 @@ Begin Form
                     Name ="lbl15"
                     Caption ="lbl15"
                     GUID = Begin
-                        0xd1f345386734954cabbdae27b949350c
+                        0x63808475780bfa48b6c76ef5602c29e0
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1464,7 +1466,7 @@ Begin Form
                     Name ="lbl16"
                     Caption ="lbl16"
                     GUID = Begin
-                        0x1a3249b70a0cb14ebabc326121e67cd6
+                        0x2fc644f56a393a448e4d1a2f839e0d54
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1483,7 +1485,7 @@ Begin Form
                     Name ="lbl17"
                     Caption ="lbl17"
                     GUID = Begin
-                        0x806c2d7b0d5b91429a7bbf9c6cc1e021
+                        0x67b9bb57adae204e895f57acdd0ce921
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1502,7 +1504,7 @@ Begin Form
                     Name ="lbl18"
                     Caption ="lbl18"
                     GUID = Begin
-                        0xdf6bcded99f9244ebfa305ac1f78280e
+                        0xfd6944353705ea4db22f47a79f379a97
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340
@@ -1521,7 +1523,7 @@ Begin Form
                     Name ="lbl19"
                     Caption ="lbl19"
                     GUID = Begin
-                        0xc74aaae61210534f99a3ac57b0c90c93
+                        0x856c90ac55f05f489f29f148f1f49437
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =17340

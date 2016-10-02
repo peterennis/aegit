@@ -4,10 +4,10 @@ dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbBoolean "LogMessages" ="0"
 dbByte "Orientation" ="0"
-dbBinary "GUID" = Begin
-    0x6d957e58f6ae6748b58acaaca527ec19
-End
 dbByte "PublishToWeb" ="1"
 dbText "Description" ="Don't be a dummy!"
+dbBinary "GUID" = Begin
+    0x00f4019dc34b944b9f41ef12dd7f5736
+End
 Begin
 End

@@ -9,9 +9,6 @@ dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbBoolean "UseTransaction" ="-1"
 dbByte "Orientation" ="0"
-dbBinary "GUID" = Begin
-    0x915ba25c754f784b80df56857a9d3156
-End
 dbByte "PublishToWeb" ="1"
 Begin
 End

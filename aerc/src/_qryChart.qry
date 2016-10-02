@@ -93,7 +93,7 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 dbByte "PublishToWeb" ="1"
 dbBinary "GUID" = Begin
-    0x0823ac37950502498806e08b17edccd7
+    0xdbfe1609356e00459490f64a3f25a067
 End
 Begin
     Begin
@@ -230,12 +230,12 @@ Begin
     State =0
     Left =0
     Top =0
-    Right =1302
-    Bottom =857
+    Right =1705
+    Bottom =856
     Left =-1
     Top =-1
-    Right =1270
-    Bottom =204
+    Right =1689
+    Bottom =170
     Left =0
     Top =0
     ColumnsShown =539

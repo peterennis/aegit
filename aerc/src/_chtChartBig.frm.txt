@@ -23,7 +23,9 @@ Begin Form
         0xe51f90fed85ee440
     End
     GUID = Begin
-        0x164b1cec23f94e4d835a695b03014a31
+        0x39299089e39d014ea0d8b06af84efcec
+    End
+    NameMap = Begin
     End
     Caption ="Charts"
     DatasheetFontName ="Calibri"
@@ -125,7 +127,7 @@ Begin Form
             Height =11520
             Name ="Detail"
             GUID = Begin
-                0xa5a448076149b942b3cdabe3e6d57d65
+                0xf7761bf8be89c046b4277ab86ab81e12
             End
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
@@ -143,7 +145,7 @@ Begin Form
                     SourceObject ="Form._chtChartBigList"
                     EventProcPrefix ="Ctl_chtChartBigList"
                     GUID = Begin
-                        0xbead13860c79834682d6d6ffd9daf1f7
+                        0x398d2a4bacc06e489da747a6e72f43bc
                     End
                     GridlineColor =10921638
 
@@ -175,7 +177,7 @@ Begin Form
                     Class ="MSGraph.Chart.8"
                     OLEClass ="Microsoft Graph Chart"
                     GUID = Begin
-                        0xcfa3223620a9b44bb2d64e1da71d1ca1
+                        0x460c07b61b117c48b507969ce58b1722
                     End
                     GridlineColor =10921638
 

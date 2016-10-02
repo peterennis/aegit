@@ -1,7 +1,7 @@
 Option Compare Database
 Option Explicit
 
-#Const conLateBinding = 0
+#Const conLateBinding = 1
 
 Public Function FileDelete(ByVal strFileName As String) As Boolean
     On Error GoTo 0

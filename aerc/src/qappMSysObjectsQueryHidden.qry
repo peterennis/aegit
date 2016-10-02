@@ -10,14 +10,14 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0x551d97718dcad240aea981b8f1b693b4
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
 dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
+dbBinary "GUID" = Begin
+    0x15b5f3103f28db458dc43359fa557c86
+End
 Begin
     Begin
         dbText "Name" ="m.Name"
@@ -35,5 +35,8 @@ Begin
     Begin
         dbText "Name" ="Description"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xfa9dd43e8a9cf64a8be4addd7d3c54c8
+        End
     End
 End

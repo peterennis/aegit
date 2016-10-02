@@ -6,14 +6,14 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "UseTransaction" ="-1"
 dbBoolean "FailOnError" ="0"
 dbByte "Orientation" ="0"
-dbBinary "GUID" = Begin
-    0xac4c50907fb5a648bc4a5da4820cfabd
-End
 dbByte "PublishToWeb" ="1"
 dbBoolean "OrderByOn" ="0"
 dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
+dbBinary "GUID" = Begin
+    0x84be32c1aa26c548aab408d48e113c28
+End
 Begin
     Begin
         dbText "Name" ="zzzTmpTblQueries.Flags"

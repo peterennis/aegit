@@ -13,7 +13,6 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
-              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               TotalsRow     False
@@ -234,6 +233,7 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
+              GUID          GUID
 >>>aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
               Name          aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
               Owner         admin
@@ -273,7 +273,6 @@
               LastUpdated   LastUpdated
               Orientation    0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
@@ -302,7 +301,6 @@
               LastUpdated   LastUpdated
               Orientation    0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
@@ -318,8 +316,8 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
-              GUID          GUID
               PublishToWeb   1 
+              GUID          GUID
 >>>Country
               Name          Country
               Owner         admin
@@ -331,7 +329,6 @@
               LastUpdated   LastUpdated
               Orientation    0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
@@ -360,7 +357,6 @@
               LastUpdated   LastUpdated
               Orientation    0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
@@ -376,8 +372,8 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
-              GUID          GUID
               PublishToWeb   1 
+              GUID          GUID
 >>>qapp_Dummy
               Name          qapp_Dummy
               Owner         admin
@@ -391,8 +387,8 @@
               ODBCTimeout    60 
               UseTransaction              True
               Orientation    0 
-              GUID          GUID
               PublishToWeb   1 
+              GUID          GUID
 >>>qapp_HiddenDummy
               Name          qapp_HiddenDummy
               Owner         admin
@@ -426,6 +422,7 @@
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+              GUID          GUID
 >>>qappMSysObjectsQueryHidden
               Name          qappMSysObjectsQueryHidden
               Owner         admin
@@ -440,12 +437,12 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
-              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+              GUID          GUID
 >>>qmak_Dummy
               Name          qmak_Dummy
               Owner         admin
@@ -474,7 +471,6 @@
               ODBCTimeout    60 
               UseTransaction              True
               Orientation    0 
-              GUID          GUID
               PublishToWeb   1 
 >>>qpt_Dummy
               Name          qpt_Dummy
@@ -488,9 +484,9 @@
               ODBCTimeout    60 
               LogMessages   False
               Orientation    0 
-              GUID          GUID
               PublishToWeb   1 
               Description   Don't be a dummy!
+              GUID          GUID
 >>>qpt_HiddenDummy
               Name          qpt_HiddenDummy
               Owner         admin
@@ -517,8 +513,8 @@
               ODBCTimeout    60 
               LogMessages   False
               Orientation    0 
-              GUID          GUID
               PublishToWeb   1 
+              GUID          GUID
 >>>qry_HiddenDummy
               Name          qry_HiddenDummy
               Owner         admin
@@ -533,7 +529,6 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
-              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
@@ -552,12 +547,12 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
-              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+              GUID          GUID
 >>>qry_Select2
               Name          qry_Select2
               Owner         admin
@@ -575,9 +570,9 @@
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
-              GUID          GUID
               RecordsetType  0 
               TotalsRow     False
+              GUID          GUID
 >>>qryLastUpdated
               Name          qryLastUpdated
               Owner         admin
@@ -592,12 +587,12 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
-              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
               RecordsetType  0 
               TotalsRow     False
+              GUID          GUID
 >>>quni_Dummy
               Name          quni_Dummy
               Owner         admin
@@ -612,10 +607,10 @@
               OrderByOn     False
               Orientation    0 
               DefaultView    2 
-              GUID          GUID
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
+              GUID          GUID
 >>>quni_HiddenDummy
               Name          quni_HiddenDummy
               Owner         admin
@@ -647,8 +642,8 @@
               UseTransaction              True
               FailOnError   False
               Orientation    0 
-              GUID          GUID
               PublishToWeb   1 
+              GUID          GUID
 >>>qupd_HiddenDummy
               Name          qupd_HiddenDummy
               Owner         admin
@@ -678,12 +673,12 @@
               UseTransaction              True
               FailOnError   False
               Orientation    0 
-              GUID          GUID
               PublishToWeb   1 
               OrderByOn     False
               DefaultView    2 
               FilterOnLoad  False
               OrderByOnLoad True
+              GUID          GUID
 >>>tblBinary
               Name          tblBinary
               Owner         admin
@@ -704,7 +699,6 @@
               DatasheetForeColor           0 
               DatasheetForeColor12         0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               DisplayViewsOnSharePointSite               1 
               TotalsRow     False
@@ -749,7 +743,6 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
-              GUID          GUID
 >>>tblDummy1
               Name          tblDummy1
               Owner         admin
@@ -777,7 +770,6 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
-              GUID          GUID
 >>>tblDummy2
               Name          tblDummy2
               Owner         admin
@@ -805,7 +797,6 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
-              GUID          GUID
 >>>tblDummy3
               Name          tblDummy3
               Owner         admin
@@ -833,7 +824,6 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
-              GUID          GUID
 >>>USysRibbons
               Name          USysRibbons
               Owner         admin
@@ -862,4 +852,3 @@
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
               RowHeight      5640 
-              GUID          GUID

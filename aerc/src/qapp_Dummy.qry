@@ -9,10 +9,10 @@ dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbBoolean "UseTransaction" ="-1"
 dbByte "Orientation" ="0"
-dbBinary "GUID" = Begin
-    0xd5db862b91a6d34182bc77505d6a91f9
-End
 dbByte "PublishToWeb" ="1"
+dbBinary "GUID" = Begin
+    0x65ad7fea9d9d4949a49e6d5e2b8af16c
+End
 Begin
     Begin
         dbText "Name" ="Dummy"
@@ -22,13 +22,13 @@ End
 Begin
     State =0
     Left =0
-    Top =40
-    Right =1619
-    Bottom =996
+    Top =0
+    Right =1705
+    Bottom =856
     Left =-1
     Top =-1
-    Right =1587
-    Bottom =672
+    Right =1689
+    Bottom =638
     Left =0
     Top =0
     ColumnsShown =651

@@ -56,6 +56,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- VersionApp (Field in _tblChart)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -84,6 +85,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- VersionData (Field in _tblChart)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -112,6 +114,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- EnterDate (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -140,6 +143,7 @@
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
 |------ Format >> mm/yyyy
+|------ GUID >> GUID
 |-- FLD01 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -166,6 +170,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD02 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -192,6 +197,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD03 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -218,6 +224,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD04 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -244,6 +251,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD05 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -270,6 +278,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD06 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -296,6 +305,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD07 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -322,6 +332,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD08 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -348,6 +359,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD09 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -374,6 +386,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD10 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -400,6 +413,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD11 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -426,6 +440,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD12 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -452,6 +467,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD13 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -478,6 +494,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD14 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -504,6 +521,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD15 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -530,6 +548,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD16 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -556,6 +575,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD17 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -582,6 +602,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD18 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -608,6 +629,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD19 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -634,6 +656,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD20 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -660,6 +683,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD21 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -686,6 +710,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD22 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -712,6 +737,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD23 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -738,6 +764,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD24 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -764,6 +791,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD25 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -790,6 +818,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD26 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -816,6 +845,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD27 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -842,6 +872,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD28 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -868,6 +899,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD29 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -894,6 +926,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD30 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -920,6 +953,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD31 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -946,6 +980,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD32 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -972,6 +1007,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD33 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -998,6 +1034,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD34 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1024,6 +1061,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD35 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1050,6 +1088,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD36 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1076,6 +1115,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD37 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1102,6 +1142,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD38 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1128,6 +1169,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD39 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1154,6 +1196,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD40 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1180,6 +1223,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD41 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1206,6 +1250,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD42 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1232,6 +1277,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD43 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1258,6 +1304,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD44 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1284,6 +1331,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD45 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1310,6 +1358,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD46 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1336,6 +1385,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD47 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1362,6 +1412,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD48 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1388,6 +1439,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD49 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1414,6 +1466,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD50 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1440,6 +1493,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD51 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1466,6 +1520,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD52 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1492,6 +1547,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD53 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1518,6 +1574,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD54 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1544,6 +1601,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD55 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1570,6 +1628,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD56 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1596,6 +1655,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD57 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1622,6 +1682,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD58 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1648,6 +1709,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD59 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1674,6 +1736,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD60 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1700,6 +1763,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD61 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1726,6 +1790,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD62 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1752,6 +1817,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD63 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1778,6 +1844,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD64 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1804,6 +1871,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD65 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1830,6 +1898,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD66 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1856,6 +1925,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD67 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1882,6 +1952,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD68 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1908,6 +1979,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD69 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1934,6 +2006,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FLD70 (Field in _tblChart)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -1960,3 +2033,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

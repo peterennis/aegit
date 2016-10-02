@@ -54,6 +54,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Desc (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -82,6 +83,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Description (Field in aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -111,3 +113,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

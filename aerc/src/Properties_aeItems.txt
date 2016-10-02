@@ -28,6 +28,7 @@
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
 |-- Item (Field in aeItems)
 |------ Attributes >> 2
@@ -57,6 +58,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Quantity (Field in aeItems)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -83,6 +85,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Status (Field in aeItems)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -112,6 +115,7 @@
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
 |------ Description >> A short description
+|------ GUID >> GUID
 |-- YNO (Field in aeItems)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -148,6 +152,7 @@
 |------ AllowMultipleValues >> False
 |------ AllowValueListEdits >> False
 |------ ShowOnlyRowSourceValues >> False
+|------ GUID >> GUID
 |-- CHK (Field in aeItems)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -174,6 +179,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- CBO (Field in aeItems)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -212,3 +218,4 @@
 |------ ShowOnlyRowSourceValues >> False
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

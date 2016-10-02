@@ -54,6 +54,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- ChartNum (Field in _tlkpChart)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -82,6 +83,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- ChartDesc (Field in _tlkpChart)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -110,6 +112,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- ChartTitle (Field in _tlkpChart)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -138,3 +141,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

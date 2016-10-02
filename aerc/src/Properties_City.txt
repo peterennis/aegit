@@ -12,7 +12,6 @@
 |-- ReplicaFilter >> 
 |-- Orientation >> 0
 |-- OrderByOn >> False
-|-- NameMap >> NameMap
 |-- DefaultView >> 2
 |-- DisplayViewsOnSharePointSite >> 1
 |-- TotalsRow >> False
@@ -28,8 +27,8 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
-|-- GUID >> GUID
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
 |-- id (Field in City)
 |------ Attributes >> 18
@@ -55,6 +54,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- CityName (Field in City)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -83,6 +83,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Country (Field in City)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -111,6 +112,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Population (Field in City)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -139,6 +141,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Longitude (Field in City)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -167,6 +170,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Latitude (Field in City)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -195,3 +199,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

@@ -11,14 +11,14 @@ dbInteger "ODBCTimeout" ="60"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
-dbBinary "GUID" = Begin
-    0xd4091604a0c3054baed4e67bbe2be8f6
-End
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
 dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
+dbBinary "GUID" = Begin
+    0x50a72278effdb04a92c897de9a093f8e
+End
 Begin
     Begin
         dbText "Name" ="Num"
@@ -31,13 +31,13 @@ End
 Begin
     State =0
     Left =0
-    Top =40
-    Right =1619
-    Bottom =996
+    Top =0
+    Right =1705
+    Bottom =856
     Left =-1
     Top =-1
-    Right =1587
-    Bottom =655
+    Right =1689
+    Bottom =621
     Left =0
     Top =0
     ColumnsShown =539

@@ -12,7 +12,6 @@
 |-- ReplicaFilter >> 
 |-- Orientation >> 0
 |-- OrderByOn >> False
-|-- NameMap >> NameMap
 |-- DefaultView >> 2
 |-- DisplayViewsOnSharePointSite >> 1
 |-- TotalsRow >> False
@@ -59,6 +58,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- CountryName (Field in Country)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -87,6 +87,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Capital (Field in Country)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -115,6 +116,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Province (Field in Country)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -143,6 +145,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Area (Field in Country)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -169,6 +172,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Population (Field in Country)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -195,3 +199,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

@@ -15,6 +15,9 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
 dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
+dbBinary "GUID" = Begin
+    0x60f4a4ebf5bd8247883dc7a175bde66d
+End
 Begin
     Begin
         dbText "Name" ="m.Name"
@@ -32,5 +35,8 @@ Begin
     Begin
         dbText "Name" ="Description"
         dbLong "AggregateType" ="-1"
+        dbBinary "GUID" = Begin
+            0xe89b1f02147a4b48bf7fe2300eb9c702
+        End
     End
 End

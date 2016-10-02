@@ -14,11 +14,11 @@ dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
-dbBinary "GUID" = Begin
-    0x3b73c743a3a1bc489263cf637cdd0474
-End
 dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
+dbBinary "GUID" = Begin
+    0xf8a977934692684ba2f3b85b81351591
+End
 Begin
     Begin
         dbText "Name" ="Num"
@@ -31,13 +31,13 @@ End
 Begin
     State =0
     Left =0
-    Top =40
-    Right =1619
-    Bottom =996
+    Top =0
+    Right =1705
+    Bottom =856
     Left =-1
     Top =-1
-    Right =1587
-    Bottom =638
+    Right =1689
+    Bottom =604
     Left =0
     Top =0
     ColumnsShown =539

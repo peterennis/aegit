@@ -19,7 +19,9 @@ Begin Form
         0x79c31af5b448e440
     End
     GUID = Begin
-        0xeb416ed03716e540aad6075d183573e2
+        0xaeaa46a4e93968489f64600bdf72b3e8
+    End
+    NameMap = Begin
     End
     DatasheetFontName ="Calibri"
     PrtMip = Begin
@@ -77,7 +79,7 @@ Begin Form
             Height =7560
             Name ="Detail"
             GUID = Begin
-                0xc2df648d3672cb44ad2ac0896aafdab9
+                0x15fa683454eb614f9aab37680f9ef194
             End
             AutoHeight =1
             AlternateBackColor =15921906
@@ -95,7 +97,7 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     Picture ="adaept_logo_rg_128x128.png"
                     GUID = Begin
-                        0xd6d66f96fd98fe4983f073d225896235
+                        0x257a698d0478c142a3494f1188782a87
                     End
                     GridlineColor =10921638
                     ImageData = Begin
@@ -118,7 +120,7 @@ Begin Form
                     Name ="Label1"
                     Caption ="frm_Dummy"
                     GUID = Begin
-                        0x296dac1707b9d946b1dc2da124b9a802
+                        0xa7fa9155bd14b54aaab33e6f4a16a002
                     End
                     GridlineColor =10921638
                     LayoutCachedLeft =1500

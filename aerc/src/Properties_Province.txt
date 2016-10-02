@@ -12,7 +12,6 @@
 |-- ReplicaFilter >> 
 |-- Orientation >> 0
 |-- OrderByOn >> False
-|-- NameMap >> NameMap
 |-- DefaultView >> 2
 |-- DisplayViewsOnSharePointSite >> 1
 |-- TotalsRow >> False
@@ -28,8 +27,8 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> -1
 |-- DatasheetForeThemeColorIndex >> -1
-|-- GUID >> GUID
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
 --------------------------------------------------
 |-- id (Field in Province)
 |------ Attributes >> 18
@@ -55,6 +54,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- ProvinceName (Field in Province)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -83,6 +83,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Country (Field in Province)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -111,6 +112,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Population (Field in Province)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -137,6 +139,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Area (Field in Province)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -165,6 +168,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Capital (Field in Province)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -193,6 +197,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- CapProv (Field in Province)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -221,3 +226,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

@@ -50,7 +50,7 @@ Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
     On Error GoTo 0
 
     If Application.VBE.ActiveVBProject.Name <> "aegit" Then
-        MsgBox "The is not the aegit project!", vbCritical, "aegit_EXPORT"
+        MsgBox "This is not the aegit project!", vbCritical, "aegit_EXPORT"
         Exit Sub
     End If
 

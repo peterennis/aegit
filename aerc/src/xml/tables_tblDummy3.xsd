@@ -12,6 +12,7 @@
     <xsd:annotation>
       <xsd:appinfo>
         <od:index index-name="eventId" index-key="eventId eventPerson " primary="yes" unique="yes" clustered="no" order="asc asc"></od:index>
+        <od:index index-name="id" index-key="id " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="MFSI" index-key="Multi Field String Indexer " primary="no" unique="no" clustered="no" order="asc asc asc asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
