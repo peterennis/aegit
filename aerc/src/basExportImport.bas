@@ -33,6 +33,25 @@ Public Sub Test_aeProjectExport()
 
 End Sub
 
+Public Sub ChangeAppTitle(strTitle As String)
+   Dim proTitle As Property
+
+   On Error Resume Next
+   With CurrentDb
+        Set proTitle = .CreateProperty("AppTitle", dbText, strTitle)
+        Call .Properties.Append(proTitle)
+        .Properties("AppTitle").Value = strTitle
+   End With
+   Call Application.RefreshTitleBar
+End Sub
+
+Public Sub PrintAppTitle()
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb()
+    Debug.Print dbs.Properties("AppTitle").Value
+'    dbs.Properties("AppTitle").Value = Application.VBE.ActiveVBProject.Name & " " & aegit_expVERSION
+End Sub
+
 Private Sub aeAddReferenceVBIDE()
 
     Dim chkRef As Variant
