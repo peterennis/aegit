@@ -30,7 +30,7 @@ Inherited: False;
 ---
 Name: Version
 Type: dbMemo
-Value: 14.0
+Value: 12.0
 Inherited: False;
 ---
 Name: RecordsAffected
@@ -95,7 +95,7 @@ Inherited: False;
 ---
 Name: Build
 Type: dbLong
-Value: 24
+Value: 720
 Inherited: False;
 ---
 Name: ProjVer
@@ -110,12 +110,12 @@ Inherited: False;
 ---
 Name: UseMDIMode
 Type: dbByte
-Value: 1
+Value: 0
 Inherited: False;
 ---
 Name: ShowDocumentTabs
 Type: dbBoolean
-Value: False
+Value: True
 Inherited: False;
 ---
 Name: Picture Property Storage Format
@@ -220,7 +220,7 @@ Inherited: False;
 ---
 Name: NavPane Width
 Type: dbLong
-Value: 279
+Value: 328
 Inherited: False;
 ---
 Name: NavPane View By
@@ -230,17 +230,7 @@ Inherited: False;
 ---
 Name: NavPane Sort By
 Type: dbLong
-Value: 0
-Inherited: False;
----
-Name: Track Name AutoCorrect Info
-Type: dbLong
-Value: 0
-Inherited: False;
----
-Name: Perform Name AutoCorrect
-Type: dbLong
-Value: 0
+Value: 1
 Inherited: False;
 ---
 Name: AppTitle
@@ -253,13 +243,13 @@ Type: dbText
 Value: .\adaept64.ico
 Inherited: False;
 ---
-Name: aeRibbonID
-Type: dbText
-Value: adaept
+Name: Track Name AutoCorrect Info
+Type: dbLong
+Value: 0
 Inherited: False;
 ---
-Name: Property Sheet Label Width
+Name: Perform Name AutoCorrect
 Type: dbLong
-Value: 2310
+Value: 0
 Inherited: False;
 ---
