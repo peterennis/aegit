@@ -174,6 +174,7 @@ Private Sub Class_Initialize()
     End With
 
     aeBeginLogging "Class_Initialize"
+    Application.SetOption "Show Hidden Objects", True
 
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         Dim dbs As DAO.Database
@@ -1084,22 +1085,22 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Next qdf
     If Not IsMissing(varDebug) Then Debug.Print , "Temp queries deleted"
 
-'    ' This will output each query specification to a file and convert UTF-16 to regular text
-'    For Each qdf In CurrentDb.QueryDefs
-'        strqdfName = qdf.Name
-'        If Not IsMissing(varDebug) Then Debug.Print , strqdfName
-'        If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
-'            Or Left$(strqdfName, 4) = "~TMP" _
-'            Or Left$(strqdfName, 3) = "zzz") Then
-'            i = i + 1
-'            Application.SaveAsText acQuery, strqdfName, strTheSourceLocation & strqdfName & ".qry"
-'            ' Convert UTF-16 to txt - fix for Access 2013+
-'            If aeReadWriteStream(strTheSourceLocation & strqdfName & ".qry") = True Then
-'                KillProperly (strTheSourceLocation & strqdfName & ".qry")
-'                Name strTheSourceLocation & strqdfName & ".qry" & ".clean.txt" As strTheSourceLocation & strqdfName & ".qry"
-'            End If
-'        End If
-'    Next qdf
+    ' This will output each query specification to a file and convert UTF-16 to regular text
+    For Each qdf In CurrentDb.QueryDefs
+        strqdfName = qdf.Name
+        If Not IsMissing(varDebug) Then Debug.Print , strqdfName
+        If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
+            Or Left$(strqdfName, 4) = "~TMP" _
+            Or Left$(strqdfName, 3) = "zzz") Then
+            i = i + 1
+            Application.SaveAsText acQuery, strqdfName, strTheSourceLocation & strqdfName & ".qry"
+            ' Convert UTF-16 to txt - fix for Access 2013+
+            If aeReadWriteStream(strTheSourceLocation & strqdfName & ".qry") = True Then
+                KillProperly (strTheSourceLocation & strqdfName & ".qry")
+                Name strTheSourceLocation & strqdfName & ".qry" & ".clean.txt" As strTheSourceLocation & strqdfName & ".qry"
+            End If
+        End If
+    Next qdf
 
     If Not IsMissing(varDebug) Then
         If i = 1 Then

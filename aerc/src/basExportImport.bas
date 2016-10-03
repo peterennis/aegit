@@ -13,21 +13,21 @@ Public Sub Test_aeProjectExport()
     Set MyVBAProject = VBE.ActiveVBProject
     On Error Resume Next
     aeAddReferenceVBIDE
-    'Stop
 
     Dim VBComp As Object
     Set VBComp = MyVBAProject.VBIDE.VBComponent
-    Dim strName As String
+    Dim strExportLocation As String
 
     Set MyVBAProject = VBE.ActiveVBProject
-    strName = CurrentProject.Path & "\Export"
-    Debug.Print "strName = " & strName
+    strExportLocation = CurrentProject.Path & "\Export"
+    Debug.Print "strExportLocation = " & strExportLocation
+
+    Application.SetOption "Show Hidden Objects", True
 
     For Each VBComp In MyVBAProject.VBComponents
-        ExportVBComponent VBComp, strName, VBComp.Name, True
+        ExportVBComponent VBComp, strExportLocation, VBComp.Name, True
     Next VBComp
 
-    strName = ""
     Set VBComp = Nothing
     Set MyVBAProject = Nothing
 
@@ -41,8 +41,15 @@ Private Sub aeAddReferenceVBIDE()
             Exit Sub
         End If
     Next
-    Application.VBE.VBProjects.VBE.ActiveVBProject.References.AddFromFile _
-        "C:\Program Files (x86)\Common Files\microsoft shared\VBA\VBA6\VBE6EXT.olb"
+    
+    If Application.VBE.Version = "6.00" Then
+        Application.VBE.VBProjects.VBE.ActiveVBProject.References.AddFromFile _
+            "C:\Program Files (x86)\Common Files\Microsoft Shared\VBA\VBA6\VBE6EXT.olb"
+    ElseIf Application.VBE.Version = "7.00" Then
+        Application.VBE.VBProjects.VBE.ActiveVBProject.References.AddFromFile _
+            "C:\Program Files (x86)\Common Files\Microsoft Shared\VBA\VBA7\VBE6EXT.olb"
+    End If
+
 End Sub
 
 Private Function AddLibrary(libName As String, GUID As String, major As Long, minor As Long)
