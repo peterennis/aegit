@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.9.9"
-Private Const aegit_expVERSION_DATE As String = "September 29, 2016"
+Private Const aegit_expVERSION_DATE As String = "October 3, 2016"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -4971,7 +4971,7 @@ PROC_ERR:
 End Sub
 
 Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbScript()
-    ' Remou - Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
+    ' Ref: http://stackoverflow.com/questions/698839/how-to-extract-the-schema-of-an-access-mdb-database/9910716#9910716
 
     Debug.Print "OutputTheSchemaFile"
     On Error GoTo PROC_ERR
@@ -5123,7 +5123,7 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                         Exit For
                     End If
                     'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
-                        
+                              
                     ''    strFlds = ", [" & fld.Name & "]"
                     ''    Debug.Print , strFlds
                     ''End If

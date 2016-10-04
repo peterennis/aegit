@@ -41,7 +41,7 @@ Option Explicit
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
 ' %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
-' %098 - tblDummy3 shows incorrect output for primary key; Use DescribeIndexField from Allan Browne; Relates to %099
+' %098 - tblDummy3 shows incorrect output for primary key; Use modified version of DescribeIndexField from Allan Browne; Relates to %099
 ' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
 ' %095 - Set minimum support to 2010 - Ref: http://stackoverflow.com/documentation/vba/3364/conditional-compilation/11558/using-declare-imports-that-work-on-all-versions-of-office#t=201607251720494878701, Rubberduck
 ' %094 - Comment out debug print statements when varDebug is not used

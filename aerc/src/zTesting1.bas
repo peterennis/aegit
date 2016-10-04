@@ -100,10 +100,6 @@ Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
     Debug.Print tdf.Name
 '    For Each fld In tdf.Fields
         strIndexFieldInfo = aeDescribeIndexField(tdf)
-        'Debug.Print strIndexFieldInfo(0, 0), strIndexFieldInfo(0, 1)
-        'Debug.Print strIndexFieldInfo(1, 0), strIndexFieldInfo(1, 1)
-        'Debug.Print strIndexFieldInfo(2, 0), strIndexFieldInfo(2, 1)
-        'Debug.Print strIndexFieldInfo(3, 0), strIndexFieldInfo(3, 1)
 '    Next
 
 End Function
@@ -219,36 +215,68 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
     '            String containing "P" if primary key, "U" if unique index, "I" if non-unique index.
     '            Lower case letters if secondary field in index. Can have multiple indexes.
     ' Arguments: tdf = the TableDef the field belongs to.
-    '            strField = name of the field to search the Indexes for.
 
     Dim idx As DAO.Index        ' Each index of this table
     Dim fld As DAO.Field        ' Each field of the index
     Dim iCount As Integer
     Dim iCountMax As Integer
     Dim iCountTotal As Integer
+    Dim arrTemp() As String
+    ReDim arrTemp(1, 0)         ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
     Dim arrReturn() As String   ' Return array
     ReDim arrReturn(1, 0)       ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
+    Dim i As Integer
+    Dim j As Integer
+    Dim jFirst As Integer
+    Dim jLast As Integer
+    Dim blnNextIndex As Boolean
 
+    jFirst = 0
+    iCountTotal = 0
     For Each idx In tdf.Indexes
-        iCount = 0
-        Debug.Print idx.Name
+        iCount = iCountTotal
+        Debug.Print ":", idx.Name
         For Each fld In idx.Fields
             If idx.Primary Then
-                arrReturn(0, iCount) = arrReturn(0, iCount) & IIf(iCount = 0, "P", "p")
-                arrReturn(1, iCount) = fld.Name
+                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "P", "p")
+                arrTemp(1, iCount) = fld.Name
             ElseIf idx.Unique Then
-                arrReturn(0, iCount) = arrReturn(0, iCount) & IIf(iCount = 0, "U", "u")
-                arrReturn(1, iCount) = fld.Name
+                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "U", "u")
+                arrTemp(1, iCount) = fld.Name
             Else
-                arrReturn(0, iCount) = arrReturn(0, iCount) & IIf(iCount = 0, "I", "i")
-                arrReturn(1, iCount) = fld.Name
+                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "I", "i")
+                arrTemp(1, iCount) = fld.Name
             End If
             iCount = iCount + 1
             iCountMax = iCount
-            ReDim Preserve arrReturn(1, iCount)
+            ReDim Preserve arrTemp(1, iCount)
         Next
         Debug.Print "> ", "iCountMax = " & iCountMax
+        jLast = iCountMax - 1
         iCountTotal = iCountTotal + iCountMax
+        Debug.Print "> ", "iCountTotal = " & iCountTotal
+        ReDim Preserve arrReturn(1, iCountTotal)
+        ReDim Preserve arrTemp(1, iCountTotal)
+
+        If blnNextIndex Then
+            Debug.Print "blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMax = " & iCountMax, "iCountTotal = " & iCountTotal
+            jFirst = iCountTotal - iCountMax
+            jLast = jFirst + iCountMax - 1
+            blnNextIndex = False
+            Debug.Print "blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMax = " & iCountMax, "iCountTotal = " & iCountTotal
+            'Stop
+        End If
+        For i = 0 To 1
+            For j = jFirst To jLast
+                'Debug.Print i, j, jFirst,
+                arrReturn(i, j) = arrTemp(i, j)
+                Debug.Print arrReturn(i, j),
+            Next
+            Debug.Print
+        Next
+        j = 0
+        jFirst = iCountTotal - 1
+        blnNextIndex = True
     Next
     Debug.Print ">> ", "iCountTotal = " & iCountTotal
     aeDescribeIndexField = arrReturn()
