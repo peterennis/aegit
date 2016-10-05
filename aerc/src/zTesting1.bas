@@ -1,108 +1,204 @@
 Option Compare Database
 Option Explicit
 
-Public Function Test_IsSingleIndexField() As Boolean
+Public Sub Test_aeDescribeIndexField()
 
     Dim dbs As DAO.Database
     Dim tdf As DAO.TableDef
     Set dbs = CurrentDb
-    Dim FieldCountRes As Integer
-
-    Set tdf = dbs.TableDefs("tblDummy3")
-'    Debug.Print tdf.Name
-    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
-
-End Function
-
-Private Function IsSingleIndexField(ByVal tdf As DAO.TableDef, ByRef FieldCountResult As Integer) As Boolean
-
-    Dim strIndexInfo As String
-    strIndexInfo = SingleTableIndexSummary(tdf)
-    Debug.Print strIndexInfo
-    FieldCountResult = LCaseCountChar("I", strIndexInfo)
-    If FieldCountResult = 1 Then
-        IsSingleIndexField = True
-        Debug.Print , "Single Field Index", "IsSingleIndexField is " & IsSingleIndexField
-    ElseIf FieldCountResult > 1 Then
-        IsSingleIndexField = False
-        Debug.Print , "Multi Field Index", "IsSingleIndexField is " & IsSingleIndexField
-    ElseIf FieldCountResult = 0 Then
-        IsSingleIndexField = False
-        Debug.Print , "No Index", "IsSingleIndexField is " & IsSingleIndexField
-    End If
-
-End Function
-
-Public Function Test_IsSinglePrimaryField() As Boolean
-
-    Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDef
-    Set dbs = CurrentDb
-    Dim IndexPrimaryFieldCount As Integer
-
-    Set tdf = dbs.TableDefs("aeItems")
-    Debug.Print tdf.Name
-    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
-
-    Set tdf = dbs.TableDefs("tblDummy2")
-    Debug.Print tdf.Name
-    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
+    'Dim FieldCountRes As Integer
 
     Set tdf = dbs.TableDefs("tblDummy3")
     Debug.Print tdf.Name
-    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
 
-End Function
+    Dim arrIndexFieldInfo As Variant
+    arrIndexFieldInfo = aeDescribeIndexField(tdf)
+    Debug.Print ">" & arrIndexFieldInfo(0, 3) & "<", ">" & arrIndexFieldInfo(1, 3) & "<"
+    Debug.Print "LBound: " & CStr(LBound(arrIndexFieldInfo)), _
+        "UBound: " & CStr(UBound(arrIndexFieldInfo)), _
+        "NumElements: " & CStr(UBound(arrIndexFieldInfo) - LBound(arrIndexFieldInfo) + 1)
 
-Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByRef PrimaryIndexFieldCount As Integer) As Boolean
+'    Dim strIndexInfo() As String
+'    strIndexInfo = SingleTableIndexSummary(tdf)
+'    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
 
-    Dim strIndexInfo As String
-    strIndexInfo = SingleTableIndexSummary(tdf)
-    PrimaryIndexFieldCount = LCaseCountChar("P", strIndexInfo)
-    If PrimaryIndexFieldCount = 1 Then
-        IsSinglePrimaryField = True
-        'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
-    ElseIf PrimaryIndexFieldCount > 1 Then
-        IsSinglePrimaryField = False
-        Debug.Print , strIndexInfo, "Multi Field Primary Key"
-    ElseIf PrimaryIndexFieldCount = 0 Then
-        IsSinglePrimaryField = False
-        'Debug.Print , strIndexInfo, "No Primary Key"
-    End If
+End Sub
 
-End Function
+Private Function aeDescribeIndexField(tdf As DAO.TableDef) As Variant
+    ' Based on work from allenbrowne.com
+    ' Purpose:   Get details of all indexes in a table.
+    ' Return:    Array of descriptors and field names.
+    '            String containing "P" if primary key, "U" if unique index, "I" if non-unique index.
+    '            Lower case letters if secondary field in index. Can have multiple indexes.
+    ' Arguments: tdf = the TableDef the field belongs to.
 
-Public Function AllTablesIndexSummary() As Boolean
+    Dim idx As DAO.Index        ' Each index of this table
+    Dim fld As DAO.Field        ' Each field of the index
+    Dim iCount As Integer
+    Dim iCountMax As Integer
+    Dim iCountMaxMem As Integer
+    Dim iCountTotal As Integer
+    Dim arrTemp() As String
+    ReDim arrTemp(1, 0)         ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
+    Dim arrReturn() As String   ' Return array
+    ReDim arrReturn(1, 0)       ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
+    Dim i As Integer
+    Dim j As Integer
+    Dim jFirst As Integer
+    Dim jLast As Integer
+    Dim blnNextIndex As Boolean
 
-    Dim dbs As DAO.Database
-    Dim tdf As DAO.TableDef
-    Dim strTableIndexInfo As String
-    strTableIndexInfo = vbNullString
-    Set dbs = CurrentDb
-    For Each tdf In dbs.TableDefs
-        ' Ignore system and temporary tables
-        If Not (tdf.Name Like "MSys*" Or tdf.Name Like "~*") Then
-            strTableIndexInfo = SingleTableIndexSummary(tdf)
-            Debug.Print tdf.Name, strTableIndexInfo
+    jFirst = 0
+    iCountTotal = 0
+    blnNextIndex = False
+
+    For Each idx In tdf.Indexes
+        Debug.Print ">> ", idx.Name
+        iCount = iCountTotal
+        iCountMax = 0
+        For Each fld In idx.Fields
+            If idx.Primary Then
+                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "P", "p")
+                arrTemp(1, iCount) = fld.Name
+            ElseIf idx.Unique Then
+                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "U", "u")
+                arrTemp(1, iCount) = fld.Name
+            Else
+                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "I", "i")
+                arrTemp(1, iCount) = fld.Name
+            End If
+            iCount = iCount + 1
+            iCountMax = iCount
+            ReDim Preserve arrTemp(1, iCount)
+        Next
+        iCountMaxMem = iCountMax
+'''        Debug.Print "> ", "iCountMax = " & iCountMax, "iCount = " & iCount, "iCountTotal = " & iCountTotal, "jFirst = " & jFirst
+        iCountMax = 0
+
+        If blnNextIndex Then
+            Debug.Print "> ", "iCountMaxMem = " & iCountMaxMem
+            jFirst = iCountTotal
+            jLast = iCountTotal + iCountMax
+'''            blnNextIndex = False
+            Debug.Print "A: blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxMem = " & iCountMaxMem, "iCountTotal = " & iCountTotal
+            iCountMaxMem = 0
+            'Stop
+        Else
+            Debug.Print "> ", "iCountMaxMem = " & iCountMaxMem
+            iCountTotal = iCountTotal + iCountMaxMem
+            ReDim Preserve arrReturn(1, iCountTotal)
+            ReDim Preserve arrTemp(1, iCountTotal)
+            jFirst = 0
+            jLast = iCountMaxMem - 1
+            Debug.Print "B: blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxMem = " & iCountMaxMem, "iCountTotal = " & iCountTotal
+            iCountMaxMem = 0
         End If
+
+        For i = 0 To 1
+            For j = jFirst To jLast
+                Debug.Print i, j, jFirst,
+                arrReturn(i, j) = arrTemp(i, j)
+                Debug.Print arrReturn(i, j),
+            Next
+            Debug.Print
+        Next
+        blnNextIndex = True
     Next
-    Set tdf = Nothing
-    Set dbs = Nothing
-
+    Debug.Print ": ", "iCountTotal = " & iCountTotal
+    ReDim Preserve arrReturn(1, iCountTotal)
+    aeDescribeIndexField = arrReturn()
 End Function
 
-Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String
+'Private Function IsSingleIndexField(ByVal tdf As DAO.TableDef, ByVal strFieldName As String) As Boolean
+'
+'    Dim strIndexInfo() As String
+'    strIndexInfo = SingleTableIndexSummary(tdf)
+'    'Debug.Print strIndexInfo
+''    FieldCountResult = LCaseCountChar("I", strIndexInfo)
+''    If FieldCountResult = 1 Then
+''        IsSingleIndexField = True
+''        Debug.Print , "Single Field Index", "IsSingleIndexField is " & IsSingleIndexField
+''    ElseIf FieldCountResult > 1 Then
+''        IsSingleIndexField = False
+''        Debug.Print , "Multi Field Index", "IsSingleIndexField is " & IsSingleIndexField
+''    ElseIf FieldCountResult = 0 Then
+''        IsSingleIndexField = False
+''        Debug.Print , "No Index", "IsSingleIndexField is " & IsSingleIndexField
+''    End If
+'
+'End Function
 
-    Dim strIndexFieldInfo As Variant
-    Dim fld As DAO.Field
+'Public Function Test_IsSinglePrimaryField() As Boolean
+'
+'    Dim dbs As DAO.Database
+'    Dim tdf As DAO.TableDef
+'    Set dbs = CurrentDb
+'    Dim IndexPrimaryFieldCount As Integer
+'
+'    Set tdf = dbs.TableDefs("aeItems")
+'    Debug.Print tdf.Name
+'    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
+'
+'    Set tdf = dbs.TableDefs("tblDummy2")
+'    Debug.Print tdf.Name
+'    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
+'
+'    Set tdf = dbs.TableDefs("tblDummy3")
+'    Debug.Print tdf.Name
+'    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
+'
+'End Function
 
-    'On Error Resume Next
-    Debug.Print tdf.Name
-'    For Each fld In tdf.Fields
-        strIndexFieldInfo = aeDescribeIndexField(tdf)
+'Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByVal strFieldName As String) As Boolean
+'
+'    Dim strIndexInfo() As String
+'    strIndexInfo = SingleTableIndexSummary(tdf)
+'
+'    PrimaryIndexFieldCount = LCaseCountChar("P", strIndexInfo)
+'    If PrimaryIndexFieldCount = 1 Then
+'        IsSinglePrimaryField = True
+'        'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
+'    ElseIf PrimaryIndexFieldCount > 1 Then
+'        IsSinglePrimaryField = False
+'        Debug.Print , strIndexInfo, "Multi Field Primary Key"
+'    ElseIf PrimaryIndexFieldCount = 0 Then
+'        IsSinglePrimaryField = False
+'        'Debug.Print , strIndexInfo, "No Primary Key"
+'    End If
+'
+'End Function
+
+'Public Function AllTablesIndexSummary() As Boolean
+'
+'    Dim dbs As DAO.Database
+'    Dim tdf As DAO.TableDef
+'    Dim strTableIndexInfo As String
+'    strTableIndexInfo = vbNullString
+'    Set dbs = CurrentDb
+'    For Each tdf In dbs.TableDefs
+'        ' Ignore system and temporary tables
+'        If Not (tdf.Name Like "MSys*" Or tdf.Name Like "~*") Then
+'            strTableIndexInfo = SingleTableIndexSummary(tdf)
+'            Debug.Print tdf.Name, strTableIndexInfo
+'        End If
 '    Next
+'    Set tdf = Nothing
+'    Set dbs = Nothing
+'
+'End Function
 
-End Function
+'Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String()
+'
+'    Dim strIndexFieldInfo() As String
+'    'Dim fld As DAO.Field
+'
+'    'On Error Resume Next
+'    'Debug.Print tdf.Name
+''    For Each fld In tdf.Fields
+'        strIndexFieldInfo = aeDescribeIndexField(tdf)
+''    Next
+'
+'End Function
 
 Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
     Dim i As Long
@@ -206,80 +302,6 @@ Public Function GetIndexDetails(tdf As DAO.TableDef, strField As String) As Stri
     Next
     GetIndexDetails = strReturn
 
-End Function
-
-Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
-    ' Based on work from allenbrowne.com
-    ' Purpose:   Get details of all indexes in a table.
-    ' Return:    Array of descriptors and field names.
-    '            String containing "P" if primary key, "U" if unique index, "I" if non-unique index.
-    '            Lower case letters if secondary field in index. Can have multiple indexes.
-    ' Arguments: tdf = the TableDef the field belongs to.
-
-    Dim idx As DAO.Index        ' Each index of this table
-    Dim fld As DAO.Field        ' Each field of the index
-    Dim iCount As Integer
-    Dim iCountMax As Integer
-    Dim iCountTotal As Integer
-    Dim arrTemp() As String
-    ReDim arrTemp(1, 0)         ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
-    Dim arrReturn() As String   ' Return array
-    ReDim arrReturn(1, 0)       ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
-    Dim i As Integer
-    Dim j As Integer
-    Dim jFirst As Integer
-    Dim jLast As Integer
-    Dim blnNextIndex As Boolean
-
-    jFirst = 0
-    iCountTotal = 0
-    For Each idx In tdf.Indexes
-        iCount = iCountTotal
-        Debug.Print ":", idx.Name
-        For Each fld In idx.Fields
-            If idx.Primary Then
-                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "P", "p")
-                arrTemp(1, iCount) = fld.Name
-            ElseIf idx.Unique Then
-                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "U", "u")
-                arrTemp(1, iCount) = fld.Name
-            Else
-                arrTemp(0, iCount) = arrTemp(0, iCount) & IIf(iCount = iCountTotal, "I", "i")
-                arrTemp(1, iCount) = fld.Name
-            End If
-            iCount = iCount + 1
-            iCountMax = iCount
-            ReDim Preserve arrTemp(1, iCount)
-        Next
-        Debug.Print "> ", "iCountMax = " & iCountMax
-        jLast = iCountMax - 1
-        iCountTotal = iCountTotal + iCountMax
-        Debug.Print "> ", "iCountTotal = " & iCountTotal
-        ReDim Preserve arrReturn(1, iCountTotal)
-        ReDim Preserve arrTemp(1, iCountTotal)
-
-        If blnNextIndex Then
-            Debug.Print "blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMax = " & iCountMax, "iCountTotal = " & iCountTotal
-            jFirst = iCountTotal - iCountMax
-            jLast = jFirst + iCountMax - 1
-            blnNextIndex = False
-            Debug.Print "blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMax = " & iCountMax, "iCountTotal = " & iCountTotal
-            'Stop
-        End If
-        For i = 0 To 1
-            For j = jFirst To jLast
-                'Debug.Print i, j, jFirst,
-                arrReturn(i, j) = arrTemp(i, j)
-                Debug.Print arrReturn(i, j),
-            Next
-            Debug.Print
-        Next
-        j = 0
-        jFirst = iCountTotal - 1
-        blnNextIndex = True
-    Next
-    Debug.Print ">> ", "iCountTotal = " & iCountTotal
-    aeDescribeIndexField = arrReturn()
 End Function
 
 Public Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
