@@ -1,6 +1,40 @@
 Option Compare Database
 Option Explicit
 
+Public Sub Setup_Test_aeDescribeIndexField()
+
+    Dim arrTest() As String
+    ReDim arrTest(1, 0)
+    Dim blnTest As Boolean
+    Dim strField As String
+    Dim strTestName As String
+
+    ' Using tblDummy fields as test example
+    strTestName = "T1:"
+    arrTest(0, 0) = "P"
+    strField = "eventId"
+    arrTest(1, 0) = strField
+    blnTest = IsSinglePrimaryField(arrTest, strField)
+    Debug.Print strTestName
+    ShowTestArray arrTest
+    If blnTest Then
+        Debug.Print , strTestName & " " & strField & " Is a Single Primary Field"
+    Else
+        Debug.Print , strTestName & " " & strField & " Is NOT a Single Primary Field"
+    End If
+    
+End Sub
+
+Private Sub ShowTestArray(arr() As String)
+    Debug.Print , "LBound: " & CStr(LBound(arr, 2)), _
+        "UBound: " & CStr(UBound(arr, 2)), _
+        "NumElements: " & CStr(UBound(arr, 2) - LBound(arr, 2) + 1)
+    Dim i As Integer
+    For i = LBound(arr, 2) To UBound(arr, 2)
+        Debug.Print , arr(0, i), arr(1, i)
+    Next
+End Sub
+
 Public Sub Test_aeDescribeIndexField()
 
     Dim dbs As DAO.Database
@@ -17,10 +51,6 @@ Public Sub Test_aeDescribeIndexField()
     Debug.Print "LBound: " & CStr(LBound(arrIndexFieldInfo)), _
         "UBound: " & CStr(UBound(arrIndexFieldInfo)), _
         "NumElements: " & CStr(UBound(arrIndexFieldInfo) - LBound(arrIndexFieldInfo) + 1)
-
-'    Dim strIndexInfo() As String
-'    strIndexInfo = SingleTableIndexSummary(tdf)
-'    Debug.Print , IsSingleIndexField(tdf, FieldCountRes), FieldCountRes
 
 End Sub
 
@@ -109,96 +139,13 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As Variant
     aeDescribeIndexField = arrReturn()
 End Function
 
-'Private Function IsSingleIndexField(ByVal tdf As DAO.TableDef, ByVal strFieldName As String) As Boolean
-'
-'    Dim strIndexInfo() As String
-'    strIndexInfo = SingleTableIndexSummary(tdf)
-'    'Debug.Print strIndexInfo
-''    FieldCountResult = LCaseCountChar("I", strIndexInfo)
-''    If FieldCountResult = 1 Then
-''        IsSingleIndexField = True
-''        Debug.Print , "Single Field Index", "IsSingleIndexField is " & IsSingleIndexField
-''    ElseIf FieldCountResult > 1 Then
-''        IsSingleIndexField = False
-''        Debug.Print , "Multi Field Index", "IsSingleIndexField is " & IsSingleIndexField
-''    ElseIf FieldCountResult = 0 Then
-''        IsSingleIndexField = False
-''        Debug.Print , "No Index", "IsSingleIndexField is " & IsSingleIndexField
-''    End If
-'
-'End Function
+Private Function IsSingleIndexField(arr() As String, ByVal strFieldName As String) As Boolean
+    Debug.Print "ADD TEST CODE FOR IsSingleIndexField"
+End Function
 
-'Public Function Test_IsSinglePrimaryField() As Boolean
-'
-'    Dim dbs As DAO.Database
-'    Dim tdf As DAO.TableDef
-'    Set dbs = CurrentDb
-'    Dim IndexPrimaryFieldCount As Integer
-'
-'    Set tdf = dbs.TableDefs("aeItems")
-'    Debug.Print tdf.Name
-'    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
-'
-'    Set tdf = dbs.TableDefs("tblDummy2")
-'    Debug.Print tdf.Name
-'    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
-'
-'    Set tdf = dbs.TableDefs("tblDummy3")
-'    Debug.Print tdf.Name
-'    Debug.Print , IsSinglePrimaryField(tdf, IndexPrimaryFieldCount), IndexPrimaryFieldCount
-'
-'End Function
-
-'Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByVal strFieldName As String) As Boolean
-'
-'    Dim strIndexInfo() As String
-'    strIndexInfo = SingleTableIndexSummary(tdf)
-'
-'    PrimaryIndexFieldCount = LCaseCountChar("P", strIndexInfo)
-'    If PrimaryIndexFieldCount = 1 Then
-'        IsSinglePrimaryField = True
-'        'Debug.Print , strIndexInfo, "Single Field Primary Key", IsSinglePrimaryField
-'    ElseIf PrimaryIndexFieldCount > 1 Then
-'        IsSinglePrimaryField = False
-'        Debug.Print , strIndexInfo, "Multi Field Primary Key"
-'    ElseIf PrimaryIndexFieldCount = 0 Then
-'        IsSinglePrimaryField = False
-'        'Debug.Print , strIndexInfo, "No Primary Key"
-'    End If
-'
-'End Function
-
-'Public Function AllTablesIndexSummary() As Boolean
-'
-'    Dim dbs As DAO.Database
-'    Dim tdf As DAO.TableDef
-'    Dim strTableIndexInfo As String
-'    strTableIndexInfo = vbNullString
-'    Set dbs = CurrentDb
-'    For Each tdf In dbs.TableDefs
-'        ' Ignore system and temporary tables
-'        If Not (tdf.Name Like "MSys*" Or tdf.Name Like "~*") Then
-'            strTableIndexInfo = SingleTableIndexSummary(tdf)
-'            Debug.Print tdf.Name, strTableIndexInfo
-'        End If
-'    Next
-'    Set tdf = Nothing
-'    Set dbs = Nothing
-'
-'End Function
-
-'Private Function SingleTableIndexSummary(ByVal tdf As DAO.TableDef) As String()
-'
-'    Dim strIndexFieldInfo() As String
-'    'Dim fld As DAO.Field
-'
-'    'On Error Resume Next
-'    'Debug.Print tdf.Name
-''    For Each fld In tdf.Fields
-'        strIndexFieldInfo = aeDescribeIndexField(tdf)
-''    Next
-'
-'End Function
+Private Function IsSinglePrimaryField(arr() As String, ByVal strFieldName As String) As Boolean
+    Debug.Print "ADD TEST CODE FOR IsSinglePrimaryField"
+End Function
 
 Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long
     Dim i As Long
@@ -305,12 +252,12 @@ Public Function GetIndexDetails(tdf As DAO.TableDef, strField As String) As Stri
 End Function
 
 Public Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As String
-' allenbrowne.com
-'Purpose:   Indicate if the field is part of a primary key or unique index.
-'Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
-'           Lower case letters if secondary field in index. Can have multiple indexes.
-'Arguments: tdf = the TableDef the field belongs to.
-'           strField = name of the field to search the Indexes for.
+    ' allenbrowne.com
+    ' Purpose:   Indicate if the field is part of a primary key or unique index.
+    ' Return:    String containing "P" if primary key, "U" if uniuqe index, "I" if non-unique index.
+    '           Lower case letters if secondary field in index. Can have multiple indexes.
+    ' Arguments: tdf = the TableDef the field belongs to.
+    '           strField = name of the field to search the Indexes for.
     Dim ind As DAO.Index        'Each index of this table.
     Dim fld As DAO.Field        'Each field of the index
     Dim iCount As Integer
@@ -334,9 +281,8 @@ Public Function DescribeIndexField(tdf As DAO.TableDef, strField As String) As S
     DescribeIndexField = strReturn
 End Function
 
-'zzzTmpTblQueries
 Public Function RecordsetUpdatable(ByVal strSQL As String) As Boolean
-' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/ff193796(v=office.15).aspx
 
     Dim dbs As DAO.Database
     Dim rst As DAO.Recordset
@@ -396,8 +342,8 @@ Public Sub TestRegKey()
 End Sub
 
 Public Function RegKeyExists(ByVal strRegKey As String) As Boolean
-' Return True if the registry key i_RegKey was found and False if not
-' Ref: http://vba-corner.livejournal.com/3054.html
+    ' Return True if the registry key i_RegKey was found and False if not
+    ' Ref: http://vba-corner.livejournal.com/3054.html
 
     On Error GoTo ErrorHandler
 
@@ -417,7 +363,7 @@ ErrorHandler:
 End Function
 
 Public Function WUAversion() As String
-' Get current WUA version
+    ' Get current WUA version
     Dim objAgentInfo As Object
     On Error Resume Next
     Err.Clear
@@ -434,13 +380,13 @@ Public Function WUAversion() As String
 End Function
 
 Private Function zzzLongestTableName() As Integer
-' ====================================================================
-' Author:   Peter F. Ennis
-' Date:     November 30, 2012
-' Comment:  Return the length of the longest table name
-' Updated:  All notes moved to change log
-' History:  See comment details, basChangeLog, commit messages on github
-' ====================================================================
+    ' ====================================================================
+    ' Author:   Peter F. Ennis
+    ' Date:     November 30, 2012
+    ' Comment:  Return the length of the longest table name
+    ' Updated:  All notes moved to change log
+    ' History:  See comment details, basChangeLog, commit messages on github
+    ' ====================================================================
 
     Dim tdf As DAO.TableDef
     Dim intTNLen As Integer
