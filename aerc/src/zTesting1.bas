@@ -40,7 +40,8 @@ Public Sub Test_aeDescribeIndexField()
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
-    Set tdf = dbs.TableDefs("tblDummy3")
+    Set tdf = dbs.TableDefs("tblDummy3")       ' List of test tables:
+                                                            ' tblDummy3, Sheet1_DS1_DEMOG, dbo_rights, dbo_studentAttendances
 
     Dim i As Integer
 
@@ -72,6 +73,7 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
     Dim iCountMaxFirst As Integer
     Dim iCountIndex As Integer
     Dim iCountIndexFields As Integer
+    Dim iArray As Integer
     Dim arrTemp() As String
     Dim arrReturn() As String   ' Return array
     Dim i As Integer
@@ -80,7 +82,7 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
     Dim jLast As Integer
     Dim blnNextIndex As Boolean
 
-    ' ReDim the array(s)? size for all fields
+    ' ReDim the arrays size for all fields
     ' Ref: http://stackoverflow.com/questions/13183775/excel-vba-how-to-redim-a-2d-array
     iCountIndexFields = 0
     For Each idx In tdf.Indexes
@@ -95,73 +97,44 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
     jFirst = 0
     jLast = 0
     iCountIndex = 0
+    iArray = 0
     blnNextIndex = False
 
     For Each idx In tdf.Indexes
         iCount = 0
+        arrTemp(0, iCount + jFirst) = vbNullString
+        arrTemp(1, iCount + jFirst) = vbNullString
         For Each fld In idx.Fields
             If idx.Primary Then
-                arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(jFirst = iCountMaxFirst, "P", "p")
+                arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(iCount = 0, "P", "p")
                 arrTemp(1, iCount + jFirst) = fld.Name
             ElseIf idx.Unique Then
-                arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(jFirst = iCountMaxFirst, "U", "u")
+                arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(iCount = 0, "U", "u")
                 arrTemp(1, iCount + jFirst) = fld.Name
             Else
-                arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(jFirst = iCountMaxFirst, "I", "i")
+                arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(iCount = 0, "I", "i")
                 arrTemp(1, iCount + jFirst) = fld.Name
             End If
             If iCount = 0 Then iCountMaxFirst = iCountMaxFirst + iCountMaxMem
             iCount = iCount + 1
             iCountMaxMem = iCount
-            Debug.Print "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "iCount = " & iCount, "jLast = " & jLast, fld.Name, arrTemp(0, iCount - 1 + jFirst), arrTemp(1, iCount - 1 + jFirst)
+            Debug.Print "iArray = " & iArray, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "iCount = " & iCount, "jLast = " & jLast, idx.Name, arrTemp(0, iCount - 1 + jFirst), arrTemp(1, iCount - 1 + jFirst)
+            arrReturn(0, iArray) = arrTemp(0, iCount - 1 + jFirst)
+            arrReturn(1, iArray) = arrTemp(1, iCount - 1 + jFirst)
+            iArray = iArray + 1
+            arrTemp(0, iCount - 1 + jFirst) = vbNullString
+            arrTemp(1, iCount - 1 + jFirst) = vbNullString
         Next
 
-        If blnNextIndex Then
-            jFirst = iCountMaxFirst
-            jLast = jFirst + iCountMaxMem - 1
-            Debug.Print "INDEX: " & idx.Name, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxFirst = " & iCountMaxFirst, "iCountMaxMem = " & iCountMaxMem
-        Else
-            Debug.Print "INDEX: " & idx.Name, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxFirst = " & iCountMaxFirst, "iCountMaxMem = " & iCountMaxMem
-            blnNextIndex = True
-        End If
+        jFirst = iCountMaxFirst
+        jLast = jFirst + iCountMaxMem - 1
+        'Debug.Print "INDEX: " & idx.Name, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxFirst = " & iCountMaxFirst, "iCountMaxMem = " & iCountMaxMem
         iCountIndex = iCountIndex + 1
-        'Debug.Print
-
-'        If blnNextIndex Then
-'            Debug.Print "A> ", "iCountMaxFirst = " & iCountMaxFirst, "iCountMax = " & iCountMax
-'            jFirst = iCountMaxFirst
-'            jLast = iCountMaxFirst + (iCountMax - 1)
-'            Debug.Print "A=> " & jFirst, jLast
-'            ReDim Preserve arrReturn(1, jLast)
-'            Debug.Print "A==> blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxFirst = " & iCountMaxFirst, "iCountTotal = " & iCountTotal
-'            'Stop
-'        Else
-'            iCountMaxFirst = iCountMaxFirst + iCountMax
-'            Debug.Print "B> ", "iCountMaxFirst = " & iCountMaxFirst, "iCountMax = " & iCountMax
-'            iCountTotal = iCountTotal + iCountMaxFirst
-'            jFirst = 0
-'            jLast = iCountMaxFirst - 1
-'            Debug.Print "B=> " & jFirst, jLast
-'            ReDim Preserve arrReturn(1, iCountMax)
-'            Debug.Print "B==> blnNextIndex = " & blnNextIndex, "jFirst = " & jFirst, "jLast = " & jLast, "iCountMaxFirst = " & iCountMaxFirst, "iCountTotal = " & iCountTotal
-'        End If
-
-'        For i = 0 To 1
-'            For j = jFirst To jLast
-'                Debug.Print i, j, jFirst,
-'                arrReturn(i, j) = arrTemp(i, j)
-'                Debug.Print arrReturn(i, j),
-'            Next
-'            Debug.Print
-'        Next
-'''        blnNextIndex = True
-'''        iCountMax = 0
-'''        iCountMaxFirst = jLast + 1
     Next
 
 '        For i = 0 To 1
             For j = 0 To iCountIndexFields - 1
-                Debug.Print i, j, arrTemp(0, j), arrTemp(1, j)
+                Debug.Print i, j, arrReturn(0, j), arrReturn(1, j)
             Next
 '        Next
 

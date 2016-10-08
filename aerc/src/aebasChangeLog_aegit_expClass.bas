@@ -8,6 +8,7 @@ Option Explicit
 ' IDBE RibbonCreator 2016 (Office 2016) - Ref: http://www.ribboncreator2016.de/en/?Download
 ' V-Tools - Ref: http://www.skrol29.com/us/vtools.php
 ' Bill Mosca - Ref: http://www.thatlldoit.com/Pages/utilsaddins.aspx
+' Rubberduck - https://github.com/rubberduck-vba/Rubberduck
 
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
@@ -35,24 +36,17 @@ Option Explicit
 ' %114 -
 ' %113 -
 ' %112 -
-' %111 -
-' %110 -
-' %109 - Schema export error for primary and index when field order changed in tables. Need to remember the field names and pass to create db schema.
+' %110 - aeDescribeIndexField should also return the index name - this is useful also for ODBC linked SQL Server tables
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
-' %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
-' %098 - tblDummy3 shows incorrect output for primary key; Use modified version of DescribeIndexField from Allan Browne; Relates to %099
 ' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
 ' %095 - Set minimum support to 2010 - Ref: http://stackoverflow.com/documentation/vba/3364/conditional-compilation/11558/using-declare-imports-that-work-on-all-versions-of-office#t=201607251720494878701, Rubberduck
-' %094 - Comment out debug print statements when varDebug is not used
 ' %093 - Create a results folder to hold test output and configure the test system to use it
-' %090 - Consider using build number
 ' %089 - Add timing and test ouptut to a file; identify PC, OS, Office
 ' %087 - Allow setup options to be loaded from a file. Consider yaml, json, other
 ' %086 - Improve debug ouput, provide trace levels and logging to file. Ref: http://pixcels.nl/debug-and-trace-in-vba/
 ' %085 - Automation goal - Ref: https://github.com/blog/1271-how-we-ship-github-for-windows
 ' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
-' %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
 ' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
 ' %071 - Add varDebug for schema output debugging
 ' %070 - Create multi field index sample then fix access and lf schema output; tblDummy3 is test case, Relates to %080, %098
@@ -72,6 +66,14 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20161007 - v199 -
+    ' FIXED - %111 - dbo_studentAttendances index studentId:date shows Iii instead of Ii
+    ' FIXED - %109 - Schema export error for primary and index when field order changed in tables. Need to remember the field names and pass to create db schema. Access will sort alphabetically by index name.
+    ' FIXED - %099 - Multi field index statement, Ref: https://msdn.microsoft.com/en-us/library/office/ff823109(v=office.15).aspx
+    ' FIXED - %098 - tblDummy3 shows incorrect output for primary key; Use modified version of DescribeIndexField from Allan Browne; Relates to %099
+    ' FIXED - %094 - Comment out debug print statements when varDebug is not used
+    ' WONTFIX - %090 - Consider using build number
+    ' FIXED - (Rubberduck) %083 - Access closing down and restarting, Ref: http://answers.microsoft.com/en-us/office/forum/office_2010-access/access-wont-shut-downkeeps-restarting/b8295bca-bfc8-4b59-8747-a609f3ba466b?auth=1
 '20160925 - v199 -
     ' FIXED - %108 - Relates to %105, Create function to check for linked ODBC tables
     ' FIXED - %107 - Relates to %108, Export spinning after third KillAllFiles, investigate and resolve - related to ODBC linked tables

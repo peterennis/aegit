@@ -239,6 +239,18 @@ Field                Text                  255
 String               Text                  255                
 Indexer              Text                  255                
 id                   AutoNumber            4                  
+Permanent_ID         Text                  255                
+State_ID             Text                  50                 
+LastName             Text                  255                
+FirstName            Text                  255                
+MiddleName           Text                  255                
+Address1             Text                  255                
+Address2             Text                  255                
+City                 Text                  255                
+State                Text                  255                
+ZIP                  Text                  50                 
+HomePhone            Text                  255                
+EthnicityCode        Text                  255                
 
 
 ------------------
