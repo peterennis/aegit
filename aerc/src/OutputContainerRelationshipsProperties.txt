@@ -1,5 +1,5 @@
->>>CountryCity
-              Name          CountryCity
+>>>{36303D70-828A-4503-83EE-4890C93A3B32}
+              Name          {36303D70-828A-4503-83EE-4890C93A3B32}
               Owner         admin
               UserName      admin
               Permissions    1048575 
@@ -7,8 +7,8 @@
               Container     Relationships
               DateCreated   DateCreated
               LastUpdated   LastUpdated
->>>CountryProvince
-              Name          CountryProvince
+>>>{3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}
+              Name          {3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}
               Owner         admin
               UserName      admin
               Permissions    1048575 

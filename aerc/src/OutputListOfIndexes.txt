@@ -45,9 +45,9 @@
 >[StateName]  [StateName], 
 ========================================
 <<<[City]>>>
-              Index:[CountryCity]
+              Index:[{3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}]
                             Field Name:Country
->[CountryCity]              [Country], 
+>[{3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}] [Country], 
               Index:[id]
                             Field Name:id
 >[id]         [id], 
@@ -61,12 +61,12 @@
 >[CountryKey] [Capital], 
 ========================================
 <<<[Province]>>>
+              Index:[{36303D70-828A-4503-83EE-4890C93A3B32}]
+                            Field Name:Country
+>[{36303D70-828A-4503-83EE-4890C93A3B32}] [Country], 
               Index:[CapProv]
                             Field Name:CapProv
 >[CapProv]    [CapProv], 
-              Index:[CountryProvince]
-                            Field Name:Country
->[CountryProvince]          [Country], 
               Index:[id]
                             Field Name:id
 >[id]         [id], 
@@ -92,16 +92,43 @@
 >[Num]        [Num], 
 ========================================
 <<<[tblDummy3]>>>
+              Index:[aDateFruit]
+                            Field Name:student
+                            Field Name:date
+>[aDateFruit] [date], 
+              Index:[aDateNight]
+                            Field Name:activity
+                            Field Name:date
+>[aDateNight] [date], 
+              Index:[date]
+                            Field Name:date
+>[date]       [date], 
+              Index:[EthnicityCode]
+                            Field Name:EthnicityCode
+>[EthnicityCode]            [EthnicityCode], 
               Index:[eventId]
                             Field Name:eventId
                             Field Name:eventPerson
 >[eventId]    [eventPerson], 
+              Index:[id]
+                            Field Name:id
+>[id]         [id], 
               Index:[MFSI]
                             Field Name:Multi
                             Field Name:Field
                             Field Name:String
                             Field Name:Indexer
 >[MFSI]       [Indexer], 
+              Index:[PersonID]
+                            Field Name:Personal_ID
+>[PersonID]   [Personal_ID], 
+              Index:[StateleeID]
+                            Field Name:Stately_ID
+>[StateleeID] [Stately_ID], 
+              Index:[Youyew]
+                            Field Name:LastName
+                            Field Name:FirstName
+>[Youyew]     [FirstName], 
 ========================================
 <<<[USysRibbons]>>>
               Index:[id]
