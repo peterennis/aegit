@@ -239,7 +239,7 @@ Field                Text                  255
 String               Text                  255                
 Indexer              Text                  255                
 id                   AutoNumber            4                  
-Personality_ID       Text                  255                
+Personal_ID          Text                  255                
 Stately_ID           Text                  50                 
 LastName             Text                  255                
 FirstName            Text                  255                

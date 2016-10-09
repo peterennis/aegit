@@ -10,20 +10,30 @@ Public Sub Setup_Test_aeDescribeIndexField()
     Dim strIndex As String
     Dim strTestName As String
 
-    strTestName = "T1:"
-    arrTest(0, 0) = "P"
-    strField = "eventId"
-    arrTest(1, 0) = strField
-    strIndex = "eventId"
-    arrTest(2, 0) = strIndex
-    Debug.Print arrTest(0, 0), arrTest(1, 0), arrTest(2, 0)
-    Debug.Print strTestName
-    ShowTestArray arrTest
-    blnTest = IsSinglePrimaryField(arrTest, strField)
+    strTestName = "tblDummy3"
+    Test_aeDescribeIndexField strTestName
+    strField = "id"
+    blnTest = IsSingleFieldPrimaryIndex(arrTest, strField)
     If blnTest Then
-        Debug.Print , strTestName & " " & strField & " Is a Single Primary Field"
+        Debug.Print , strTestName & "/" & strField & " Is a Single Field Primary Index"
     Else
-        Debug.Print , strTestName & " " & strField & " Is NOT a Single Primary Field"
+        Debug.Print , strTestName & "/" & strField & " Is NOT a Single Field Primary Index"
+    End If
+
+    strField = "id"
+    blnTest = IsSingleFieldUniqueIndex(arrTest, strField)
+    If blnTest Then
+        Debug.Print , strTestName & "/" & strField & " Is a Single Field Unique Index"
+    Else
+        Debug.Print , strTestName & "/" & strField & " Is NOT a Single Field Unique Index"
+    End If
+
+    strField = "id"
+    blnTest = IsSingleFieldIndex(arrTest, strField)
+    If blnTest Then
+        Debug.Print , strTestName & "/" & strField & " Is a Single Field Index"
+    Else
+        Debug.Print , strTestName & "/" & strField & " Is NOT a Single Field Index"
     End If
 
 End Sub
@@ -34,16 +44,16 @@ Private Sub ShowTestArray(arr() As String)
         "NumElements: " & CStr(UBound(arr, 2) - LBound(arr, 2) + 1)
     Dim i As Integer
     For i = LBound(arr, 2) To UBound(arr, 2)
-        Debug.Print , arr(0, i), arr(1, i), arr(1, i)
+        Debug.Print , arr(0, i), arr(1, i), arr(2, i)
     Next
 End Sub
 
-Public Sub Test_aeDescribeIndexField()
+Public Sub Test_aeDescribeIndexField(strTableName As String)
 
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
-    Set tdf = dbs.TableDefs("tblDummy3")
+    Set tdf = dbs.TableDefs(strTableName)
 
     Dim i As Integer
 
@@ -57,6 +67,9 @@ Public Sub Test_aeDescribeIndexField()
     For i = LBound(arrIndexFieldInfo, 2) To UBound(arrIndexFieldInfo, 2) - LBound(arrIndexFieldInfo, 2)
         Debug.Print arrIndexFieldInfo(0, i), arrIndexFieldInfo(1, i), arrIndexFieldInfo(2, i)
     Next
+
+    Set tdf = Nothing
+    Set dbs = Nothing
 
 End Sub
 
@@ -121,7 +134,7 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
             If iCount = 0 Then iCountMaxFirst = iCountMaxFirst + iCountMaxMem
             iCount = iCount + 1
             iCountMaxMem = iCount
-            Debug.Print "iArray = " & iArray, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "iCount = " & iCount, "jLast = " & jLast, idx.Name, arrTemp(0, iCount - 1 + jFirst), arrTemp(1, iCount - 1 + jFirst), arrTemp(2, iCount - 1 + jFirst)
+            'Debug.Print "iArray = " & iArray, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "iCount = " & iCount, "jLast = " & jLast, idx.Name, arrTemp(0, iCount - 1 + jFirst), arrTemp(1, iCount - 1 + jFirst), arrTemp(2, iCount - 1 + jFirst)
             arrReturn(0, iArray) = arrTemp(0, iCount - 1 + jFirst)
             arrReturn(1, iArray) = arrTemp(1, iCount - 1 + jFirst)
             arrReturn(2, iArray) = arrTemp(2, iCount - 1 + jFirst)
@@ -136,26 +149,28 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
         iCountIndex = iCountIndex + 1
     Next
 
-'        For i = 0 To 1
-            For j = 0 To iCountIndexFields - 1
-                Debug.Print i, j, arrReturn(0, j), arrReturn(1, j), arrReturn(2, j)
-            Next
-'        Next
+    'For j = 0 To iCountIndexFields - 1
+    '    Debug.Print i, j, arrReturn(0, j), arrReturn(1, j), arrReturn(2, j)
+    'Next
 
-    Debug.Print ":iCountIndexFields = " & iCountIndexFields
+    'Debug.Print ":iCountIndexFields = " & iCountIndexFields
     ' Ref: http://stackoverflow.com/questions/26644231/vba-using-ubound-on-a-multidimensional-array
-    Debug.Print "::arrReturn", "LBound: " & CStr(LBound(arrReturn, 2)), _
+    'Debug.Print "::arrReturn", "LBound: " & CStr(LBound(arrReturn, 2)), _
         "UBound: " & CStr(UBound(arrReturn, 2)), _
         "NumElements: " & CStr(UBound(arrReturn, 2) - LBound(arrReturn, 2) + 1)
     aeDescribeIndexField = arrReturn()
 End Function
 
-Private Function IsSingleIndexField(arr() As String, ByVal strFieldName As String) As Boolean
-    Debug.Print "ADD TEST CODE FOR IsSingleIndexField"
+Private Function IsSingleFieldPrimaryIndex(arr() As String, ByVal strFieldName As String) As Boolean
+    Debug.Print "ADD TEST CODE FOR IsSingleFieldPrimaryIndex"
 End Function
 
-Private Function IsSinglePrimaryField(arr() As String, ByVal strFieldName As String) As Boolean
-    Debug.Print "ADD TEST CODE FOR IsSinglePrimaryField"
+Private Function IsSingleFieldUniqueIndex(arr() As String, ByVal strFieldName As String) As Boolean
+    Debug.Print "ADD TEST CODE FOR IsSingleFieldUniqueIndex"
+End Function
+
+Private Function IsSingleFieldIndex(arr() As String, ByVal strFieldName As String) As Boolean
+    Debug.Print "ADD TEST CODE FOR IsSingleFieldIndex"
 End Function
 
 Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString As String) As Long

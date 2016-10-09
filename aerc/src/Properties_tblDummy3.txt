@@ -28,6 +28,7 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
+|-- GUID >> GUID
 --------------------------------------------------
 |-- eventId (Field in tblDummy3)
 |------ Attributes >> 1
@@ -243,14 +244,14 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
-|-- Personality_ID (Field in tblDummy3)
+|-- Personal_ID (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
 |------ Type >> 10
-|------ Name >> Personality_ID
+|------ Name >> Personal_ID
 |------ OrdinalPosition >> 8
 |------ Size >> 255
-|------ SourceField >> Personality_ID
+|------ SourceField >> Personal_ID
 |------ SourceTable >> tblDummy3
 |------ DataUpdatable >> False
 |------ DefaultValue >> 

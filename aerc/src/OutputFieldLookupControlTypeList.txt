@@ -145,7 +145,7 @@
               [String]       109          TextBox
               [Indexer]      109          TextBox
               [id]           109          TextBox
-              [Personality_ID]             109          TextBox
+              [Personal_ID]  109          TextBox
               [Stately_ID]   109          TextBox
               [LastName]     109          TextBox
               [FirstName]    109          TextBox
