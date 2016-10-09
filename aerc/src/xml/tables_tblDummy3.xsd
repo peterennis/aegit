@@ -11,12 +11,16 @@
   <xsd:element name="tblDummy3">
     <xsd:annotation>
       <xsd:appinfo>
+        <od:index index-name="aDateFruit" index-key="student date " primary="no" unique="no" clustered="no" order="asc asc"></od:index>
+        <od:index index-name="aDateNight" index-key="activity date " primary="no" unique="no" clustered="no" order="asc asc"></od:index>
+        <od:index index-name="date" index-key="date " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="EthnicityCode" index-key="EthnicityCode " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="eventId" index-key="eventId eventPerson " primary="yes" unique="yes" clustered="no" order="asc asc"></od:index>
-        <od:index index-name="id" index-key="id " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="id" index-key="id " primary="no" unique="yes" clustered="no" order="asc"></od:index>
         <od:index index-name="MFSI" index-key="Multi Field String Indexer " primary="no" unique="no" clustered="no" order="asc asc asc asc"></od:index>
-        <od:index index-name="Permanent_ID" index-key="Permanent_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
-        <od:index index-name="State_ID" index-key="State_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="PersonID" index-key="Personality_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="StateleeID" index-key="Stately_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Youyew" index-key="LastName FirstName " primary="no" unique="yes" clustered="no" order="asc asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
     <xsd:complexType>
@@ -53,14 +57,14 @@
           </xsd:simpleType>
         </xsd:element>
         <xsd:element name="id" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int"></xsd:element>
-        <xsd:element name="Permanent_ID" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+        <xsd:element name="Personality_ID" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
           <xsd:simpleType>
             <xsd:restriction base="xsd:string">
               <xsd:maxLength value="255"></xsd:maxLength>
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
-        <xsd:element name="State_ID" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+        <xsd:element name="Stately_ID" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
           <xsd:simpleType>
             <xsd:restriction base="xsd:string">
               <xsd:maxLength value="50"></xsd:maxLength>
@@ -137,6 +141,21 @@
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
+        <xsd:element name="activity" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="student" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="date" minOccurs="0" od:jetType="datetime" od:sqlSType="datetime" type="xsd:dateTime"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

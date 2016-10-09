@@ -145,8 +145,8 @@
               [String]       109          TextBox
               [Indexer]      109          TextBox
               [id]           109          TextBox
-              [Permanent_ID]               109          TextBox
-              [State_ID]     109          TextBox
+              [Personality_ID]             109          TextBox
+              [Stately_ID]   109          TextBox
               [LastName]     109          TextBox
               [FirstName]    109          TextBox
               [MiddleName]   109          TextBox
@@ -157,14 +157,17 @@
               [ZIP]          109          TextBox
               [HomePhone]    109          TextBox
               [EthnicityCode]              109          TextBox
+              [activity]     109          TextBox
+              [student]      109          TextBox
+              [date]         109          TextBox
 [USysRibbons]
               [id]           109          TextBox
               [RibbonName]   109          TextBox
               [RibbonXML]    109          TextBox
 Count of Check box = 1
-Count of Text box  = 142
+Count of Text box  = 145
 Count of List box  = 1
 Count of Combo box = 2
 Count of Else      = 0
-Count of Display Controls = 146
-Count of All Fields = 146
+Count of Display Controls = 149
+Count of All Fields = 149

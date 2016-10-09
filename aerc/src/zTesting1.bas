@@ -4,19 +4,22 @@ Option Explicit
 Public Sub Setup_Test_aeDescribeIndexField()
 
     Dim arrTest() As String
-    ReDim arrTest(1, 0)
+    ReDim arrTest(2, 0)
     Dim blnTest As Boolean
     Dim strField As String
+    Dim strIndex As String
     Dim strTestName As String
 
-    ' Using tblDummy fields as test example
     strTestName = "T1:"
     arrTest(0, 0) = "P"
     strField = "eventId"
     arrTest(1, 0) = strField
-    blnTest = IsSinglePrimaryField(arrTest, strField)
+    strIndex = "eventId"
+    arrTest(2, 0) = strIndex
+    Debug.Print arrTest(0, 0), arrTest(1, 0), arrTest(2, 0)
     Debug.Print strTestName
     ShowTestArray arrTest
+    blnTest = IsSinglePrimaryField(arrTest, strField)
     If blnTest Then
         Debug.Print , strTestName & " " & strField & " Is a Single Primary Field"
     Else
@@ -31,7 +34,7 @@ Private Sub ShowTestArray(arr() As String)
         "NumElements: " & CStr(UBound(arr, 2) - LBound(arr, 2) + 1)
     Dim i As Integer
     For i = LBound(arr, 2) To UBound(arr, 2)
-        Debug.Print , arr(0, i), arr(1, i)
+        Debug.Print , arr(0, i), arr(1, i), arr(1, i)
     Next
 End Sub
 
@@ -40,8 +43,7 @@ Public Sub Test_aeDescribeIndexField()
     Dim dbs As DAO.Database
     Set dbs = CurrentDb
     Dim tdf As DAO.TableDef
-    Set tdf = dbs.TableDefs("tblDummy3")       ' List of test tables:
-                                                            ' tblDummy3, Sheet1_DS1_DEMOG, dbo_rights, dbo_studentAttendances
+    Set tdf = dbs.TableDefs("tblDummy3")
 
     Dim i As Integer
 
@@ -53,8 +55,8 @@ Public Sub Test_aeDescribeIndexField()
         "NumElements: " & CStr(UBound(arrIndexFieldInfo, 2) - LBound(arrIndexFieldInfo, 2) + 1)
 
     For i = LBound(arrIndexFieldInfo, 2) To UBound(arrIndexFieldInfo, 2) - LBound(arrIndexFieldInfo, 2)
-        Debug.Print arrIndexFieldInfo(0, i), arrIndexFieldInfo(1, i)
-    Next i
+        Debug.Print arrIndexFieldInfo(0, i), arrIndexFieldInfo(1, i), arrIndexFieldInfo(2, i)
+    Next
 
 End Sub
 
@@ -91,8 +93,8 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
         Next
     Next
     Debug.Print "iCountIndexFields = " & iCountIndexFields
-    ReDim Preserve arrTemp(1, iCountIndexFields - 1)
-    ReDim Preserve arrReturn(1, iCountIndexFields - 1)
+    ReDim Preserve arrTemp(2, iCountIndexFields - 1)
+    ReDim Preserve arrReturn(2, iCountIndexFields - 1)
 
     jFirst = 0
     jLast = 0
@@ -104,6 +106,7 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
         iCount = 0
         arrTemp(0, iCount + jFirst) = vbNullString
         arrTemp(1, iCount + jFirst) = vbNullString
+        arrTemp(2, iCount + jFirst) = idx.Name
         For Each fld In idx.Fields
             If idx.Primary Then
                 arrTemp(0, iCount + jFirst) = arrTemp(0, iCount + jFirst) & IIf(iCount = 0, "P", "p")
@@ -118,9 +121,10 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
             If iCount = 0 Then iCountMaxFirst = iCountMaxFirst + iCountMaxMem
             iCount = iCount + 1
             iCountMaxMem = iCount
-            Debug.Print "iArray = " & iArray, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "iCount = " & iCount, "jLast = " & jLast, idx.Name, arrTemp(0, iCount - 1 + jFirst), arrTemp(1, iCount - 1 + jFirst)
+            Debug.Print "iArray = " & iArray, "iCountIndex = " & iCountIndex, "jFirst = " & jFirst, "iCount = " & iCount, "jLast = " & jLast, idx.Name, arrTemp(0, iCount - 1 + jFirst), arrTemp(1, iCount - 1 + jFirst), arrTemp(2, iCount - 1 + jFirst)
             arrReturn(0, iArray) = arrTemp(0, iCount - 1 + jFirst)
             arrReturn(1, iArray) = arrTemp(1, iCount - 1 + jFirst)
+            arrReturn(2, iArray) = arrTemp(2, iCount - 1 + jFirst)
             iArray = iArray + 1
             arrTemp(0, iCount - 1 + jFirst) = vbNullString
             arrTemp(1, iCount - 1 + jFirst) = vbNullString
@@ -134,7 +138,7 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
 
 '        For i = 0 To 1
             For j = 0 To iCountIndexFields - 1
-                Debug.Print i, j, arrReturn(0, j), arrReturn(1, j)
+                Debug.Print i, j, arrReturn(0, j), arrReturn(1, j), arrReturn(2, j)
             Next
 '        Next
 

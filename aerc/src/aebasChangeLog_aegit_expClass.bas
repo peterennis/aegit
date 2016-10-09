@@ -36,7 +36,6 @@ Option Explicit
 ' %114 -
 ' %113 -
 ' %112 -
-' %110 - aeDescribeIndexField should also return the index name - this is useful also for ODBC linked SQL Server tables
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
 ' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
@@ -66,6 +65,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20161007 - v19901 -
+    ' FIXED - %110 - aeDescribeIndexField should also return the index name - this is useful also for ODBC linked SQL Server tables
 '20161007 - v199 -
     ' FIXED - %111 - dbo_studentAttendances index studentId:date shows Iii instead of Ii
     ' FIXED - %109 - Schema export error for primary and index when field order changed in tables. Need to remember the field names and pass to create db schema. Access will sort alphabetically by index name.
