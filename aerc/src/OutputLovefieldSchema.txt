@@ -73,3 +73,94 @@ schemaBuilder.createTable('_tblChart').
     addColumn('FLD68', lf.Type.INTEGER).
     addColumn('FLD69', lf.Type.INTEGER).
     addColumn('FLD70', lf.Type.INTEGER).
+schemaBuilder.createTable('_tblPersist').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('persist', lf.Type.STRING).
+schemaBuilder.createTable('_tlkpChart').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('ChartNum', lf.Type.STRING).
+    addColumn('ChartDesc', lf.Type.STRING).
+    addColumn('ChartTitle', lf.Type.STRING).
+schemaBuilder.createTable('_tlkpMonth').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('TheMonthShort', lf.Type.STRING).
+    addColumn('TheMonthLong', lf.Type.STRING).
+    addColumn('TheMonthCode', lf.Type.STRING).
+schemaBuilder.createTable('_tlkpYear').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('TheYear', lf.Type.STRING).
+schemaBuilder.createTable('aeItems').
+    addColumn('Item', lf.Type.STRING).
+    addColumn('Quantity', lf.Type.INTEGER).
+    addColumn('Status', lf.Type.STRING).
+    addColumn('YNO', lf.Type.STRING).
+    addColumn('CHK', lf.Type.BOOLEAN).
+    addColumn('CBO', lf.Type.STRING).
+schemaBuilder.createTable('aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('Desc', lf.Type.STRING).
+    addColumn('Description', lf.Type.STRING).
+schemaBuilder.createTable('aetlkpStates').
+    addColumn('StateCode', lf.Type.STRING).
+    addColumn('StateAbbreviation', lf.Type.STRING).
+    addColumn('StateName', lf.Type.STRING).
+schemaBuilder.createTable('City').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('CityName', lf.Type.STRING).
+    addColumn('Country', lf.Type.STRING).
+    addColumn('Population', lf.Type.STRING).
+    addColumn('Longitude', lf.Type.STRING).
+    addColumn('Latitude', lf.Type.STRING).
+schemaBuilder.createTable('Country').
+    addColumn('Code', lf.Type.STRING).
+    addColumn('CountryName', lf.Type.STRING).
+    addColumn('Capital', lf.Type.STRING).
+    addColumn('Province', lf.Type.STRING).
+    addColumn('Area', lf.Type.INTEGER).
+    addColumn('Population', lf.Type.INTEGER).
+schemaBuilder.createTable('Province').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('ProvinceName', lf.Type.STRING).
+    addColumn('Country', lf.Type.STRING).
+    addColumn('Population', lf.Type.INTEGER).
+    addColumn('Area', lf.Type.STRING).
+    addColumn('Capital', lf.Type.STRING).
+    addColumn('CapProv', lf.Type.STRING).
+schemaBuilder.createTable('tblBinary').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('FileName', lf.Type.STRING).
+    addColumn('binary', lf.Type.ARRAY_BUFFER).
+schemaBuilder.createTable('tblDummy0').
+    addColumn('Num', lf.Type.INTEGER).
+schemaBuilder.createTable('tblDummy1').
+    addColumn('Num', lf.Type.INTEGER).
+schemaBuilder.createTable('tblDummy2').
+    addColumn('Num', lf.Type.INTEGER).
+schemaBuilder.createTable('tblDummy3').
+    addColumn('eventId', lf.Type.INTEGER).
+    addColumn('eventPerson', lf.Type.INTEGER).
+    addColumn('eventPosition', lf.Type.INTEGER).
+    addColumn('Multi', lf.Type.STRING).
+    addColumn('Field', lf.Type.STRING).
+    addColumn('String', lf.Type.STRING).
+    addColumn('Indexer', lf.Type.STRING).
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('Personal_ID', lf.Type.STRING).
+    addColumn('Stately_ID', lf.Type.STRING).
+    addColumn('LastName', lf.Type.STRING).
+    addColumn('FirstName', lf.Type.STRING).
+    addColumn('MiddleName', lf.Type.STRING).
+    addColumn('Address1', lf.Type.STRING).
+    addColumn('Address2', lf.Type.STRING).
+    addColumn('City', lf.Type.STRING).
+    addColumn('State', lf.Type.STRING).
+    addColumn('ZIP', lf.Type.STRING).
+    addColumn('HomePhone', lf.Type.STRING).
+    addColumn('EthnicityCode', lf.Type.STRING).
+    addColumn('activity', lf.Type.STRING).
+    addColumn('student', lf.Type.STRING).
+    addColumn('date', lf.Type.DATE_TIME).
+schemaBuilder.createTable('USysRibbons').
+    addColumn('id', lf.Type.INTEGER).
+    addColumn('RibbonName', lf.Type.STRING).
+    addColumn('RibbonXML', lf.Type.STRING).

@@ -5085,73 +5085,73 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
             If Not IsMissing(varDebug) Then Debug.Print strSQL
             'Stop
 
-            ' Indexes
-            Debug.Print tdf.Name
-            For Each ndx In tdf.Indexes
-
-                'Debug.Print ndx.Name, ndx.Fields, ndx.Primary
-                If ndx.Unique Then
-                    strSQL = "strSQL=""CREATE UNIQUE INDEX "
-                Else
-                    strSQL = "strSQL=""CREATE INDEX "
-                End If
-
-                strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
-                strFlds = vbNullString
-
-                Dim IndexPrimaryFieldCount As Integer
-                Dim IndexFieldCount As Integer
-                For Each fld In tdf.Fields
-
-                    ' Test for multi field primary key
-                    If IsSinglePrimaryField(tdf, IndexPrimaryFieldCount) Then
-                        strFlds = ", [" & fld.Name & "]"
-                        Exit For
-                    ElseIf IndexPrimaryFieldCount > 1 Then
-                        Debug.Print tdf.Name, fld.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary Index"
-                        strFlds = ", [" & "P FIX ME" & "]"
-                        Exit For
-                    End If
-
-                    ' Test for multi field index
-                    If IsSingleIndexField(tdf, IndexFieldCount) Then
-                        strFlds = ", [" & fld.Name & "]"
-                        Exit For
-                    ElseIf IndexFieldCount > 1 Then
-                        Debug.Print tdf.Name, fld.Name, IndexFieldCount, "FIX here for Multi Field Index"
-                        strFlds = ", [" & "I FIX ME" & "]"
-                        Exit For
-                    End If
-                    'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
-                              
-                    ''    strFlds = ", [" & fld.Name & "]"
-                    ''    Debug.Print , strFlds
-                    ''End If
-
-                Next
-
-                strSQL = strSQL & Mid$(strFlds, 2) & ") "
-                strCn = vbNullString
-
-                If ndx.Primary Then
-                    strCn = " PRIMARY"
-                End If
-
-                If ndx.Required Then
-                    strCn = strCn & " DISALLOW NULL"
-                End If
-
-                If ndx.IgnoreNulls Then
-                    strCn = strCn & " IGNORE NULL"
-                End If
-
-                If Trim$(strCn) <> vbNullString Then
-                    strSQL = strSQL & "WITH" & strCn & " "
-                End If
-
-                'Debug.Print strSQL
-                f.WriteLine vbCrLf & Trim$(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
-            Next
+'            ' Indexes
+'            Debug.Print tdf.Name
+'            For Each ndx In tdf.Indexes
+'
+'                'Debug.Print ndx.Name, ndx.Fields, ndx.Primary
+'                If ndx.Unique Then
+'                    strSQL = "strSQL=""CREATE UNIQUE INDEX "
+'                Else
+'                    strSQL = "strSQL=""CREATE INDEX "
+'                End If
+'
+'                strSQL = strSQL & "[" & ndx.Name & "] ON [" & tdf.Name & "] ("
+'                strFlds = vbNullString
+'
+'                Dim IndexPrimaryFieldCount As Integer
+'                Dim IndexFieldCount As Integer
+'                For Each fld In tdf.Fields
+'
+'                    ' Test for multi field primary key
+'                    If IsSinglePrimaryField(tdf, IndexPrimaryFieldCount) Then
+'                        strFlds = ", [" & fld.Name & "]"
+'                        Exit For
+'                    ElseIf IndexPrimaryFieldCount > 1 Then
+'                        Debug.Print tdf.Name, fld.Name, IndexPrimaryFieldCount, "FIX here for Multi Field Primary Index"
+'                        strFlds = ", [" & "P FIX ME" & "]"
+'                        Exit For
+'                    End If
+'
+'                    ' Test for multi field index
+'                    If IsSingleIndexField(tdf, IndexFieldCount) Then
+'                        strFlds = ", [" & fld.Name & "]"
+'                        Exit For
+'                    ElseIf IndexFieldCount > 1 Then
+'                        Debug.Print tdf.Name, fld.Name, IndexFieldCount, "FIX here for Multi Field Index"
+'                        strFlds = ", [" & "I FIX ME" & "]"
+'                        Exit For
+'                    End If
+'                    'Debug.Print tdf.Name, "FN>" & fld.Name, "IDX>" & ndx.Name, "PK>" & ndx.Primary, "FK>" & ndx.Foreign, "UNQ>" & ndx.Unique, "RQD>" & ndx.Required
+'
+'                    ''    strFlds = ", [" & fld.Name & "]"
+'                    ''    Debug.Print , strFlds
+'                    ''End If
+'
+'                Next
+'
+'                strSQL = strSQL & Mid$(strFlds, 2) & ") "
+'                strCn = vbNullString
+'
+'                If ndx.Primary Then
+'                    strCn = " PRIMARY"
+'                End If
+'
+'                If ndx.Required Then
+'                    strCn = strCn & " DISALLOW NULL"
+'                End If
+'
+'                If ndx.IgnoreNulls Then
+'                    strCn = strCn & " IGNORE NULL"
+'                End If
+'
+'                If Trim$(strCn) <> vbNullString Then
+'                    strSQL = strSQL & "WITH" & strCn & " "
+'                End If
+'
+'                'Debug.Print strSQL
+'                f.WriteLine vbCrLf & Trim$(strSQL) & """" & vbCrLf & "Currentdb.Execute strSQL"
+'            Next
             'Stop
         End If
     Next
