@@ -156,7 +156,7 @@
               [State]        109          TextBox
               [ZIP]          109          TextBox
               [HomePhone]    109          TextBox
-              [EthnicityCode]              109          TextBox
+              [Ethnicity]    109          TextBox
               [activity]     109          TextBox
               [student]      109          TextBox
               [date]         109          TextBox

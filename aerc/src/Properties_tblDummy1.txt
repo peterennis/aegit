@@ -28,6 +28,7 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
+|-- GUID >> GUID
 --------------------------------------------------
 |-- Num (Field in tblDummy1)
 |------ Attributes >> 1

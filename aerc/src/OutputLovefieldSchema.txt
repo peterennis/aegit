@@ -156,7 +156,7 @@ schemaBuilder.createTable('tblDummy3').
     addColumn('State', lf.Type.STRING).
     addColumn('ZIP', lf.Type.STRING).
     addColumn('HomePhone', lf.Type.STRING).
-    addColumn('EthnicityCode', lf.Type.STRING).
+    addColumn('Ethnicity', lf.Type.STRING).
     addColumn('activity', lf.Type.STRING).
     addColumn('student', lf.Type.STRING).
     addColumn('date', lf.Type.DATE_TIME).

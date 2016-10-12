@@ -13,5 +13,5 @@ CREATE TABLE [tblBinary] ( [id] Counter, [FileName] Text (255), [binary] OLEObje
 CREATE TABLE [tblDummy0] ( [Num] Long )
 CREATE TABLE [tblDummy1] ( [Num] Long )
 CREATE TABLE [tblDummy2] ( [Num] Long )
-CREATE TABLE [tblDummy3] ( [eventId] Long, [eventPerson] Long, [eventPosition] Long, [Multi] Text (255), [Field] Text (255), [String] Text (255), [Indexer] Text (255), [id] Counter, [Personal_ID] Text (255), [Stately_ID] Text (50), [LastName] Text (255), [FirstName] Text (255), [MiddleName] Text (255), [Address1] Text (255), [Address2] Text (255), [City] Text (255), [State] Text (255), [ZIP] Text (50), [HomePhone] Text (255), [EthnicityCode] Text (255), [activity] Text (255), [student] Text (255), [date] DateTime )
+CREATE TABLE [tblDummy3] ( [eventId] Long, [eventPerson] Long, [eventPosition] Long, [Multi] Text (255), [Field] Text (255), [String] Text (255), [Indexer] Text (255), [id] Counter, [Personal_ID] Text (255), [Stately_ID] Text (50), [LastName] Text (255), [FirstName] Text (255), [MiddleName] Text (255), [Address1] Text (255), [Address2] Text (255), [City] Text (255), [State] Text (255), [ZIP] Text (50), [HomePhone] Text (255), [Ethnicity] Text (255), [activity] Text (255), [student] Text (255), [date] DateTime )
 CREATE TABLE [USysRibbons] ( [id] Counter, [RibbonName] Text (255), [RibbonXML] Memo )

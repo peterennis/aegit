@@ -770,6 +770,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          GUID
 >>>tblDummy2
               Name          tblDummy2
               Owner         admin
@@ -797,6 +798,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          GUID
 >>>tblDummy3
               Name          tblDummy3
               Owner         admin

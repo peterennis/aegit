@@ -11,14 +11,14 @@
   <xsd:element name="tblDummy3">
     <xsd:annotation>
       <xsd:appinfo>
-        <od:index index-name="aDateFruit" index-key="student date " primary="no" unique="no" clustered="no" order="asc asc"></od:index>
-        <od:index index-name="aDateNight" index-key="activity date " primary="no" unique="no" clustered="no" order="asc asc"></od:index>
+        <od:index index-name="aDateFruit" index-key="student date " primary="no" unique="no" clustered="no" order="desc asc"></od:index>
+        <od:index index-name="aDateNight" index-key="activity date " primary="no" unique="no" clustered="no" order="asc desc"></od:index>
         <od:index index-name="date" index-key="date " primary="no" unique="no" clustered="no" order="asc"></od:index>
-        <od:index index-name="EthnicityCode" index-key="EthnicityCode " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="EthCode" index-key="Ethnicity " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="eventId" index-key="eventId eventPerson " primary="yes" unique="yes" clustered="no" order="asc asc"></od:index>
         <od:index index-name="id" index-key="id " primary="no" unique="yes" clustered="no" order="asc"></od:index>
         <od:index index-name="MFSI" index-key="Multi Field String Indexer " primary="no" unique="no" clustered="no" order="asc asc asc asc"></od:index>
-        <od:index index-name="PersonID" index-key="Personal_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="PersonID" index-key="Personal_ID " primary="no" unique="no" clustered="no" order="desc"></od:index>
         <od:index index-name="StateleeID" index-key="Stately_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="Youyew" index-key="LastName FirstName " primary="no" unique="yes" clustered="no" order="asc asc"></od:index>
       </xsd:appinfo>
@@ -134,7 +134,7 @@
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
-        <xsd:element name="EthnicityCode" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+        <xsd:element name="Ethnicity" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
           <xsd:simpleType>
             <xsd:restriction base="xsd:string">
               <xsd:maxLength value="255"></xsd:maxLength>

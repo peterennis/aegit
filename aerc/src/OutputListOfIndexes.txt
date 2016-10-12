@@ -103,9 +103,9 @@
               Index:[date]
                             Field Name:date
 >[date]       [date], 
-              Index:[EthnicityCode]
-                            Field Name:EthnicityCode
->[EthnicityCode]            [EthnicityCode], 
+              Index:[EthCode]
+                            Field Name:Ethnicity
+>[EthCode]    [Ethnicity], 
               Index:[eventId]
                             Field Name:eventId
                             Field Name:eventPerson

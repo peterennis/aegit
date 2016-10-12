@@ -11,7 +11,7 @@
   <xsd:element name="tblDummy2">
     <xsd:annotation>
       <xsd:appinfo>
-        <od:index index-name="Num" index-key="Num " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
+        <od:index index-name="Num" index-key="Num " primary="no" unique="no" clustered="no" order="asc"></od:index>
       </xsd:appinfo>
     </xsd:annotation>
     <xsd:complexType>

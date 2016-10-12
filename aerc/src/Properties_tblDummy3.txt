@@ -552,14 +552,14 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
-|-- EthnicityCode (Field in tblDummy3)
+|-- Ethnicity (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
 |------ Type >> 10
-|------ Name >> EthnicityCode
+|------ Name >> Ethnicity
 |------ OrdinalPosition >> 19
 |------ Size >> 255
-|------ SourceField >> EthnicityCode
+|------ SourceField >> Ethnicity
 |------ SourceTable >> tblDummy3
 |------ DataUpdatable >> False
 |------ DefaultValue >> 

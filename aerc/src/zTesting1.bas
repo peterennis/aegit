@@ -10,6 +10,9 @@ Public Sub Setup_Test_aeDescribeIndexField()
     Dim strIndex As String
     Dim strTestName As String
 
+    'strTestName = "tblDummy0"          ' P
+    'strTestName = "tblDummy1"          ' U
+    'strTestName = "tblDummy2"          ' I
     strTestName = "tblDummy3"
     Test_aeDescribeIndexField strTestName
     strField = "id"
