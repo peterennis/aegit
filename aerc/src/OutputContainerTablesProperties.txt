@@ -346,6 +346,74 @@
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
               GUID          GUID
+>>>Customers
+              Name          Customers
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              WSSTemplateID  105 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              DisplayViewsOnSharePointSite               1 
+              StarColumnHidden            False
+              HideNewField  False
+              NameMap       Track name AutoCorrect info is ON!
+              PublishToWeb   1 
+>>>Order Details
+              Name          Order Details
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              Orientation    0 
+              OrderByOn     False
+              NameMap       Track name AutoCorrect info is ON!
+              DefaultView    2 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad False
+              WSSTemplateID  120 
+              DisplayViewsOnSharePointSite               1 
+              HideNewField  False
+              StarColumnHidden            False
+              PublishToWeb   1 
+>>>Orders
+              Name          Orders
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              AppendOnly    True
+              Orientation    0 
+              OrderByOn     False
+              NameMap       Track name AutoCorrect info is ON!
+              DefaultView    2 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad False
+              RowHeight      315 
+              WSSTemplateID  120 
+              SubdatasheetName            Table.Order Details
+              LinkChildFields             Order ID
+              LinkMasterFields            Order ID
+              DisplayViewsOnSharePointSite               1 
+              StarColumnHidden            False
+              HideNewField  False
+              PublishToWeb   1 
 >>>Province
               Name          Province
               Owner         admin

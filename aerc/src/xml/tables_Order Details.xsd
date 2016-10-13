@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:od="urn:schemas-microsoft-com:officedata">
+  <xsd:element name="dataroot">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Order_x0020_Details" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="generated" type="xsd:dateTime"></xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Order_x0020_Details">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <od:index index-name="ID" index-key="ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Inventory ID" index-key="Inventory_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="OrderDetails" index-key="Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="OrderID" index-key="Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="OrderStatusLookup" index-key="Status_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="PrimaryKey" index-key="ID " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
+        <od:index index-name="ProductID" index-key="Product_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="ProductsOnOrders" index-key="Product_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Purchase Order ID" index-key="Purchase_x0020_Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Status ID" index-key="Status_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ID" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int"></xsd:element>
+        <xsd:element name="Order_x0020_ID" minOccurs="1" od:jetType="longinteger" od:sqlSType="int" od:nonNullable="yes" type="xsd:int"></xsd:element>
+        <xsd:element name="Product_x0020_ID" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
+        <xsd:element name="Quantity" minOccurs="1" od:jetType="decimal" od:sqlSType="decimal" od:nonNullable="yes">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:decimal">
+              <xsd:totalDigits value="18"></xsd:totalDigits>
+              <xsd:fractionDigits value="4"></xsd:fractionDigits>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Unit_x0020_Price" minOccurs="0" od:jetType="currency" od:sqlSType="money" type="xsd:double"></xsd:element>
+        <xsd:element name="Discount" minOccurs="1" od:jetType="double" od:sqlSType="float" od:nonNullable="yes" type="xsd:double"></xsd:element>
+        <xsd:element name="Status_x0020_ID" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
+        <xsd:element name="Date_x0020_Allocated" minOccurs="0" od:jetType="datetime" od:sqlSType="datetime" type="xsd:dateTime"></xsd:element>
+        <xsd:element name="Purchase_x0020_Order_x0020_ID" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
+        <xsd:element name="Inventory_x0020_ID" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+

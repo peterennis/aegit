@@ -118,8 +118,59 @@
               [Province]     109          TextBox
               [Area]         109          TextBox
               [Population]   109          TextBox
+[Customers]
+              [ID]           109          TextBox
+              [Company]      109          TextBox
+              [Last Name]    109          TextBox
+              [First Name]   109          TextBox
+              [E-mail Address]             109          TextBox
+              [Job Title]    109          TextBox
+              [Business Phone]             109          TextBox
+              [Home Phone]   109          TextBox
+              [Mobile Phone]               109          TextBox
+              [Fax Number]   109          TextBox
+              [Address]      109          TextBox
+              [City]         109          TextBox
+              [State/Province]             109          TextBox
+              [ZIP/Postal Code]            109          TextBox
+              [Country/Region]             109          TextBox
+              [Web Page]     109          TextBox
+              [Notes]        109          TextBox
+              [Attachments]  126          
+[Order Details]
+              [ID]           126          
+              [Order ID]     109          TextBox
+              [Product ID]   111          ComboBox
+              [Quantity]     109          TextBox
+              [Unit Price]   109          TextBox
+              [Discount]     109          TextBox
+              [Status ID]    111          ComboBox
+              [Date Allocated]             111          ComboBox
+              [Purchase Order ID]          109          TextBox
+              [Inventory ID]               109          TextBox
+[Orders]
+              [Order ID]     109          TextBox
+              [Employee ID]  111          ComboBox
+              [Customer ID]  111          ComboBox
+              [Order Date]   111          ComboBox
+              [Shipped Date]               111          ComboBox
+              [Shipper ID]   111          ComboBox
+              [Ship Name]    109          TextBox
+              [Ship Address]               109          TextBox
+              [Ship City]    109          TextBox
+              [Ship State/Province]        109          TextBox
+              [Ship ZIP/Postal Code]       109          TextBox
+              [Ship Country/Region]        109          TextBox
+              [Shipping Fee]               109          TextBox
+              [Taxes]        109          TextBox
+              [Payment Type]               111          ComboBox
+              [Paid Date]    111          ComboBox
+              [Notes]        111          ComboBox
+              [Tax Rate]     109          TextBox
+              [Tax Status]   111          ComboBox
+              [Status ID]    111          ComboBox
 [Province]
-              [id]           109          TextBox
+              [id]           111          ComboBox
               [ProvinceName]               109          TextBox
               [Country]      109          TextBox
               [Population]   109          TextBox
@@ -165,9 +216,9 @@
               [RibbonName]   109          TextBox
               [RibbonXML]    109          TextBox
 Count of Check box = 1
-Count of Text box  = 145
+Count of Text box  = 177
 Count of List box  = 1
-Count of Combo box = 2
-Count of Else      = 0
-Count of Display Controls = 149
-Count of All Fields = 149
+Count of Combo box = 16
+Count of Else      = 2
+Count of Display Controls = 195
+Count of All Fields = 195

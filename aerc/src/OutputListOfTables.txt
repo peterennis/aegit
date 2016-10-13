@@ -8,6 +8,9 @@
 [aetlkpStates]              False
 [City]        False
 [Country]     False
+[Customers]   False
+[Order Details]             False
+[Orders]      False
 [Province]    False
 [tblBinary]   False
 [tblDummy0]   True

@@ -118,6 +118,57 @@ schemaBuilder.createTable('Country').
     addColumn('Province', lf.Type.STRING).
     addColumn('Area', lf.Type.INTEGER).
     addColumn('Population', lf.Type.INTEGER).
+schemaBuilder.createTable('Customers').
+    addColumn('ID', lf.Type.INTEGER).
+    addColumn('Company', lf.Type.STRING).
+    addColumn('Last Name', lf.Type.STRING).
+    addColumn('First Name', lf.Type.STRING).
+    addColumn('E-mail Address', lf.Type.STRING).
+    addColumn('Job Title', lf.Type.STRING).
+    addColumn('Business Phone', lf.Type.STRING).
+    addColumn('Home Phone', lf.Type.STRING).
+    addColumn('Mobile Phone', lf.Type.STRING).
+    addColumn('Fax Number', lf.Type.STRING).
+    addColumn('Address', lf.Type.STRING).
+    addColumn('City', lf.Type.STRING).
+    addColumn('State/Province', lf.Type.STRING).
+    addColumn('ZIP/Postal Code', lf.Type.STRING).
+    addColumn('Country/Region', lf.Type.STRING).
+    addColumn('Web Page
+    addColumn('Notes', lf.Type.STRING).
+    addColumn('Attachments
+schemaBuilder.createTable('Order Details').
+    addColumn('ID', lf.Type.INTEGER).
+    addColumn('Order ID', lf.Type.INTEGER).
+    addColumn('Product ID', lf.Type.INTEGER).
+    addColumn('Quantity', lf.Type.NUMBER).
+    addColumn('Unit Price
+    addColumn('Discount', lf.Type.NUMBER).
+    addColumn('Status ID', lf.Type.INTEGER).
+    addColumn('Date Allocated', lf.Type.DATE_TIME).
+    addColumn('Purchase Order ID', lf.Type.INTEGER).
+    addColumn('Inventory ID', lf.Type.INTEGER).
+schemaBuilder.createTable('Orders').
+    addColumn('Order ID', lf.Type.INTEGER).
+    addColumn('Employee ID', lf.Type.INTEGER).
+    addColumn('Customer ID', lf.Type.INTEGER).
+    addColumn('Order Date', lf.Type.DATE_TIME).
+    addColumn('Shipped Date', lf.Type.DATE_TIME).
+    addColumn('Shipper ID', lf.Type.INTEGER).
+    addColumn('Ship Name', lf.Type.STRING).
+    addColumn('Ship Address', lf.Type.STRING).
+    addColumn('Ship City', lf.Type.STRING).
+    addColumn('Ship State/Province', lf.Type.STRING).
+    addColumn('Ship ZIP/Postal Code', lf.Type.STRING).
+    addColumn('Ship Country/Region', lf.Type.STRING).
+    addColumn('Shipping Fee
+    addColumn('Taxes
+    addColumn('Payment Type', lf.Type.STRING).
+    addColumn('Paid Date', lf.Type.DATE_TIME).
+    addColumn('Notes', lf.Type.STRING).
+    addColumn('Tax Rate', lf.Type.NUMBER).
+    addColumn('Tax Status', lf.Type.INTEGER).
+    addColumn('Status ID', lf.Type.INTEGER).
 schemaBuilder.createTable('Province').
     addColumn('id', lf.Type.INTEGER).
     addColumn('ProvinceName', lf.Type.STRING).

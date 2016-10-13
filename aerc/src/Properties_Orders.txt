@@ -1,0 +1,699 @@
+|-- Name >> Orders
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 48
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
+|-- AppendOnly >> True
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- NameMap >> NameMap
+|-- DefaultView >> 2
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> False
+|-- RowHeight >> 315
+|-- WSSTemplateID >> 120
+|-- SubdatasheetName >> Table.Order Details
+|-- LinkChildFields >> Order ID
+|-- LinkMasterFields >> Order ID
+|-- DisplayViewsOnSharePointSite >> 1
+|-- StarColumnHidden >> False
+|-- HideNewField >> False
+|-- PublishToWeb >> 1
+--------------------------------------------------
+|-- Order ID (Field in Orders)
+|------ Attributes >> 18
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Order ID
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> Order ID
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 1170
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Employee ID (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Employee ID
+|------ OrdinalPosition >> 1
+|------ Size >> 4
+|------ SourceField >> Employee ID
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 1695
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ Caption >> Employee
+|------ DisplayControl >> 111
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> False
+|------ ListRows >> 16
+|------ ListWidth >> 1440twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ RowSource >> SELECT [ID], [Employee Name] FROM [Employees Extended] ORDER BY [Employee Name];
+|------ ColumnWidths >> 0;1440
+|------ ListItemsEditForm >> Employee Details
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Customer ID (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Customer ID
+|------ OrdinalPosition >> 2
+|------ Size >> 4
+|------ SourceField >> Customer ID
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 1590
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 111
+|------ RowSourceType >> Table/Query
+|------ RowSource >> SELECT [ID], [Company] FROM [Customers Extended] ORDER BY [Company];
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> False
+|------ ColumnWidths >> 0;1440
+|------ ListRows >> 16
+|------ ListWidth >> 1440twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ AggregateType >> -1
+|------ Caption >> Customer
+|------ ListItemsEditForm >> Customer Details
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Order Date (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 8
+|------ Name >> Order Date
+|------ OrdinalPosition >> 3
+|------ Size >> 8
+|------ SourceField >> Order Date
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> Now()
+|------ ValidationRule >> >=#1/1/1900#
+|------ ValidationText >> Value must be greater than 1/1/1900.
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 3
+|------ AggregateType >> -1
+|------ Format >> Short Date
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ ShowDatePicker >> 1
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Shipped Date (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 8
+|------ Name >> Shipped Date
+|------ OrdinalPosition >> 4
+|------ Size >> 8
+|------ SourceField >> Shipped Date
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> >=#1/1/1900#
+|------ ValidationText >> Value must be greater than 1/1/1900.
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 1680
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 3
+|------ AggregateType >> -1
+|------ Format >> Short Date
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ ShowDatePicker >> 1
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Shipper ID (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Shipper ID
+|------ OrdinalPosition >> 5
+|------ Size >> 4
+|------ SourceField >> Shipper ID
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 2310
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ Caption >> Ship Via
+|------ DisplayControl >> 111
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ RowSource >> SELECT [ID], [Company] FROM [Shippers Extended] ORDER BY [Company];
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> False
+|------ ColumnWidths >> 0;1440
+|------ ListRows >> 16
+|------ ListWidth >> 0twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ ListItemsEditForm >> Shipper Details
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Ship Name (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Ship Name
+|------ OrdinalPosition >> 6
+|------ Size >> 50
+|------ SourceField >> Ship Name
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Ship Address (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 12
+|------ Name >> Ship Address
+|------ OrdinalPosition >> 7
+|------ Size >> 0
+|------ SourceField >> Ship Address
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextFormat >> 0
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Ship City (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Ship City
+|------ OrdinalPosition >> 8
+|------ Size >> 50
+|------ SourceField >> Ship City
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Ship State/Province (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Ship State/Province
+|------ OrdinalPosition >> 9
+|------ Size >> 50
+|------ SourceField >> Ship State/Province
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Ship ZIP/Postal Code (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Ship ZIP/Postal Code
+|------ OrdinalPosition >> 10
+|------ Size >> 50
+|------ SourceField >> Ship ZIP/Postal Code
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Ship Country/Region (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Ship Country/Region
+|------ OrdinalPosition >> 11
+|------ Size >> 50
+|------ SourceField >> Ship Country/Region
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 1515
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Shipping Fee (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 5
+|------ Name >> Shipping Fee
+|------ OrdinalPosition >> 12
+|------ Size >> 8
+|------ SourceField >> Shipping Fee
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ Format >> $#,##0.00;($#,##0.00)
+|------ DecimalPlaces >> 255
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Taxes (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 5
+|------ Name >> Taxes
+|------ OrdinalPosition >> 13
+|------ Size >> 8
+|------ SourceField >> Taxes
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ Format >> $#,##0.00;($#,##0.00)
+|------ DecimalPlaces >> 255
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Payment Type (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Payment Type
+|------ OrdinalPosition >> 14
+|------ Size >> 50
+|------ SourceField >> Payment Type
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 1710
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 111
+|------ RowSourceType >> Value List
+|------ RowSource >> Credit Card;Check;Cash
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ ColumnWidths >> 1440
+|------ ListRows >> 16
+|------ ListWidth >> 0twip
+|------ LimitToList >> True
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ AggregateType >> -1
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Paid Date (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 8
+|------ Name >> Paid Date
+|------ OrdinalPosition >> 15
+|------ Size >> 8
+|------ SourceField >> Paid Date
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> >=#1/1/1900#
+|------ ValidationText >> Value must be greater than 1/1/1900.
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 3
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ ShowDatePicker >> 1
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|------ Format >> Short Date
+|-- Notes (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 12
+|------ Name >> Notes
+|------ OrdinalPosition >> 16
+|------ Size >> 0
+|------ SourceField >> Notes
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> True
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextFormat >> 0
+|------ AggregateType >> -1
+|------ WSSFieldID >> Comments
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Tax Rate (Field in Orders)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 7
+|------ Name >> Tax Rate
+|------ OrdinalPosition >> 17
+|------ Size >> 8
+|------ SourceField >> Tax Rate
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Tax Status (Field in Orders)
+|------ Attributes >> 1
+|------ CollatingOrder >> 1033
+|------ Type >> 2
+|------ Name >> Tax Status
+|------ OrdinalPosition >> 18
+|------ Size >> 1
+|------ SourceField >> Tax Status
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 111
+|------ RowSourceType >> Table/Query
+|------ RowSource >> SELECT [Orders Tax Status].[ID], [Orders Tax Status].[Tax Status Name] FROM [Orders Tax Status];
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> False
+|------ ColumnWidths >> 0;1440
+|------ ListRows >> 16
+|------ ListWidth >> 1440twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ TextAlign >> 0
+|------ AllowValueListEdits >> True
+|------ AggregateType >> -1
+|------ ShowOnlyRowSourceValues >> False
+|-- Status ID (Field in Orders)
+|------ Attributes >> 1
+|------ CollatingOrder >> 1033
+|------ Type >> 2
+|------ Name >> Status ID
+|------ OrdinalPosition >> 19
+|------ Size >> 1
+|------ SourceField >> Status ID
+|------ SourceTable >> Orders
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 111
+|------ RowSourceType >> Table/Query
+|------ RowSource >> Orders Status
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> False
+|------ ListRows >> 16
+|------ ListWidth >> 0twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ AggregateType >> -1
+|------ ColumnWidths >> 0;1440
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False

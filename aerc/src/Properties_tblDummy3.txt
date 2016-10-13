@@ -5,7 +5,7 @@
 |-- Connect >> 
 |-- Attributes >> 0
 |-- SourceTableName >> 
-|-- RecordCount >> 0
+|-- RecordCount >> 1
 |-- ValidationRule >> 
 |-- ValidationText >> 
 |-- ConflictTable >> 

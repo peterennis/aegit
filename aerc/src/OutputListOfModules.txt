@@ -18,6 +18,7 @@
 [zRibbons]    False
 [zTesting1]   False
 [zTesting2]   False
+[zTesting3]   False
 [zTextHandlers]             False
 [zzOLD]       False
 [zzResearch]  False

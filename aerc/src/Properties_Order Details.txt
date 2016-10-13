@@ -1,0 +1,349 @@
+|-- Name >> Order Details
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 58
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- NameMap >> NameMap
+|-- DefaultView >> 2
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> False
+|-- WSSTemplateID >> 120
+|-- DisplayViewsOnSharePointSite >> 1
+|-- HideNewField >> False
+|-- StarColumnHidden >> False
+|-- PublishToWeb >> 1
+--------------------------------------------------
+|-- ID (Field in Order Details)
+|------ Attributes >> 18
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> ID
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> ID
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ AggregateType >> -1
+|------ WSSFieldID >> ID
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Order ID (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Order ID
+|------ OrdinalPosition >> 1
+|------ Size >> 4
+|------ SourceField >> Order ID
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> True
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ ListRows >> 16
+|------ ListWidth >> 0twip
+|------ LimitToList >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ AggregateType >> -1
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Product ID (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Product ID
+|------ OrdinalPosition >> 2
+|------ Size >> 4
+|------ SourceField >> Product ID
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 111
+|------ RowSourceType >> Table/Query
+|------ RowSource >> SELECT ID, [Product Name] FROM Products ORDER BY [Product Name];
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> True
+|------ ColumnWidths >> 0
+|------ ListRows >> 16
+|------ ListWidth >> 4320twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ AggregateType >> -1
+|------ Caption >> Product
+|------ ListItemsEditForm >> Product Details
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Quantity (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 18
+|------ Type >> 20
+|------ Name >> Quantity
+|------ OrdinalPosition >> 3
+|------ Size >> 16
+|------ SourceField >> Quantity
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> True
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ AggregateType >> 0
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Unit Price (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 5
+|------ Name >> Unit Price
+|------ OrdinalPosition >> 4
+|------ Size >> 8
+|------ SourceField >> Unit Price
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ Format >> $#,##0.00;($#,##0.00)
+|------ DecimalPlaces >> 255
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Discount (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 7
+|------ Name >> Discount
+|------ OrdinalPosition >> 5
+|------ Size >> 8
+|------ SourceField >> Discount
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 0
+|------ ValidationRule >> <=1 And >=0
+|------ ValidationText >> You cannot enter a value greater than 100 percent (1) or less than 0.
+|------ Required >> True
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ Format >> Percent
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Status ID (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Status ID
+|------ OrdinalPosition >> 6
+|------ Size >> 4
+|------ SourceField >> Status ID
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 111
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ RowSource >> Order Details Status
+|------ BoundColumn >> 1
+|------ ColumnCount >> 2
+|------ ColumnHeads >> False
+|------ ColumnWidths >> 0;1440
+|------ ListRows >> 16
+|------ ListWidth >> 0twip
+|------ LimitToList >> True
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> True
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Date Allocated (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 8
+|------ Name >> Date Allocated
+|------ OrdinalPosition >> 7
+|------ Size >> 8
+|------ SourceField >> Date Allocated
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> >=#1/1/1900#
+|------ ValidationText >> Value must be greater than 1/1/1900.
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 3
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ ShowDatePicker >> 1
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|------ Format >> Short Date
+|-- Purchase Order ID (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Purchase Order ID
+|------ OrdinalPosition >> 8
+|------ Size >> 4
+|------ SourceField >> Purchase Order ID
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Inventory ID (Field in Order Details)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Inventory ID
+|------ OrdinalPosition >> 9
+|------ Size >> 4
+|------ SourceField >> Inventory ID
+|------ SourceTable >> Order Details
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DecimalPlaces >> 255
+|------ DisplayControl >> 109
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:od="urn:schemas-microsoft-com:officedata">
+  <xsd:element name="dataroot">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Customers" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="generated" type="xsd:dateTime"></xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customers">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <od:index index-name="City" index-key="City " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Company" index-key="Company " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="First Name" index-key="First_x0020_Name " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Last Name" index-key="Last_x0020_Name " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="Postal Code" index-key="ZIP_x002F_Postal_x0020_Code " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="PrimaryKey" index-key="ID " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
+        <od:index index-name="State/Province" index-key="State_x002F_Province " primary="no" unique="no" clustered="no" order="asc"></od:index>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ID" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int"></xsd:element>
+        <xsd:element name="Company" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Last_x0020_Name" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="First_x0020_Name" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="E-mail_x0020_Address" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Job_x0020_Title" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Business_x0020_Phone" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="25"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Home_x0020_Phone" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="25"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Mobile_x0020_Phone" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="25"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Fax_x0020_Number" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="25"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Address" minOccurs="0" od:jetType="memo" od:sqlSType="ntext">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="536870910"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="City" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="State_x002F_Province" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ZIP_x002F_Postal_x0020_Code" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="15"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Country_x002F_Region" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Web_x0020_Page" minOccurs="0" od:jetType="hyperlink" od:sqlSType="ntext" od:hyperlink="yes">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="536870910"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Notes" minOccurs="0" od:jetType="memo" od:sqlSType="ntext" od:textFormat="1">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="536870910"></xsd:maxLength>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Attachments" minOccurs="0" od:jetType="complex" od:jetComplexType="MSysComplexType_Attachment" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="FileData" minOccurs="0" od:jetType="oleobject" od:sqlSType="image">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:base64Binary">
+                    <xsd:maxLength value="1476395008"></xsd:maxLength>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FileFlags" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"></xsd:element>
+              <xsd:element name="FileName" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="255"></xsd:maxLength>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FileTimeStamp" minOccurs="0" od:jetType="datetime" od:sqlSType="datetime" type="xsd:dateTime"></xsd:element>
+              <xsd:element name="FileType" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="255"></xsd:maxLength>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FileURL" minOccurs="0" od:jetType="memo" od:sqlSType="ntext">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="536870910"></xsd:maxLength>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+

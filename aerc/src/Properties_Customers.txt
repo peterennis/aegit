@@ -1,0 +1,603 @@
+|-- Name >> Customers
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 29
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
+|-- Orientation >> 0
+|-- OrderByOn >> False
+|-- DefaultView >> 2
+|-- WSSTemplateID >> 105
+|-- TotalsRow >> False
+|-- FilterOnLoad >> False
+|-- OrderByOnLoad >> True
+|-- DisplayViewsOnSharePointSite >> 1
+|-- StarColumnHidden >> False
+|-- HideNewField >> False
+|-- NameMap >> NameMap
+|-- PublishToWeb >> 1
+--------------------------------------------------
+|-- ID (Field in Customers)
+|------ Attributes >> 18
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> ID
+|------ OrdinalPosition >> 0
+|------ Size >> 4
+|------ SourceField >> ID
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 960
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ WSSFieldID >> ID
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Company (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Company
+|------ OrdinalPosition >> 1
+|------ Size >> 50
+|------ SourceField >> Company
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ WSSFieldID >> Company
+|-- Last Name (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Last Name
+|------ OrdinalPosition >> 2
+|------ Size >> 50
+|------ SourceField >> Last Name
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ WSSFieldID >> Title
+|-- First Name (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> First Name
+|------ OrdinalPosition >> 3
+|------ Size >> 50
+|------ SourceField >> First Name
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextAlign >> 0
+|------ AggregateType >> -1
+|------ WSSFieldID >> FirstName
+|-- E-mail Address (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> E-mail Address
+|------ OrdinalPosition >> 4
+|------ Size >> 50
+|------ SourceField >> E-mail Address
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 2400
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> Email
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Job Title (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Job Title
+|------ OrdinalPosition >> 5
+|------ Size >> 50
+|------ SourceField >> Job Title
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> 2295
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> JobTitle
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Business Phone (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Business Phone
+|------ OrdinalPosition >> 6
+|------ Size >> 25
+|------ SourceField >> Business Phone
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> WorkPhone
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Home Phone (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Home Phone
+|------ OrdinalPosition >> 7
+|------ Size >> 25
+|------ SourceField >> Home Phone
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> HomePhone
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Mobile Phone (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Mobile Phone
+|------ OrdinalPosition >> 8
+|------ Size >> 25
+|------ SourceField >> Mobile Phone
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> CellPhone
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Fax Number (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Fax Number
+|------ OrdinalPosition >> 9
+|------ Size >> 25
+|------ SourceField >> Fax Number
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> WorkFax
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Address (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 12
+|------ Name >> Address
+|------ OrdinalPosition >> 10
+|------ Size >> 0
+|------ SourceField >> Address
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextFormat >> 0
+|------ WSSFieldID >> WorkAddress
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- City (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> City
+|------ OrdinalPosition >> 11
+|------ Size >> 50
+|------ SourceField >> City
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> WorkCity
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- State/Province (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> State/Province
+|------ OrdinalPosition >> 12
+|------ Size >> 50
+|------ SourceField >> State/Province
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> WorkState
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- ZIP/Postal Code (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> ZIP/Postal Code
+|------ OrdinalPosition >> 13
+|------ Size >> 15
+|------ SourceField >> ZIP/Postal Code
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> WorkZip
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Country/Region (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Country/Region
+|------ OrdinalPosition >> 14
+|------ Size >> 50
+|------ SourceField >> Country/Region
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 109
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ AggregateType >> -1
+|------ WSSFieldID >> WorkCountry
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowMultipleValues >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Web Page (Field in Customers)
+|------ Attributes >> 32770
+|------ CollatingOrder >> 1033
+|------ Type >> 12
+|------ Name >> Web Page
+|------ OrdinalPosition >> 15
+|------ Size >> 0
+|------ SourceField >> Web Page
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 2
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ WSSFieldID >> WebPage
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Notes (Field in Customers)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 12
+|------ Name >> Notes
+|------ OrdinalPosition >> 16
+|------ Size >> 0
+|------ SourceField >> Notes
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ IMEMode >> 0
+|------ IMESentenceMode >> 0
+|------ UnicodeCompression >> True
+|------ TextFormat >> 1
+|------ WSSFieldID >> Comments
+|------ AggregateType >> -1
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ TextAlign >> 0
+|------ ShowOnlyRowSourceValues >> False
+|-- Attachments (Field in Customers)
+|------ Attributes >> 1
+|------ CollatingOrder >> 2
+|------ Type >> 101
+|------ Name >> Attachments
+|------ OrdinalPosition >> 17
+|------ Size >> 4
+|------ SourceField >> Attachments
+|------ SourceTable >> Customers
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|------ ColumnWidth >> -1
+|------ ColumnOrder >> 0
+|------ ColumnHidden >> False
+|------ DisplayControl >> 126
+|------ AggregateType >> -1
+|------ WSSFieldID >> Attachments
+|------ TextAlign >> 0
+|------ RowSourceType >> Table/Query
+|------ BoundColumn >> 1
+|------ ColumnCount >> 1
+|------ ColumnHeads >> False
+|------ AllowValueListEdits >> False
+|------ ShowOnlyRowSourceValues >> False
