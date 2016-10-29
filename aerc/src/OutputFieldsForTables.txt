@@ -1,268 +1,337 @@
 ----------------
 TABLE: _tblChart
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   Long Integer          4                  
-VersionApp           Text                  255                
-VersionData          Text                  255                
-EnterDate            Date/Time             8                  
-FLD01                Long Integer          4                  
-FLD02                Long Integer          4                  
-FLD03                Long Integer          4                  
-FLD04                Long Integer          4                  
-FLD05                Long Integer          4                  
-FLD06                Long Integer          4                  
-FLD07                Long Integer          4                  
-FLD08                Long Integer          4                  
-FLD09                Long Integer          4                  
-FLD10                Long Integer          4                  
-FLD11                Long Integer          4                  
-FLD12                Long Integer          4                  
-FLD13                Long Integer          4                  
-FLD14                Long Integer          4                  
-FLD15                Long Integer          4                  
-FLD16                Long Integer          4                  
-FLD17                Long Integer          4                  
-FLD18                Long Integer          4                  
-FLD19                Long Integer          4                  
-FLD20                Long Integer          4                  
-FLD21                Long Integer          4                  
-FLD22                Long Integer          4                  
-FLD23                Long Integer          4                  
-FLD24                Long Integer          4                  
-FLD25                Long Integer          4                  
-FLD26                Long Integer          4                  
-FLD27                Long Integer          4                  
-FLD28                Long Integer          4                  
-FLD29                Long Integer          4                  
-FLD30                Long Integer          4                  
-FLD31                Long Integer          4                  
-FLD32                Long Integer          4                  
-FLD33                Long Integer          4                  
-FLD34                Long Integer          4                  
-FLD35                Long Integer          4                  
-FLD36                Long Integer          4                  
-FLD37                Long Integer          4                  
-FLD38                Long Integer          4                  
-FLD39                Long Integer          4                  
-FLD40                Long Integer          4                  
-FLD41                Long Integer          4                  
-FLD42                Long Integer          4                  
-FLD43                Long Integer          4                  
-FLD44                Long Integer          4                  
-FLD45                Long Integer          4                  
-FLD46                Long Integer          4                  
-FLD47                Long Integer          4                  
-FLD48                Long Integer          4                  
-FLD49                Long Integer          4                  
-FLD50                Long Integer          4                  
-FLD51                Long Integer          4                  
-FLD52                Long Integer          4                  
-FLD53                Long Integer          4                  
-FLD54                Long Integer          4                  
-FLD55                Long Integer          4                  
-FLD56                Long Integer          4                  
-FLD57                Long Integer          4                  
-FLD58                Long Integer          4                  
-FLD59                Long Integer          4                  
-FLD60                Long Integer          4                  
-FLD61                Long Integer          4                  
-FLD62                Long Integer          4                  
-FLD63                Long Integer          4                  
-FLD64                Long Integer          4                  
-FLD65                Long Integer          4                  
-FLD66                Long Integer          4                  
-FLD67                Long Integer          4                  
-FLD68                Long Integer          4                  
-FLD69                Long Integer          4                  
-FLD70                Long Integer          4                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      Long Integer          4                  
+VersionApp              Text                  255                
+VersionData             Text                  255                
+EnterDate               Date/Time             8                  
+FLD01                   Long Integer          4                  
+FLD02                   Long Integer          4                  
+FLD03                   Long Integer          4                  
+FLD04                   Long Integer          4                  
+FLD05                   Long Integer          4                  
+FLD06                   Long Integer          4                  
+FLD07                   Long Integer          4                  
+FLD08                   Long Integer          4                  
+FLD09                   Long Integer          4                  
+FLD10                   Long Integer          4                  
+FLD11                   Long Integer          4                  
+FLD12                   Long Integer          4                  
+FLD13                   Long Integer          4                  
+FLD14                   Long Integer          4                  
+FLD15                   Long Integer          4                  
+FLD16                   Long Integer          4                  
+FLD17                   Long Integer          4                  
+FLD18                   Long Integer          4                  
+FLD19                   Long Integer          4                  
+FLD20                   Long Integer          4                  
+FLD21                   Long Integer          4                  
+FLD22                   Long Integer          4                  
+FLD23                   Long Integer          4                  
+FLD24                   Long Integer          4                  
+FLD25                   Long Integer          4                  
+FLD26                   Long Integer          4                  
+FLD27                   Long Integer          4                  
+FLD28                   Long Integer          4                  
+FLD29                   Long Integer          4                  
+FLD30                   Long Integer          4                  
+FLD31                   Long Integer          4                  
+FLD32                   Long Integer          4                  
+FLD33                   Long Integer          4                  
+FLD34                   Long Integer          4                  
+FLD35                   Long Integer          4                  
+FLD36                   Long Integer          4                  
+FLD37                   Long Integer          4                  
+FLD38                   Long Integer          4                  
+FLD39                   Long Integer          4                  
+FLD40                   Long Integer          4                  
+FLD41                   Long Integer          4                  
+FLD42                   Long Integer          4                  
+FLD43                   Long Integer          4                  
+FLD44                   Long Integer          4                  
+FLD45                   Long Integer          4                  
+FLD46                   Long Integer          4                  
+FLD47                   Long Integer          4                  
+FLD48                   Long Integer          4                  
+FLD49                   Long Integer          4                  
+FLD50                   Long Integer          4                  
+FLD51                   Long Integer          4                  
+FLD52                   Long Integer          4                  
+FLD53                   Long Integer          4                  
+FLD54                   Long Integer          4                  
+FLD55                   Long Integer          4                  
+FLD56                   Long Integer          4                  
+FLD57                   Long Integer          4                  
+FLD58                   Long Integer          4                  
+FLD59                   Long Integer          4                  
+FLD60                   Long Integer          4                  
+FLD61                   Long Integer          4                  
+FLD62                   Long Integer          4                  
+FLD63                   Long Integer          4                  
+FLD64                   Long Integer          4                  
+FLD65                   Long Integer          4                  
+FLD66                   Long Integer          4                  
+FLD67                   Long Integer          4                  
+FLD68                   Long Integer          4                  
+FLD69                   Long Integer          4                  
+FLD70                   Long Integer          4                  
 
 
 ------------------
 TABLE: _tblPersist
 ------------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-persist              Text                  255                
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+persist                 Text                  255                
 
 
 -----------------
 TABLE: _tlkpChart
 -----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-ChartNum             Text                  255                
-ChartDesc            Text                  255                
-ChartTitle           Text                  255                
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+ChartNum                Text                  255                
+ChartDesc               Text                  255                
+ChartTitle              Text                  255                
 
 
 -----------------
 TABLE: _tlkpMonth
 -----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-TheMonthShort        Text                  3                  
-TheMonthLong         Text                  9                  
-TheMonthCode         Text                  2                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+TheMonthShort           Text                  3                  
+TheMonthLong            Text                  9                  
+TheMonthCode            Text                  2                  
 
 
 ----------------
 TABLE: _tlkpYear
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-TheYear              Text                  4                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+TheYear                 Text                  4                  
 
 
 --------------
 TABLE: aeItems
 --------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION        
-=================    ==================    ====    ===================
-Item                 Text                  255                        
-Quantity             Long Integer          4                          
-Status               Text                  255     A short description
-YNO                  Text                  255                        
-CHK                  Yes/No                1                          
-CBO                  Text                  255                        
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION        
+====================    ==================    ====    ===================
+Item                    Text                  255                        
+Quantity                Long Integer          4                          
+Status                  Text                  255     A short description
+YNO                     Text                  255                        
+CHK                     Yes/No                1                          
+CBO                     Text                  255                        
 
 
 ----------------------------------------------------------------
 TABLE: aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger
 ----------------------------------------------------------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION                       
-=================    ==================    ====    ==================================
-id                   AutoNumber            4                                         
-Desc                 Text                  255                                       
-Description          Text                  255     This is a description of the field
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION                       
+====================    ==================    ====    ==================================
+id                      AutoNumber            4                                         
+Desc                    Text                  255                                       
+Description             Text                  255     This is a description of the field
 
 
 -------------------
 TABLE: aetlkpStates
 -------------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-StateCode            Text                  3                  
-StateAbbreviation    Text                  2                  
-StateName            Text                  15                 
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+StateCode               Text                  3                  
+StateAbbreviation       Text                  2                  
+StateName               Text                  15                 
 
 
 -----------
 TABLE: City
 -----------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-CityName             Text                  255                
-Country              Text                  255                
-Population           Text                  255                
-Longitude            Text                  255                
-Latitude             Text                  255                
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+CityName                Text                  255                
+Country                 Text                  255                
+Population              Text                  255                
+Longitude               Text                  255                
+Latitude                Text                  255                
 
 
 --------------
 TABLE: Country
 --------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-Code                 Text                  255                
-CountryName          Text                  255                
-Capital              Text                  255                
-Province             Text                  255                
-Area                 Long Integer          4                  
-Population           Long Integer          4                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+Code                    Text                  255                
+CountryName             Text                  255                
+Capital                 Text                  255                
+Province                Text                  255                
+Area                    Long Integer          4                  
+Population              Long Integer          4                  
+
+
+----------------
+TABLE: Customers
+----------------
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+ID                      AutoNumber            4                  
+Company                 Text                  50                 
+Last Name               Text                  50                 
+First Name              Text                  50                 
+E-mail Address          Text                  50                 
+Job Title               Text                  50                 
+Business Phone          Text                  25                 
+Home Phone              Text                  25                 
+Mobile Phone            Text                  25                 
+Fax Number              Text                  25                 
+Address                 Memo                  0                  
+City                    Text                  50                 
+State/Province          Text                  50                 
+ZIP/Postal Code         Text                  15                 
+Country/Region          Text                  50                 
+Web Page                Hyperlink             0                  
+Notes                   Memo                  0                  
+Attachments             Attachment            4                  
+
+
+--------------------
+TABLE: Order Details
+--------------------
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+ID                      AutoNumber            4                  
+Order ID                Long Integer          4                  
+Product ID              Long Integer          4                  
+Quantity                Decimal               16                 
+Unit Price              Currency              8                  
+Discount                Double                8                  
+Status ID               Long Integer          4                  
+Date Allocated          Date/Time             8                  
+Purchase Order ID       Long Integer          4                  
+Inventory ID            Long Integer          4                  
+
+
+-------------
+TABLE: Orders
+-------------
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+Order ID                AutoNumber            4                  
+Employee ID             Long Integer          4                  
+Customer ID             Long Integer          4                  
+Order Date              Date/Time             8                  
+Shipped Date            Date/Time             8                  
+Shipper ID              Long Integer          4                  
+Ship Name               Text                  50                 
+Ship Address            Memo                  0                  
+Ship City               Text                  50                 
+Ship State/Province     Text                  50                 
+Ship ZIP/Postal Code    Text                  50                 
+Ship Country/Region     Text                  50                 
+Shipping Fee            Currency              8                  
+Taxes                   Currency              8                  
+Payment Type            Text                  50                 
+Paid Date               Date/Time             8                  
+Notes                   Memo                  0                  
+Tax Rate                Double                8                  
+Tax Status              Byte                  1                  
+Status ID               Byte                  1                  
 
 
 ---------------
 TABLE: Province
 ---------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-ProvinceName         Text                  255                
-Country              Text                  255                
-Population           Long Integer          4                  
-Area                 Text                  255                
-Capital              Text                  255                
-CapProv              Text                  255                
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+ProvinceName            Text                  255                
+Country                 Text                  255                
+Population              Long Integer          4                  
+Area                    Text                  255                
+Capital                 Text                  255                
+CapProv                 Text                  255                
 
 
 ----------------
 TABLE: tblBinary
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-FileName             Text (fixed width)    255                
-binary               OLE Object            0                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+FileName                Text (fixed width)    255                
+binary                  OLE Object            0                  
 
 
 ----------------
 TABLE: tblDummy0
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-Num                  Long Integer          4                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+Num                     Long Integer          4                  
 
 
 ----------------
 TABLE: tblDummy1
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-Num                  Long Integer          4                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+Num                     Long Integer          4                  
 
 
 ----------------
 TABLE: tblDummy2
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-Num                  Long Integer          4                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+Num                     Long Integer          4                  
 
 
 ----------------
 TABLE: tblDummy3
 ----------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-eventId              Long Integer          4                  
-eventPerson          Long Integer          4                  
-eventPosition        Long Integer          4                  
-Multi                Text                  255                
-Field                Text                  255                
-String               Text                  255                
-Indexer              Text                  255                
-id                   AutoNumber            4                  
-Personal_ID          Text                  255                
-Stately_ID           Text                  50                 
-LastName             Text                  255                
-FirstName            Text                  255                
-MiddleName           Text                  255                
-Address1             Text                  255                
-Address2             Text                  255                
-City                 Text                  255                
-State                Text                  255                
-ZIP                  Text                  50                 
-HomePhone            Text                  255                
-Ethnicity            Text                  255                
-activity             Text                  255                
-student              Text                  255                
-date                 Date/Time             8                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+eventId                 Long Integer          4                  
+eventPerson             Long Integer          4                  
+eventPosition           Long Integer          4                  
+Multi                   Text                  255                
+Field                   Text                  255                
+String                  Text                  255                
+Indexer                 Text                  255                
+id                      AutoNumber            4                  
+Personal_ID             Text                  255                
+Stately_ID              Text                  50                 
+LastName                Text                  255                
+FirstName               Text                  255                
+MiddleName              Text                  255                
+Address1                Text                  255                
+Address2                Text                  255                
+City                    Text                  255                
+State                   Text                  255                
+ZIP                     Text                  50                 
+HomePhone               Text                  255                
+Ethnicity               Text                  255                
+activity                Text                  255                
+student                 Text                  255                
+date                    Date/Time             8                  
 
 
 ------------------
 TABLE: USysRibbons
 ------------------
-FIELD NAME           FIELD TYPE            SIZE    DESCRIPTION
-=================    ==================    ====    ===========
-id                   AutoNumber            4                  
-RibbonName           Text                  255                
-RibbonXML            Memo                  0                  
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+id                      AutoNumber            4                  
+RibbonName              Text                  255                
+RibbonXML               Memo                  0                  
 
 

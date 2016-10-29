@@ -32,9 +32,14 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %120 -
+' %119 -
+' %118 -
+' %117 -
+' %116 -
 ' %115 -
 ' %114 -
-' %113 -
+' %113 - Lovefield export unknown type Hyperlink, Attachment, Currency - from Customers; Orders; Order Details - tables imported from Northwind 2007 for testing
 ' %112 - Test ExportXML method, allows developers to export XML data, schemas, and presentation information from ... or the Microsoft Access database engine, Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
