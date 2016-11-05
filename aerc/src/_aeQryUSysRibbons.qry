@@ -27,6 +27,9 @@ dbByte "TabularCharSet" ="0"
 dbByte "TabularFamily" ="34"
 dbLong "DatasheetForeColor" ="0"
 dbLong "DatasheetForeColor12" ="0"
+dbBinary "GUID" = Begin
+    0x787911b9f01ea34a91f5d73c7562b2ad
+End
 Begin
     Begin
         dbText "Name" ="USysRibbons.RibbonXML"
@@ -44,13 +47,13 @@ End
 Begin
     State =0
     Left =0
-    Top =40
-    Right =1619
-    Bottom =871
+    Top =0
+    Right =1272
+    Bottom =662
     Left =-1
     Top =-1
-    Right =1587
-    Bottom =486
+    Right =1256
+    Bottom =469
     Left =0
     Top =0
     ColumnsShown =539

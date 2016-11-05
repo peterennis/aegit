@@ -10,6 +10,9 @@ dbBoolean "UseTransaction" ="-1"
 dbBoolean "FailOnError" ="0"
 dbByte "Orientation" ="0"
 dbByte "PublishToWeb" ="1"
+dbBinary "GUID" = Begin
+    0xdb58a2398fe57744a891e92d8c254eae
+End
 Begin
     Begin
         dbText "Name" ="Dummy"
@@ -19,13 +22,13 @@ End
 Begin
     State =0
     Left =0
-    Top =40
-    Right =1619
-    Bottom =996
+    Top =0
+    Right =1272
+    Bottom =662
     Left =-1
     Top =-1
-    Right =1587
-    Bottom =672
+    Right =1256
+    Bottom =636
     Left =0
     Top =0
     ColumnsShown =579

@@ -26,6 +26,7 @@
               TabularFamily  34 
               DatasheetForeColor           0 
               DatasheetForeColor12         0 
+              GUID          GUID
 >>>_qryChart
               Name          _qryChart
               Owner         admin
@@ -365,7 +366,6 @@
               DisplayViewsOnSharePointSite               1 
               StarColumnHidden            False
               HideNewField  False
-              NameMap       Track name AutoCorrect info is ON!
               PublishToWeb   1 
 >>>Order Details
               Name          Order Details
@@ -378,7 +378,6 @@
               LastUpdated   LastUpdated
               Orientation    0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               TotalsRow     False
               FilterOnLoad  False
@@ -400,7 +399,6 @@
               AppendOnly    True
               Orientation    0 
               OrderByOn     False
-              NameMap       Track name AutoCorrect info is ON!
               DefaultView    2 
               TotalsRow     False
               FilterOnLoad  False
@@ -471,6 +469,7 @@
               UseTransaction              True
               Orientation    0 
               PublishToWeb   1 
+              GUID          GUID
 >>>qappMSysObjectsFormHiddenVisible
               Name          qappMSysObjectsFormHiddenVisible
               Owner         admin
@@ -540,6 +539,7 @@
               UseTransaction              True
               Orientation    0 
               PublishToWeb   1 
+              GUID          GUID
 >>>qpt_Dummy
               Name          qpt_Dummy
               Owner         admin
@@ -569,6 +569,7 @@
               Orientation    0 
               PublishToWeb   1 
               Description   Don't be a dummy!
+              GUID          GUID
 >>>qpt_SqlSchemaTablesList
               Name          qpt_SqlSchemaTablesList
               Owner         admin
@@ -601,6 +602,7 @@
               OrderByOnLoad True
               PublishToWeb   1 
               Description   This is hidden dummy
+              GUID          GUID
 >>>qry_Select1
               Name          qry_Select1
               Owner         admin
@@ -696,6 +698,7 @@
               FilterOnLoad  False
               OrderByOnLoad True
               PublishToWeb   1 
+              GUID          GUID
 >>>qupd_Dummy
               Name          qupd_Dummy
               Owner         admin
@@ -727,6 +730,7 @@
               FailOnError   False
               Orientation    0 
               PublishToWeb   1 
+              GUID          GUID
 >>>qupdHiddenQueryFlagDescription
               Name          qupdHiddenQueryFlagDescription
               Owner         admin
@@ -811,6 +815,7 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
+              GUID          GUID
 >>>tblDummy1
               Name          tblDummy1
               Owner         admin
@@ -923,3 +928,4 @@
               DatasheetForeThemeColorIndex               0 
               PublishToWeb   1 
               RowHeight      5640 
+              GUID          GUID

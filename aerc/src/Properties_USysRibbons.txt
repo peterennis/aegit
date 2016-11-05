@@ -27,6 +27,7 @@
 |-- DatasheetForeThemeColorIndex >> 0
 |-- PublishToWeb >> 1
 |-- RowHeight >> 5640
+|-- GUID >> GUID
 --------------------------------------------------
 |-- id (Field in USysRibbons)
 |------ Attributes >> 17
@@ -52,6 +53,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- RibbonName (Field in USysRibbons)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -80,6 +82,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- RibbonXML (Field in USysRibbons)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -108,3 +111,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

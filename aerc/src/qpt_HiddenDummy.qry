@@ -6,5 +6,8 @@ dbBoolean "LogMessages" ="0"
 dbByte "Orientation" ="0"
 dbByte "PublishToWeb" ="1"
 dbText "Description" ="Don't be a dummy!"
+dbBinary "GUID" = Begin
+    0x74893ad9fd39b14782e4b0e8419d7b86
+End
 Begin
 End

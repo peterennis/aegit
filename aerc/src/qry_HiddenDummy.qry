@@ -10,5 +10,8 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbByte "PublishToWeb" ="1"
 dbText "Description" ="This is hidden dummy"
+dbBinary "GUID" = Begin
+    0xed84c2b1d7b554428cb307cc3ee8e137
+End
 Begin
 End

@@ -10,7 +10,6 @@
 |-- ValidationText >> 
 |-- Orientation >> 0
 |-- OrderByOn >> False
-|-- NameMap >> NameMap
 |-- DefaultView >> 2
 |-- TotalsRow >> False
 |-- FilterOnLoad >> False

@@ -54,6 +54,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- eventPerson (Field in tblDummy3)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -80,6 +81,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- eventPosition (Field in tblDummy3)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -106,6 +108,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Multi (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -134,6 +137,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Field (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -162,6 +166,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- String (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -190,6 +195,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Indexer (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -218,6 +224,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- id (Field in tblDummy3)
 |------ Attributes >> 17
 |------ CollatingOrder >> 1033
@@ -242,6 +249,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Personal_ID (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -270,6 +278,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Stately_ID (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -298,6 +307,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- LastName (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -326,6 +336,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- FirstName (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -354,6 +365,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- MiddleName (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -382,6 +394,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Address1 (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -410,6 +423,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Address2 (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -438,6 +452,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- City (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -466,6 +481,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- State (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -494,6 +510,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- ZIP (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -522,6 +539,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- HomePhone (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -550,6 +568,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- Ethnicity (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -578,6 +597,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- activity (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -606,6 +626,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- student (Field in tblDummy3)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -634,6 +655,7 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID
 |-- date (Field in tblDummy3)
 |------ Attributes >> 1
 |------ CollatingOrder >> 1033
@@ -661,3 +683,4 @@
 |------ ShowDatePicker >> 1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

@@ -26,6 +26,7 @@
 |-- ReadOnlyWhenDisconnected >> False
 |-- DatasheetGridlinesThemeColorIndex >> 3
 |-- DatasheetForeThemeColorIndex >> 0
+|-- GUID >> GUID
 --------------------------------------------------
 |-- Num (Field in tblDummy0)
 |------ Attributes >> 1
@@ -53,3 +54,4 @@
 |------ AggregateType >> -1
 |------ ResultType >> 0
 |------ CurrencyLCID >> 0
+|------ GUID >> GUID

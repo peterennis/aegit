@@ -18,7 +18,6 @@
 |-- DisplayViewsOnSharePointSite >> 1
 |-- StarColumnHidden >> False
 |-- HideNewField >> False
-|-- NameMap >> NameMap
 |-- PublishToWeb >> 1
 --------------------------------------------------
 |-- ID (Field in Customers)
