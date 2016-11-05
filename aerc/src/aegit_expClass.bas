@@ -2349,12 +2349,18 @@ Public Function GetLovefieldType(ByVal strAccessFieldType As String) As String
     End If
 
     Select Case accessFieldType
+        Case "Attachment"
+            GetLovefieldType = "', lf.Type.OBJECT)."        ' "OBJECT"
         Case "Counter"
             GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
+        Case "Currency"
+            GetLovefieldType = "', lf.Type.STRING)."        ' "STRING"
         Case "DateTime"
             GetLovefieldType = "', lf.Type.DATE_TIME)."     ' "DATE_TIME"
         Case "Double"
             GetLovefieldType = "', lf.Type.NUMBER)."        ' "NUMBER"
+        Case "Hyperlink"
+            GetLovefieldType = "', lf.Type.STRING)."        ' "STRING"
         Case "Integer"
             GetLovefieldType = "', lf.Type.INTEGER)."       ' "INTEGER"
         Case "Long"

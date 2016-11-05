@@ -134,15 +134,15 @@ schemaBuilder.createTable('Customers').
     addColumn('State/Province', lf.Type.STRING).
     addColumn('ZIP/Postal Code', lf.Type.STRING).
     addColumn('Country/Region', lf.Type.STRING).
-    addColumn('Web Page
+    addColumn('Web Page', lf.Type.STRING).
     addColumn('Notes', lf.Type.STRING).
-    addColumn('Attachments
+    addColumn('Attachments', lf.Type.OBJECT).
 schemaBuilder.createTable('Order Details').
     addColumn('ID', lf.Type.INTEGER).
     addColumn('Order ID', lf.Type.INTEGER).
     addColumn('Product ID', lf.Type.INTEGER).
     addColumn('Quantity', lf.Type.NUMBER).
-    addColumn('Unit Price
+    addColumn('Unit Price', lf.Type.STRING).
     addColumn('Discount', lf.Type.NUMBER).
     addColumn('Status ID', lf.Type.INTEGER).
     addColumn('Date Allocated', lf.Type.DATE_TIME).
@@ -161,8 +161,8 @@ schemaBuilder.createTable('Orders').
     addColumn('Ship State/Province', lf.Type.STRING).
     addColumn('Ship ZIP/Postal Code', lf.Type.STRING).
     addColumn('Ship Country/Region', lf.Type.STRING).
-    addColumn('Shipping Fee
-    addColumn('Taxes
+    addColumn('Shipping Fee', lf.Type.STRING).
+    addColumn('Taxes', lf.Type.STRING).
     addColumn('Payment Type', lf.Type.STRING).
     addColumn('Paid Date', lf.Type.DATE_TIME).
     addColumn('Notes', lf.Type.STRING).
