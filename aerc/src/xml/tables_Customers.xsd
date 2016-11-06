@@ -135,7 +135,7 @@
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
-        <xsd:element name="Attachments" minOccurs="0" od:jetType="complex" od:jetComplexType="MSysComplexType_Attachment" maxOccurs="unbounded">
+        <xsd:element name="MyAttachments" minOccurs="0" od:jetType="complex" od:jetComplexType="MSysComplexType_Attachment" maxOccurs="unbounded">
           <xsd:complexType>
             <xsd:sequence>
               <xsd:element name="FileData" minOccurs="0" od:jetType="oleobject" od:sqlSType="image">

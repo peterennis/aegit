@@ -200,7 +200,7 @@ ZIP/Postal Code         Text                  15
 Country/Region          Text                  50                 
 Web Page                Hyperlink             0                  
 Notes                   Memo                  0                  
-Attachments             Attachment            4                  
+MyAttachments           Attachment            4                  
 
 
 --------------------

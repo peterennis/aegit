@@ -56,7 +56,7 @@ Currentdb.Execute strSQL
 
 'Local Table
 
-strSQL="CREATE TABLE [Customers] ( [ID] Counter, [Company] Text (50), [Last Name] Text (50), [First Name] Text (50), [E-mail Address] Text (50), [Job Title] Text (50), [Business Phone] Text (25), [Home Phone] Text (25), [Mobile Phone] Text (25), [Fax Number] Text (25), [Address] Memo, [City] Text (50), [State/Province] Text (50), [ZIP/Postal Code] Text (15), [Country/Region] Text (50), [Web Page] Hyperlink, [Notes] Memo, [Attachments] Attachment )"
+strSQL="CREATE TABLE [Customers] ( [ID] Counter, [Company] Text (50), [Last Name] Text (50), [First Name] Text (50), [E-mail Address] Text (50), [Job Title] Text (50), [Business Phone] Text (25), [Home Phone] Text (25), [Mobile Phone] Text (25), [Fax Number] Text (25), [Address] Memo, [City] Text (50), [State/Province] Text (50), [ZIP/Postal Code] Text (15), [Country/Region] Text (50), [Web Page] Hyperlink, [Notes] Memo, [MyAttachments] Attachment )"
 Currentdb.Execute strSQL
 
 'Local Table

@@ -367,6 +367,16 @@
               StarColumnHidden            False
               HideNewField  False
               PublishToWeb   1 
+              GUID          GUID
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex              -1 
+              AlternateBackThemeColorIndex              -1 
+              AlternateBackTint            100 
+              AlternateBackShade           100 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex         -1 
+              DatasheetForeThemeColorIndex              -1 
 >>>Order Details
               Name          Order Details
               Owner         admin

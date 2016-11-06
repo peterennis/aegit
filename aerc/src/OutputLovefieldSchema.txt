@@ -136,7 +136,7 @@ schemaBuilder.createTable('Customers').
     addColumn('Country/Region', lf.Type.STRING).
     addColumn('Web Page', lf.Type.STRING).
     addColumn('Notes', lf.Type.STRING).
-    addColumn('Attachments', lf.Type.OBJECT).
+    addColumn('MyAttachments', lf.Type.OBJECT).
 schemaBuilder.createTable('Order Details').
     addColumn('ID', lf.Type.INTEGER).
     addColumn('Order ID', lf.Type.INTEGER).

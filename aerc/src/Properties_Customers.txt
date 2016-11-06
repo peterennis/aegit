@@ -19,6 +19,16 @@
 |-- StarColumnHidden >> False
 |-- HideNewField >> False
 |-- PublishToWeb >> 1
+|-- GUID >> GUID
+|-- BackTint >> 100
+|-- BackShade >> 100
+|-- ThemeFontIndex >> -1
+|-- AlternateBackThemeColorIndex >> -1
+|-- AlternateBackTint >> 100
+|-- AlternateBackShade >> 100
+|-- ReadOnlyWhenDisconnected >> False
+|-- DatasheetGridlinesThemeColorIndex >> -1
+|-- DatasheetForeThemeColorIndex >> -1
 --------------------------------------------------
 |-- ID (Field in Customers)
 |------ Attributes >> 18
@@ -49,6 +59,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Company (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -76,6 +88,8 @@
 |------ TextAlign >> 0
 |------ AggregateType >> -1
 |------ WSSFieldID >> Company
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Last Name (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -103,6 +117,8 @@
 |------ TextAlign >> 0
 |------ AggregateType >> -1
 |------ WSSFieldID >> Title
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- First Name (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -130,6 +146,8 @@
 |------ TextAlign >> 0
 |------ AggregateType >> -1
 |------ WSSFieldID >> FirstName
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- E-mail Address (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -164,6 +182,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Job Title (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -198,6 +218,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Business Phone (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -232,6 +254,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Home Phone (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -266,6 +290,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Mobile Phone (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -300,6 +326,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Fax Number (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -334,6 +362,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Address (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -367,6 +397,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- City (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -401,6 +433,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- State/Province (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -435,6 +469,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- ZIP/Postal Code (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -469,6 +505,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Country/Region (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -503,6 +541,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Web Page (Field in Customers)
 |------ Attributes >> 32770
 |------ CollatingOrder >> 1033
@@ -535,6 +575,8 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
 |-- Notes (Field in Customers)
 |------ Attributes >> 2
 |------ CollatingOrder >> 1033
@@ -568,14 +610,16 @@
 |------ AllowValueListEdits >> False
 |------ TextAlign >> 0
 |------ ShowOnlyRowSourceValues >> False
-|-- Attachments (Field in Customers)
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0
+|-- MyAttachments (Field in Customers)
 |------ Attributes >> 1
-|------ CollatingOrder >> 2
+|------ CollatingOrder >> 5
 |------ Type >> 101
-|------ Name >> Attachments
+|------ Name >> MyAttachments
 |------ OrdinalPosition >> 17
 |------ Size >> 4
-|------ SourceField >> Attachments
+|------ SourceField >> MyAttachments
 |------ SourceTable >> Customers
 |------ DataUpdatable >> False
 |------ DefaultValue >> 
@@ -590,11 +634,5 @@
 |------ ColumnHidden >> False
 |------ DisplayControl >> 126
 |------ AggregateType >> -1
-|------ WSSFieldID >> Attachments
-|------ TextAlign >> 0
-|------ RowSourceType >> Table/Query
-|------ BoundColumn >> 1
-|------ ColumnCount >> 1
-|------ ColumnHeads >> False
-|------ AllowValueListEdits >> False
-|------ ShowOnlyRowSourceValues >> False
+|------ ResultType >> 0
+|------ CurrencyLCID >> 0

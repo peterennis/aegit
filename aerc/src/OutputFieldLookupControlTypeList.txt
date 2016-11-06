@@ -136,7 +136,7 @@
               [Country/Region]             109          TextBox
               [Web Page]     109          TextBox
               [Notes]        109          TextBox
-              [Attachments]  126          
+              [MyAttachments]              126          
 [Order Details]
               [ID]           126          
               [Order ID]     109          TextBox

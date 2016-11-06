@@ -3413,19 +3413,7 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
         Debug.Print , strPathFileName
     Else
     End If
-
-    'strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate, MSysObjects.DateUpdate "
-    
-    '    strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
-    '    strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "
-    '    strSQL = strSQL & vbCrLf & "IIf(type = -32764,""Report"", IIf(type=-32766,""Module"", "
-    '    strSQL = strSQL & vbCrLf & "IIf(type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
-    '    strSQL = strSQL & vbCrLf & "MSysObjects.Name, MSysObjects.DateCreate "
-    '    strSQL = strSQL & vbCrLf & "FROM MSysObjects "
-    '    strSQL = strSQL & vbCrLf & "WHERE Type IN (1, 5, 6, -32768, -32764, -32766, -32761) "
-    '    strSQL = strSQL & vbCrLf & "AND Left$(Name, 4) <> ""MSys"" AND Left$(Name, 1) <> ""~"" "
-    '    strSQL = strSQL & vbCrLf & "ORDER BY IIf(type=1,""Table"",IIf(type=6,""Linked Table"",IIf(type=5,""Query"",IIf(type=-32768,""Form"",IIf(type=-32764,""Report"",IIf(type=-32766,""Module"",IIf(type=-32761,""Module"",""Unknown""))))))), MSysObjects.Name;"
-
+  
     ' Ref: https://support.office.com/en-za/article/FormatDateTime-Function-aef62949-f957-4ba4-94ff-ace14be4f1ca
     ' Format DateCreate as short date, vbShortDate = 2
     'SELECT IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))) AS [Object Type], MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated
@@ -3451,7 +3439,7 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
         ' create it ...
         CurrentDb.CreateQueryDef MY_QUERY_NAME, strSQL
     Else
-        ' other wise, update the sql
+        ' otherwise, update the sql
         CurrentDb.QueryDefs(MY_QUERY_NAME).SQL = strSQL
     End If
 
