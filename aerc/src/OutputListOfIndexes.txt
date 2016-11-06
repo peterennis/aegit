@@ -45,9 +45,9 @@
 >[StateName]  [StateName], 
 ========================================
 <<<[City]>>>
-              Index:[{3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}]
+              Index:[CountryCity]
                             Field Name:Country
->[{3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}] [Country], 
+>[CountryCity]              [Country], 
               Index:[id]
                             Field Name:id
 >[id]         [id], 
@@ -60,13 +60,112 @@
                             Field Name:Capital
 >[CountryKey] [Capital], 
 ========================================
+<<<[Customers]>>>
+              Index:[City]
+                            Field Name:City
+>[City]       [City], 
+              Index:[Company]
+                            Field Name:Company
+>[Company]    [Company], 
+              Index:[First Name]
+                            Field Name:First Name
+>[First Name] [First Name], 
+              Index:[Last Name]
+                            Field Name:Last Name
+>[Last Name]  [Last Name], 
+              Index:[Postal Code]
+                            Field Name:ZIP/Postal Code
+>[Postal Code]              [ZIP/Postal Code], 
+              Index:[PrimaryKey]
+                            Field Name:ID
+>[PrimaryKey] [ID], 
+              Index:[State/Province]
+                            Field Name:State/Province
+>[State/Province]           [State/Province], 
+========================================
+<<<[Order Details]>>>
+              Index:[ID]
+                            Field Name:ID
+>[ID]         [ID], 
+              Index:[Inventory ID]
+                            Field Name:Inventory ID
+>[Inventory ID]             [Inventory ID], 
+              Index:[OrderDetails]
+                            Field Name:Order ID
+>[OrderDetails]             [Order ID], 
+              Index:[OrderID]
+                            Field Name:Order ID
+>[OrderID]    [Order ID], 
+              Index:[OrdersOrder Details]
+                            Field Name:Order ID
+>[OrdersOrder Details]      [Order ID], 
+              Index:[OrderStatusLookup]
+                            Field Name:Status ID
+>[OrderStatusLookup]        [Status ID], 
+              Index:[PrimaryKey]
+                            Field Name:ID
+>[PrimaryKey] [ID], 
+              Index:[ProductID]
+                            Field Name:Product ID
+>[ProductID]  [Product ID], 
+              Index:[ProductsOnOrders]
+                            Field Name:Product ID
+>[ProductsOnOrders]         [Product ID], 
+              Index:[Purchase Order ID]
+                            Field Name:Purchase Order ID
+>[Purchase Order ID]        [Purchase Order ID], 
+              Index:[Status ID]
+                            Field Name:Status ID
+>[Status ID]  [Status ID], 
+========================================
+<<<[Orders]>>>
+              Index:[CustomerID]
+                            Field Name:Customer ID
+>[CustomerID] [Customer ID], 
+              Index:[CustomerOnOrders]
+                            Field Name:Customer ID
+>[CustomerOnOrders]         [Customer ID], 
+              Index:[CustomersOrders]
+                            Field Name:Customer ID
+>[CustomersOrders]          [Customer ID], 
+              Index:[EmployeeID]
+                            Field Name:Employee ID
+>[EmployeeID] [Employee ID], 
+              Index:[EmployeesOnOrders]
+                            Field Name:Employee ID
+>[EmployeesOnOrders]        [Employee ID], 
+              Index:[ID]
+                            Field Name:Order ID
+>[ID]         [Order ID], 
+              Index:[OrderStatus]
+                            Field Name:Status ID
+>[OrderStatus]              [Status ID], 
+              Index:[PrimaryKey]
+                            Field Name:Order ID
+>[PrimaryKey] [Order ID], 
+              Index:[ShipperID]
+                            Field Name:Shipper ID
+>[ShipperID]  [Shipper ID], 
+              Index:[ShipperOnOrder]
+                            Field Name:Shipper ID
+>[ShipperOnOrder]           [Shipper ID], 
+              Index:[Status ID]
+                            Field Name:Status ID
+>[Status ID]  [Status ID], 
+              Index:[TaxStatusOnOrders]
+                            Field Name:Tax Status
+>[TaxStatusOnOrders]        [Tax Status], 
+              Index:[ZIP/Postal Code]
+                            Field Name:Ship ZIP/Postal Code
+>[ZIP/Postal Code]          [Ship ZIP/Postal Code], 
+========================================
 <<<[Province]>>>
-              Index:[{36303D70-828A-4503-83EE-4890C93A3B32}]
-                            Field Name:Country
->[{36303D70-828A-4503-83EE-4890C93A3B32}] [Country], 
               Index:[CapProv]
                             Field Name:CapProv
 >[CapProv]    [CapProv], 
+              Index:[CountryProvince]
+                            Field Name:Country
+>[CountryProvince]          [Country], 
               Index:[id]
                             Field Name:id
 >[id]         [id], 

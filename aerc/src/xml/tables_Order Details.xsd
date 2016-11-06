@@ -15,6 +15,7 @@
         <od:index index-name="Inventory ID" index-key="Inventory_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="OrderDetails" index-key="Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="OrderID" index-key="Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="OrdersOrder Details" index-key="Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="OrderStatusLookup" index-key="Status_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="PrimaryKey" index-key="ID " primary="yes" unique="yes" clustered="no" order="asc"></od:index>
         <od:index index-name="ProductID" index-key="Product_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>

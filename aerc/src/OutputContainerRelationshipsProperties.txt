@@ -1,5 +1,5 @@
->>>{36303D70-828A-4503-83EE-4890C93A3B32}
-              Name          {36303D70-828A-4503-83EE-4890C93A3B32}
+>>>CountryCity
+              Name          CountryCity
               Owner         admin
               UserName      admin
               Permissions    1048575 
@@ -7,8 +7,8 @@
               Container     Relationships
               DateCreated   DateCreated
               LastUpdated   LastUpdated
->>>{3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}
-              Name          {3D8A6A66-7C2A-4D6B-B840-26B4A99F6CB8}
+>>>CountryProvince
+              Name          CountryProvince
               Owner         admin
               UserName      admin
               Permissions    1048575 
@@ -16,8 +16,8 @@
               Container     Relationships
               DateCreated   DateCreated
               LastUpdated   LastUpdated
->>>{7DB718EE-F06C-4776-9FE1-B723D6AD5495}
-              Name          {7DB718EE-F06C-4776-9FE1-B723D6AD5495}
+>>>CustomersOrders
+              Name          CustomersOrders
               Owner         admin
               UserName      admin
               Permissions    1048575 
@@ -25,8 +25,8 @@
               Container     Relationships
               DateCreated   DateCreated
               LastUpdated   LastUpdated
->>>{A58A6B4A-9309-400A-B070-6C76493383AD}
-              Name          {A58A6B4A-9309-400A-B070-6C76493383AD}
+>>>OrdersOrder Details
+              Name          OrdersOrder Details
               Owner         admin
               UserName      admin
               Permissions    1048575 

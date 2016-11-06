@@ -13,6 +13,7 @@
       <xsd:appinfo>
         <od:index index-name="CustomerID" index-key="Customer_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="CustomerOnOrders" index-key="Customer_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
+        <od:index index-name="CustomersOrders" index-key="Customer_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="EmployeeID" index-key="Employee_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="EmployeesOnOrders" index-key="Employee_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
         <od:index index-name="ID" index-key="Order_x0020_ID " primary="no" unique="no" clustered="no" order="asc"></od:index>
