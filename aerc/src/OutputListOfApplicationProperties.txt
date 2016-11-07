@@ -4,7 +4,7 @@ Transactions: True, 1, False;
 Updatable: True, 1, False;
 CollatingOrder: 1033, 3, False;
 QueryTimeout: 60, 3, False;
-Version: 12.0, 12, False;
+Version: 14.0, 12, False;
 RecordsAffected: 0, 4, False;
 ReplicaID: , 15, False;
 DesignMasterID: , 15, False;
