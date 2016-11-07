@@ -9,6 +9,8 @@ Option Explicit
 ' V-Tools - Ref: http://www.skrol29.com/us/vtools.php
 ' Bill Mosca - Ref: http://www.thatlldoit.com/Pages/utilsaddins.aspx
 ' Rubberduck - https://github.com/rubberduck-vba/Rubberduck
+' DataNumen Access Repair - Ref: https://www.datanumen.com/access-repair/
+
 
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
@@ -21,6 +23,8 @@ Option Explicit
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219149
 ' *** CreateObject("System.Collections.ArrayList")
 ' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
+' Microsoft Access - Really useful queries - http://www.sqlquery.com/Microsoft_Access_useful_queries.html
+' Ref: http://www.micronetservices.com/manage_remote_backend_access_database.htm
 '
 '
 ' Guides:
@@ -28,6 +32,8 @@ Option Explicit
 ' Ref: http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=410
 ' *** Ref: http://www.vb123.com/toolshed/02_accvb/remotequeries.htm - Remote Queries In Microsoft Access
 ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/f8a050b9-3e12-465e-9448-36be59827581/vba-code-redirect-results-from-immediate-window-to-an-access-table-or-csv-file?forum=accessdev
+' Access Articles- Ref: http://www.databasejournal.com/article.php/1464721
+' Long Binary Data - Ref: http://www.ammara.com/support/technologies/long-binary-data.html
 '
 '
 '=============================================================================================================================
@@ -37,8 +43,9 @@ Option Explicit
 ' %118 -
 ' %117 -
 ' %116 -
-' %115 -
-' %114 -
+' %115 - MSys*XML ??? What creates it?
+' %114 - How to clean up MSysObjects, Ref: http://www.office-forums.com/threads/how-to-clean-up-msysobjects.681442/ - MSysComplexColumns holds information and references about the "Attachments" type field, and Multi-Valued-Fields
+'           Follow up with this technical discussion - Ref: https://social.msdn.microsoft.com/Forums/office/en-US/f3fc50e9-0c2d-45fc-b9fa-bc3b852cda6b/is-it-possible-to-get-at-the-table-underlying-an-attachment-field?forum=accessdev
 ' %112 - Test ExportXML method, allows developers to export XML data, schemas, and presentation information from ... or the Microsoft Access database engine, Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
