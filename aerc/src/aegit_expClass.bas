@@ -4210,7 +4210,7 @@ Private Sub OutputListOfMacros(Optional ByVal varDebug As Variant)
 
     Const strSQL As String = "SELECT m.Name, """" AS Attribute " & _
         "FROM MSysObjects AS m " & _
-        "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" AND " & _
+        "WHERE m.Name Not Like ""~%"" And m.Name Not Like ""zzz*"" And m.Name Not Like ""~TMP*"" AND " & _
         "m.Type=-32766 " & _
         "ORDER BY m.Name;"
     
