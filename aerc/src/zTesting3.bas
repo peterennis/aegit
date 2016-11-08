@@ -4,7 +4,7 @@ Option Explicit
 Public Sub ExportTableDataWithSchema(strTableName As String)
 ' Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
 ' expression .ExportXML(ObjectType, DataSource, DataTarget, SchemaTarget, PresentationTarget, ImageTarget, Encoding, OtherFlags, WhereCondition, AdditionalData)
-' expression A variable that represents an Application object.
+' expression - A variable that represents an Application object.
 '
 ' Usage Example: ExportTableDataWithSchema "tblDummy3"
 
