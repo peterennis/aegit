@@ -41,7 +41,6 @@ Option Explicit
 ' %120 -
 ' %119 -
 ' %118 -
-' %117 -
 ' %116 - MSysIMEXColumns and MSysIMEXSpecsThese two tables contain information about any Import/Export Specifications you have created in Access.
 '           The MSysIMEXSpecs contains general information about the specification, while MSysIMEXColumns includes the column mapping for each specification.
 '           Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
@@ -78,7 +77,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20161105 - v19903 -
+'20161107 - v19904 -
+    ' FIXED - %117 - Make schema output optional and default is false
     ' FIXED - %113 - Lovefield export unknown type Hyperlink, Attachment, Currency - from Customers; Orders; Order Details - tables imported from Northwind 2007 for testing
 '20161007 - v19901 -
     ' FIXED - %110 - aeDescribeIndexField should also return the index name - this is useful also for ODBC linked SQL Server tables

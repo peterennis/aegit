@@ -81,6 +81,7 @@ Private Type myExportType                   ' Initialize defaults as:
     ExportQAT As Boolean                    ' False
     ExportCBID As Boolean                   ' False
     ExportNoODBCTablesInfo As Boolean       ' True, default does not export info about ODBC linked tables
+    ExportCreateDbScript As Boolean         ' False,
 End Type
 
 Private myExclude As myExclusions
@@ -541,6 +542,16 @@ Public Property Get SchemaFile(Optional ByVal varDebug As Variant) As Boolean
         OutputTheSchemaFile "varDebug"
     End If
     SchemaFile = True
+End Property
+
+Public Property Let ExportSchemaFile(ByVal IsExportSchema As Boolean)
+    On Error GoTo 0
+    Debug.Print "Property Let ExportSchemaFile"
+    If IsExportSchema Then
+        aegitExport.ExportCreateDbScript = True
+    Else
+        aegitExport.ExportCreateDbScript = False
+    End If
 End Property
 
 Public Property Get SourceFolder() As String
@@ -1198,12 +1209,14 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputListOfApplicationProperties
     OutputQueriesSqlText
     OutputFieldLookupControlTypeList
-    OutputTheSchemaFile
-    OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
-    OutputTheSqlOnlyFile strTheSourceLocation & aeSchemaFile & ".sql", strTheSourceLocation & aeSchemaFile & ".sql" & ".only"
-    KillProperly (strTheSourceLocation & aeSchemaFile & ".sql")
+    If aegitExport.ExportCreateDbScript Then
+        OutputTheSchemaFile
+        OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
+        OutputTheSqlOnlyFile strTheSourceLocation & aeSchemaFile & ".sql", strTheSourceLocation & aeSchemaFile & ".sql" & ".only"
+        KillProperly (strTheSourceLocation & aeSchemaFile & ".sql")
+        GenerateLovefieldSchema strTheSourceLocation & aeSchemaFile & ".sql" & ".only", strTheSourceLocation & aeLoveSchema
+    End If
     OutputListOfIndexes strTheSourceLocation & aeIndexLists
-    GenerateLovefieldSchema strTheSourceLocation & aeSchemaFile & ".sql" & ".only", strTheSourceLocation & aeLoveSchema
     'Stop
 
     If aegitExport.ExportQAT Then
