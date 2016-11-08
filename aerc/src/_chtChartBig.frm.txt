@@ -16,18 +16,15 @@ Begin Form
     Width =24495
     DatasheetFontHeight =11
     ItemSuffix =81
-    Right =24255
-    Bottom =11505
-    DatasheetGridlinesColor =14806254
+    Right =18825
+    Bottom =9675
+    DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0xe51f90fed85ee440
     End
     GUID = Begin
         0x39299089e39d014ea0d8b06af84efcec
     End
-    NameMap = Begin
-    End
-    Caption ="Charts"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
     End
@@ -167,7 +164,7 @@ Begin Form
                     Height =8550
                     TabIndex =1
                     BorderColor =10921638
-                    ForeColor =4138256
+                    ForeColor =3484194
                     Name ="chtChart"
                     OleData = Begin
                     End

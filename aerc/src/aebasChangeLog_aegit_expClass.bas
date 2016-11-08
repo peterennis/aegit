@@ -41,7 +41,7 @@ Option Explicit
 ' %120 -
 ' %119 -
 ' %118 -
-' %116 - MSysIMEXColumns and MSysIMEXSpecsThese two tables contain information about any Import/Export Specifications you have created in Access.
+' %116 - MSysIMEXColumns and MSysIMEXSpecs - These two tables contain information about any Import/Export Specifications you have created in Access.
 '           The MSysIMEXSpecs contains general information about the specification, while MSysIMEXColumns includes the column mapping for each specification.
 '           Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 ' %115 - MSysAccessXML ??? - Ref: http://www.databasejournal.com/features/msaccess/article.php/3528491/Use-System-Tables-to-Manage-Objects.htm
@@ -50,7 +50,6 @@ Option Explicit
 ' %112 - Test ExportXML method, allows developers to export XML data, schemas, and presentation information from ... or the Microsoft Access database engine, Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
 ' %101 - Importing and Exporting XML Data Using Microsoft Access, Ref: https://technet.microsoft.com/en-us/library/ee692914.aspx
 ' %100 - Automation Error on CreateObject("System.Collections.ArrayList"), install .Net 3.5 SP1 (includes .NET 2) for W10, Ref: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/9bfcd001-5168-4cff-b2ba-6b8e8d465138/excel-2010-vb-runtime-error-2146232576-80131700-automation-error-on?forum=exceldev
-' %096 - Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
 ' %095 - Set minimum support to 2010 - Ref: http://stackoverflow.com/documentation/vba/3364/conditional-compilation/11558/using-declare-imports-that-work-on-all-versions-of-office#t=201607251720494878701, Rubberduck
 ' %093 - Create a results folder to hold test output and configure the test system to use it
 ' %089 - Add timing and test ouptut to a file; identify PC, OS, Office
@@ -58,9 +57,6 @@ Option Explicit
 ' %086 - Improve debug ouput, provide trace levels and logging to file. Ref: http://pixcels.nl/debug-and-trace-in-vba/
 ' %085 - Automation goal - Ref: https://github.com/blog/1271-how-we-ship-github-for-windows
 ' %084 - On Error Goto 0 - Ref: http://www.peterssoftware.com/t_fixerr.htm (k)
-' %078 - Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
-' %071 - Add varDebug for schema output debugging
-' %070 - Create multi field index sample then fix access and lf schema output; tblDummy3 is test case, Relates to %080, %098
 ' %062 - Fix backend testing for existence of srcbe, srcbe/xml, srcbe/xmldata folders
 ' %057 - MS Access Control Property.Type not making sense, Ref: http://stackoverflow.com/questions/27682177/ms-access-control-property-type-not-making-sense
 ' %052 - Create property to define text encoding output
@@ -77,9 +73,13 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20161107 - v19904 -
+'20161107 - v19905 -
     ' FIXED - %117 - Make schema output optional and default is false
     ' FIXED - %113 - Lovefield export unknown type Hyperlink, Attachment, Currency - from Customers; Orders; Order Details - tables imported from Northwind 2007 for testing
+    ' ONHOLD - %096 - Relates to %117, Bug - CreateDb schema is treating relationships as an index. Need different SQL for the relationships.
+    ' ONHOLD - %078 - Relates to %117, Parse output error for table aeItems, it has no index or primary key and is missing the semicolon for LF creation
+    ' ONHOLD - %071 - Relates to %117, Add varDebug for schema output debugging
+    ' ONHOLD - %070 - Relates to %117, Create multi field index sample then fix access and lf schema output; tblDummy3 is test case, Relates to %080, %098
 '20161007 - v19901 -
     ' FIXED - %110 - aeDescribeIndexField should also return the index name - this is useful also for ODBC linked SQL Server tables
 '20161007 - v199 -
