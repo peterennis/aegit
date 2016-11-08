@@ -42,8 +42,10 @@ Option Explicit
 ' %119 -
 ' %118 -
 ' %117 -
-' %116 -
-' %115 - MSys*XML ??? What creates it?
+' %116 - MSysIMEXColumns and MSysIMEXSpecsThese two tables contain information about any Import/Export Specifications you have created in Access.
+'           The MSysIMEXSpecs contains general information about the specification, while MSysIMEXColumns includes the column mapping for each specification.
+'           Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
+' %115 - MSysAccessXML ??? - Ref: http://www.databasejournal.com/features/msaccess/article.php/3528491/Use-System-Tables-to-Manage-Objects.htm
 ' %114 - How to clean up MSysObjects, Ref: http://www.office-forums.com/threads/how-to-clean-up-msysobjects.681442/ - MSysComplexColumns holds information and references about the "Attachments" type field, and Multi-Valued-Fields
 '           Follow up with this technical discussion - Ref: https://social.msdn.microsoft.com/Forums/office/en-US/f3fc50e9-0c2d-45fc-b9fa-bc3b852cda6b/is-it-possible-to-get-at-the-table-underlying-an-attachment-field?forum=accessdev
 ' %112 - Test ExportXML method, allows developers to export XML data, schemas, and presentation information from ... or the Microsoft Access database engine, Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx

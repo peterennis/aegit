@@ -25,7 +25,6 @@ ShowDocumentTabs: True, 1, False;
 Picture Property Storage Format: 0, 4, False;
 WebDesignMode: 0, 2, False;
 CheckTruncatedNumFields: 1, 4, False;
-Theme Resource Name: Office Theme, 10, False;
 StartUpShowDBWindow: True, 1, False;
 StartUpShowStatusBar: True, 1, False;
 AllowShortcutMenus: True, 1, False;

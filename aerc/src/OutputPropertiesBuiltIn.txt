@@ -133,11 +133,6 @@ Type: dbLong
 Value: 1
 Inherited: False;
 ---
-Name: Theme Resource Name
-Type: dbText
-Value: Office Theme
-Inherited: False;
----
 Name: StartUpShowDBWindow
 Type: dbBoolean
 Value: True
