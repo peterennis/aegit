@@ -16,18 +16,15 @@ Begin Form
     Width =17280
     DatasheetFontHeight =11
     ItemSuffix =88
-    Right =17535
-    Bottom =9465
-    DatasheetGridlinesColor =14806254
+    Right =18825
+    Bottom =9675
+    DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0xe51f90fed85ee440
     End
     GUID = Begin
         0x4856ce7a473f5b408f8199caa1a2da40
     End
-    NameMap = Begin
-    End
-    Caption ="KPI01"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
     End
@@ -133,12 +130,13 @@ Begin Form
                     SizeMode =1
                     RowSourceTypeInt =2
                     OverlapFlags =85
+                    OLETypeAllowed =1
                     Left =120
                     Top =750
                     Width =15915
                     Height =8550
                     BorderColor =10921638
-                    ForeColor =4138256
+                    ForeColor =3484194
                     Name ="chtKPI01"
                     OleData = Begin
                     End
@@ -177,8 +175,8 @@ Begin Form
                     LayoutCachedTop =10140
                     LayoutCachedWidth =5160
                     LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -205,8 +203,8 @@ Begin Form
                     LayoutCachedTop =10140
                     LayoutCachedWidth =6060
                     LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -234,8 +232,8 @@ Begin Form
                     LayoutCachedTop =10140
                     LayoutCachedWidth =6960
                     LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -263,8 +261,8 @@ Begin Form
                     LayoutCachedTop =10140
                     LayoutCachedWidth =7860
                     LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -292,8 +290,8 @@ Begin Form
                     LayoutCachedTop =10140
                     LayoutCachedWidth =8760
                     LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -320,8 +318,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =5160
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -348,8 +346,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =6060
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -376,8 +374,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =6960
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -405,8 +403,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =7860
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -434,8 +432,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =8760
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -463,8 +461,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =9660
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -492,8 +490,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =10560
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -521,8 +519,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =11460
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -550,8 +548,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =12360
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -579,8 +577,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =13260
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -608,8 +606,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =14160
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -637,8 +635,8 @@ Begin Form
                     LayoutCachedTop =10680
                     LayoutCachedWidth =15060
                     LayoutCachedHeight =11085
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -755,8 +753,8 @@ Begin Form
                     LayoutCachedTop =10140
                     LayoutCachedWidth =9660
                     LayoutCachedHeight =10545
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -834,8 +832,8 @@ Begin Form
                     LayoutCachedTop =10260
                     LayoutCachedWidth =2820
                     LayoutCachedHeight =11040
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
@@ -864,8 +862,8 @@ Begin Form
                     LayoutCachedTop =10260
                     LayoutCachedWidth =3840
                     LayoutCachedHeight =11040
-                    BackColor =14136213
-                    BorderColor =14136213
+                    BackColor =15123357
+                    BorderColor =15123357
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
                     WebImagePaddingRight =1
