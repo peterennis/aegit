@@ -81,8 +81,8 @@
               XP, 2003      Run Permissions                            1 
               XP, 2003      ANSI Query Mode                            0 
               XP, 2003      ANSI Query Mode Default                    0 
-                  2003      Query Design Font Name                    Segoe UI
-                  2003      Query Design Font Size                     8 
+                  2003      Query Design Font Name                    Courier New
+                  2003      Query Design Font Size                     10 
                   2003      Show Property Update Options buttons      -1 
 >>>Forms/Reports Tab
               XP, 2003      Selection Behavior           0 
@@ -194,8 +194,8 @@
               2007, 2010, 2013            Enable AutoJoin             -1 
               2007, 2010, 2013            ANSI Query Mode              0 
               2007, 2010, 2013            ANSI Query Mode Default      0 
-              2007, 2010, 2013            Query Design Font Name      Segoe UI
-              2007, 2010, 2013            Query Design Font Size       8 
+              2007, 2010, 2013            Query Design Font Name      Courier New
+              2007, 2010, 2013            Query Design Font Size       10 
    >>>Forms/Reports section
               2007, 2010, 2013            Selection Behavior           0 
               2007, 2010, 2013            Form Template               Normal
