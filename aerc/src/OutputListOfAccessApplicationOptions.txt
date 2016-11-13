@@ -1,5 +1,5 @@
 >>>Standard Options
-              2000          AppTitle                    aegit 1.9.906
+              2000          AppTitle                    aegit 1.9.907
               2000          AppIcon                     .\adaept64.ico
               2000          AllowFullMenus              True
               2000          AllowShortcutMenus          True
