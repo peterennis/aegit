@@ -1,13 +1,11 @@
 Option Compare Database
 Option Explicit
 
-' Author: James Kauffman
-' Source: http://www.saplsmw.com
-' Update: Peter F. Ennis
-
-'Note a dependency on ADODB plug-in in earlier Access versions.
-
 Public Function RemoveTableDuplicates(ByVal strTableName As String) As Boolean
+    ' Author: James Kauffman
+    ' Source: http://www.saplsmw.com
+    ' Update: Peter F. Ennis
+    ' Note a dependency on ADODB plug-in in earlier Access versions.
 
     On Error GoTo 0
     Dim rs As DAO.Recordset
@@ -66,7 +64,7 @@ Public Function RemoveTableDuplicates(ByVal strTableName As String) As Boolean
 End Function
 
 Public Function ExportToText(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
-' This function ONLY exports to Tab-delimited text files with the headers and without text idenitifiers (No quotes!)
+    ' This function ONLY exports to Tab-delimited text files with the headers and without text idenitifiers (No quotes!)
     
     On Error GoTo 0
     Dim rst As DAO.Recordset
@@ -159,8 +157,8 @@ Public Sub TestExportToTextUnicode()
 End Sub
 
 Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
-' Written by Jimbo at SAPLSMW.com
-' Special thanks: accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
+    ' Written by Jimbo at SAPLSMW.com
+    ' Special thanks: accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
 
     On Error GoTo 0
     Dim rst As DAO.Recordset
@@ -255,7 +253,7 @@ Public Function ExportToTextUnicode(ByVal strTableName As String, ByVal strFileN
 End Function
 
 Public Function ImportFromAccess(ByVal strSourceFile As String, ByVal strSourceTable As String, _
-                                    ByVal strTargetTable As String) As Boolean
+    ByVal strTargetTable As String) As Boolean
 
     On Error GoTo 0
     Dim nCurrent As Long
@@ -304,8 +302,8 @@ Public Function ImportFromAccess(ByVal strSourceFile As String, ByVal strSourceT
 End Function
 
 Public Function ImportFromText(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strDelim As String = vbTab) As Boolean
-' This function should be used only for importing extraordinarily large text files.
-' Files of normal length should be imported using the Access import utility.
+    ' This function should be used only for importing extraordinarily large text files.
+    ' Files of normal length should be imported using the Access import utility.
   
     On Error GoTo 0
     Dim rs As DAO.Recordset
@@ -511,7 +509,7 @@ ErrorHandler:
 End Function
 
 Public Function TableScrub(ByVal strTableName As String) As Long
-' This function removes leading spaces and trailing spaces from every string field in a table.
+    ' This function removes leading spaces and trailing spaces from every string field in a table.
 
     On Error GoTo 0
     Dim strTemp As String
@@ -557,7 +555,7 @@ Public Function TableScrub(ByVal strTableName As String) As Long
                 End If
                 nLength = nLength - Len(strTemp)
             End If
-        TableScrub = TableScrub + nLength
+            TableScrub = TableScrub + nLength
 
         Next
         rs.Update
@@ -570,7 +568,7 @@ Public Function TableScrub(ByVal strTableName As String) As Long
 End Function
 
 Public Function FixCase(ByVal strText As String) As String
-' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
+    ' Convert to sentence case: UPPER CASE COMPANY NAME-->Upper Case Company Name
     Dim strParse As String
     On Error GoTo 0
     strParse = Trim$(strText & vbNullString)
@@ -595,7 +593,7 @@ Public Function Deduplicate(ByVal strValue As String) As Boolean
 End Function
 
 Public Function DeleteRecords(ByVal strTableName As String) As Boolean
-' Delete all records from a table--easier than creating a delete query.
+    ' Delete all records from a table--easier than creating a delete query.
     On Error GoTo 0
     CurrentDb.Execute ("DELETE * FROM " & strTableName)
     DeleteRecords = True

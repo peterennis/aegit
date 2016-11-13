@@ -107,14 +107,14 @@ Private Function IsArrayInitialized(ByVal arr As Variant) As Boolean
 End Function
 
 Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
-                                Optional ByVal varSrcFldr As Variant, _
-                                Optional ByVal varXmlFldr As Variant, _
-                                Optional ByVal varXmlDataFldr As Variant, _
-                                Optional ByVal varSrcFldrBe As Variant, _
-                                Optional ByVal varXmlFldrBe As Variant, _
-                                Optional ByVal varXmlDataFldrBe As Variant, _
-                                Optional ByVal varBackEndDbOne As Variant, _
-                                Optional ByVal varFrontEndApp As Variant)
+    Optional ByVal varSrcFldr As Variant, _
+    Optional ByVal varXmlFldr As Variant, _
+    Optional ByVal varXmlDataFldr As Variant, _
+    Optional ByVal varSrcFldrBe As Variant, _
+    Optional ByVal varXmlFldrBe As Variant, _
+    Optional ByVal varXmlDataFldrBe As Variant, _
+    Optional ByVal varBackEndDbOne As Variant, _
+    Optional ByVal varFrontEndApp As Variant)
 
     Debug.Print "aegitClassTest"
     On Error GoTo PROC_ERR
@@ -140,7 +140,7 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
 
     If IsArrayInitialized(gvarMyTablesForExportToXML) Then
         Debug.Print , "UBound(gvarMyTablesForExportToXML) = " & UBound(gvarMyTablesForExportToXML)
-'''        oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
+        'oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML
     Else
         Debug.Print "Array gvarMyTablesForExportToXML is not initialized! There are no tables selected for data export."
     End If

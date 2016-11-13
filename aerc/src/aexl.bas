@@ -8,8 +8,8 @@ Public Sub TestExportToExcel()
 End Sub
 
 Public Function ExportToExcel(ByVal strTableName As String, ByVal strFileName As String, Optional ByVal strTabName As String = "Sheet1") As Boolean
-' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
-' Ref: http://www.granite.ab.ca/access/latebinding.htm
+    ' Original example Ref: http://www.saplsmw.com, James Kauffman, Ver 1.20 Updated 17 Jun 2010
+    ' Ref: http://www.granite.ab.ca/access/latebinding.htm
 
     Dim objExcel As Object
     Set objExcel = CreateObject("Excel.Application")

@@ -13,14 +13,14 @@ Public Function IsMacHidden(ByVal strMacroName As String) As Boolean
 End Function
 
 Public Sub NoBOM(ByVal strFileName As String)
-' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
-' Use the same file name for input and output
+    ' Ref: http://www.experts-exchange.com/Programming/Languages/Q_27478996.html
+    ' Use the same file name for input and output
     On Error GoTo 0
 
     ' Define needed constants
-'    Const ForReading As Integer = 1
+    'Const ForReading As Integer = 1
     Const ForWriting As Integer = 2
-'    Const TriStateUseDefault As Integer = -2
+    'Const TriStateUseDefault As Integer = -2
     Const adTypeText As Integer = 2
     Dim strContent As String
 
@@ -57,9 +57,9 @@ End Sub
 'Dev ashish
 '
 'Function strTran(ByVal sInString As String, _
-                            sFindString As String, _
-                            sReplaceString As String, _
-                            Optional iCount As Variant) As String
+'    sFindString As String, _
+'    sReplaceString As String, _
+'    Optional iCount As Variant) As String
 '   Dim iSpot As Integer, iCtr As Integer
 '   If IsMissing(iCount) Then iCount = 1
 '   If iCount = 0 Then iCount = 1000
@@ -80,8 +80,8 @@ End Sub
 'http://computer-programming-forum.com/1-vba/34d339bb6472eb9d.htm
 
 Public Sub CatalogUserCreatedObjects()
-' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc
-' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
+    ' Ref: http://blogannath.blogspot.com/2010/03/microsoft-access-tips-tricks-working.html#ixzz3WCBJcxwc
+    ' Ref: http://stackoverflow.com/questions/5286620/saving-a-query-via-access-vba-code
     On Error GoTo 0
 
     Dim strSQL As String

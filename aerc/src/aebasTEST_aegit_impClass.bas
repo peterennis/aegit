@@ -54,7 +54,7 @@ Private Function ImpPassFail(ByVal bln As Boolean) As String
 End Function
 
 Public Function aegitClassImportTest(Optional ByVal varDebug As Variant, _
-                                Optional ByVal varImpFldr As Variant) As Boolean
+    Optional ByVal varImpFldr As Variant) As Boolean
 
     On Error GoTo 0
 

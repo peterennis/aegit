@@ -26,7 +26,7 @@ Private Sub TestLoggingProcessExample()
 End Sub
 
 Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
     On Error GoTo 0
     mlngStartTime = timeGetTime()
     'Debug.Print ">aeBeginLogging"; Space$(1); "mlngStartTime=" & mlngStartTime
@@ -43,7 +43,7 @@ Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As
 End Sub
 
 Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
     On Error GoTo 0
     If aeLog.blnNoTrace Then
         'Debug.Print "E1: aeEndLogging", "blnNoTrace=" & aeLog.blnNoTrace
@@ -64,7 +64,7 @@ Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As V
 End Sub
 
 Private Sub aePrintLog(Optional ByVal varOne As Variant = vbNullString, _
-        Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
+    Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
     On Error GoTo 0
     If aeLog.blnNoTrace Or aeLog.blnNoPrint Then
         Exit Sub
@@ -89,12 +89,12 @@ Private Function PassFail(ByVal blnPassFail As Boolean, Optional ByVal varOther 
 End Function
 
 Public Sub Run_aeTestLogging()
-'    Test_DocumentTheDatabase
-'    Test_Exists
-'    Test_GetReferences
-'    Test_DocumentTables
-'    Test_DocumentRelations
-'    Test_DocumentTablesXML
+    'Test_DocumentTheDatabase
+    'Test_Exists
+    'Test_GetReferences
+    'Test_DocumentTables
+    'Test_DocumentRelations
+    'Test_DocumentTablesXML
     Test_SchemaFile "WithDebugging"
 
 End Sub

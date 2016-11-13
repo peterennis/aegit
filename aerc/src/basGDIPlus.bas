@@ -42,13 +42,13 @@ End Type
 
 
 #If Win64 Then
-    Private Type PICTDESC
-        cbSizeOfStruct As Long
-        PicType As Long
-        hImage As LongPtr
-        xExt As Long
-        yExt As Long
-    End Type
+Private Type PICTDESC
+    cbSizeOfStruct As Long
+    PicType As Long
+    hImage As LongPtr
+    xExt As Long
+    yExt As Long
+End Type
     
     Private Type GDIPStartupInput
         GdiplusVersion As Long

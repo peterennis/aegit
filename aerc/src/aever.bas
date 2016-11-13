@@ -7,11 +7,11 @@ Public Sub Version_Test()
 End Sub
 
 Public Function GetEdition(ByVal strAppVersion As String, ByVal strGuid As String) As String
-' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
-' Ref: http://p2p.wrox.com/excel-vba/82653-what-best-way-get-excel-version.html
-' Ref: http://colinlegg.wordpress.com/2013/02/02/office-edition-in-vba/
-' Ref: https://community.spiceworks.com/topic/150065-how-to-remove-ms-office-2010-standard-registry-keys
-' This one is for Office Home and Student 2010): {90140000-003D-0000-0000-0000000FF1CE}
+    ' Ref: http://www.makeuseof.com/tag/monitor-vba-apps-running-slick-script/
+    ' Ref: http://p2p.wrox.com/excel-vba/82653-what-best-way-get-excel-version.html
+    ' Ref: http://colinlegg.wordpress.com/2013/02/02/office-edition-in-vba/
+    ' Ref: https://community.spiceworks.com/topic/150065-how-to-remove-ms-office-2010-standard-registry-keys
+    ' This one is for Office Home and Student 2010): {90140000-003D-0000-0000-0000000FF1CE}
 
     On Error GoTo PROC_ERR
 
@@ -67,13 +67,13 @@ PROC_EXIT:
 PROC_ERR:
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetEdition of Class aegit_expClass"
     GetEdition = strERR_MSG & vbNewLine & _
-                    "Error Number: " & CStr(Err.Number) & _
-                    vbNewLine & "Error Desc: " & Err.Description
+        "Error Number: " & CStr(Err.Number) & _
+        vbNewLine & "Error Desc: " & Err.Description
  
 End Function
  
 Private Function GetEdition2000_Office(ByVal strSku As String) As String
-' Ref: http://support.microsoft.com/kb/230848/
+    ' Ref: http://support.microsoft.com/kb/230848/
  
     On Error GoTo 0
     Select Case strSku
@@ -151,7 +151,7 @@ Private Function GetEdition2000_Office(ByVal strSku As String) As String
 End Function
  
 Private Function GetEdition2002_Office(ByVal strSku As String) As String
-' Ref: http://support.microsoft.com/kb/302663/
+    ' Ref: http://support.microsoft.com/kb/302663/
  
     On Error GoTo 0
     Select Case strSku
@@ -235,7 +235,7 @@ Private Function GetEdition2002_Office(ByVal strSku As String) As String
 End Function
  
 Private Function GetEdition2003_Office(ByVal strSku As String) As String
-' Ref: http://support.microsoft.com/kb/832672/
+    ' Ref: http://support.microsoft.com/kb/832672/
  
     On Error GoTo 0
     Select Case strSku
@@ -337,7 +337,7 @@ Private Function GetEdition2003_Office(ByVal strSku As String) As String
 End Function
  
 Private Function GetEdition2007_Office(ByVal strSku As String) As String
-' Ref: http://support.microsoft.com/kb/928516/
+    ' Ref: http://support.microsoft.com/kb/928516/
  
     On Error GoTo 0
     Select Case strSku
@@ -435,7 +435,7 @@ Private Function GetEdition2007_Office(ByVal strSku As String) As String
 End Function
  
 Private Function GetEdition2010_Office(ByVal strSku As String) As String
-' Ref: http://support.microsoft.com/kb/2186281
+    ' Ref: http://support.microsoft.com/kb/2186281
  
     On Error GoTo 0
     Select Case strSku
@@ -500,7 +500,7 @@ Private Function GetEdition2010_Office(ByVal strSku As String) As String
 End Function
  
 Private Function GetEdition2013_Office(ByVal strSku As String) As String
-' Ref: http://support.microsoft.com/kb/2786054
+    ' Ref: http://support.microsoft.com/kb/2786054
  
     On Error GoTo 0
     Debug.Print "GetEdition2013_Office strSku=" & strSku
@@ -559,7 +559,7 @@ Private Function GetEdition2013_Office(ByVal strSku As String) As String
 End Function
 
 Private Function GetEdition2016_Office(ByVal strSku As String) As String
-' Ref: https://support.microsoft.com/en-us/kb/3120274
+    ' Ref: https://support.microsoft.com/en-us/kb/3120274
  
     On Error GoTo 0
     Debug.Print "GetEdition2016_Office strSku=" & strSku

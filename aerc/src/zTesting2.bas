@@ -8,17 +8,17 @@ Private Ref As Reference
 #Const FSORef = 0
 
 Public Sub ExportIt(ByVal strTableName As String)
-' Exports the table to the default folder
-' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=65762
+    ' Exports the table to the default folder
+    ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=65762
 
     On Error GoTo 0
     Application.ExportXML ObjectType:=acExportTable, DataSource:=strTableName, _
-                    DataTarget:=strTableName & ".xml"
+        DataTarget:=strTableName & ".xml"
 
 End Sub
 
 Public Sub TestHideQueryDef()
-' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/25d9dafd-b446-40ba-8dbd-a0efa983f2ff/how-to-programatically-hide-a-querydef
+    ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/25d9dafd-b446-40ba-8dbd-a0efa983f2ff/how-to-programatically-hide-a-querydef
 
     On Error GoTo 0
     ' Query1 returns the list of all queries
@@ -40,13 +40,13 @@ Public Sub TestHideQueryDef()
 End Sub
 
 Public Sub OutputListOfAllQueries()
-' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
+    ' Ref: http://www.pcreview.co.uk/forums/runtime-error-7874-a-t2922352.html
 
     On Error GoTo 0
     Const strSQL As String = "SELECT m.Name " & vbCrLf & _
-                                "FROM MSysObjects AS m " & vbCrLf & _
-                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
-                                "ORDER BY m.Name;"
+        "FROM MSysObjects AS m " & vbCrLf & _
+        "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
+        "ORDER BY m.Name;"
     ' NOTE: Use zzz* for the query name so that it will be ignored by aegit code export
     Const strTempQuery As String = "zzz___MyTempQuery___"
 
@@ -74,9 +74,9 @@ Public Sub MakeTableWithListOfAllQueries()
     Const strTempTable As String = "zzzTmpTblQueries"
     ' NOTE: Use zzz* for the table name so that it will be ignored by aegit code export
     Const strSQL As String = "SELECT m.Name, 0 AS Hidden INTO " & strTempTable & " " & vbCrLf & _
-                                "FROM MSysObjects AS m " & vbCrLf & _
-                                "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
-                                "ORDER BY m.Name;"
+        "FROM MSysObjects AS m " & vbCrLf & _
+        "WHERE (((m.Name) Not ALike ""~%"") AND ((m.Type)=5)) " & vbCrLf & _
+        "ORDER BY m.Name;"
 
     ' RunSQL works for Action queries
     DoCmd.SetWarnings False
@@ -87,8 +87,8 @@ Public Sub MakeTableWithListOfAllQueries()
 End Sub
 
 Public Function ExportTheTableData(ByVal strTbl As String, ByVal strSpec As String, _
-                    ByVal strPathFileName As String, ByVal blnHasHeaders As Boolean) As Boolean
-' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
+    ByVal strPathFileName As String, ByVal blnHasHeaders As Boolean) As Boolean
+    ' Ref: http://www.btabdevelopment.com/ts/2010ExpSpec
 
     On Error GoTo 0
     DoCmd.TransferText acExportDelim, strSpec, strTbl, strPathFileName, blnHasHeaders
@@ -483,44 +483,44 @@ End Function
 '
 
 Private Function GetFiles(ByVal strPath As String, _
-                ByVal dctDict As Object, _
-                Optional ByVal blnRecursive As Boolean) As Boolean
-'Function GetFiles(strPath As String, _
-                dctDict As Dictionary, _
-                Optional blnRecursive As Boolean) As Boolean
-' This procedure returns all the files in a directory into
-' a Dictionary object. If called recursively, it also returns
-' all files in subfolders.
+    ByVal dctDict As Object, _
+    Optional ByVal blnRecursive As Boolean) As Boolean
+    'Function GetFiles(strPath As String, _
+    '    dctDict As Dictionary, _
+    '    Optional blnRecursive As Boolean) As Boolean
+    ' This procedure returns all the files in a directory into
+    ' a Dictionary object. If called recursively, it also returns
+    ' all files in subfolders.
 
-    #If FSORef = 0 Then  ' Late binding
-        ' Ref: http://msdn.microsoft.com/en-us/library/office/gg278516.aspx
-        Dim fsoSysObj As Object
-        Dim oFolder As Object
-        Dim oSubFolder As Object
-        Dim oFile As Object
-        Set fsoSysObj = CreateObject("Scripting.FileSystemObject")
-        ' <=======
-        ' Remove the Object reference if it is present
-        On Error Resume Next
-        Set Ref = References!Scripting
-        If Err.Number = 0 Then
-            References.Remove Ref
-        ElseIf Err.Number <> 9 Then 'Subscript out of range meaning not reference not found
-            MsgBox Err.Description
-            Exit Function
-        End If
-        ' Use your own error handling label here
-        On Error GoTo PROC_ERR
-        '<=======
-    #Else
-        ' A reference to the Object Library must be specified
-        Dim fsoSysObj As FileSystemObject
-        Dim oFolder As Folder
-        Dim oSubFolder As Folder
-        Dim oFile As File
-        ' Return new FileSystemObject.
-        Set fsoSysObj = New FileSystemObject
-    #End If
+#If FSORef = 0 Then  ' Late binding
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/gg278516.aspx
+    Dim fsoSysObj As Object
+    Dim oFolder As Object
+    Dim oSubFolder As Object
+    Dim oFile As Object
+    Set fsoSysObj = CreateObject("Scripting.FileSystemObject")
+    ' <=======
+    ' Remove the Object reference if it is present
+    On Error Resume Next
+    Set Ref = References!Scripting
+    If Err.Number = 0 Then
+        References.Remove Ref
+    ElseIf Err.Number <> 9 Then 'Subscript out of range meaning not reference not found
+        MsgBox Err.Description
+        Exit Function
+    End If
+    ' Use your own error handling label here
+    On Error GoTo PROC_ERR
+    '<=======
+#Else
+    ' A reference to the Object Library must be specified
+    Dim fsoSysObj As FileSystemObject
+    Dim oFolder As Folder
+    Dim oSubFolder As Folder
+    Dim oFile As File
+    ' Return new FileSystemObject.
+    Set fsoSysObj = New FileSystemObject
+#End If
 
 
     On Error Resume Next
@@ -558,18 +558,18 @@ PROC_ERR:
 End Function
 
 Public Sub TestGetFiles()
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa164475(v=office.10).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164475(v=office.10).aspx
 
     On Error GoTo 0
-    #If FSORef = 0 Then  ' Late binding
-        Dim dctDict As Object
-        ' Create new dictionary
-        Set dctDict = CreateObject("Scripting.Dictionary")
-    #Else
-        ' A reference to the Object Library must be specified
-        Dim dctDict As Dictionary
-        Set dctDict = New Dictionary
-    #End If
+#If FSORef = 0 Then  ' Late binding
+    Dim dctDict As Object
+    ' Create new dictionary
+    Set dctDict = CreateObject("Scripting.Dictionary")
+#Else
+    ' A reference to the Object Library must be specified
+    Dim dctDict As Dictionary
+    Set dctDict = New Dictionary
+#End If
 
     Dim varItem As Variant
     Dim GetTempDir As String

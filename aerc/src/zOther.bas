@@ -17,12 +17,12 @@ Public Sub TestGetSQLServerData()
 End Sub
 
 Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As String) As Boolean
-' Ref: http://www.saplsmw.com/node/11
-' Ref: http://www.eileenslounge.com/viewtopic.php?f=29&t=5886
-' Ref: *** http://social.msdn.microsoft.com/Forums/office/en-US/00c3f331-15e6-44f2-9e6f-abede3a986d8/sql-server-data-connectivity-best-practices-for-ms-access-vba ***
-' http://www.connectionstrings.com/sql-server-native-client-11-0-odbc-driver/
-' oConn.Properties("Prompt") = adPromptAlways
-' oConn.Open "Driver={SQL Server Native Client 11.0};Server=myServerAddress;Database=myDataBase;"
+    ' Ref: http://www.saplsmw.com/node/11
+    ' Ref: http://www.eileenslounge.com/viewtopic.php?f=29&t=5886
+    ' Ref: *** http://social.msdn.microsoft.com/Forums/office/en-US/00c3f331-15e6-44f2-9e6f-abede3a986d8/sql-server-data-connectivity-best-practices-for-ms-access-vba ***
+    ' http://www.connectionstrings.com/sql-server-native-client-11-0-odbc-driver/
+    ' oConn.Properties("Prompt") = adPromptAlways
+    ' oConn.Open "Driver={SQL Server Native Client 11.0};Server=myServerAddress;Database=myDataBase;"
 
     On Error GoTo 0
     Dim strODBC As String
@@ -79,57 +79,57 @@ Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As
         ElseIf otbl.Name = "DatabaseLog" Then
         ElseIf otbl.Name = "ErrorLog" Then
         Else
-        Debug.Print otbl.Type, otbl.Name
-        If otbl.Type = "TABLE" Then
-
-            orst.Open "HumanResources." & otbl.Name, cnn, adOpenDynamic, adLockOptimistic
-            For Each tdf In dbs.TableDefs
-                'Debug.Print , tdf.Name
-                If tdf.Name = otbl.Name Then
-                    ' This table already exists!  Delete it.
-                    dbs.TableDefs.Delete (otbl.Name)
-                End If
-            Next
-
-            Set tdf = dbs.CreateTableDef(otbl.Name)
-            For Each ocol In otbl.Columns
-                Debug.Print "ocol=" & ocol.Name, "DefinedSize=" & ocol.DefinedSize
-                If ocol.DefinedSize < 256 And ocol.DefinedSize <> 0 Then
-                    Set fld = tdf.CreateField(ocol.Name, dbText, ocol.DefinedSize)
-                ElseIf ocol.DefinedSize = 0 Then
-                    Set fld = tdf.CreateField(ocol.Name, dbText, 255)
-                Else
-                    'MsgBox "ocol.DefinedSize=" & ocol.DefinedSize
-                    Set fld = tdf.CreateField(ocol.Name, dbMemo, 255)
-                    'Stop
-                End If
-                fld.AllowZeroLength = True
-                fld.Required = False
-                tdf.Fields.Append fld
-            Next
-            dbs.TableDefs.Append tdf
-            dbs.TableDefs.Refresh
-
-            Set rst = dbs.OpenRecordset(otbl.Name)
-            Do While Not orst.EOF
-                rst.AddNew
-                For Each ofld In orst.Fields
-                    ' Avoid type mismatch with trim and &""
-                    Debug.Print "ofld.Name=" & ofld.Name
-                    rst.Fields(ofld.Name).Value = Trim$(vbNullString & ofld.Value)
+            Debug.Print otbl.Type, otbl.Name
+            If otbl.Type = "TABLE" Then
+    
+                orst.Open "HumanResources." & otbl.Name, cnn, adOpenDynamic, adLockOptimistic
+                For Each tdf In dbs.TableDefs
+                    'Debug.Print , tdf.Name
+                    If tdf.Name = otbl.Name Then
+                        ' This table already exists!  Delete it.
+                        dbs.TableDefs.Delete (otbl.Name)
+                    End If
                 Next
-                rst.Update
-                orst.MoveNext
-                If Second(Now) <> intSec Then
-                    ' update once each second
-                    intSec = Second(Now)
-                    vx = DoEvents()
-                End If
-            Loop
-            rst.Close
-
-            orst.Close
-        End If
+    
+                Set tdf = dbs.CreateTableDef(otbl.Name)
+                For Each ocol In otbl.Columns
+                    Debug.Print "ocol=" & ocol.Name, "DefinedSize=" & ocol.DefinedSize
+                    If ocol.DefinedSize < 256 And ocol.DefinedSize <> 0 Then
+                        Set fld = tdf.CreateField(ocol.Name, dbText, ocol.DefinedSize)
+                    ElseIf ocol.DefinedSize = 0 Then
+                        Set fld = tdf.CreateField(ocol.Name, dbText, 255)
+                    Else
+                        'MsgBox "ocol.DefinedSize=" & ocol.DefinedSize
+                        Set fld = tdf.CreateField(ocol.Name, dbMemo, 255)
+                        'Stop
+                    End If
+                    fld.AllowZeroLength = True
+                    fld.Required = False
+                    tdf.Fields.Append fld
+                Next
+                dbs.TableDefs.Append tdf
+                dbs.TableDefs.Refresh
+    
+                Set rst = dbs.OpenRecordset(otbl.Name)
+                Do While Not orst.EOF
+                    rst.AddNew
+                    For Each ofld In orst.Fields
+                        ' Avoid type mismatch with trim and &""
+                        Debug.Print "ofld.Name=" & ofld.Name
+                        rst.Fields(ofld.Name).Value = Trim$(vbNullString & ofld.Value)
+                    Next
+                    rst.Update
+                    orst.MoveNext
+                    If Second(Now) <> intSec Then
+                        ' update once each second
+                        intSec = Second(Now)
+                        vx = DoEvents()
+                    End If
+                Loop
+                rst.Close
+    
+                orst.Close
+            End If
         End If
     Next
     dbs.Close

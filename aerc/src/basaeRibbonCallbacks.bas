@@ -1,7 +1,6 @@
 Option Compare Database
 Option Explicit
 
-'@Ignore EncapsulatePublicField, MoveFieldCloserToUsage
 Public gobjaeRibbon As IRibbonUI
 
 Public Sub OnRibbonLoad(ByVal ribbon As IRibbonUI)
@@ -19,7 +18,6 @@ Public Sub OnActionButton(ByVal control As IRibbonControl)
     End Select
 End Sub
 
-'@Ignore ProcedureCanBeWrittenAsFunction
 Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
     ' Callbackname in XML File "getEnabled"
     On Error GoTo 0
@@ -29,7 +27,6 @@ Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
     End Select
 End Sub
 
-'@Ignore ProcedureCanBeWrittenAsFunction
 Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     ' Callbackname in XML File "getVisible"
     On Error GoTo 0
@@ -39,7 +36,6 @@ Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     End Select
 End Sub
 
-'@Ignore ProcedureCanBeWrittenAsFunction
 Public Sub GetImages(ByVal control As IRibbonControl, ByRef Image As Variant)
 
     On Error GoTo 0
@@ -60,31 +56,31 @@ Private Function getTheValue(ByVal strTag As String, ByVal strValue As String) A
     ' getTheValue("DefaultValue:=Test;Enabled:=0;Visible:=1", "DefaultValue")
     ' Return           : "Test"
     ' *************************************************************
-      
-   On Error Resume Next
-      
-   Dim workTb()     As String
-   Dim Ele()        As String
-   Dim myVariabs()  As String
-   Dim i            As Integer
 
-      workTb = Split(strTag, ";")
+    On Error Resume Next
       
-      ReDim myVariabs(LBound(workTb) To UBound(workTb), 0 To 1)
-      For i = LBound(workTb) To UBound(workTb)
-         Ele = Split(workTb(i), ":=")
-         myVariabs(i, 0) = Ele(0)
-         If UBound(Ele) = 1 Then
+    Dim workTb() As String
+    Dim Ele() As String
+    Dim myVariabs() As String
+    Dim i As Integer
+
+    workTb = Split(strTag, ";")
+    
+    ReDim myVariabs(LBound(workTb) To UBound(workTb), 0 To 1)
+    For i = LBound(workTb) To UBound(workTb)
+        Ele = Split(workTb(i), ":=")
+        myVariabs(i, 0) = Ele(0)
+        If UBound(Ele) = 1 Then
             myVariabs(i, 1) = Ele(1)
-         End If
-      Next
-      
-      For i = LBound(myVariabs) To UBound(myVariabs)
-         If strValue = myVariabs(i, 0) Then
+        End If
+    Next
+    
+    For i = LBound(myVariabs) To UBound(myVariabs)
+        If strValue = myVariabs(i, 0) Then
             getTheValue = myVariabs(i, 1)
-         End If
-      Next
-      
+        End If
+    Next
+
 End Function
 
 Public Function getIconFromTable(ByVal strFileName As String) As Picture

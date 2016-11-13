@@ -4,7 +4,7 @@ Option Explicit
 Private Declare PtrSafe Function GetTickCount Lib "kernel32" () As Long
 
 Public Sub HashAllModules()
-' mwolfe02, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/1966
+    ' mwolfe02, Ref: https://github.com/rubberduck-vba/Rubberduck/issues/1966
 
     On Error GoTo 0
 
@@ -21,34 +21,39 @@ Public Sub HashAllModules()
         Dim objLoaded As Boolean
         objLoaded = obj.IsLoaded
 
-        If Not objLoaded Then DoCmd.OpenModule obj.Name
+        If Not objLoaded Then
+            DoCmd.OpenModule obj.Name
+        End If
+
         Dim mdl As Module
         Set mdl = Application.Modules(obj.Name)
         LineCount = LineCount + mdl.CountOfLines
 
-        'Convert the module contents to a byte array...
+        ' Convert the module contents to a byte array...
         Dim Content() As Byte
         Content = mdl.Lines(1, mdl.CountOfLines)
 
-        '...and hash it
+        ' ...and hash it
         Dim HashedBytes As Variant
         HashedBytes = enc.ComputeHash_2((Content))
 
-        'Convert the hashed byte array to a hex string
+        ' Convert the hashed byte array to a hex string
         Dim Pos As Integer
         Dim HexedHash As String
         HexedHash = vbNullString
         For Pos = 1 To LenB((HashedBytes))
             HexedHash = HexedHash & LCase$(Right$("0" & Hex$(AscB(MidB$(HashedBytes, Pos, 1))), 2))
         Next
-        Debug.Print HexedHash, mdl.Name    'Returns a 40 byte/character hex string
+        Debug.Print HexedHash, mdl.Name    ' Returns a 40 byte/character hex string
 
         Set mdl = Nothing
-        If Not objLoaded Then DoCmd.Close acModule, obj.Name
+        If Not objLoaded Then
+            DoCmd.Close acModule, obj.Name
+        End If
 
     Next obj
     Set enc = Nothing
-    Debug.Print "Done...processed "; CurrentProject.AllModules.Count; "modules with"; _
-                LineCount; "lines of code in"; GetTickCount - s; "ms"
+    Debug.Print "Done !!! processed "; CurrentProject.AllModules.Count; "modules with"; _
+        LineCount; "lines of code in"; GetTickCount - s; "ms"
 
 End Sub

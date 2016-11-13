@@ -111,10 +111,10 @@ Public Function SpFolder(ByVal SpName As String) As String
 End Function
    
 Public Sub ExportAllModulesToFile()
-' Ref: http://wiki.lessthandot.com/index.php/Code_and_Code_Windows
-' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
-' The reference for the FileSystemObject Object is Windows Script Host Object Model
-' but it not necessary to add the reference for this procedure.
+    ' Ref: http://wiki.lessthandot.com/index.php/Code_and_Code_Windows
+    ' Ref: http://stackoverflow.com/questions/2794480/exporting-code-from-microsoft-access
+    ' The reference for the FileSystemObject Object is Windows Script Host Object Model
+    ' but it not necessary to add the reference for this procedure.
     On Error GoTo 0
 
     Dim fso As Object
@@ -132,7 +132,7 @@ Public Sub ExportAllModulesToFile()
     strTxtFile = SpFolder(Desktop) & "\" & Replace(CurrentProject.Name, ".", "_") & ".txt"
     Debug.Print "strTxtFile = " & strTxtFile
     Set fil = fso.CreateTextFile(SpFolder(Desktop) & "\" _
-            & Replace(CurrentProject.Name, ".", " ") & ".txt")
+        & Replace(CurrentProject.Name, ".", " ") & ".txt")
 
     ' For each component in the project ...
     For Each mdl In VBE.ActiveVBProject.VBComponents
@@ -158,18 +158,18 @@ Public Sub ExportAllModulesToFile()
 End Sub
 
 Public Sub SetRefToLibrary()
-' http://www.exceltoolset.com/setting-a-reference-to-the-vba-extensibility-library-by-code/
-' Adjusted for Microsoft Access
-' Create a reference to the VBA Extensibility library
+    ' http://www.exceltoolset.com/setting-a-reference-to-the-vba-extensibility-library-by-code/
+    ' Adjusted for Microsoft Access
+    ' Create a reference to the VBA Extensibility library
     On Error Resume Next        ' in case the reference already exits
     Access.Application.VBE.ActiveVBProject.References _
-                  .AddFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 0
+        .AddFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 0
 End Sub
 
 Public Function CodeLinesInProjectCount() As Long
-' Ref: http://www.cpearson.com/excel/vbe.aspx
-' Adjusted for Microsoft Access and Late Binding. No reference needed.
-' Access.Application is used. Returns -1 if the VBProject is locked.
+    ' Ref: http://www.cpearson.com/excel/vbe.aspx
+    ' Adjusted for Microsoft Access and Late Binding. No reference needed.
+    ' Access.Application is used. Returns -1 if the VBProject is locked.
     On Error GoTo 0
 
     Dim VBP As Object               'VBIDE.VBProject
@@ -200,7 +200,7 @@ Public Function CodeLinesInProjectCount() As Long
 End Function
 
 Public Sub GetAK()
-' Ref: http://compgroups.net/comp.databases.ms-access/can-t-export-a-pass-through-query/357262
+    ' Ref: http://compgroups.net/comp.databases.ms-access/can-t-export-a-pass-through-query/357262
 
     On Error Resume Next
     CurrentDb.Execute "drop table t1"
@@ -211,8 +211,8 @@ Public Sub GetAK()
 End Sub
 
 Public Sub IsAppOpen(ByVal strAppName As String)
-' Ref: http://www.ehow.com/how_12111794_determine-excel-already-running-vba.html
-' Ref: http://msdn.microsoft.com/en-us/library/office/aa164798(v=office.10).aspx
+    ' Ref: http://www.ehow.com/how_12111794_determine-excel-already-running-vba.html
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/aa164798(v=office.10).aspx
 
     Const ERR_APP_NOTRUNNING As Long = 429
 
@@ -251,27 +251,27 @@ Err_IsAppOpen:
 End Sub
 
 Public Sub TestPropertiesOutput()
-' Ref: http://www.everythingaccess.com/tutorials.asp?ID=Accessing-detailed-file-information-provided-by-the-Operating-System
-' Ref: http://www.techrepublic.com/article/a-simple-solution-for-tracking-changes-to-access-data/
-' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/480c17b3-e3d1-4f98-b1d6-fa16b23c6a0d/please-help-to-edit-the-table-query-form-and-modules-modified-date
-'
-' Ref: http://perfectparadigm.com/tip001.html
-'SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate,
-'MSysObjects.Name , MSysObjects.Type
-'FROM MSysObjects;
+    ' Ref: http://www.everythingaccess.com/tutorials.asp?ID=Accessing-detailed-file-information-provided-by-the-Operating-System
+    ' Ref: http://www.techrepublic.com/article/a-simple-solution-for-tracking-changes-to-access-data/
+    ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/480c17b3-e3d1-4f98-b1d6-fa16b23c6a0d/please-help-to-edit-the-table-query-form-and-modules-modified-date
+    '
+    ' Ref: http://perfectparadigm.com/tip001.html
+    'SELECT MSysObjects.DateCreate, MSysObjects.DateUpdate,
+    'MSysObjects.Name , MSysObjects.Type
+    'FROM MSysObjects;
     On Error GoTo 0
 
     Debug.Print ">>>frm_Dummy"
     Debug.Print "DateCreated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("DateCreated").Value
     Debug.Print "LastUpdated", DBEngine(0)(0).Containers("Forms")("frm_Dummy").Properties("LastUpdated").Value
 
-' *** Ref: http://support.microsoft.com/default.aspx?scid=kb%3Ben-us%3B299554 ***
-'When the user initially creates a new Microsoft Access specific-object, such as a form), the database engine still
-'enters the current date and time into the DateCreate and DateUpdate columns in the MSysObjects table. However, when
-'the user modifies and saves the object, Microsoft Access does not notify the database engine; therefore, the
-'DateUpdate column always stays the same.
-
-' Ref: http://questiontrack.com/how-can-i-display-a-last-modified-time-on-ms-access-form-995507.html
+    ' *** Ref: http://support.microsoft.com/default.aspx?scid=kb%3Ben-us%3B299554 ***
+    'When the user initially creates a new Microsoft Access specific-object, such as a form), the database engine still
+    'enters the current date and time into the DateCreate and DateUpdate columns in the MSysObjects table. However, when
+    'the user modifies and saves the object, Microsoft Access does not notify the database engine; therefore, the
+    'DateUpdate column always stays the same.
+    
+    ' Ref: http://questiontrack.com/how-can-i-display-a-last-modified-time-on-ms-access-form-995507.html
 
     Dim obj As AccessObject
     Dim dbs As Object
@@ -390,7 +390,7 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
 End Sub
 
 Public Sub FormUseDefaultPrinter()
-' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
     On Error GoTo 0
 
     Dim obj As Object
@@ -406,7 +406,7 @@ Public Sub FormUseDefaultPrinter()
 End Sub
 
 Public Sub ReportUseDefaultPrinter()
-' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
+    ' Ref: http://msdn.microsoft.com/en-us/library/office/ff845464(v=office.15).aspx
     On Error GoTo 0
 
     Dim obj As Object
@@ -422,14 +422,14 @@ Public Sub ReportUseDefaultPrinter()
 End Sub
 
 Public Sub TestForCreateFormReportTextFile()
-' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
-' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
-' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
-' Ref: http://www.techonthenet.com/excel/formulas/instr.php
-'
-' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
-' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
-' "OleData = Begin"
+    ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
+    ' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
+    ' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
+    ' Ref: http://www.techonthenet.com/excel/formulas/instr.php
+    '
+    ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
+    ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
+    ' "OleData = Begin"
     On Error GoTo 0
 
     Dim fleIn As Integer
@@ -486,15 +486,15 @@ Public Sub TestForCreateFormReportTextFile()
 End Sub
 
 Public Sub CreateFormReportTextFile()
-' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
-' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
-' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
-' Ref: http://www.techonthenet.com/excel/formulas/instr.php
-' Ref: http://stackoverflow.com/questions/8680640/vba-how-to-conditionally-skip-a-for-loop-iteration
-'
-' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
-' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
-' "OleData = Begin"
+    ' Ref: http://social.msdn.microsoft.com/Forums/office/en-US/714d453c-d97a-4567-bd5f-64651e29c93a/how-to-read-text-a-file-into-a-string-1line-at-a-time-search-it-for-keyword-data?forum=accessdev
+    ' Ref: http://bytes.com/topic/access/insights/953655-vba-standard-text-file-i-o-statements
+    ' Ref: http://www.java2s.com/Code/VBA-Excel-Access-Word/File-Path/ExamplesoftheVBAOpenStatement.htm
+    ' Ref: http://www.techonthenet.com/excel/formulas/instr.php
+    ' Ref: http://stackoverflow.com/questions/8680640/vba-how-to-conditionally-skip-a-for-loop-iteration
+    '
+    ' "Checksum =" , "NameMap = Begin",  "PrtMap = Begin",  "PrtDevMode = Begin"
+    ' "PrtDevNames = Begin", "PrtDevModeW = Begin", "PrtDevNamesW = Begin"
+    ' "OleData = Begin"
     On Error GoTo 0
 
     Dim fleIn As Integer
@@ -609,7 +609,7 @@ Public Sub SaveTableMacros()
     On Error GoTo 0
     ' Export Table Data to XML
     ' Ref: http://technet.microsoft.com/en-us/library/ee692914.aspx
-'    Application.ExportXML acExportTable, "aeItems", "C:\Temp\aeItemsData.xml"
+    'Application.ExportXML acExportTable, "aeItems", "C:\Temp\aeItemsData.xml"
 
     ' Save table macros as XML
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=99179
@@ -621,7 +621,7 @@ Public Sub SaveTableMacros()
 End Sub
 
 Public Function IncrementReset() As Long
-' This function returns an incremented number each time it's called.  Resets after 2 seconds.
+    ' This function returns an incremented number each time it's called.  Resets after 2 seconds.
     On Error GoTo 0
     Static nIncrement As Long
     'Now we put in a reset based on time!

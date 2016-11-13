@@ -51,16 +51,16 @@ Public Function fLevelArrow(ByVal intNum As Integer) As String
 End Function
 
 Private Sub ListFileSystemRecursively(ByVal strRootPathName As String, _
-                Optional ByVal varListFiles As Variant, _
-                Optional ByVal varDebug As Variant)
-' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
-'==============================================================================
-' Purpose:  List File System Recursively
-' Author:   Peter Ennis
-' Date:     February 10, 2011
-' Comment:  Fix to work in VBA. Based on MSDN sample for WScript
-' Requires: Late binding does not need reference to Microsoft Scripting Runtime
-'==============================================================================
+    Optional ByVal varListFiles As Variant, _
+    Optional ByVal varDebug As Variant)
+    ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
+    '==============================================================================
+    ' Purpose:  List File System Recursively
+    ' Author:   Peter Ennis
+    ' Date:     February 10, 2011
+    ' Comment:  Fix to work in VBA. Based on MSDN sample for WScript
+    ' Requires: Late binding does not need reference to Microsoft Scripting Runtime
+    '==============================================================================
 
     On Error GoTo 0
     Dim strFolder As String
@@ -102,9 +102,9 @@ Private Sub ListFileSystemRecursively(ByVal strRootPathName As String, _
 End Sub
 
 Private Sub ShowSubFolders(ByVal objFolder As Object, _
-                Optional ByVal varListFilesShow As Variant, _
-                Optional ByVal varDebugShow As Variant)
-' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
+    Optional ByVal varListFilesShow As Variant, _
+    Optional ByVal varDebugShow As Variant)
+    ' Ref: http://blogs.msdn.com/b/gstemp/archive/2004/08/10/212113.aspx
 
     On Error GoTo PROC_ERR
 
@@ -133,10 +133,10 @@ Private Sub ShowSubFolders(ByVal objFolder As Object, _
             mintSubFolderLevel = mintSubFolderLevel + 1
             If Not IsMissing(varDebugShow) Then
                 Debug.Print "Sub Level = " & Format$(mintSubFolderLevel, "00") & " Len = " & Format$(Len(objFolder.Path), "000") _
-                                            & " " & fLevelArrow(mintSubFolderLevel - 1) & " " & objSubFolder.Path
+                    & " " & fLevelArrow(mintSubFolderLevel - 1) & " " & objSubFolder.Path
             End If
             Print #fle, "Sub Level = " & Format$(mintSubFolderLevel, "00") & " Len = " & Format$(Len(objFolder.Path), "000") _
-                                            & " " & fLevelArrow(mintSubFolderLevel - 1) & " " & objSubFolder.Path
+                & " " & fLevelArrow(mintSubFolderLevel - 1) & " " & objSubFolder.Path
             ShowSubFolders objSubFolder, varListFilesShow:=varListFilesShow, varDebugShow:=varDebugShow
         End If
         mintSubFolderLevel = mintSubFolderLevel - 1
@@ -144,7 +144,6 @@ Private Sub ShowSubFolders(ByVal objFolder As Object, _
 
 PROC_EXIT:
     Set colFolders = Nothing
-    'PopCallStack
     Exit Sub
 
 PROC_ERR:
@@ -154,7 +153,6 @@ PROC_ERR:
     Else
         MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ShowSubFolders of Module aefs"
         'If blnDebug Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure ShowSubFolders of Module aefs"
-        'GlobalErrHandler
         Resume PROC_EXIT
     End If
 End Sub

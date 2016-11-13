@@ -105,7 +105,7 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
     iCountIndexFields = 0
     For Each idx In tdf.Indexes
         For Each fld In idx.Fields
-        iCountIndexFields = iCountIndexFields + 1
+            iCountIndexFields = iCountIndexFields + 1
         Next
     Next
     Debug.Print "iCountIndexFields = " & iCountIndexFields
@@ -159,8 +159,8 @@ Private Function aeDescribeIndexField(tdf As DAO.TableDef) As String()
     'Debug.Print ":iCountIndexFields = " & iCountIndexFields
     ' Ref: http://stackoverflow.com/questions/26644231/vba-using-ubound-on-a-multidimensional-array
     'Debug.Print "::arrReturn", "LBound: " & CStr(LBound(arrReturn, 2)), _
-        "UBound: " & CStr(UBound(arrReturn, 2)), _
-        "NumElements: " & CStr(UBound(arrReturn, 2) - LBound(arrReturn, 2) + 1)
+    '    "UBound: " & CStr(UBound(arrReturn, 2)), _
+    '    "NumElements: " & CStr(UBound(arrReturn, 2) - LBound(arrReturn, 2) + 1)
     aeDescribeIndexField = arrReturn()
 End Function
 
@@ -180,8 +180,8 @@ Private Function LCaseCountChar(ByVal searchChar As String, ByVal searchString A
     Dim i As Long
     For i = 1 To Len(searchString)
         If Mid$(LCase$(searchString), i, 1) = LCase(searchChar) Then
-        LCaseCountChar = LCaseCountChar + 1
-    End If
+            LCaseCountChar = LCaseCountChar + 1
+        End If
     Next
 End Function
 
@@ -253,7 +253,7 @@ Public Sub TestGetIndexDetails()
 End Sub
 
 Public Function GetIndexDetails(tdf As DAO.TableDef, strField As String) As String
-' Ref: allenbrowne.com DescribeIndexField
+    ' Ref: allenbrowne.com DescribeIndexField
 
     'Debug.Print "GetIndexDetails"
     Dim ind As DAO.Index
@@ -426,11 +426,13 @@ Private Function zzzLongestTableName() As Integer
     intTNLen = 0
     For Each tdf In CurrentDb.TableDefs
         If Not (Left$(tdf.Name, 4) = "MSys" _
-                Or Left$(tdf.Name, 4) = "~TMP" _
-                Or Left$(tdf.Name, 3) = "zzz") Then
+            Or Left$(tdf.Name, 4) = "~TMP" _
+            Or Left$(tdf.Name, 3) = "zzz") Then
+
             If Len(tdf.Name) > intTNLen Then
                 intTNLen = Len(tdf.Name)
             End If
+
         End If
     Next tdf
 

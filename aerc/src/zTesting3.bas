@@ -2,11 +2,11 @@ Option Compare Database
 Option Explicit
 
 Public Sub ExportTableDataWithSchema(strTableName As String)
-' Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
-' expression .ExportXML(ObjectType, DataSource, DataTarget, SchemaTarget, PresentationTarget, ImageTarget, Encoding, OtherFlags, WhereCondition, AdditionalData)
-' expression - A variable that represents an Application object.
-'
-' Usage Example: ExportTableDataWithSchema "tblDummy3"
+    ' Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
+    ' expression .ExportXML(ObjectType, DataSource, DataTarget, SchemaTarget, PresentationTarget, ImageTarget, Encoding, OtherFlags, WhereCondition, AdditionalData)
+    ' expression - A variable that represents an Application object.
+    '
+    ' Usage Example: ExportTableDataWithSchema "tblDummy3"
 
     Application.ExportXML ObjectType:=acExportTable, DataSource:=strTableName, DataTarget:=strTableName & ".xml", _
         SchemaTarget:=strTableName & ".sch", Encoding:=acUTF8, OtherFlags:=acExportAllTableAndFieldProperties
@@ -15,7 +15,7 @@ Public Sub ExportTableDataWithSchema(strTableName As String)
 End Sub
 
 Public Sub ExportCustomerOrderData()
-' Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
+    ' Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
 
     Dim objOrderInfo As AdditionalData
     Dim objOrderDetailsInfo As AdditionalData
@@ -29,7 +29,7 @@ Public Sub ExportCustomerOrderData()
     ' Export the contents of the Customers table. The Orders and Order
     ' Details tables will be included in the XML file.
     Application.ExportXML ObjectType:=acExportTable, DataSource:="Customers", _
-    DataTarget:="Customer Orders.xml", AdditionalData:=objOrderInfo
+        DataTarget:="Customer Orders.xml", AdditionalData:=objOrderInfo
     Debug.Print "DONE !!!"
 
 End Sub
