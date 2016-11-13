@@ -291,6 +291,15 @@
               DatasheetForeThemeColorIndex              -1 
               PublishToWeb   1 
               GUID          GUID
+>>>aetlkpStates1
+              Name          aetlkpStates1
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
 >>>City
               Name          City
               Owner         admin

@@ -65,6 +65,7 @@
 "Table","aeItems","DateCreated"
 "Table","aetblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger","DateCreated"
 "Table","aetlkpStates","DateCreated"
+"Table","aetlkpStates1","DateCreated"
 "Table","City","DateCreated"
 "Table","Country","DateCreated"
 "Table","Customers","DateCreated"

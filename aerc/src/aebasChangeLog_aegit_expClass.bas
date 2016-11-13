@@ -43,12 +43,13 @@ Option Explicit
 ' %123 -
 ' %122 -
 ' %121 -
-' %120 -
+' %120 - Relates to %116, Create function to output list of MSys tables then work through steps to understand conditions when they are created
 ' %119 - Use HashAllModules for hash signed release of 2.0.0 on GitHhub
 ' %118 - Use HashAllModules for code output hash signed export files
 ' %116 - MSysIMEXColumns and MSysIMEXSpecs - These two tables contain information about any Import/Export Specifications you have created in Access.
 '           The MSysIMEXSpecs contains general information about the specification, while MSysIMEXColumns includes the column mapping for each specification.
 '           Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
+'           Ref: http://stackoverflow.com/questions/143420/how-can-i-modify-a-saved-microsoft-access-2007-or-2010-import-specification
 ' %115 - MSysAccessXML ??? - Ref: http://www.databasejournal.com/features/msaccess/article.php/3528491/Use-System-Tables-to-Manage-Objects.htm
 ' %114 - How to clean up MSysObjects, Ref: http://www.office-forums.com/threads/how-to-clean-up-msysobjects.681442/ - MSysComplexColumns holds information and references about the "Attachments" type field, and Multi-Valued-Fields
 '           Follow up with this technical discussion - Ref: https://social.msdn.microsoft.com/Forums/office/en-US/f3fc50e9-0c2d-45fc-b9fa-bc3b852cda6b/is-it-possible-to-get-at-the-table-underlying-an-attachment-field?forum=accessdev

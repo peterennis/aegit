@@ -152,6 +152,16 @@ StateAbbreviation       Text                  2
 StateName               Text                  15                 
 
 
+--------------------
+TABLE: aetlkpStates1
+--------------------
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
+StateCode               Text                  255                
+StateAbbreviation       Text                  255                
+StateName               Text                  255                
+
+
 -----------
 TABLE: City
 -----------
