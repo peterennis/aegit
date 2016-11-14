@@ -10,8 +10,8 @@ Option Explicit
 ' Bill Mosca - Ref: http://www.thatlldoit.com/Pages/utilsaddins.aspx
 ' Rubberduck - https://github.com/rubberduck-vba/Rubberduck
 ' DataNumen Access Repair - Ref: https://www.datanumen.com/access-repair/
-
-
+'
+'
 ' Research:
 ' Ref: http://www.msoutlook.info/question/482 - officeUI-files
 ' The Ribbon and QAT settings - C:\Users\%username%\AppData\Local\Microsoft\Office
@@ -25,6 +25,7 @@ Option Explicit
 ' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
 ' Microsoft Access - Really useful queries - http://www.sqlquery.com/Microsoft_Access_useful_queries.html
 ' Ref: http://www.micronetservices.com/manage_remote_backend_access_database.htm
+' Microsoft Access Tips and Tricks - Ref: http://www.datagnostics.com/tips.html
 '
 '
 ' Guides:
@@ -38,9 +39,15 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %130 -
+' %129 -
+' %128 -
+' %127 -
+' %126 -
 ' %125 -
-' %124 -
-' %123 -
+' %124 - USysApplicationLog Table - Ref: https://www.amazon.com/Microsoft-Access-2010-Inside-Out/dp/0735626855#reader_0735626855
+'           The USysApplicationLog table is used to record any data macro execution errors - Ref: http://www.accessjunkie.com/Pages/faq2010_32.aspx
+' %123 - VBA How to Hide a table - http://hitechcoach.com/index.php/component/content/article/61-access-databases/tables/63-how-to-hide-a-table
 ' %122 - USysRegInfo is a table that is normally created in databases intended as add-ins, to be managed by the Access Add-In Manager
 ' %121 - Fix needed for export like tables_~TMPCLP132461.xsd
 ' %120 - Relates to %116, Create function to output list of MSys tables then work through steps to understand conditions when they are created
@@ -51,6 +58,9 @@ Option Explicit
 '           Ref: http://www.opengatesw.net/ms-access-tutorials/Access-Articles/Microsoft-Access-System-Tables.htm
 '           Ref: http://stackoverflow.com/questions/143420/how-can-i-modify-a-saved-microsoft-access-2007-or-2010-import-specification
 '           Ref: http://www.blueclaw-db.com/export-specifications.htm
+'           DoCmd.RunSavedImportExport Method - Ref: https://msdn.microsoft.com/en-us/library/office/ff834375.aspx
+'           DoCmd.TransferText Method - Ref: https://msdn.microsoft.com/en-us/library/office/ff835958.aspx
+'           *** Research: VBA Manipulation Of Import/Export Specification - Ref: http://www.utteraccess.com/forum/VBA-Manipulation-Saved-E-t1990584.html ***
 ' %115 - MSysAccessXML ??? - Ref: http://www.databasejournal.com/features/msaccess/article.php/3528491/Use-System-Tables-to-Manage-Objects.htm
 ' %114 - How to clean up MSysObjects, Ref: http://www.office-forums.com/threads/how-to-clean-up-msysobjects.681442/ - MSysComplexColumns holds information and references about the "Attachments" type field, and Multi-Valued-Fields
 '           Follow up with this technical discussion - Ref: https://social.msdn.microsoft.com/Forums/office/en-US/f3fc50e9-0c2d-45fc-b9fa-bc3b852cda6b/is-it-possible-to-get-at-the-table-underlying-an-attachment-field?forum=accessdev
