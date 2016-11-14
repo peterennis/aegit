@@ -44,7 +44,7 @@ Option Explicit
 ' %128 -
 ' %127 -
 ' %126 -
-' %125 -
+' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
 ' %124 - USysApplicationLog Table - Ref: https://www.amazon.com/Microsoft-Access-2010-Inside-Out/dp/0735626855#reader_0735626855
 '           The USysApplicationLog table is used to record any data macro execution errors - Ref: http://www.accessjunkie.com/Pages/faq2010_32.aspx
 ' %123 - VBA How to Hide a table - http://hitechcoach.com/index.php/component/content/article/61-access-databases/tables/63-how-to-hide-a-table
