@@ -42,8 +42,8 @@ Option Explicit
 ' %130 -
 ' %129 -
 ' %128 -
-' %127 -
-' %126 -
+' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
+' %126 - Add Export folder exp, integrate with aegit class
 ' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
 ' %124 - USysApplicationLog Table - Ref: https://www.amazon.com/Microsoft-Access-2010-Inside-Out/dp/0735626855#reader_0735626855
 '           The USysApplicationLog table is used to record any data macro execution errors - Ref: http://www.accessjunkie.com/Pages/faq2010_32.aspx

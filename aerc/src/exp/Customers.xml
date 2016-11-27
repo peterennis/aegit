@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="Customers.xsd" generated="2016-11-26T21:05:02">
+<Customers>
+<ID>1</ID>
+<Company>Company A</Company>
+<Last_x0020_Name>Bedecs</Last_x0020_Name>
+<First_x0020_Name>Anna</First_x0020_Name>
+<Job_x0020_Title>Owner</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 1st Street</Address>
+<City>Seattle</City>
+<State_x002F_Province>WA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>2</ID>
+<Company>Company B</Company>
+<Last_x0020_Name>Gratacos Solsona</Last_x0020_Name>
+<First_x0020_Name>Antonio</First_x0020_Name>
+<Job_x0020_Title>Owner</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 2nd Street</Address>
+<City>Boston</City>
+<State_x002F_Province>MA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>3</ID>
+<Company>Company C</Company>
+<Last_x0020_Name>Axen</Last_x0020_Name>
+<First_x0020_Name>Thomas</First_x0020_Name>
+<Job_x0020_Title>Purchasing Representative</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 3rd Street</Address>
+<City>Los Angelas</City>
+<State_x002F_Province>CA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>4</ID>
+<Company>Company D</Company>
+<Last_x0020_Name>Lee</Last_x0020_Name>
+<First_x0020_Name>Christina</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 4th Street</Address>
+<City>New York</City>
+<State_x002F_Province>NY</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>5</ID>
+<Company>Company E</Company>
+<Last_x0020_Name>O’Donnell</Last_x0020_Name>
+<First_x0020_Name>Martin</First_x0020_Name>
+<Job_x0020_Title>Owner</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 5th Street</Address>
+<City>Minneapolis</City>
+<State_x002F_Province>MN</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>6</ID>
+<Company>Company F</Company>
+<Last_x0020_Name>Pérez-Olaeta</Last_x0020_Name>
+<First_x0020_Name>Francisco</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 6th Street</Address>
+<City>Milwaukee</City>
+<State_x002F_Province>WI</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>7</ID>
+<Company>Company G</Company>
+<Last_x0020_Name>Xie</Last_x0020_Name>
+<First_x0020_Name>Ming-Yang</First_x0020_Name>
+<Job_x0020_Title>Owner</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 7th Street</Address>
+<City>Boise</City>
+<State_x002F_Province>ID</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>8</ID>
+<Company>Company H</Company>
+<Last_x0020_Name>Andersen</Last_x0020_Name>
+<First_x0020_Name>Elizabeth</First_x0020_Name>
+<Job_x0020_Title>Purchasing Representative</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 8th Street</Address>
+<City>Portland</City>
+<State_x002F_Province>OR</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>9</ID>
+<Company>Company I</Company>
+<Last_x0020_Name>Mortensen</Last_x0020_Name>
+<First_x0020_Name>Sven</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 9th Street</Address>
+<City>Salt Lake City</City>
+<State_x002F_Province>UT</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>10</ID>
+<Company>Company J</Company>
+<Last_x0020_Name>Wacker</Last_x0020_Name>
+<First_x0020_Name>Roland</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 10th Street</Address>
+<City>Chicago</City>
+<State_x002F_Province>IL</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>11</ID>
+<Company>Company K</Company>
+<Last_x0020_Name>Krschne</Last_x0020_Name>
+<First_x0020_Name>Peter</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 11th Street</Address>
+<City>Miami</City>
+<State_x002F_Province>FL</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>12</ID>
+<Company>Company L</Company>
+<Last_x0020_Name>Edwards</Last_x0020_Name>
+<First_x0020_Name>John</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>123 12th Street</Address>
+<City>Las Vegas</City>
+<State_x002F_Province>NV</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>13</ID>
+<Company>Company M</Company>
+<Last_x0020_Name>Ludick</Last_x0020_Name>
+<First_x0020_Name>Andre</First_x0020_Name>
+<Job_x0020_Title>Purchasing Representative</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>456 13th Street</Address>
+<City>Memphis</City>
+<State_x002F_Province>TN</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>14</ID>
+<Company>Company N</Company>
+<Last_x0020_Name>Grilo</Last_x0020_Name>
+<First_x0020_Name>Carlos</First_x0020_Name>
+<Job_x0020_Title>Purchasing Representative</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>456 14th Street</Address>
+<City>Denver</City>
+<State_x002F_Province>CO</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>15</ID>
+<Company>Company O</Company>
+<Last_x0020_Name>Kupkova</Last_x0020_Name>
+<First_x0020_Name>Helena</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>456 15th Street</Address>
+<City>Honolulu</City>
+<State_x002F_Province>HI</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>16</ID>
+<Company>Company P</Company>
+<Last_x0020_Name>Goldschmidt</Last_x0020_Name>
+<First_x0020_Name>Daniel</First_x0020_Name>
+<Job_x0020_Title>Purchasing Representative</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>456 16th Street</Address>
+<City>San Francisco</City>
+<State_x002F_Province>CA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>17</ID>
+<Company>Company Q</Company>
+<Last_x0020_Name>Bagel</Last_x0020_Name>
+<First_x0020_Name>Jean Philippe</First_x0020_Name>
+<Job_x0020_Title>Owner</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>456 17th Street</Address>
+<City>Seattle</City>
+<State_x002F_Province>WA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>18</ID>
+<Company>Company R</Company>
+<Last_x0020_Name>Autier Miconi</Last_x0020_Name>
+<First_x0020_Name>Catherine</First_x0020_Name>
+<Job_x0020_Title>Purchasing Representative</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>456 18th Street</Address>
+<City>Boston</City>
+<State_x002F_Province>MA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>19</ID>
+<Company>Company S</Company>
+<Last_x0020_Name>Eggerer</Last_x0020_Name>
+<First_x0020_Name>Alexander</First_x0020_Name>
+<Job_x0020_Title>Accounting Assistant</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 19th Street</Address>
+<City>Los Angelas</City>
+<State_x002F_Province>CA</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>20</ID>
+<Company>Company T</Company>
+<Last_x0020_Name>Li</Last_x0020_Name>
+<First_x0020_Name>George</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 20th Street</Address>
+<City>New York</City>
+<State_x002F_Province>NY</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>21</ID>
+<Company>Company U</Company>
+<Last_x0020_Name>Tham</Last_x0020_Name>
+<First_x0020_Name>Bernard</First_x0020_Name>
+<Job_x0020_Title>Accounting Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 21th Street</Address>
+<City>Minneapolis</City>
+<State_x002F_Province>MN</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>22</ID>
+<Company>Company V</Company>
+<Last_x0020_Name>Ramos</Last_x0020_Name>
+<First_x0020_Name>Luciana</First_x0020_Name>
+<Job_x0020_Title>Purchasing Assistant</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 22th Street</Address>
+<City>Milwaukee</City>
+<State_x002F_Province>WI</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>23</ID>
+<Company>Company W</Company>
+<Last_x0020_Name>Entin</Last_x0020_Name>
+<First_x0020_Name>Michael</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 23th Street</Address>
+<City>Portland</City>
+<State_x002F_Province>OR</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>24</ID>
+<Company>Company X</Company>
+<Last_x0020_Name>Hasselberg</Last_x0020_Name>
+<First_x0020_Name>Jonas</First_x0020_Name>
+<Job_x0020_Title>Owner</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 24th Street</Address>
+<City>Salt Lake City</City>
+<State_x002F_Province>UT</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>25</ID>
+<Company>Company Y</Company>
+<Last_x0020_Name>Rodman</Last_x0020_Name>
+<First_x0020_Name>John</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 25th Street</Address>
+<City>Chicago</City>
+<State_x002F_Province>IL</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>26</ID>
+<Company>Company Z</Company>
+<Last_x0020_Name>Liu</Last_x0020_Name>
+<First_x0020_Name>Run</First_x0020_Name>
+<Job_x0020_Title>Accounting Assistant</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 26th Street</Address>
+<City>Miami</City>
+<State_x002F_Province>FL</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>27</ID>
+<Company>Company AA</Company>
+<Last_x0020_Name>Toh</Last_x0020_Name>
+<First_x0020_Name>Karen</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 27th Street</Address>
+<City>Las Vegas</City>
+<State_x002F_Province>NV</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>28</ID>
+<Company>Company BB</Company>
+<Last_x0020_Name>Raghav</Last_x0020_Name>
+<First_x0020_Name>Amritansh</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 28th Street</Address>
+<City>Memphis</City>
+<State_x002F_Province>TN</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+<Customers>
+<ID>29</ID>
+<Company>Company CC</Company>
+<Last_x0020_Name>Lee</Last_x0020_Name>
+<First_x0020_Name>Soo Jung</First_x0020_Name>
+<Job_x0020_Title>Purchasing Manager</Job_x0020_Title>
+<Business_x0020_Phone>(123)555-0100</Business_x0020_Phone>
+<Fax_x0020_Number>(123)555-0101</Fax_x0020_Number>
+<Address>789 29th Street</Address>
+<City>Denver</City>
+<State_x002F_Province>CO</State_x002F_Province>
+<ZIP_x002F_Postal_x0020_Code>99999</ZIP_x002F_Postal_x0020_Code>
+<Country_x002F_Region>USA</Country_x002F_Region>
+</Customers>
+</dataroot>

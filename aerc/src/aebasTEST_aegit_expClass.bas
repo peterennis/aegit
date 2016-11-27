@@ -13,6 +13,7 @@ Option Explicit
 ' FRONT END SETUP
 'Public Const THE_FRONT_END_APP = True
 'Public Const THE_SOURCE_FOLDER = ".\src\"                  ' "C:\THE\DATABASE\PATH\src\"
+'Public Const THE_EXPORT_FOLDER = ".\src\exp\"              ' "C:\THE\DATABASE\PATH\src\exp\"
 'Public Const THE_XML_FOLDER = ".\src\xml\"                 ' "C:\THE\DATABASE\PATH\src\xml\"
 'Public Const THE_XML_DATA_FOLDER = ".\src\xmldata\"        ' "C:\THE\DATABASE\PATH\src\xmldata\"
 'Public Const THE_BACK_END_DB1 = "C:\MY\BACKEND\DATA.accdb"
@@ -23,6 +24,7 @@ Option Explicit
 ' BACK END SETUP
 'Public Const THE_FRONT_END_APP = False
 'Public Const THE_SOURCE_FOLDER = "NONE"                     ' ".\src\"
+'Public Const THE_EXPORT_FOLDER = ".\src\exp\"               ' ".\src\exp\"
 'Public Const THE_XML_FOLDER = "NONE"                        ' ".\src\xml\"
 'Public Const THE_XML_DATA_FOLDER = "NONE"                   ' ".\src\xmldata\"
 'Public Const THE_BACK_END_DB1 = "NONE"

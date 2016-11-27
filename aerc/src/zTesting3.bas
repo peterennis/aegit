@@ -1,16 +1,33 @@
 Option Compare Database
 Option Explicit
 
-Public Sub ExportTableDataWithSchema(strTableName As String)
+Public Sub ExportAllTableDataWithSchema()
+
+    Dim tdf As DAO.TableDef
+    Dim strExportPath As String
+    strExportPath = "C:\ae\aegit\aerc\src\exp\"
+    
+    For Each tdf In CurrentDb.TableDefs
+        If Not (Left$(tdf.Name, 4) = "MSys" _
+            Or Left$(tdf.Name, 4) = "~TMP" _
+            Or Left$(tdf.Name, 3) = "zzz") Then
+            
+            ExportTableDataWithSchema strExportPath, tdf.Name
+        End If
+    Next tdf
+    Debug.Print "DONE !!!"
+End Sub
+
+Private Sub ExportTableDataWithSchema(expPath As String, strTableName As String)
     ' Ref: https://msdn.microsoft.com/en-us/library/office/ff193212.aspx
     ' expression .ExportXML(ObjectType, DataSource, DataTarget, SchemaTarget, PresentationTarget, ImageTarget, Encoding, OtherFlags, WhereCondition, AdditionalData)
     ' expression - A variable that represents an Application object.
     '
     ' Usage Example: ExportTableDataWithSchema "tblDummy3"
 
-    Application.ExportXML ObjectType:=acExportTable, DataSource:=strTableName, DataTarget:=strTableName & ".xml", _
-        SchemaTarget:=strTableName & ".sch", Encoding:=acUTF8, OtherFlags:=acExportAllTableAndFieldProperties
-    Debug.Print "DONE !!!"
+    Application.ExportXML ObjectType:=acExportTable, DataSource:=strTableName, DataTarget:=expPath & strTableName & ".xml", _
+        SchemaTarget:=strTableName & ".xsd", Encoding:=acUTF8, OtherFlags:=acExportAllTableAndFieldProperties
+    Debug.Print strTableName
 
 End Sub
 

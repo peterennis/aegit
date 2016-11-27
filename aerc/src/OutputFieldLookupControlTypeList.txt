@@ -104,10 +104,6 @@
               [StateCode]    109          TextBox
               [StateAbbreviation]          109          TextBox
               [StateName]    109          TextBox
-[aetlkpStates1]
-              [StateCode]    109          TextBox
-              [StateAbbreviation]          109          TextBox
-              [StateName]    109          TextBox
 [City]
               [id]           109          TextBox
               [CityName]     109          TextBox
@@ -220,9 +216,9 @@
               [RibbonName]   109          TextBox
               [RibbonXML]    109          TextBox
 Count of Check box = 1
-Count of Text box  = 180
+Count of Text box  = 177
 Count of List box  = 1
 Count of Combo box = 16
 Count of Else      = 2
-Count of Display Controls = 198
-Count of All Fields = 198
+Count of Display Controls = 195
+Count of All Fields = 195
