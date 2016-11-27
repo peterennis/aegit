@@ -8,8 +8,6 @@
 |-- RecordCount >> 69
 |-- ValidationRule >> 
 |-- ValidationText >> 
-|-- ConflictTable >> 
-|-- ReplicaFilter >> 
 --------------------------------------------------
 |-- StateCode (Field in aetlkpStates1)
 |------ Attributes >> 2
