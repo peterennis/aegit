@@ -8,6 +8,8 @@
 |-- RecordCount >> 27
 |-- ValidationRule >> 
 |-- ValidationText >> 
+|-- ConflictTable >> 
+|-- ReplicaFilter >> 
 |-- PublishToWeb >> 1
 |-- Orientation >> 0
 |-- OrderByOn >> False

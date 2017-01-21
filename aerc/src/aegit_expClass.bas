@@ -32,15 +32,15 @@ Option Explicit
 
 Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Declare PtrSafe Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
+Private Declare PtrSafe Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hwnd As Long) As Long
 Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
 Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.909"
-Private Const aegit_expVERSION_DATE As String = "November 26, 2016"
+Private Const aegit_expVERSION As String = "1.9.910"
+Private Const aegit_expVERSION_DATE As String = "January 20, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -3410,23 +3410,26 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
 
     Debug.Print "OutputCatalogUserCreatedObjects"
     On Error GoTo PROC_ERR
-    
+
     Dim strSQL As String
-    Const MY_QUERY_NAME As String = "zzzqryCatalogUserCreatedObjects"
-    
-    Dim strPathFileName As String
+    Dim fle As Integer
+    fle = FreeFile()
+
+'    Dim strPathFileName As String
     If aegitFrontEndApp Then
-        strPathFileName = aestrSourceLocation & aeCatalogObj
+'        strPathFileName = aestrSourceLocation & aeCatalogObj
+        Open aestrSourceLocation & aeCatalogObj For Output As #fle
     Else
-        strPathFileName = aestrSourceLocationBe & aeCatalogObj
+'        strPathFileName = aestrSourceLocationBe & aeCatalogObj
+        Open aestrSourceLocationBe & aeCatalogObj For Output As #fle
     End If
 
     If Not IsMissing(varDebug) Then
         Debug.Print "OutputCatalogUserCreatedObjects"
-        Debug.Print , strPathFileName
+'        Debug.Print , strPathFileName
     Else
     End If
-  
+
     ' Ref: https://support.office.com/en-za/article/FormatDateTime-Function-aef62949-f957-4ba4-94ff-ace14be4f1ca
     ' Format DateCreate as short date, vbShortDate = 2
     'SELECT IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))) AS [Object Type], MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated
@@ -3447,34 +3450,31 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
 
     'Debug.Print strSQL
 
-    ' Using a query name and sql string, if the query does not exist, ...
-    If IsNull(DLookup("Name", "MsysObjects", "Name='" & MY_QUERY_NAME & "'")) Then
-        ' create it ...
-        CurrentDb.CreateQueryDef MY_QUERY_NAME, strSQL
-    Else
-        ' otherwise, update the sql
-        CurrentDb.QueryDefs(MY_QUERY_NAME).SQL = strSQL
-    End If
+    CurrentProject.Connection.Execute "GRANT SELECT ON MSysObjects TO Admin;"
 
-    'DoCmd.OpenQuery MY_QUERY_NAME
-e3167:
-    DoCmd.TransferText acExportDelim, , MY_QUERY_NAME, strPathFileName
-    ' Delete the query
-    On Error Resume Next
-    DoCmd.DeleteObject acQuery, MY_QUERY_NAME
-    Err.Clear
-    On Error GoTo PROC_ERR
+    Dim dbs As DAO.Database
+    Set dbs = CurrentDb
+    Dim rst As DAO.Recordset
+    Set rst = dbs.OpenRecordset(strSQL)
 
+    Do While Not rst.EOF
+        If Not IsMissing(varDebug) Then Debug.Print rst.Fields(0), rst.Fields(1)
+        Print #fle, """" & rst.Fields(0) & """" & "," & """" & rst.Fields(1) & """" & "," & """" & "DateCreated" & """"
+        rst.MoveNext
+    Loop
+    Close fle
+    'Stop
+    
 PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-    If Err = 3167 Then          ' Record is deleted
-        'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
-        Resume e3167
-    Else
-        MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
-    End If
+'330       If Err = 3167 Then          ' Record is deleted
+'              'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
+'340           Resume e3167
+'350       Else
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
+'370       End If
     'Stop
     Resume PROC_EXIT
 
@@ -4008,8 +4008,8 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
 
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.Id & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
+            Print #fle, CBR.Name & ": " & CBTN.id & " - " & CBTN.Caption
         Next
     Next
 
@@ -4830,6 +4830,9 @@ End Sub
 Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
     ' Ref: http://bytes.com/topic/access/answers/709190-how-export-table-structure-including-description
 
+    Debug.Print "OutputTableProperties"
+    On Error GoTo PROC_ERR
+
     Dim tdf As DAO.TableDef
     Dim prp As DAO.Property
     Dim fldprp As DAO.Property
@@ -4894,6 +4897,15 @@ Private Sub OutputTableProperties(Optional ByVal varDebug As Variant)
         End If
 NextTdf:
     Next tdf
+    
+PROC_EXIT:
+    Set tdf = Nothing
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputTableProperties of Class aegit_expClass", vbCritical, "ERROR"
+    Resume PROC_EXIT
+
 End Sub
 
 Private Sub OutputTheQAT(ByVal strTheFile As String, Optional ByVal varDebug As Variant)

@@ -40,8 +40,6 @@ Option Explicit
 '=============================================================================================================================
 ' Tasks:
 ' %130 -
-' %129 -
-' %128 -
 ' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
 ' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
@@ -90,6 +88,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20170120 - v19910 -
+    ' FIXED - %129 - Fix export for output catalog user created objects to not use zzz query
+    ' FIXED - %128 - Set size of window on open, e.g. frmSizeWindow
 '20161107 - v19905 -
     ' FIXED - %117 - Make schema output optional and default is false
     ' FIXED - %113 - Lovefield export unknown type Hyperlink, Attachment, Currency - from Customers; Orders; Order Details - tables imported from Northwind 2007 for testing

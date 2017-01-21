@@ -12,16 +12,16 @@ End Sub
 Public Sub OnActionButton(ByVal control As IRibbonControl)
     ' Callbackname in XML File "onAction"
     On Error GoTo 0
-    Select Case control.Id
+    Select Case control.id
         Case Else
-            MsgBox "Button """ & control.Id & """ clicked!" & vbCrLf, vbInformation
+            MsgBox "Button """ & control.id & """ clicked!" & vbCrLf, vbInformation
     End Select
 End Sub
 
 Public Sub GetEnabled(ByVal control As IRibbonControl, ByRef enabled As Variant)
     ' Callbackname in XML File "getEnabled"
     On Error GoTo 0
-    Select Case control.Id
+    Select Case control.id
         Case Else
             enabled = True
     End Select
@@ -30,7 +30,7 @@ End Sub
 Public Sub GetVisible(ByVal control As IRibbonControl, ByRef visible As Variant)
     ' Callbackname in XML File "getVisible"
     On Error GoTo 0
-    Select Case control.Id
+    Select Case control.id
         Case Else
             visible = True
     End Select

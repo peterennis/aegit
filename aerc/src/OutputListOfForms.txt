@@ -6,3 +6,4 @@
 [_frmPersist] True
 [frm_Dummy]   False
 [frm_HiddenDummy]           True
+[frmSizeWindow]             False

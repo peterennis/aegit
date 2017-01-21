@@ -1,0 +1,281 @@
+Version =20
+VersionRequired =20
+PublishOption =1
+Begin Form
+    AutoResize = NotDefault
+    PopUp = NotDefault
+    RecordSelectors = NotDefault
+    MaxButton = NotDefault
+    MinButton = NotDefault
+    ShortcutMenu = NotDefault
+    NavigationButtons = NotDefault
+    DividingLines = NotDefault
+    ScrollBars =2
+    ViewsAllowed =1
+    BorderStyle =1
+    PictureAlignment =2
+    DatasheetGridlinesBehavior =3
+    GridX =24
+    GridY =24
+    Width =7080
+    DatasheetFontHeight =11
+    ItemSuffix =13
+    Left =4920
+    Top =2640
+    Right =23070
+    Bottom =15015
+    DatasheetGridlinesColor =15132391
+    RecSrcDt = Begin
+        0x603bc9e477e0e440
+    End
+    GUID = Begin
+        0xc5e2d6a4fad7e947bda25ed5d91a60c5
+    End
+    Caption ="Some Caption"
+    DatasheetFontName ="Calibri"
+    PrtMip = Begin
+    End
+    PrtDevMode = Begin
+    End
+    PrtDevNames = Begin
+    End
+    OnLoad ="[Event Procedure]"
+    AllowDatasheetView =0
+    FilterOnLoad =0
+    ShowPageMargins =0
+    DisplayOnSharePointSite =1
+    AllowLayoutView =0
+    DatasheetAlternateBackColor =15921906
+    DatasheetGridlinesColor12 =0
+    DatasheetBackThemeColorIndex =1
+    BorderThemeColorIndex =3
+    ThemeFontIndex =1
+    ForeThemeColorIndex =0
+    AlternateBackThemeColorIndex =1
+    AlternateBackShade =95.0
+    PrtDevModeW = Begin
+    End
+    PrtDevNamesW = Begin
+    End
+    NoSaveCTIWhenDisabled =1
+    Begin
+        Begin Label
+            BackStyle =0
+            FontSize =11
+            FontName ="Calibri"
+            ThemeFontIndex =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =0
+            BorderTint =50.0
+            ForeThemeColorIndex =0
+            ForeTint =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin CommandButton
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderColor =16777215
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeThemeColorIndex =0
+            PressedForeTint =75.0
+        End
+        Begin TextBox
+            AddColon = NotDefault
+            FELineBreak = NotDefault
+            BorderLineStyle =0
+            LabelX =-1800
+            FontSize =11
+            FontName ="Calibri"
+            AsianLineBreak =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ThemeFontIndex =1
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin ComboBox
+            AddColon = NotDefault
+            BorderLineStyle =0
+            LabelX =-1800
+            FontSize =11
+            FontName ="Calibri"
+            AllowValueListEdits =1
+            InheritValueList =1
+            ThemeFontIndex =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ForeThemeColorIndex =2
+            ForeShade =50.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin FormHeader
+            Height =0
+            BackColor =15064278
+            Name ="FormHeader"
+            GUID = Begin
+                0x2e259496e187b04eb7cdb4ae0a7003f7
+            End
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =2
+            BackTint =20.0
+        End
+        Begin Section
+            Height =1980
+            Name ="Detail"
+            GUID = Begin
+                0x34a177a14c3b164ca3c44380fc7005b3
+            End
+            AlternateBackColor =15132391
+            AlternateBackThemeColorIndex =3
+            BackThemeColorIndex =1
+            Begin
+                Begin Label
+                    OverlapFlags =85
+                    Left =540
+                    Top =240
+                    Width =5640
+                    Height =1500
+                    FontSize =16
+                    FontWeight =700
+                    BorderColor =8355711
+                    ForeColor =8355711
+                    Name ="Label12"
+                    Caption ="Open form centered in window\015\012with a specific form size."
+                    GUID = Begin
+                        0xfd05da8e83a4264eadb57221e6722b9c
+                    End
+                    GridlineColor =10921638
+                    LayoutCachedLeft =540
+                    LayoutCachedTop =240
+                    LayoutCachedWidth =6180
+                    LayoutCachedHeight =1740
+                End
+            End
+        End
+        Begin FormFooter
+            Height =0
+            Name ="FormFooter"
+            GUID = Begin
+                0x06c56cad98879943a5f6c0f37be0a415
+            End
+            AutoHeight =1
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+        End
+    End
+End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+Private Declare PtrSafe Function GetDC Lib "user32" (ByVal hwnd As Long) As Long
+Private Declare PtrSafe Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hdc As Long) As Long
+Private Declare PtrSafe Function GetDeviceCaps Lib "gdi32" (ByVal hdc As Long, ByVal nIndex As Long) As Long
+Private Declare PtrSafe Function GetSystemMetrics Lib "user32" (ByVal nIndex As Long) As Long
+Private Const SM_CXSCREEN = 0
+Private Const SM_CYSCREEN = 1
+Private Const WU_LOGPIXELSX = 88
+Private Const WU_LOGPIXELSY = 90
+
+Private Function ScreenHeight() As Long
+    ScreenHeight = GetSystemMetrics(SM_CYSCREEN)
+End Function
+
+Private Function ScreenWidth() As Long
+    ScreenWidth = GetSystemMetrics(SM_CXSCREEN)
+End Function
+
+Public Function ConvertPIXELSToTWIPS(lPixel As Long, lDirection As Long) As Long
+
+    Dim lngDC As Long
+    Dim RetVal As Long
+    Dim PIXELSPERINCH As Long
+    Const nTwipsPerInch = 1440
+ 
+    lngDC = GetDC(0)
+    ' Horizontal
+    If (lDirection = 0) Then
+        PIXELSPERINCH = GetDeviceCaps(lngDC, WU_LOGPIXELSX)
+    ' Vertical
+    Else
+        PIXELSPERINCH = GetDeviceCaps(lngDC, WU_LOGPIXELSY)
+    End If
+    RetVal = ReleaseDC(0, lngDC)
+    ConvertPIXELSToTWIPS = (lPixel / PIXELSPERINCH) * nTwipsPerInch
+
+End Function
+
+Private Function ConvertTwipsToPixels(lngTwips As Long, lngDirection As Long) As Long
+
+    Dim lngDC As Long       ' Handle to device
+    Dim lngPixelsPerInch As Long
+    Const nTwipsPerInch = 1440
+    lngDC = GetDC(0)
+
+    If (lngDirection = 0) Then       'Horizontal
+        lngPixelsPerInch = GetDeviceCaps(lngDC, WU_LOGPIXELSX)
+    Else                            'Vertical
+        lngPixelsPerInch = GetDeviceCaps(lngDC, WU_LOGPIXELSY)
+    End If
+    lngDC = ReleaseDC(0, lngDC)
+    ConvertTwipsToPixels = (lngTwips / nTwipsPerInch) * lngPixelsPerInch
+
+End Function
+
+Private Sub Form_Load()
+    'MsgBox "Me.OpenArgs = " & Me.OpenArgs, vbInformation, gstrPROJECT_SVIPDB
+    ' Ref: https://access-programmers.co.uk/forums/showthread.php?t=208764
+    ' Ref: https://www.pcreview.co.uk/threads/how-to-get-the-screen-resolution-in-vba.3224107/
+    ' Ref: http://www.tek-tips.com/viewthread.cfm?qid=679518
+    ' Ref: http://www.office-loesung.de/ftopic253388_0_0_asc.php
+    ' Ref: http://www.vbarchiv.net/api/details.php?id=getsystemmetrics
+
+    Dim w As Long
+    Dim h As Long
+    Dim myWidth As Long
+    Dim myHeight As Long
+    myWidth = 4.5 * 1440 ' (4.5 is inches and 1440 is the number of TWIPS in an inch)
+    myHeight = 3 * 1440
+
+    'MsgBox "fsubIntakeAdditions Form_Open"
+    w = ConvertPIXELSToTWIPS(ScreenWidth, 0)
+    h = ConvertPIXELSToTWIPS(ScreenHeight, 1)
+    'MsgBox "h = " & h & Space(8) & "w = " & w & Space(8) & "twips"
+
+    DoCmd.MoveSize w / 2 - myWidth / 2, _
+        h / 2 - myHeight / 2, _
+        myWidth, _
+        myHeight
+
+End Sub
