@@ -39,8 +39,13 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %135 -
+' %134 -
+' %133 -
+' %132 -
+' %131 -
 ' %130 -
-' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
+' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' %126 - Add Export folder exp, integrate with aegit class
 ' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
 ' %124 - USysApplicationLog Table - Ref: https://www.amazon.com/Microsoft-Access-2010-Inside-Out/dp/0735626855#reader_0735626855
@@ -88,9 +93,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20170120 - v19910 -
-    ' FIXED - %129 - Fix export for output catalog user created objects to not use zzz query
-    ' FIXED - %128 - Set size of window on open, e.g. frmSizeWindow
+'20170324 - v19911 -
+    ' FIXED - %129 - Mark development testing export types as EXPERIMENTAL
+    ' FIXED - %127 - Marked as EXPERIMENTAL, export tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 '20161107 - v19905 -
     ' FIXED - %117 - Make schema output optional and default is false
     ' FIXED - %113 - Lovefield export unknown type Hyperlink, Attachment, Currency - from Customers; Orders; Order Details - tables imported from Northwind 2007 for testing

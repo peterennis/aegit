@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.910"
-Private Const aegit_expVERSION_DATE As String = "January 20, 2017"
+Private Const aegit_expVERSION As String = "1.9.911"
+Private Const aegit_expVERSION_DATE As String = "March 24, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -74,14 +74,14 @@ Private Type mySetupType
     UseImportFolder As Boolean
 End Type
 
-Private Type myExportType                   ' Initialize defaults as:
-    ExportAll As Boolean                    ' True
-    ExportCodeAndObjects As Boolean         ' True
-    ExportModuleCodeOnly As Boolean         ' True
-    ExportQAT As Boolean                    ' False
-    ExportCBID As Boolean                   ' False
-    ExportNoODBCTablesInfo As Boolean       ' True, default does not export info about ODBC linked tables
-    ExportCreateDbScript As Boolean         ' False,
+Private Type myExportType                           ' Initialize defaults as:
+    ExportAll As Boolean                            ' True
+    ExportCodeAndObjects As Boolean                 ' True
+    ExportModuleCodeOnly As Boolean                 ' True
+    EXPERIMENTAL_ExportQAT As Boolean               ' False
+    EXPERIMENTAL_ExportCBID As Boolean              ' False
+    ExportNoODBCTablesInfo As Boolean               ' True, default does not export info about ODBC linked tables
+    EXPERIMENTAL_ExportCreateDbScript As Boolean    ' False,
 End Type
 
 Private myExclude As myExclusions
@@ -213,8 +213,8 @@ Private Sub Class_Initialize()
         .ExportAll = True
         .ExportCodeAndObjects = True
         .ExportModuleCodeOnly = True
-        .ExportQAT = False
-        .ExportCBID = False
+        .EXPERIMENTAL_ExportQAT = False
+        .EXPERIMENTAL_ExportCBID = False
         .ExportNoODBCTablesInfo = True
     End With
 
@@ -249,8 +249,8 @@ Private Sub Class_Initialize()
         Debug.Print , "aegitExport.ExportAll = " & aegitExport.ExportAll
         Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
         Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
-        Debug.Print , "aegitExport.ExportQAT = " & aegitExport.ExportQAT
-        Debug.Print , "aegitExport.ExportCBID = " & aegitExport.ExportCBID
+        Debug.Print , "aegitExport.EXPERIMENTAL_ExportQAT = " & aegitExport.EXPERIMENTAL_ExportQAT
+        Debug.Print , "aegitExport.EXPERIMENTAL_ExportCBID = " & aegitExport.EXPERIMENTAL_ExportCBID
         Debug.Print , "aegitExport.ExportNoODBCTablesInfo = " & aegitExport.ExportNoODBCTablesInfo
         DefineMyExclusions
         Debug.Print , "pExclude = " & pExclude
@@ -459,13 +459,13 @@ Public Property Get Exists(ByVal strAccObjType As String, _
     End If
 End Property
 
-Public Property Let ExportCBID(ByVal IsExportCBID As Boolean)
+Public Property Let EXPERIMENTAL_ExportCBID(ByVal IsEXPERIMENTAL_ExportCBID As Boolean)
     On Error GoTo 0
-    Debug.Print "Property Let ExportCBID"
-    If IsExportCBID Then
-        aegitExport.ExportCBID = True
+    Debug.Print "Property Let EXPERIMENTAL_ExportCBID"
+    If IsEXPERIMENTAL_ExportCBID Then
+        aegitExport.EXPERIMENTAL_ExportCBID = True
     Else
-        aegitExport.ExportCBID = False
+        aegitExport.EXPERIMENTAL_ExportCBID = False
     End If
 End Property
 
@@ -479,13 +479,13 @@ Public Property Let ExportNoODBCTablesInfo(ByVal ExportNoODBCTablesInfo As Boole
     End If
 End Property
 
-Public Property Let ExportQAT(ByVal IsExportQAT As Boolean)
+Public Property Let EXPERIMENTAL_ExportQAT(ByVal IsEXPERIMENTAL_ExportQAT As Boolean)
     On Error GoTo 0
-    Debug.Print "Property Let ExportQAT"
-    If IsExportQAT Then
-        aegitExport.ExportQAT = True
+    Debug.Print "Property Let EXPERIMENTAL_ExportQAT"
+    If IsEXPERIMENTAL_ExportQAT Then
+        aegitExport.EXPERIMENTAL_ExportQAT = True
     Else
-        aegitExport.ExportQAT = False
+        aegitExport.EXPERIMENTAL_ExportQAT = False
     End If
 End Property
 
@@ -544,13 +544,13 @@ Public Property Get SchemaFile(Optional ByVal varDebug As Variant) As Boolean
     SchemaFile = True
 End Property
 
-Public Property Let ExportSchemaFile(ByVal IsExportSchema As Boolean)
+Public Property Let EXPERIMENTAL_ExportCreateDbScript(ByVal IsEXPERIMENTAL_ExportCreateDbScript As Boolean)
     On Error GoTo 0
-    Debug.Print "Property Let ExportSchemaFile"
-    If IsExportSchema Then
-        aegitExport.ExportCreateDbScript = True
+    Debug.Print "Property Let EXPERIMENTAL_ExportCreateDbScript"
+    If IsEXPERIMENTAL_ExportCreateDbScript Then
+        aegitExport.EXPERIMENTAL_ExportCreateDbScript = True
     Else
-        aegitExport.ExportCreateDbScript = False
+        aegitExport.EXPERIMENTAL_ExportCreateDbScript = False
     End If
 End Property
 
@@ -1136,7 +1136,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     If Not IsMissing(varDebug) Then
         OutputListOfContainers aeAppListCnt, varDebug
         OutputListOfAccessApplicationOptions varDebug
-        If aegitExport.ExportCBID Then
+        If aegitExport.EXPERIMENTAL_ExportCBID Then
             OutputListOfCommandBarIDs strTheSourceLocation & aeAppCmbrIds, varDebug
             SortTheFile strTheSourceLocation & aeAppCmbrIds, strTheSourceLocation & aeAppCmbrIds & ".sort"
             KillProperly (strTheSourceLocation & aeAppCmbrIds)
@@ -1170,7 +1170,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
-        If aegitExport.ExportCBID Then
+        If aegitExport.EXPERIMENTAL_ExportCBID Then
             OutputListOfCommandBarIDs strTheSourceLocation & aeAppCmbrIds
             'Debug.Print , "strTheSourceLocation = " & strTheSourceLocation
             'Debug.Print , "aeAppCmbrIds = " & aeAppCmbrIds
@@ -1209,7 +1209,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputListOfApplicationProperties
     OutputQueriesSqlText
     OutputFieldLookupControlTypeList
-    If aegitExport.ExportCreateDbScript Then
+    If aegitExport.EXPERIMENTAL_ExportCreateDbScript Then
         OutputTheSchemaFile
         OutputTheSqlFile strTheSourceLocation & aeSchemaFile, strTheSourceLocation & aeSchemaFile & ".sql"
         OutputTheSqlOnlyFile strTheSourceLocation & aeSchemaFile & ".sql", strTheSourceLocation & aeSchemaFile & ".sql" & ".only"
@@ -1219,7 +1219,7 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputListOfIndexes strTheSourceLocation & aeIndexLists
     'Stop
 
-    If aegitExport.ExportQAT Then
+    If aegitExport.EXPERIMENTAL_ExportQAT Then
         If Not IsMissing(varDebug) Then
             OutputTheQAT aeAppListQAT, varDebug
         Else
