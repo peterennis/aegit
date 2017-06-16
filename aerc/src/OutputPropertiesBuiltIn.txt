@@ -230,7 +230,7 @@ Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 1.9.913
+Value: aegit 1.9.914
 Inherited: False;
 ---
 Name: AppIcon
