@@ -225,12 +225,12 @@ Inherited: False;
 ---
 Name: NavPane Sort By
 Type: dbLong
-Value: 1
+Value: 2
 Inherited: False;
 ---
 Name: AppTitle
 Type: dbText
-Value: aegit 1.9.911
+Value: aegit 1.9.913
 Inherited: False;
 ---
 Name: AppIcon

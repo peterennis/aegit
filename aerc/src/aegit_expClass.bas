@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.911"
-Private Const aegit_expVERSION_DATE As String = "March 24, 2017"
+Private Const aegit_expVERSION As String = "1.9.913"
+Private Const aegit_expVERSION_DATE As String = "May 9, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -920,7 +920,7 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
     If Not IsMissing(varDebug) Then Debug.Print ">List of tables exported as XML to " & strTheXMLLocation
     If Not aegitExport.ExportNoODBCTablesInfo Then
         For Each tbl In dbs.TableDefs
-            If Not IsLinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") Then
+            If Not IsLinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") And Not Left$(tbl.Name, 4) = "~TMP" Then
                 strObjName = tbl.Name
                 Application.ExportXML acExportTable, strObjName, , _
                     strTheXMLLocation & "tables_" & strObjName & ".xsd"
@@ -937,7 +937,7 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
             If IsLinkedODBC(tbl.Name) Then
                 ' Do nothing
             Else
-                If Not IsLinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") Then
+                If Not IsLinkedTable(tbl.Name) And Not (tbl.Name Like "MSys*") And Not Left$(tbl.Name, 4) = "~TMP" Then
                     strObjName = tbl.Name
                     Application.ExportXML acExportTable, strObjName, , _
                         strTheXMLLocation & "tables_" & strObjName & ".xsd"
@@ -4686,7 +4686,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
             Or Left$(qdf.Name, 4) = "~TMP" _
             Or Left$(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.SQL
+            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.sql
         End If
     Next
 
@@ -5059,9 +5059,9 @@ Private Sub OutputTheSchemaFile(Optional ByVal varDebug As Variant) ' CreateDbSc
                 Select Case fld.Type
                     Case dbText
                         ' No look-up fields
-                        strFlds = strFlds & "Text (" & fld.Size & ")"
+                        strFlds = strFlds & "Text (" & fld.size & ")"
                     Case 109&                                   ' dbComplexText
-                        strFlds = strFlds & "Text (" & fld.Size & ")"
+                        strFlds = strFlds & "Text (" & fld.size & ")"
                     Case dbMemo, dbByte, 102&, dbInteger, 103&, _
                         104&, dbSingle, 105&, dbDouble, 106&, dbGUID, _
                         107&, dbDecimal, 108&, dbCurrency, _
@@ -5345,7 +5345,7 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     Dim strTestPath As String
     strTestPath = strPathFileName
     If Left$(strPathFileName, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(strPathFileName, 2, Len(strPathFileName) - 1)
+        strTestPath = CurrentProject.path & Mid$(strPathFileName, 2, Len(strPathFileName) - 1)
         strPathFileName = strTestPath
         'Debug.Print , "strPathFileName = " & strPathFileName, "PrettyXML"
         'Stop
@@ -5883,12 +5883,12 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
                 'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
                 Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                     & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                    & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                    & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                     & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
             End If
             Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                 & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                 & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
         Next
     Else
@@ -5900,12 +5900,12 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
                     'If Not IsMissing(varDebug) And aeintFDLen <> 11 Then
                     Debug.Print SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                         & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                        & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                        & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                         & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
                 End If
                 Print #1, SizeString(fld.Name, aeintFNLen, TextLeft, " ") _
                     & aestr4 & SizeString(FieldTypeName(fld), aeintFTLen, TextLeft, " ") _
-                    & aestr4 & SizeString(fld.Size, aeintFSize, TextLeft, " ") _
+                    & aestr4 & SizeString(fld.size, aeintFSize, TextLeft, " ") _
                     & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
             Next
         End If
@@ -5938,42 +5938,42 @@ Private Sub TestForRelativePath()
     Dim strTestPath As String
     strTestPath = aestrSourceLocation
     If Left$(aestrSourceLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
+        strTestPath = CurrentProject.path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
         aestrSourceLocation = strTestPath
     End If
     'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
     '
     strTestPath = aestrSourceLocationBe
     If Left$(aestrSourceLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
+        strTestPath = CurrentProject.path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
         aestrSourceLocationBe = strTestPath
     End If
     'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
     '
     strTestPath = aestrXMLLocation
     If Left$(aestrXMLLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
+        strTestPath = CurrentProject.path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
     End If
     'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
     '
     strTestPath = aestrXMLLocationBe
     If Left$(aestrXMLLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
+        strTestPath = CurrentProject.path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
         aestrXMLLocationBe = strTestPath
     End If
     'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
     '
     strTestPath = aestrXMLDataLocation
     If Left$(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
+        strTestPath = CurrentProject.path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
         aestrXMLDataLocation = strTestPath
     End If
     'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
     '
     strTestPath = aestrXMLDataLocationBe
     If Left$(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
+        strTestPath = CurrentProject.path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
         aestrXMLDataLocationBe = strTestPath
     End If
     'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe

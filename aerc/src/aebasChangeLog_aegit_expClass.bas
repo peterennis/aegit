@@ -8,7 +8,7 @@ Option Explicit
 ' IDBE RibbonCreator 2016 (Office 2016) - Ref: http://www.ribboncreator2016.de/en/?Download
 ' V-Tools - Ref: http://www.skrol29.com/us/vtools.php
 ' Bill Mosca - Ref: http://www.thatlldoit.com/Pages/utilsaddins.aspx
-' Rubberduck - https://github.com/rubberduck-vba/Rubberduck
+' Rubberduck - Ref: https://github.com/rubberduck-vba/Rubberduck
 ' DataNumen Access Repair - Ref: https://www.datanumen.com/access-repair/
 '
 '
@@ -23,7 +23,7 @@ Option Explicit
 ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=219149
 ' *** CreateObject("System.Collections.ArrayList")
 ' Ref: http://www.ozgrid.com/forum/showthread.php?t=167349
-' Microsoft Access - Really useful queries - http://www.sqlquery.com/Microsoft_Access_useful_queries.html
+' Microsoft Access - Really useful queries - Ref: http://www.sqlquery.com/Microsoft_Access_useful_queries.html
 ' Ref: http://www.micronetservices.com/manage_remote_backend_access_database.htm
 ' Microsoft Access Tips and Tricks - Ref: http://www.datagnostics.com/tips.html
 '
@@ -42,10 +42,9 @@ Option Explicit
 ' %135 -
 ' %134 -
 ' %133 -
-' %132 -
-' %131 -
-' %130 -
+' %132 - Verify report txt export capability
 ' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
+' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
 ' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
 ' %124 - USysApplicationLog Table - Ref: https://www.amazon.com/Microsoft-Access-2010-Inside-Out/dp/0735626855#reader_0735626855
@@ -93,9 +92,12 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20170509 - v19913 -
+    ' FIXED - %131 - Do not export unwanted temp tabes e.g. src\xml\tables_~TMPCLP117951.xsd
+'20170411 - v19912 -
+    ' FIXED - %130 - Add RenameSQLinkedTable
 '20170324 - v19911 -
     ' FIXED - %129 - Mark development testing export types as EXPERIMENTAL
-    ' FIXED - %127 - Marked as EXPERIMENTAL, export tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 '20161107 - v19905 -
     ' FIXED - %117 - Make schema output optional and default is false
     ' FIXED - %113 - Lovefield export unknown type Hyperlink, Attachment, Currency - from Customers; Orders; Order Details - tables imported from Northwind 2007 for testing

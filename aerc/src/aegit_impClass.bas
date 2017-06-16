@@ -759,35 +759,35 @@ Private Function aeReadDocDatabase(ByVal blnImport As Boolean, Optional ByVal va
                 MsgBox "Skipping: FORM " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If Not IsMissing(varDebug) Then Debug.Print "Skipping: FORM " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acForm, strFileBaseName, MyFile.Path
+                Application.LoadFromText acForm, strFileBaseName, MyFile.path
             End If
         ElseIf (strFileType = "rpt") Then
             If Exists("REPORTS", strFileBaseName) Then
                 MsgBox "Skipping: REPORT " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If Not IsMissing(varDebug) Then Debug.Print "Skipping: REPORT " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acReport, strFileBaseName, MyFile.Path
+                Application.LoadFromText acReport, strFileBaseName, MyFile.path
             End If
         ElseIf (strFileType = "bas") Then
             If Exists("MODULES", strFileBaseName) Then
                 MsgBox "Skipping: MODULE " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If Not IsMissing(varDebug) Then Debug.Print "Skipping: MODULE " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acModule, strFileBaseName, MyFile.Path
+                Application.LoadFromText acModule, strFileBaseName, MyFile.path
             End If
         ElseIf (strFileType = "mac") Then
             If Exists("MACROS", strFileBaseName) Then
                 MsgBox "Skipping: MACRO " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If Not IsMissing(varDebug) Then Debug.Print "Skipping: MACRO " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acMacro, strFileBaseName, MyFile.Path
+                Application.LoadFromText acMacro, strFileBaseName, MyFile.path
             End If
         ElseIf (strFileType = "qry") Then
             If Exists("QUERIES", strFileBaseName) Then
                 MsgBox "Skipping: QUERY " & strFileBaseName & " exists in the current database.", vbInformation, "EXISTENCE IS REAL !!!"
                 If Not IsMissing(varDebug) Then Debug.Print "Skipping: QUERY " & strFileBaseName & " exists in the current database.", "EXISTENCE IS REAL !!!"
             Else
-                Application.LoadFromText acQuery, strFileBaseName, MyFile.Path
+                Application.LoadFromText acQuery, strFileBaseName, MyFile.path
             End If
         End If
     Next

@@ -19,7 +19,7 @@ Public Sub Test_aeProjectExport()
     Dim strExportLocation As String
 
     Set MyVBAProject = VBE.ActiveVBProject
-    strExportLocation = CurrentProject.Path & "\Export"
+    strExportLocation = CurrentProject.path & "\Export"
     Debug.Print "strExportLocation = " & strExportLocation
 
     Application.SetOption "Show Hidden Objects", True
@@ -137,7 +137,7 @@ Public Sub ProjectImport()
 
     For Each MyVBAComp In MyVBAProj.VBComponents
         CompName = MyVBAComp.Name
-        fName = CurrentProject.Path & "\Export\" & CompName & GetFileExtension(MyVBAComp)
+        fName = CurrentProject.path & "\Export\" & CompName & GetFileExtension(MyVBAComp)
         If CompName <> "basVersioning" Then
             If MyVBAComp.Type = vbext_ct_Document Then
                 ' MyVBAComp is destination module

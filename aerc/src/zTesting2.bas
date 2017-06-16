@@ -60,7 +60,7 @@ Public Sub OutputListOfAllQueries()
     If Err.Number = 3265 Then ' 3265 is "Item not found in this collection."
         Set qdfCurr = CurrentDb.CreateQueryDef(strTempQuery)
     End If
-    qdfCurr.SQL = strSQL
+    qdfCurr.sql = strSQL
     'Debug.Print """" & strTempQuery & """"
     DoCmd.OpenQuery strTempQuery
     'DoCmd.Close acQuery, strTempQuery
@@ -535,13 +535,13 @@ Private Function GetFiles(ByVal strPath As String, _
 
     ' Loop through Files collection, adding to dictionary.
     For Each oFile In oFolder.Files
-        dctDict.Add oFile.Path, oFile.Path
+        dctDict.Add oFile.path, oFile.path
     Next oFile
 
     ' If Recursive flag is true, call recursively.
     If blnRecursive Then
         For Each oSubFolder In oFolder.SubFolders
-            GetFiles oSubFolder.Path, dctDict, True
+            GetFiles oSubFolder.path, dctDict, True
         Next oSubFolder
     End If
 

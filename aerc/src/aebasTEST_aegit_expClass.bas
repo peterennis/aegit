@@ -46,6 +46,45 @@ Public Const gstrPROJECT_aegit As String = "aegit export project"
 Public Const gstrVERSION_aegit As String = "0.0.0"
 Public gvarMyTablesForExportToXML() As Variant
 '
+'
+Public Const THE_SOURCE_FOLDER = "FIX\THE\PATH"
+'
+
+Public Sub RenameSQLinkedTables(Optional ByVal strSourceFolder As String = THE_SOURCE_FOLDER)
+
+    Dim i As Integer
+    Dim MyAppPath As String
+    Dim LeftFour As String
+    Dim dbs As DAO.Database
+
+    On Error GoTo PROC_ERR
+
+    MyAppPath = strSourceFolder & "..\"
+    Debug.Print CurrentProject.path, "MyAppPath = " & MyAppPath, Application.Name, _
+        Application.VBE.ActiveVBProject.Name, Application.CurrentProject.Name
+    Set dbs = OpenDatabase(CurrentProject.path & "\" & Application.CurrentProject.Name)
+    dbs.CreateTableDef
+
+    For i = 0 To dbs.TableDefs.Count - 1
+        Debug.Print dbs.TableDefs(i).Name
+        LeftFour = Left(dbs.TableDefs(i).Name, 4)
+        If LeftFour = "dbo_" Then
+            dbs.TableDefs(i).Name = Replace(dbs.TableDefs(i).Name, "dbo_", "")
+            Debug.Print LeftFour, dbs.TableDefs(i).Name
+        End If
+    Next i
+    Debug.Print "RenameSQLinkedTables DONE !!!"
+
+PROC_EXIT:
+    dbs.Close
+    Set dbs = Nothing
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure RenameSQLinkedTables"
+    Resume Next
+
+End Sub
 
 Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
 

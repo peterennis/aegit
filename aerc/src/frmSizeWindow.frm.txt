@@ -2,36 +2,31 @@ Version =20
 VersionRequired =20
 PublishOption =1
 Begin Form
-    AutoResize = NotDefault
     PopUp = NotDefault
     RecordSelectors = NotDefault
-    MaxButton = NotDefault
-    MinButton = NotDefault
-    ShortcutMenu = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
-    ScrollBars =2
-    ViewsAllowed =1
-    BorderStyle =1
+    AllowDesignChanges = NotDefault
+    DefaultView =0
+    ScrollBars =0
+    BorderStyle =3
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7080
     DatasheetFontHeight =11
-    ItemSuffix =13
     Left =4920
     Top =2640
-    Right =23070
-    Bottom =15015
+    Right =17865
+    Bottom =12315
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
-        0x603bc9e477e0e440
+        0x03a73de0bcf2e440
     End
     GUID = Begin
-        0xc5e2d6a4fad7e947bda25ed5d91a60c5
+        0xfe62e64f0faac84cbd716e25dc3ebaef
     End
-    Caption ="Some Caption"
+    Caption ="Pop Up - You Sized Me!"
     DatasheetFontName ="Calibri"
     PrtMip = Begin
     End
@@ -40,13 +35,12 @@ Begin Form
     PrtDevNames = Begin
     End
     OnLoad ="[Event Procedure]"
-    AllowDatasheetView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
-    AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
+    FitToScreen =1
     DatasheetBackThemeColorIndex =1
     BorderThemeColorIndex =3
     ThemeFontIndex =1
@@ -59,132 +53,13 @@ Begin Form
     End
     NoSaveCTIWhenDisabled =1
     Begin
-        Begin Label
-            BackStyle =0
-            FontSize =11
-            FontName ="Calibri"
-            ThemeFontIndex =1
-            BackThemeColorIndex =1
-            BorderThemeColorIndex =0
-            BorderTint =50.0
-            ForeThemeColorIndex =0
-            ForeTint =50.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
-        Begin CommandButton
-            FontSize =11
-            FontWeight =400
-            FontName ="Calibri"
-            ForeThemeColorIndex =0
-            ForeTint =75.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-            UseTheme =1
-            Shape =1
-            Gradient =12
-            BackThemeColorIndex =4
-            BackTint =60.0
-            BorderLineStyle =0
-            BorderColor =16777215
-            BorderThemeColorIndex =4
-            BorderTint =60.0
-            ThemeFontIndex =1
-            HoverThemeColorIndex =4
-            HoverTint =40.0
-            PressedThemeColorIndex =4
-            PressedShade =75.0
-            HoverForeThemeColorIndex =0
-            HoverForeTint =75.0
-            PressedForeThemeColorIndex =0
-            PressedForeTint =75.0
-        End
-        Begin TextBox
-            AddColon = NotDefault
-            FELineBreak = NotDefault
-            BorderLineStyle =0
-            LabelX =-1800
-            FontSize =11
-            FontName ="Calibri"
-            AsianLineBreak =1
-            BackThemeColorIndex =1
-            BorderThemeColorIndex =1
-            BorderShade =65.0
-            ThemeFontIndex =1
-            ForeThemeColorIndex =0
-            ForeTint =75.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
-        Begin ComboBox
-            AddColon = NotDefault
-            BorderLineStyle =0
-            LabelX =-1800
-            FontSize =11
-            FontName ="Calibri"
-            AllowValueListEdits =1
-            InheritValueList =1
-            ThemeFontIndex =1
-            BackThemeColorIndex =1
-            BorderThemeColorIndex =1
-            BorderShade =65.0
-            ForeThemeColorIndex =2
-            ForeShade =50.0
-            GridlineThemeColorIndex =1
-            GridlineShade =65.0
-        End
-        Begin FormHeader
-            Height =0
-            BackColor =15064278
-            Name ="FormHeader"
-            GUID = Begin
-                0x2e259496e187b04eb7cdb4ae0a7003f7
-            End
-            AlternateBackThemeColorIndex =1
-            AlternateBackShade =95.0
-            BackThemeColorIndex =2
-            BackTint =20.0
-        End
         Begin Section
-            Height =1980
+            Height =7260
             Name ="Detail"
             GUID = Begin
-                0x34a177a14c3b164ca3c44380fc7005b3
+                0x0b2119c0fa2b62439c2010b3cafbf1c9
             End
-            AlternateBackColor =15132391
-            AlternateBackThemeColorIndex =3
-            BackThemeColorIndex =1
-            Begin
-                Begin Label
-                    OverlapFlags =85
-                    Left =540
-                    Top =240
-                    Width =5640
-                    Height =1500
-                    FontSize =16
-                    FontWeight =700
-                    BorderColor =8355711
-                    ForeColor =8355711
-                    Name ="Label12"
-                    Caption ="Open form centered in window\015\012with a specific form size."
-                    GUID = Begin
-                        0xfd05da8e83a4264eadb57221e6722b9c
-                    End
-                    GridlineColor =10921638
-                    LayoutCachedLeft =540
-                    LayoutCachedTop =240
-                    LayoutCachedWidth =6180
-                    LayoutCachedHeight =1740
-                End
-            End
-        End
-        Begin FormFooter
-            Height =0
-            Name ="FormFooter"
-            GUID = Begin
-                0x06c56cad98879943a5f6c0f37be0a415
-            End
-            AutoHeight =1
+            AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
@@ -222,7 +97,7 @@ Public Function ConvertPIXELSToTWIPS(lPixel As Long, lDirection As Long) As Long
     Dim RetVal As Long
     Dim PIXELSPERINCH As Long
     Const nTwipsPerInch = 1440
- 
+
     lngDC = GetDC(0)
     ' Horizontal
     If (lDirection = 0) Then
