@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "1.9.914"
-Private Const aegit_expVERSION_DATE As String = "June 15, 2017"
+Private Const aegit_expVERSION_DATE As String = "June 16, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -1734,7 +1734,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, ByVal st
             End If
             KillProperly (strTheCurrentPathAndFile)
 SaveAsText:
-            If intAcObjType = 5 Then
+            If intAcObjType = 5 Then    ' Modules
                 'Debug.Print "5:", doc.Name, Excluded(doc.Name)
                 If Excluded(doc.Name) And pExclude Then
                     Debug.Print , "=> Excluded: " & doc.Name
@@ -1745,18 +1745,19 @@ SaveAsText:
             Else
                 Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             End If
+
             If mblnUTF16 Then
                 Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
             Else
                 Application.SaveAsText intAcObjType, doc.Name, strTheCurrentPathAndFile
-                If intAcObjType = 2 Then
+                If intAcObjType = 2 Or intAcObjType = 3 Then    ' Forms or Reports
                     ' Convert UTF-16 to txt - fix for Access 2013
                     If NoBOM(strTheCurrentPathAndFile) Then
                         ' Conversion done
                     Else
                         ' Fallback to old method
                         If aeReadWriteStream(strTheCurrentPathAndFile) = True Then
-                            'If intAcObjType = 2 Then Pause (0.25)
+                            'If intAcObjType = 2 Or intAcObjType = 3 Then Pause (0.25)
                             KillProperly (strTheCurrentPathAndFile)
                             Name strTheCurrentPathAndFile & ".clean.txt" As strTheCurrentPathAndFile
                         End If
@@ -1768,7 +1769,7 @@ SaveAsText:
         ' Ouput frm as txt
         If Not (Left$(doc.Name, 3) = "zzz" Or Left$(doc.Name, 4) = "~TMP") _
             Or Not Excluded(doc.Name) Then
-            If strContainerType = "Forms" Then
+            If strContainerType = "Forms" Or strContainerType = "Reports" Then
                 If Not IsMissing(varDebug) Then
                     CreateFormReportTextFile strTheCurrentPathAndFile, strTheCurrentPathAndFile & ".txt", varDebug
                 Else

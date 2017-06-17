@@ -1,0 +1,196 @@
+Version =20
+VersionRequired =20
+PublishOption =1
+Begin Report
+    LayoutForPrint = NotDefault
+    DividingLines = NotDefault
+    AllowDesignChanges = NotDefault
+    DateGrouping =1
+    GrpKeepTogether =1
+    PictureAlignment =2
+    DatasheetGridlinesBehavior =3
+    GridX =24
+    GridY =24
+    Width =8884
+    DatasheetFontHeight =11
+    ItemSuffix =2
+    Right =12945
+    Bottom =9675
+    DatasheetGridlinesColor =15132391
+    RecSrcDt = Begin
+        0x7f676739b548e440
+    End
+    GUID = Begin
+        0xe7cdea1ab2dbcf4db928b62ee6f40a3f
+    End
+    DatasheetFontName ="Calibri"
+    PrtMip = Begin
+    End
+    PrtDevMode = Begin
+    End
+    PrtDevNames = Begin
+    End
+    FilterOnLoad =0
+    FitToPage =1
+    DisplayOnSharePointSite =1
+    DatasheetAlternateBackColor =15921906
+    DatasheetGridlinesColor12 =0
+    FitToScreen =1
+    DatasheetBackThemeColorIndex =1
+    BorderThemeColorIndex =3
+    ThemeFontIndex =1
+    ForeThemeColorIndex =0
+    AlternateBackThemeColorIndex =1
+    AlternateBackShade =95.0
+    PrtDevModeW = Begin
+    End
+    PrtDevNamesW = Begin
+    End
+    NoSaveCTIWhenDisabled =1
+    Begin
+        Begin Image
+            OldBorderStyle =0
+            BorderLineStyle =0
+            SizeMode =3
+            PictureAlignment =2
+            BorderColor =16777215
+            GridlineColor =16777215
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin CommandButton
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderColor =16777215
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeThemeColorIndex =0
+            PressedForeTint =75.0
+        End
+        Begin PageHeader
+            Height =1500
+            Name ="PageHeaderSection"
+            GUID = Begin
+                0x8e3f51902854b543a19aa1eb8aab4ee0
+            End
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+            Begin
+                Begin Image
+                    PictureType =2
+                    Left =60
+                    Top =60
+                    Width =1320
+                    Height =1320
+                    BorderColor =10921638
+                    Name ="img_ae"
+                    OnClick ="[Event Procedure]"
+                    Picture ="adaept_logo_rg_128x128"
+                    GUID = Begin
+                        0xfc654bcf8252a24fa4b31ba1ed66d9eb
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =1380
+                    LayoutCachedHeight =1380
+                End
+            End
+        End
+        Begin Section
+            KeepTogether = NotDefault
+            Height =7560
+            Name ="Detail"
+            GUID = Begin
+                0x50aa4ca6c1b4ef46ae8437b2400cca5d
+            End
+            AutoHeight =1
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+            Begin
+                Begin CommandButton
+                    Left =1800
+                    Top =540
+                    Width =1860
+                    Height =720
+                    ForeColor =4210752
+                    Name ="cmdClickMe"
+                    Caption ="Click Me!"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xaae39dfa72add740b991f4513fded7ed
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =1800
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =3660
+                    LayoutCachedHeight =1260
+                    BackColor =15123357
+                    BorderColor =15123357
+                    HoverColor =15652797
+                    PressedColor =11957550
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
+            End
+        End
+        Begin PageFooter
+            Height =360
+            Name ="PageFooterSection"
+            GUID = Begin
+                0x81b87fce2dd90b48a2908f1a9cd1a4f4
+            End
+            AutoHeight =1
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+        End
+    End
+End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+Private Sub cmdClickMe_Click()
+    MsgBox "You Clicked Me!"
+End Sub
+
+Private Sub img_ae_Click()
+    On Error GoTo 0
+    MsgBox "This is a rpt dummy!"
+End Sub

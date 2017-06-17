@@ -1,0 +1,135 @@
+Version =20
+VersionRequired =20
+PublishOption =1
+Begin Report
+    LayoutForPrint = NotDefault
+    DividingLines = NotDefault
+    AllowDesignChanges = NotDefault
+    DateGrouping =1
+    GrpKeepTogether =1
+    PictureAlignment =2
+    DatasheetGridlinesBehavior =3
+    GridX =24
+    GridY =24
+    Width =8884
+    DatasheetFontHeight =11
+    ItemSuffix =1
+    Right =14610
+    Bottom =12165
+    DatasheetGridlinesColor =14806254
+    RecSrcDt = Begin
+        0x7f676739b548e440
+    End
+    GUID = Begin
+        0x49a1c78409413f489479e939bfef72f9
+    End
+    NameMap = Begin
+    End
+    DatasheetFontName ="Calibri"
+    PrtMip = Begin
+    End
+    PrtDevMode = Begin
+    End
+    PrtDevNames = Begin
+    End
+    FilterOnLoad =0
+    FitToPage =1
+    DisplayOnSharePointSite =1
+    DatasheetAlternateBackColor =15921906
+    DatasheetGridlinesColor12 =0
+    FitToScreen =1
+    DatasheetBackThemeColorIndex =1
+    BorderThemeColorIndex =3
+    ThemeFontIndex =1
+    ForeThemeColorIndex =0
+    AlternateBackThemeColorIndex =1
+    AlternateBackShade =95.0
+    PrtDevModeW = Begin
+    End
+    PrtDevNamesW = Begin
+    End
+    NoSaveCTIWhenDisabled =1
+    Begin
+        Begin Image
+            OldBorderStyle =0
+            BorderLineStyle =0
+            SizeMode =3
+            PictureAlignment =2
+            BorderColor =16777215
+            GridlineColor =16777215
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin PageHeader
+            Height =1500
+            Name ="PageHeaderSection"
+            GUID = Begin
+                0x3217d31712f9ab48982f3a565962a9ce
+            End
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+            Begin
+                Begin Image
+                    PictureType =2
+                    Left =60
+                    Top =60
+                    Width =1320
+                    Height =1320
+                    BorderColor =10921638
+                    Name ="img_ae"
+                    OnClick ="[Event Procedure]"
+                    Picture ="adaept_logo_rg_128x128"
+                    GUID = Begin
+                        0xdebb5cb5a345174eb37c5b7ba4b223c0
+                    End
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =1380
+                    LayoutCachedHeight =1380
+                End
+            End
+        End
+        Begin Section
+            KeepTogether = NotDefault
+            Height =7560
+            Name ="Detail"
+            GUID = Begin
+                0xff70f9f8da5dd5428e00c933edd97041
+            End
+            AutoHeight =1
+            AlternateBackColor =15921906
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+        End
+        Begin PageFooter
+            Height =360
+            Name ="PageFooterSection"
+            GUID = Begin
+                0xe60117f10192b94e984222e658c75d34
+            End
+            AutoHeight =1
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
+            BackThemeColorIndex =1
+        End
+    End
+End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+Private Sub img_ae_Click()
+    On Error GoTo 0
+    MsgBox "This is a rpt dummy!"
+End Sub
