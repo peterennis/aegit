@@ -32,15 +32,15 @@ Option Explicit
 
 Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
 
-Private Declare PtrSafe Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hwnd As Long) As Long
+Private Declare PtrSafe Function apiSetActiveWindow Lib "user32" Alias "SetActiveWindow" (ByVal hWnd As Long) As Long
 Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 
 Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "1.9.914"
-Private Const aegit_expVERSION_DATE As String = "June 16, 2017"
+Private Const aegit_expVERSION As String = "1.9.915"
+Private Const aegit_expVERSION_DATE As String = "June 30, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -1037,16 +1037,25 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 
     aeBeginLogging "aeDocumentTheDatabase"
     If aegitSetup Then
+        'MsgBox "aestrSourceLocation = " & aestrSourceLocation
         KillAllFiles aestrSourceLocation            '= aegitType.SourceFolder
+        'MsgBox "aestrXMLLocation = " & aestrXMLLocation
         KillAllFiles aestrXMLLocation               '= aegitType.XMLFolder
+        'MsgBox "aestrXMLDataLocation = " & aestrXMLDataLocation
         KillAllFiles aestrXMLDataLocation           '= aegitType.XMLDataFolder
     ElseIf aegitFrontEndApp Then
+        'MsgBox "aestrSourceLocation = " & aestrSourceLocation
         KillAllFiles aestrSourceLocation
+        'MsgBox "aestrXMLLocation = " & aestrXMLLocation
         KillAllFiles aestrXMLLocation
+        'MsgBox "aestrXMLDataLocation = " & aestrXMLDataLocation
         KillAllFiles aestrXMLDataLocation
     ElseIf Not aegitFrontEndApp Then
+        'MsgBox "aestrSourceLocationBe = " & aestrSourceLocationBe
         KillAllFiles aestrSourceLocationBe
+        'MsgBox "aestrXMLLocationBe = " & aestrXMLLocationBe
         KillAllFiles aestrXMLLocationBe
+        'MsgBox "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
         KillAllFiles aestrXMLDataLocationBe
     End If
     aePrintLog "Timing for KillAllFiles"
@@ -5346,7 +5355,7 @@ Public Sub PrettyXML(ByVal strPathFileName As String, Optional ByVal varDebug As
     Dim strTestPath As String
     strTestPath = strPathFileName
     If Left$(strPathFileName, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(strPathFileName, 2, Len(strPathFileName) - 1)
+        strTestPath = CurrentProject.Path & Mid$(strPathFileName, 2, Len(strPathFileName) - 1)
         strPathFileName = strTestPath
         'Debug.Print , "strPathFileName = " & strPathFileName, "PrettyXML"
         'Stop
@@ -5939,42 +5948,42 @@ Private Sub TestForRelativePath()
     Dim strTestPath As String
     strTestPath = aestrSourceLocation
     If Left$(aestrSourceLocation, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
+        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
         aestrSourceLocation = strTestPath
     End If
     'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
     '
     strTestPath = aestrSourceLocationBe
     If Left$(aestrSourceLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
+        strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
         aestrSourceLocationBe = strTestPath
     End If
     'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
     '
     strTestPath = aestrXMLLocation
     If Left$(aestrXMLLocation, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
     End If
     'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
     '
     strTestPath = aestrXMLLocationBe
     If Left$(aestrXMLLocationBe, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
         aestrXMLLocationBe = strTestPath
     End If
     'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
     '
     strTestPath = aestrXMLDataLocation
     If Left$(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
         aestrXMLDataLocation = strTestPath
     End If
     'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
     '
     strTestPath = aestrXMLDataLocationBe
-    If Left$(aestrXMLDataLocation, 1) = "." Then
-        strTestPath = CurrentProject.path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
+    If Left$(aestrXMLDataLocationBe, 1) = "." Then
+        strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
         aestrXMLDataLocationBe = strTestPath
     End If
     'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
@@ -6061,15 +6070,18 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
 
         ' Check folders exist
         If Not FolderExists(aestrSourceLocationBe) Then
-            MsgBox "aestrSourceLocationBe does not exist!", vbCritical, "VerifySetup"
+            MsgBox "aestrSourceLocationBe does not exist!" & vbCrLf & _
+                "aestrSourceLocationBe = " & aestrSourceLocationBe, vbCritical, "VerifySetup"
             Stop
         End If
         If Not FolderExists(aestrXMLLocationBe) Then
-            MsgBox "aestrXMLLocationBe does not exist!", vbCritical, "VerifySetup"
+            MsgBox "aestrXMLLocationBe does not exist!" & vbCrLf & _
+                "aestrXMLLocationBe = " & aestrXMLLocationBe, vbCritical, "VerifySetup"
             Stop
         End If
         If Not FolderExists(aestrXMLDataLocationBe) Then
-            MsgBox "aestrXMLDataLocationBe does not exist!", vbCritical, "VerifySetup"
+            MsgBox "aestrXMLDataLocationBe does not exist!" & vbCrLf & _
+                "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe, vbCritical, "VerifySetup"
             Stop
         End If
     End If

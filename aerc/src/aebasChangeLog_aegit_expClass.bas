@@ -41,7 +41,6 @@ Option Explicit
 ' Tasks:
 ' %135 -
 ' %134 -
-' %133 -
 ' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
@@ -91,7 +90,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'2017616 - v19914 -
+'20170630 - v19915 -
+    ' FIXED - %133 - aestrXMLDataLocationBe is not converted correctly from relative to absolute path (SVIPAZSQL011.PNG), TestForRelativePath (SVIPAZSQL012.PNG)
+'20170616 - v19914 -
     ' FIXED - %132 - Add report txt export capability
 '20170509 - v19913 -
     ' FIXED - %131 - Do not export unwanted temp tabes e.g. src\xml\tables_~TMPCLP117951.xsd

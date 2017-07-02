@@ -106,7 +106,7 @@ Public Function SpFolder(ByVal SpName As String) As String
     Dim objFolderItem As Object
     Set objFolderItem = objFolder.Self
 
-    SpFolder = objFolderItem.path
+    SpFolder = objFolderItem.Path
 
 End Function
    

@@ -535,13 +535,13 @@ Private Function GetFiles(ByVal strPath As String, _
 
     ' Loop through Files collection, adding to dictionary.
     For Each oFile In oFolder.Files
-        dctDict.Add oFile.path, oFile.path
+        dctDict.Add oFile.Path, oFile.Path
     Next oFile
 
     ' If Recursive flag is true, call recursively.
     If blnRecursive Then
         For Each oSubFolder In oFolder.SubFolders
-            GetFiles oSubFolder.path, dctDict, True
+            GetFiles oSubFolder.Path, dctDict, True
         Next oSubFolder
     End If
 

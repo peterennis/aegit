@@ -60,9 +60,14 @@ Public Sub RenameSQLinkedTables(Optional ByVal strSourceFolder As String = THE_S
     On Error GoTo PROC_ERR
 
     MyAppPath = strSourceFolder & "..\"
-    Debug.Print CurrentProject.path, "MyAppPath = " & MyAppPath, Application.Name, _
-        Application.VBE.ActiveVBProject.Name, Application.CurrentProject.Name
-    Set dbs = OpenDatabase(CurrentProject.path & "\" & Application.CurrentProject.Name)
+    Debug.Print "CurrentProject.path = " & CurrentProject.Path
+    Debug.Print "MyAppPath = " & MyAppPath
+    Debug.Print "Application.Name = " & Application.Name
+    Debug.Print "Application.VBE.ActiveVBProject.Name = " & Application.VBE.ActiveVBProject.Name
+    Debug.Print "Application.CurrentProject.Name = " & Application.CurrentProject.Name
+    Debug.Print "CurrentProject.Path\Application.CurrentProject.Name = " & CurrentProject.Path & "\" & Application.CurrentProject.Name
+    'Stop
+    Set dbs = OpenDatabase(CurrentProject.Path & "\" & Application.CurrentProject.Name)
     dbs.CreateTableDef
 
     For i = 0 To dbs.TableDefs.Count - 1
