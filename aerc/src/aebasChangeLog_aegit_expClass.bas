@@ -39,8 +39,11 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %135 -
-' %134 -
+' %140 -
+' %139 -
+' %138 -
+' %137 -
+' %136 -
 ' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
@@ -90,6 +93,9 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20170727 - v19916 -
+    ' FIXED - %135 - Fix export tool for separate procedure queries for more detailed timing output and messages
+    ' FIXED - %134 - Create Setup_The_Source_Location
 '20170630 - v19915 -
     ' FIXED - %133 - aestrXMLDataLocationBe is not converted correctly from relative to absolute path (SVIPAZSQL011.PNG), TestForRelativePath (SVIPAZSQL012.PNG)
 '20170616 - v19914 -
