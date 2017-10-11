@@ -41,9 +41,6 @@ Option Explicit
 ' Tasks:
 ' %140 -
 ' %139 -
-' %138 -
-' %137 -
-' %136 -
 ' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
@@ -93,6 +90,10 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20170727 - v200 -
+    ' FIXED - %138 - Zip up v200, put in zips and commit to GitHub
+    ' FIXED - %137 - Decompile the accdb to minimal size
+    ' FIXED - %136 - Bump  to version 2.0.0 as it looks good!
 '20170727 - v19916 -
     ' FIXED - %135 - Fix export tool for separate procedure queries for more detailed timing output and messages
     ' FIXED - %134 - Create Setup_The_Source_Location
