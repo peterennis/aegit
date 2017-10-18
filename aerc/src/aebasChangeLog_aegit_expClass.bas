@@ -39,15 +39,23 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
-' %140 -
-' %139 -
+' %155 -
+' %154 -
+' %153 -
+' %152 - Setup access development, Ref: https://stackoverflow.com/questions/892415/how-to-set-up-a-development-environment-in-ms-access?noredirect=1&lq=1
+' %151 - More schema extraction. Ref: How to extract the schema of an Access database?
+' %150 - Export relationships test, Ref: https://stackoverflow.com/questions/22642371/export-import-ms-access-relations-to-a-text-file-using-vba?rq=1
+' %149 - Export schema for import test, Ref: https://stackoverflow.com/questions/2946203/export-and-import-ms-access-table-definitions-as-text-files
+' %148 - GH #12, Fix aegit template for Access 2016
+' %147 - GH #13, Test and make a new v201 release
+' %146 - GH #14, Add input box to aegit template export
+' %145 - Add an aeHideTable table to aegit and check if the table export list includes it
 ' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' %127 - exp tables should respect ODBC flag - NOTE: be careful of export sql table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
 ' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
 ' %124 - USysApplicationLog Table - Ref: https://www.amazon.com/Microsoft-Access-2010-Inside-Out/dp/0735626855#reader_0735626855
 '           The USysApplicationLog table is used to record any data macro execution errors - Ref: http://www.accessjunkie.com/Pages/faq2010_32.aspx
-' %123 - VBA How to Hide a table - http://hitechcoach.com/index.php/component/content/article/61-access-databases/tables/63-how-to-hide-a-table
 ' %122 - USysRegInfo is a table that is normally created in databases intended as add-ins, to be managed by the Access Add-In Manager
 ' %121 - Fix needed for export like tables_~TMPCLP132461.xsd
 ' %120 - Relates to %116, Create function to output list of MSys tables then work through steps to understand conditions when they are created
@@ -90,7 +98,17 @@ Option Explicit
 '=============================================================================================================================
 '
 '
-'20170727 - v200 -
+'20171017 - v201 -
+    ' FIXED - %144 - Relates to %123, add aeHideTable and aeUnHideTable to aegit class
+    ' FIXED - %143 - Bump version date
+    ' FIXED - %123 - VBA How to Hide a table - http://hitechcoach.com/index.php/component/content/article/61-access-databases/tables/63-how-to-hide-a-table
+'20171011 - v201 -
+    ' FIXED - %142 - Bump version
+    ' FIXED - %141 - Add Kinsa as admin and developer
+    ' FIXED - %140 - Add location to debug output of KillAllFiles
+'20171011 - v200 -
+    ' FIXED - %139 - Create separate command for aegit_Template_EXPORT with no guard for checking if it is the aegit project
+'20171010 - v200 -
     ' FIXED - %138 - Zip up v200, put in zips and commit to GitHub
     ' FIXED - %137 - Decompile the accdb to minimal size
     ' FIXED - %136 - Bump  to version 2.0.0 as it looks good!

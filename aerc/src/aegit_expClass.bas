@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.0.0"
-Private Const aegit_expVERSION_DATE As String = "October 10, 2017"
+Private Const aegit_expVERSION As String = "2.0.1"
+Private Const aegit_expVERSION_DATE As String = "October 17, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -519,13 +519,13 @@ Public Property Get GetReferences(Optional ByVal varDebug As Variant) As Boolean
     End If
 End Property
 
-Public Property Get IsPrimaryKey(ByVal strTableName As String, ByVal strField As String) As Boolean
+Public Property Get IsPrimaryKey(ByVal strTablename As String, ByVal strField As String) As Boolean
     On Error GoTo 0
     Debug.Print "Property Get IsPrimaryKey"
     Dim dbs As DAO.Database
     Set dbs = CurrentDb()
     Dim tdf As DAO.TableDef
-    Set tdf = dbs.TableDefs(strTableName)
+    Set tdf = dbs.TableDefs(strTablename)
     mblnResult = IsPK(tdf, strField)
     IsPrimaryKey = mblnResult
     Set tdf = Nothing
@@ -679,6 +679,26 @@ Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     aegitXMLFolderBe = strXMLFolderBe
     'Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
+
+Private Sub aeHideTable(strTablename As String)
+    With CurrentDb
+        With .TableDefs(strTablename)
+            .Attributes = .Attributes Or dbHiddenObject
+        End With
+    End With
+    RefreshDatabaseWindow
+End Sub
+
+Public Sub aeUnHideTable(strTablename As String)
+    With CurrentDb
+        With .TableDefs(strTablename)
+            If dbHiddenObject = (.Attributes And dbHiddenObject) Then
+                .Attributes = .Attributes - dbHiddenObject
+            End If
+        End With
+    End With
+    RefreshDatabaseWindow
+End Sub
 
 Private Sub aeBeginLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
     Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
@@ -2281,7 +2301,7 @@ PROC_ERR:
 
 End Function
 
-Private Function GetLinkedTableCurrentPath(ByVal strTableName As String) As String
+Private Function GetLinkedTableCurrentPath(ByVal strTablename As String) As String
     ' Ref: http://www.access-programmers.co.uk/forums/showthread.php?t=198057
     ' =========================================================================
     ' Procedure: GetLinkedTableCurrentPath
@@ -2302,12 +2322,12 @@ Private Function GetLinkedTableCurrentPath(ByVal strTableName As String) As Stri
     Dim strMidLink As String
 
     If Not aegitExport.ExportNoODBCTablesInfo Then
-        If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
+        If Len(CurrentDb.TableDefs(strTablename).Connect) > 0 Then
             ' Linked table exists, but is the link valid?
             ' The next line of code will generate Errors 3011 or 3024 if it isn't
-            CurrentDb.TableDefs(strTableName).RefreshLink
+            CurrentDb.TableDefs(strTablename).RefreshLink
             ' If you get to this point, you have a valid, Linked Table
-            strConnect = CurrentDb.TableDefs(strTableName).Connect
+            strConnect = CurrentDb.TableDefs(strTablename).Connect
             intStrConnectLen = Len(strConnect)
             intDatabasePos = InStr(1, strConnect, "Database=") + 8
             strMidLink = Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos)
@@ -2319,24 +2339,24 @@ Private Function GetLinkedTableCurrentPath(ByVal strTableName As String) As Stri
             '    , vbInformation, "GetLinkedTableCurrentPath"
             GetLinkedTableCurrentPath = strMidLink
         Else
-            GetLinkedTableCurrentPath = "Local Table=>" & strTableName
+            GetLinkedTableCurrentPath = "Local Table=>" & strTablename
         End If
     Else
         ' Check if it is an ODBC link
-        If IsLinkedODBC(strTableName) Then
+        If IsLinkedODBC(strTablename) Then
             ' Return an indicator that it is an ODBC table
             GetLinkedTableCurrentPath = "ODBC"
         Else
-            If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
-                CurrentDb.TableDefs(strTableName).RefreshLink
+            If Len(CurrentDb.TableDefs(strTablename).Connect) > 0 Then
+                CurrentDb.TableDefs(strTablename).RefreshLink
                 ' If you get to this point, you have a valid, Linked Table
-                strConnect = CurrentDb.TableDefs(strTableName).Connect
+                strConnect = CurrentDb.TableDefs(strTablename).Connect
                 intStrConnectLen = Len(strConnect)
                 intDatabasePos = InStr(1, strConnect, "Database=") + 8
                 strMidLink = Mid$(strConnect, intDatabasePos + 1, Len(strConnect) - intDatabasePos)
                 GetLinkedTableCurrentPath = strMidLink
             Else
-                GetLinkedTableCurrentPath = "Local Table=>" & strTableName
+                GetLinkedTableCurrentPath = "Local Table=>" & strTablename
             End If
         End If
     End If
@@ -2350,10 +2370,10 @@ PROC_ERR:
             'MsgBox "mblnIgnore = " & mblnIgnore
             If mblnIgnore Then Resume PROC_EXIT
         Case 3265
-            MsgBox "(" & strTableName & ") does not exist as either an Internal or Linked Table", _
+            MsgBox "(" & strTablename & ") does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
         Case 3011, 3024                 ' Linked Table does not exist or DB Path not valid
-            MsgBox "(" & strTableName & ") is not a valid Linked Table", vbCritical, "Link Not Valid"
+            MsgBox "(" & strTablename & ") is not a valid Linked Table", vbCritical, "Link Not Valid"
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "ERROR"
     End Select
@@ -2544,13 +2564,13 @@ Public Function GetTableName(ByVal strSchemaLine As String) As String
 
     Dim intPosOne As Integer
     Dim intPosTwo As Integer
-    Dim strTableName As String
+    Dim strTablename As String
 
     intPosOne = InStr(1, strSchemaLine, "[") + 1
     intPosTwo = InStr(1, strSchemaLine, "]")
-    strTableName = Mid$(strSchemaLine, intPosOne, intPosTwo - intPosOne)
+    strTablename = Mid$(strSchemaLine, intPosOne, intPosTwo - intPosOne)
     'Debug.Print "strTableName=" & strTableName
-    GetTableName = strTableName
+    GetTableName = strTablename
 
 End Function
 
@@ -2625,17 +2645,17 @@ Private Function IsFormHidden(ByVal strFormName As String) As Boolean
     End If
 End Function
 
-Private Function IsLinkedODBC(strTableName As String) As Boolean
+Private Function IsLinkedODBC(strTablename As String) As Boolean
     ' Ref: http://www.pcreview.co.uk/threads/check-if-a-table-is-linked.3748757/
     ' Non-linked tables are type 1
     ' ODBC linked tables are type 4
     ' All other linked tables are type 6
 
     'Debug.Print strTableName, Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"))
-    IsLinkedODBC = Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"), 0) = 4
+    IsLinkedODBC = Nz(DLookup("Type", "MSysObjects", "Name = '" & strTablename & "'"), 0) = 4
 End Function
 
-Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
+Private Function IsLinkedTable(ByVal strTablename As String) As Boolean
 
     'Debug.Print "LinkedTable"
     On Error GoTo PROC_ERR
@@ -2648,10 +2668,10 @@ Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
     ' window does not open
     If Not aegitExport.ExportNoODBCTablesInfo Then
         ' Linked table connection string is > 0
-        If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
+        If Len(CurrentDb.TableDefs(strTablename).Connect) > 0 Then
             ' Linked table exists, but is the link valid?
             ' The next line of code will generate Errors 3011 or 3024 if it isn't
-            CurrentDb.TableDefs(strTableName).RefreshLink
+            CurrentDb.TableDefs(strTablename).RefreshLink
             'If you get to this point, you have a valid, Linked Table
             IsLinkedTable = True
             'Debug.Print "LinkedTable = True"
@@ -2663,12 +2683,12 @@ Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
         End If
     Else
         ' Check if it is an ODBC link
-        If IsLinkedODBC(strTableName) Then
+        If IsLinkedODBC(strTablename) Then
             ' Do nothing and treat the link as false
             IsLinkedTable = False
         Else
-            If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
-                CurrentDb.TableDefs(strTableName).RefreshLink
+            If Len(CurrentDb.TableDefs(strTablename).Connect) > 0 Then
+                CurrentDb.TableDefs(strTablename).RefreshLink
                 IsLinkedTable = True
             Else
                 IsLinkedTable = False
@@ -2692,10 +2712,10 @@ PROC_ERR:
                 'do nothing
             End If
         Case 3265
-            MsgBox "[" & strTableName & "] does not exist as either an Internal or Linked Table", _
+            MsgBox "[" & strTablename & "] does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
         Case 3011, 3024     'Linked Table does not exist or DB Path not valid
-            MsgBox "[" & strTableName & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
+            MsgBox "[" & strTablename & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
         Case Else
             MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
     End Select
@@ -2804,22 +2824,22 @@ Private Function IsSinglePrimaryField(ByVal tdf As DAO.TableDef, ByRef PrimaryIn
 
 End Function
 
-Private Function IsTableHidden(ByVal strTableName As String) As Boolean
+Private Function IsTableHidden(ByVal strTablename As String) As Boolean
     'Debug.Print "IsTableHidden"
     On Error GoTo 0
-    If IsNull(strTableName) Or strTableName = vbNullString Then
+    If IsNull(strTablename) Or strTablename = vbNullString Then
         IsTableHidden = False
     Else
-        IsTableHidden = GetHiddenAttribute(acTable, strTableName)
+        IsTableHidden = GetHiddenAttribute(acTable, strTablename)
     End If
 End Function
 
-Private Function IsTableSchemaDone(ByVal strTableName As String, ByVal strSQL As String) As Boolean
+Private Function IsTableSchemaDone(ByVal strTablename As String, ByVal strSQL As String) As Boolean
     'Debug.print "IsTableSchemaDone"
     On Error GoTo 0
     
     IsTableSchemaDone = True
-    If InStr(strSQL, strTableName) Then
+    If InStr(strSQL, strTablename) Then
         IsTableSchemaDone = False
     End If
 End Function
@@ -2828,7 +2848,7 @@ Private Sub KillAllFiles(ByVal strLoc As String)
 
     Dim strFile As String
 
-    Debug.Print "KillAllFiles"
+    Debug.Print "KillAllFiles " & strLoc
     'Debug.Print , "strLoc = " & strLoc
     On Error GoTo PROC_ERR
 
@@ -2969,7 +2989,7 @@ PROC_ERR:
 
 End Sub
 
-Private Function ListGUID(ByVal strTableName As String) As String
+Private Function ListGUID(ByVal strTablename As String) As String
     ' Ref: http://stackoverflow.com/questions/8237914/how-to-get-the-guid-of-a-table-in-microsoft-access
     ' e.g. ?ListGUID("tblThisTableHasSomeReallyLongNameButItCouldBeMuchLonger")
 
@@ -2982,7 +3002,7 @@ Private Function ListGUID(ByVal strTableName As String) As String
     Dim strGuid As String
 
     strGuid = vbNullString
-    arrGUID8 = CurrentDb.TableDefs(strTableName).Properties("GUID").Value
+    arrGUID8 = CurrentDb.TableDefs(strTablename).Properties("GUID").Value
     For i = 1 To 8
         If Len(Hex$(arrGUID8(i))) = 1 Then
             strArrGUID8(i) = "0" & Hex$(arrGUID8(i))
@@ -5406,7 +5426,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     Dim strLfFieldName As String
     Dim strThePrimaryKeyField As String
     Dim strTheIndex As String
-    Dim strTableName As String
+    Dim strTablename As String
 
     Dim strAppName As String
     strAppName = Application.VBE.ActiveVBProject.Name
@@ -5436,12 +5456,12 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     For i = 0 To UBound(arrSQL)
         If Left$(arrSQL(i), Len(mTABLE)) = mTABLE Then
             ' Get the table name
-            strTableName = GetTableName(arrSQL(i))
+            strTablename = GetTableName(arrSQL(i))
             ' Test if the table schema is finished
             If i < UBound(arrSQL) Then
                 ' FIX THIS !!!
             End If
-            strLfCreateTable = "schemaBuilder.createTable('" & strTableName & "')."
+            strLfCreateTable = "schemaBuilder.createTable('" & strTablename & "')."
             'Debug.Print i & ">", strLfCreateTable
             Print #fleOut, strLfCreateTable
             mstrToParse = Right$(arrSQL(i), Len(arrSQL(i)) - InStr(arrSQL(i), "("))
@@ -5465,7 +5485,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Create the PrimaryKey
             strThePrimaryKeyField = GetPrimaryKey(arrSQL(i))
             If i <> UBound(arrSQL) Then
-                If IsTableSchemaDone(strTableName, arrSQL(i + 1)) Then
+                If IsTableSchemaDone(strTablename, arrSQL(i + 1)) Then
                     strThePrimaryKeyField = strThePrimaryKeyField & SEMICOLON
                 Else
                     strThePrimaryKeyField = strThePrimaryKeyField & PERIOD
@@ -5483,7 +5503,7 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
             ' Create the Index
             strTheIndex = GetIndex(arrSQL(i))
             If i <> UBound(arrSQL) Then
-                If IsTableSchemaDone(strTableName, arrSQL(i + 1)) Then
+                If IsTableSchemaDone(strTablename, arrSQL(i + 1)) Then
                     strTheIndex = strTheIndex & SEMICOLON
                 Else
                     strTheIndex = strTheIndex & PERIOD
@@ -5773,7 +5793,7 @@ PROC_ERR:
 
 End Sub
 
-Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug As Variant) As Boolean
+Private Function TableInfo(ByVal strTablename As String, Optional ByVal varDebug As Variant) As Boolean
     ' Ref: http://allenbrowne.com/func-06.html
     ' =============================================================================
     ' Purpose:  Display the field names, types, sizes and descriptions for a table
@@ -5803,10 +5823,10 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
     End If
 
     Set dbs = CurrentDb()
-    Set tdf = dbs.TableDefs(strTableName)
-    sLen = Len("TABLE: ") + Len(strTableName)
+    Set tdf = dbs.TableDefs(strTablename)
+    sLen = Len("TABLE: ") + Len(strTablename)
 
-    strLinkedTablePath = GetLinkedTableCurrentPath(strTableName)
+    strLinkedTablePath = GetLinkedTableCurrentPath(strTablename)
     'MsgBox strLinkedTablePath & " " & Left$(strLinkedTablePath, 13), vbInformation, "TableInfo"
 
     aeintFDLen = LongestTableDescription(tdf.Name)
@@ -5815,7 +5835,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
 
     If Not IsMissing(varDebug) Then
         Debug.Print SizeString("-", sLen, TextLeft, "-")
-        Debug.Print SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+        Debug.Print SizeString("TABLE: " & strTablename, sLen, TextLeft, " ")
         Debug.Print SizeString("-", sLen, TextLeft, "-")
         If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
             Debug.Print strLinkedTablePath
@@ -5832,7 +5852,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
   
     'Debug.Print ">>>", SizeString("-", sLen, TextLeft, "-")
     Print #1, SizeString("-", sLen, TextLeft, "-")
-    Print #1, SizeString("TABLE: " & strTableName, sLen, TextLeft, " ")
+    Print #1, SizeString("TABLE: " & strTablename, sLen, TextLeft, " ")
     Print #1, SizeString("-", sLen, TextLeft, "-")
     If Left$(strLinkedTablePath, 13) <> "Local Table=>" Then
         Print #1, "Linked=>" & strLinkedTablePath
@@ -5861,7 +5881,7 @@ Private Function TableInfo(ByVal strTableName As String, Optional ByVal varDebug
                 & aestr4 & SizeString(GetDescription(fld), aeintFDLen, TextLeft, " ")
         Next
     Else
-        If IsLinkedODBC(strTableName) Then
+        If IsLinkedODBC(strTablename) Then
             ' Do nothing
         Else
             For Each fld In tdf.Fields

@@ -91,6 +91,32 @@ PROC_ERR:
 
 End Sub
 
+Public Sub aegit_Template_EXPORT(Optional ByVal varDebug As Variant)
+
+    Const THE_FRONT_END_APP = True
+    Const THE_SOURCE_FOLDER = ".\src\"
+    Const THE_XML_FOLDER = ".\src\xml\"
+    Const THE_XML_DATA_FOLDER = ".\src\xmldata\"
+    Const THE_BACK_END_SOURCE_FOLDER = "NONE"
+    Const THE_BACK_END_XML_FOLDER = "NONE"
+    Const THE_BACK_END_DB1 = "NONE"
+
+    On Error GoTo 0
+
+    If Not IsMissing(varDebug) Then
+        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varSrcFldrBe:=THE_BACK_END_SOURCE_FOLDER, _
+                        varXmlFldr:=THE_XML_FOLDER, varXmlDataFldr:=THE_XML_DATA_FOLDER, _
+                        varFrontEndApp:=THE_FRONT_END_APP, _
+                        varBackEndDbOne:=THE_BACK_END_DB1
+    Else
+        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varSrcFldrBe:=THE_BACK_END_SOURCE_FOLDER, _
+                        varXmlFldr:=THE_XML_FOLDER, varXmlDataFldr:=THE_XML_DATA_FOLDER, _
+                        varFrontEndApp:=THE_FRONT_END_APP, _
+                        varBackEndDbOne:=THE_BACK_END_DB1
+    End If
+
+End Sub
+
 Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
 
     On Error GoTo 0
