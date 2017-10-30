@@ -44,7 +44,7 @@ NavPane Closed: 0, 4, False;
 NavPane Width: 328, 4, False;
 NavPane View By: 0, 4, False;
 NavPane Sort By: 2, 4, False;
-AppTitle: aegit 2.0.1, 10, False;
+AppTitle: aegit 2.0.2, 10, False;
 AppIcon: .\adaept64.ico, 10, False;
 Track Name AutoCorrect Info: 0, 4, False;
 Perform Name AutoCorrect: 0, 4, False;
