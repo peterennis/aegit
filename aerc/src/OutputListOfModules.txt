@@ -12,6 +12,7 @@
 [basExportImport]           False
 [basGDIPlus]  False
 [basHash]     False
+[basUTF8]     False
 [cls_HiddenDummy]           True
 [Test_aegit]  False
 [zOther]      False
