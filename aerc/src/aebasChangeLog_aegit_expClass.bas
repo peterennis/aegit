@@ -39,12 +39,17 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %165 -
+' %164 -
+' %163 -
+' %162 -
+' %161 -
 ' %160 -
 ' %159 -
-' %158 -
-' %157 -
-' %156 -
-' %155 -
+' %158 - Add function ExportToTextUnicode
+' %157 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
+' %156 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
+' %155 - MsoEncoding Enumeration, Ref: https://msdn.microsoft.com/en-us/library/office/aa432511(v=office.12).aspx
 ' %154 - DISTINCT vs. DISTINCTROW, Ref: http://www.fmsinc.com/microsoftaccess/query/distinct_vs_distinctrow/unique_values_records.asp
 ' %153 - Show query properties, CommandBars("Property Sheet").Position = msoBarTop (then click in the query design window)
 ' %152 - Setup access development, Ref: https://stackoverflow.com/questions/892415/how-to-set-up-a-development-environment-in-ms-access?noredirect=1&lq=1
@@ -52,7 +57,6 @@ Option Explicit
 ' %150 - Export relationships test, Ref: https://stackoverflow.com/questions/22642371/export-import-ms-access-relations-to-a-text-file-using-vba?rq=1
 ' %149 - Export schema for import test, Ref: https://stackoverflow.com/questions/2946203/export-and-import-ms-access-table-definitions-as-text-files
 ' %148 - GH #12, Fix aegit template for Access 2016
-' %147 - GH #13, Test and make a new v201 release
 ' %146 - GH #14, Add input box to aegit template export
 ' %145 - Add an aeHideTable table to aegit and check if the table export list includes it
 ' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
@@ -103,6 +107,8 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20171119 - v203 -
+    ' FIXED - %147 - GH #13, Test and make a new v201 release
 '20171017 - v201 -
     ' FIXED - %144 - Relates to %123, add aeHideTable and aeUnHideTable to aegit class
     ' FIXED - %143 - Bump version date

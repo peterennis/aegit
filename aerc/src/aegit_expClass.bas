@@ -4690,7 +4690,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
             Or Left$(qdf.Name, 4) = "~TMP" _
             Or Left$(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.sql
+            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.SQL
         End If
     Next
 
