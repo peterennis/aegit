@@ -45,8 +45,8 @@ Option Explicit
 ' %157 -
 ' %156 -
 ' %155 -
-' %154 -
-' %153 -
+' %154 - DISTINCT vs. DISTINCTROW, Ref: http://www.fmsinc.com/microsoftaccess/query/distinct_vs_distinctrow/unique_values_records.asp
+' %153 - Show query properties, CommandBars("Property Sheet").Position = msoBarTop (then click in the query design window)
 ' %152 - Setup access development, Ref: https://stackoverflow.com/questions/892415/how-to-set-up-a-development-environment-in-ms-access?noredirect=1&lq=1
 ' %151 - More schema extraction. Ref: How to extract the schema of an Access database?
 ' %150 - Export relationships test, Ref: https://stackoverflow.com/questions/22642371/export-import-ms-access-relations-to-a-text-file-using-vba?rq=1
