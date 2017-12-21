@@ -63,6 +63,101 @@ Public Sub TestUTF8Conversion()
 
 End Sub
 
+Public Function ExportToTextUnicode(strTableName As String, strFileName As String, _
+    Optional ByVal strDelim As String = vbTab) As Boolean
+    ' Ref: https://saplsmw.com/Export_directly_to_UTF-8_from_Access_using_VBA
+    ' Written by Jimbo at SAPLSMW.com
+    ' Special thanks: accessblog.net/2007/06/how-to-write-out-unicode-text-files-in.html
+
+    Dim rst As DAO.Recordset
+    Dim strSQL As String
+    Dim nCurrent As Long
+    Dim nFieldCount As Long
+    Dim nRecordCount As Long
+    Dim RetVal As Variant
+    Dim nCurRec As Long
+    Dim dnow As Date
+    Dim nCurSec As Long
+    Dim nTotalSeconds As Long
+    Dim nSecondsLeft As Long
+    Dim strTest As String
+
+    strSQL = "SELECT * FROM " & strTableName & ";"
+    'Check to see if strTableName is actually a query.  If so, use its SQL query.
+    nCurrent = 0
+    Do While nCurrent < CurrentDb.QueryDefs.Count
+        If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
+            strSQL = CurrentDb.QueryDefs(nCurrent).SQL
+        End If
+        nCurrent = nCurrent + 1
+    Loop
+    Set rst = CurrentDb.OpenRecordset(strSQL)
+    nFieldCount = rst.Fields.Count
+
+    If Not rst.EOF Then
+        'Now find the *actual* record count--returns a value of 1 record if we don't do these moves.
+        rst.MoveLast
+        rst.MoveFirst
+    End If
+
+    nRecordCount = rst.RecordCount
+    RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to " & strFileName & ". . .", nRecordCount)
+    'Create a binary stream
+    Dim UnicodeStream
+    Set UnicodeStream = CreateObject("ADODB.Stream")
+    UnicodeStream.Charset = "UTF-8"
+    UnicodeStream.Open
+
+    For nCurrent = 0 To nFieldCount - 1
+        If Right(rst.Fields(nCurrent).Name, 1) = "_" Then
+            UnicodeStream.WriteText Left(rst.Fields(nCurrent).Name, Len(rst.Fields(nCurrent).Name) - 1) & strDelim
+        Else
+            UnicodeStream.WriteText rst.Fields(nCurrent).Name & strDelim
+        End If
+    Next
+
+    UnicodeStream.WriteText vbCrLf
+    nCurSec = Second(Now())
+
+    Do While Not rst.EOF
+        nCurRec = nCurRec + 1
+        If Second(Now()) <> nCurSec And nCurRec <> rst.RecordCount Then
+            nCurSec = Second(Now())
+            RetVal = SysCmd(acSysCmdUpdateMeter, nCurRec)
+            RetVal = DoEvents()
+        End If
+        strTest = ""
+        For nCurrent = 0 To nFieldCount - 1  'Check for blank lines--no need to export those!
+            strTest = strTest & IIf(IsNull(rst.Fields), "", rst.Fields(nCurrent))
+        Next
+        If Len(Trim(strTest)) > 0 Then  'Check for blank lines--no need to export those!
+            For nCurrent = 0 To nFieldCount - 1
+                If Not IsNull(rst.Fields(nCurrent).Value) Then
+                    UnicodeStream.WriteText Trim(rst.Fields(nCurrent).Value)
+                End If
+                If nCurrent = (nFieldCount - 1) Then
+                    UnicodeStream.WriteText vbCrLf 'new line.
+                Else
+                    UnicodeStream.WriteText strDelim
+                End If
+            Next
+        End If
+        rst.MoveNext
+    Loop
+
+    'Check to ensure that the file does't already exist.
+    If Len(Dir(strFileName)) > 0 Then
+        Kill strFileName  ' The file exists, so we must delete it before it be created again.
+    End If
+    UnicodeStream.SaveToFile strFileName
+    UnicodeStream.Close
+    rst.Close
+    Set rst = Nothing
+    ExportToTextUnicode = True
+    RetVal = SysCmd(acSysCmdRemoveMeter)
+
+End Function
+
 ' Open a binary file for reading (mode = 'r') or writing (mode = 'w').
 Private Function BinOpen(ByVal file_path As String, ByVal mode As String) As BinFile
     Dim f As BinFile

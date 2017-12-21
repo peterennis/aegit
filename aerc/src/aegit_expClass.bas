@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.0.2"
-Private Const aegit_expVERSION_DATE As String = "October 29, 2017"
+Private Const aegit_expVERSION As String = "2.0.3"
+Private Const aegit_expVERSION_DATE As String = "November 19, 2017"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -4690,7 +4690,7 @@ Private Function OutputQueriesSqlText() As Boolean
         If Not (Left$(qdf.Name, 4) = "MSys" Or Left$(qdf.Name, 4) = "~sq_" _
             Or Left$(qdf.Name, 4) = "~TMP" _
             Or Left$(qdf.Name, 3) = "zzz") Then
-            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.sql
+            Print #1, "<<<[" & qdf.Name & "]>>>" & vbCrLf & qdf.SQL
         End If
     Next
 

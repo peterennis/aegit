@@ -9,7 +9,7 @@
               <@_@>
                    References:
                             VBA           Visual Basic For Applications
-                                          C:\PROGRA~2\COMMON~1\MICROS~1\VBA\VBA7.1\VBE7.DLL
+                                          C:\Program Files (x86)\COMMON~1\MICROS~1\VBA\VBA7.1\VBE7.DLL
                                           {000204EF-0000-0000-C000-000000000046}
                             Access        Microsoft Access 16.0 Object Library
                                           C:\Program Files (x86)\Microsoft Office\Office16\MSACC.OLB
