@@ -91,6 +91,32 @@ PROC_ERR:
 
 End Sub
 
+Public Sub aegit_fesql_EXPORT(Optional ByVal varDebug As Variant)
+
+    Const THE_FRONT_END_APP = True
+    Const THE_SOURCE_FOLDER = ".\srcfesql\"
+    Const THE_XML_FOLDER = ".\srcfesql\xml\"
+    Const THE_XML_DATA_FOLDER = ".\srcfesql\xmldata\"
+    Const THE_BACK_END_SOURCE_FOLDER = "NONE"
+    Const THE_BACK_END_XML_FOLDER = "NONE"
+    Const THE_BACK_END_DB1 = "NONE"
+
+    On Error GoTo 0
+
+    If Not IsMissing(varDebug) Then
+        aegitClassTest varDebug:="varDebug", varSrcFldr:=THE_SOURCE_FOLDER, varSrcFldrBe:=THE_BACK_END_SOURCE_FOLDER, _
+                        varXmlFldr:=THE_XML_FOLDER, varXmlDataFldr:=THE_XML_DATA_FOLDER, _
+                        varFrontEndApp:=THE_FRONT_END_APP, _
+                        varBackEndDbOne:=THE_BACK_END_DB1
+    Else
+        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varSrcFldrBe:=THE_BACK_END_SOURCE_FOLDER, _
+                        varXmlFldr:=THE_XML_FOLDER, varXmlDataFldr:=THE_XML_DATA_FOLDER, _
+                        varFrontEndApp:=THE_FRONT_END_APP, _
+                        varBackEndDbOne:=THE_BACK_END_DB1
+    End If
+
+End Sub
+
 Public Sub aegit_Template_EXPORT(Optional ByVal varDebug As Variant)
 
     Const THE_FRONT_END_APP = True
@@ -117,6 +143,43 @@ Public Sub aegit_Template_EXPORT(Optional ByVal varDebug As Variant)
 
 End Sub
 
+Public Sub aegit_Backend_EXPORT(Optional ByVal varDebug As Variant)
+
+    ' BACK END SETUP
+    Const THE_FRONT_END_APP = False
+    Const THE_SOURCE_FOLDER = "NONE"                     ' ".\src\"
+    Const THE_XML_FOLDER = "NONE"                        ' ".\src\xml\"
+    Const THE_XML_DATA_FOLDER = "NONE"                   ' ".\src\xmldata\"
+    Const THE_BACK_END_DB1 = "NONE"
+    Const THE_BACK_END_SOURCE_FOLDER = ".\srcbe\"
+    Const THE_BACK_END_XML_FOLDER = ".\srcbe\xml\"
+    Const THE_BACK_END_XML_DATA_FOLDER = ".\srcbe\xmldata\"
+
+    On Error GoTo PROC_ERR
+
+    'Debug.Print "THE_BACK_END_DB1 = " & THE_BACK_END_DB1
+    If Not IsMissing(varDebug) Then
+        aegitClassTest varDebug:="varDebug", _
+                        varSrcFldr:=THE_SOURCE_FOLDER, varSrcFldrBe:=THE_BACK_END_SOURCE_FOLDER, _
+                        varXmlFldr:=THE_XML_FOLDER, varXmlFldrBe:=THE_BACK_END_XML_FOLDER, _
+                        varXmlDataFldr:=THE_XML_DATA_FOLDER, varXmlDataFldrBe:=THE_BACK_END_XML_DATA_FOLDER, _
+                        varBackEndDbOne:=THE_BACK_END_DB1, varFrontEndApp:=THE_FRONT_END_APP
+    Else
+        aegitClassTest varSrcFldr:=THE_SOURCE_FOLDER, varSrcFldrBe:=THE_BACK_END_SOURCE_FOLDER, _
+                        varXmlFldr:=THE_XML_FOLDER, varXmlFldrBe:=THE_BACK_END_XML_FOLDER, _
+                        varXmlDataFldr:=THE_XML_DATA_FOLDER, varXmlDataFldrBe:=THE_BACK_END_XML_DATA_FOLDER, _
+                        varBackEndDbOne:=THE_BACK_END_DB1, varFrontEndApp:=THE_FRONT_END_APP
+    End If
+
+PROC_EXIT:
+    Exit Sub
+
+PROC_ERR:
+    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aegit_Backend_EXPORT"
+    Resume Next
+
+End Sub
+
 Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
 
     On Error GoTo 0
@@ -131,6 +194,7 @@ Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
     Else
         aegitClassTest varFrontEndApp:=True
     End If
+
 End Sub
 
 Public Sub ALTERNATIVE_EXPORT(Optional ByVal varDebug As Variant)

@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.0.3"
-Private Const aegit_expVERSION_DATE As String = "November 19, 2017"
+Private Const aegit_expVERSION As String = "2.0.8"
+Private Const aegit_expVERSION_DATE As String = "February 16, 2018"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -77,7 +77,7 @@ End Type
 Private Type myExportType                           ' Initialize defaults as:
     ExportAll As Boolean                            ' True
     ExportCodeAndObjects As Boolean                 ' True
-    ExportModuleCodeOnly As Boolean                 ' True
+    'OBSOLETE ExportModuleCodeOnly As Boolean                 ' True
     EXPERIMENTAL_ExportQAT As Boolean               ' False
     EXPERIMENTAL_ExportCBID As Boolean              ' False
     ExportNoODBCTablesInfo As Boolean               ' True, default does not export info about ODBC linked tables
@@ -120,7 +120,8 @@ Private aestrLFD As String
 Private aestrBackEndDbOne As String
 Private aeListOfTables() As Variant
 '
-Private Const DebugPrintInitialize As Boolean = False
+Private Const DebugPrintInitialize As Boolean = True
+'
 'Private aestrPassword As String
 Private Const aestr4 As String = "    "
 Private Const aeAppCmbrIds As String = "OutputListOfCommandBarIDs.txt"
@@ -192,7 +193,10 @@ Private Sub Class_Initialize()
     aegitXMLFolderBe = "default"
     aegitXMLDataFolder = "default"
     aegitXMLDataFolderBe = "default"
-    aestrBackEndDbOne = "default"             ' default for aegit is no back end database
+    aestrBackEndDbOne = "default"           ' Default for aegit is no back end database
+    aegitFrontEndApp = True                 ' Default is a front end app
+    pExclude = False                        ' Default setting is to export associated aegit_exp files
+    '
     ReDim Preserve aegitDataXML(0 To 0)
     If Application.VBE.ActiveVBProject.Name = "aegit" Then
         aegitDataXML(0) = "aetlkpStates"
@@ -213,14 +217,11 @@ Private Sub Class_Initialize()
     With aegitExport
         .ExportAll = True
         .ExportCodeAndObjects = True
-        .ExportModuleCodeOnly = True
+        'OBSOLETE .ExportModuleCodeOnly = True
         .EXPERIMENTAL_ExportQAT = False
         .EXPERIMENTAL_ExportCBID = False
         .ExportNoODBCTablesInfo = True
     End With
-
-    pExclude = True             ' Default setting is not to export associated aegit_exp files
-    aegitFrontEndApp = True     ' Default is a front end app
 
     Debug.Print "Class_Initialize"
     If DebugPrintInitialize Then
@@ -249,7 +250,7 @@ Private Sub Class_Initialize()
         '
         Debug.Print , "aegitExport.ExportAll = " & aegitExport.ExportAll
         Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
-        Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
+        'OBSOLETE Debug.Print , "aegitExport.ExportCodeOnly = " & aegitExport.ExportModuleCodeOnly
         Debug.Print , "aegitExport.EXPERIMENTAL_ExportQAT = " & aegitExport.EXPERIMENTAL_ExportQAT
         Debug.Print , "aegitExport.EXPERIMENTAL_ExportCBID = " & aegitExport.EXPERIMENTAL_ExportCBID
         Debug.Print , "aegitExport.ExportNoODBCTablesInfo = " & aegitExport.ExportNoODBCTablesInfo
@@ -567,13 +568,14 @@ Public Property Let SourceFolder(ByVal strSourceFolder As String)
     On Error GoTo 0
     Debug.Print "Property Let SourceFolder"
     aegitSourceFolder = strSourceFolder
+    Debug.Print , "aegitSourceFolder = " & aegitSourceFolder
 End Property
 
 Public Property Get SourceFolderBe() As String
     On Error GoTo 0
     Debug.Print "Property Get SourceFolderBe"
     SourceFolderBe = aegitSourceFolderBe      'aestrSourceLocationBe
-    'Debug.Print , "SourceFolderBe = " & SourceFolderBe
+    Debug.Print , "SourceFolderBe = " & SourceFolderBe
 End Property
 
 Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
@@ -581,7 +583,7 @@ Public Property Let SourceFolderBe(ByVal strSourceFolderBe As String)
     Debug.Print "Property Let SourceFolderBe"
     aegitSourceFolderBe = strSourceFolderBe
     'aestrSourceLocationBe = strSourceFolderBe
-    'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
 End Property
 
 Public Property Let TablesExportToXML(ByVal varTablesArray As Variant)
@@ -635,7 +637,7 @@ Public Property Let XMLDataFolder(ByVal strXMLDataFolder As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLDataFolder"
     aegitXMLDataFolder = strXMLDataFolder
-    'Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
+    Debug.Print , "aegitXMLDataFolder = " & aegitXMLDataFolder
 End Property
 
 Public Property Get XMLDataFolderBe() As String
@@ -649,7 +651,7 @@ Public Property Let XMLDataFolderBe(ByVal strXMLDataFolderBe As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLDataFolderBe"
     aegitXMLDataFolderBe = strXMLDataFolderBe
-    'Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
+    Debug.Print , "aegitXMLDataFolderBe = " & aegitXMLDataFolderBe
 End Property
 
 Public Property Get XMLFolder() As String
@@ -663,7 +665,7 @@ Public Property Let XMLFolder(ByVal strXMLFolder As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLFolder"
     aegitXMLFolder = strXMLFolder
-    'Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
+    Debug.Print , "aegitXMLFolder = " & aegitXMLFolder
 End Property
 
 Public Property Get XMLFolderBe() As String
@@ -677,7 +679,7 @@ Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     On Error GoTo 0
     Debug.Print "Property Let XMLFolderBe"
     aegitXMLFolderBe = strXMLFolderBe
-    'Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
+    Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
 
 Private Sub aeHideTable(strTableName As String)
@@ -1104,34 +1106,31 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
 
     ListOrCloseAllOpenQueries
 
+    DeleteAllExportedFiles
+
     Debug.Print "aeDocumentTheDatabase", "aegitSetup = " & aegitSetup, "aegitFrontEndApp = " & aegitFrontEndApp
     'Stop
 
-    aeBeginLogging "aeDocumentTheDatabase"
-    If aegitSetup Then
-        'MsgBox "aestrSourceLocation = " & aestrSourceLocation
-        KillAllFiles aestrSourceLocation            '= aegitType.SourceFolder
-        'MsgBox "aestrXMLLocation = " & aestrXMLLocation
-        KillAllFiles aestrXMLLocation               '= aegitType.XMLFolder
-        'MsgBox "aestrXMLDataLocation = " & aestrXMLDataLocation
-        KillAllFiles aestrXMLDataLocation           '= aegitType.XMLDataFolder
-    ElseIf aegitFrontEndApp Then
-        'MsgBox "aestrSourceLocation = " & aestrSourceLocation
-        KillAllFiles aestrSourceLocation
-        'MsgBox "aestrXMLLocation = " & aestrXMLLocation
-        KillAllFiles aestrXMLLocation
-        'MsgBox "aestrXMLDataLocation = " & aestrXMLDataLocation
-        KillAllFiles aestrXMLDataLocation
-    ElseIf Not aegitFrontEndApp Then
-        'MsgBox "aestrSourceLocationBe = " & aestrSourceLocationBe
-        KillAllFiles aestrSourceLocationBe
-        'MsgBox "aestrXMLLocationBe = " & aestrXMLLocationBe
-        KillAllFiles aestrXMLLocationBe
-        'MsgBox "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-        KillAllFiles aestrXMLDataLocationBe
+    Debug.Print , "aegitExport.ExportAll = " & aegitExport.ExportAll
+    If aegitExport.ExportCodeAndObjects Then
+        Debug.Print , "aegitExport.ExportCodeAndObjects = " & aegitExport.ExportCodeAndObjects
     End If
-    aePrintLog "Timing for KillAllFiles"
-    aeEndLogging "aeDocumentTheDatabase"
+    'OBSOLETE If aegitExport.ExportModuleCodeOnly Then
+    '    Debug.Print , "aegitExport.ExportModuleCodeOnly = " & aegitExport.ExportModuleCodeOnly
+    'End If
+    If aegitExport.ExportNoODBCTablesInfo Then
+        Debug.Print , "aegitExport.ExportNoODBCTablesInfo = " & aegitExport.ExportNoODBCTablesInfo
+    End If
+    If aegitExport.EXPERIMENTAL_ExportCBID Then
+        Debug.Print , "aegitExport.EXPERIMENTAL_ExportCBID = " & aegitExport.EXPERIMENTAL_ExportCBID
+    End If
+    If aegitExport.EXPERIMENTAL_ExportCreateDbScript Then
+        Debug.Print , "aegitExport.EXPERIMENTAL_ExportCreateDbScript = " & aegitExport.EXPERIMENTAL_ExportCreateDbScript
+    End If
+    If aegitExport.EXPERIMENTAL_ExportQAT Then
+        Debug.Print , "aegitExport.EXPERIMENTAL_ExportQAT = " & aegitExport.EXPERIMENTAL_ExportQAT
+    End If
+    'Stop
 
     ' ===========================================
     '    FORMS REPORTS SCRIPTS MODULES QUERIES
@@ -1171,6 +1170,35 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         aeEndLogging "aeDocumentTheDatabase"
     End If
 
+    If Not IsMissing(varDebug) Then
+        aeGetReferences varDebug
+        aeDocumentTables varDebug
+        aeDocumentRelations varDebug
+        aeDocumentTablesXML varDebug
+    Else
+        aeGetReferences
+        aeDocumentTables
+        aeDocumentRelations
+        aeDocumentTablesXML
+    End If
+
+    OutputQueriesSqlText
+
+    If Not IsMissing(varDebug) Then
+        If aeExists("Tables", "USysRibbons", varDebug) Then
+            OutputTableDataAsFormattedText "USysRibbons", varDebug
+        End If
+    Else
+        If aeExists("Tables", "USysRibbons") Then
+            OutputTableDataAsFormattedText "USysRibbons"
+        End If
+    End If
+
+    ' If ExportAll is false then do not export anything beyond this point
+    If Not aegitExport.ExportAll Then
+        Exit Function
+    End If
+
     ' =============
     '    OUTPUTS
     ' =============
@@ -1193,9 +1221,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aeExists("Tables", "aetlkpStates", varDebug) Then
             OutputTableDataAsFormattedText "aetlkpStates", varDebug
         End If
-        If aeExists("Tables", "USysRibbons", varDebug) Then
-            OutputTableDataAsFormattedText "USysRibbons", varDebug
-        End If
         OutputCatalogUserCreatedObjects varDebug
         OutputListOfAllHiddenQueries varDebug
         OutputListOfForms varDebug
@@ -1205,10 +1230,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputBuiltInPropertiesText varDebug
         OutputAllContainerProperties varDebug
         OutputTableProperties varDebug
-        aeGetReferences varDebug
-        aeDocumentTables varDebug
-        aeDocumentRelations varDebug
-        aeDocumentTablesXML varDebug
     Else
         OutputListOfContainers aeAppListCnt
         OutputListOfAccessApplicationOptions
@@ -1230,9 +1251,6 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         If aeExists("Tables", "aetlkpStates") Then
             OutputTableDataAsFormattedText "aetlkpStates"
         End If
-        If aeExists("Tables", "USysRibbons") Then
-            OutputTableDataAsFormattedText "USysRibbons"
-        End If
         OutputCatalogUserCreatedObjects
         OutputListOfAllHiddenQueries
         OutputListOfForms
@@ -1242,14 +1260,9 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
         OutputBuiltInPropertiesText
         OutputAllContainerProperties
         OutputTableProperties
-        aeGetReferences
-        aeDocumentTables
-        aeDocumentRelations
-        aeDocumentTablesXML
     End If
 
     OutputListOfApplicationProperties
-    OutputQueriesSqlText
     OutputFieldLookupControlTypeList
     If aegitExport.EXPERIMENTAL_ExportCreateDbScript Then
         OutputTheSchemaFile
@@ -1285,6 +1298,36 @@ PROC_ERR:
     Resume PROC_EXIT
 
 End Function
+
+Private Sub DeleteAllExportedFiles()
+
+    aeBeginLogging "DeleteAllExportedFiles"
+    If aegitSetup Then
+        'MsgBox "aestrSourceLocation = " & aestrSourceLocation
+        KillAllFiles aestrSourceLocation            '= aegitType.SourceFolder
+        'MsgBox "aestrXMLLocation = " & aestrXMLLocation
+        KillAllFiles aestrXMLLocation               '= aegitType.XMLFolder
+        'MsgBox "aestrXMLDataLocation = " & aestrXMLDataLocation
+        KillAllFiles aestrXMLDataLocation           '= aegitType.XMLDataFolder
+    ElseIf aegitFrontEndApp Then
+        'MsgBox "aestrSourceLocation = " & aestrSourceLocation
+        KillAllFiles aestrSourceLocation
+        'MsgBox "aestrXMLLocation = " & aestrXMLLocation
+        KillAllFiles aestrXMLLocation
+        'MsgBox "aestrXMLDataLocation = " & aestrXMLDataLocation
+        KillAllFiles aestrXMLDataLocation
+    ElseIf Not aegitFrontEndApp Then
+        'MsgBox "aestrSourceLocationBe = " & aestrSourceLocationBe
+        KillAllFiles aestrSourceLocationBe
+        'MsgBox "aestrXMLLocationBe = " & aestrXMLLocationBe
+        KillAllFiles aestrXMLLocationBe
+        'MsgBox "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        KillAllFiles aestrXMLDataLocationBe
+    End If
+    aePrintLog "Timing for DeleteAllExportedFiles"
+    aeEndLogging "DeleteAllExportedFiles"
+
+End Sub
 
 Private Sub aeEndLogging(ByVal strProcName As String, Optional ByVal varOne As Variant = vbNullString, _
     Optional ByVal varTwo As Variant = vbNullString, Optional ByVal varThree As Variant = vbNullString)
@@ -4011,16 +4054,20 @@ Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional By
     Dim CBTN As Object      ' CommandBarButton
     Set CBTN = Application.CommandBars.FindControls
     Dim fle As Integer
+    Dim CbtnLCid As Long
 
     fle = FreeFile()
     Open strOutputFile For Output As #fle
 
     On Error Resume Next
-
+    
     For Each CBR In Application.CommandBars
         For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then Debug.Print CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
-            Print #fle, CBR.Name & ": " & CBTN.ID & " - " & CBTN.Caption
+            If Not IsMissing(varDebug) Then
+                CbtnLCid = CBTN.ID
+                Debug.Print CBR.Name & ": " & CbtnLCid & " - " & CBTN.Caption
+            End If
+            Print #fle, CBR.Name & ": " & CbtnLCid & " - " & CBTN.Caption
         Next
     Next
 
@@ -5930,43 +5977,43 @@ Private Sub TestForRelativePath()
         strTestPath = CurrentProject.Path & Mid$(aestrSourceLocation, 2, Len(aestrSourceLocation) - 1)
         aestrSourceLocation = strTestPath
     End If
-    'Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
+    Debug.Print , "aestrSourceLocation = " & aestrSourceLocation
     '
     strTestPath = aestrSourceLocationBe
     If Left$(aestrSourceLocationBe, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrSourceLocationBe, 2, Len(aestrSourceLocationBe) - 1)
         aestrSourceLocationBe = strTestPath
     End If
-    'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
+    Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
     '
     strTestPath = aestrXMLLocation
     If Left$(aestrXMLLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLLocation, 2, Len(aestrXMLLocation) - 1)
         aestrXMLLocation = strTestPath
     End If
-    'Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
+    Debug.Print , "aestrXMLLocation = " & aestrXMLLocation
     '
     strTestPath = aestrXMLLocationBe
     If Left$(aestrXMLLocationBe, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLLocationBe, 2, Len(aestrXMLLocationBe) - 1)
         aestrXMLLocationBe = strTestPath
     End If
-    'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
+    Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
     '
     strTestPath = aestrXMLDataLocation
     If Left$(aestrXMLDataLocation, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocation, 2, Len(aestrXMLDataLocation) - 1)
         aestrXMLDataLocation = strTestPath
     End If
-    'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+    Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
     '
     strTestPath = aestrXMLDataLocationBe
     If Left$(aestrXMLDataLocationBe, 1) = "." Then
         strTestPath = CurrentProject.Path & Mid$(aestrXMLDataLocationBe, 2, Len(aestrXMLDataLocationBe) - 1)
         aestrXMLDataLocationBe = strTestPath
     End If
-    'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-    'Debug.Print , "--------------------------------------------------"
+    Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+    Debug.Print , "--------------------------------------------------"
 
 End Sub
 
@@ -6040,10 +6087,10 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
         aestrSourceLocationBe = aegitSourceFolderBe
         aestrXMLLocationBe = aegitXMLFolderBe
         aestrXMLDataLocationBe = aegitXMLDataFolderBe
-        'Debug.Print , "aestrSourceLocationBe = " & aestrSourceLocationBe
-        'Debug.Print , "aestrXMLLocationBe = " & aestrXMLLocationBe
-        'Debug.Print , "aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
-        'Debug.Print , "--------------------------------------------------"
+        Debug.Print , "BE1: aestrSourceLocationBe = " & aestrSourceLocationBe
+        Debug.Print , "BE2: aestrXMLLocationBe = " & aestrXMLLocationBe
+        Debug.Print , "BE3: aestrXMLDataLocationBe = " & aestrXMLDataLocationBe
+        Debug.Print , "--------------------------------------------------"
 
         TestForRelativePath
 

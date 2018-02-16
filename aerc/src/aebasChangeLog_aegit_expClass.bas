@@ -39,17 +39,18 @@ Option Explicit
 '
 '=============================================================================================================================
 ' Tasks:
+' %170 -
+' %169 -
+' %168 -
+' %167 -
+' %166 -
 ' %165 -
-' %164 -
-' %163 -
-' %162 -
-' %161 -
-' %160 -
-' %159 -
-' %158 - Add function ExportToTextUnicode
-' %157 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
-' %156 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
-' %155 - MsoEncoding Enumeration, Ref: https://msdn.microsoft.com/en-us/library/office/aa432511(v=office.12).aspx
+' %164 - Add adaept modification notice to basUTF8
+' %163 - Fix basUTF8 for supporting only VBA7
+' %162 - Add function ExportToTextUnicode
+' %161 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
+' %160 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
+' %159 - MsoEncoding Enumeration, Ref: https://msdn.microsoft.com/en-us/library/office/aa432511(v=office.12).aspx
 ' %154 - DISTINCT vs. DISTINCTROW, Ref: http://www.fmsinc.com/microsoftaccess/query/distinct_vs_distinctrow/unique_values_records.asp
 ' %153 - Show query properties, CommandBars("Property Sheet").Position = msoBarTop (then click in the query design window)
 ' %152 - Setup access development, Ref: https://stackoverflow.com/questions/892415/how-to-set-up-a-development-environment-in-ms-access?noredirect=1&lq=1
@@ -107,6 +108,14 @@ Option Explicit
 '=============================================================================================================================
 '
 '
+'20180216 - v208 - Bump
+'20171211 - v207 -
+    ' FIXED - %158 - Fix aegit export for only objects and code
+'20171208 - v205 -
+    ' FIXED - %157 - Backend export not working correctly
+'20171204 - v204 -
+    ' FIXED - %156 - Add CbtnLCid so that CBTN.id is used only once (deal with upper/lower case changing in code)
+    ' FIXED - %155 - Add fesql export command for aegit
 '20171119 - v203 -
     ' FIXED - %147 - GH #13, Test and make a new v201 release
 '20171017 - v201 -
