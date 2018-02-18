@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.0.8"
-Private Const aegit_expVERSION_DATE As String = "February 16, 2018"
+Private Const aegit_expVERSION As String = "2.1.0"
+Private Const aegit_expVERSION_DATE As String = "February 17, 2018"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -796,7 +796,7 @@ Private Function aeDocumentTables(Optional ByVal varDebug As Variant) As Boolean
     ' Ref: http://www.tek-tips.com/faqs.cfm?fid=6905
     ' Ref: http://allenbrowne.com/func-06.html
     ' Document the tables, fields, and relationships
-    ' Tables, field type, primary keys, foreign keys, indexes
+    ' Tables, field Type, primary keys, foreign keys, indexes
     ' Relationships in the database with table, foreign table, primary keys, foreign keys
 
     Dim tdf As DAO.TableDef
@@ -1266,10 +1266,10 @@ Private Function aeDocumentTheDatabase(Optional ByVal varDebug As Variant) As Bo
     OutputFieldLookupControlTypeList
     If aegitExport.EXPERIMENTAL_ExportCreateDbScript Then
         OutputTheSchemaFile
-        OutputTheSqlFile mstrTheSourceLocation & aeSchemaFile, mstrTheSourceLocation & aeSchemaFile & ".sql"
-        OutputTheSqlOnlyFile mstrTheSourceLocation & aeSchemaFile & ".sql", mstrTheSourceLocation & aeSchemaFile & ".sql" & ".only"
-        KillProperly (mstrTheSourceLocation & aeSchemaFile & ".sql")
-        GenerateLovefieldSchema mstrTheSourceLocation & aeSchemaFile & ".sql" & ".only", mstrTheSourceLocation & aeLoveSchema
+        OutputTheSqlFile mstrTheSourceLocation & aeSchemaFile, mstrTheSourceLocation & aeSchemaFile & ".SQL"
+        OutputTheSqlOnlyFile mstrTheSourceLocation & aeSchemaFile & ".SQL", mstrTheSourceLocation & aeSchemaFile & ".SQL" & ".only"
+        KillProperly (mstrTheSourceLocation & aeSchemaFile & ".SQL")
+        GenerateLovefieldSchema mstrTheSourceLocation & aeSchemaFile & ".SQL" & ".only", mstrTheSourceLocation & aeLoveSchema
     End If
     OutputListOfIndexes mstrTheSourceLocation & aeIndexLists
     aePrintLog "Timing for aeDocumentTheDatabase Outputs"
@@ -1772,7 +1772,7 @@ Private Function DocumentTheContainer(ByVal strContainerType As String, _
     Dim intAcObjType As Integer
     Dim strTheCurrentPathAndFile As String
 
-    Set dbs = CurrentDb() ' use CurrentDb() to refresh Collections
+    Set dbs = CurrentDb() ' Use CurrentDb() to refresh Collections
 
     If IsMissing(varDebug) Then
         'Debug.Print , "varDebug IS missing so no parameter is passed to DocumentTheContainer"
@@ -2117,7 +2117,7 @@ Private Function FileLocked(ByVal strFileName As String) As Boolean
     fle = FreeFile()
     On Error Resume Next
     ' If the file is already opened by another process,
-    ' and the specified type of access is not allowed,
+    ' and the specified Type of access is not allowed,
     ' the Open operation fails and an error occurs.
     Open strFileName For Binary Access Read Write Lock Read Write As #fle
     Close fle
@@ -2272,8 +2272,24 @@ End Sub
 
 Private Function GetDescription(ByVal obj As Object) As String
     'Debug.Print "GetDescription"
-    On Error Resume Next
-    GetDescription = obj.Properties("Description")
+    On Error GoTo PROC_ERR
+
+    GetDescription = Nz(obj.Properties("Description"), "No Description Property")
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err
+        Case 3270
+            'Debug.Print "Err=" & Err.Number & " " & obj.Name & " (" & Err.Description & ") in procedure GetDescription of Class aegitClass"
+            'Stop
+            Resume PROC_EXIT
+        Case Else
+            MsgBox "Erl=" & Erl & " Err=" & Err.Number & " (" & Err.Description & ") in procedure GetIndex of Class aegitClass"
+            Resume PROC_EXIT
+    End Select
+
 End Function
 
 Public Function GetFieldInfo(ByVal strSchemaLine As String) As String
@@ -2651,7 +2667,7 @@ Private Function IsFileLocked(ByVal PathFileName As String) As Boolean
         Unlock i
         Close i
     Else
-        ' Err.Raise 53
+        'Err.Raise 53
     End If
 
 PROC_EXIT:
@@ -2690,9 +2706,9 @@ End Function
 
 Private Function IsLinkedODBC(strTableName As String) As Boolean
     ' Ref: http://www.pcreview.co.uk/threads/check-if-a-table-is-linked.3748757/
-    ' Non-linked tables are type 1
-    ' ODBC linked tables are type 4
-    ' All other linked tables are type 6
+    ' Non-linked tables are Type 1
+    ' ODBC linked tables are Type 4
+    ' All other linked tables are Type 6
 
     'Debug.Print strTableName, Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"))
     IsLinkedODBC = Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"), 0) = 4
@@ -2748,16 +2764,16 @@ PROC_ERR:
             'MsgBox "mblnIgnore = " & mblnIgnore
             If mblnIgnore Then Resume PROC_EXIT
             MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
-            intAnswer = MsgBox("Ignore further errors of this type?", vbYesNo + vbQuestion, "IsLinkedTable Error")
+            intAnswer = MsgBox("Ignore further errors of this Type?", vbYesNo + vbQuestion, "IsLinkedTable Error")
             If intAnswer = vbYes Then
                 mblnIgnore = True
             Else
-                'do nothing
+                ' Do nothing
             End If
         Case 3265
             MsgBox "[" & strTableName & "] does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
-        Case 3011, 3024     'Linked Table does not exist or DB Path not valid
+        Case 3011, 3024     ' Linked Table does not exist or DB Path not valid
             MsgBox "[" & strTableName & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
         Case Else
             MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
@@ -3109,7 +3125,6 @@ Private Function LongestFieldPropsName() As Boolean
     aeintFNLen = 0
     aeintFTLen = 0
     aeintFDLen = 0
-
 
     For Each tblDef In CurrentDb.TableDefs
         If Not (Left$(tblDef.Name, 4) = "MSys" _
@@ -3483,18 +3498,18 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     Dim fle As Integer
     fle = FreeFile()
 
-'    Dim strPathFileName As String
+    'Dim strPathFileName As String
     If aegitFrontEndApp Then
-'        strPathFileName = aestrSourceLocation & aeCatalogObj
+        'strPathFileName = aestrSourceLocation & aeCatalogObj
         Open aestrSourceLocation & aeCatalogObj For Output As #fle
     Else
-'        strPathFileName = aestrSourceLocationBe & aeCatalogObj
+        'strPathFileName = aestrSourceLocationBe & aeCatalogObj
         Open aestrSourceLocationBe & aeCatalogObj For Output As #fle
     End If
 
     If Not IsMissing(varDebug) Then
         Debug.Print "OutputCatalogUserCreatedObjects"
-'        Debug.Print , strPathFileName
+        'Debug.Print , strPathFileName
     Else
     End If
 
@@ -3505,10 +3520,10 @@ Public Sub OutputCatalogUserCreatedObjects(Optional ByVal varDebug As Variant)
     'WHERE (((MSysObjects.[Type]) In (1,5,6,-32768,-32764,-32766,-32761)) AND ((Left$([Name],4))<>"MSys") AND ((Left$([Name],1))<>"~"))
     'ORDER BY IIf(type=1,"Table",IIf(type=6,"Linked Table",IIf(type=5,"Query",IIf(type=-32768,"Form",IIf(type=-32764,"Report",IIf(type=-32766,"Module",IIf(type=-32761,"Module","Unknown"))))))), MSysObjects.Name;
 
-    strSQL = "SELECT IIf(type = 1,""Table"", IIf(type = 6, ""Linked Table"", "
-    strSQL = strSQL & vbCrLf & "IIf(type = 5,""Query"", IIf(type = -32768,""Form"", "
-    strSQL = strSQL & vbCrLf & "IIf(type = -32764,""Report"", IIf(type=-32766,""Module"", "
-    strSQL = strSQL & vbCrLf & "IIf(type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
+    strSQL = "SELECT IIf(Type = 1,""Table"", IIf(Type = 6, ""Linked Table"", "
+    strSQL = strSQL & vbCrLf & "IIf(Type = 5,""Query"", IIf(Type = -32768,""Form"", "
+    strSQL = strSQL & vbCrLf & "IIf(Type = -32764,""Report"", IIf(type=-32766,""Module"", "
+    strSQL = strSQL & vbCrLf & "IIf(Type = -32761,""Module"", ""Unknown""))))))) as [Object Type], "
     strSQL = strSQL & vbCrLf & "MSysObjects.Name, ""DateCreated"" AS DateCreated "
     'strSQL = strSQL & vbCrLf & "MSysObjects.Name, FormatDateTime([DateCreate],2) AS DateCreated "
     strSQL = strSQL & vbCrLf & "FROM MSysObjects "
@@ -3537,12 +3552,12 @@ PROC_EXIT:
     Exit Sub
 
 PROC_ERR:
-'330       If Err = 3167 Then          ' Record is deleted
-'              'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
-'340           Resume e3167
-'350       Else
+    'If Err = 3167 Then          ' Record is deleted
+    '    'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
+    '     Resume e3167
+    'Else
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputCatalogUserCreatedObjects of Class aegit_expClass", vbCritical, "ERROR"
-'370       End If
+    'End If
     'Stop
     Resume PROC_EXIT
 
@@ -3684,7 +3699,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     Print #fle, ">>>Tables/Queries Tab"
     Print #fle, , "XP, 2003", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              ' Table design, Default field sizes - Text
     Print #fle, , "XP, 2003", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            ' Table design, Default field sizes - Number
-    Print #fle, , "XP, 2003", "Default Field Type                  ", Application.GetOption("Default Field Type")                   ' Table design, Default field type
+    Print #fle, , "XP, 2003", "Default Field Type                  ", Application.GetOption("Default Field Type")                   ' Table design, Default field Type
     Print #fle, , "XP, 2003", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           ' Table design, AutoIndex on Import/Create
     Print #fle, , "XP, 2003", "Show Table Names                    ", Application.GetOption("Show Table Names")                     ' Query design, Show table names
     Print #fle, , "XP, 2003", "Output All Fields                   ", Application.GetOption("Output All Fields")                    ' Query design, Output all fields
@@ -3796,7 +3811,7 @@ Private Sub OutputListOfAccessApplicationOptions(Optional ByVal varDebug As Vari
     Print #fle, "   >>>Table design section"
     Print #fle, , "2007, 2010, 2013", "Default Text Field Size             ", Application.GetOption("Default Text Field Size")              ' Default text field size
     Print #fle, , "2007, 2010, 2013", "Default Number Field Size           ", Application.GetOption("Default Number Field Size")            ' Default number field size
-    Print #fle, , "2007, 2010, 2013", "Default Field Type                  ", Application.GetOption("Default Field Type")                   ' Default field type
+    Print #fle, , "2007, 2010, 2013", "Default Field Type                  ", Application.GetOption("Default Field Type")                   ' Default field Type
     Print #fle, , "2007, 2010, 2013", "AutoIndex on Import/Create          ", Application.GetOption("AutoIndex on Import/Create")           ' AutoIndex on Import/Create
     Print #fle, , "2007, 2010, 2013", "Show Property Update Options Buttons", Application.GetOption("Show Property Update Options Buttons") ' Show Property Update Option Buttons
     Print #fle, "   >>>Query design section"
@@ -4041,43 +4056,43 @@ PROC_ERR:
 End Sub
 
 Private Sub OutputListOfCommandBarIDs(ByVal strOutputFile As String, Optional ByVal varDebug As Variant)
-    ' Programming Office Commandbars - get the ID of a CommandBarControl
-    ' Ref: http://blogs.msdn.com/b/guowu/archive/2004/09/06/225963.aspx
-    ' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
-
-    Debug.Print "OutputListOfCommandBarIDs"
-    'Debug.Print , "strOutputFile = " & strOutputFile
-    On Error GoTo PROC_ERR
-
-    Dim CBR As Object       ' CommandBar
-    Set CBR = Application.CommandBars
-    Dim CBTN As Object      ' CommandBarButton
-    Set CBTN = Application.CommandBars.FindControls
-    Dim fle As Integer
-    Dim CbtnLCid As Long
-
-    fle = FreeFile()
-    Open strOutputFile For Output As #fle
-
-    On Error Resume Next
-    
-    For Each CBR In Application.CommandBars
-        For Each CBTN In CBR.Controls
-            If Not IsMissing(varDebug) Then
-                CbtnLCid = CBTN.ID
-                Debug.Print CBR.Name & ": " & CbtnLCid & " - " & CBTN.Caption
-            End If
-            Print #fle, CBR.Name & ": " & CbtnLCid & " - " & CBTN.Caption
-        Next
-    Next
-
-PROC_EXIT:
-    Close fle
-    Exit Sub
-
-PROC_ERR:
-    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfCommandBarIDs of Class aegit_expClass", vbCritical, "ERROR"
-    Resume PROC_EXIT
+'    ' Programming Office Commandbars - get the ID of a CommandBarControl
+'    ' Ref: http://blogs.msdn.com/b/guowu/archive/2004/09/06/225963.aspx
+'    ' Ref: http://www.vbforums.com/showthread.php?392954-How-do-I-Find-control-IDs-in-Visual-Basic-for-Applications-for-office-2003
+'
+'    Debug.Print "OutputListOfCommandBarIDs"
+'    'Debug.Print , "strOutputFile = " & strOutputFile
+'    On Error GoTo PROC_ERR
+'
+'    Dim CBR As Object       ' CommandBar
+'    Set CBR = Application.CommandBars
+'    Dim CBTN As Object      ' CommandBarButton
+'    Set CBTN = Application.CommandBars.FindControls
+'    Dim fle As Integer
+'    Dim CbtnLCid As Long
+'
+'    fle = FreeFile()
+'    Open strOutputFile For Output As #fle
+'
+'    On Error Resume Next
+'
+'    For Each CBR In Application.CommandBars
+'        For Each CBTN In CBR.Controls
+'            If Not IsMissing(varDebug) Then
+'                CbtnLCid = CBTN.ID
+'                Debug.Print CBR.Name & ": " & CbtnLCid & " - " & CBTN.Caption
+'            End If
+'            Print #fle, CBR.Name & ": " & CbtnLCid & " - " & CBTN.Caption
+'        Next
+'    Next
+'
+'PROC_EXIT:
+'    Close fle
+'    Exit Sub
+'
+'PROC_ERR:
+'    MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure OutputListOfCommandBarIDs of Class aegit_expClass", vbCritical, "ERROR"
+'    Resume PROC_EXIT
 
 End Sub
 
@@ -4587,7 +4602,7 @@ Public Sub OutputMyUnicode(ByRef strPathFileName As String, _
         Debug.Print "aestrSourceLocation=" & aestrSourceLocation
         mystrPathFileName = aestrSourceLocation & "TEST_OutputListOfCommandBarIDs.txt"
         .SaveToFile mystrPathFileName, 2            ' adSaveCreateOverWrite
-        '.SaveToFile "C:\TEMP\TestItFile.txt", 2            ' adSaveCreateOverWrite
+        '.SaveToFile "C:\TEMP\TestItFile.txt", 2    ' adSaveCreateOverWrite
         .Close
     End With
     'Stop
@@ -4701,11 +4716,11 @@ PROC_ERR:
 End Sub
 
 Private Function OutputQueriesSqlText() As Boolean
-    ' Ref: http://www.pcreview.co.uk/forums/export-sql-saved-query-into-text-file-t2775525.html
+    ' Ref: http://www.pcreview.co.uk/forums/export-SQL-saved-query-into-text-file-t2775525.html
     ' ====================================================================
     ' Author:   Peter F. Ennis
     ' Date:     December 3, 2012
-    ' Comment:  Output the sql code of all queries to a text file
+    ' Comment:  Output the SQL code of all queries to a text file
     ' Updated:  All notes moved to change log
     ' History:  See comment details, basChangeLog, commit messages on github
     ' ====================================================================
@@ -5453,8 +5468,8 @@ Public Sub ReadInputWriteOutputLovefieldSchema(ByVal strFileIn As String, ByVal 
     ' lf.Type.BOOLEAN, false, No, JavaScript boolean object
     ' lf.Type.DATE_TIME, Date(0), No, JavaScript Date - will be converted to timestamp integer internally
     ' lf.Type.INTEGER, 0, No, 32-bit integer
-    ' lf.Type.NUMBER, 0, No, JavaScript number type
-    ' lf.Type.String, '', No, JavaScript string type
+    ' lf.Type.NUMBER, 0, No, JavaScript number Type
+    ' lf.Type.String, '', No, JavaScript string Type
     ' lf.Type.OBJECT, null, Yes, JavaScript Object - stored as-is
 
     'Debug.Print "ReadInputWriteOutputLovefieldSchema"
@@ -5764,8 +5779,8 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
     Dim sPadChar As String
 
     If Len(Text) >= Length Then
-        ' if the source string is longer than the specified length, return the
-        ' Length left characters
+        ' If the source string is longer than the specified length, return the
+        ' left Length characters
         SizeString = Left$(Text, Length)
         Exit Function
     End If
@@ -5774,20 +5789,20 @@ Private Function SizeString(ByVal Text As String, ByVal Length As Long, _
         ' PadChar is an empty string. use a space.
         sPadChar = " "
     Else
-        ' use only the first character of PadChar
+        ' Use only the first character of PadChar
         sPadChar = Left$(PadChar, 1)
     End If
 
     If (TextSide <> TextLeft) And (TextSide <> TextRight) Then
-        ' if TextSide was neither TextLeft nor TextRight, use TextLeft.
+        ' If TextSide was neither TextLeft nor TextRight, use TextLeft.
         TextSide = TextLeft
     End If
 
     If TextSide = TextLeft Then
-        ' if the text goes on the left, fill out the right with spaces
+        ' If the text goes on the left, fill out the right with spaces
         SizeString = Text & String$(Length - Len(Text), sPadChar)
     Else
-        ' otherwise fill on the left and put the Text on the right
+        ' Otherwise fill on the left and put the Text on the right
         SizeString = String$(Length - Len(Text), sPadChar) & Text
     End If
 

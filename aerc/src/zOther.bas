@@ -19,8 +19,8 @@ End Sub
 Public Function GetSQLServerData(ByVal strServer As String, ByVal strDatabase As String) As Boolean
     ' Ref: http://www.saplsmw.com/node/11
     ' Ref: http://www.eileenslounge.com/viewtopic.php?f=29&t=5886
-    ' Ref: *** http://social.msdn.microsoft.com/Forums/office/en-US/00c3f331-15e6-44f2-9e6f-abede3a986d8/sql-server-data-connectivity-best-practices-for-ms-access-vba ***
-    ' http://www.connectionstrings.com/sql-server-native-client-11-0-odbc-driver/
+    ' Ref: *** http://social.msdn.microsoft.com/Forums/office/en-US/00c3f331-15e6-44f2-9e6f-abede3a986d8/SQL-server-data-connectivity-best-practices-for-ms-access-vba ***
+    ' http://www.connectionstrings.com/SQL-server-native-client-11-0-odbc-driver/
     ' oConn.Properties("Prompt") = adPromptAlways
     ' oConn.Open "Driver={SQL Server Native Client 11.0};Server=myServerAddress;Database=myDataBase;"
 
