@@ -42,11 +42,7 @@ Option Explicit
 ' %170 -
 ' %169 -
 ' %168 -
-' %167 -
-' %166 -
-' %165 - Add adaept modification notice to basUTF8
-' %164 - Fix basUTF8 for supporting only VBA7
-' %163 - Add function ExportToTextUnicode
+' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
 ' %161 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
 ' %160 - MsoEncoding Enumeration, Ref: https://msdn.microsoft.com/en-us/library/office/aa432511(v=office.12).aspx
@@ -108,6 +104,11 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20180321 - v211
+    ' FIXED - %167 - Fix aegit base path for adaept.com
+    ' FIXED - %165 - Add adaept modification notice to basUTF8
+    ' FIXED - %164 - Fix basUTF8 for supporting only VBA7
+    ' FIXED - %163 - Add function ExportToTextUnicode
 ' 20180217 - v210 - Bump
 ' 20180216 - v208 - Bump
 ' 20171211 - v207 -

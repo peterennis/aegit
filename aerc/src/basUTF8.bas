@@ -19,29 +19,20 @@ Option Explicit
 ' TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 ' THIS SOFTWARE.
 
-#If VBA7 Then
-  Private Declare PtrSafe _
-      Function getTempPath Lib "kernel32" _
-           Alias "GetTempPathA" (ByVal nBufferLength As Long, _
-                                 ByVal lpBuffer As String) As Long
-  Private Declare PtrSafe _
-      Function getTempFileName Lib "kernel32" _
-           Alias "GetTempFileNameA" (ByVal lpszPath As String, _
-                                     ByVal lpPrefixString As String, _
-                                     ByVal wUnique As Long, _
-                                     ByVal lpTempFileName As String) As Long
-#Else
-  Private Declare _
-      Function getTempPath Lib "kernel32" _
-           Alias "GetTempPathA" (ByVal nBufferLength As Long, _
-                                 ByVal lpBuffer As String) As Long
-  Private Declare _
-      Function getTempFileName Lib "kernel32" _
-           Alias "GetTempFileNameA" (ByVal lpszPath As String, _
-                                     ByVal lpPrefixString As String, _
-                                     ByVal wUnique As Long, _
-                                     ByVal lpTempFileName As String) As Long
-#End If
+' Updates by Peter Ennis 2017-18
+' %001 - Only support VBA7
+'
+'
+
+Private Declare PtrSafe Function getTempPath Lib "kernel32" _
+    Alias "GetTempPathA" (ByVal nBufferLength As Long, _
+    ByVal lpBuffer As String) As Long
+
+Private Declare PtrSafe Function getTempFileName Lib "kernel32" _
+    Alias "GetTempFileNameA" (ByVal lpszPath As String, _
+    ByVal lpPrefixString As String, _
+    ByVal wUnique As Long, _
+    ByVal lpTempFileName As String) As Long
 
 ' Structure to track buffered reading or writing of binary files
 Private Type BinFile
@@ -55,15 +46,20 @@ Private Type BinFile
     mode As String
 End Type
 
-Public Sub TestUTF8Conversion()
+Public Sub Test_UTF8Conversion()
 
     Dim strSourceFile As String
     Dim strDestinationFile As String
     
-
 End Sub
 
-Public Function ExportToTextUnicode(strTableName As String, strFileName As String, _
+Public Sub Test_aeExportToTextUnicode()
+    On Error GoTo 0
+    Dim bln As Boolean
+    bln = ExportToTextUnicode("Items", "C:\Temp\ExportedItemsUnicode.txt")
+End Sub
+
+Public Function aeExportToTextUnicode(strTableName As String, strFileName As String, _
     Optional ByVal strDelim As String = vbTab) As Boolean
     ' Ref: https://saplsmw.com/Export_directly_to_UTF-8_from_Access_using_VBA
     ' Written by Jimbo at SAPLSMW.com
@@ -83,7 +79,7 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     Dim strTest As String
 
     strSQL = "SELECT * FROM " & strTableName & ";"
-    'Check to see if strTableName is actually a query.  If so, use its SQL query.
+    ' Check to see if strTableName is actually a query. If so, use its SQL query
     nCurrent = 0
     Do While nCurrent < CurrentDb.QueryDefs.Count
         If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
@@ -95,14 +91,14 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
     nFieldCount = rst.Fields.Count
 
     If Not rst.EOF Then
-        'Now find the *actual* record count--returns a value of 1 record if we don't do these moves.
+        ' Now find the *actual* record count--returns a value of 1 record if we don't do these moves
         rst.MoveLast
         rst.MoveFirst
     End If
 
     nRecordCount = rst.RecordCount
     RetVal = SysCmd(acSysCmdInitMeter, "Exporting " & strTableName & " to " & strFileName & ". . .", nRecordCount)
-    'Create a binary stream
+    ' Create a binary stream
     Dim UnicodeStream
     Set UnicodeStream = CreateObject("ADODB.Stream")
     UnicodeStream.Charset = "UTF-8"
@@ -127,16 +123,16 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
             RetVal = DoEvents()
         End If
         strTest = ""
-        For nCurrent = 0 To nFieldCount - 1  'Check for blank lines--no need to export those!
+        For nCurrent = 0 To nFieldCount - 1 ' Check for blank lines--no need to export those!
             strTest = strTest & IIf(IsNull(rst.Fields), "", rst.Fields(nCurrent))
         Next
-        If Len(Trim(strTest)) > 0 Then  'Check for blank lines--no need to export those!
+        If Len(Trim(strTest)) > 0 Then      ' Check for blank lines--no need to export those!
             For nCurrent = 0 To nFieldCount - 1
                 If Not IsNull(rst.Fields(nCurrent).Value) Then
                     UnicodeStream.WriteText Trim(rst.Fields(nCurrent).Value)
                 End If
                 If nCurrent = (nFieldCount - 1) Then
-                    UnicodeStream.WriteText vbCrLf 'new line.
+                    UnicodeStream.WriteText vbCrLf ' New line.
                 Else
                     UnicodeStream.WriteText strDelim
                 End If
@@ -145,21 +141,21 @@ Public Function ExportToTextUnicode(strTableName As String, strFileName As Strin
         rst.MoveNext
     Loop
 
-    'Check to ensure that the file does't already exist.
+    ' Check to ensure that the file doesn't already exist
     If Len(Dir(strFileName)) > 0 Then
-        Kill strFileName  ' The file exists, so we must delete it before it be created again.
+        Kill strFileName  ' The file exists, so we must delete it before it be created again
     End If
     UnicodeStream.SaveToFile strFileName
     UnicodeStream.Close
     rst.Close
     Set rst = Nothing
-    ExportToTextUnicode = True
+    aeExportToTextUnicode = True
     RetVal = SysCmd(acSysCmdRemoveMeter)
 
 End Function
 
-' Open a binary file for reading (mode = 'r') or writing (mode = 'w').
 Private Function BinOpen(ByVal file_path As String, ByVal mode As String) As BinFile
+    ' Open a binary file for reading (mode = 'r') or writing (mode = 'w')
     Dim f As BinFile
 
     f.file_num = FreeFile
@@ -178,7 +174,7 @@ Private Function BinOpen(ByVal file_path As String, ByVal mode As String) As Bin
         f.buffer_pos = 0
         Get f.file_num, f.file_pos + 1, f.buffer
     Else
-'''        VCS_DelIfExist file_path
+        '''        VCS_DelIfExist file_path
         Open file_path For Binary Access Write As f.file_num
         f.file_len = 0
         f.file_pos = 0
@@ -190,8 +186,8 @@ Private Function BinOpen(ByVal file_path As String, ByVal mode As String) As Bin
     BinOpen = f
 End Function
 
-' Buffered read one byte at a time from a binary file.
 Private Function BinRead(ByRef f As BinFile) As Integer
+    ' Buffered read one byte at a time from a binary file
     If f.at_eof = True Then
         BinRead = 0
         Exit Function
@@ -217,8 +213,8 @@ Private Function BinRead(ByRef f As BinFile) As Integer
     End If
 End Function
 
-' Buffered write one byte at a time from a binary file.
 Private Sub BinWrite(ByRef f As BinFile, b As Integer)
+    ' Buffered write one byte at a time from a binary file
     Mid(f.buffer, f.buffer_pos + 1, 1) = Chr$(b)
     f.buffer_pos = f.buffer_pos + 1
     If f.buffer_pos >= &H4000 Then
@@ -227,8 +223,8 @@ Private Sub BinWrite(ByRef f As BinFile, b As Integer)
     End If
 End Sub
 
-' Close binary file.
 Private Sub BinClose(ByRef f As BinFile)
+    ' Close binary file
     If f.mode = "w" And f.buffer_pos > 0 Then
         f.buffer = Left$(f.buffer, f.buffer_pos)
         Put f.file_num, , f.buffer
@@ -236,8 +232,8 @@ Private Sub BinClose(ByRef f As BinFile)
     Close f.file_num
 End Sub
 
-' Binary convert a UCS2-little-endian encoded file to UTF-8.
 Public Sub VCS_ConvertUcs2Utf8(ByVal Source As String, ByVal dest As String)
+    ' Binary convert a UCS2-little-endian encoded file to UTF-8
     Dim f_in As BinFile
     Dim f_out As BinFile
     Dim in_low As Integer

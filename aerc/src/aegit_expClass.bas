@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.1.0"
-Private Const aegit_expVERSION_DATE As String = "February 17, 2018"
+Private Const aegit_expVERSION As String = "2.1.1"
+Private Const aegit_expVERSION_DATE As String = "March 21, 2018"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -168,7 +168,7 @@ Private Sub Class_Initialize()
     ' Ref: http://stackoverflow.com/questions/1731052/is-there-a-way-to-overload-the-constructor-initialize-procedure-for-a-class-in
 
     On Error GoTo PROC_ERR
-    
+
     With aeLog
         .blnNoEnd = False
         .blnNoPrint = False
@@ -202,12 +202,12 @@ Private Sub Class_Initialize()
         aegitDataXML(0) = "aetlkpStates"
     End If
     aegitExportDataToXML = True
-    aegitType.SourceFolder = "C:\ae\aegit\aerc\src\"
-    aegitType.SourceFolderBe = "C:\ae\aegit\aerc\srcbe\"
-    aegitType.XMLFolder = "C:\ae\aegit\aerc\src\xml\"
-    aegitType.XMLFolderBe = "C:\ae\aegit\aerc\srcbe\xml\"
-    aegitType.XMLDataFolder = "C:\ae\aegit\aerc\src\xmldata\"
-    aegitType.XMLDataFolderBe = "C:\ae\aegit\aerc\srcbe\xmldata\"
+    aegitType.SourceFolder = "C:\ae\adaept.com\aegit\aerc\src\"
+    aegitType.SourceFolderBe = "C:\ae\adaept.com\aegit\aerc\srcbe\"
+    aegitType.XMLFolder = "C:\ae\adaept.com\aegit\aerc\src\xml\"
+    aegitType.XMLFolderBe = "C:\ae\adaept.com\aegit\aerc\srcbe\xml\"
+    aegitType.XMLDataFolder = "C:\ae\adaept.com\aegit\aerc\src\xmldata\"
+    aegitType.XMLDataFolderBe = "C:\ae\adaept.com\aegit\aerc\srcbe\xmldata\"
 
     Const aeintLTN As Integer = 11           ' Set a minimum default
     aeintFNLen = 4          ' Set a minimum default
