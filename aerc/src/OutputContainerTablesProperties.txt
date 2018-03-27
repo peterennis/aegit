@@ -910,6 +910,34 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               GUID          GUID
+>>>tblLogSummary
+              Name          tblLogSummary
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              Orientation    0 
+              OrderByOn     False
+              DefaultView    2 
+              GUID          GUID
+              DisplayViewsOnSharePointSite               1 
+              TotalsRow     False
+              FilterOnLoad  False
+              OrderByOnLoad True
+              HideNewField  False
+              BackTint       100 
+              BackShade      100 
+              ThemeFontIndex              -1 
+              AlternateBackThemeColorIndex              -1 
+              AlternateBackTint            100 
+              AlternateBackShade           100 
+              ReadOnlyWhenDisconnected    False
+              DatasheetGridlinesThemeColorIndex         -1 
+              DatasheetForeThemeColorIndex              -1 
+              PublishToWeb   1 
 >>>USysRibbons
               Name          USysRibbons
               Owner         admin

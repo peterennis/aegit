@@ -21,6 +21,7 @@
 "Module","basExportImport","DateCreated"
 "Module","basGDIPlus","DateCreated"
 "Module","basHash","DateCreated"
+"Module","basRobocopyTools","DateCreated"
 "Module","basUTF8","DateCreated"
 "Module","cls_HiddenDummy","DateCreated"
 "Module","mac_Dummy","DateCreated"
@@ -80,4 +81,5 @@
 "Table","tblDummy1","DateCreated"
 "Table","tblDummy2","DateCreated"
 "Table","tblDummy3","DateCreated"
+"Table","tblLogSummary","DateCreated"
 "Table","USysRibbons","DateCreated"

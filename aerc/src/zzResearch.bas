@@ -99,12 +99,12 @@ Public Sub CatalogUserCreatedObjects()
 
     Debug.Print strSQL
     
-    ' Using a query name and sql string, if the query does not exist, ...
+    ' Using a query name and SQL string, if the query does not exist, ...
     If IsNull(DLookup("Name", "MsysObjects", "Name='" & MY_QUERY_NAME & "'")) Then
         ' create it ...
         CurrentDb.CreateQueryDef MY_QUERY_NAME, strSQL
     Else
-        ' other wise, update the sql
+        ' other wise, update the SQL
         CurrentDb.QueryDefs(MY_QUERY_NAME).SQL = strSQL
     End If
 

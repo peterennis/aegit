@@ -229,6 +229,8 @@
                             Field Name:FirstName
 >[Youyew]     [FirstName], 
 ========================================
+<<<[tblLogSummary]>>>
+========================================
 <<<[USysRibbons]>>>
               Index:[id]
                             Field Name:id

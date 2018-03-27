@@ -211,14 +211,35 @@
               [activity]     109          TextBox
               [student]      109          TextBox
               [date]         109          TextBox
+[tblLogSummary]
+              [Filename]     109          TextBox
+              [status]       109          TextBox
+              [dirs_total]   109          TextBox
+              [dirs_copied]  109          TextBox
+              [dirs_skipped]               109          TextBox
+              [dirs_mismatched]            109          TextBox
+              [dirs_failed]  109          TextBox
+              [dirs_extras]  109          TextBox
+              [files_total]  109          TextBox
+              [files_copied]               109          TextBox
+              [files_skipped]              109          TextBox
+              [files_mismatched]           109          TextBox
+              [files_failed]               109          TextBox
+              [files_extras]               109          TextBox
+              [bytes_total]  109          TextBox
+              [bytes_copied]               109          TextBox
+              [bytes_skipped]              109          TextBox
+              [bytes_mismatched]           109          TextBox
+              [bytes_failed]               109          TextBox
+              [bytes_extras]               109          TextBox
 [USysRibbons]
               [id]           109          TextBox
               [RibbonName]   109          TextBox
               [RibbonXML]    109          TextBox
 Count of Check box = 1
-Count of Text box  = 177
+Count of Text box  = 197
 Count of List box  = 1
 Count of Combo box = 16
 Count of Else      = 2
-Count of Display Controls = 195
-Count of All Fields = 195
+Count of Display Controls = 215
+Count of All Fields = 215
