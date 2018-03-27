@@ -41,7 +41,6 @@ Option Explicit
 ' Tasks:
 ' %170 -
 ' %169 -
-' %168 -
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
 ' %161 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
@@ -104,6 +103,8 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20180327 - v212
+    ' FIXED - %168 - Add basRobocopyTools for log file analysis
 ' 20180321 - v211
     ' FIXED - %167 - Fix aegit base path for adaept.com
     ' FIXED - %165 - Add adaept modification notice to basUTF8
