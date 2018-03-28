@@ -1,0 +1,368 @@
+|-- Name >> tblLogSummary
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 39
+|-- ValidationRule >> 
+|-- ValidationText >> 
+--------------------------------------------------
+|-- Run_date (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Run_date
+|------ OrdinalPosition >> 0
+|------ Size >> 8
+|------ SourceField >> Run_date
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- File_name (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> File_name
+|------ OrdinalPosition >> 1
+|------ Size >> 46
+|------ SourceField >> File_name
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- status (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> status
+|------ OrdinalPosition >> 2
+|------ Size >> 7
+|------ SourceField >> status
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- dirs_total (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> dirs_total
+|------ OrdinalPosition >> 3
+|------ Size >> 6
+|------ SourceField >> dirs_total
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- dirs_copied (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> dirs_copied
+|------ OrdinalPosition >> 4
+|------ Size >> 3
+|------ SourceField >> dirs_copied
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- dirs_skipped (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> dirs_skipped
+|------ OrdinalPosition >> 5
+|------ Size >> 1
+|------ SourceField >> dirs_skipped
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- dirs_mismatched (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> dirs_mismatched
+|------ OrdinalPosition >> 6
+|------ Size >> 1
+|------ SourceField >> dirs_mismatched
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- dirs_failed (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> dirs_failed
+|------ OrdinalPosition >> 7
+|------ Size >> 1
+|------ SourceField >> dirs_failed
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- dirs_extras (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> dirs_extras
+|------ OrdinalPosition >> 8
+|------ Size >> 4
+|------ SourceField >> dirs_extras
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- files_total (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> files_total
+|------ OrdinalPosition >> 9
+|------ Size >> 7
+|------ SourceField >> files_total
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- files_copied (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> files_copied
+|------ OrdinalPosition >> 10
+|------ Size >> 4
+|------ SourceField >> files_copied
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- files_skipped (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> files_skipped
+|------ OrdinalPosition >> 11
+|------ Size >> 7
+|------ SourceField >> files_skipped
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- files_mismatched (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> files_mismatched
+|------ OrdinalPosition >> 12
+|------ Size >> 1
+|------ SourceField >> files_mismatched
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- files_failed (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> files_failed
+|------ OrdinalPosition >> 13
+|------ Size >> 1
+|------ SourceField >> files_failed
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- files_extras (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> files_extras
+|------ OrdinalPosition >> 14
+|------ Size >> 5
+|------ SourceField >> files_extras
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- bytes_total (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> bytes_total
+|------ OrdinalPosition >> 15
+|------ Size >> 9
+|------ SourceField >> bytes_total
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- bytes_copied (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> bytes_copied
+|------ OrdinalPosition >> 16
+|------ Size >> 8
+|------ SourceField >> bytes_copied
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- bytes_skipped (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> bytes_skipped
+|------ OrdinalPosition >> 17
+|------ Size >> 9
+|------ SourceField >> bytes_skipped
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- bytes_mismatched (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> bytes_mismatched
+|------ OrdinalPosition >> 18
+|------ Size >> 8
+|------ SourceField >> bytes_mismatched
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- bytes_failed (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> bytes_failed
+|------ OrdinalPosition >> 19
+|------ Size >> 1
+|------ SourceField >> bytes_failed
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- bytes_extras (Field in tblLogSummary)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> bytes_extras
+|------ OrdinalPosition >> 20
+|------ Size >> 8
+|------ SourceField >> bytes_extras
+|------ SourceTable >> tblLogSummary
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> True
+|------ AppendOnly >> False
+|------ Expression >> 

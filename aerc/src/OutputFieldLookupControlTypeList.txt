@@ -212,7 +212,8 @@
               [student]      109          TextBox
               [date]         109          TextBox
 [tblLogSummary]
-              [Filename]     109          TextBox
+              [Run_date]     109          TextBox
+              [File_name]    109          TextBox
               [status]       109          TextBox
               [dirs_total]   109          TextBox
               [dirs_copied]  109          TextBox
@@ -237,9 +238,9 @@
               [RibbonName]   109          TextBox
               [RibbonXML]    109          TextBox
 Count of Check box = 1
-Count of Text box  = 197
+Count of Text box  = 198
 Count of List box  = 1
 Count of Combo box = 16
 Count of Else      = 2
-Count of Display Controls = 215
-Count of All Fields = 215
+Count of Display Controls = 216
+Count of All Fields = 216

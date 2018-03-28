@@ -330,26 +330,27 @@ TABLE: tblLogSummary
 --------------------
 FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
 ====================    ==================    ====    ===========
-Filename                Text                  60                 
+Run_date                Text                  8                  
+File_name               Text                  46                 
 status                  Text                  7                  
 dirs_total              Text                  6                  
-dirs_copied             Text                  4                  
+dirs_copied             Text                  3                  
 dirs_skipped            Text                  1                  
 dirs_mismatched         Text                  1                  
 dirs_failed             Text                  1                  
 dirs_extras             Text                  4                  
 files_total             Text                  7                  
-files_copied            Text                  5                  
+files_copied            Text                  4                  
 files_skipped           Text                  7                  
 files_mismatched        Text                  1                  
 files_failed            Text                  1                  
 files_extras            Text                  5                  
 bytes_total             Text                  9                  
-bytes_copied            Text                  9                  
+bytes_copied            Text                  8                  
 bytes_skipped           Text                  9                  
-bytes_mismatched        Text                  9                  
+bytes_mismatched        Text                  8                  
 bytes_failed            Text                  1                  
-bytes_extras            Text                  9                  
+bytes_extras            Text                  8                  
 
 
 ------------------
