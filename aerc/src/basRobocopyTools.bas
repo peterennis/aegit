@@ -138,3 +138,49 @@ Private Function ImportLogSummaryFromText(ByVal strTableName As String, _
     Debug.Print "DONE!!!"
 
 End Function
+
+Private Function CreateTable(ByVal strTableName As String, ByRef strFields() As String, ByRef nSizes() As Long) As Boolean
+
+    Dim nCounter As Long
+    Dim dbs As DAO.Database
+    ' Now create the database.  Rename the old database if necessary.
+    Set dbs = CurrentDb
+    Dim tdf As DAO.TableDef
+    Dim fld1 As DAO.Field
+    Dim fName As String
+    Dim fType As Integer
+    Dim fSize As Integer
+
+    On Error GoTo PROC_ERR
+    ' Check for existence of TargetTable
+    nCounter = 0
+    Do While nCounter < dbs.TableDefs.Count
+        If dbs.TableDefs(nCounter).Name = strTableName Then
+            ' Delete TargetTable--must start from scratch
+            dbs.TableDefs.Delete (strTableName)
+        End If
+        nCounter = nCounter + 1
+    Loop
+    
+    Set tdf = dbs.CreateTableDef(strTableName)
+    For nCounter = 1 To Val(strFields(0))
+        fName = strFields(nCounter)
+        fType = dbText
+        fSize = nSizes(nCounter) 'fSize = 255
+        Set fld1 = tdf.CreateField(fName, fType, fSize)
+        fld1.AllowZeroLength = True
+        fld1.Required = False
+        tdf.Fields.Append fld1
+    Next
+    ' Create the table in the database
+    dbs.TableDefs.Append tdf
+    dbs.TableDefs.Refresh
+    CreateTable = True
+    Exit Function
+
+PROC_ERR:
+    MsgBox "Error number " & Err.Number & ": " & Err.Description, "Function CreateTable"
+    CreateTable = False
+    Exit Function
+
+End Function
