@@ -39,8 +39,12 @@ Option Explicit
 '
 ' =============================================================================================================================
 ' Tasks:
-' %170 -
-' %169 -
+' %175 -
+' %174 -
+' %173 -
+' %172 -
+' %171 -
+' %170 - Add feature to allow scrolling of big list in form _chtBigList
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
 ' %161 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
@@ -103,6 +107,8 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20180402 - v215
+    ' FIXED - %169 - Fix error for display of form _chtBigList
 ' 20180327 - v212
     ' FIXED - %168 - Add basRobocopyTools for log file analysis
 ' 20180321 - v211
