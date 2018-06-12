@@ -183,6 +183,9 @@ Public Sub aegit_EXPORT(Optional ByVal varDebug As Variant)
 
     On Error GoTo 0
 
+    ' Define tables for xml data export
+    gvarMyTablesForExportToXML = Array("USysRibbons")
+
     If Application.VBE.ActiveVBProject.Name <> "aegit" Then
         MsgBox "This is not the aegit project!", vbCritical, "aegit_EXPORT"
         Exit Sub
@@ -270,7 +273,7 @@ Public Sub aegitClassTest(Optional ByVal varDebug As Variant, _
     'MsgBox "varBackEndDbOne = " & varBackEndDbOne, vbInformation, "Procedure aegitClassTest"
 
     ' Define tables for xml data export
-    gvarMyTablesForExportToXML = Array("USysRibbons")
+    '''gvarMyTablesForExportToXML = Array("USysRibbons")
     oDbObjects.TablesExportToXML = gvarMyTablesForExportToXML()
 
     If IsArrayInitialized(gvarMyTablesForExportToXML) Then

@@ -43,7 +43,6 @@ Option Explicit
 ' %174 -
 ' %173 -
 ' %172 -
-' %171 -
 ' %170 - Add feature to allow scrolling of big list in form _chtBigList
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
@@ -107,6 +106,8 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20180611 - v216
+    ' FIXED - %171 - Define tables for xml data export outside of aegitClassTest
 ' 20180402 - v215
     ' FIXED - %169 - Fix error for display of form _chtBigList
 ' 20180327 - v212

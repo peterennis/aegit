@@ -83,7 +83,7 @@ Public Function aeExportToTextUnicode(strTableName As String, strFileName As Str
     nCurrent = 0
     Do While nCurrent < CurrentDb.QueryDefs.Count
         If UCase(CurrentDb.QueryDefs(nCurrent).Name) = UCase(strTableName) Then
-            strSQL = CurrentDb.QueryDefs(nCurrent).SQL
+            strSQL = CurrentDb.QueryDefs(nCurrent).sql
         End If
         nCurrent = nCurrent + 1
     Loop

@@ -17,5 +17,4 @@
 [tblDummy1]   True
 [tblDummy2]   True
 [tblDummy3]   True
-[tblLogSummary]             False
 [USysRibbons] False

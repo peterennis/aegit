@@ -7,12 +7,12 @@
 [aelan]       False
 [aever]       False
 [aexl]        False
+[aezdbClass]  False
 [bas_HiddenDummy]           True
 [basaeRibbonCallbacks]      False
 [basExportImport]           False
 [basGDIPlus]  False
 [basHash]     False
-[basRobocopyTools]          False
 [basUTF8]     False
 [cls_HiddenDummy]           True
 [Test_aegit]  False

@@ -910,15 +910,6 @@
               DatasheetGridlinesThemeColorIndex          3 
               DatasheetForeThemeColorIndex               0 
               GUID          GUID
->>>tblLogSummary
-              Name          tblLogSummary
-              Owner         admin
-              UserName      admin
-              Permissions    1048319 
-              AllPermissions               1048319 
-              Container     Tables
-              DateCreated   DateCreated
-              LastUpdated   LastUpdated
 >>>USysRibbons
               Name          USysRibbons
               Owner         admin
