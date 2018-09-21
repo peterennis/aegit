@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.1.6"
-Private Const aegit_expVERSION_DATE As String = "June 11, 2018"
+Private Const aegit_expVERSION As String = "2.1.7"
+Private Const aegit_expVERSION_DATE As String = "September 20, 2018"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
