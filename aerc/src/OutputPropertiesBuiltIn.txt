@@ -253,8 +253,3 @@ Type: dbText
 Value: Office Theme
 Inherited: False;
 ---
-Name: Use BigInt for linking and importing data
-Type: dbLong
-Value: 0
-Inherited: False;
----

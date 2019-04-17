@@ -49,4 +49,3 @@ AppIcon: .\adaept64.ico, 10, False;
 Track Name AutoCorrect Info: 0, 4, False;
 Perform Name AutoCorrect: 0, 4, False;
 Theme Resource Name: Office Theme, 10, False;
-Use BigInt for linking and importing data: 0, 4, False;

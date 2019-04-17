@@ -7,7 +7,6 @@
 [aelan]       False
 [aever]       False
 [aexl]        False
-[aezdbClass]  False
 [bas_HiddenDummy]           True
 [basaeRibbonCallbacks]      False
 [basExportImport]           False

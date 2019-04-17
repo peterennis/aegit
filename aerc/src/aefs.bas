@@ -23,7 +23,8 @@ Public Sub TestListFileSystemRecursively()
     'TEST_FILE_PATH = "C:\Users\"
     'TEST_FILE_PATH = "C:\Apps\"
     'TEST_FILE_PATH = "C:\__DATA_DELETION__"
-    TEST_FILE_PATH = "C:\TEMP\"
+    'TEST_FILE_PATH = "C:\TEMP\"
+    TEST_FILE_PATH = "\\storageds\RDA_SHARED_DRIVE\Current_Projects\San_Francisco"
     mintSubFolderLevel = 1
     ListFileSystemRecursively TEST_FILE_PATH, varDebug:="DebugIt"
     Close fle
@@ -32,7 +33,6 @@ Public Sub TestListFileSystemRecursively()
     Open OUTPUT_FOLDERS_FILES For Output As #fle2
     Close fle2
     Open OUTPUT_FOLDERS_FILES For Append As #fle2
-    TEST_FILE_PATH = "C:\TEMP\"
     mintSubFolderLevel = 1
     ListFileSystemRecursively TEST_FILE_PATH, varListFiles:=True, varDebug:="DebugIt"
     Close fle

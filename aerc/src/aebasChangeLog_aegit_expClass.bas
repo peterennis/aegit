@@ -39,11 +39,10 @@ Option Explicit
 '
 ' =============================================================================================================================
 ' Tasks:
-' %175 -
-' %174 -
-' %173 -
-' %172 -
-' %170 - Add feature to allow scrolling of big list in form _chtBigList
+' %180 -
+' %179 -
+' %178 -
+' %177 -
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
 ' %161 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
@@ -106,6 +105,13 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20190206 - v217
+    ' FIXED - %176 - No object with the given name and type exists in the current database, DocumentTheQueries
+    ' FIXED - %175 - Invalid procedure call in DocumentTheQueries
+    ' FIXED - %174 - Kill file error for "Basics: Access Functions" etc. - needs fix for file names
+    ' FIXED - %173 - varTablesArray has no value!!! - subscript out of range, TablesExportToXML
+    ' FIXED - %172 - Error  - varTablesArray has no value; set explicit message for this error
+    ' WONTFIX - %170 - Add feature to allow scrolling of big list in form _chtBigList
 ' 20180611 - v216
     ' FIXED - %171 - Define tables for xml data export outside of aegitClassTest
 ' 20180402 - v215

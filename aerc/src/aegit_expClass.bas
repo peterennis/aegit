@@ -40,7 +40,7 @@ Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
 Private Const aegit_expVERSION As String = "2.1.7"
-Private Const aegit_expVERSION_DATE As String = "September 20, 2018"
+Private Const aegit_expVERSION_DATE As String = "April 2, 2019"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -607,8 +607,12 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
+        Case 9
+            MsgBox "Erl=?" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML" & vbCrLf & vbCrLf & _
+                "varTablesArray has no value !!! continuing Export...", vbInformation, "WARNING - Value not set"
+            'Stop
         Case Else
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML", vbCritical, "ERROR"
+            MsgBox "Erl=?" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TablesExportToXML", vbCritical, "ERROR"
             Stop
     End Select
 
@@ -681,6 +685,27 @@ Public Property Let XMLFolderBe(ByVal strXMLFolderBe As String)
     aegitXMLFolderBe = strXMLFolderBe
     Debug.Print , "aegitXMLFolderBe = " & aegitXMLFolderBe
 End Property
+
+'-----------------------------------------------------------
+
+Private Function RemoveIllegalCharacters(ByVal strText As String) As String
+
+    ' Ref: https://access-programmers.co.uk/forums/showthread.php?t=261147
+
+    Const cstrIllegals As String = "\,/,:,*,?,"",<,>,|"
+    
+    Dim lngCounter As Long
+    Dim astrChars() As String
+    
+    astrChars() = Split(cstrIllegals, ",")
+    
+    For lngCounter = LBound(astrChars()) To UBound(astrChars())
+        strText = Replace(strText, astrChars(lngCounter), vbNullString)
+    Next lngCounter
+    
+    RemoveIllegalCharacters = strText
+
+End Function
 
 Private Sub aeHideTable(strTableName As String)
     With CurrentDb
@@ -1014,6 +1039,7 @@ Private Function DocumentTheQueries(Optional ByVal varDebug As Variant) As Boole
     Dim qdf As DAO.QueryDef
     Dim i As Integer
     Dim strqdfName As String
+    Dim strqdfNameLegal As String
 
     i = 0
     If Not IsMissing(varDebug) Then Debug.Print "QUERIES"
@@ -1031,16 +1057,17 @@ Private Function DocumentTheQueries(Optional ByVal varDebug As Variant) As Boole
     ' This will output each query specification to a file and convert UTF-16 to regular text
     For Each qdf In CurrentDb.QueryDefs
         strqdfName = qdf.Name
+        strqdfNameLegal = RemoveIllegalCharacters(qdf.Name)
         If Not IsMissing(varDebug) Then Debug.Print , strqdfName
         If Not (Left$(strqdfName, 4) = "MSys" Or Left$(strqdfName, 4) = "~sq_" _
             Or Left$(strqdfName, 4) = "~TMP" _
             Or Left$(strqdfName, 3) = "zzz") Then
             i = i + 1
-            Application.SaveAsText acQuery, strqdfName, mstrTheSourceLocation & strqdfName & ".qry"
+            Application.SaveAsText acQuery, strqdfName, mstrTheSourceLocation & strqdfNameLegal & ".qry"
             ' Convert UTF-16 to txt - fix for Access 2013+
-            If aeReadWriteStream(mstrTheSourceLocation & strqdfName & ".qry") = True Then
-                KillProperly (mstrTheSourceLocation & strqdfName & ".qry")
-                Name mstrTheSourceLocation & strqdfName & ".qry" & ".clean.txt" As mstrTheSourceLocation & strqdfName & ".qry"
+            If aeReadWriteStream(mstrTheSourceLocation & strqdfNameLegal & ".qry") = True Then
+                KillProperly (mstrTheSourceLocation & strqdfNameLegal & ".qry")
+                Name mstrTheSourceLocation & strqdfNameLegal & ".qry" & ".clean.txt" As mstrTheSourceLocation & strqdfNameLegal & ".qry"
             End If
         End If
     Next qdf
@@ -2944,6 +2971,8 @@ Private Sub KillProperly(ByVal Killfile As String)
     'Debug.Print "KillProperly"
     On Error GoTo PROC_ERR
 
+'    On Error GoTo 0
+
 TryAgain:
     If Len(Dir$(Killfile)) > 0 Then
         SetAttr Killfile, vbNormal
@@ -2958,6 +2987,10 @@ PROC_ERR:
         Pause (0.25)
         Resume TryAgain
     ElseIf Err = 53 Then     ' File not found
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass", vbCritical, "ERROR"
+        Resume PROC_EXIT
+    ElseIf Err = 52 Then     ' Bad filename or number
+        MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass", vbInformation, "WARNING - Filename with illegal characters?"
         Resume PROC_EXIT
     End If
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " Killfile=" & Killfile & " (" & Err.Description & ") in procedure KillProperly of Class aegit_expClass", vbCritical, "ERROR"
@@ -6063,7 +6096,7 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
         End If
         'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
         If Not FolderExists(aestrXMLDataLocation) Then
-            MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
+            MsgBox "1. aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
     ElseIf aegitFrontEndApp Then
@@ -6093,9 +6126,9 @@ Private Sub VerifySetup()   '(Optional ByVal varDebug As Variant)
             MsgBox "aestrXMLLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
-        'Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
+        Debug.Print , "aestrXMLDataLocation = " & aestrXMLDataLocation
         If Not FolderExists(aestrXMLDataLocation) Then
-            MsgBox "aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
+            MsgBox "2. aestrXMLDataLocation does not exist!", vbCritical, "VerifySetup"
             Stop
         End If
     ElseIf Not aegitFrontEndApp Then
