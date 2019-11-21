@@ -39,10 +39,15 @@ Option Explicit
 '
 ' =============================================================================================================================
 ' Tasks:
+' %185 -
+' %184 -
+' %183 -
+' %182 -
+' %181 -
 ' %180 -
 ' %179 -
 ' %178 -
-' %177 -
+' %177 - Table name example 'DataSet 3 $'_ImportErrors causes error condition in export
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
 ' %161 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
@@ -57,7 +62,6 @@ Option Explicit
 ' %148 - GH #12, Fix aegit template for Access 2016
 ' %146 - GH #14, Add input box to aegit template export
 ' %145 - Add an aeHideTable table to aegit and check if the table export list includes it
-' %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' %127 - exp tables should respect ODBC flag - NOTE: be careful of export SQL table data via this method, only use for test data
 ' %126 - Add Export folder exp, integrate with aegit class
 ' %125 - Update basGDIPlus with latest code from aeGDIPlusDemo
@@ -105,6 +109,8 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20191119 - v218
+    ' FIXED - %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' 20190206 - v217
     ' FIXED - %176 - No object with the given name and type exists in the current database, DocumentTheQueries
     ' FIXED - %175 - Invalid procedure call in DocumentTheQueries
