@@ -1,0 +1,63 @@
+|-- Name >> 'DataSet 3 $'_ImportErrors
+|-- Updatable >> True
+|-- DateCreated >> DateCreated
+|-- LastUpdated >> LastUpdated
+|-- Connect >> 
+|-- Attributes >> 0
+|-- SourceTableName >> 
+|-- RecordCount >> 3
+|-- ValidationRule >> 
+|-- ValidationText >> 
+|-- LogTable >> 1
+--------------------------------------------------
+|-- Error (Field in 'DataSet 3 $'_ImportErrors)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Error
+|------ OrdinalPosition >> 0
+|------ Size >> 255
+|------ SourceField >> Error
+|------ SourceTable >> 'DataSet 3 $'_ImportErrors
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- Field (Field in 'DataSet 3 $'_ImportErrors)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 10
+|------ Name >> Field
+|------ OrdinalPosition >> 1
+|------ Size >> 255
+|------ SourceField >> Field
+|------ SourceTable >> 'DataSet 3 $'_ImportErrors
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 
+|-- Row (Field in 'DataSet 3 $'_ImportErrors)
+|------ Attributes >> 2
+|------ CollatingOrder >> 1033
+|------ Type >> 4
+|------ Name >> Row
+|------ OrdinalPosition >> 2
+|------ Size >> 4
+|------ SourceField >> Row
+|------ SourceTable >> 'DataSet 3 $'_ImportErrors
+|------ DataUpdatable >> False
+|------ DefaultValue >> 
+|------ ValidationRule >> 
+|------ ValidationText >> 
+|------ Required >> False
+|------ AllowZeroLength >> False
+|------ AppendOnly >> False
+|------ Expression >> 

@@ -137,6 +137,10 @@
               [Web Page]     109          TextBox
               [Notes]        109          TextBox
               [MyAttachments]              126          
+['DataSet 3 $'_ImportErrors]
+              [Error]        126          
+              [Field]        126          
+              [Row]          126          
 [Order Details]
               [ID]           126          
               [Order ID]     109          TextBox
@@ -241,6 +245,6 @@ Count of Check box = 1
 Count of Text box  = 198
 Count of List box  = 1
 Count of Combo box = 16
-Count of Else      = 2
+Count of Else      = 5
 Count of Display Controls = 216
 Count of All Fields = 216

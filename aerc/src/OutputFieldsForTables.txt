@@ -203,6 +203,12 @@ Notes                   Memo                  0
 MyAttachments           Attachment            4                  
 
 
+---------------------------------
+TABLE: 'DataSet 3 $'_ImportErrors
+---------------------------------
+Linked=>
+FIELD NAME              FIELD TYPE            SIZE    DESCRIPTION
+====================    ==================    ====    ===========
 --------------------
 TABLE: Order Details
 --------------------

@@ -70,6 +70,7 @@
 "Table","City","DateCreated"
 "Table","Country","DateCreated"
 "Table","Customers","DateCreated"
+"Table","'DataSet 3 $'_ImportErrors","DateCreated"
 "Table","f_34EEEF6549CE4C758731B12FA7BE3E6C_VersionHistory_F5F8918F-0A3F-","DateCreated"
 "Table","f_58CF7911A7BE413C9B7BEC5A295C6AB7_MyAttachments","DateCreated"
 "Table","f_9E8203D96A754B0890DAF9414007C362_Data","DateCreated"

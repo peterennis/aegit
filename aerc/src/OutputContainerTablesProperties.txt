@@ -377,6 +377,16 @@
               ReadOnlyWhenDisconnected    False
               DatasheetGridlinesThemeColorIndex         -1 
               DatasheetForeThemeColorIndex              -1 
+>>>'DataSet 3 $'_ImportErrors
+              Name          'DataSet 3 $'_ImportErrors
+              Owner         admin
+              UserName      admin
+              Permissions    1048319 
+              AllPermissions               1048319 
+              Container     Tables
+              DateCreated   DateCreated
+              LastUpdated   LastUpdated
+              LogTable       1 
 >>>Order Details
               Name          Order Details
               Owner         admin

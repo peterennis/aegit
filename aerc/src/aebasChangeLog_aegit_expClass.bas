@@ -44,9 +44,8 @@ Option Explicit
 ' %183 -
 ' %182 -
 ' %181 -
-' %180 -
-' %179 -
-' %178 -
+' %180 - Provide count of warnings in output result
+' %179 - Allow warnings setting to write debug message vs. MsgBox popup
 ' %177 - Table name example 'DataSet 3 $'_ImportErrors causes error condition in export
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
@@ -109,6 +108,8 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20191121 - v219
+    ' FIXED- %178 - Load 'DataSet 3 $'_ImportErrors a test data sample
 ' 20191119 - v218
     ' FIXED - %128 - Add snips to doc for Webspeak/Newspeak links as local reference
 ' 20190206 - v217

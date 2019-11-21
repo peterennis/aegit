@@ -9,6 +9,7 @@
 [City]        False
 [Country]     False
 [Customers]   False
+['DataSet 3 $'_ImportErrors]              False
 [Order Details]             False
 [Orders]      False
 [Province]    False
