@@ -2462,8 +2462,11 @@ PROC_ERR:
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Linked Table does not exist, DB Path not valid or wrong table name." & vbCrLf & _
                 " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "Link/Path/Name Not Valid"
         Case 3075
-            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Linked Table does not exist, DB Path not valid or wrong table name." & vbCrLf & _
-                " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "Link/Path/Name Not Valid"
+            Debug.Print "GetLinkedTableCurrentPath"
+            Debug.Print , "!Warning Erl=" & Erl & " Err 3075: strTableName = " & strTableName
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Syntax error (missing operator)" & vbCrLf & _
+                " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "GetLinkedTableCurrentPath"
+            Resume PROC_EXIT
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "ERROR"
     End Select
@@ -2829,7 +2832,7 @@ PROC_ERR:
             MsgBox "Err 3011,3024 [" & strTableName & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
         Case 3075
             Debug.Print "IsLinkedTable"
-            Debug.Print , "Erl=" & Erl & " Err 3075: strTableName = " & strTableName
+            Debug.Print , "!Warning Erl=" & Erl & " Err 3075: strTableName = " & strTableName
             'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Syntax error (missing operator)" & vbCrLf & _
                 " (" & Err.Description & ") in procedure IsLinkedTable of Class aegit_expClass", vbCritical, "IsLinkedTable"
             Resume Resume3075
