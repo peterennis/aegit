@@ -6042,6 +6042,16 @@ PROC_EXIT:
     Exit Function
 
 PROC_ERR:
+    Select Case Err.Number
+        Case 3075
+            Debug.Print "TableInfo"
+            Debug.Print , "!Warning Erl=" & Erl & " Err 3075: strTableName = " & strTableName
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Syntax error (missing operator)" & vbCrLf & _
+                " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass", vbCritical, "TableInfo"
+            Resume PROC_EXIT
+        Case Else
+            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "TableInfo Error"
+    End Select
     MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass", vbCritical, "ERROR"
     If Not IsMissing(varDebug) Then Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure TableInfo of Class aegit_expClass"
     TableInfo = False
