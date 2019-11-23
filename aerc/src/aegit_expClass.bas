@@ -2458,8 +2458,12 @@ PROC_ERR:
         Case 3265
             MsgBox "(" & strTableName & ") does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
-        Case 3011, 3024                 ' Linked Table does not exist or DB Path not valid
-            MsgBox "(" & strTableName & ") is not a valid Linked Table", vbCritical, "Link Not Valid"
+        Case 3011, 3024
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Linked Table does not exist, DB Path not valid or wrong table name." & vbCrLf & _
+                " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "Link/Path/Name Not Valid"
+        Case 3075
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Linked Table does not exist, DB Path not valid or wrong table name." & vbCrLf & _
+                " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "Link/Path/Name Not Valid"
         Case Else
             MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure GetLinkedTableCurrentPath of Class aegit_expClass", vbCritical, "ERROR"
     End Select
@@ -2739,11 +2743,30 @@ Private Function IsLinkedODBC(strTableName As String) As Boolean
 
     'Debug.Print strTableName, Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"))
     IsLinkedODBC = Nz(DLookup("Type", "MSysObjects", "Name = '" & strTableName & "'"), 0) = 4
+
+PROC_EXIT:
+    Exit Function
+
+PROC_ERR:
+    Select Case Err.Number
+        Case 3075
+            MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Syntax error (missing operator)" & vbCrLf & _
+                " (" & Err.Description & ") in procedure IsLinkedODBC of Class aegit_expClass", vbCritical, "IsLinkedODBC"
+        Case Else
+            MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
+    End Select
+    Resume PROC_EXIT
 End Function
 
 Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
 
-    'Debug.Print "LinkedTable"
+    'Debug.Print "IsLinkedTable"
+    ' Error 3075 from table names with single quotes e.g. 'DataSet 3 $'_ImportErrors
+    If strTableName = "'DataSet 3 $'_ImportErrors" Then
+        Debug.Print , "Found it!"
+        Debug.Print , "strTableName = " & strTableName
+    End If
+      
     On Error GoTo PROC_ERR
     If mblnIgnore Then Exit Function
 
@@ -2771,7 +2794,9 @@ Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
         ' Check if it is an ODBC link
         If IsLinkedODBC(strTableName) Then
             ' Do nothing and treat the link as false
+Resume3075:
             IsLinkedTable = False
+            Debug.Print , "Did this print?"
         Else
             If Len(CurrentDb.TableDefs(strTableName).Connect) > 0 Then
                 CurrentDb.TableDefs(strTableName).RefreshLink
@@ -2798,10 +2823,16 @@ PROC_ERR:
                 ' Do nothing
             End If
         Case 3265
-            MsgBox "[" & strTableName & "] does not exist as either an Internal or Linked Table", _
+            MsgBox "Err 3265 [" & strTableName & "] does not exist as either an Internal or Linked Table", _
                 vbCritical, "Table Missing"
         Case 3011, 3024     ' Linked Table does not exist or DB Path not valid
-            MsgBox "[" & strTableName & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
+            MsgBox "Err 3011,3024 [" & strTableName & "] is not a valid Linked Table", vbCritical, "Link Not Valid"
+        Case 3075
+            Debug.Print "IsLinkedTable"
+            Debug.Print , "Erl=" & Erl & " Err 3075: strTableName = " & strTableName
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Syntax error (missing operator)" & vbCrLf & _
+                " (" & Err.Description & ") in procedure IsLinkedTable of Class aegit_expClass", vbCritical, "IsLinkedTable"
+            Resume Resume3075
         Case Else
             MsgBox "Err=" & Err.Number & " " & Err.Description, vbExclamation, "IsLinkedTable Error"
     End Select
