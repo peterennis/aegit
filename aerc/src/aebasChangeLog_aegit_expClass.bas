@@ -46,7 +46,6 @@ Option Explicit
 ' %181 -
 ' %180 - Provide count of warnings in output result
 ' %179 - Allow warnings setting to write debug message vs. MsgBox popup
-' %177 - Table name example 'DataSet 3 $'_ImportErrors causes error condition in export
 ' %166 - Update and test basUTF8
 ' %162 - Encoding - manual conversion, Ref: http://opinions.co.il/ogdan/converting-microsoft-access-database-tables-in-local-encoding-into-utf-8-encoding/
 ' %161 - Test exporting in UTF-8 format. The last parameter of TransferText is Codepage and UTF-8 is 65001
@@ -108,6 +107,8 @@ Option Explicit
 ' =============================================================================================================================
 '
 '
+' 20191122 - v220
+    ' FIXED - %177 - Table name example 'DataSet 3 $'_ImportErrors causes error condition in export
 ' 20191121 - v219
     ' FIXED- %178 - Load 'DataSet 3 $'_ImportErrors a test data sample
 ' 20191119 - v218

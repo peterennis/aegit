@@ -39,8 +39,8 @@ Private Const EXCLUDE_1 As String = "aebasChangeLog_aegit_expClass"
 Private Const EXCLUDE_2 As String = "aebasTEST_aegit_expClass"
 Private Const EXCLUDE_3 As String = "aegit_expClass"
 
-Private Const aegit_expVERSION As String = "2.1.9"
-Private Const aegit_expVERSION_DATE As String = "November 21, 2019"
+Private Const aegit_expVERSION As String = "2.2.0"
+Private Const aegit_expVERSION_DATE As String = "November 22, 2019"
 'Private Const aeAPP_NAME As String = "aegit_exp"
 Private Const mblnOutputPrinterInfo As Boolean = False
 ' If mblnUTF16 is True the form txt exported files will be UTF-16 Windows format
@@ -2771,12 +2771,13 @@ End Function
 Private Function IsLinkedTable(ByVal strTableName As String) As Boolean
 
     'Debug.Print "IsLinkedTable"
+
     ' Error 3075 from table names with single quotes e.g. 'DataSet 3 $'_ImportErrors
-    If strTableName = "'DataSet 3 $'_ImportErrors" Then
-        Debug.Print , "Found it!"
-        Debug.Print , "strTableName = " & strTableName
-    End If
-      
+    'If strTableName = "'DataSet 3 $'_ImportErrors" Then
+    '    Debug.Print , "Found it!"
+    '    Debug.Print , "strTableName = " & strTableName
+    'End If
+
     On Error GoTo PROC_ERR
     If mblnIgnore Then Exit Function
 
