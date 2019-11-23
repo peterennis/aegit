@@ -988,6 +988,7 @@ Private Function aeDocumentTablesXML(Optional ByVal varDebug As Variant) As Bool
                     End If
                 End If
             End If
+Resume3075:
         Next
     End If
 
@@ -1010,6 +1011,12 @@ PROC_EXIT:
 
 PROC_ERR:
     Select Case Err.Number
+        Case 3075
+            Debug.Print "aeDocumentTablesXML"
+            Debug.Print , "!Warning Erl=" & Erl & " Err 3075: tbl.Name = " & tbl.Name
+            'MsgBox "Erl=" & Erl & " Error " & Err.Number & " (" & strTableName & ") Syntax error (missing operator)" & vbCrLf & _
+                " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass", vbCritical, "aeDocumentTablesXML"
+            Resume Resume3075
         Case 31532
             Debug.Print ">>>Erl=" & Erl & " Error " & Err.Number & " (" & Err.Description & ") in procedure aeDocumentTablesXML of Class aegit_expClass"
             Debug.Print , "strObjName=" & strObjName, "strTheXMLLocation=" & strTheXMLLocation          ' from line 430
